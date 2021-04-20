@@ -18,7 +18,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "push": "npm ci && npm run build && git push"
+    "push": "git checkout main && npm ci && npm run build && git push origin main",
+    "preview": "git checkout testing && npm ci && npm run build && git push origin testing && firebase hosting:channel:deploy preview"
   },
   "eslintConfig": {
     "extends": [
