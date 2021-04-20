@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "push": "npm ci && npm build && git push"
+    "push": "npm ci && npm run build && git push"
   },
   "eslintConfig": {
     "extends": [
