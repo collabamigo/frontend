@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-      <h1>Hoarding</h1>
+      <h1>Hoarding2</h1>
   </React.StrictMode>,
   document.getElementById('root')
 );

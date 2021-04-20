@@ -1,0 +1,2 @@
+(this["webpackJsonpreact-collabconnect"]=this["webpackJsonpreact-collabconnect"]||[]).push([[0],{10:function(n,t,e){"use strict";e.r(t);var c=e(0),o=e.n(c),i=e(3),r=e.n(i),a=(e(8),function(n){n&&n instanceof Function&&e.e(3).then(e.bind(null,11)).then((function(t){var e=t.getCLS,c=t.getFID,o=t.getFCP,i=t.getLCP,r=t.getTTFB;e(n),c(n),o(n),i(n),r(n)}))}),s=e(2);r.a.render(Object(s.jsx)(o.a.StrictMode,{children:Object(s.jsx)("h1",{children:"Hoarding2"})}),document.getElementById("root")),a()},8:function(n,t,e){}},[[10,1,2]]]);
+//# sourceMappingURL=main.eb53f33f.chunk.js.map
