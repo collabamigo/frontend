@@ -6,14 +6,12 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - main
-    paths:
-      - 'build/**'
 jobs:
   build_and_deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-#      - run: npm ci && npm run build
+      - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           target: collabconnect
