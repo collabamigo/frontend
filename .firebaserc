@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "collabconnect-242d8"
+    "default": "collabconnect-242d8",
+    "development": "collabconnect-development"
   }
 }
