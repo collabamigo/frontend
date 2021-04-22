@@ -2,5 +2,21 @@
   "projects": {
     "default": "collabconnect-242d8",
     "development": "collabconnect-development"
+  },
+  "targets": {
+    "collabconnect-242d8": {
+      "hosting": {
+        "production": [
+          "collabconnect"
+        ]
+      }
+    },
+    "collabconnect-development": {
+      "hosting": {
+        "development": [
+          "collabconnect-development"
+        ]
+      }
+    }
   }
 }
