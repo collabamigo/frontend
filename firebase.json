@@ -1,6 +1,6 @@
 {
   "hosting":[ {
-    "target": "default",
+    "target": "production",
     "public": "build",
     "ignore": [
       "firebase.json",
@@ -18,5 +18,4 @@
     ]
   }
     ]
-
 }
