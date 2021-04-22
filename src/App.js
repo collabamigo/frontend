@@ -1,26 +1,30 @@
 // import logo from './logo.svg';
 import './App.css';
+import  Button from './Components/Button'
+import Collab from './Components/Collab'
+import React from 'react'
 
-function App() {
+class App extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state={
+            isActive: false
+        }
+    }
+    handleHide = () => {
+        this.setState({
+          isActive: true
+        });
+      };
+    render(){
   return (
     <div className="App">
-      <div className="jumbotron">
-        <h1>COLLABCONNECT</h1>
-      </div>
-      <div className="row">
-          <div className="col-md-6">
-              <button type="button" className="btn btn-primary"> Signup</button>
-          </div>
-          <div className="col-md-6">
-              <button type="button" className="btn btn-primary"> Signin</button>
-          </div>
-      </div>
-      {/*<div className="container">*/}
-      {/*  <p>This is some text.</p>*/}
-      {/*  <p>This is another text.</p>*/}
-      {/*</div>*/}
+        <Collab className="jumbotron" title = "Collab Connect"/>
+        <Button className ="btn btn-primary" title= "Login using IIITD" onClick={this.handleHide} state={!this.state.isActive} />
+        <Button className="btn btn-primary" title="Ask for help" state={this.state.isActive} />
+        <Button className="btn btn-primary" title="Help Others" state={this.state.isActive}  />
     </div>
-  );
+  );}
 }
 
 export default App;
