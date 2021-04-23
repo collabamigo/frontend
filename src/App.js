@@ -26,7 +26,7 @@ class App extends React.Component{
         });
       };
     render(){
-        let label ='';
+        let label;
         if (this.state.user !== null)
         {
             label = <h1>Hello {this.state.user.getBasicProfile().getName()}</h1>
