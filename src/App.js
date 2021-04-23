@@ -3,6 +3,7 @@ import './App.css';
 import  Button from './Components/Button'
 import Collab from './Components/Collab'
 import React from 'react'
+import GSignIn from "./Components/Google_signin";
 
 class App extends React.Component{
     constructor(props) {
@@ -20,6 +21,7 @@ class App extends React.Component{
   return (
     <div className="App">
         <Collab className="jumbotron" title = "Collab Connect"/>
+        <GSignIn />
         <Button className ="btn btn-primary" title= "Login using IIITD" onClick={this.handleHide} state={!this.state.isActive} />
         <Button className="btn btn-primary" title="Ask for help" state={this.state.isActive} />
         <Button className="btn btn-primary" title="Help Others" state={this.state.isActive}  />
