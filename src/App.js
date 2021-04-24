@@ -4,7 +4,8 @@ import  Button from './Components/Button'
 import Collab from './Components/Collab'
 import React from 'react'
 import GoogleSignIn from "./Components/GoogleSignIn";
-import Ask from './Components/ask'
+import Ask from './Components/Ask'
+import Help from './Components/help'
 import {
   BrowserRouter as Router,
   Route,
@@ -12,12 +13,13 @@ import {
 } from "react-router-dom";
 
 
+
 class App extends React.Component{
     constructor(props) {
         super(props);
         this.state={
             isActive: false,
-            user: null
+            user: null,
         }
     }
 
@@ -48,9 +50,9 @@ class App extends React.Component{
   return (
       <Router>
         <div className="App">
+            <Collab className="jumbotron" title = "Collab Connect" />
             <Route path = '/' exact render = {(props) =>
                 (<>
-                    <Collab className="jumbotron" title = "Collab Connect" />
                     <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.isActive} />
                     <Button className ="btn btn-primary" title= "Login using IIITD" onClick={this.handleHide} visibility={!this.state.isActive} />
                         {label}
@@ -58,9 +60,8 @@ class App extends React.Component{
                         <Link to={'/help'}><Button className="btn btn-primary" title="Help Others" visibility={this.state.isActive} /> </Link>
                     </>
                 )} />
-
             <Route path='/ask' component={Ask} />
-            <Route path='/help' component={Ask} />
+            <Route path='/help' component={Help} />
 
         </div>
       </Router>
