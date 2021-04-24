@@ -11,7 +11,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 
 class App extends React.Component{
@@ -58,16 +58,20 @@ class App extends React.Component{
         <>
             <Route path = '/' exact>
                     <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.isActive} />
-                    <Button className ="btn btn-primary" title= "Login using IIITD" onClick={this.handleHide} visibility={!this.state.isActive} />
+                    {/*<Button className ="btn btn-primary" title= "Login using IIITD" onClick={this.handleHide} visibility={!this.state.isActive} />*/}
                         <Link to ={'/ask'}><Button className="btn btn-primary" title="Ask for help" visibility={this.state.isActive} /> </Link>
                         <Link to={'/help'}><Button className="btn btn-primary" title="Help Others" visibility={this.state.isActive} /> </Link>
 
             </Route>
-            <Route path='/ask'>
+            <ProtectedRoute exact path='/ask' user={this.state.user}>
                 <Ask />
-            </Route>
-            <Route path='/help'>
+            </ProtectedRoute>
+            <ProtectedRoute exact path='/help' user={this.state.user}>
                 <Help />
+            </ProtectedRoute>
+            <Route exact path='/403'>
+                <img src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
+                     alt="Gandalf you shall not pass" loading="lazy"/>
             </Route>
         </>
       </Router>
