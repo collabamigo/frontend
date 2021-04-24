@@ -3,17 +3,14 @@ import { Route, Redirect } from 'react-router-dom';
 
 function ProtectedRoute(props) {
     const {user, ...other} = props;
+    let ret;
     if (user)
     {
-        return (
-            <Route {...other}>
-                {props.children}
-            </Route>
-        )
+        ret = props.children
     }
     else
     {
-          return <Redirect to={
+          ret = <Redirect to={
               {
                   pathname: '/403',
                   state: {
@@ -22,6 +19,10 @@ function ProtectedRoute(props) {
               }
           } />
     }
+    return ( <Route {...other}>
+            {ret}
+    </Route>
+    )
 }
 
 export default ProtectedRoute
