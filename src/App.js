@@ -5,6 +5,8 @@ import Collab from './Components/Collab'
 import React from 'react'
 import GoogleSignIn from "./Components/GoogleSignIn";
 import Ask from './Components/ask'
+import Help from './Components/help'
+
 import {
   BrowserRouter as Router,
   Route,
@@ -60,7 +62,7 @@ class App extends React.Component{
                 )} />
 
             <Route path='/ask' component={Ask} />
-            <Route path='/help' component={Ask} />
+            <Route path='/help' component={Help} />
 
         </div>
       </Router>
