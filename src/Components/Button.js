@@ -1,6 +1,6 @@
 
 function Button(props) {
-    if (props.state) {
+    if (props.visibility) {
         return (
             <button type="button" className={props.className} onClick={props.onClick}>
                 {props.title}

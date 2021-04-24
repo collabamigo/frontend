@@ -1,4 +1,4 @@
-// import logo from './logo.svg';
+
 import './App.css';
 import  Button from './Components/Button'
 import Collab from './Components/Collab'
@@ -38,11 +38,11 @@ class App extends React.Component{
   return (
     <div className="App">
         <Collab className="jumbotron" title = "Collab Connect" />
-        <GoogleSignIn onClick={this.handleLogin} state={!this.state.isActive} />
-        <Button className ="btn btn-primary" title= "Login using IIITD" onClick={this.handleHide} state={!this.state.isActive} />
+        <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.isActive} />
+        <Button className ="btn btn-primary" title= "Login using IIITD" onClick={this.handleHide} visibility={!this.state.isActive} />
         {label}
-        <Button className="btn btn-primary" title="Ask for help" state={this.state.isActive} />
-        <Button className="btn btn-primary" title="Help Others" state={this.state.isActive}  />
+        <Button className="btn btn-primary" title="Ask for help" visibility={this.state.isActive} />
+        <Button className="btn btn-primary" title="Help Others" visibility={this.state.isActive}  />
 
     </div>
   );}

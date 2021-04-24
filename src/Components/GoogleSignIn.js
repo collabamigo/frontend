@@ -11,7 +11,7 @@ function GoogleSignIn(props){
 
     window.onSignIn = (googleUser) => {onSignIn(googleUser)}
 
-    if (props.state)
+    if (props.visibility)
         return (<div className="g-signin2" data-onsuccess="onSignIn" data-theme="dark" />);
     else
         return ''
