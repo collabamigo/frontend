@@ -7,7 +7,6 @@ import GoogleSignIn from "./Components/GoogleSignIn";
 import Ask from './Components/ask'
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
   Link
 } from "react-router-dom";
@@ -62,6 +61,7 @@ class App extends React.Component{
 
             <Route path='/ask' component={Ask} />
             <Route path='/help' component={Ask} />
+
         </div>
       </Router>
   );}
