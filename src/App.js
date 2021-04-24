@@ -4,6 +4,14 @@ import  Button from './Components/Button'
 import Collab from './Components/Collab'
 import React from 'react'
 import GoogleSignIn from "./Components/GoogleSignIn";
+import Ask from './Components/ask'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 
 class App extends React.Component{
     constructor(props) {
@@ -20,11 +28,13 @@ class App extends React.Component{
         });
         this.handleHide();
     }
+
     handleHide = () => {
         this.setState({
           isActive: true
         });
       };
+
     render(){
         let label;
         if (this.state.user !== null)
@@ -35,16 +45,26 @@ class App extends React.Component{
         {
             label = ''
         }
-  return (
-    <div className="App">
-        <Collab className="jumbotron" title = "Collab Connect" />
-        <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.isActive} />
-        <Button className ="btn btn-primary" title= "Login using IIITD" onClick={this.handleHide} visibility={!this.state.isActive} />
-        {label}
-        <Button className="btn btn-primary" title="Ask for help" visibility={this.state.isActive} />
-        <Button className="btn btn-primary" title="Help Others" visibility={this.state.isActive}  />
 
-    </div>
+  return (
+      <Router>
+        <div className="App">
+            <Route path = '/' exact render = {(props) =>
+                (<>
+                    <Collab className="jumbotron" title = "Collab Connect" />
+                    <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.isActive} />
+                    <Button className ="btn btn-primary" title= "Login using IIITD" onClick={this.handleHide} visibility={!this.state.isActive} />
+                        {label}
+                        <Link to ={'/ask'}><Button className="btn btn-primary" title="Ask for help" visibility={this.state.isActive} /> </Link>
+                        <Link to={'/help'}><Button className="btn btn-primary" title="Help Others" visibility={this.state.isActive} /> </Link>
+                    </>
+                )} />
+
+            <Route path='/ask' component={Ask} />
+            <Route path='/help' component={Ask} />
+
+        </div>
+      </Router>
   );}
 }
 

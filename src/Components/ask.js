@@ -1,7 +1,7 @@
 
 import React from "react";
 
-const Home = () => (
+const Ask = () => (
   <div>
     <h1 className="title is-1">This is the Home Page</h1>
     <p>
@@ -13,4 +13,4 @@ const Home = () => (
   </div>
 );
 
-export default Home;
+export default Ask;
