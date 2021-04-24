@@ -20,12 +20,14 @@ class App extends React.Component{
         this.state={
             isActive: false,
             user: null,
+            test: null
         }
     }
 
     handleLogin = (user) => {
         this.setState({
-            user: user
+            user: user,
+            test: user.getBasicProfile().getName()
         });
         this.handleHide();
     }
@@ -40,31 +42,36 @@ class App extends React.Component{
         let label;
         if (this.state.user !== null)
         {
-            label = <h1>Hello {this.state.user.getBasicProfile().getName()}</h1>
+            label = <h1>Hello {this.state.test}</h1>
         }
         else
         {
             label = ''
         }
+        console.log(label);
 
   return (
+      <div className="App">
+          <Collab className="jumbotron" title = "Collab Connect" userName={this.state.test} />
+
       <Router>
-        <div className="App">
-            <Collab className="jumbotron" title = "Collab Connect" />
-            <Route path = '/' exact render = {(props) =>
-                (<>
+        <>
+            <Route path = '/' exact>
                     <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.isActive} />
                     <Button className ="btn btn-primary" title= "Login using IIITD" onClick={this.handleHide} visibility={!this.state.isActive} />
-                        {label}
                         <Link to ={'/ask'}><Button className="btn btn-primary" title="Ask for help" visibility={this.state.isActive} /> </Link>
                         <Link to={'/help'}><Button className="btn btn-primary" title="Help Others" visibility={this.state.isActive} /> </Link>
-                    </>
-                )} />
-            <Route path='/ask' component={Ask} />
-            <Route path='/help' component={Help} />
 
-        </div>
+            </Route>
+            <Route path='/ask'>
+                <Ask />
+            </Route>
+            <Route path='/help'>
+                <Help />
+            </Route>
+        </>
       </Router>
+      </div>
   );}
 }
 
