@@ -62,7 +62,6 @@ class App extends React.Component{
 
             <Route path='/ask' component={Ask} />
             <Route path='/help' component={Ask} />
-
         </div>
       </Router>
   );}
