@@ -1,17 +1,18 @@
-function encrypt(token){
-    const encrypted_token = token; // TODO: Encrypt token through Django before saving in cookie
-    return encrypted_token;
+function encrypt(text) {
+    const NodeRSA = require('node-rsa');
+    const key = new NodeRSA({b: 512});
+    const publicKey = "-----BEGIN PUBLIC KEY-----\n" +
+        "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIeSDB/Wj1wudkS6nAEFjApXwsN3zQPA\n" +
+        "n7CAWUrRThvUzInbky4pVi5+GWO9wBkYGh0rij1LgJ8HCp5qVvQKhH0CAwEAAQ==\n" +
+        "-----END PUBLIC KEY-----"
+    key.importKey(publicKey,'pkcs8-public')
+    return key.encrypt(text, 'base64')
 }
 
 function GoogleSignIn(props){
     function onSignIn(googleUser) {
           localStorage.setItem('encrypted_token', encrypt(googleUser.getAuthResponse().id_token))
           localStorage.setItem('userName', googleUser.getBasicProfile().getName())
-          // const profile = googleUser.getBasicProfile();
-          // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-          // console.log('Name: ' + profile.getName());
-          // console.log('Image URL: ' + profile.getImageUrl());
-          // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
           props.onClick(googleUser);
     }
 
