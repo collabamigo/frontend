@@ -11,7 +11,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import ProtectedRoute from "./Components/ProtectedRoute";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 
 
 class App extends React.Component{
@@ -22,6 +22,7 @@ class App extends React.Component{
             user: null,
             test: null
         }
+
     }
 
     handleLogin = (user) => {
@@ -39,16 +40,15 @@ class App extends React.Component{
       };
 
     render(){
-        let label;
-        if (this.state.user !== null)
-        {
-            label = <h1>Hello {this.state.test}</h1>
-        }
-        else
-        {
-            label = ''
-        }
-        console.log(label);
+        // let label;
+        // if (this.state.user !== null)
+        // {
+        //     label = <h1>Hello {this.state.test}</h1>
+        // }
+        // else
+        // {
+        //     label = ''
+        // }
 
   return (
       <div className="App">
