@@ -1,10 +1,10 @@
 
 function Button(props) {
-    const {visibility, ...other} = props;
+    const {visibility, title, ...other} = props;
     if (visibility) {
         return (
             <button type="button" {...other}>
-                {props.title}
+                {title}
             </button>
         );
     }
