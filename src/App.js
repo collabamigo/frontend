@@ -1,4 +1,4 @@
-
+// TODO: Add a clear cache button
 import './App.css';
 import  Button from './Components/Button'
 import Collab from './Components/Collab'
