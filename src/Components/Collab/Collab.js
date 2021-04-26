@@ -1,4 +1,5 @@
 import React from 'react'
+import './Collab.css'
 
 class Collab extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class Collab extends React.Component {
     let label;
         if (this.state.user !== null)
         {
-            label = <h1>{this.props.userName}</h1>
+            label = <>{this.props.userName}</>
         }
         else
         {
@@ -22,12 +23,18 @@ class Collab extends React.Component {
         }
 
     return(
-    <div className={this.state.className}>
-      <h1> {this.state.title} </h1>
-      <h1>{label}</h1>
+    <div className={this.state.className} >
+        <div className="text-right">
+            <p className='account'> {label} <span className="material-icons">
+            account_circle
+            </span></p>
+        </div>
+        <div>
+            <h1> {this.state.title} </h1>
+        </div>
     </div>
     )
   }
 }
 
-export default Collab
+export default Collab;
