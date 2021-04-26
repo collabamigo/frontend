@@ -3,10 +3,11 @@ import React from 'react'
 class Name extends React.Component {
     render() {
         return (
-            <div >
+            <li key={this.props.name}>
                 {this.props.name}
-            </div>
+            </li>
         )
     }
 }
+
 export default Name

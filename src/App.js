@@ -1,11 +1,11 @@
 // TODO: Add a clear cache button
 import './App.css';
 import  Button from './Components/Button'
-import Collab from './Components/Collab'
+import Collab from './Components/Collab/Collab'
 import React from 'react'
 import GoogleSignIn from "./Components/GoogleSignIn/GoogleSignIn";
-import Ask from './Components/Ask'
-import Help from './Components/help'
+import Ask from './Components/Ask/Ask'
+import Help from './Components/Help/Help'
 import {
   BrowserRouter as Router,
   Route,
@@ -73,7 +73,6 @@ class App extends React.Component{
                 <h6>ERROR: This page is only visible to logged in users. Meet Gandalf</h6>
                 <img src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
                      alt="Gandalf you shall not pass" loading="lazy"/>
-
                 <a href={'/'}><h5>Go to homepage</h5></a>
             </Route>
         </>
