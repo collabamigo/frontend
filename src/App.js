@@ -23,7 +23,7 @@ class App extends React.Component{
 
     }
 
-    handleLogin = (user) => {
+    handleLogin = () => {
         this.setState({
             loggedIn: true
         });
