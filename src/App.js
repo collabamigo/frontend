@@ -18,61 +18,44 @@ class App extends React.Component{
     constructor(props) {
         super(props);
         this.state={
-            isActive: false,
-            user: null,
-            test: null
+            loggedIn: Boolean(localStorage.getItem('userName'))
         }
 
     }
 
     handleLogin = (user) => {
         this.setState({
-            user: user,
-            test: user.getBasicProfile().getName()
+            loggedIn: true
         });
-        this.handleHide();
     }
 
-    handleHide = () => {
-        this.setState({
-          isActive: true
-        });
-      };
+
 
     render(){
-        // let label;
-        // if (this.state.user !== null)
-        // {
-        //     label = <h1>Hello {this.state.test}</h1>
-        // }
-        // else
-        // {
-        //     label = ''
-        // }
 
   return (
       <div className="App">
-          <Collab className="jumbotron" title = "Collab Connect" userName={this.state.test} />
+          <Collab className="jumbotron" title = "Collab Connect" />
 
       <Router>
         <>
             <Route path = '/' exact>
-                    <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.isActive} />
+                    <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.loggedIn} />
                 <div className='row'>
                     <div className="col-md-5"/>
                         <div className="col-md-1" >
-                            <Link to ={'/ask'}><Button className="btn btn-primary" title="Ask for help" visibility={this.state.isActive} /> </Link>
+                            <Link to ={'/ask'}><Button className="btn btn-primary" title="Ask for help" visibility={this.state.loggedIn} /> </Link>
                         </div>
                         <div className="col-md-1">
-                            <Link to={'/help'}><Button className="btn btn-primary" title="Help Others" visibility={this.state.isActive} /> </Link>
+                            <Link to={'/help'}><Button className="btn btn-primary" title="Help Others" visibility={this.state.loggedIn} /> </Link>
                         </div>
                     </div>
 
             </Route>
-            <ProtectedRoute exact path='/ask' user={this.state.user}>
+            <ProtectedRoute exact path='/ask'>
                 <Ask />
             </ProtectedRoute>
-            <ProtectedRoute exact path='/help' user={this.state.user}>
+            <ProtectedRoute exact path='/help'>
                 <Help />
             </ProtectedRoute>
             <Route exact path='/403'>

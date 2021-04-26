@@ -3,7 +3,6 @@ import { Route, Redirect } from 'react-router-dom';
 
 
 function ProtectedRoute(props) {
-    const {user, ...other} = props;
     let ret;
     if (localStorage.getItem('encrypted_token'))
     {
@@ -20,7 +19,7 @@ function ProtectedRoute(props) {
               }
           } />
     }
-    return ( <Route {...other}>
+    return ( <Route {...props}>
             {ret}
     </Route>
     )
