@@ -1,8 +1,9 @@
 
 function Button(props) {
-    if (props.visibility) {
+    const {visibility, ...other} = props;
+    if (visibility) {
         return (
-            <button type="button" className={props.className} onClick={props.onClick}>
+            <button type="button" {...other}>
                 {props.title}
             </button>
         );
