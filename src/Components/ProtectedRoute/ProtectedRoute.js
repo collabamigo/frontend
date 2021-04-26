@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
+
 function ProtectedRoute(props) {
     const {user, ...other} = props;
     let ret;
-    if (user)
+    if (localStorage.getItem('encrypted_token'))
     {
         ret = props.children
     }
