@@ -1,13 +1,16 @@
-
+// TODO: Add a clear cache button
 import './App.css';
 import  Button from './Components/Button'
-import Collab from './Components/Collab/Collab'
+import Collab from './Components/Collab'
 import React from 'react'
 import GoogleSignIn from "./Components/GoogleSignIn/GoogleSignIn";
-import Ask from './Components/Ask/Ask'
-import Help from './Components/Help/Help'
+import Ask from './Components/Ask'
+import Help from './Components/help'
 import {
-  BrowserRouter as Router,Route,Link} from "react-router-dom";
+  BrowserRouter as Router,
+  Route,
+  Link
+} from "react-router-dom";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 
 
@@ -19,6 +22,7 @@ class App extends React.Component{
             user: null,
             test: null
         }
+
     }
 
     handleLogin = (user) => {
@@ -36,24 +40,25 @@ class App extends React.Component{
       };
 
     render(){
-        let label;
-        if (this.state.user !== null)
-        {
-            label = <h1>Hello {this.state.test}</h1>
-        }
-        else
-        {
-            label = ''
-        }
-        console.log(label);
+        // let label;
+        // if (this.state.user !== null)
+        // {
+        //     label = <h1>Hello {this.state.test}</h1>
+        // }
+        // else
+        // {
+        //     label = ''
+        // }
 
   return (
       <div className="App">
           <Collab className="jumbotron" title = "Collab Connect" userName={this.state.test} />
+
       <Router>
         <>
             <Route path = '/' exact>
                     <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.isActive} />
+                    {/*<Button className ="btn btn-primary" title= "Login using IIITD" onClick={this.handleHide} visibility={!this.state.isActive} />*/}
                         <Link to ={'/ask'}><Button className="btn btn-primary" title="Ask for help" visibility={this.state.isActive} /> </Link>
                         <Link to={'/help'}><Button className="btn btn-primary" title="Help Others" visibility={this.state.isActive} /> </Link>
 
@@ -65,8 +70,11 @@ class App extends React.Component{
                 <Help />
             </ProtectedRoute>
             <Route exact path='/403'>
+                <h6>ERROR: This page is only visible to logged in users. Meet Gandalf</h6>
                 <img src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
                      alt="Gandalf you shall not pass" loading="lazy"/>
+
+                <a href={'/'}><h5>Go to homepage</h5></a>
             </Route>
         </>
       </Router>
