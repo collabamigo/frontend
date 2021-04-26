@@ -8,7 +8,7 @@ import Ask from './Components/Ask/Ask'
 import Help from './Components/Help/Help'
 import {
   BrowserRouter as Router,Route,Link} from "react-router-dom";
-import ProtectedRoute from "./Components/ProtectedRoute";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 
 
 class App extends React.Component{
