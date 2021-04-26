@@ -25,7 +25,7 @@ function GoogleSignIn(props){
     function onSignIn(googleUser) {
           localStorage.setItem('encrypted_token', encrypt(googleUser.getAuthResponse().id_token))
           localStorage.setItem('userName', googleUser.getBasicProfile().getName())
-          props.onClick(googleUser);
+          props.onClick();
     }
 
     window.onSignIn = (googleUser) => {onSignIn(googleUser)}

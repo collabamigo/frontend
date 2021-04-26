@@ -1,5 +1,6 @@
 import React from 'react'
 import './Collab.css'
+import Down from '../Dropdown/Dropdown'
 
 class Collab extends React.Component {
   constructor(props) {
@@ -13,21 +14,12 @@ class Collab extends React.Component {
 
   render() {
     let label;
-        if (this.state.user !== null)
-        {
-            label = <>{this.props.userName}</>
-        }
-        else
-        {
-            label = ''
-        }
+      label = localStorage.getItem('userName')? localStorage.getItem('userName') : ""
 
     return(
     <div className={this.state.className} >
         <div className="text-right">
-            <p className='account'> {label} <span className="material-icons">
-            account_circle
-            </span></p>
+            <div className='account'> {label} <Down /> </div>
         </div>
         <div>
             <h1> {this.state.title} </h1>
