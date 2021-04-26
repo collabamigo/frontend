@@ -70,8 +70,11 @@ class App extends React.Component{
                 <Help />
             </ProtectedRoute>
             <Route exact path='/403'>
+                <h6>ERROR: This page is only visible to logged in users. Meet Gandalf</h6>
                 <img src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
                      alt="Gandalf you shall not pass" loading="lazy"/>
+
+                <a href={'/'}><h5>Go to homepage</h5></a>
             </Route>
         </>
       </Router>
