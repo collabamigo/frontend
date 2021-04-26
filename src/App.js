@@ -42,8 +42,16 @@ class App extends React.Component{
             <Route path = '/' exact>
                 <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.loggedIn} />
                 <div className='row'>
-                    <Link className="col-md-6" to ={'/ask'}><Button className="float-right btn btn-primary" title="Ask for help" visibility={this.state.loggedIn} /> </Link>
-                    <Link className="col-md-6" to={'/help'}><Button className="float-left btn btn-primary" title="Help Others" visibility={this.state.loggedIn} /> </Link>
+                    <Link className="col-md-6" to ={'/ask'}>
+                        <Button className="float-right btn btn-primary" visibility={this.state.loggedIn}>
+                            Ask for help
+                        </Button>
+                    </Link>
+                    <Link className="col-md-6" to={'/help'}>
+                        <Button className="float-left btn btn-primary" visibility={this.state.loggedIn}>
+                            Help Others
+                        </Button>
+                    </Link>
                 </div>
             </Route>
             <ProtectedRoute exact path='/ask'>
