@@ -3,7 +3,7 @@ import './App.css';
 import  Button from './Components/Button'
 import Collab from './Components/Collab'
 import React from 'react'
-import GoogleSignIn from "./Components/GoogleSignIn";
+import GoogleSignIn from "./Components/GoogleSignIn/GoogleSignIn";
 import Ask from './Components/Ask'
 import Help from './Components/help'
 import {

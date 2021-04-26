@@ -1,3 +1,5 @@
+import './GoogleSignIn.css'
+
 function encrypt(text) {
     const NodeRSA = require('node-rsa');
     const key = new NodeRSA();
