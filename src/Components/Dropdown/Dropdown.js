@@ -4,7 +4,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 
 function signOut() {
-  var auth2 = window.gapi.auth2.getAuthInstance();
+  let auth2 = window.gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
     localStorage.clear();
     window.location.href = "/";
