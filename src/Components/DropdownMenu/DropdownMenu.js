@@ -28,8 +28,7 @@ function DropdownMenu(props) {
                 >
 
                     <Dropdown.Item eventKey="profile">Profile <span className="material-icons">
-                    account_circle
-                    </span>
+                    perm_identity</span>
                     </Dropdown.Item>
                     <Dropdown.Item eventKey="settings">Settings <span className="material-icons">
                     settings</span>
