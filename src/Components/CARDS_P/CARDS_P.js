@@ -16,7 +16,7 @@ class CARDS_P extends React.Component {
                   <Card.Text>
                     I love machine learning and love implementing it with Open cv
                   </Card.Text>
-                  <Card.Link href="#"> lol </Card.Link>
+                  <Card.Link href="https://www.github.com"> lol </Card.Link>
                 </Card.Body>
               </Card>
             </div>
