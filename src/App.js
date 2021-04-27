@@ -35,11 +35,10 @@ class App extends React.Component{
     render(){
   return (
       <div className="App">
-          <Collab className="jumbotron" title = "Collab Connect" />
-
       <Router>
         <>
             <Route path = '/' exact>
+                <Collab className="jumbotron" title = "Collab Connect" />
                 <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.signedIn} />
                 <div className='row'>
                     <Link className="col-md-6" to ={'/ask'}>
@@ -55,9 +54,11 @@ class App extends React.Component{
                 </div>
             </Route>
             <ProtectedRoute exact path='/ask'>
+                <Collab className="jumbotron" title = "Collab Connect" />
                 <Ask />
             </ProtectedRoute>
             <ProtectedRoute exact path='/help'>
+                <Collab className="jumbotron" title = "Collab Connect" />
                 <Help />
             </ProtectedRoute>
             <Route exact path='/403'>
