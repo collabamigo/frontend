@@ -22,15 +22,22 @@ function DropdownMenu(props) {
         return (
                 <DropdownButton
                     alignRight
-                    // title="Profile"
+                    title=""
                     id="dropdown-menu-align-right"
                     onSelect={handleSelect}
                 >
 
-                    <Dropdown.Item eventKey="profile">Profile</Dropdown.Item>
-                    <Dropdown.Item eventKey="settings">Settings</Dropdown.Item>
+                    <Dropdown.Item eventKey="profile">Profile <span className="material-icons">
+                    account_circle
+                    </span>
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="settings">Settings <span className="material-icons">
+                    settings</span>
+                    </Dropdown.Item>
                     <Dropdown.Divider/>
-                    <Dropdown.Item eventKey="signOut">Sign Out</Dropdown.Item>
+                    <Dropdown.Item eventKey="signOut">Sign Out <span className="material-icons">
+                    logout
+                    </span></Dropdown.Item>
                 </DropdownButton>
 
                 // {/*<span className="material-icons" >*/}
