@@ -8,7 +8,8 @@ import Help from './Components/Help/Help'
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+    Switch
 } from "react-router-dom";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute"
 
@@ -35,10 +36,19 @@ class App extends React.Component{
     render(){
   return (
       <div className="App">
+
       <Router>
         <>
+            <Switch>
+                <Route exact path = '/'>
+                    {/*TODO: Put banner here*/}
+                    <Collab className="jumbotron" title = "Collab Connect" />
+                </Route>
+                <Route>
+                    <Collab className="jumbotron" title = "Collab Connect" />
+                </Route>
+            </Switch>
             <Route path = '/' exact>
-                <Collab className="jumbotron" title = "Collab Connect" />
                 <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.signedIn} />
                 <div className='row'>
                     <Link className="col-md-6" to ={'/ask'}>
@@ -53,14 +63,15 @@ class App extends React.Component{
                     </Link>
                 </div>
             </Route>
+
             <ProtectedRoute exact path='/ask'>
-                <Collab className="jumbotron" title = "Collab Connect" />
                 <Ask />
             </ProtectedRoute>
+
             <ProtectedRoute exact path='/help'>
-                <Collab className="jumbotron" title = "Collab Connect" />
                 <Help />
             </ProtectedRoute>
+
             <Route exact path='/403'>
                 <h6>ERROR: This page is only visible to logged in users. Meet Gandalf</h6>
                 <img src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
