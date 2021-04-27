@@ -18,9 +18,14 @@ class Collab extends React.Component {
 
         return(
             <div className={this.state.className} >
-                <div className='account text-right'> {label} <DropdownMenu visibility={Boolean(localStorage.getItem('userName'))}/> </div>
-                <h1> {this.state.title} </h1>
+                <div className='row'>
+                    <div className={"col-3"}/>
+                    <h1 className={"col-6"}> {this.state.title} </h1>
+                    <div className='account text-right col-3'> {label} <DropdownMenu visibility={Boolean(localStorage.getItem('userName'))}/> </div>
+
+                </div>
             </div>
+
         )
     }
 }

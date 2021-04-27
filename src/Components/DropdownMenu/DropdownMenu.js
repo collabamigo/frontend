@@ -20,10 +20,9 @@ function DropdownMenu(props) {
         }
 
         return (
-            <div>
                 <DropdownButton
                     alignRight
-                    title="Profile"
+                    // title="Profile"
                     id="dropdown-menu-align-right"
                     onSelect={handleSelect}
                 >
@@ -34,13 +33,12 @@ function DropdownMenu(props) {
                     <Dropdown.Item eventKey="signOut">Sign Out</Dropdown.Item>
                 </DropdownButton>
 
-                {/*<span className="material-icons" >*/}
-                {/*    account_circle*/}
-                {/*    </span>*/}
+                // {/*<span className="material-icons" >*/}
+                // {/*    account_circle*/}
+                // {/*    </span>*/}
+                //
+                // {/*<h4>{value}</h4>*/}
 
-                {/*<h4>{value}</h4>*/}
-
-            </div>
         );
     }
     else

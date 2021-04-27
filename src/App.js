@@ -69,7 +69,7 @@ class App extends React.Component{
             </ProtectedRoute>
 
             <ProtectedRoute exact path='/help'>
-                <Help />
+                <Help Vendor={true}/>
             </ProtectedRoute>
 
             <Route exact path='/403'>
