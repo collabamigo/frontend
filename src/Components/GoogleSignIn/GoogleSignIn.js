@@ -33,7 +33,7 @@ function GoogleSignIn(props){
     if (props.visibility)
         return (<div className="g-signin2" data-onsuccess="onSignIn" data-theme="dark" />);
     else
-        return ''
+        return null
 
 }
 export default GoogleSignIn

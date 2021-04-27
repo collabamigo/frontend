@@ -1,6 +1,6 @@
 import React from 'react'
 import './Collab.css'
-import Down from '../Dropdown/Dropdown'
+import DropdownMenu from '../DropdownMenu/DropdownMenu'
 
 class Collab extends React.Component {
   constructor(props) {
@@ -17,14 +17,10 @@ class Collab extends React.Component {
       label = localStorage.getItem('userName')? localStorage.getItem('userName') : ""
 
     return(
-    <div className={this.state.className} >
-        <div className="text-right">
-            <div className='account'> {label} <Down /> </div>
-        </div>
-        <div>
+        <div className={this.state.className} >
+            <div className='account text-right'> {label} <DropdownMenu visibility={Boolean(localStorage.getItem('userName'))}/> </div>
             <h1> {this.state.title} </h1>
         </div>
-    </div>
     )
   }
 }
