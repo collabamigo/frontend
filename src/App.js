@@ -51,12 +51,12 @@ class App extends React.Component{
             <Route path = '/' exact>
                 <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.signedIn} />
                 <div className='row'>
-                    <Link className="col-md-6" to ={'/ask'}>
+                    <Link className="col-6" to ={'/ask'}>
                         <Button className="float-right btn btn-primary" visibility={this.state.signedIn}>
                             Ask for help
                         </Button>
                     </Link>
-                    <Link className="col-md-6" to={'/help'}>
+                    <Link className="col-6" to={'/help'}>
                         <Button className="float-left btn btn-primary" visibility={this.state.signedIn}>
                             Help Others
                         </Button>
