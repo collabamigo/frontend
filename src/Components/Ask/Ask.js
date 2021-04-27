@@ -1,6 +1,6 @@
 
 import React from "react";
-import NamesContainer from "../NamesContainer";
+import NamesContainer from "./NamesContainer";
 import './Ask.css'
 import CARDS_P from '../CARDS_P/CARDS_P'
 
