@@ -18,21 +18,22 @@ class App extends React.Component{
     constructor(props) {
         super(props);
         this.state={
-            loggedIn: Boolean(localStorage.getItem('userName'))
+            signedIn: Boolean(localStorage.getItem('userName'))
         }
-
+        window.gapi.load('auth2', function() {
+            window.gapi.auth2.init();
+        });
     }
 
     handleLogin = () => {
         this.setState({
-            loggedIn: true
+            signedIn: true
         });
     }
 
 
 
     render(){
-
   return (
       <div className="App">
           <Collab className="jumbotron" title = "Collab Connect" />
@@ -40,15 +41,15 @@ class App extends React.Component{
       <Router>
         <>
             <Route path = '/' exact>
-                <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.loggedIn} />
+                <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.signedIn} />
                 <div className='row'>
                     <Link className="col-md-6" to ={'/ask'}>
-                        <Button className="float-right btn btn-primary" visibility={this.state.loggedIn}>
+                        <Button className="float-right btn btn-primary" visibility={this.state.signedIn}>
                             Ask for help
                         </Button>
                     </Link>
                     <Link className="col-md-6" to={'/help'}>
-                        <Button className="float-left btn btn-primary" visibility={this.state.loggedIn}>
+                        <Button className="float-left btn btn-primary" visibility={this.state.signedIn}>
                             Help Others
                         </Button>
                     </Link>
