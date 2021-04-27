@@ -1,9 +1,8 @@
-// TODO: Add a clear cache button
-import './App.css';
+import './App.css'
 import  Button from './Components/Button'
 import Collab from './Components/Collab/Collab'
 import React from 'react'
-import GoogleSignIn from "./Components/GoogleSignIn/GoogleSignIn";
+import GoogleSignIn from "./Components/GoogleSignIn/GoogleSignIn"
 import Ask from './Components/Ask/Ask'
 import Help from './Components/Help/Help'
 import {
@@ -11,7 +10,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute"
 
 
 class App extends React.Component{

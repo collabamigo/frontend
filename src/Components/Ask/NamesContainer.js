@@ -3,9 +3,9 @@ import React from 'react'
 class Name extends React.Component {
     render() {
         return (
-            <li key={this.props.name}>
+            <div key={this.props.name}>
                 {this.props.name}
-            </li>
+            </div>
         )
     }
 }
