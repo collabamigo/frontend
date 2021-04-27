@@ -12,13 +12,9 @@ function signOut() {
   });
 }
 function Down() {
-  const [value,setValue]=useState('');
   const handleSelect=(e)=>{
-    // console.log(e);
       if (e==="signOut")
           signOut()
-      setValue(e)
-      console.log(value)
   }
 
   return (
