@@ -100,9 +100,8 @@ function renderSuggestion(suggestion) {
 }
 
 class NamesContainer extends React.Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
     this.state = {
       value: '',
       suggestions: [],
