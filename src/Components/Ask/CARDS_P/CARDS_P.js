@@ -6,7 +6,7 @@ class CARDS_P extends React.Component {
 
     render(){
         return(
-            <div className="">
+            <div className='float-right'>
               <Card style={{ width: "22rem" }} >
                 <Card.Body>
                   <Card.Title style={{ color: "orange" }}>Shikhar Sharma</Card.Title>
