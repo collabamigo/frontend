@@ -1,8 +1,8 @@
 
 import React from "react";
-import NamesContainer from "./NamesContainer";
 import './Ask.css'
-import CARDS_P from '../CARDS_P/CARDS_P'
+import CARDS_P from './CARDS_P/CARDS_P'
+import Autocomplete from "./Autocomplete";
 
 class Ask extends React.Component {
     constructor(props) {
@@ -23,19 +23,26 @@ class Ask extends React.Component {
     render() {
         return(
             <div >
-                <div className="col-4">
-                    <h1 className="title is-1"> Skill Search </h1>
-                    <p>
-                    <input type= 'text' value = {this.state.searchTerm} onChange = {this.editSearchTerm} placeholder = 'Search for a name!'/>
-                    </p>
-                    <h3>Recent Ones</h3>
-                    <NamesContainer names = {this.dynamicSearch()}/>
+                <div>
+                  <h1 className={'col-sm-5 col-md-5'}> Skill Search </h1>
+                  <Autocomplete
+                    suggestions={[
+                      "npm",
+                      "Open Cv",
+                      "Machine Learning",
+                      "Python",
+                      "Go",
+                      "Java",
+                      "SVM Machines",
+                      "RNN",
+                      "CNN"
+                    ]}
+                  />
                 </div>
                 <CARDS_P />
             </div>
         )
     }
 }
-
 
 export default Ask;
