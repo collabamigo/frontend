@@ -25,11 +25,12 @@ class Ask extends React.Component {
             <div >
                 <div className="col-4">
                     <h1 className="title is-1"> Skill Search </h1>
-                    <p>
-                    <input type= 'text' value = {this.state.searchTerm} onChange = {this.editSearchTerm} placeholder = 'Search for a name!'/>
-                    </p>
-                    <h3>Recent Ones</h3>
-                    <NamesContainer names = {this.dynamicSearch()}/>
+                    <NamesContainer/>
+                    {/*<p>*/}
+                    {/*<input type= 'text' value = {this.state.searchTerm} onChange = {this.editSearchTerm} placeholder = 'Search for a name!'/>*/}
+                    {/*</p>*/}
+                    {/*<h3>Recent Ones</h3>*/}
+                    {/*<NamesContainer names = {this.dynamicSearch()}/>*/}
                 </div>
                 <CARDS_P />
             </div>
