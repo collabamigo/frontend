@@ -21,10 +21,11 @@ input {
   max-height: 143px;
   overflow-y: auto;
   padding-left: 0;
+  padding-right: 0;
   width: calc(300px + 1rem);
 }
 
-.suggestions li {
+.suggestions li{
   padding: 0.5rem;
 }
 
