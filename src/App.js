@@ -1,5 +1,4 @@
 import './App.css'
-import  Button from './Components/Button'
 import Collab from './Components/Collab/Collab'
 import React from 'react'
 import GoogleSignIn from "./Components/GoogleSignIn/GoogleSignIn"
@@ -50,18 +49,20 @@ class App extends React.Component{
             </Switch>
             <Route path = '/' exact>
                 <GoogleSignIn onClick={this.handleLogin} visibility={!this.state.signedIn} />
-                <div className='row'>
-                    <Link className="col-6" to ={'/ask'}>
-                        <Button className="float-right btn btn-primary" visibility={this.state.signedIn}>
-                            Ask for help
-                        </Button>
-                    </Link>
-                    <Link className="col-6" to={'/help'}>
-                        <Button className="float-left btn btn-primary" visibility={this.state.signedIn}>
-                            Help Others
-                        </Button>
-                    </Link>
-                </div>
+                {this.state.signedIn
+                    ?
+                    <div className='row'>
+                        <div className='col-md-4 col-sm-3'/>
+                        <Link className="col-md-1 col-sm-2 btn btn-primary" to ={'/ask'}>
+                                Ask for help
+                        </Link>
+                        <div className='col-2'/>
+                        <Link className="col-md-1 col-sm-2 btn btn-primary" to={'/help'}>
+                                Help Others
+                        </Link>
+                    </div>:
+
+                    null}
             </Route>
 
             <ProtectedRoute exact path='/ask'>
