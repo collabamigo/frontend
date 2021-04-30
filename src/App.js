@@ -52,14 +52,15 @@ class App extends React.Component{
                 {this.state.signedIn
                     ?
                     <div className='row'>
-                        <div className='col-md-4 col-sm-3'/>
-                        <Link className="col-md-1 col-sm-2 btn btn-primary" to ={'/ask'}>
+                        <div className='col'/>
+                        <Link className="col-auto btn btn-primary">
                                 Ask for help
                         </Link>
                         <div className='col-2'/>
-                        <Link className="col-md-1 col-sm-2 btn btn-primary" to={'/help'}>
+                        <Link className="col-auto btn btn-primary">
                                 Help Others
                         </Link>
+                        <div className='col'/>
                     </div>:
 
                     null}
