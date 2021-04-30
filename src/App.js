@@ -53,11 +53,11 @@ class App extends React.Component{
                     ?
                     <div className='row'>
                         <div className='col'/>
-                        <Link className="col-auto btn btn-primary">
+                        <Link className="col-auto btn btn-primary"  to='/ask'>
                                 Ask for help
                         </Link>
                         <div className='col-2'/>
-                        <Link className="col-auto btn btn-primary">
+                        <Link className="col-auto btn btn-primary" to='/help'>
                                 Help Others
                         </Link>
                         <div className='col'/>
