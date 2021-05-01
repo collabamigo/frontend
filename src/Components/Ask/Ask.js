@@ -35,11 +35,17 @@ class Ask extends React.Component {
                       "Java",
                       "SVM Machines",
                       "RNN",
-                      "CNN"
+                      "CNN",
+                        "C++",
+                        "Cyber security"
                     ]}
                   />
                 </div>
-                <CARDS_P />
+                <div>
+                    <CARDS_P name="Shikhar Sharma" batch="CSE, First Year" description="Did this work yet, pls inform jajajajajajajasjasjajsjasja
+                    ajsjasjasjajsajsjajs"/>
+                    <CARDS_P name="Aditya Pratap" batch="CSE, First Year" description="Did this work yet, pls inform" />
+                </div>
             </div>
         )
     }
