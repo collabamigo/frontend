@@ -16,12 +16,12 @@ class CARDS_P extends React.Component {
             <div className='float-right'>
               <Card style={{ width: "22rem" }} >
                 <Card.Body>
-                  <Card.Title style={{ color: "orange" }}>{this.state.name}</Card.Title>
+                  <Card.Title style={{ color: "orange" }}>{this.props.name}</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">
-                      {this.state.batch}
+                      {this.props.batch}
                   </Card.Subtitle>
                   <Card.Text>
-                      {this.state.description}
+                      {this.props.description}
                   </Card.Text>
                     <Card.Link href="https://www.instagram.com/">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000"
