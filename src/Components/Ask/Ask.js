@@ -17,7 +17,7 @@ class Ask extends React.Component {
             found_match: false
         }
     }
-    onEnter = (value) => {
+    onEnter = () => {
         this.setState({found_match:true});
     }
 
@@ -27,7 +27,7 @@ class Ask extends React.Component {
         this.setState({temp_l:temp,
         found_match: false})
         if (temp && temp[0] === value){
-            this.onEnter(value)
+            this.onEnter()
         }
       }
 
