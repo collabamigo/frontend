@@ -1,9 +1,9 @@
 
-import React, { Component, Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import './Autocomplete.css'
 
-class Autocomplete extends Component {
+class Autocomplete extends React.Component {
   static propTypes = {
     suggestions: PropTypes.instanceOf(Array)
   };
@@ -14,7 +14,6 @@ class Autocomplete extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       // The active selection's index
       activeSuggestion: 0,
@@ -28,6 +27,8 @@ class Autocomplete extends Component {
   }
 
   onChange = e => {
+    console.log(e.currentTarget.value)
+
     const { suggestions } = this.props;
     const userInput = e.currentTarget.value;
 
@@ -36,7 +37,7 @@ class Autocomplete extends Component {
       suggestion =>
         suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
-
+    this.props.onChange(e.currentTarget.value)
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions,
@@ -45,7 +46,7 @@ class Autocomplete extends Component {
     });
   };
 
-  onClick = e => {
+  onClick = (e) => {
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions: [],
@@ -54,7 +55,7 @@ class Autocomplete extends Component {
     });
   };
 
-  onKeyDown = e => {
+  onKeyDown = (e) => {
     const { activeSuggestion, filteredSuggestions } = this.state;
 
     // User pressed the enter key
@@ -117,7 +118,8 @@ class Autocomplete extends Component {
             })}
           </ul>
         );
-      } else {
+      }
+      else {
         suggestionsListComponent = (
           <div className="no-suggestions">
             <em>No suggestions, you're on your own!</em>
@@ -127,14 +129,14 @@ class Autocomplete extends Component {
     }
 
     return (
-      <Fragment>
+      <>
         <div className={'row'}>
           <div className={'col-sm-1 col-md-1'}/>
         <input
           type="text"
           onChange={onChange}
           onKeyDown={onKeyDown}
-          value={userInput}
+          value={this.state.userInput}
           className={'col-sm-4 col-md-3'}
         />
           </div>
@@ -142,7 +144,7 @@ class Autocomplete extends Component {
           <div className={'col-sm-1 col-md-1'}/>
         {suggestionsListComponent}
         </div>
-      </Fragment>
+      </>
     );
   }
 }
