@@ -59,21 +59,10 @@ class Ask extends React.Component {
             <div>
                 <div>
                   <h1 className={'col-sm-5 col-md-5'}> Skill Search </h1>
-                  <Autocomplete
-                    suggestions={[
-                      "npm",
-                      "Open Cv",
-                      "Machine Learning",
-                      "Python",
-                      "Go",
-                      "Java",
-                      "SVM Machines",
-                      "RNN",
-                      "CNN",
-                        "C++",
-                        "Cyber security"
-                    ]}
-                    onChange={this.editSearchTerm}
+                    <Autocomplete
+                         suggestions={this.state.temp_l}
+                         onChange={this.editSearchTerm}
+                      />
                   />
                 </div>
                 <div>
