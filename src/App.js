@@ -11,6 +11,8 @@ import {
     Switch
 } from "react-router-dom";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute"
+import Footer from './Components/Footer/Footer'
+import About from './Components/AboutUs/AboutUs'
 
 
 class App extends React.Component{
@@ -74,12 +76,16 @@ class App extends React.Component{
                 <Help Vendor={true}/>
             </ProtectedRoute>
 
+            <Route exact path = "/about">
+                <About />
+            </Route>
             <Route exact path='/403'>
                 <h6>ERROR: This page is only visible to logged in users. Meet Gandalf</h6>
                 <img src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
                      alt="Gandalf you shall not pass" loading="lazy"/>
                 <a href={'/'}><h5>Go to homepage</h5></a>
             </Route>
+            <Footer />
         </>
       </Router>
       </div>
