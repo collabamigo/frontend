@@ -22,10 +22,9 @@ function DropdownMenu(props) {
         return (
                 <DropdownButton
                     alignRight
-                    title=""
+                    title= {props.title}
                     id="dropdown-menu-align-right"
-                    onSelect={handleSelect}
-                >
+                    onSelect={handleSelect}>
 
                     <Dropdown.Item eventKey="profile">Profile <span className="material-icons">
                     perm_identity</span>
