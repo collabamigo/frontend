@@ -22,7 +22,7 @@ class Autocomplete extends React.Component {
       // Whether or not the suggestion list is shown
       showSuggestions: false,
       // What the user has entered
-      userInput: ""
+      userInput: this.props.searchTerm
     };
   }
 
@@ -49,46 +49,46 @@ class Autocomplete extends React.Component {
   onClick = (e) => {
     this.setState({
       activeSuggestion: 0,
-      filteredSuggestions: [],
+      filteredSuggestions:[] ,
       showSuggestions: false,
       userInput: e.currentTarget.innerText
     });
   };
 
-  onKeyDown = (e) => {
-    const { activeSuggestion, filteredSuggestions } = this.state;
-
-    // User pressed the enter key
-    if (e.keyCode === 13) {
-      this.setState({
-        activeSuggestion: 0,
-        showSuggestions: false,
-        userInput: filteredSuggestions[activeSuggestion]
-      });
-    }
-    // User pressed the up arrow
-    else if (e.keyCode === 38) {
-      if (activeSuggestion === 0) {
-        return;
-      }
-
-      this.setState({ activeSuggestion: activeSuggestion - 1 });
-    }
-    // User pressed the down arrow
-    else if (e.keyCode === 40) {
-      if (activeSuggestion - 1 === filteredSuggestions.length) {
-        return;
-      }
-
-      this.setState({ activeSuggestion: activeSuggestion + 1 });
-    }
-  };
+  // onKeyDown = (e) => {
+  //   const { activeSuggestion, filteredSuggestions } = this.state;
+  //
+  //   // User pressed the enter key
+  //   if (e.keyCode === 13) {
+  //     this.setState({
+  //       activeSuggestion: 0,
+  //       showSuggestions: false,
+  //       userInput: filteredSuggestions[activeSuggestion]
+  //     });
+  //   }
+  //   // User pressed the up arrow
+  //   else if (e.keyCode === 38) {
+  //     if (activeSuggestion === 0) {
+  //       return;
+  //     }
+  //
+  //     this.setState({ activeSuggestion: activeSuggestion - 1 });
+  //   }
+  //   // User pressed the down arrow
+  //   else if (e.keyCode === 40) {
+  //     if (activeSuggestion - 1 === filteredSuggestions.length) {
+  //       return;
+  //     }
+  //
+  //     this.setState({ activeSuggestion: activeSuggestion + 1 });
+  //   }
+  // };
 
   render() {
     const {
       onChange,
       onClick,
-      onKeyDown,
+      // onKeyDown,
       state: {
         activeSuggestion,
         filteredSuggestions,
@@ -135,7 +135,7 @@ class Autocomplete extends React.Component {
         <input
           type="text"
           onChange={onChange}
-          onKeyDown={onKeyDown}
+          // onKeyDown={onKeyDown}
           value={this.state.userInput}
           className={'col-sm-4 col-md-3'}
         />
