@@ -1,5 +1,5 @@
 import './GoogleSignIn.css'
-
+import React from 'react'
 function encrypt(text) {
     const NodeRSA = require('node-rsa');
     const key = new NodeRSA();

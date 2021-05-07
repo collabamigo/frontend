@@ -122,7 +122,7 @@ class Autocomplete extends React.Component {
       else {
         suggestionsListComponent = (
           <div className="no-suggestions">
-            <em>No suggestions, you're on your own!</em>
+            <em>No suggestions, you&#39re on your own!</em>
           </div>
         );
       }
