@@ -1,9 +1,10 @@
-import './GoogleSignIn.css'
-import React from 'react'
-function encrypt(text) {
-    const NodeRSA = require('node-rsa');
-    const key = new NodeRSA();
-    const publicKey = "-----BEGIN PUBLIC KEY-----\n" +
+import "./GoogleSignIn.css";
+import React from "react";
+function encrypt (text) {
+
+    const NodeRSA = require("node-rsa"),
+        key = new NodeRSA(),
+        publicKey = "-----BEGIN PUBLIC KEY-----\n" +
         "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAviuJnPMOFsTwxY22ajnr\n" +
         "2gjkvp3L6SEpRIffHYIbXcl5XVpqr7rH3aW7VC48Dr2qxSqhVcHQrv5yl6jIXyr2\n" +
         "IfOeHpMY4SmSAyN1DL1kCNvlnaOjeyG4cTj44V6GKRWQF+nt4rd+Ym7gZFFBLrL0\n" +
@@ -16,24 +17,50 @@ function encrypt(text) {
         "EpTaEqTmGG8MQqax01W1gkXchKVRdo4bk6MnIwPNVT/An1VQi0glODSeSCRYrbdS\n" +
         "8nAFKEhjAQKx0FZ68rmGOIxmEPkBH59i21fATLLsx8Ubh8PakGmIa3rezgZ+6Yi5\n" +
         "M+doF8Bbbr4YJ6qdWSRBHDMCAwEAAQ==\n" +
-        "-----END PUBLIC KEY-----\n"
-    key.importKey(publicKey,'pkcs8-public')
-    return key.encrypt(text, 'base64')
+        "-----END PUBLIC KEY-----\n";
+    key.importKey(
+        publicKey,
+        "pkcs8-public"
+    );
+    return key.encrypt(
+        text,
+        "base64"
+    );
+
 }
 
-function GoogleSignIn(props){
-    function onSignIn(googleUser) {
-          localStorage.setItem('encrypted_token', encrypt(googleUser.getAuthResponse().id_token))
-          localStorage.setItem('userName', googleUser.getBasicProfile().getName())
-          props.onClick();
+function GoogleSignIn (props) {
+
+    function onSignIn (googleUser) {
+
+        localStorage.setItem(
+            "encrypted_token",
+            encrypt(googleUser.getAuthResponse().id_token)
+        );
+        localStorage.setItem(
+            "userName",
+            googleUser.getBasicProfile().getName()
+        );
+        props.onClick();
+
     }
 
-    window.onSignIn = (googleUser) => {onSignIn(googleUser)}
+    window.onSignIn = (googleUser) => {
 
-    if (props.visibility)
-        return (<div className="g-signin2" data-onsuccess="onSignIn" data-theme="dark" />);
-    else
-        return null
+        onSignIn(googleUser);
+
+    };
+
+    if (props.visibility) {
+
+        return (<div
+            className="g-signin2"
+            data-onsuccess="onSignIn"
+            data-theme="dark"
+                />);
+
+    }
+    return null;
 
 }
-export default GoogleSignIn
+export default GoogleSignIn;

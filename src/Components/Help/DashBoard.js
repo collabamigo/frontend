@@ -1,16 +1,28 @@
 import React from "react";
 
+// eslint-disable-next-line react/prefer-stateless-function
 class DashBoard extends React.Component {
-    render() {
-        return(
-            <div>
-                <h1>Dashboard <span className="material-icons">
-                    dashboard
-                    </span>
-                </h1>
-            </div>
-        )
+
+    // Noinspection JSCheckFunctionSignatures
+    shouldComponentUpdate () {
+
+        return false;
+
     }
+
+    render () {
+
+        return (
+            <h1>
+                Dashboard
+                <span className="material-icons">
+                    dashboard
+                </span>
+            </h1>
+        );
+
+    }
+
 }
 
 export default DashBoard;

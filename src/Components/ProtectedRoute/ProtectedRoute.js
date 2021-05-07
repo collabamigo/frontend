@@ -1,28 +1,35 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React from "react";
+import {Redirect, Route} from "react-router-dom";
 
 
-function ProtectedRoute(props) {
+function ProtectedRoute (props) {
+
     let ret;
-    if (localStorage.getItem('encrypted_token'))
-    {
-        ret = props.children
-    }
-    else
-    {
-          ret = <Redirect to={
+    if (localStorage.getItem("encrypted_token")) {
+
+        ret = props.children;
+
+    } else {
+
+        ret =
+            (<Redirect to={
               {
                   pathname: '/403',
                   state: {
                       from: props.location
                   }
               }
-          } />
+          }
+            />)
+
     }
-    return ( <Route {...props}>
+    return (
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <Route {...props}>
             {ret}
-    </Route>
-    )
+        </Route>);
+
+
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;
