@@ -1,4 +1,7 @@
+
 import React from "react";
+import PropTypes from "prop-types";
+
 
 function Button (props) {
 
@@ -23,5 +26,12 @@ function Button (props) {
     return null;
 
 }
+Button.propTypes = {
+    children: PropTypes.node,
+    visibility: PropTypes.string.isRequired,
+}
 
+Button.defaultProps = {
+    children: null
+}
 export default Button;

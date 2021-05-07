@@ -1,6 +1,12 @@
 import React from "react";
 
 class AboutUs extends React.Component {
+    // Noinspection JSCheckFunctionSignatures
+    shouldComponentUpdate () {
+
+        return false;
+
+    }
 
     render () {
 

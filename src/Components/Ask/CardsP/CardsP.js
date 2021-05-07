@@ -1,14 +1,16 @@
+/* eslint-disable react/forbid-component-props */
+
 import React from "react";
 import Card from "react-bootstrap/Card";
-import "./CARDS_P.css";
+import "./CardsP.css";
+import PropTypes from "prop-types";
 
-function CARDS_P (props) {
-
+function CardsP (props) {
     return (
         <div className="float-right">
-            <Card style={{"width": "22rem"}} >
+            <Card className="card_main" >
                 <Card.Body>
-                    <Card.Title style={{"color": "orange"}}>
+                    <Card.Title className="main_title">
                         {props.name}
                     </Card.Title>
 
@@ -69,5 +71,10 @@ function CARDS_P (props) {
 
 }
 
+CardsP.propTypes = {
+    batch:PropTypes.string.isRequired,
+    description:PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+}
 
-export default CARDS_P;
+export default CardsP;

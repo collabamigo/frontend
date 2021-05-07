@@ -1,6 +1,7 @@
 import React from "react";
 import "./Collab.css";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
+import PropTypes from "prop-types";
 
 function Collab (props) {
 
@@ -40,4 +41,9 @@ function Collab (props) {
 
 }
 
+Collab.propTypes = {
+    className:PropTypes.string.isRequired,
+    title:PropTypes.string.isRequired,
+
+}
 export default Collab;

@@ -1,10 +1,11 @@
 
 import React from "react";
 import "./Ask.css";
-import CARDS_P from "./CARDS_P/CARDS_P";
+import CardsP from "./CardsP/CardsP";
 import Autocomplete from "./Autocomplete";
 import a from "../../temp";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 function generate (val) {
 
@@ -12,6 +13,14 @@ function generate (val) {
 
 }
 class Ask extends React.Component {
+
+    static propTypes = {
+      searchTerm : PropTypes.string,
+    };
+
+    static defaultProps = {
+      searchTerm : "",
+    };
 
     constructor (props) {
 
@@ -25,13 +34,25 @@ class Ask extends React.Component {
 
     }
 
+    componentDidMount () {
+
+        this.refreshList();
+    }
+
+    // Noinspection JSCheckFunctionSignatures
+    shouldComponentUpdate () {
+
+        return true;
+
+    }
+
     onEnter = () => {
 
         this.setState({"found_match": true});
 
     }
 
-    editSearchTerm = (value) => {
+    handleChange = (value) => {
 
         this.setState({"searchTerm": value});
         const temp = generate(value);
@@ -42,12 +63,6 @@ class Ask extends React.Component {
             this.onEnter();
 
         }
-
-    }
-
-    componentDidMount () {
-
-        this.refreshList();
 
     }
 
@@ -84,7 +99,7 @@ class Ask extends React.Component {
                           </h1>
 
                           <Autocomplete
-                              onChange={this.editSearchTerm}
+                              onChange={this.handleChange}
                               searchTerm={this.state.searchTerm}
                               suggestions={this.state.temp_l}
                           />
@@ -97,42 +112,41 @@ class Ask extends React.Component {
               );
 
           }
-
-          return (
-              <div>
+          else{
+              return (
                   <div>
-                      <h1 className="col-sm-5 col-md-5">
-                          {" "}
-                          Skill Search
+                      <div>
+                          <h1 className="col-sm-5 col-md-5">
+                              {" "}
+                              Skill Search
 
-                          {" "}
-                      </h1>
+                              {" "}
+                          </h1>
 
-                      <Autocomplete
-                          onChange={this.editSearchTerm}
-                          searchTerm={this.state.searchTerm}
-                          suggestions={this.state.temp_l}
-                      />
+                          <Autocomplete
+                              onChange={this.handleChange}
+                              searchTerm={this.state.searchTerm}
+                              suggestions={this.state.temp_l}
+                          />
+                      </div>
+
+                      <div>
+                          <CardsP
+                              batch="CSE, First Year"
+                              description={`${this.state.dataList[0].description}  dont mess with me`}
+                              name={this.state.dataList[0].title}
+                          />
+
+                          <CardsP
+                              batch="CSE, First Year"
+                              description="Did this work yet, pls inform"
+                              name="Aditya Pratap"
+                          />
+                      </div>
                   </div>
-
-                  <div>
-                      <CARDS_P
-                          batch="CSE, First Year"
-                          description={`${this.state.dataList[0].description}  dont mess with me`}
-                          name={this.state.dataList[0].title}
-                      />
-
-                      <CARDS_P
-                          batch="CSE, First Year"
-                          description="Did this work yet, pls inform"
-                          name="Aditya Pratap"
-                      />
-                  </div>
-              </div>
-          );
-
+            );
+          }
       }
-
 }
 
 export default Ask;

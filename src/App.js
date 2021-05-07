@@ -15,8 +15,8 @@ import Footer from "./Components/Footer/Footer";
 import About from "./Components/AboutUs/AboutUs";
 
 
+// eslint-disable-next-line react/require-optimization
 class App extends React.Component {
-
     constructor (props) {
 
         super(props);
@@ -26,20 +26,15 @@ class App extends React.Component {
         window.gapi.load(
             "auth2",
             () => {
-
                 window.gapi.auth2.init();
-
             }
         );
-
     }
 
     handleLogin = () => {
-
         this.setState({
             "signedIn": true
         });
-
     }
 
 
@@ -80,8 +75,8 @@ class App extends React.Component {
                                 visibility={!this.state.signedIn}
                             />
 
-                            {this.state.signedIn
-                                ? <div className="row">
+                            {this.state.signedIn?
+                                <div className="row">
                                     <div className="col" />
 
                                     <Link
@@ -101,7 +96,7 @@ class App extends React.Component {
                                     </Link>
 
                                     <div className="col" />
-                                  </div>
+                                </div>
 
                                 : null}
                         </Route>

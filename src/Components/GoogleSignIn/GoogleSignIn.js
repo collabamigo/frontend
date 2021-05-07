@@ -1,5 +1,7 @@
 import "./GoogleSignIn.css";
 import React from "react";
+import PropTypes from 'prop-types'
+
 function encrypt (text) {
 
     const NodeRSA = require("node-rsa"),
@@ -62,5 +64,10 @@ function GoogleSignIn (props) {
     }
     return null;
 
+}
+
+GoogleSignIn.propTypes={
+    onClick: PropTypes.func.isRequired,
+    visibility: PropTypes.bool.isRequired,
 }
 export default GoogleSignIn;

@@ -1,4 +1,5 @@
 
+
 import React from "react";
 import PropTypes from "prop-types";
 import "./Autocomplete.css";
@@ -6,11 +7,15 @@ import "./Autocomplete.css";
 class Autocomplete extends React.Component {
 
   static propTypes = {
-      "suggestions": PropTypes.instanceOf(Array)
+      onChange: PropTypes.func.isRequired,
+      searchTerm : PropTypes.string,
+      suggestions: PropTypes.instanceOf(Array),
+
   };
 
   static defaultProps = {
-      "suggestions": []
+      searchTerm: "",
+      suggestions: []
   };
 
   constructor (props) {
@@ -26,8 +31,14 @@ class Autocomplete extends React.Component {
           // What the user has entered
           "userInput": this.props.searchTerm
       };
-
   }
+  
+    // noinspection JSCheckFunctionSignatures
+    shouldComponentUpdate () {
+
+        return true;
+
+    }
 
   onChange = (e) => {
 
@@ -111,8 +122,9 @@ class Autocomplete extends React.Component {
           if (filteredSuggestions.length) {
 
               suggestionsListComponent =
-                  (<ul className="suggestions col-sm-4 col-md-3">
-                      {filteredSuggestions.map((suggestion, index) => {
+                  (
+                      <ul className="suggestions col-sm-4 col-md-3">
+                          {filteredSuggestions.map((suggestion, index) => {
 
                   let className;
 
@@ -131,16 +143,18 @@ class Autocomplete extends React.Component {
                       </li>
                   );
               })}
-                   </ul>);
+                      </ul>);
 
           } else {
 
               suggestionsListComponent =
-                  (<div className="no-suggestions">
-                      <em>
-                          No suggestions, you&#39re on your own!
-                      </em>
-                   </div>);
+                  (
+                      <div className="no-suggestions">
+                          <em>
+                              No suggestions, you are on your own!
+                          </em>
+                      </div>
+                  );
 
           }
 

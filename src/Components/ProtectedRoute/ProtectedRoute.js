@@ -1,6 +1,6 @@
 import React from "react";
 import {Redirect, Route} from "react-router-dom";
-
+import PropTypes from "prop-types";
 
 function ProtectedRoute (props) {
 
@@ -12,15 +12,13 @@ function ProtectedRoute (props) {
     } else {
 
         ret =
-            (<Redirect to={
+            (
+                <Redirect to={
               {
                   pathname: '/403',
-                  state: {
-                      from: props.location
-                  }
               }
           }
-            />)
+                />)
 
     }
     return (
@@ -30,6 +28,14 @@ function ProtectedRoute (props) {
         </Route>);
 
 
+}
+
+ProtectedRoute.propTypes = {
+    children: PropTypes.node,
+}
+
+ProtectedRoute.defaultProps = {
+    children: null
 }
 
 export default ProtectedRoute;

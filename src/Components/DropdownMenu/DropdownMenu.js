@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
+import PropTypes from "prop-types";
 
 function signOut () {
 
@@ -72,5 +73,9 @@ function DropdownMenu (props) {
     return null;
 
 }
-// TODO: Aditya look over material-icons
+
+DropdownMenu.propTypes = {
+    title: PropTypes.string.isRequired,
+    visibility:PropTypes.bool.isRequired,
+}
 export default DropdownMenu;
