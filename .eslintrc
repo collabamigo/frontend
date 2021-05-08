@@ -58,6 +58,6 @@
     "react/jsx-max-depth": "off",
     "react/jsx-props-no-spreading": "off",
     "react/no-set-state": "off",
-    "react/forbid-component-props": "warn"
+    "react/forbid-component-props": "off"
   }
 }
