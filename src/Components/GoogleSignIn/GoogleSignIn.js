@@ -2,7 +2,7 @@ import "./GoogleSignIn.css";
 import React from "react";
 import PropTypes from 'prop-types'
 
-function encrypt (text) {
+function rsa_encrypt (plaintext) {
 
     const NodeRSA = require("node-rsa"),
         key = new NodeRSA(),
@@ -25,8 +25,8 @@ function encrypt (text) {
         "pkcs8-public"
     );
     return key.encrypt(
-        text,
-        "base64"
+        plaintext,
+        "hex"
     );
 
 }
@@ -34,17 +34,35 @@ function encrypt (text) {
 function GoogleSignIn (props) {
 
     function onSignIn (googleUser) {
+        const crypto = require('crypto');
+        const CryptoJS = require("crypto-js");
+
+        const encrypted_token= CryptoJS.AES.encrypt(googleUser.getAuthResponse().id_token,
+            crypto.randomBytes(32).toString(), {
+                mode: CryptoJS.mode.CBC,});
 
         localStorage.setItem(
             "encrypted_token",
-            encrypt(googleUser.getAuthResponse().id_token)
+           encrypted_token.ciphertext.toString()
         );
+
+        localStorage.setItem(
+            "aes_key",
+            rsa_encrypt(encrypted_token.key.toString())
+        );
+        console.log(encrypted_token.key.toString(), encrypted_token.iv.toString())
+
+        localStorage.setItem(
+            "iv",
+            encrypted_token.iv.toString()
+        );
+
+
         localStorage.setItem(
             "userName",
             googleUser.getBasicProfile().getName()
         );
         props.onClick();
-
     }
 
     window.onSignIn = (googleUser) => {
