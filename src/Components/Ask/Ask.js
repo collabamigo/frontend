@@ -72,10 +72,7 @@ class Ask extends React.Component {
     }
 
       refreshList = () => {
-          axios.
-              get("https://blooming-peak-53825.herokuapp.com/connect/api/todo/").
-              then((res) => this.setState({"dataList": res.data})).
-              catch((err) => console.log(err));
+
 
       };
 
