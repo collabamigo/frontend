@@ -13,13 +13,26 @@ import {
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import Footer from "./Components/Footer/Footer";
 import About from "./Components/AboutUs/AboutUs";
+import axios from "axios";
+import FormSignIn from './Components/FormSignIn/FormSignIn'
 
 
 // eslint-disable-next-line react/require-optimization
 class App extends React.Component {
     constructor (props) {
-
         super(props);
+
+        // eslint-disable-next-line no-unused-vars
+        const  mera= axios.interceptors.request.use(function (config) {
+            config.headers['aeskey'] = localStorage.getItem('aes_key')
+            config.headers['iv'] = localStorage.getItem('iv')
+            config.headers['token'] = localStorage.getItem('encrypted_token')
+            console.log(config)
+            return config;
+          }, function (error) {
+            // Do something with request error
+            return Promise.reject(error);
+          });
         this.state = {
             "signedIn": Boolean(localStorage.getItem("userName"))
         };
@@ -37,8 +50,19 @@ class App extends React.Component {
         });
     }
 
-
     render () {
+        // axios.post("https://blooming-peak-53825.herokuapp.com/connect/api/profile/", {
+        //     headers: {
+        //         "aeskey": localStorage.getItem("aes_key"),
+        //         "token": localStorage.getItem("encrypted_token"),
+        //         "iv": localStorage.getItem("iv")
+        //     }
+        // })
+        // .then((response) => {
+        //   console.log(response);
+        // }, (error) => {
+        //   console.log(error);
+        // });
 
         return (
             <div className="App">
@@ -100,6 +124,13 @@ class App extends React.Component {
 
                                 : null}
                         </Route>
+
+                        <ProtectedRoute
+                            exact
+                            path="/form"
+                        >
+                            <FormSignIn />
+                        </ProtectedRoute>
 
                         <ProtectedRoute
                             exact

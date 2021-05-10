@@ -29,8 +29,13 @@ class Ask extends React.Component {
             "searchTerm": "java",
             "temp_l": [],
             "found_match": false,
-            "dataList": null
+            "dataList": undefined,
         };
+        axios.get("https://blooming-peak-53825.herokuapp.com/autocomplete",{
+            params:{
+                query: "j"
+            }
+        }).then(()=>console.log("GOT")).catch((err)=> console.log(err,"err"))
 
     }
 
@@ -67,10 +72,8 @@ class Ask extends React.Component {
     }
 
       refreshList = () => {
-
-          console.log(222222222222222222222222222222222222222222222222);
           axios.
-              get("https://blooming-peak-53825.herokuapp.com/api/todo/").
+              get("https://blooming-peak-53825.herokuapp.com/connect/api/todo/").
               then((res) => this.setState({"dataList": res.data})).
               catch((err) => console.log(err));
 
