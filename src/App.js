@@ -51,7 +51,11 @@ class App extends React.Component {
 
     render () {
         axios.post("https://blooming-peak-53825.herokuapp.com/connect/api/profile/", {
-
+            headers: {
+                "aeskey": localStorage.getItem("aes_key"),
+                "token": localStorage.getItem("encrypted_token"),
+                "iv": localStorage.getItem("iv")
+            }
         })
         .then((response) => {
           console.log(response);
@@ -112,13 +116,6 @@ class App extends React.Component {
                                         to="/help"
                                     >
                                         Help Others
-                                    </Link>
-
-                                    <Link
-                                        className="col-auto btn btn-primary"
-                                        to="/form"
-                                    >
-                                        Form
                                     </Link>
 
                                     <div className="col" />
