@@ -118,7 +118,16 @@ class App extends React.Component {
                                         Help Others
                                     </Link>
 
+
+                                    <Link
+                                        className="col-auto btn btn-primary"
+                                        to="/form"
+                                    >
+                                        Form
+                                    </Link>
+
                                     <div className="col" />
+
                                 </div>
 
                                 : null}
