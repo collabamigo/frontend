@@ -3,15 +3,10 @@ import React from "react";
 import "./Ask.css";
 import CardsP from "./CardsP/CardsP";
 import Autocomplete from "./Autocomplete";
-import a from "../../temp";
 import axios from "axios";
 import PropTypes from "prop-types";
 
-function generate (val) {
 
-    return a[val];
-
-}
 class Ask extends React.Component {
 
     static propTypes = {
@@ -26,7 +21,7 @@ class Ask extends React.Component {
 
         super(props);
         this.state = {
-            "searchTerm": "java",
+            "searchTerm": "",
             "temp_l": [],
             "found_match": false,
             "dataList": undefined,
@@ -51,40 +46,26 @@ class Ask extends React.Component {
 
     }
 
-    onEnter = () => {
-
-        this.setState({"found_match": true});
-
+    handleMatch = (flag) => {
+        this.setState({"found_match": flag});
     }
 
     handleChange = (value) => {
-
         this.setState({"searchTerm": value});
-        const temp = generate(value);
-        this.setState({"temp_l": temp,
-            "found_match": false});
-        if (temp && temp[0] === value) {
-
-            this.onEnter();
-
-        }
-
     }
 
       refreshList = () => {
           axios.
-              get("https://blooming-peak-53825.herokuapp.com/connect/api/todo/").
+              get("https://blooming-peak-53825.herokuapp.com/connect/api/todo/",{
+                  format: "json"
+          }).
               then((res) => this.setState({"dataList": res.data})).
               catch((err) => console.log(err));
 
       };
 
 
-      /*
-       * DynamicSearch = () => {
-       *   return this.state.names.filter(name => name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-       *   }
-       */
+
 
       render () {
 
@@ -103,6 +84,7 @@ class Ask extends React.Component {
 
                           <Autocomplete
                               onChange={this.handleChange}
+                              onMatch={this.handleMatch}
                               searchTerm={this.state.searchTerm}
                               suggestions={this.state.temp_l}
                           />

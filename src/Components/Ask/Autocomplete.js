@@ -3,33 +3,33 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Autocomplete.css";
+import a from "../../temp";
+function generate (val) {
+
+    return a[val];
+
+}
 
 class Autocomplete extends React.Component {
 
   static propTypes = {
       onChange: PropTypes.func.isRequired,
+      onMatch:PropTypes.func.isRequired,
       searchTerm : PropTypes.string,
-      suggestions: PropTypes.instanceOf(Array),
-
   };
 
   static defaultProps = {
       searchTerm: "",
-      suggestions: []
   };
 
   constructor (props) {
 
       super(props);
       this.state = {
-      // The active selection's index
-          "activeSuggestion": 0,
-          // The suggestions that match the user's input
-          "filteredSuggestions": [],
-          // Whether or not the suggestion list is shown
-          "showSuggestions": false,
-          // What the user has entered
-          "userInput": this.props.searchTerm
+          activeSuggestion: 0,
+          filteredSuggestions: [],
+          showSuggestions: false,
+          userInput: this.props.searchTerm,
       };
   }
   
@@ -40,33 +40,25 @@ class Autocomplete extends React.Component {
 
     }
 
-  onChange = (e) => {
-
-      console.log(e.currentTarget.value);
-
-      const {suggestions} = this.props,
-          userInput = e.currentTarget.value,
-
-          // Filter our suggestions that don't contain the user's input
-          filteredSuggestions = suggestions.filter((suggestion) => suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1);
-      this.props.onChange(e.currentTarget.value);
+  handleChange = (e) => {
+      const suggestions = generate(e.target.value);
       this.setState({
-          "activeSuggestion": 0,
-          filteredSuggestions,
-          "showSuggestions": true,
-          "userInput": e.currentTarget.value
+          activeSuggestion: 0,
+          filteredSuggestions: suggestions,
+          showSuggestions: true,
+          userInput: e.target.value,
       });
-
+       this.props.onChange(e.target.value);
+        if (suggestions && suggestions[0].toLowerCase() === e.target.value.toLowerCase()){
+            this.handleClick()
+        }
   };
 
-  onClick = (e) => {
-
+  handleClick = () => {
       this.setState({
-          "activeSuggestion": 0,
-          "filteredSuggestions": [],
           "showSuggestions": false,
-          "userInput": e.currentTarget.innerText
       });
+      this.props.onMatch(true);
 
   };
 
@@ -102,34 +94,20 @@ class Autocomplete extends React.Component {
    */
 
   render () {
-
-      const {
-          onChange,
-          onClick,
-          // OnKeyDown,
-          "state": {
-              activeSuggestion,
-              filteredSuggestions,
-              showSuggestions,
-              userInput
-          }
-      } = this;
-
       let suggestionsListComponent;
 
-      if (showSuggestions && userInput) {
+      if (this.state.showSuggestions && this.state.userInput) {
 
-          if (filteredSuggestions.length) {
+          if (this.state.filteredSuggestions) {
 
               suggestionsListComponent =
                   (
                       <ul className="suggestions col-sm-4 col-md-3">
-                          {filteredSuggestions.map((suggestion, index) => {
+                          {this.state.filteredSuggestions.map((suggestion, index) => {
 
                   let className;
 
-                  // Flag the active suggestion with a class
-                  if (index === activeSuggestion) {
+                  if (index === this.state.activeSuggestion) {
 
                       className = "suggestion-active";
                   }
@@ -137,7 +115,7 @@ class Autocomplete extends React.Component {
                       <li
                           className={className}
                           key={suggestion}
-                          onClick={onClick}
+                          onClick={this.handleClick}
                       >
                           {suggestion}
                       </li>
@@ -155,9 +133,7 @@ class Autocomplete extends React.Component {
                           </em>
                       </div>
                   );
-
           }
-
       }
 
       return (
@@ -167,8 +143,7 @@ class Autocomplete extends React.Component {
 
                   <input
                       className="col-sm-4 col-md-3"
-                      onChange={onChange}
-                      // OnKeyDown={onKeyDown}
+                      onChange={this.handleChange.bind(this)}
                       type="text"
                       value={this.state.userInput}
                   />
