@@ -1,5 +1,6 @@
 
 import React from 'react'
+import axios from "axios";
 
 class FormSignIn extends React.Component {
 
@@ -41,26 +42,48 @@ class FormSignIn extends React.Component {
 
     
     handleSubmit(e) {
-        if (this.state.degree !== "selected"){
-            alert('A name was submitted: ' + this.state.LastName);
+        alert('A name was submitted: ' + this.state.LastName);
+        let payload = {
+            "First_Name":this.state.FirstName,
+            "Last_Name":this.state.LastName,
+            "Gender":"",
+            "Degree":this.state.degree,
+            "Course":this.state.branch,
+            "Email":this.email,
+            "Handle":"",
+            "IsTeacher":false}
 
-            console.log(this.state.FirstName)
-            console.log(this.state.LastName)
-            console.log(this.email)
-            console.log(this.state.degree)
-            console.log(this.state.branch)
-            this.setState({
-                FirstName: '',
-                LastName:'',
-                degree: '',
-                branch:''
-            })
-            e.preventDefault();
-        }
+        axios.post("https://blooming-peak-53825.herokuapp.com/connect/api/profile/", payload)
+            .then(res => {
+            console.log(res);
+            console.log(res.data);
+          })
 
-        else{
-              alert('Please select: ');
-        }
+        // r = requests.post(url=URL, data=json_data,
+    //                       cookies=session, headers={'Referer': URL, 'Content-Type': 'application/json'})
+    //{
+         //     "Last_Name": "", n
+        //     "Gender": "",
+        //     "Degree": "", n
+        //     "Course": "", n
+        //     "Email": "", n
+        //     "Handle": "",
+        //     "IsTeacher": false n
+        // }
+
+        console.log(this.state.FirstName)
+        console.log(this.state.LastName)
+        console.log(this.email)
+        console.log(this.state.degree)
+        console.log(this.state.branch)
+
+        this.setState({
+            FirstName: '',
+            LastName:'',
+            degree: '',
+            branch:''
+        })
+        e.preventDefault();
 
     }
 
@@ -68,7 +91,7 @@ class FormSignIn extends React.Component {
     this.setState({LastName: event.target.value});
   }
 
-  email = "lol@iiitd.ac.in"
+  email = "shikhar20121@iiitd.ac.in"
 
   render() {
         const first_name = localStorage.getItem("userName")

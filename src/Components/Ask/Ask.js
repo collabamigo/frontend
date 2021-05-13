@@ -56,10 +56,10 @@ class Ask extends React.Component {
 
       refreshList = () => {
           axios.
-              get("https://blooming-peak-53825.herokuapp.com/connect/api/todo/",{
+              get("https://blooming-peak-53825.herokuapp.com/connect/api/profile/",{
                   format: "json"
-          }).
-              then((res) => this.setState({"dataList": res.data})).
+          })
+              .then((res) => this.setState({"dataList": res.data})).
               catch((err) => console.log(err));
 
       };
@@ -118,8 +118,8 @@ class Ask extends React.Component {
                       <div>
                           <CardsP
                               batch="CSE, First Year"
-                              description={`${this.state.dataList[0].description}  dont mess with me`}
-                              name={this.state.dataList[0].title}
+                              description={`${this.state.dataList[0].First_Name}  dont mess with me`}
+                              name={this.state.dataList[0].Last_Name}
                           />
 
                           <CardsP

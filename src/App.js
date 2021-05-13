@@ -21,7 +21,6 @@ import FormSignIn from './Components/FormSignIn/FormSignIn'
 class App extends React.Component {
     constructor (props) {
         super(props);
-
         axios.interceptors.request.use(function (config) {
             config.headers['aeskey'] = localStorage.getItem('aes_key')
             config.headers['iv'] = localStorage.getItem('iv')
