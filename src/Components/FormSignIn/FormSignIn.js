@@ -7,7 +7,6 @@ class FormSignIn extends React.Component {
         super(props);
         this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
         this.handleChangeLastName = this.handleChangeLastName.bind(this);
-        this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleChangeDegree = this.handleChangeDegree.bind(this);
         this.handleChangeBranch = this.handleChangeBranch.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,12 +14,10 @@ class FormSignIn extends React.Component {
         this.state = {
             FirstName: '',
             LastName:'',
-            email: '',
             degree: '',
             branch:''
         }
     }
-
 
   shouldComponentUpdate () {
     return true;
@@ -32,10 +29,6 @@ class FormSignIn extends React.Component {
 
     handleChangeLastName(e) {
         this.setState({ LastName: e.target.value })
-    }
-
-    handleChangeEmail() {
-        this.setState({ email:"lol@iiitd.ac.in"})
     }
 
     handleChangeDegree(e) {
@@ -53,13 +46,12 @@ class FormSignIn extends React.Component {
 
             console.log(this.state.FirstName)
             console.log(this.state.LastName)
-            console.log(this.state.email)
+            console.log(this.email)
             console.log(this.state.degree)
             console.log(this.state.branch)
             this.setState({
                 FirstName: '',
                 LastName:'',
-                email: '',
                 degree: '',
                 branch:''
             })
@@ -76,9 +68,10 @@ class FormSignIn extends React.Component {
     this.setState({LastName: event.target.value});
   }
 
+  email = "lol@iiitd.ac.in"
+
   render() {
         const first_name = localStorage.getItem("userName")
-        const temp = "lol@iiitd.ac.in"
         const name = first_name.split(' ')
     return (
         <form onSubmit={this.handleSubmit}>
@@ -142,10 +135,9 @@ class FormSignIn extends React.Component {
 
                             <input
                                 disabled
-                                onSubmit={this.handleChangeEmail}
-                                placeholder={temp}
+                                placeholder={this.email}
                                 type='text'
-                                value={temp}
+                                value={this.email}
                             />
 
                             <div className="col" />
@@ -162,11 +154,12 @@ class FormSignIn extends React.Component {
                                 <select
                                     className="form-control"
                                     onChange={this.handleChangeDegree}
+                                    required
                                     value={this.state.degree}
                                 >
                                     <option
                                         selected
-                                        value="selected"
+                                        value=""
                                     >
                                         ---Select Degree---
                                     </option>
@@ -186,42 +179,44 @@ class FormSignIn extends React.Component {
                                 <select
                                     className="form-control"
                                     onChange={this.handleChangeBranch}
+                                    required
+                                    value={this.state.branch}
                                 >
                                     <div className="col" />
 
                                     <option
                                         selected
-                                        value={this.state.branch}
+                                        value=""
 
                                     >
                                         ---Select Branch---
                                     </option>
 
-                                    <option value={this.state.branch}>
+                                    <option value="CSAI">
                                         CSAI
                                     </option>
 
-                                    <option value={this.state.branch}>
+                                    <option value="CSE">
                                         CSE
                                     </option>
 
-                                    <option value={this.state.branch}>
+                                    <option value="CSB">
                                         CSB
                                     </option>
 
-                                    <option value={this.state.branch}>
+                                    <option value="CSD">
                                         CSD
                                     </option>
 
-                                    <option value={this.state.branch}>
+                                    <option value="CSS">
                                         CSS
                                     </option>
 
-                                    <option value={this.state.branch}>
+                                    <option value="CSAM">
                                         CSAM
                                     </option>
 
-                                    <option value={this.state.branch}>
+                                    <option value="ECE">
                                         ECE
                                     </option>
 
