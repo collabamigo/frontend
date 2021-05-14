@@ -54,7 +54,7 @@ class Ask extends React.Component {
         this.setState({"searchTerm": value});
     }
 
-      refreshList = () => {
+    refreshList = () => {
           axios.
               get("https://blooming-peak-53825.herokuapp.com/connect/api/profile/",{
                   format: "json"
@@ -63,8 +63,6 @@ class Ask extends React.Component {
               catch((err) => console.log(err));
 
       };
-
-
 
 
       render () {

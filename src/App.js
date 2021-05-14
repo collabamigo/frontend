@@ -15,6 +15,7 @@ import Footer from "./Components/Footer/Footer";
 import About from "./Components/AboutUs/AboutUs";
 import axios from "axios";
 import FormSignIn from './Components/FormSignIn/FormSignIn'
+import Profile from "./Components/Profile/Profile";
 
 
 // eslint-disable-next-line react/require-optimization
@@ -151,6 +152,13 @@ class App extends React.Component {
                             path="/help"
                         >
                             <Help Vendor />
+                        </ProtectedRoute>
+
+                        <ProtectedRoute
+                            exact
+                            path="/profile"
+                        >
+                            <Profile />
                         </ProtectedRoute>
 
                         <Route

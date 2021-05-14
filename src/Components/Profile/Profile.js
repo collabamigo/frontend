@@ -1,21 +1,26 @@
-
 import React from 'react'
+import "./Profile.css";
 import axios from "axios";
 
-class FormSignIn extends React.Component {
+class Profile extends React.Component{
+
     constructor(props) {
         super(props);
         this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
         this.handleChangeLastName = this.handleChangeLastName.bind(this);
         this.handleChangeDegree = this.handleChangeDegree.bind(this);
         this.handleChangeBranch = this.handleChangeBranch.bind(this);
+        this.handleChangeHandle = this.handleChangeHandle.bind(this);
+        this.handleChangeContact = this.handleChangeContact.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
             FirstName: '',
             LastName:'',
             degree: '',
-            branch:''
+            branch:'',
+            Handle:'',
+            Contact:0
         }
     }
 
@@ -38,9 +43,19 @@ class FormSignIn extends React.Component {
     handleChangeBranch(e) {
         this.setState({ branch: e.target.value })
     }
-    
+
+    handleChangeHandle(e) {
+        this.setState({ Handle: e.target.value })
+    }
+
+    handleChangeContact(e) {
+        this.setState({ Contact: e.target.value })
+    }
+
     handleSubmit(e) {
+
         alert('A name was submitted: ' + this.state.LastName);
+
         let payload = {
             "First_Name":this.state.FirstName,
             "Last_Name":this.state.LastName,
@@ -71,6 +86,8 @@ class FormSignIn extends React.Component {
         console.log(this.state.FirstName)
         console.log(this.state.LastName)
         console.log(this.email)
+        console.log(this.state.Handle)
+        console.log(this.state.Contact)
         console.log(this.state.degree)
         console.log(this.state.branch)
 
@@ -78,7 +95,9 @@ class FormSignIn extends React.Component {
             FirstName: '',
             LastName:'',
             degree: '',
-            branch:''
+            branch:'',
+            Contact:'',
+            Handle:''
         })
         e.preventDefault();
 
@@ -163,6 +182,52 @@ class FormSignIn extends React.Component {
                             <div className="col" />
 
                         </label>
+
+                        <br />
+
+                        <label className="row">
+                            <div className="col" />
+
+                            <div className="col-2" >
+                                Handle :
+                            </div>
+
+                            <div className="col-auto" />
+
+                            <input
+                                onChange={this.handleChangeHandle}
+                                placeholder="Social media Handle"
+                                type='text'
+                                value={this.state.Handle}
+                            />
+
+                            <div className="col" />
+
+                        </label>
+
+                        <br />
+
+                        <label className="row">
+                            <div className="col" />
+
+                            <div className="col-2" >
+                                Contact :
+                            </div>
+
+                            <div className="col-auto" />
+
+                            <input
+                                onChange={this.handleChangeContact}
+                                placeholder="9843323291"
+                                type='number'
+                                value={this.state.Contact}
+                            />
+
+                            <div className="col" />
+
+                        </label>
+
+                        <br />
 
                         <br />
 
@@ -254,7 +319,7 @@ class FormSignIn extends React.Component {
                         <button
                             className="btn btn-primary"
                             onChange={this.handleChange}
-                            type="submit" 
+                            type="submit"
                             value="Submit"
                         >
                             Submit
@@ -268,4 +333,4 @@ class FormSignIn extends React.Component {
   }
 }
 
-export default FormSignIn;
+export default Profile;

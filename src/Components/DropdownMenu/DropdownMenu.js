@@ -3,6 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import PropTypes from "prop-types";
+import {
+    Link,
+    Route,
+} from "react-router-dom";
 
 function signOut () {
 
@@ -20,53 +24,48 @@ function DropdownMenu (props) {
     if (props.visibility) {
 
         const handleSelect = (e) => {
-
             if (e === "signOut") {
-
                 signOut();
-
             }
-
         };
 
         return (
-            <DropdownButton
-                alignRight
-                id="dropdown-menu-align-right"
-                onSelect={handleSelect}
-                title={props.title}
-            >
+            <Route>
+                <DropdownButton
+                    alignRight
+                    id="dropdown-menu-align-right"
+                    onSelect={handleSelect}
+                    title={props.title}
+                >
 
-                <Dropdown.Item eventKey="profile">
-                    Profile
-                    <span className="material-icons">
-                        perm_identity
-                    </span>
-                </Dropdown.Item>
+                    <Dropdown.Item eventKey="profile">
+                        <Link
+                            to="/profile"
+                        >
+                            Profile
+                            <span className="material-icons col-2">
+                                perm_identity
+                            </span>
+                        </Link>
+                    </Dropdown.Item>
 
-                <Dropdown.Item eventKey="settings">
-                    Settings
-                    <span className="material-icons">
-                        settings
-                    </span>
-                </Dropdown.Item>
+                    <Dropdown.Item eventKey="settings">
+                        Settings
+                        <span className="material-icons col-2">
+                            settings
+                        </span>
+                    </Dropdown.Item>
 
-                <Dropdown.Divider />
+                    <Dropdown.Divider />
 
-                <Dropdown.Item eventKey="signOut">
-                    Sign Out
-                    <span className="material-icons">
-                        logout
-                    </span>
-                </Dropdown.Item>
-            </DropdownButton>
-
-        // {/*<span className="material-icons" >*/}
-        // {/*    account_circle*/}
-        // {/*    </span>*/}
-        //
-        // {/*<h4>{value}</h4>*/}
-
+                    <Dropdown.Item eventKey="signOut">
+                        Sign Out
+                        <span className="material-icons col-2">
+                            logout
+                        </span>
+                    </Dropdown.Item>
+                </DropdownButton>
+            </Route>
         );
 
     }
