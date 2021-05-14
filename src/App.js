@@ -16,6 +16,7 @@ import About from "./Components/AboutUs/AboutUs";
 import axios from "axios";
 import FormSignIn from './Components/FormSignIn/FormSignIn'
 import Profile from "./Components/Profile/Profile";
+import Card from "react-bootstrap/Card";
 
 
 // eslint-disable-next-line react/require-optimization
@@ -50,19 +51,6 @@ class App extends React.Component {
     }
 
     render () {
-        axios.post("https://blooming-peak-53825.herokuapp.com/connect/api/profile/", {
-            headers: {
-                "aeskey": localStorage.getItem("aes_key"),
-                "token": localStorage.getItem("encrypted_token"),
-                "iv": localStorage.getItem("iv")
-            }
-        })
-        .then((response) => {
-          console.log(response);
-        }, (error) => {
-          console.log(error);
-        });
-
         return (
             <div className="App">
 
@@ -102,12 +90,16 @@ class App extends React.Component {
                                 <div className="row">
                                     <div className="col" />
 
-                                    <Link
-                                        className="col-auto btn btn-primary"
-                                        to="/ask"
-                                    >
-                                        Ask for help
-                                    </Link>
+                                    <Card className="card_main">
+                                        <Card.Body>
+                                            <Link
+                                                className="col-auto btn btn-primary"
+                                                to="/ask"
+                                            >
+                                                Ask for help
+                                            </Link>
+                                        </Card.Body>
+                                    </Card>
 
                                     <div className="col-2" />
 

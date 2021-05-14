@@ -50,7 +50,7 @@ class FormSignIn extends React.Component {
             "Handle":"",
             "IsTeacher":false}
 
-        axios.post("https://blooming-peak-53825.herokuapp.com/connect/api/profile/", payload)
+        axios.post("https://blooming-peak-53825.herokuapp.com/connect/api/todo/", payload)
             .then(res => {
             console.log(res);
             console.log(res.data);
