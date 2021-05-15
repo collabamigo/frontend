@@ -88,10 +88,21 @@ class App extends React.Component {
 
                             {this.state.signedIn?
                                 <div className="row">
-                                    <div className="col" />
+                                    <div className="col-auto" />
 
-                                    <Card className="card_main">
+                                    <Card className="card_main card ask_card_main card-body text-secondary">
                                         <Card.Body>
+                                            <Card.Title className="card-header">
+                                                Ask for Help
+                                            </Card.Title>
+
+                                            <br />
+
+                                            <Card.Text>
+                                                This is ask for help.
+                                                If you have doubts they will be solved.
+                                            </Card.Text>
+
                                             <Link
                                                 className="col-auto btn btn-primary"
                                                 to="/ask"
@@ -103,23 +114,42 @@ class App extends React.Component {
 
                                     <div className="col-2" />
 
-                                    <Link
-                                        className="col-auto btn btn-primary"
-                                        to="/help"
-                                    >
-                                        Help Others
-                                    </Link>
+                                    <Card className="card_main help_card_main card-body text-secondary">
+                                        <Card.Body>
 
+                                            <Card.Title className="card-header">
+                                                Help Others
+                                            </Card.Title>
+
+                                            <br />
+
+                                            <Card.Text>
+                                                <p>
+                                                    This is Help others.
+                                                    If you have doubts they will be solved.
+                                                    Aditya Will help us place ourselves in this grid , cause I am lazy
+                                                </p>
+                                            </Card.Text>
+
+                                            <Link
+                                                className="col-auto btn btn-primary"
+                                                to="/help"
+                                            >
+                                                Help Others
+                                            </Link>
+                                        </Card.Body>
+                                    </Card>
+
+                                    <div className="col-2" />
+
+                                    <div className="col-5" />
 
                                     <Link
-                                        className="col-auto btn btn-primary"
+                                        className="btn btn-primary"
                                         to="/form"
                                     >
                                         Form
                                     </Link>
-
-                                    <div className="col" />
-
                                 </div>
 
                                 : null}

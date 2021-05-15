@@ -56,7 +56,7 @@ class Ask extends React.Component {
 
     refreshList = () => {
           axios.
-              get("https://blooming-peak-53825.herokuapp.com/connect/api/profile/",{
+              get("https://blooming-peak-53825.herokuapp.com/connect/lolcheck/",{
                   format: "json"
           })
               .then((res) => this.setState({"dataList": res.data})).

@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.ask_card_main{
+  height:20rem;
+  width:20rem;
+
+}
+
+.card-header{
+  /*color: #000000;*/
+  background-color: #6f42c1;
+}
