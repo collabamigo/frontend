@@ -39,7 +39,7 @@ function profileExists () {
 function GoogleSignIn (props) {
 
     const [stage, changeStage] = useState("button");
-    const [googleUser, setGoogleUser] = useState(undefined);
+    const [googleUserState, setGoogleUserState] = useState(undefined);
 
     function onSignIn (googleUser) {
         if (stage==="button") {
@@ -71,13 +71,13 @@ function GoogleSignIn (props) {
             }
         }
         if (stage==="button" && !profileExists()) {
-            setGoogleUser(googleUser);
+            setGoogleUserState(googleUser);
             changeStage("form");
         }
         else {
             localStorage.setItem(
                 "userName",
-                googleUser.getBasicProfile().getName()
+                googleUserState.getBasicProfile().getName()
             );            
             props.onClick();
         }
@@ -98,9 +98,9 @@ function GoogleSignIn (props) {
         else if (stage==="form")
             return (
                 <FormSignIn
-                    emailId={googleUser.getBasicProfile().getEmail()}
-                    firstName={googleUser.getBasicProfile().getGivenName()}
-                    lastName={googleUser.getBasicProfile().getFamilyName()}
+                    emailId={googleUserState.getBasicProfile().getEmail()}
+                    firstName={googleUserState.getBasicProfile().getGivenName()}
+                    lastName={googleUserState.getBasicProfile().getFamilyName()}
                     onSubmit={onSignIn}
                 />
             )
