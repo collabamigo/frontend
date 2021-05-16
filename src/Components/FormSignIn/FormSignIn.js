@@ -1,8 +1,16 @@
 
 import React from 'react'
 import axios from "axios";
+import PropTypes from "prop-types";
 
 class FormSignIn extends React.Component {
+    static propTypes = {
+      onSubmit:PropTypes.func,
+    };
+
+    static defaultProps = {
+      onSubmit: undefined
+    };
     constructor(props) {
         super(props);
         this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
@@ -20,7 +28,7 @@ class FormSignIn extends React.Component {
     }
 
     shouldComponentUpdate () {
-    return true;
+        return true;
     }
 
     handleChangeFirstName(e) {
@@ -40,7 +48,7 @@ class FormSignIn extends React.Component {
     }
     
     handleSubmit(e) {
-        alert('A name was submitted: ' + this.state.LastName);
+
         let payload = {
             "First_Name":this.state.FirstName,
             "Last_Name":this.state.LastName,
@@ -52,8 +60,10 @@ class FormSignIn extends React.Component {
 
         axios.post("https://blooming-peak-53825.herokuapp.com/connect/api/profile/", payload)
             .then(res => {
+            alert('A name was submitted: ' + this.state.LastName);
             console.log(res);
             console.log(res.data);
+            this.props.onSubmit()
           })
 
         // r = requests.post(url=URL, data=json_data,
