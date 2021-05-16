@@ -8,7 +8,7 @@ name: Preview
       - testing
 jobs:
   build_and_deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - run: npm ci && npx eslint src && npm run build
