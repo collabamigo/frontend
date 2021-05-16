@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Profile.css";
 import axios from "axios";
+import backend from "../../env";
 
 class Profile extends React.Component{
 
@@ -65,7 +66,7 @@ class Profile extends React.Component{
             "Handle":"",
             "IsTeacher":false}
 
-        axios.post("https://blooming-peak-53825.herokuapp.com/connect/lolcheck/", payload)
+        axios.post(backend+"connect/lolcheck/", payload)
             .then(res => {
             console.log(res);
             console.log(res.data);

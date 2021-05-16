@@ -5,6 +5,7 @@ import CardsP from "./CardsP/CardsP";
 import Autocomplete from "./Autocomplete";
 import axios from "axios";
 import PropTypes from "prop-types";
+import backend from "../../env";
 
 
 class Ask extends React.Component {
@@ -26,7 +27,7 @@ class Ask extends React.Component {
             "found_match": false,
             "dataList": undefined,
         };
-        axios.get("https://blooming-peak-53825.herokuapp.com/autocomplete",{
+        axios.get(backend+"autocomplete",{
             params:{
                 query: "j"
             }
@@ -56,7 +57,7 @@ class Ask extends React.Component {
 
     refreshList = () => {
           axios.
-              get("https://blooming-peak-53825.herokuapp.com/connect/lolcheck/",{
+              get(backend+"connect/lolcheck/",{
                   format: "json"
           })
               .then((res) => this.setState({"dataList": res.data})).
