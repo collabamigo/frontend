@@ -40,7 +40,16 @@
 .ask_card_main{
   height:20rem;
   width:20rem;
+}
 
+.help_card_main{
+  height:20rem;
+  width:20rem;
+}
+
+.cc_main{
+  height:20rem;
+  width:30rem;
 }
 
 .card-header{

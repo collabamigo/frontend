@@ -2,6 +2,7 @@ import React from 'react'
 import "./Profile.css";
 import axios from "axios";
 import backend from "../../env";
+import './Profile.css'
 
 class Profile extends React.Component{
 
@@ -115,49 +116,65 @@ class Profile extends React.Component{
             <div className="form-group">
                 <div className="row">
                     <div className="col">
-                        <label className="row">
-                            <div className="col" />
+                        <div>
+                            <label className="row">
+                                <div className="col" />
 
-                            <div className="col-2" >
-                                First Name:
-                            </div>
+                                <div className="col-2" >
+                                    First Name:
+                                </div>
 
-                            <div className="col-auto" />
+                                <div className="col-auto" />
 
-                            <input
-                                onChange={this.handleChangeFirstName}
-                                placeholder={this.name[0]}
-                                required
-                                type='text'
-                                value={this.state.FirstName}
-                            />
+                                <input
+                                    disabled
+                                    onChange={this.handleChangeFirstName}
+                                    placeholder={this.name[0]}
+                                    required
+                                    type='text'
+                                    value={this.state.FirstName}
+                                />
 
-                            <div className="col" />
+                                <div className="col" />
 
-                        </label>
+                            </label>
 
-                        <br />
+                            <br />
 
-                        <label className="row">
-                            <div className="col" />
+                            <label className="row">
+                                <div className="col" />
 
-                            <div className="col-2">
-                                Last Name:
-                            </div>
+                                <div className="col-2">
+                                    Last Name:
+                                </div>
 
-                            <div className="col-auto" />
+                                <div className="col-auto" />
 
-                            <input
-                                onChange={this.handleChangeLastName}
-                                placeholder={this.name[1]}
-                                required
-                                type='text'
-                                value={this.state.LastName}
-                            />
+                                <input
+                                    disabled
+                                    onChange={this.handleChangeLastName}
+                                    placeholder={this.name[1]}
+                                    required
+                                    type='text'
+                                    value={this.state.LastName}
+                                />
 
-                            <div className="col" />
+                                {/*TODO:modal email content*/}
 
-                        </label>
+                                <div className="col-auto" />
+
+                                <button
+                                    className="btn btn-outline-info col-auto"
+                                    type="button"
+                                >
+                                    Help
+                                </button>
+
+                                <div className="col" />
+
+                            </label>
+
+                        </div>
 
                         <br />
 

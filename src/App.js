@@ -16,7 +16,7 @@ import About from "./Components/AboutUs/AboutUs";
 import axios from "axios";
 import Profile from "./Components/Profile/Profile";
 import Card from "react-bootstrap/Card";
-
+import Connect from './Components/Connect/Connect'
 
 // eslint-disable-next-line react/require-optimization
 class App extends React.Component {
@@ -85,68 +85,96 @@ class App extends React.Component {
                             />
 
                             {this.state.signedIn?
-                                <div className="row">
-                                    <div className="col-auto" />
+                                <>
+                                    <div className="row">
+                                        <div className="col-auto" />
 
-                                    <Card className="card_main card ask_card_main card-body text-secondary">
-                                        <Card.Body>
-                                            <Card.Title className="card-header">
-                                                Ask for Help
-                                            </Card.Title>
+                                        <Card className="card_main card ask_card_main card-body text-secondary">
+                                            <Card.Body>
+                                                <Card.Title className="card-header font-weight-bold">
+                                                    Ask for Help
+                                                </Card.Title>
 
-                                            <br />
+                                                <br />
 
-                                            <Card.Text>
-                                                This is ask for help.
-                                                If you have doubts they will be solved.
-                                            </Card.Text>
-
-                                            <Link
-                                                className="col-auto btn btn-primary"
-                                                to="/ask"
-                                            >
-                                                Ask for help
-                                            </Link>
-                                        </Card.Body>
-                                    </Card>
-
-                                    <div className="col-2" />
-
-                                    <Card className="card_main help_card_main card-body text-secondary">
-                                        <Card.Body>
-
-                                            <Card.Title className="card-header">
-                                                Help Others
-                                            </Card.Title>
-
-                                            <br />
-
-                                            <Card.Text>
-                                                <p>
-                                                    This is Help others.
+                                                <Card.Text>
+                                                    This is ask for help.
                                                     If you have doubts they will be solved.
-                                                    Aditya Will help us place ourselves in this grid , cause I am lazy
-                                                </p>
-                                            </Card.Text>
+                                                </Card.Text>
 
-                                            <Link
-                                                className="col-auto btn btn-primary"
-                                                to="/help"
-                                            >
-                                                Help Others
-                                            </Link>
-                                        </Card.Body>
-                                    </Card>
+                                                <Link
+                                                    className="col-auto btn btn-primary"
+                                                    to="/ask"
+                                                >
+                                                    Ask for help
+                                                </Link>
+                                            </Card.Body>
+                                        </Card>
 
-                                    <div className="col-3" />
+                                        <div className="col-auto" />
 
+                                        <Card className="card_main help_card_main card-body text-secondary">
+                                            <Card.Body>
 
+                                                <Card.Title className="card-header font-weight-bold">
+                                                    Help Others
+                                                </Card.Title>
 
-                                    <div className="col-2" />
+                                                <br />
 
-                                    <div className="col-5" />
+                                                <Card.Text>
+                                                    <p>
+                                                        This is Help others.
+                                                        If you have doubts they will be solved.
+                                                        Aditya Will help us place ourselves in this grid , cause I am lazy
+                                                    </p>
+                                                </Card.Text>
 
-                                </div>
+                                                <Link
+                                                    className="col-auto btn btn-primary"
+                                                    to="/help"
+                                                >
+                                                    Help Others
+                                                </Link>
+                                            </Card.Body>
+                                        </Card>
+
+                                        <div className="col-auto" />
+
+                                    </div>
+
+                                    <br />
+
+                                    <div className="row">
+                                        <div className="col-auto" />
+
+                                        <Card className="card_main cc_main card-body text-secondary">
+                                            <Card.Body>
+                                                <Card.Title className="card-header font-weight-bold">
+                                                    Collaborate and Connect
+                                                </Card.Title>
+
+                                                <br />
+
+                                                <Card.Text>
+                                                    <p>
+                                                        It is a place where you can find new projects to work
+                                                        upon and gain new experience. One can also apply for helping
+                                                        a team by being a part of it or on interim basis depending on the team. Lets keep the learning and helping community alive.
+                                                    </p>
+                                                </Card.Text>
+
+                                                <Link
+                                                    className="col-auto btn btn-primary"
+                                                    to="/collab_connect"
+                                                >
+                                                    Lets Collaborate
+                                                </Link>
+                                            </Card.Body>
+                                        </Card>
+
+                                    </div>
+                                </>
 
                                 : null}
                         </Route>
@@ -170,6 +198,13 @@ class App extends React.Component {
                             path="/profile"
                         >
                             <Profile />
+                        </ProtectedRoute>
+
+                        <ProtectedRoute
+                            exact
+                            path="/collab_connect"
+                        >
+                            <Connect />
                         </ProtectedRoute>
 
                         <Route
