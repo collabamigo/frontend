@@ -33,7 +33,7 @@ function rsa_encrypt (plaintext) {
 }
 
 function profileExists () {
-    return true
+    return false
 }
 
 function GoogleSignIn (props) {
