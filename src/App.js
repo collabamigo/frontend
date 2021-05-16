@@ -14,7 +14,6 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import Footer from "./Components/Footer/Footer";
 import About from "./Components/AboutUs/AboutUs";
 import axios from "axios";
-import FormSignIn from './Components/FormSignIn/FormSignIn'
 import Profile from "./Components/Profile/Profile";
 import Card from "react-bootstrap/Card";
 
@@ -53,7 +52,6 @@ class App extends React.Component {
     render () {
         return (
             <div className="App">
-
                 <Router>
                     <>
                         <Switch>
@@ -144,23 +142,10 @@ class App extends React.Component {
 
                                     <div className="col-5" />
 
-                                    <Link
-                                        className="btn btn-primary"
-                                        to="/form"
-                                    >
-                                        Form
-                                    </Link>
                                 </div>
 
                                 : null}
                         </Route>
-
-                        <ProtectedRoute
-                            exact
-                            path="/form"
-                        >
-                            <FormSignIn />
-                        </ProtectedRoute>
 
                         <ProtectedRoute
                             exact
