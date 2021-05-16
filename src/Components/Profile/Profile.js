@@ -108,10 +108,10 @@ class Profile extends React.Component{
   }
 
     email = "shikhar20121@iiitd.ac.in"
+    first_name = "Shikhar Sharma"
+    name = this.first_name.split(' ')
 
   render() {
-        const first_name = localStorage.getItem("userName")
-        const name = first_name.split(' ')
     return (
         <form onSubmit={this.handleSubmit}>
             <div className="form-group">
@@ -128,7 +128,7 @@ class Profile extends React.Component{
 
                             <input
                                 onChange={this.handleChangeFirstName}
-                                placeholder={name[0]}
+                                placeholder={this.name[0]}
                                 required
                                 type='text'
                                 value={this.state.FirstName}
@@ -151,7 +151,7 @@ class Profile extends React.Component{
 
                             <input
                                 onChange={this.handleChangeLastName}
-                                placeholder={name[1]}
+                                placeholder={this.name[1]}
                                 required
                                 type='text'
                                 value={this.state.LastName}
