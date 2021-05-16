@@ -1,6 +1,7 @@
 import "./GoogleSignIn.css";
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from 'prop-types'
+import FormSignIn from "../FormSignIn/FormSignIn";
 
 function rsa_encrypt (plaintext) {
 
@@ -31,52 +32,78 @@ function rsa_encrypt (plaintext) {
 
 }
 
+function profileExists () {
+    return true
+}
+
 function GoogleSignIn (props) {
 
+    const [stage, changeStage] = useState("button");
+    const [googleUser, setGoogleUser] = useState(undefined);
+
     function onSignIn (googleUser) {
-        const crypto = require('crypto');
-        const CryptoJS = require("crypto-js");
+        if (stage==="button") {
+            const crypto = require('crypto');
+            const CryptoJS = require("crypto-js");
 
-        const encrypted_token= CryptoJS.AES.encrypt(googleUser.getAuthResponse().id_token,
-            crypto.randomBytes(32).toString(), {
-                mode: CryptoJS.mode.CBC,});
+            const encrypted_token = CryptoJS.AES.encrypt(googleUser.getAuthResponse().id_token,
+                crypto.randomBytes(32).toString(), {
+                    mode: CryptoJS.mode.CBC,
+                });
 
-        localStorage.setItem(
-            "encrypted_token",
-           encrypted_token.ciphertext.toString()
-        );
+            {
+                localStorage.setItem(
+                    "encrypted_token",
+                    encrypted_token.ciphertext.toString()
+                );
 
-        localStorage.setItem(
-            "aes_key",
-            rsa_encrypt(encrypted_token.key.toString())
-        );
+                localStorage.setItem(
+                    "aes_key",
+                    rsa_encrypt(encrypted_token.key.toString())
+                );
 
-        localStorage.setItem(
-            "iv",
-            encrypted_token.iv.toString()
-        );
+                localStorage.setItem(
+                    "iv",
+                    encrypted_token.iv.toString()
+                );
 
 
-        localStorage.setItem(
-            "userName",
-            googleUser.getBasicProfile().getName()
-        );
-        props.onClick();
+            }
+        }
+        if (stage==="button" && !profileExists()) {
+            setGoogleUser(googleUser);
+            changeStage("form");
+        }
+        else {
+            localStorage.setItem(
+                "userName",
+                googleUser.getBasicProfile().getName()
+            );            
+            props.onClick();
+        }
     }
 
     window.onSignIn = (googleUser) => {
-
         onSignIn(googleUser);
-
     };
 
     if (props.visibility) {
 
-        return (<div
-            className="g-signin2"
-            data-onsuccess="onSignIn"
-            data-theme="dark"
-                />);
+        if (stage==="button")
+            return (<div
+                className="g-signin2"
+                data-onsuccess="onSignIn"
+                data-theme="dark"
+                    />);
+        else if (stage==="form")
+            return (
+                <FormSignIn
+                    emailId={googleUser.getBasicProfile().getEmail()}
+                    firstName={googleUser.getBasicProfile().getGivenName()}
+                    lastName={googleUser.getBasicProfile().getFamilyName()}
+                    onSubmit={onSignIn}
+                />
+            )
 
     }
     return null;
