@@ -2,6 +2,7 @@
 import React from 'react'
 import axios from "axios";
 import PropTypes from "prop-types";
+import backend from "../../env";
 
 class FormSignIn extends React.Component {
     static propTypes = {
@@ -63,7 +64,7 @@ class FormSignIn extends React.Component {
             "Handle":"",
             "IsTeacher":false}
 
-        axios.post("http://localhost:8000/connect/api/profile/", payload)
+        axios.post(backend + "connect/api/profile/", payload)
             .then(res => {
             alert('A name was submitted: ' + this.state.LastName);
             console.log(res);
