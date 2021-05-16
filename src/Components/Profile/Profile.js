@@ -71,10 +71,7 @@ class Profile extends React.Component{
             console.log(res.data);
           })
 
-        // r = requests.post(url=URL, data=json_data,
-    //                       cookies=session, headers={'Referer': URL, 'Content-Type': 'application/json'})
-    //{
-         //     "Last_Name": "", n
+        //     "Last_Name": "", n
         //     "Gender": "",
         //     "Degree": "", n
         //     "Course": "", n

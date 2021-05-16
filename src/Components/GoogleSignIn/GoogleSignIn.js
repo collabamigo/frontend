@@ -75,10 +75,19 @@ function GoogleSignIn (props) {
             changeStage("form");
         }
         else {
-            localStorage.setItem(
+            if (googleUserState){
+                localStorage.setItem(
                 "userName",
                 googleUserState.getBasicProfile().getName()
-            );            
+                );
+            }
+            else{
+                localStorage.setItem(
+                "userName",
+                googleUser.getBasicProfile().getName()
+                );
+            }
+
             props.onClick();
         }
     }

@@ -138,6 +138,10 @@ class App extends React.Component {
                                         </Card.Body>
                                     </Card>
 
+                                    <div className="col-3" />
+
+
+
                                     <div className="col-2" />
 
                                     <div className="col-5" />

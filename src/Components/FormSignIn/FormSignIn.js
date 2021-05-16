@@ -5,12 +5,16 @@ import PropTypes from "prop-types";
 
 class FormSignIn extends React.Component {
     static propTypes = {
-      onSubmit:PropTypes.func,
+        emailId:PropTypes.string.isRequired,
+        firstName:PropTypes.string.isRequired,
+        lastName:PropTypes.string.isRequired,
+        onSubmit:PropTypes.func,
     };
 
     static defaultProps = {
       onSubmit: undefined
     };
+
     constructor(props) {
         super(props);
         this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
@@ -20,8 +24,9 @@ class FormSignIn extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
-            FirstName: '',
-            LastName:'',
+            FirstName: this.props.firstName,
+            LastName:this.props.lastName,
+            email: this.props.emailId,
             degree: '',
             branch:''
         }
@@ -80,7 +85,7 @@ class FormSignIn extends React.Component {
 
         console.log(this.state.FirstName)
         console.log(this.state.LastName)
-        console.log(this.email)
+        console.log(this.state.email)
         console.log(this.state.degree)
         console.log(this.state.branch)
 
@@ -98,9 +103,6 @@ class FormSignIn extends React.Component {
     this.setState({LastName: event.target.value});
   }
 
-    email = "shikhar20121@iiitd.ac.in"
-    first_name = "Shikhar Sharma"
-    name = this.first_name.split(' ')
 
   render() {
     return (
@@ -119,7 +121,6 @@ class FormSignIn extends React.Component {
 
                             <input
                                 onChange={this.handleChangeFirstName}
-                                placeholder={this.name[0]}
                                 required
                                 type='text'
                                 value={this.state.FirstName}
@@ -142,7 +143,6 @@ class FormSignIn extends React.Component {
 
                             <input
                                 onChange={this.handleChangeLastName}
-                                placeholder={this.name[1]}
                                 required
                                 type='text'
                                 value={this.state.LastName}
@@ -165,9 +165,8 @@ class FormSignIn extends React.Component {
 
                             <input
                                 disabled
-                                placeholder={this.email}
                                 type='text'
-                                value={this.email}
+                                value={this.state.email}
                             />
 
                             <div className="col" />
