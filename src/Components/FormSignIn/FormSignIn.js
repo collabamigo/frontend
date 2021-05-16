@@ -187,7 +187,6 @@ class FormSignIn extends React.Component {
                                     value={this.state.degree}
                                 >
                                     <option
-                                        selected
                                         value=""
                                     >
                                         ---Select Degree---
@@ -211,12 +210,9 @@ class FormSignIn extends React.Component {
                                     required
                                     value={this.state.branch}
                                 >
-                                    <div className="col" />
 
                                     <option
-                                        selected
                                         value=""
-
                                     >
                                         ---Select Branch---
                                     </option>
