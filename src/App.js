@@ -33,8 +33,9 @@ class App extends React.Component {
           });
 
         this.state = {
-            "signedIn": Boolean(localStorage.getItem("userName"))
+            "signedIn": false
         };
+
         window.gapi.load(
             "auth2",
             () => {
