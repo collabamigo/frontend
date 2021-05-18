@@ -33,6 +33,7 @@ class FormSignIn extends React.Component {
         }
     }
 
+    // noinspection JSCheckFunctionSignatures
     shouldComponentUpdate () {
         return true;
     }
@@ -58,11 +59,9 @@ class FormSignIn extends React.Component {
         let payload = {
             "First_Name":this.state.FirstName,
             "Last_Name":this.state.LastName,
-            "Gender":"",
             "Degree":this.state.degree,
             "Course":this.state.branch,
-            "Handle":"",
-            "IsTeacher":true}
+        }
 
         axios.post(backend + "connect/api/profile/", payload)
             .then(res => {
@@ -72,23 +71,6 @@ class FormSignIn extends React.Component {
             this.props.onSubmit()
           })
 
-        // r = requests.post(url=URL, data=json_data,
-    //                       cookies=session, headers={'Referer': URL, 'Content-Type': 'application/json'})
-    //{
-         //     "Last_Name": "", n
-        //     "Gender": "",
-        //     "Degree": "", n
-        //     "Course": "", n
-        //     "Email": "", n
-        //     "Handle": "",
-        //     "IsTeacher": false n
-        // }
-
-        console.log(this.state.FirstName)
-        console.log(this.state.LastName)
-        console.log(this.state.email)
-        console.log(this.state.degree)
-        console.log(this.state.branch)
 
         this.setState({
             FirstName: '',
