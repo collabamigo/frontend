@@ -2,6 +2,8 @@ import "./GoogleSignIn.css";
 import React, {useState} from "react";
 import PropTypes from 'prop-types'
 import FormSignIn from "../FormSignIn/FormSignIn";
+import axios from "axios";
+import backend from "../../env";
 
 function rsa_encrypt (plaintext) {
 
@@ -32,13 +34,26 @@ function rsa_encrypt (plaintext) {
 
 }
 
-function profileExists () {
-    return false
-}
+
+
+
 
 function GoogleSignIn (props) {
-
     const [stage, changeStage] = useState("button");
+    async function profileExists (googleUser) {
+        if (stage==="button")
+            return {
+                res:await axios.get(backend+"connect/api/profile?format=json"),
+                googleUser: googleUser
+            }
+        else
+            return {
+            res:{data: ["DUMMY"]},
+            googleUser: googleUser
+        }
+    }
+
+
     const [googleUserState, setGoogleUserState] = useState(undefined);
 
     function onSignIn (googleUser) {
@@ -70,26 +85,32 @@ function GoogleSignIn (props) {
 
             }
         }
-        if (stage==="button" && !profileExists()) {
+        if (!googleUserState)
             setGoogleUserState(googleUser);
-            changeStage("form");
-        }
-        else {
-            if (googleUserState){
-                localStorage.setItem(
-                "userName",
-                googleUserState.getBasicProfile().getName()
-                );
+
+        profileExists(googleUser).then((res)=>{
+            if (!res.res.data.length) {
+                if (!googleUserState)
+                    setGoogleUserState(res.googleUser);
+                changeStage("form");
             }
             else{
-                localStorage.setItem(
-                "userName",
-                googleUser.getBasicProfile().getName()
-                );
-            }
+                if (googleUserState){
+                    localStorage.setItem(
+                    "userName",
+                    googleUserState.getBasicProfile().getName()
+                    );
+                }
+                else{
+                    localStorage.setItem(
+                    "userName",
+                    res.googleUser.getBasicProfile().getName()
+                    );
+                }
 
-            props.onClick();
-        }
+                props.onClick();
+            }
+        })
     }
 
     window.onSignIn = (googleUser) => {
