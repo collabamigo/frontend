@@ -1,6 +1,6 @@
 import React from "react";
 import "./Help.css";
-import DashBoard from "./DashBoard";
+import DashBoard from "./DashBoard/DashBoard";
 import PropTypes from "prop-types";
 
 // eslint-disable-next-line react/require-optimization

@@ -1,10 +1,20 @@
-import React from 'react'
-import "./Profile.css";
-import axios from "axios";
-import backend from "../../env";
-import './Profile.css'
 
-class Profile extends React.Component{
+import React from 'react'
+import axios from "axios";
+import PropTypes from "prop-types";
+import backend from "../../env";
+
+class FormSignIn extends React.Component {
+    static propTypes = {
+        emailId:PropTypes.string.isRequired,
+        firstName:PropTypes.string.isRequired,
+        lastName:PropTypes.string.isRequired,
+        onSubmit:PropTypes.func,
+    };
+
+    static defaultProps = {
+      onSubmit: undefined
+    };
 
     constructor(props) {
         super(props);
@@ -12,27 +22,15 @@ class Profile extends React.Component{
         this.handleChangeLastName = this.handleChangeLastName.bind(this);
         this.handleChangeDegree = this.handleChangeDegree.bind(this);
         this.handleChangeBranch = this.handleChangeBranch.bind(this);
-        this.handleChangeHandle = this.handleChangeHandle.bind(this);
-        this.handleChangeContact = this.handleChangeContact.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
-        const data = {
-            FirstName: '',
-            LastName:'',
+        this.state = {
+            FirstName: this.props.firstName,
+            LastName:this.props.lastName,
+            email: this.props.emailId,
             degree: '',
-            branch:'',
-            Handle:'',
-            Contact:0
+            branch:''
         }
-        this.state ={
-            data: data,
-        }
-
-        axios.get(backend+"connect/get_profile/")
-            .then(res => {
-                const data = res.data;
-                this.setState({data});
-            })
     }
 
     shouldComponentUpdate () {
@@ -55,17 +53,7 @@ class Profile extends React.Component{
         this.setState({ branch: e.target.value })
     }
 
-    handleChangeHandle(e) {
-        this.setState({ Handle: e.target.value })
-    }
-
-    handleChangeContact(e) {
-        this.setState({ Contact: e.target.value })
-    }
-
     handleSubmit(e) {
-
-        alert('A name was submitted: ' + this.state.LastName);
 
         let payload = {
             "First_Name":this.state.FirstName,
@@ -74,15 +62,20 @@ class Profile extends React.Component{
             "Degree":this.state.degree,
             "Course":this.state.branch,
             "Handle":"",
-            "IsTeacher":false}
+            "IsTeacher":true}
 
-        axios.post(backend+"connect/lolcheck/", payload)
+        axios.post(backend + "connect/api/profile/", payload)
             .then(res => {
+            alert('A name was submitted: ' + this.state.LastName);
             console.log(res);
             console.log(res.data);
+            this.props.onSubmit()
           })
 
-        //     "Last_Name": "", n
+        // r = requests.post(url=URL, data=json_data,
+    //                       cookies=session, headers={'Referer': URL, 'Content-Type': 'application/json'})
+    //{
+         //     "Last_Name": "", n
         //     "Gender": "",
         //     "Degree": "", n
         //     "Course": "", n
@@ -93,9 +86,7 @@ class Profile extends React.Component{
 
         console.log(this.state.FirstName)
         console.log(this.state.LastName)
-        console.log(this.email)
-        console.log(this.state.Handle)
-        console.log(this.state.Contact)
+        console.log(this.state.email)
         console.log(this.state.degree)
         console.log(this.state.branch)
 
@@ -103,9 +94,7 @@ class Profile extends React.Component{
             FirstName: '',
             LastName:'',
             degree: '',
-            branch:'',
-            Contact:'',
-            Handle:''
+            branch:''
         })
         e.preventDefault();
 
@@ -115,9 +104,6 @@ class Profile extends React.Component{
     this.setState({LastName: event.target.value});
   }
 
-    email = "shikhar20121@iiitd.ac.in"
-    first_name = "Shikhar Sharma"
-    name = this.first_name.split(' ')
 
   render() {
     return (
@@ -125,65 +111,47 @@ class Profile extends React.Component{
             <div className="form-group">
                 <div className="row">
                     <div className="col">
-                        <div>
-                            <label className="row">
-                                <div className="col" />
+                        <label className="row">
+                            <div className="col" />
 
-                                <div className="col-2" >
-                                    First Name:
-                                </div>
+                            <div className="col-2" >
+                                First Name:
+                            </div>
 
-                                <div className="col-auto" />
+                            <div className="col-auto" />
 
-                                <input
-                                    disabled
-                                    onChange={this.handleChangeFirstName}
-                                    placeholder={this.state.data['First_Name']}
-                                    required
-                                    type='text'
-                                    value={this.state.data['First_Name']}
-                                />
+                            <input
+                                onChange={this.handleChangeFirstName}
+                                required
+                                type='text'
+                                value={this.state.FirstName}
+                            />
 
-                                <div className="col" />
+                            <div className="col" />
 
-                            </label>
+                        </label>
 
-                            <br />
+                        <br />
 
-                            <label className="row">
-                                <div className="col" />
+                        <label className="row">
+                            <div className="col" />
 
-                                <div className="col-2">
-                                    Last Name:
-                                </div>
+                            <div className="col-2">
+                                Last Name:
+                            </div>
 
-                                <div className="col-auto" />
+                            <div className="col-auto" />
 
-                                <input
-                                    disabled
-                                    onChange={this.handleChangeLastName}
-                                    placeholder={this.state.data['Last_Name']}
-                                    required
-                                    type='text'
-                                    value={this.state.data['Last_Name']}
-                                />
+                            <input
+                                onChange={this.handleChangeLastName}
+                                required
+                                type='text'
+                                value={this.state.LastName}
+                            />
 
-                                {/*TODO:modal email content*/}
+                            <div className="col" />
 
-                                <div className="col-auto" />
-
-                                <button
-                                    className="btn btn-outline-info col-auto"
-                                    type="button"
-                                >
-                                    Help
-                                </button>
-
-                                <div className="col" />
-
-                            </label>
-
-                        </div>
+                        </label>
 
                         <br />
 
@@ -198,60 +166,13 @@ class Profile extends React.Component{
 
                             <input
                                 disabled
-                                placeholder={this.email}
                                 type='text'
-                                value={this.email}
+                                value={this.state.email}
                             />
 
                             <div className="col" />
 
                         </label>
-
-                        <br />
-
-                        <label className="row">
-                            <div className="col" />
-
-                            <div className="col-2" >
-                                Handle :
-                            </div>
-
-                            <div className="col-auto" />
-
-                            <input
-                                onChange={this.handleChangeHandle}
-                                placeholder="Social media Handle"
-                                type='text'
-                                value={this.state.Handle}
-                            />
-
-                            <div className="col" />
-
-                        </label>
-
-                        <br />
-
-                        <label className="row">
-                            <div className="col" />
-
-                            <div className="col-2" >
-                                Contact :
-                            </div>
-
-                            <div className="col-auto" />
-
-                            <input
-                                onChange={this.handleChangeContact}
-                                placeholder="9843323291"
-                                type='number'
-                                value={this.state.Contact}
-                            />
-
-                            <div className="col" />
-
-                        </label>
-
-                        <br />
 
                         <br />
 
@@ -267,7 +188,6 @@ class Profile extends React.Component{
                                     value={this.state.degree}
                                 >
                                     <option
-                                        selected
                                         value=""
                                     >
                                         ---Select Degree---
@@ -291,12 +211,9 @@ class Profile extends React.Component{
                                     required
                                     value={this.state.branch}
                                 >
-                                    <div className="col" />
 
                                     <option
-                                        selected
                                         value=""
-
                                     >
                                         ---Select Branch---
                                     </option>
@@ -357,4 +274,4 @@ class Profile extends React.Component{
   }
 }
 
-export default Profile;
+export default FormSignIn;

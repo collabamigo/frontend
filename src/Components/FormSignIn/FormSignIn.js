@@ -62,7 +62,7 @@ class FormSignIn extends React.Component {
             "Degree":this.state.degree,
             "Course":this.state.branch,
             "Handle":"",
-            "IsTeacher":false}
+            "IsTeacher":true}
 
         axios.post(backend + "connect/api/profile/", payload)
             .then(res => {
@@ -101,7 +101,7 @@ class FormSignIn extends React.Component {
     }
 
     handleChange(event) {
-    this.setState({LastName: event.target.value});
+        this.setState({LastName: event.target.value});
   }
 
 
