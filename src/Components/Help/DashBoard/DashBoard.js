@@ -1,10 +1,8 @@
 import React from "react";
 import Chart from "react-google-charts";
 
-// eslint-disable-next-line react/prefer-stateless-function
 class DashBoard extends React.Component {
 
-    // Noinspection JSCheckFunctionSignatures
     shouldComponentUpdate () {
 
         return false;
@@ -26,7 +24,7 @@ class DashBoard extends React.Component {
                     <Chart
                         chartType="PieChart"
                         data={[
-                        ['Language', 'Speakers (in millions)'],
+                        ['Work', 'Percentage covered'],
                         ['Java', 13],
                         ['Python', 83],
                         ['SVM', 1.4],
@@ -36,14 +34,14 @@ class DashBoard extends React.Component {
                         ['Git', 38],
                         ['C++', 5.5],
                       ]}
-                        height='400px'
+                        height='500px'
                         loader={
                             <div>
                                 Loading Chart
                             </div>
                         }
                         options={{
-                        title: 'Work Summary',
+                        // title: 'Work Summary',
                         legend: 'none',
                         pieSliceText: 'label',
                         slices: {
@@ -54,14 +52,12 @@ class DashBoard extends React.Component {
                         },
                       }}
                         rootProps={{ 'data-testid': '5' }}
-                        width='700px'
+                        width='400px'
                     />
                 </div>
             </div>
         );
-
     }
-
 }
 
 export default DashBoard;
