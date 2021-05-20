@@ -57,7 +57,7 @@ class Ask extends React.Component {
 
     refreshList = () => {
           axios.
-              get(backend+"connect/lolcheck/",{
+              get(backend+"connect/profile/",{
                   format: "json"
           })
               .then((res) => this.setState({"dataList": res.data})).

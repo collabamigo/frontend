@@ -17,6 +17,10 @@ import axios from "axios";
 import Profile from "./Components/Profile/Profile";
 import Card from "react-bootstrap/Card";
 import Connect from './Components/Connect/Connect'
+import DarkMode from "./Components/Collab/DarkMode/DarkMode";
+// import Welcome from "./Components/Welcome/Welcome";
+
+
 
 // eslint-disable-next-line react/require-optimization
 class App extends React.Component {
@@ -66,6 +70,8 @@ class App extends React.Component {
                                     className="jumbotron"
                                     title="Collab Connect"
                                 />
+
+                                <DarkMode />
                             </Route>
 
                             <Route>
@@ -84,6 +90,8 @@ class App extends React.Component {
                                 onClick={this.handleLogin}
                                 visibility={!this.state.signedIn}
                             />
+
+                            {/*<Welcome visibility={this.state.signedIn} />*/}
 
                             {this.state.signedIn?
                                 <>
@@ -157,11 +165,12 @@ class App extends React.Component {
 
                                                 <br />
 
-                                                <Card.Text>
+                                                <Card.Text >
                                                     <p>
                                                         It is a place where you can find new projects to work
                                                         upon and gain new experience. One can also apply for helping
-                                                        a team by being a part of it or on interim basis depending on the team. Lets keep the learning and helping community alive.
+                                                        a team by being a part of it or on interim basis depending on the team.
+                                                        Lets keep the learning and helping community alive.
                                                     </p>
                                                 </Card.Text>
 
@@ -173,7 +182,6 @@ class App extends React.Component {
                                                 </Link>
                                             </Card.Body>
                                         </Card>
-
                                     </div>
                                 </>
 

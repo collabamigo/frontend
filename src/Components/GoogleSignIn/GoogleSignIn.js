@@ -34,10 +34,6 @@ function rsa_encrypt (plaintext) {
 
 }
 
-
-
-
-
 function GoogleSignIn (props) {
     const [stage, changeStage] = useState("button");
     async function profileExists (googleUser) {
