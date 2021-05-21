@@ -24,6 +24,21 @@ class Ask extends React.Component {
     constructor (props) {
 
         super(props);
+        // const dataList = [{
+        //     id:'',
+        //     FirstName: '',
+        //     LastName:'',
+        //     Gender:'',
+        //     Degree: '',
+        //     Course:'',
+        //     Handle:'',
+        //     isTeacher:'',
+        //     email:'',
+        //     Skill_set:[],
+        //     Contact:0,
+        //     UpVotes:0,
+        //     DownVotes:0,
+        // }]
         this.state = {
             "searchTerm": "",
             "temp_l": [],
@@ -52,6 +67,13 @@ class Ask extends React.Component {
 
     handleMatch = (flag) => {
         this.setState({"found_match": flag});
+        axios.get(backend+"connect/searchfordata/",{
+            format: "json",
+             params:{
+                 id_list: JSON.stringify(this.state.dataList["Teachers"]),
+        },})
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
     }
 
     handleChange = (value) => {
@@ -59,13 +81,11 @@ class Ask extends React.Component {
     }
 
     refreshList = () => {
-          axios.
-              get(backend+"connect/seaarchfor/java/",{
-                  format: "json"
+        axios.get(backend+"connect/searchfor/java",{
+            format: "json"
           })
-              .then((res) => this.setState({"dataList": res.data}))
-              .catch((err) => console.log(err));
-
+            .then((res) => this.setState({"dataList": res.data}))
+            .catch((err) => console.log(err));
     };
 
       render () {
@@ -119,9 +139,9 @@ class Ask extends React.Component {
                       <div>
                           <CardsP
                               batch="CSE, First Year"
-                              description={`${this.state.dataList[0].Last_Name}  dont mess with me`}
+                              description={`${this.state.dataList["First_Name"]}  dont mess with me`}
                               insta={"https://www.instagram.com/"+"guy.pixelated/"}
-                              name={this.state.dataList[0].First_Name}
+                              name={this.state.dataList[0]["Last_Name"]}
                           />
                       </div>
                   </div>

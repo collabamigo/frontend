@@ -22,7 +22,6 @@ import AboutUs from "./Components/AboutUs/AboutUs";
 // import Welcome from "./Components/Welcome/Welcome";
 
 
-
 // eslint-disable-next-line react/require-optimization
 class App extends React.Component {
     constructor (props) {
@@ -38,7 +37,7 @@ class App extends React.Component {
           });
 
         this.state = {
-            "signedIn": false
+            "signedIn": false,
         };
 
         window.gapi.load(
@@ -48,6 +47,14 @@ class App extends React.Component {
             }
         );
     }
+// axios.get('/myController/myAction', {
+//   params: {
+//     storeIds: [1,2,3]
+//   },
+//   paramsSerializer: params => {
+//     return qs.stringify(params)
+//   }
+// })
 
     handleLogin = () => {
         this.setState({
