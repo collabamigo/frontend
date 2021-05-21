@@ -60,14 +60,13 @@ class Ask extends React.Component {
 
     refreshList = () => {
           axios.
-              get(backend+"connect/java/",{
+              get(backend+"connect/seaarchfor/java/",{
                   format: "json"
           })
               .then((res) => this.setState({"dataList": res.data}))
               .catch((err) => console.log(err));
 
     };
-
 
       render () {
           console.log(this.props.searchTerm);
@@ -104,6 +103,7 @@ class Ask extends React.Component {
                       <div>
                           <h1 className="col-sm-5 col-md-5">
                               {" "}
+
                               Skill Search
 
                               {" "}
@@ -122,13 +122,6 @@ class Ask extends React.Component {
                               description={`${this.state.dataList[0].Last_Name}  dont mess with me`}
                               insta={"https://www.instagram.com/"+"guy.pixelated/"}
                               name={this.state.dataList[0].First_Name}
-                          />
-
-                          <CardsP
-                              batch="CSE, First Year"
-                              description="Did this work yet, pls inform"
-                              insta={"https://www.instagram.com/"+"apsaditya51/"}
-                              name="Aditya Pratap"
                           />
                       </div>
                   </div>
