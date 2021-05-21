@@ -18,6 +18,7 @@ import Profile from "./Components/Profile/Profile";
 import Card from "react-bootstrap/Card";
 import Connect from './Components/Connect/Connect'
 import DarkMode from "./Components/Collab/DarkMode/DarkMode";
+import AboutUs from "./Components/AboutUs/AboutUs";
 // import Welcome from "./Components/Welcome/Welcome";
 
 
@@ -207,6 +208,13 @@ class App extends React.Component {
                             path="/profile"
                         >
                             <Profile />
+                        </ProtectedRoute>
+
+                        <ProtectedRoute
+                            exact
+                            path="/profile"
+                        >
+                            <AboutUs />
                         </ProtectedRoute>
 
                         <ProtectedRoute

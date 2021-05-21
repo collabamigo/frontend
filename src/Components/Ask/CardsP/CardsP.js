@@ -22,7 +22,7 @@ function CardsP (props) {
                         {props.description}
                     </Card.Text>
 
-                    <Card.Link href="https://www.instagram.com/">
+                    <Card.Link href={props.insta}>
                         <svg
                             className="bi bi-instagram"
                             fill="#000000"
@@ -74,6 +74,7 @@ function CardsP (props) {
 CardsP.propTypes = {
     batch:PropTypes.string.isRequired,
     description:PropTypes.string.isRequired,
+    insta:PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
 }
 

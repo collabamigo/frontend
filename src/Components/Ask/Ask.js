@@ -7,6 +7,9 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import backend from "../../env";
 
+// function getIds(searchTerm) {
+//     return ['B20016', 'B20064']
+// }
 
 class Ask extends React.Component {
 
@@ -57,17 +60,16 @@ class Ask extends React.Component {
 
     refreshList = () => {
           axios.
-              get(backend+"connect/profile/",{
+              get(backend+"connect/java/",{
                   format: "json"
           })
-              .then((res) => this.setState({"dataList": res.data})).
-              catch((err) => console.log(err));
+              .then((res) => this.setState({"dataList": res.data}))
+              .catch((err) => console.log(err));
 
-      };
+    };
 
 
       render () {
-
           console.log(this.props.searchTerm);
           if (!this.state.found_match) {
 
@@ -117,13 +119,15 @@ class Ask extends React.Component {
                       <div>
                           <CardsP
                               batch="CSE, First Year"
-                              description={`${this.state.dataList[0].First_Name}  dont mess with me`}
-                              name={this.state.dataList[0].Last_Name}
+                              description={`${this.state.dataList[0].Last_Name}  dont mess with me`}
+                              insta={"https://www.instagram.com/"+"guy.pixelated/"}
+                              name={this.state.dataList[0].First_Name}
                           />
 
                           <CardsP
                               batch="CSE, First Year"
                               description="Did this work yet, pls inform"
+                              insta={"https://www.instagram.com/"+"apsaditya51/"}
                               name="Aditya Pratap"
                           />
                       </div>
