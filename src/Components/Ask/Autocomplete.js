@@ -52,6 +52,7 @@ class Autocomplete extends React.Component {
   handleClick = (e) => {
       this.setState({
           "showSuggestions": false,
+          searchTerm: e.target.innerText
       });
       this.props.onMatch(e.target.innerText);
   };
