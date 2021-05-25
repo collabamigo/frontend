@@ -4,19 +4,10 @@ import "./Ask.css";
 import CardsP from "./CardsP/CardsP";
 import Autocomplete from "./Autocomplete";
 import axios from "axios";
-import PropTypes from "prop-types";
 import backend from "../../env";
 
 
 class Ask extends React.Component {
-
-    static propTypes = {
-      searchTerm : PropTypes.string,
-    };
-
-    static defaultProps = {
-      searchTerm : "",
-    };
 
     constructor (props) {
 
@@ -44,14 +35,12 @@ class Ask extends React.Component {
 
     // Noinspection JSCheckFunctionSignatures
     shouldComponentUpdate () {
-
         return true;
-
     }
 
-    handleMatch = (flag) => {
-        this.setState({"found_match": flag});
-        this.refreshList(this.state.searchTerm)
+    handleMatch = (searchTerm) => {
+        this.setState({"found_match": true});
+        this.getTeacherIds(searchTerm)
 
         axios.get(backend+"connect/teachersdata/",{
             // format: "json",
@@ -61,24 +50,23 @@ class Ask extends React.Component {
         })
             .then((res) => this.setState({"tempList": res.data}))
             .catch((err) => console.log(err));
-
-        // console.log("lol"+this.state.tempList[0])
     }
 
     handleChange = (value) => {
         this.setState({"searchTerm": value});
     }
 
-    refreshList = (e) => {
-        axios.get(backend+"connect/teacheridfor/"+ e ,{
+    getTeacherIds = (searchTerm) => {
+        axios.get(backend+"connect/teacheridfor/"+ searchTerm ,{
+        params: {
             format: "json",
+        }
           })
             .then((res) => this.setState({"dataList": res.data}))
             .catch((err) => console.log(err));
     };
 
       render () {
-          console.log(this.props.searchTerm);
           if (!this.state.found_match) {
 
               return (
@@ -118,8 +106,11 @@ class Ask extends React.Component {
                               {" "}
                           </h1>
 
+                          {/* TODO: Remove function duplication*/}
+
                           <Autocomplete
                               onChange={this.handleChange}
+                              onMatch={this.handleMatch}
                               searchTerm={this.state.searchTerm}
                               suggestions={this.state.temp_l}
                           />
