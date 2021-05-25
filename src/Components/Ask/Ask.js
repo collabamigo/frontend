@@ -16,7 +16,7 @@ class Ask extends React.Component {
             "searchTerm": "",
             "temp_l": [],
             "found_match": false,
-            "dataList": undefined,
+            // "dataList": undefined,
             "tempList": [{}],
         }
 
@@ -42,14 +42,6 @@ class Ask extends React.Component {
         this.setState({"found_match": true});
         this.getTeacherIds(searchTerm)
 
-        axios.get(backend+"connect/teachersdata/",{
-            // format: "json",
-             params:{
-                 id_list: JSON.stringify(this.state.dataList)
-             }
-        })
-            .then((res) => this.setState({"tempList": res.data}))
-            .catch((err) => console.log(err));
     }
 
     handleChange = (value) => {
@@ -62,7 +54,17 @@ class Ask extends React.Component {
             format: "json",
         }
           })
-            .then((res) => this.setState({"dataList": res.data}))
+            .then((res) => {
+                // this.setState({"dataList": res.data})
+                axios.get(backend+"connect/teachersdata/",{
+                    // format: "json",
+                     params:{
+                         id_list: JSON.stringify(res.data)
+                     }
+                })
+                    .then((response) => this.setState({"tempList": response.data}))
+                    .catch((err) => console.log(err));
+            })
             .catch((err) => console.log(err));
     };
 
