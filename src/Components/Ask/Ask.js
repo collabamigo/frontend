@@ -20,18 +20,8 @@ class Ask extends React.Component {
             "tempList": [{}],
         }
 
-        axios.get(backend+"autocomplete",{
-            params:{
-                query: "j"
-            }
-        }).then(()=>console.log("GOT")).catch((err)=> console.log(err,"err"))
-
     }
 
-    // componentDidMount () {
-    //
-    //     this.refreshList();
-    // }
 
     // Noinspection JSCheckFunctionSignatures
     shouldComponentUpdate () {
