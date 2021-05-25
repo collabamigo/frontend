@@ -34,7 +34,7 @@ jobs:
       - name: Creating issues
         run: readarray -t array <<< $(git diff HEAD^ --name-only -G "TODO" -- ':!:*.yml' | xargs --no-run-if-empty git
                 grep -n "TODO" --) && for command in "${array[@]}"; do
-                    gh issue create --title "${command##*#}" --body "${command}" --label "todo" || echo "ERROR ${command}";
+                    gh issue create --title "${command##*:}" --body "${command}" --label "todo" || echo "ERROR ${command}";
                       done
 
       - name: Github logout
