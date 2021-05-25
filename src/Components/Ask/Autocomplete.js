@@ -1,12 +1,9 @@
 
-
 import React from "react";
 import PropTypes from "prop-types";
 import "./Autocomplete.css";
-import a from "../../temp";
-function generate (val) {
-    return a[val];
-}
+import backend from "../../env";
+import axios from "axios";
 
 class Autocomplete extends React.Component {
 
@@ -15,7 +12,7 @@ class Autocomplete extends React.Component {
       onMatch:PropTypes.func.isRequired,
   };
 
-  constructor (props) {
+    constructor (props) {
 
       super(props);
       this.state = {
@@ -23,6 +20,7 @@ class Autocomplete extends React.Component {
           filteredSuggestions: [],
           showSuggestions: false,
           searchTerm: "",
+          suggestions:"",
       };
   }
   
@@ -31,98 +29,106 @@ class Autocomplete extends React.Component {
         return true;
     }
 
-  handleChange = (e) => {
-      const suggestions = generate(e.target.value);
-      this.setState({
-          activeSuggestion: 0,
-          filteredSuggestions: suggestions,
-          showSuggestions: true,
-          searchTerm: e.target.value,
-      });
-       this.props.onChange(e.target.value);
-        if (suggestions && suggestions[0].toLowerCase() === e.target.value.toLowerCase()){
-            this.handleClick({
-                target: {
-                    innerText: e.target.value
+      handleChange = (e) => {
+            axios.get(backend+"autocomplete",{
+                params:{
+                    query: e.target.value
                 }
             })
-        }
-  };
+                .then((res) => this.setState({suggestions: res["recommendations"]}))
+                .catch((err)=> console.log(err,"err"))
 
-  handleClick = (e) => {
-      this.setState({
-          "showSuggestions": false,
-          searchTerm: e.target.innerText
-      });
-      this.props.onMatch(e.target.innerText);
-  };
+          this.setState({
+              activeSuggestion: 0,
+              filteredSuggestions: this.suggestions,
+              showSuggestions: true,
+              searchTerm: e.target.value,
+          });
+           this.props.onChange(e.target.value);
+            if (this.state.suggestions && this.state.suggestions[0].toLowerCase() === e.target.value.toLowerCase()){
+                this.handleClick({
+                    target: {
+                        innerText: e.target.value
+                    }
+                })
+            }
+      };
+
+      handleClick = (e) => {
+          this.setState({
+              "showSuggestions": false,
+              searchTerm: e.target.innerText
+          });
+          this.props.onMatch(e.target.innerText);
+      };
 
 
-  render () {
-      let suggestionsListComponent;
+      render () {
+          console.log(this.state.suggestions)
+          let suggestionsListComponent;
 
-      if (this.state.showSuggestions && this.state.searchTerm) {
+          if (this.state.showSuggestions && this.state.searchTerm) {
 
-          if (this.state.filteredSuggestions) {
+              if (this.state.filteredSuggestions) {
 
-              suggestionsListComponent =
-                  (
-                      <ul className="suggestions col-sm-4 col-md-3">
-                          {this.state.filteredSuggestions.map((suggestion, index) => {
+                  suggestionsListComponent =
+                      (
+                          <ul className="suggestions col-sm-4 col-md-3">
+                              {this.state.filteredSuggestions.map((suggestion, index) => {
 
-                  let className;
+                      let className;
 
-                  if (index === this.state.activeSuggestion) {
+                      if (index === this.state.activeSuggestion) {
 
-                      className = "suggestion-active";
-                  }
-                  return (
-                      <li
-                          className={className}
-                          key={suggestion}
-                          onClick={this.handleClick}
-                      >
-                          {suggestion}
-                      </li>
-                  );
-              })}
-                      </ul>);
+                          className = "suggestion-active";
+                      }
+                      return (
+                          <li
+                              className={className}
+                              key={suggestion}
+                              onClick={this.handleClick}
+                          >
+                              {suggestion}
+                          </li>
+                      );
+                  })}
+                          </ul>);
 
-          } else {
+              } else {
 
-              suggestionsListComponent =
-                  (
-                      <div className="no-suggestions">
-                          <em>
-                              No suggestions, you are on your own!
-                          </em>
-                      </div>
-                  );
+                  suggestionsListComponent =
+                      (
+                          <div className="no-suggestions">
+                              <em>
+                                  No suggestions, you are on your own!
+                              </em>
+                          </div>
+                      );
+              }
           }
+
+          return (
+              <>
+                  <div className="row">
+                      <div className="col-sm-1 col-md-1" />
+
+                      <input
+                          className="col-sm-4 col-md-3"
+                          onChange={this.handleChange.bind(this)}
+                          type="text"
+                          value={this.state.searchTerm}
+                      />
+                  </div>
+
+                  <div className="row">
+                      <div className="col-sm-1 col-md-1" />
+
+                      {suggestionsListComponent}
+                  </div>
+              </>
+          );
+
       }
-
-      return (
-          <>
-              <div className="row">
-                  <div className="col-sm-1 col-md-1" />
-
-                  <input
-                      className="col-sm-4 col-md-3"
-                      onChange={this.handleChange.bind(this)}
-                      type="text"
-                      value={this.state.searchTerm}
-                  />
-              </div>
-
-              <div className="row">
-                  <div className="col-sm-1 col-md-1" />
-
-                  {suggestionsListComponent}
-              </div>
-          </>
-      );
-
-  }
 
 }
 
