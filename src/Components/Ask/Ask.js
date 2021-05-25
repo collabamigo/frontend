@@ -7,9 +7,6 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import backend from "../../env";
 
-// function getIds(searchTerm) {
-//     return ['B20016', 'B20064']
-// }
 
 class Ask extends React.Component {
 
@@ -24,27 +21,14 @@ class Ask extends React.Component {
     constructor (props) {
 
         super(props);
-        // const dataList = [{
-        //     id:'',
-        //     FirstName: '',
-        //     LastName:'',
-        //     Gender:'',
-        //     Degree: '',
-        //     Course:'',
-        //     Handle:'',
-        //     isTeacher:'',
-        //     email:'',
-        //     Skill_set:[],
-        //     Contact:0,
-        //     UpVotes:0,
-        //     DownVotes:0,
-        // }]
         this.state = {
             "searchTerm": "",
             "temp_l": [],
             "found_match": false,
             "dataList": undefined,
-        };
+            "tempList": [{}],
+        }
+
         axios.get(backend+"autocomplete",{
             params:{
                 query: "j"
@@ -67,13 +51,16 @@ class Ask extends React.Component {
 
     handleMatch = (flag) => {
         this.setState({"found_match": flag});
-        axios.get(backend+"connect/searchfordata/",{
-            format: "json",
+        axios.get(backend+"connect/teachersdata/",{
+            // format: "json",
              params:{
-                 id_list: JSON.stringify(this.state.dataList["Teachers"]),
-        },})
-            .then((res) => console.log(res))
+                 id_list: JSON.stringify(this.state.dataList)
+             }
+        })
+            .then((res) => this.setState({"tempList": res.data}))
             .catch((err) => console.log(err));
+
+        // console.log("lol"+this.state.tempList[0])
     }
 
     handleChange = (value) => {
@@ -81,8 +68,8 @@ class Ask extends React.Component {
     }
 
     refreshList = () => {
-        axios.get(backend+"connect/searchfor/java",{
-            format: "json"
+        axios.get(backend+"connect/teacheridfor/java",{
+            format: "json",
           })
             .then((res) => this.setState({"dataList": res.data}))
             .catch((err) => console.log(err));
@@ -137,12 +124,19 @@ class Ask extends React.Component {
                       </div>
 
                       <div>
-                          <CardsP
-                              batch="CSE, First Year"
-                              description={`${this.state.dataList["First_Name"]}  dont mess with me`}
-                              insta={"https://www.instagram.com/"+"guy.pixelated/"}
-                              name={this.state.dataList[0]["Last_Name"]}
-                          />
+                          {this.state.tempList.map(item => (
+                              <div
+                                  className="row-auto"
+                                  key={item.id}
+                              >
+                                  <CardsP
+                                      batch={item.Course}
+                                      description="My Tech Stack is "
+                                      insta={"https://www.instagram.com/"+ item.Handle}
+                                      name={item.First_Name + " " + item.Last_Name}
+                                  />
+                              </div>
+                          ))}
                       </div>
                   </div>
             );
