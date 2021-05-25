@@ -18,6 +18,7 @@ class Ask extends React.Component {
             "found_match": false,
             // "dataList": undefined,
             "tempList": [{}],
+            // "pageData":0,
         }
 
     }
@@ -31,6 +32,10 @@ class Ask extends React.Component {
     handleMatch = (searchTerm) => {
         this.setState({"found_match": true});
         this.getTeacherIds(searchTerm)
+
+    }
+
+    handleGetNext = () => {
 
     }
 
@@ -81,6 +86,27 @@ class Ask extends React.Component {
 
                       <div className="float-centre">
                           Loading...
+                      </div>
+
+                      <div className="row">
+                          <div className="col-auto" />
+
+                          <button
+                              className="btn btn-primary"
+                              onClick={this.handleGetNext}
+                              type="button"
+                          >
+                              Next
+                          </button>
+                          
+                          <div className="col-auto" />
+                          
+                          <button
+                              className="btn btn-primary"
+                              type="button"
+                          >
+                              Previous
+                          </button>
                       </div>
                   </div>
               );
