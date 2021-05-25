@@ -98,7 +98,7 @@ class Ask extends React.Component {
                               {" "}
                           </h1>
 
-                          {/* TODO: Remove function duplication*/}
+                          {/* TODO:  Remove function duplication*/}
 
                           <Autocomplete
                               onChange={this.handleChange}
