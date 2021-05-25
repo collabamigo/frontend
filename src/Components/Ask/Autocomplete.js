@@ -17,10 +17,10 @@ class Autocomplete extends React.Component {
       super(props);
       this.state = {
           activeSuggestion: 0,
-          filteredSuggestions: [],
+          suggestions: undefined,
           showSuggestions: false,
           searchTerm: "",
-          suggestions:"",
+          cacheId: 0,
       };
   }
   
@@ -30,51 +30,61 @@ class Autocomplete extends React.Component {
     }
 
       handleChange = (e) => {
-            axios.get(backend+"autocomplete",{
+            axios.get(backend+"autocomplete/",{
                 params:{
-                    query: e.target.value
+                    query: e.target.value,
+                    cache: this.state.cacheId,
                 }
-            })
-                .then((res) => this.setState({suggestions: res["recommendations"]}))
+            }).then(
+                (res) => {
+                    this.setState({
+                        suggestions: res.data["recommendations"],
+                        cacheId: res.data["cache_id"]
+                    }
+                    )
+      })
                 .catch((err)=> console.log(err,"err"))
 
           this.setState({
               activeSuggestion: 0,
-              filteredSuggestions: this.suggestions,
               showSuggestions: true,
               searchTerm: e.target.value,
           });
            this.props.onChange(e.target.value);
             if (this.state.suggestions && this.state.suggestions[0].toLowerCase() === e.target.value.toLowerCase()){
-                this.handleClick({
-                    target: {
-                        innerText: e.target.value
-                    }
+                this.props.onMatch(e.target.value);
+            }
+            else {
+                this.setState({
+                    showSuggestions: true
                 })
             }
       };
 
       handleClick = (e) => {
           this.setState({
-              "showSuggestions": false,
-              searchTerm: e.target.innerText
+              showSuggestions: false,
           });
-          this.props.onMatch(e.target.innerText);
+          this.handleChange({
+              target: {
+                  value: e.target.innerText
+              }
+          })
       };
 
 
       render () {
-          console.log(this.state.suggestions)
+          console.log("rerender", this.state)
           let suggestionsListComponent;
 
           if (this.state.showSuggestions && this.state.searchTerm) {
 
-              if (this.state.filteredSuggestions) {
+              if (this.state.suggestions) {
 
                   suggestionsListComponent =
                       (
                           <ul className="suggestions col-sm-4 col-md-3">
-                              {this.state.filteredSuggestions.map((suggestion, index) => {
+                              {this.state.suggestions.map((suggestion, index) => {
 
                       let className;
 
