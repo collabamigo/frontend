@@ -37,10 +37,10 @@ class Ask extends React.Component {
 
     }
 
-    componentDidMount () {
-
-        this.refreshList();
-    }
+    // componentDidMount () {
+    //
+    //     this.refreshList();
+    // }
 
     // Noinspection JSCheckFunctionSignatures
     shouldComponentUpdate () {
@@ -51,6 +51,8 @@ class Ask extends React.Component {
 
     handleMatch = (flag) => {
         this.setState({"found_match": flag});
+        this.refreshList(this.state.searchTerm)
+
         axios.get(backend+"connect/teachersdata/",{
             // format: "json",
              params:{
@@ -67,8 +69,8 @@ class Ask extends React.Component {
         this.setState({"searchTerm": value});
     }
 
-    refreshList = () => {
-        axios.get(backend+"connect/teacheridfor/java",{
+    refreshList = (e) => {
+        axios.get(backend+"connect/teacheridfor/"+ e ,{
             format: "json",
           })
             .then((res) => this.setState({"dataList": res.data}))
