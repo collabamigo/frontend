@@ -24,8 +24,8 @@ jobs:
   Create-issues-using-TODO:
     runs-on: self-hosted
     needs: build_and_deploy
-  - uses: actions/checkout@v2
     steps:
+      - uses: actions/checkout@v2
       - name: Github login
         run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
 
