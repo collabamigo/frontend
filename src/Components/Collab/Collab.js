@@ -2,6 +2,7 @@ import React from "react";
 import "./Collab.css";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 function Collab (props) {
 
@@ -18,7 +19,13 @@ function Collab (props) {
                 <h1 className="col-6">
                     {" "}
 
-                    {props.title}
+                    {/* eslint-disable-next-line react/jsx-no-undef */}
+
+                    <Link
+                        to="/"
+                    >
+                        {props.title}
+                    </Link>
 
                     {" "}
                 </h1>
