@@ -57,10 +57,10 @@ class FormSignIn extends React.Component {
     handleSubmit(e) {
 
         let payload = {
-            "First_Name":this.state.FirstName,
-            "Last_Name":this.state.LastName,
-            "degree":this.state.degree,
-            "course":this.state.branch,
+            First_Name :this.state.FirstName,
+            Last_Name :this.state.LastName,
+            degree :this.state.degree,
+            course :this.state.branch,
         }
 
         axios.post(backend + "connect/api/profile/", payload)
