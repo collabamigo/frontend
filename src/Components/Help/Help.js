@@ -1,50 +1,62 @@
 import React from "react";
 import "./Help.css";
 import DashBoard from "./DashBoard/DashBoard";
-import PropTypes from "prop-types";
+import backend from "../../env";
+import axios from "axios";
+import HelpForm from "./HelpForm/HelpForm";
 
 // eslint-disable-next-line react/require-optimization
 class Ask extends React.Component {
-
-    static propTypes = {
-      Vendor : PropTypes.bool.isRequired,
-    };
-
+    
     constructor (props) {
-
         super(props);
         this.state = {
-            "Vendor": props.Vendor
+            "teacher" : ""
         };
+    }
 
+
+    componentDidMount() {
+        axios.get(backend+"connect/api/profile/", {
+            params:{
+                format:"json",
+            }
+        })
+            .then((res) => {
+                this.setState ( {teacher: res.data[0]["IsTeacher"]})
+            })
+    }
+
+    shouldComponentUpdate () {
+        return true;
     }
 
     render () {
-
-        if (this.state.Vendor) {
+        if (this.state.teacher) {
 
             return (
                 <DashBoard />
             );
 
         }
+        
+        else
+        {
+           return (
+               <div>
+                   <h3>
+                       Hey ! We see you are eager to help others !
+                   </h3>
 
-        return (
-            <div>
-                <h1>
-                    Sorry you can not help
-                </h1>
+                   <p>
+                       In order to help others Please register with us
+                   </p>
 
-                <p>
-                    In order to help Please register with us
-                </p>
-
-            </div>
-        );
-
-
+                   <HelpForm />
+               </div>
+           );
+        }
     }
-
 }
 
 export default Ask;
