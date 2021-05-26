@@ -8,30 +8,28 @@ class Profile extends React.Component{
 
     constructor(props) {
         super(props);
-        this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
-        this.handleChangeLastName = this.handleChangeLastName.bind(this);
         this.handleChangeDegree = this.handleChangeDegree.bind(this);
-        this.handleChangeBranch = this.handleChangeBranch.bind(this);
+        this.handleChangecourse = this.handleChangecourse.bind(this);
         this.handleChangeHandle = this.handleChangeHandle.bind(this);
         this.handleChangeContact = this.handleChangeContact.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
-        const data = [{
-            FirstName: '',
-            LastName:'',
-            degree: '',
-            branch:'',
-            Handle:'',
-            Contact:0
-        }]
-        this.state ={
-            data: data,
+        
+        this.state = {
+            First_Name: '',
+            Last_Name:'',
+            degree: 'null',
+            course:'null',
+            handle:'',
+            contact:'',
+            email: '',
         }
 
+    }
+
+    componentDidMount() {
         axios.get(backend+"connect/api/profile?format=json")
             .then(res => {
-                const data = res.data;
-                this.setState({data});
+                this.setState(res.data[0] );
             })
     }
 
@@ -39,85 +37,41 @@ class Profile extends React.Component{
         return true;
     }
 
-    handleChangeFirstName(e) {
-        this.setState({ FirstName: e.target.value })
-    }
-
-    handleChangeLastName(e) {
-        this.setState({ LastName: e.target.value })
-    }
-
     handleChangeDegree(e) {
         this.setState({ degree: e.target.value })
     }
 
-    handleChangeBranch(e) {
-        this.setState({ branch: e.target.value })
+    handleChangecourse(e) {
+        this.setState({ course: e.target.value })
     }
 
     handleChangeHandle(e) {
-        this.setState({ Handle: e.target.value })
+        this.setState({ handle: e.target.value })
     }
 
     handleChangeContact(e) {
-        this.setState({ Contact: e.target.value })
+        this.setState({ contact: e.target.value })
     }
 
     handleSubmit(e) {
 
-        alert('A name was submitted: ' + this.state.LastName);
 
         let payload = {
-            "First_Name":this.state.data[0]["First_Name"],
-            "Last_Name":this.state.data[0]["Last_Name"],
-            "Gender":"",
-            "Degree":this.state.degree,
-            "Course":this.state.branch,
-            "Handle":"",
-            "IsTeacher":false}
+            degree: this.state.degree,
+            course: this.state.course,
+            handle: this.state.handle,
+        }
 
-        axios.post(backend+"connect/api/profile/", payload)
-            .then(res => {
-            console.log(res);
-            console.log(res.data);
+        axios.patch(backend + "connect/api/profile/" + this.state.id +'/', payload)
+            .then(() => {
+            alert('A name was submitted: ' + this.state.First_Name);
           })
 
-        //     "Last_Name": "", n
-        //     "Gender": "",
-        //     "Degree": "", n
-        //     "Course": "", n
-        //     "Email": "", n
-        //     "Handle": "",
-        //     "IsTeacher": false n
-        // }
-
-        console.log(this.state.FirstName)
-        console.log(this.state.LastName)
-        console.log(this.email)
-        console.log(this.state.Handle)
-        console.log(this.state.Contact)
-        console.log(this.state.degree)
-        console.log(this.state.branch)
-
-        this.setState({
-            FirstName: '',
-            LastName:'',
-            degree: '',
-            branch:'',
-            Contact:'',
-            Handle:''
-        })
         e.preventDefault();
 
     }
 
-    handleChange(event) {
-    this.setState({LastName: event.target.value});
-  }
 
-    email = "shikhar20121@iiitd.ac.in"
-    first_name = "Shikhar Sharma"
-    name = this.first_name.split(' ')
 
   render() {
     return (
@@ -131,10 +85,8 @@ class Profile extends React.Component{
                     <input
                         className="form-control col-auto"
                         disabled
-                        onChange={this.handleChangeFirstName}
-                        placeholder={this.state.data[0]["First_Name"]}
                         type='text'
-                        value={this.state.data[0]["First_Name"]}
+                        value={this.state.First_Name}
                     />
                 </div>
             </div>
@@ -150,16 +102,15 @@ class Profile extends React.Component{
                     <input
                         className="form-control col-auto"
                         disabled
-                        onChange={this.handleChangeLastName}
-                        placeholder={this.state.data[0]["Last_Name"]}
                         type='text'
-                        value={this.state.data[0]["Last_Name"]}
+                        value={this.state.Last_Name}
                     />
 
                     <button
                         className="btn btn-outline-info col-auto"
                         type="button"
                     >
+                        {/* TODO: Link of help to be added here */}
                         Help
                     </button>
 
@@ -177,9 +128,8 @@ class Profile extends React.Component{
                     <input
                         className="form-control col-auto"
                         disabled
-                        placeholder={this.email}
                         type='text'
-                        value={this.email}
+                        value={this.state.email}
                     />
                 </div>
             </div>
@@ -195,9 +145,9 @@ class Profile extends React.Component{
                     <input
                         className="form-control col-auto"
                         onChange={this.handleChangeHandle}
-                        placeholder={this.state.Handle}
+                        placeholder="Social media handles"
                         type='text'
-                        value={this.state.Handle}
+                        value={this.state.handle}
                     />
                 </div>
             </div>
@@ -213,8 +163,9 @@ class Profile extends React.Component{
                     <input
                         className="form-control col-auto"
                         onChange={this.handleChangeContact}
+                        placeholder='Contact number'
                         type='number'
-                        value={this.state.Contact}
+                        value={this.state.contact}
                     />
                 </div>
             </div>
@@ -225,11 +176,13 @@ class Profile extends React.Component{
                     <select
                         className="form-control col-auto"
                         onChange={this.handleChangeDegree}
+                        placeholder='Your degree [BTech/MTech]'
                         value={this.state.degree}
                     >
                         <option
-                            selected
-                            value=""
+                            disabled
+                            hidden
+                            value="null"
                         >
                             ---Select Degree---
                         </option>
@@ -245,18 +198,19 @@ class Profile extends React.Component{
                 </label>
 
                 <label className="col-auto col-form-label">
-                    Branch:
+                    course:
                     <select
                         className="form-control col-auto"
-                        onChange={this.handleChangeBranch}
-                        value={this.state.branch}
+                        onChange={this.handleChangecourse}
+                        value={this.state.course}
                     >
                         <option
-                            selected
-                            value=""
+                            disabled
+                            hidden
+                            value="null"
 
                         >
-                            ---Select Branch---
+                            ---Select course---
                         </option>
 
                         <option value="CSAI">
@@ -296,14 +250,11 @@ class Profile extends React.Component{
 
             <br />
 
-            <button
+            <input
                 className="btn btn-primary mb-2"
-                onChange={this.handleChange}
                 type="submit"
-                value="Submit"
-            >
-                Submit
-            </button>
+                value="submit"
+            />
 
         </form>
     );
