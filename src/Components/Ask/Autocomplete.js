@@ -7,13 +7,12 @@ import axios from "axios";
 
 class Autocomplete extends React.Component {
 
-  static propTypes = {
+    static propTypes = {
       onChange: PropTypes.func.isRequired,
       onMatch:PropTypes.func.isRequired,
   };
 
     constructor (props) {
-
       super(props);
       this.state = {
           activeSuggestion: 0,
@@ -22,7 +21,7 @@ class Autocomplete extends React.Component {
           searchTerm: "",
           cacheId: 0,
       };
-  }
+    }
   
     // noinspection JSCheckFunctionSignatures
     shouldComponentUpdate () {

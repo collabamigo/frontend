@@ -47,14 +47,6 @@ class App extends React.Component {
             }
         );
     }
-// axios.get('/myController/myAction', {
-//   params: {
-//     storeIds: [1,2,3]
-//   },
-//   paramsSerializer: params => {
-//     return qs.stringify(params)
-//   }
-// })
 
     handleLogin = () => {
         this.setState({
@@ -207,7 +199,7 @@ class App extends React.Component {
                             exact
                             path="/help"
                         >
-                            <Help Vendor />
+                            <Help />
                         </ProtectedRoute>
 
                         <ProtectedRoute
@@ -219,7 +211,7 @@ class App extends React.Component {
 
                         <ProtectedRoute
                             exact
-                            path="/profile"
+                            path="/aboutus"
                         >
                             <AboutUs />
                         </ProtectedRoute>

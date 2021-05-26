@@ -68,15 +68,15 @@ class Profile extends React.Component{
         alert('A name was submitted: ' + this.state.LastName);
 
         let payload = {
-            "First_Name":this.state.FirstName,
-            "Last_Name":this.state.LastName,
+            "First_Name":this.state.data[0]["First_Name"],
+            "Last_Name":this.state.data[0]["Last_Name"],
             "Gender":"",
             "Degree":this.state.degree,
             "Course":this.state.branch,
             "Handle":"",
             "IsTeacher":false}
 
-        axios.post(backend+"connect/lolcheck/", payload)
+        axios.post(backend+"connect/api/profile/", payload)
             .then(res => {
             console.log(res);
             console.log(res.data);
@@ -133,7 +133,6 @@ class Profile extends React.Component{
                         disabled
                         onChange={this.handleChangeFirstName}
                         placeholder={this.state.data[0]["First_Name"]}
-                        required
                         type='text'
                         value={this.state.data[0]["First_Name"]}
                     />
@@ -153,7 +152,6 @@ class Profile extends React.Component{
                         disabled
                         onChange={this.handleChangeLastName}
                         placeholder={this.state.data[0]["Last_Name"]}
-                        required
                         type='text'
                         value={this.state.data[0]["Last_Name"]}
                     />
@@ -227,7 +225,6 @@ class Profile extends React.Component{
                     <select
                         className="form-control col-auto"
                         onChange={this.handleChangeDegree}
-                        required
                         value={this.state.degree}
                     >
                         <option
@@ -252,7 +249,6 @@ class Profile extends React.Component{
                     <select
                         className="form-control col-auto"
                         onChange={this.handleChangeBranch}
-                        required
                         value={this.state.branch}
                     >
                         <option
