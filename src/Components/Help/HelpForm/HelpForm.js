@@ -3,8 +3,10 @@ import React from 'react'
 // import backend from "../../../env";
 import './HelpForm.css'
 import Step1 from './Steps/Step1'
+import Step2 from './Steps/Step2'
 
 class HelpForm extends React.Component{
+
     constructor(props) {
         super(props);
         this.state={
@@ -18,7 +20,7 @@ class HelpForm extends React.Component{
 
     handleNext = () => {
         let currentStep = this.currentStep
-        currentStep = currentStep >= 2? 3: currentStep + 1
+        currentStep = currentStep >= 1? 2: this.state.currentStep + 1
         this.setState({
           currentStep: currentStep
         })
@@ -26,7 +28,7 @@ class HelpForm extends React.Component{
 
     handlePrev = () => {
         let currentStep = this.currentStep
-        currentStep = currentStep <= 1? 1: currentStep - 1
+        currentStep = currentStep <= 2? 1: this.state.currentStep - 1
         this.setState({
           currentStep: currentStep
         })
@@ -50,10 +52,10 @@ class HelpForm extends React.Component{
     
     nextButton(){
       let currentStep = this.state.currentStep;
-      if(currentStep <3){
+      if(currentStep <2){
         return (
             <button 
-                className="btn btn-primary float-right" 
+                className="btn btn-primary"
                 onClick={this.handleNext}
                 type="button"
             >
@@ -61,20 +63,17 @@ class HelpForm extends React.Component{
             </button>        
         )
       }
-      
-    return null;
+        return null;
     }
 
     render() {
-        console.log(this.state.data)
+        console.log(this.state.currentStep)
         return (
             <form onSubmit={this.handleSubmit}>
 
                 <Step1 currentStep={this.state.currentStep} />
 
-                {/*<Step2 currentStep={this.state.currentStep} />*/}
-
-                <br />
+                <Step2 currentStep={this.state.currentStep} />
 
                 <br />
                 

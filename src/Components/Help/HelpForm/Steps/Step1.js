@@ -25,7 +25,7 @@ class Step1 extends React.Component {
 
         this.state ={
             data: data,
-            currentStep: props.currentStep
+            currentStep: props.currentStep,
         }
     }
 
@@ -83,16 +83,14 @@ class Step1 extends React.Component {
 
     }
 
-    handleChange(event) {
-        this.setState({Contact: event.target.value});
-    }
 
     render (){
+        console.log("step1" + this.state.currentStep)
         console.log(this.state.data)
         if (this.state.currentStep !== 1) {
             return null
-      }
-        return(
+        }
+        return (
             <>
                 <div className="form-group row">
                     <label className="col-auto col-form-label">
@@ -172,7 +170,7 @@ class Step1 extends React.Component {
 
                 <div />
             </>
-      );
+        );
     }
 }
 
