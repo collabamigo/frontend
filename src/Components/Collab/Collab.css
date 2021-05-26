@@ -11,3 +11,11 @@
     padding-bottom: 15px;
     padding-top: 10px;
 }
+
+.link {
+  color:rgb(128, 128, 128);
+}
+.link:hover {
+   color: rgb(170, 170, 170);
+   text-decoration: none;
+}
