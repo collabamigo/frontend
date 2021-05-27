@@ -197,7 +197,7 @@ class FormSignIn extends React.Component {
                                     <option
                                         value=""
                                     >
-                                        ---Select course---
+                                        ---Select Course---
                                     </option>
 
                                     <option value="CSAI">

@@ -11,7 +11,7 @@ class Profile extends React.Component{
         this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
         this.handleChangeLastName = this.handleChangeLastName.bind(this);
         this.handleChangeDegree = this.handleChangeDegree.bind(this);
-        this.handleChangeBranch = this.handleChangeBranch.bind(this);
+        this.handleChangeCourse = this.handleChangeCourse.bind(this);
         this.handleChangeHandle = this.handleChangeHandle.bind(this);
         this.handleChangeContact = this.handleChangeContact.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,7 +20,7 @@ class Profile extends React.Component{
             FirstName: '',
             LastName:'',
             degree: '',
-            branch:'',
+            course:'',
             Handle:'',
             Contact:0
         }]
@@ -51,8 +51,8 @@ class Profile extends React.Component{
         this.setState({ degree: e.target.value })
     }
 
-    handleChangeBranch(e) {
-        this.setState({ branch: e.target.value })
+    handleChangeCourse(e) {
+        this.setState({ course: e.target.value })
     }
 
     handleChangeHandle(e) {
@@ -72,7 +72,7 @@ class Profile extends React.Component{
             "Last_Name":this.state.data[0]["Last_Name"],
             "Gender":"",
             "Degree":this.state.degree,
-            "Course":this.state.branch,
+            "Course":this.state.course,
             "Handle":"",
             "IsTeacher":false}
 
@@ -97,13 +97,13 @@ class Profile extends React.Component{
         console.log(this.state.Handle)
         console.log(this.state.Contact)
         console.log(this.state.degree)
-        console.log(this.state.branch)
+        console.log(this.state.course)
 
         this.setState({
             FirstName: '',
             LastName:'',
             degree: '',
-            branch:'',
+            course:'',
             Contact:'',
             Handle:''
         })
@@ -245,18 +245,18 @@ class Profile extends React.Component{
                 </label>
 
                 <label className="col-auto col-form-label">
-                    Branch:
+                    Course:
                     <select
                         className="form-control col-auto"
-                        onChange={this.handleChangeBranch}
-                        value={this.state.branch}
+                        onChange={this.handleChangeCourse}
+                        value={this.state.course}
                     >
                         <option
                             selected
                             value=""
 
                         >
-                            ---Select Branch---
+                            ---Select Course---
                         </option>
 
                         <option value="CSAI">
