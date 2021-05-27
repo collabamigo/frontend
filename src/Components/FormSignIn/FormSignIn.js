@@ -21,7 +21,7 @@ class FormSignIn extends React.Component {
         this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
         this.handleChangeLastName = this.handleChangeLastName.bind(this);
         this.handleChangeDegree = this.handleChangeDegree.bind(this);
-        this.handleChangeBranch = this.handleChangeBranch.bind(this);
+        this.handleChangecourse = this.handleChangecourse.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
@@ -29,7 +29,7 @@ class FormSignIn extends React.Component {
             LastName:this.props.lastName,
             email: this.props.emailId,
             degree: '',
-            branch:''
+            course:''
         }
     }
 
@@ -50,8 +50,8 @@ class FormSignIn extends React.Component {
         this.setState({ degree: e.target.value })
     }
 
-    handleChangeBranch(e) {
-        this.setState({ branch: e.target.value })
+    handleChangecourse(e) {
+        this.setState({ course: e.target.value })
     }
     
     handleSubmit(e) {
@@ -60,7 +60,7 @@ class FormSignIn extends React.Component {
             First_Name :this.state.FirstName,
             Last_Name :this.state.LastName,
             degree :this.state.degree,
-            course :this.state.branch,
+            course :this.state.course,
         }
 
         axios.post(backend + "connect/api/profile/", payload)
@@ -76,7 +76,7 @@ class FormSignIn extends React.Component {
             FirstName: '',
             LastName:'',
             degree: '',
-            branch:''
+            course:''
         })
         e.preventDefault();
 
@@ -186,18 +186,18 @@ class FormSignIn extends React.Component {
                             </label>
 
                             <label className="col-auto">
-                                Branch:
+                                course:
                                 <select
                                     className="form-control"
-                                    onChange={this.handleChangeBranch}
+                                    onChange={this.handleChangecourse}
                                     required
-                                    value={this.state.branch}
+                                    value={this.state.course}
                                 >
 
                                     <option
                                         value=""
                                     >
-                                        ---Select Branch---
+                                        ---Select course---
                                     </option>
 
                                     <option value="CSAI">
