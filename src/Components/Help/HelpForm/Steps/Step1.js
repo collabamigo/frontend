@@ -1,91 +1,25 @@
 
 import React from "react";
-import axios from "axios";
-import backend from "../../../../env";
 import PropTypes from "prop-types";
 
 class Step1 extends React.Component {
     static propTypes = {
-            currentStep:PropTypes.number.isRequired
-        };
-
-    constructor(props) {
-        super(props);
-        this.handleChangeHandle = this.handleChangeHandle.bind(this);
-        this.handleChangeGithub = this.handleChangeGithub.bind(this);
-        this.handleChangeLD = this.handleChangeLD.bind(this);
-        this.handleChangeContact = this.handleChangeContact.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        const data = [{
-            Handle:'',
-            Contact:'',
-            Github: '',
-            LD:'',
-        }]
-
-        this.state ={
-            data: data,
-        }
-    }
+            Contact:PropTypes.string.isRequired,
+            Github:PropTypes.string.isRequired,
+            Handle:PropTypes.string.isRequired,
+            LD:PropTypes.string.isRequired,
+            currentStep:PropTypes.number.isRequired,
+            handleChangeContact:PropTypes.func.isRequired,
+            handleChangeGithub:PropTypes.func.isRequired,
+            handleChangeHandle:PropTypes.func.isRequired,
+            handleChangeLD:PropTypes.func.isRequired,
+    };
 
     shouldComponentUpdate () {
         return true;
     }
 
-    handleChangeHandle(e) {
-        this.setState({ Handle: e.target.value })
-    }
-
-    handleChangeGithub(e) {
-        this.setState({ Github: e.target.value })
-    }
-
-    handleChangeLD(e) {
-        this.setState({ LD: e.target.value })
-    }
-
-    handleChangeContact(e) {
-        this.setState({ Contact: e.target.value })
-    }
-
-    handleSubmit(e) {
-
-        alert('A number was submitted: ' + this.state.Handle);
-
-        let payload = {
-            "Contact":"",
-            "Handle":"",
-            "Github":"",
-            "IsTeacher":true,
-            "LD":'',
-        }
-
-        axios.post(backend+"connect/api/teacher/", payload)
-            .then(res => {
-            console.log(res);
-            console.log(res.data);
-          })
-
-        console.log(this.state.Handle)
-        console.log(this.state.Contact)
-        console.log(this.state.Github)
-        console.log(this.state.LD)
-
-
-        this.setState({
-            Contact:'',
-            Handle:'',
-            Github:'',
-            LD:'',
-        })
-        e.preventDefault();
-
-    }
-
-
     render (){
-        console.log("step1" + this.props.currentStep)
-        console.log(this.state.data)
         if (this.props.currentStep !== 1) {
             return null
         }
@@ -101,11 +35,11 @@ class Step1 extends React.Component {
                         <div>
                             <input
                                 className="form-control col-auto"
-                                onChange={this.handleChangeHandle}
+                                onChange={this.props.handleChangeHandle}
                                 placeholder="@instagram"
                                 required
                                 type='text'
-                                value={this.state.Handle}
+                                value={this.props.Handle}
                             />
                         </div>
                     </div>
@@ -120,11 +54,11 @@ class Step1 extends React.Component {
                         <div>
                             <input
                                 className="form-control col-auto"
-                                onChange={this.handleChangeContact}
+                                onChange={this.props.handleChangeContact}
                                 placeholder="Mobile Number"
                                 required
                                 type='number'
-                                value={this.state.Contact}
+                                value={this.props.Contact}
                             />
                         </div>
                     </div>
@@ -139,11 +73,11 @@ class Step1 extends React.Component {
                         <div>
                             <input
                                 className="form-control col-auto"
-                                onChange={this.handleChangeGithub}
+                                onChange={this.props.handleChangeGithub}
                                 placeholder="Github account"
                                 required
                                 type='text'
-                                value={this.state.Github}
+                                value={this.props.Github}
                             />
                         </div>
                     </div>
@@ -158,11 +92,11 @@ class Step1 extends React.Component {
                         <div>
                             <input
                                 className="form-control col-auto"
-                                onChange={this.handleChangeLD}
+                                onChange={this.props.handleChangeLD}
                                 placeholder="LinkedIn account"
                                 required
                                 type='text'
-                                value={this.state.LD}
+                                value={this.props.LD}
                             />
                         </div>
                     </div>
