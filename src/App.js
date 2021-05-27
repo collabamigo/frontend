@@ -19,6 +19,7 @@ import Card from "react-bootstrap/Card";
 import Connect from './Components/Connect/Connect'
 import DarkMode from "./Components/Collab/DarkMode/DarkMode";
 import AboutUs from "./Components/AboutUs/AboutUs";
+import ConnectionRequest from "./Components/ConnectionRequest/ConnectionRequest";
 // import Welcome from "./Components/Welcome/Welcome";
 
 
@@ -209,6 +210,7 @@ class App extends React.Component {
                             <Profile />
                         </ProtectedRoute>
 
+
                         <ProtectedRoute
                             exact
                             path="/aboutus"
@@ -228,6 +230,13 @@ class App extends React.Component {
                             path="/about"
                         >
                             <About />
+                        </Route>
+
+                        <Route
+                            exact
+                            path="/connection"
+                        >
+                            <ConnectionRequest />
                         </Route>
 
                         <Route
