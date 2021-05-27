@@ -186,7 +186,7 @@ class FormSignIn extends React.Component {
                             </label>
 
                             <label className="col-auto">
-                                course:
+                                Course:
                                 <select
                                     className="form-control"
                                     onChange={this.handleChangecourse}
