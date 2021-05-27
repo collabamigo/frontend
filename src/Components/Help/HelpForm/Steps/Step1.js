@@ -25,7 +25,6 @@ class Step1 extends React.Component {
 
         this.state ={
             data: data,
-            currentStep: props.currentStep,
         }
     }
 
@@ -85,92 +84,95 @@ class Step1 extends React.Component {
 
 
     render (){
-        console.log("step1" + this.state.currentStep)
+        console.log("step1" + this.props.currentStep)
         console.log(this.state.data)
-        if (this.state.currentStep !== 1) {
+        if (this.props.currentStep !== 1) {
             return null
         }
-        return (
-            <>
-                <div className="form-group row">
-                    <label className="col-auto col-form-label">
-                        Handle
-                    </label>
+        else
+        {
+            return (
+                <>
+                    <div className="form-group row">
+                        <label className="col-auto col-form-label">
+                            Handle
+                        </label>
 
-                    <div>
-                        <input
-                            className="form-control col-auto"
-                            onChange={this.handleChangeHandle}
-                            placeholder="@instagram"
-                            required
-                            type='text'
-                            value={this.state.Handle}
-                        />
+                        <div>
+                            <input
+                                className="form-control col-auto"
+                                onChange={this.handleChangeHandle}
+                                placeholder="@instagram"
+                                required
+                                type='text'
+                                value={this.state.Handle}
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <br />
+                    <br />
 
-                <div className="form-group row">
-                    <label className="col-auto col-form-label">
-                        Contact
-                    </label>
+                    <div className="form-group row">
+                        <label className="col-auto col-form-label">
+                            Contact
+                        </label>
 
-                    <div>
-                        <input
-                            className="form-control col-auto"
-                            onChange={this.handleChangeContact}
-                            placeholder="Mobile Number"
-                            required
-                            type='number'
-                            value={this.state.Contact}
-                        />
+                        <div>
+                            <input
+                                className="form-control col-auto"
+                                onChange={this.handleChangeContact}
+                                placeholder="Mobile Number"
+                                required
+                                type='number'
+                                value={this.state.Contact}
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <br />
+                    <br />
 
-                <div className="form-group row">
-                    <label className="col-auto col-form-label">
-                        Github Profile
-                    </label>
+                    <div className="form-group row">
+                        <label className="col-auto col-form-label">
+                            Github Profile
+                        </label>
 
-                    <div>
-                        <input
-                            className="form-control col-auto"
-                            onChange={this.handleChangeGithub}
-                            placeholder="Github account"
-                            required
-                            type='text'
-                            value={this.state.Github}
-                        />
+                        <div>
+                            <input
+                                className="form-control col-auto"
+                                onChange={this.handleChangeGithub}
+                                placeholder="Github account"
+                                required
+                                type='text'
+                                value={this.state.Github}
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <br />
+                    <br />
 
-                <div className="form-group row">
-                    <label className="col-auto col-form-label">
-                        LinkedIn Profile
-                    </label>
+                    <div className="form-group row">
+                        <label className="col-auto col-form-label">
+                            LinkedIn Profile
+                        </label>
 
-                    <div>
-                        <input
-                            className="form-control col-auto"
-                            onChange={this.handleChangeLD}
-                            placeholder="LinkedIn account"
-                            required
-                            type='text'
-                            value={this.state.LD}
-                        />
+                        <div>
+                            <input
+                                className="form-control col-auto"
+                                onChange={this.handleChangeLD}
+                                placeholder="LinkedIn account"
+                                required
+                                type='text'
+                                value={this.state.LD}
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <br />
+                    <br />
 
-                <div />
-            </>
-        );
+                    <div />
+                </>
+            );
+        }
     }
 }
 
