@@ -120,7 +120,7 @@ class Ask extends React.Component {
                               {" "}
                           </h1>
 
-                          {/* TODO: Remove function duplication*/}
+                          {/* TODO: Remove function duplication */}
 
                           <Autocomplete
                               onChange={this.handleChange}
@@ -129,6 +129,9 @@ class Ask extends React.Component {
                               suggestions={this.state.temp_l}
                           />
                       </div>
+
+                      {/* TODO: Remove Instagram Handle */}
+                      {/* TODO: Add undefined case handling */}
 
                       <div>
                           {this.state.tempList.map(item => (

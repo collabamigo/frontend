@@ -245,7 +245,7 @@ class App extends React.Component {
 
                             <a href="/">
                                 <h5>
-                                    Go to homepage
+                                    Sign in to continue
                                 </h5>
                             </a>
                         </Route>
