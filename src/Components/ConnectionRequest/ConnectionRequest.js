@@ -24,15 +24,17 @@ class ConnectionRequest extends React.Component{
         this.setState({checked: e.target.checked})
     }
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
+        console.log('calll')
         const query = useQuery()
 
-        axios.post(backend+"/connection/request/", {
+        axios.post(backend+"connect/approve/", {
             request_id: query.get("request_id"),
             mobile: this.state.checked?1:0})
             .then(res => {
             console.log(res);
           })
+        e.preventDefault()
     }
     
     render(){
@@ -53,7 +55,7 @@ class ConnectionRequest extends React.Component{
                     </Form.Group>
 
                     <Button
-                        onClick={this.handleSubmit}
+                        onClick={this.handleSubmit.bind(this)}
                         type="submit"
                         variant="primary"
                     >
