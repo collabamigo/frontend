@@ -14,6 +14,7 @@ class AboutUs extends React.Component {
                 <h1>
                     The team
                 </h1>
+
                 {/* TODO: Body class made blue, keep only h1 tag as blue */}
 
                 <div className='ripple-background'>
