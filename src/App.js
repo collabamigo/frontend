@@ -233,8 +233,7 @@ class App extends React.Component {
                         </Route>
 
                         <Route
-                            exact
-                            path="/connection"
+                            path="/connection/"
                         >
                             <ConnectionRequest />
                         </Route>

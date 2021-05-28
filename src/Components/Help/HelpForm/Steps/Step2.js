@@ -18,14 +18,22 @@ class Step2 extends React.Component {
         }
         return (
             <div className="form-group">
-                <label htmlFor="username">
+                <label className="col-auto col-form-label">
                     Add your skills
                 </label>
+
+                <div>
+                    <input
+                        data-role="tagsinput"
+                        type="text"
+                    />
+                </div>
 
                 <br />
 
                 <button
                     className="btn btn-primary mb-2"
+                    onChange={this.handleChange}
                     type="submit"
                     value="Submit"
                 >

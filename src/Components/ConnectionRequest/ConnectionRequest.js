@@ -1,30 +1,34 @@
 
 import React from 'react'
 import {Button, Form} from "react-bootstrap";
-import Collab from '../Collab/Collab'
 import axios from "axios";
 import backend from "../../env";
-import Footer from "../Footer/Footer";
 
 class ConnectionRequest extends React.Component{
 
     constructor(props) {
         super(props);
         this.state={
-            checked:false
+            checked:false,
+            request_id:''
         }
     }
 
     shouldComponentUpdate() {
         return true
     }
+
+    handleURLSearch(){
+        return new URLSearchParams(window.location.search);
+    }
     
     handleCheckboxChange = (e) => {
         this.setState({checked: e.target.checked})
     }
 
-    handleSubmit = (e)=> {
-        axios.post(backend+"/connection/request/",e)
+    handleSubmit = ()=> {
+        this.setState({request_id: this.handleURLSearch})
+        axios.post(backend+"/connection/request/", this.state.request_id)
             .then(res => {
             console.log(res);
           })
@@ -33,15 +37,14 @@ class ConnectionRequest extends React.Component{
     render(){
         return(   
             <div>
-                <Collab
-                    className="jumbotron" 
-                    title="Collab Connect"
-                />
 
                 <Form>
                     <Form.Group controlId="formBasicCheckbox">
+                        <label>
+                            Share my mobile also
+                        </label>
+
                         <Form.Check
-                            label="Share my mobile also"
                             onChange={this.handleCheckboxChange}
                             type="checkbox"
                             value={this.state.checked}
@@ -55,9 +58,7 @@ class ConnectionRequest extends React.Component{
                     >
                         Accept request
                     </Button>
-                </Form>    
-
-                <Footer />
+                </Form>
             </div>
             
         )
