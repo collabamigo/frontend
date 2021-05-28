@@ -7,18 +7,31 @@ class Step1 extends React.Component {
             Contact:PropTypes.string.isRequired,
             Github:PropTypes.string.isRequired,
             Handle:PropTypes.string.isRequired,
-            LD:PropTypes.string.isRequired,
+            Linkedin:PropTypes.string.isRequired,
             currentStep:PropTypes.number.isRequired,
             handleChangeContact:PropTypes.func.isRequired,
             handleChangeGithub:PropTypes.func.isRequired,
             handleChangeHandle:PropTypes.func.isRequired,
-            handleChangeLD:PropTypes.func.isRequired,
+            handleChangeLinkedin:PropTypes.func.isRequired,
+            handleNext: PropTypes.func.isRequired
     };
 
     shouldComponentUpdate () {
         return true;
     }
 
+    nextButton(){
+        return (
+            <button
+                className="btn btn-primary"
+                onClick={this.props.handleNext}
+                type="button"
+                value="Next"
+            >
+                Next
+            </button>
+        )
+    }
     render (){
         if (this.props.currentStep !== 1) {
             return null
@@ -93,11 +106,11 @@ class Step1 extends React.Component {
                         <div>
                             <input
                                 className="form-control col-auto"
-                                onChange={this.props.handleChangeLD}
+                                onChange={this.props.handleChangeLinkedin}
                                 placeholder="LinkedIn account"
                                 required
                                 type='text'
-                                value={this.props.LD}
+                                value={this.props.Linkedin}
                             />
                         </div>
                     </div>
@@ -105,6 +118,8 @@ class Step1 extends React.Component {
                     <br />
 
                     <div />
+
+                    {this.nextButton()}
                 </>
             );
         }

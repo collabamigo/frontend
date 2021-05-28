@@ -16,6 +16,7 @@ class Ask extends React.Component {
     }
 
 
+
     componentDidMount() {
         axios.get(backend+"connect/api/teacher/", {
             params:{
@@ -30,7 +31,11 @@ class Ask extends React.Component {
     shouldComponentUpdate () {
         return true;
     }
-
+    handlerSubmit() {
+        this.setState({
+            teacher: true
+        })
+    }
     render () {
         if (this.state.teacher) {
 
@@ -40,46 +45,23 @@ class Ask extends React.Component {
 
         }
         
-        else if (this.state.teacher === false){
-            return (
-                <div>
-                    <h3>
-                        Hey ! We see you are eager to help others !
-                    </h3>
+        else
+        {
+           return (
+               <div>
+                   <h3>
+                       Hey ! We see you are eager to help others !
+                   </h3>
 
-                    <p>
-                        In order to help others Please register with us
-                    </p>
+                   <p>
+                       In order to help others Please register with us
+                   </p>
 
-                    <HelpForm />
-                </div>
+                   <HelpForm
+                       handleSubmit={this.handlerSubmit.bind(this)}
+                   />
+               </div>
            );
-
-        }
-        else{
-            return (
-                <div>
-                    <div 
-                        className="spinner-border spinner-border-sm"
-                        role="status"
-                    >
-                        <span className="sr-only">
-                            Loading...
-                        </span>
-                    </div>
-    
-                    <div
-                        className="spinner-grow spinner-grow-sm"
-                        role="status"
-                    >
-                        <span 
-                            className="sr-only"
-                        >
-                            Loading...
-                        </span>
-                    </div>
-                </div>
-            )
         }
     }
 }

@@ -8,18 +8,21 @@ import './tag.css'
 class Step2 extends React.Component {
 
     static propTypes = {
-            currentStep:PropTypes.number.isRequired
-        };
+        currentStep: PropTypes.number.isRequired,
+        handlePrev: PropTypes.func.isRequired,
+        handleSubmit: PropTypes.func.isRequired
+    };
 
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             "searchTerm": "",
             "found_match": false,
             "temp_l": [],
             "tags": [],
         }
     }
+
     shouldComponentUpdate() {
         return true;
     }
@@ -32,9 +35,9 @@ class Step2 extends React.Component {
         this.setState({"found_match": true});
     }
 
-    handleChangeTag(tags) {
-        this.setState({"tags": tags})
-    }
+    // handleChangeTag(tags) {
+    //     this.setState({"tags": tags})
+    // }
 
     renderAutocomplete({addTag, ...props}) {
         console.log(props)
@@ -43,14 +46,40 @@ class Step2 extends React.Component {
                 onChange={(val) => this.handleChange(val)}
                 onMatch={(val) => {
                     this.handleMatch.bind(this)
-                    addTag(val)
+                    if (!this.state.tags.includes(val)) {
+                        this.setState((state) => ({
+                            tags: state.tags.concat([val])
+                        }))
+                        addTag(val)
+                    }
                 }}
                 searchTerm={this.state.searchTerm}
                 suggestions={this.state.temp_l}
+                version={2}
             />
         )
     }
+    handleChangeTag() {
 
+    }
+    handleSubmit() {
+        this.props.handleSubmit(this.state.tags)
+    }
+    previousButton() {
+      let currentStep = this.state.currentStep;
+      if(currentStep !==1){
+        return (
+            <button
+                className="btn btn-secondary"
+                onClick={this.props.handlePrev}
+                type="button"
+            >
+                Previous
+            </button>
+        )
+      }
+      return null;
+    }
     render() {
         if (this.props.currentStep !== 2) {
             console.log(this.state.found_match)
@@ -65,7 +94,7 @@ class Step2 extends React.Component {
                 <div className="center">
 
 
-                    <TagsInput 
+                    <TagsInput
                         onChange={this.handleChangeTag.bind(this)}
                         renderInput={this.renderAutocomplete.bind(this)}
                         value={this.state.tags}
@@ -74,10 +103,13 @@ class Step2 extends React.Component {
 
                 <br />
 
+                {this.previousButton()}
+
                 <button
                     className="btn btn-primary mb-2"
                     onChange={this.handleChange}
-                    type="submit"
+                    onClick={this.handleSubmit.bind(this)}
+                    type="button"
                     value="Submit"
                 >
                     Submit

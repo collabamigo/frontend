@@ -1,28 +1,32 @@
 import React from 'react'
-// import axios from "axios";
-// import backend from "../../../env";
+import axios from "axios";
 import './HelpForm.css'
 import Step1 from './Steps/Step1'
 import Step2 from './Steps/Step2'
+import backend from "../../../env";
+import PropTypes from "prop-types";
 
 class HelpForm extends React.Component{
+    static propTypes = {
+        handleSubmit: PropTypes.func.isRequired
+    };
 
     constructor(props) {
         super(props);
-        this.handleChangeHandle = this.handleChangeHandle.bind(this);
-        this.handleChangeGithub = this.handleChangeGithub.bind(this);
-        this.handleChangeLD = this.handleChangeLD.bind(this);
-        this.handleChangeContact = this.handleChangeContact.bind(this);
+        this.handlerChangeHandle = this.handlerChangeHandle.bind(this);
+        this.handlerChangeGithub = this.handlerChangeGithub.bind(this);
+        this.handlerChangeLinkedin = this.handlerChangeLinkedin.bind(this);
+        this.handlerChangeContact = this.handlerChangeContact.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        const data = [{
+        const data = {
             Handle:'',
             Contact:'',
             Github: '',
-            LD:'',
-        }]
+            Linkedin:'',
+        }
 
         this.state ={
-            data: data,
+            ...data,
             currentStep: 1
         }
     }
@@ -31,103 +35,49 @@ class HelpForm extends React.Component{
         return true;
     }
 
-    handleChangeHandle(e) {
+    handlerChangeHandle(e) {
         this.setState({ Handle: e.target.value })
     }
 
-    handleChangeGithub(e) {
+    handlerChangeGithub(e) {
         this.setState({ Github: e.target.value })
     }
 
-    handleChangeLD(e) {
-        this.setState({ LD: e.target.value })
+    handlerChangeLinkedin(e) {
+        this.setState({ Linkedin: e.target.value })
     }
 
-    handleChangeContact(e) {
+    handlerChangeContact(e) {
         this.setState({ Contact: e.target.value })
     }
 
     handleSubmit(e) {
-
-        alert('A number was submitted: ' + this.state.Handle);
-
-        // let payload = {
-        //     "Contact":"",
-        //     "Handle":"",
-        //     "Github":"",
-        //     "IsTeacher":true,
-        //     "LD":'',
-        // }
-
-        // axios.post(backend+"connect/api/teacher/", payload)
-        //     .then(res => {
-        //     console.log(res);
-        //     console.log(res.data);
-        //   })
-
-        console.log(this.state.Handle)
-        console.log(this.state.Contact)
-        console.log(this.state.Github)
-        console.log(this.state.LD)
-
-
-        this.setState({
-            Contact:'',
-            Handle:'',
-            Github:'',
-            LD:'',
-        })
         e.preventDefault();
-
     }
 
-    handleNext = () => {
-        let currentStep = this.currentStep
-        currentStep = currentStep >= 1? 2: this.state.currentStep + 1
+    handlerNext = () => {
         this.setState({
-          currentStep: currentStep
+          currentStep: 2
         })
     }
 
-    handlePrev = () => {
-        let currentStep = this.currentStep
-        currentStep = currentStep <= 2? 1: this.state.currentStep - 1
+    handlerPrev = () => {
         this.setState({
-          currentStep: currentStep
+          currentStep: 1
         })
     }
 
-    previousButton() {
-      let currentStep = this.state.currentStep;
-      if(currentStep !==1){
-        return (
-            <button 
-                className="btn btn-secondary" 
-                onClick={this.handlePrev}
-                type="button"
-            >
-                Previous
-            </button>
-        )
-      }
-      return null;
+    handlerSubmit = (tags) => {
+        axios.post(backend+"connect/api/teacher/",{
+            Contact: this.state.Contact,
+            Gitname: this.state.Github,
+            LinkedIn: this.state.Linkedin,
+            skills: tags
+        }).then(this.props.handleSubmit())
     }
+
     
-    nextButton(){
-      let currentStep = this.state.currentStep;
-      if(currentStep <2){
-        return (
-            <button 
-                className="btn btn-primary"
-                onClick={this.handleNext}
-                type="button"
-            >
-                Next
-            </button>        
-        )
-      }
-        return null;
-    }
+
 
     render() {
         console.log(this.state.currentStep)
@@ -139,22 +89,23 @@ class HelpForm extends React.Component{
                     Contact={this.state.Contact}
                     Github={this.state.Github}
                     Handle={this.state.Handle}
-                    LD={this.state.LD}
+                    Linkedin={this.state.Linkedin}
                     currentStep={this.state.currentStep}
-                    onChange={e => {this.handleChangeHandle(e) ; this.handleChangeGithub(e);
-                        this.handleChangeLD(e); this.handleChangeContact(e) }}
+                    handleChangeContact={this.handlerChangeContact}
+                    handleChangeGithub={this.handlerChangeGithub}
+                    handleChangeHandle={this.handlerChangeHandle}
+                    handleChangeLinkedin={this.handlerChangeLinkedin}
+                    handleNext={this.handlerNext}
                 />
 
                 <Step2
                     currentStep={this.state.currentStep}
-                    onChange={e=> {this.handleSubmit(e)}}
+                    handlePrev={this.handlerPrev}
+                    handleSubmit={this.handlerSubmit}
+                    // onChange={e=> {this.handleSubmit(e)}}
                 />
 
                 <br />
-                
-                {this.previousButton()}
-
-                {this.nextButton()}
 
             </form>
         );

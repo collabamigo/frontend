@@ -8,16 +8,21 @@ import axios from "axios";
 class Autocomplete extends React.Component {
 
     static propTypes = {
-      onChange: PropTypes.func.isRequired,
-      onMatch:PropTypes.func.isRequired,
-  };
+        onChange: PropTypes.func.isRequired,
+        onMatch:PropTypes.func.isRequired,
+        version: PropTypes.number
 
+    };
+
+    static defaultProps={
+        version:1
+    }
     constructor (props) {
       super(props);
       this.state = {
           activeSuggestion: 0,
           suggestions: undefined,
-          showSuggestions: false,
+          showSuggestions: true,
           searchTerm: "",
           cacheId: 0,
       };
@@ -50,26 +55,48 @@ class Autocomplete extends React.Component {
               searchTerm: e.target.value,
           });
            this.props.onChange(e.target.value);
-            if (this.state.suggestions && this.state.suggestions[0].toLowerCase() === e.target.value.toLowerCase()){
-                this.props.onMatch(e.target.value);
-            }
-            else {
-                this.setState({
-                    showSuggestions: true
-                })
-            }
+           //  if (this.state.suggestions && this.state.suggestions[0].toLowerCase() === e.target.value.toLowerCase()){
+           //      this.props.onMatch(e.target.value);
+           //  }
+           //  else {
+           //      this.setState({
+           //          showSuggestions: true
+           //      })
+           //  }
       };
 
       handleClick = (e) => {
           this.setState({
               showSuggestions: false,
           });
-          this.handleChange({
-              target: {
-                  value: e.target.innerText
+          if (this.props.version === 1) {
+              this.setState({
+                  searchTerm: e.target.value
+              })
+          }
+          else {
+              this.setState({
+                  searchTerm: ""
+              })
+          }
+          this.props.onMatch(e.target.value);
+          // this.handleChange({
+          //     target: {
+          //         value: e.target.innerText
+          //     }
+          // })
+      };
+
+      handleKeyDown(e) {
+        if (e.key === 'Enter' || e.key === 'Tab') {
+          this.handleClick({
+              target : {
+                  value: this.state.suggestions[0]
               }
           })
-      };
+          e.preventDefault()
+        }
+      }
 
 
       render () {
@@ -124,6 +151,7 @@ class Autocomplete extends React.Component {
                       <input
                           className="col-sm-4 col-md-3"
                           onChange={this.handleChange.bind(this)}
+                          onKeyDown={this.handleKeyDown.bind(this)}
                           type="text"
                           value={this.state.searchTerm}
                       />
