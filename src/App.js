@@ -12,13 +12,12 @@ import {
 } from "react-router-dom";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import Footer from "./Components/Footer/Footer";
-import About from "./Components/AboutUs/AboutUs";
+import AboutUs from "./Components/AboutUs/AboutUs";
 import axios from "axios";
 import Profile from "./Components/Profile/Profile";
 import Card from "react-bootstrap/Card";
 import Connect from './Components/Connect/Connect'
 import DarkMode from "./Components/Collab/DarkMode/DarkMode";
-import AboutUs from "./Components/AboutUs/AboutUs";
 import ConnectionRequest from "./Components/ConnectionRequest/ConnectionRequest";
 // import Welcome from "./Components/Welcome/Welcome";
 
@@ -210,14 +209,6 @@ class App extends React.Component {
                             <Profile />
                         </ProtectedRoute>
 
-
-                        <ProtectedRoute
-                            exact
-                            path="/aboutus"
-                        >
-                            <AboutUs />
-                        </ProtectedRoute>
-
                         <ProtectedRoute
                             exact
                             path="/collab_connect"
@@ -229,7 +220,7 @@ class App extends React.Component {
                             exact
                             path="/about"
                         >
-                            <About />
+                            <AboutUs />
                         </Route>
 
                         <Route

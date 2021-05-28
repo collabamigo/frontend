@@ -1,6 +1,6 @@
 
 import React from 'react'
-import {Button, Form} from "react-bootstrap";
+// import {Button, Form} from "react-bootstrap";
 import axios from "axios";
 import backend from "../../env";
 
@@ -13,6 +13,7 @@ class ConnectionRequest extends React.Component{
         super(props);
         this.state={
             checked:false,
+            class_change:"badge badge-warning"
         }
     }
 
@@ -22,11 +23,16 @@ class ConnectionRequest extends React.Component{
     
     handleCheckboxChange = (e) => {
         this.setState({checked: e.target.checked})
+        if (this.state.checked === true) {
+            this.setState({class_change:"badge badge-warning"})
+        }
+        else{
+            this.setState({class_change:"badge badge-success"})
+        }
     }
 
     handleSubmit = (e) => {
         const query = useQuery()
-
         axios.post(backend+"connect/approve/", {
             request_id: query.get("request_id"),
             mobile: this.state.checked?1:0})
@@ -42,28 +48,63 @@ class ConnectionRequest extends React.Component{
     render(){
         return(   
             <div>
+                <p>
+                    <h4>
+                        Eager to work with your next peers ?
+                        <br />
+                        Feel free to increase connectivity with your peers
+                    </h4>
 
-                <Form>
-                    <Form.Group controlId="formBasicCheckbox">
-                        <label>
-                            Share my mobile also
-                        </label>
+                    Data we are sharing:
+                    <br />
 
-                        <Form.Check
+                    <span className="badge badge-success col-auto">
+                        Social Handle
+                    </span>
+
+                    <span className="badge badge-success col-auto">
+                        Github Username
+                    </span>
+
+                    <span className="badge badge-success col-auto">
+                        Email Address
+                    </span>
+
+                    <span className={this.state.class_change}>
+                        Contact Number
+                    </span>
+
+                </p>
+
+                <form>
+                    <div className="form-check">
+                        <input
+                            className="form-check-input"
                             onChange={this.handleCheckboxChange}
                             type="checkbox"
                             value={this.state.checked}
                         />
-                    </Form.Group>
 
-                    <Button
-                        onClick={this.handleSubmit.bind(this)}
-                        type="submit"
-                        variant="primary"
-                    >
-                        Accept request
-                    </Button>
-                </Form>
+                        <label
+                            className="form-check-label"
+                            htmlFor="exampleCheck1"
+                        >
+                            Check me out
+                        </label>
+
+                        <br />
+
+                        <br />
+
+                        <button
+                            className="btn btn-primary"
+                            onClick={this.handleSubmit.bind(this)}
+                            type="submit"
+                        >
+                            Accept request
+                        </button>
+                    </div>
+                </form>
             </div>
             
         )

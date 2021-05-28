@@ -1,6 +1,7 @@
 
 import React from "react"
 import PropTypes from "prop-types";
+import Autocomplete from "../../../Ask/Autocomplete";
 
 class Step2 extends React.Component {
 
@@ -8,12 +9,29 @@ class Step2 extends React.Component {
             currentStep:PropTypes.number.isRequired
         };
 
+    constructor(props) {
+        super(props);
+        this.state={
+            "searchTerm": "",
+            "found_match": false,
+            "temp_l": [],
+        }
+    }
     shouldComponentUpdate() {
         return true;
     }
 
+    handleChange = (value) => {
+        this.setState({"searchTerm": value});
+    }
+
+    handleMatch = () => {
+        this.setState({"found_match": true});
+    }
+
     render() {
         if (this.props.currentStep !== 2) {
+            console.log(this.state.found_match)
             return null
         }
         return (
@@ -22,10 +40,12 @@ class Step2 extends React.Component {
                     Add your skills
                 </label>
 
-                <div>
-                    <input
-                        data-role="tagsinput"
-                        type="text"
+                <div className="center">
+                    <Autocomplete
+                        onChange={this.handleChange}
+                        onMatch={this.handleMatch}
+                        searchTerm={this.state.searchTerm}
+                        suggestions={this.state.temp_l}
                     />
                 </div>
 
