@@ -25,14 +25,16 @@ class ConnectionRequest extends React.Component{
     }
 
     handleSubmit = (e) => {
-        console.log('calll')
         const query = useQuery()
 
         axios.post(backend+"connect/approve/", {
             request_id: query.get("request_id"),
             mobile: this.state.checked?1:0})
             .then(res => {
-            console.log(res);
+                if (res.status === 208)
+                    alert("You have already approved this connection request")
+                else if (res.status === 200)
+                    alert("Request successfully approved")
           })
         e.preventDefault()
     }
