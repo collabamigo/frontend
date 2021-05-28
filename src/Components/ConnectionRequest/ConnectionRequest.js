@@ -4,31 +4,32 @@ import {Button, Form} from "react-bootstrap";
 import axios from "axios";
 import backend from "../../env";
 
+function useQuery() {
+  return new URLSearchParams(window.location.search);
+}
 class ConnectionRequest extends React.Component{
 
     constructor(props) {
         super(props);
         this.state={
             checked:false,
-            request_id:''
         }
     }
 
     shouldComponentUpdate() {
         return true
     }
-
-    handleURLSearch(){
-        return new URLSearchParams(window.location.search);
-    }
     
     handleCheckboxChange = (e) => {
         this.setState({checked: e.target.checked})
     }
 
-    handleSubmit = ()=> {
-        this.setState({request_id: this.handleURLSearch})
-        axios.post(backend+"/connection/request/", this.state.request_id)
+    handleSubmit = () => {
+        const query = useQuery()
+
+        axios.post(backend+"/connection/request/", {
+            request_id: query.get("request_id"),
+            mobile: this.state.checked?1:0})
             .then(res => {
             console.log(res);
           })
