@@ -16,9 +16,7 @@ class Ask extends React.Component {
             "searchTerm": "",
             "temp_l": [],
             "found_match": false,
-            // "dataList": undefined,
             "tempList": [{}],
-            // "pageData":0,
         }
 
     }
@@ -50,9 +48,7 @@ class Ask extends React.Component {
         }
           })
             .then((res) => {
-                // this.setState({"dataList": res.data})
                 axios.get(backend+"connect/teachersdata/",{
-                    // format: "json",
                      params:{
                          id_list: JSON.stringify(res.data)
                      }
