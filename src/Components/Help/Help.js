@@ -23,7 +23,6 @@ class Ask extends React.Component {
             }
         })
             .then((res) => {
-                console.log(res.data)
                 this.setState ( {teacher: Boolean(res.data.length)})
             })
     }
