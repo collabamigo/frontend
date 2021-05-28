@@ -2,6 +2,8 @@
 import React from "react"
 import PropTypes from "prop-types";
 import Autocomplete from "../../../Ask/Autocomplete";
+import TagsInput from 'react-tagsinput'
+import './tag.css'
 
 class Step2 extends React.Component {
 
@@ -15,6 +17,7 @@ class Step2 extends React.Component {
             "searchTerm": "",
             "found_match": false,
             "temp_l": [],
+            "tags": [],
         }
     }
     shouldComponentUpdate() {
@@ -27,6 +30,10 @@ class Step2 extends React.Component {
 
     handleMatch = () => {
         this.setState({"found_match": true});
+    }
+
+    handleChangeTag(tags) {
+        this.setState({"tags": tags})
     }
 
     render() {
@@ -46,6 +53,11 @@ class Step2 extends React.Component {
                         onMatch={this.handleMatch}
                         searchTerm={this.state.searchTerm}
                         suggestions={this.state.temp_l}
+                    />
+
+                    <TagsInput 
+                        onChange={this.handleChangeTag.bind(this)}
+                        value={this.state.tags}
                     />
                 </div>
 

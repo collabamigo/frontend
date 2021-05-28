@@ -42,7 +42,7 @@ class Ask extends React.Component {
     }
 
     getTeacherIds = (searchTerm) => {
-        axios.get(backend+"connect/teacheridfor/"+ searchTerm ,{
+        axios.get(backend+"connect/api/skill/"+ searchTerm ,{
         params: {
             format: "json",
         }
@@ -50,7 +50,7 @@ class Ask extends React.Component {
             .then((res) => {
                 axios.get(backend+"connect/teachersdata/",{
                      params:{
-                         id_list: JSON.stringify(res.data)
+                         id_list: JSON.stringify(res.data["Teacher_set"])
                      }
                 })
                     .then((response) => this.setState({"tempList": response.data}))
