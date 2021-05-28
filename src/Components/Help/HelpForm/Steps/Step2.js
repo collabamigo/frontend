@@ -24,7 +24,7 @@ class Step2 extends React.Component {
         return true;
     }
 
-    handleChange = (value) => {
+    handleChange(value) {
         this.setState({"searchTerm": value});
     }
 
@@ -34,6 +34,21 @@ class Step2 extends React.Component {
 
     handleChangeTag(tags) {
         this.setState({"tags": tags})
+    }
+
+    renderAutocomplete({addTag, ...props}) {
+        console.log(props)
+        return (
+            <Autocomplete
+                onChange={(val) => this.handleChange(val)}
+                onMatch={(val) => {
+                    this.handleMatch.bind(this)
+                    addTag(val)
+                }}
+                searchTerm={this.state.searchTerm}
+                suggestions={this.state.temp_l}
+            />
+        )
     }
 
     render() {
@@ -48,15 +63,11 @@ class Step2 extends React.Component {
                 </label>
 
                 <div className="center">
-                    <Autocomplete
-                        onChange={this.handleChange}
-                        onMatch={this.handleMatch}
-                        searchTerm={this.state.searchTerm}
-                        suggestions={this.state.temp_l}
-                    />
+
 
                     <TagsInput 
                         onChange={this.handleChangeTag.bind(this)}
+                        renderInput={this.renderAutocomplete.bind(this)}
                         value={this.state.tags}
                     />
                 </div>
