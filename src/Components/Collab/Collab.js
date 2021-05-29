@@ -21,7 +21,7 @@ function Collab (props) {
                     {/* eslint-disable-next-line react/jsx-no-undef */}
 
                     <a
-                        className="text-body display-4"
+                        className="display-4 link-collab"
                         href="/"
                     >
                         {props.title}

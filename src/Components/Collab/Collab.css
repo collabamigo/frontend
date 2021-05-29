@@ -12,10 +12,10 @@
     padding-top: 10px;
 }
 
-.link {
+.link-collab {
   color:rgb(128, 128, 128);
 }
-.link:hover {
+.link-collab:hover {
    color: rgb(170, 170, 170);
-   text-decoration: none;
+   text-decoration: none!important;
 }
