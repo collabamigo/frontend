@@ -1,8 +1,11 @@
 import React from "react";
 import Chart from "react-google-charts";
+import PropTypes from "prop-types";
 
 class DashBoard extends React.Component {
-
+    static propTypes = {
+        skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }
     shouldComponentUpdate () {
         return false;
     }
@@ -23,15 +26,10 @@ class DashBoard extends React.Component {
                     <Chart
                         chartType="PieChart"
                         data={[
-                        ['Work', 'Percentage covered'],
-                        ['Java', 13],
-                        ['Python', 83],
-                        ['SVM', 1.4],
-                        ['ML', 23],
-                        ['KNN', 46],
-                        ['Open Cv', 300],
-                        ['Git', 38],
-                        ['C++', 5.5],
+                        ["hello", 'Percentage covered'],
+                        [this.props.skills[1], 53],
+                        [this.props.skills[2], 83],
+                        [this.props.skills[0], 20],
                       ]}
                         height='500px'
                         loader={
