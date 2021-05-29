@@ -84,3 +84,5 @@ body {
   color: var(--text-color-jumbotron);
   background-color: var(--background-color-jumbotron) !important;
 }
+
+/* Adding Bootstrap values */

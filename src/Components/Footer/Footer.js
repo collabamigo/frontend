@@ -11,14 +11,16 @@ class Footer extends React.Component {
 
     render() {
         return (
+            <section>
 
-            <div className="footer">
-                This will always appear at the bottom of the page, but
-                <strong>
-                    not fixed
-                </strong>
-                .
-            </div>
+                <div className="footer">
+                    This will always appear at the bottom of the page, but
+                    <strong>
+                        not fixed
+                    </strong>
+                    .
+                </div>
+            </section>
 
         )
     }
