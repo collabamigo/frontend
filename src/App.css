@@ -77,6 +77,16 @@ body {
 }
 
 .card-header{
+  background: none!important;
+
+}
+
+.card-footer{
+  background: none!important;
+  border-top: none;
+}
+
+.card-header{
   color: var(--text-color);
 }
 

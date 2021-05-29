@@ -98,6 +98,37 @@ class App extends React.Component {
                                     <div className="container">
                                         <div className="row">
                                             <div className="col-lg-4 mb-4">
+                                                <Card className="card_main help_card_main text-secondary">
+                                                    <img
+                                                        alt=""
+                                                        className="card-img-top"
+                                                        src="https://images.unsplash.com/photo-1495653797063-114787b77b23?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+                                                    />
+
+                                                    <Card.Body>
+                                                        <Card.Title className="card-header font-weight-bold">
+                                                            HELP OTHERS
+                                                        </Card.Title>
+
+                                                        <br />
+
+                                                        <Card.Text>
+                                                            Solve other&apos;s doubts and be the mentor you always wanted.
+                                                            Using our platform you can reach a larger curious community.
+                                                        </Card.Text>
+
+                                                        <Link
+                                                            className="col-auto btn btn-primary"
+                                                            to="/help"
+                                                        >
+                                                            Help others
+                                                        </Link>
+
+                                                    </Card.Body>
+                                                </Card>
+                                            </div>
+
+                                            <div className="col-lg-4 mb-4">
                                                 <Card className="card_main card ask_card_main text-secondary">
                                                     <img
                                                         alt="noobmaster"
@@ -106,15 +137,25 @@ class App extends React.Component {
                                                     />
 
                                                     <Card.Body className="card-body">
-                                                        <Card.Title className="font-weight-bold">
-                                                            Ask for help
+                                                        <Card.Title className="card-header font-weight-bold">
+                                                            ASK FOR HELP
                                                         </Card.Title>
 
                                                         <br />
 
                                                         <Card.Text>
-                                                            This is ask for help. If you have doubts they will be solved.
+                                                            <b>
+                                                                Stack Overflow:404!
+                                                            </b>
+
+                                                            {" "}
+                                                            Answer not found,
+
+                                                            <br />
+                                                            The button below can solve it
                                                         </Card.Text>
+
+                                                        <br />
 
                                                         <Link
                                                             className="col-auto btn btn-primary"
@@ -127,38 +168,6 @@ class App extends React.Component {
                                             </div>
 
                                             <div className="col-lg-4 mb-4">
-                                                <Card className="card_main help_card_main text-secondary">
-                                                    <img
-                                                        alt=""
-                                                        className="card-img-top"
-                                                        src="https://images.unsplash.com/photo-1495653797063-114787b77b23?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-                                                    />
-
-                                                    <Card.Body>
-                                                        <Card.Title className="card-header font-weight-bold">
-                                                            Help others
-                                                        </Card.Title>
-                                                        
-                                                        <br />
-                                                        
-                                                        <Card.Text>
-                                                            This is Help others.
-                                                            If you have doubts they will be solved.
-                                                            Aditya Will help us place ourselves in this grid , cause I am lazy
-                                                        </Card.Text>
-
-                                                        <Link
-                                                            className="btn btn-outline-success btn-sm"
-                                                            to="/help"
-                                                        >
-                                                            Help others
-                                                        </Link>
-
-                                                    </Card.Body>
-                                                </Card>
-                                            </div>
-
-                                            <div className="col-lg-4 mb-4">
                                                 <Card className="card_main cc_main text-secondary">
                                                     <img
                                                         alt=""
@@ -166,17 +175,21 @@ class App extends React.Component {
                                                         src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
                                                     />
 
-                                                    <Card.Body>
+                                                    <Card.Body className="card-body">
                                                         <Card.Title className="card-header font-weight-bold">
-                                                            Lets collaborate
+                                                            LET&apos;S  COLLABORATE
                                                         </Card.Title>
 
-                                                        <Card.Text>
-                                                            This is Help others. If you have doubts they will be solved. Aditya Will help us place ourselves in this grid , cause I am lazy
+                                                        <br />
+
+                                                        <Card.Text className="card-text">
+                                                            Find new projects to work.
+                                                            Apply for teams and Collaborations.
+                                                            Lets keep the learning and helping community alive.
                                                         </Card.Text>
 
                                                         <Link
-                                                            className="btn btn-outline-success btn-sm"
+                                                            className="col-auto btn btn-primary"
                                                             to="/collab_connect"
                                                         >
                                                             Lets Collaborate
