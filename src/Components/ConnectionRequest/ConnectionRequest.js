@@ -73,12 +73,27 @@ class ConnectionRequest extends React.Component{
                             Social Handle
                         </span>
 
+                        <span>
+                             &nbsp;
+                             &nbsp;
+                        </span>
+
                         <span className="badge badge-success col-auto">
                             Github Username
                         </span>
 
+                        <span>
+                             &nbsp;
+                             &nbsp;
+                        </span>
+
                         <span className="badge badge-success col-auto">
                             Email Address
+                        </span>
+
+                        <span>
+                             &nbsp;
+                             &nbsp;
                         </span>
 
                         <span className={this.state.class_change}>

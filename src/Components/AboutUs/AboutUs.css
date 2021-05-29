@@ -1,80 +1,68 @@
-.body{
-  background: #3399ff;
+.body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
 }
 
-
-.circle{
-  position: absolute;
-  border-radius: 50%;
-  background: white;
-  animation: ripple 15s infinite;
-  box-shadow: 0px 0px 1px 0px #508fb9;
+html {
+  box-sizing: border-box;
 }
 
-.small{
-  width: 200px;
-  height: 200px;
-  left: -100px;
-  bottom: -100px;
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
-.medium{
-  width: 400px;
-  height: 400px;
-  left: -200px;
-  bottom: -200px;
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
 }
 
-.large{
-  width: 600px;
-  height: 600px;
-  left: -300px;
-  bottom: -300px;
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
 }
 
-.xlarge{
-  width: 800px;
-  height: 800px;
-  left: -400px;
-  bottom: -400px;
+.about-section {
+  padding: 50px;
+  text-align: center;
+  background-color: #474e5d;
+  color: white;
 }
 
-.xxlarge{
-  width: 1000px;
-  height: 1000px;
-  left: -500px;
-  bottom: -500px;
+.container {
+  padding: 0 16px;
 }
 
-.shade1{
-  opacity: 0.2;
-}
-.shade2{
-  opacity: 0.5;
-}
-
-.shade3{
-  opacity: 0.7;
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
-.shade4{
-  opacity: 0.8;
+.title {
+  color: grey;
 }
 
-.shade5{
-  opacity: 0.9;
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
 }
 
-@keyframes ripple{
-  0%{
-    transform: scale(0.8);
-  }
+.button:hover {
+  background-color: #555;
+}
 
-  50%{
-    transform: scale(1.2);
-  }
-
-  100%{
-    transform: scale(0.8);
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
   }
 }

@@ -24,7 +24,7 @@ import ConnectionRequest from "./Components/ConnectionRequest/ConnectionRequest"
 
 // eslint-disable-next-line react/require-optimization
 class App extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         axios.interceptors.request.use(function (config) {
             config.headers['aeskey'] = localStorage.getItem('aes_key')
@@ -32,9 +32,9 @@ class App extends React.Component {
             config.headers['token'] = localStorage.getItem('encrypted_token')
             console.log(config)
             return config;
-          }, function (error) {
+        }, function (error) {
             return Promise.reject(error);
-          });
+        });
 
         this.state = {
             "signedIn": false,
@@ -54,7 +54,7 @@ class App extends React.Component {
         });
     }
 
-    render () {
+    render() {
         return (
             <div className="App">
                 <Router>
@@ -93,7 +93,7 @@ class App extends React.Component {
 
                             {/*<Welcome visibility={this.state.signedIn} />*/}
 
-                            {this.state.signedIn?
+                            {this.state.signedIn ?
                                 <>
                                     <div className="row">
                                         <div className="col-auto" />
