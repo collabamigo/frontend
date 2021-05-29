@@ -20,9 +20,9 @@ class HelpForm extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this);
         const data = {
             Handle:'',
-            Contact:'',
-            Github: '',
-            Linkedin:'',
+            Contact:undefined,
+            Github: undefined,
+            Linkedin:undefined,
         }
 
         this.state ={

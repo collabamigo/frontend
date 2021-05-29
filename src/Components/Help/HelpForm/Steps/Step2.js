@@ -16,10 +16,10 @@ class Step2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            "searchTerm": "",
-            "found_match": false,
-            "temp_l": [],
-            "tags": [],
+            searchTerm: "",
+            found_match: false,
+            temp_l: [],
+            tags: [],
         }
     }
 
@@ -35,9 +35,9 @@ class Step2 extends React.Component {
         this.setState({"found_match": true});
     }
 
-    // handleChangeTag(tags) {
-    //     this.setState({"tags": tags})
-    // }
+    handleChangeTag(tags) {
+        this.setState({tags: tags})
+    }
 
     renderAutocomplete({addTag, ...props}) {
         console.log(props)
@@ -47,9 +47,6 @@ class Step2 extends React.Component {
                 onMatch={(val) => {
                     this.handleMatch.bind(this)
                     if (!this.state.tags.includes(val)) {
-                        this.setState((state) => ({
-                            tags: state.tags.concat([val])
-                        }))
                         addTag(val)
                     }
                 }}
@@ -58,9 +55,6 @@ class Step2 extends React.Component {
                 version={2}
             />
         )
-    }
-    handleChangeTag() {
-
     }
     handleSubmit() {
         this.props.handleSubmit(this.state.tags)
