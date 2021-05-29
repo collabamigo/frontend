@@ -21,7 +21,6 @@ class Ask extends React.Component {
 
     }
 
-
     // Noinspection JSCheckFunctionSignatures
     shouldComponentUpdate () {
         return true;
@@ -36,7 +35,7 @@ class Ask extends React.Component {
     }
 
     handleChange = (value) => {
-        this.setState({"searchTerm": value});
+        this.setState({"searchTerm": value, "found_match":false});
     }
 
     getTeacherIds = (searchTerm) => {
