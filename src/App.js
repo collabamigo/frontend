@@ -94,28 +94,30 @@ class App extends React.Component {
                             {/*<Welcome visibility={this.state.signedIn} />*/}
 
                             {this.state.signedIn ?
-                                <section id="gallery">
+                                <section>
                                     <div className="container">
                                         <div className="row">
                                             <div className="col-lg-4 mb-4">
-                                                <Card className="card">
+                                                <Card className="card_main card ask_card_main text-secondary">
                                                     <img
-                                                        alt=""
+                                                        alt="noobmaster"
                                                         className="card-img-top"
                                                         src="https://images.unsplash.com/photo-1534551767192-78b8dd45b51b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
                                                     />
 
                                                     <Card.Body className="card-body">
-                                                        <h5 className="card-title">
+                                                        <Card.Title className="font-weight-bold">
                                                             Ask for help
-                                                        </h5>
+                                                        </Card.Title>
 
-                                                        <p className="card-text">
+                                                        <br />
+
+                                                        <Card.Text>
                                                             This is ask for help. If you have doubts they will be solved.
-                                                        </p>
+                                                        </Card.Text>
 
                                                         <Link
-                                                            className="btn btn-outline-success btn-sm"
+                                                            className="col-auto btn btn-primary"
                                                             to="/ask"
                                                         >
                                                             Ask for help
@@ -125,22 +127,25 @@ class App extends React.Component {
                                             </div>
 
                                             <div className="col-lg-4 mb-4">
-                                                <Card className="card">
+                                                <Card className="card_main help_card_main text-secondary">
                                                     <img
                                                         alt=""
                                                         className="card-img-top"
                                                         src="https://images.unsplash.com/photo-1495653797063-114787b77b23?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
                                                     />
 
-                                                    <div className="card-body">
-                                                        <h5 className="card-title">
+                                                    <Card.Body>
+                                                        <Card.Title className="card-header font-weight-bold">
                                                             Help others
-                                                        </h5>
-
-                                                        <p className="card-text">
-                                                            It is a place where you can find new projects to work upon and gain new experience. One can also apply for helping a team by being a part of it or on interim basis depending on the team. Lets keep the learning and helping community alive.
-
-                                                        </p>
+                                                        </Card.Title>
+                                                        
+                                                        <br />
+                                                        
+                                                        <Card.Text>
+                                                            This is Help others.
+                                                            If you have doubts they will be solved.
+                                                            Aditya Will help us place ourselves in this grid , cause I am lazy
+                                                        </Card.Text>
 
                                                         <Link
                                                             className="btn btn-outline-success btn-sm"
@@ -149,26 +154,26 @@ class App extends React.Component {
                                                             Help others
                                                         </Link>
 
-                                                    </div>
+                                                    </Card.Body>
                                                 </Card>
                                             </div>
 
                                             <div className="col-lg-4 mb-4">
-                                                <Card className="card">
+                                                <Card className="card_main cc_main text-secondary">
                                                     <img
                                                         alt=""
                                                         className="card-img-top"
                                                         src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
                                                     />
 
-                                                    <div className="card-body">
-                                                        <h5 className="card-title">
+                                                    <Card.Body>
+                                                        <Card.Title className="card-header font-weight-bold">
                                                             Lets collaborate
-                                                        </h5>
+                                                        </Card.Title>
 
-                                                        <p className="card-text">
+                                                        <Card.Text>
                                                             This is Help others. If you have doubts they will be solved. Aditya Will help us place ourselves in this grid , cause I am lazy
-                                                        </p>
+                                                        </Card.Text>
 
                                                         <Link
                                                             className="btn btn-outline-success btn-sm"
@@ -177,7 +182,7 @@ class App extends React.Component {
                                                             Lets Collaborate
                                                         </Link>
 
-                                                    </div>
+                                                    </Card.Body>
                                                 </Card>
                                             </div>
                                         </div>
