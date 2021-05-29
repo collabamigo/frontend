@@ -12,13 +12,25 @@ class Footer extends React.Component {
     render() {
         return (
             <section>
-
                 <div className="footer">
-                    This will always appear at the bottom of the page, but
-                    <strong>
-                        not fixed
-                    </strong>
-                    .
+                    <span className="material-icons link-footer">
+                        copyright
+                        {" "}
+                    </span>
+
+                    <b className="link-footer">
+                        2021
+                        {" "}
+
+                        <a
+                            className="link-footer"
+                            href="https://github.com/watson-hex"
+                            rel="noreferrer"
+                            target="_blank"
+                        >
+                            Watson-Hex
+                        </a>
+                    </b>
                 </div>
             </section>
 

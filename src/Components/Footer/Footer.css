@@ -44,3 +44,10 @@
    text-align: center;
  }
 
+.link-footer {
+  color: #6c757d;
+}
+
+.link-footer:hover {
+    color: #6c757d;
+}
