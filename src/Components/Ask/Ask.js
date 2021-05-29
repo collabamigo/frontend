@@ -144,6 +144,7 @@ class Ask extends React.Component {
                                       batch={item.course}
                                       description="My Tech Stack is "
                                       insta={"https://www.instagram.com/"+ item.Handle}
+                                      key_value={item.id}
                                       name={item.First_Name + " " + item.Last_Name}
                                   />
                               </div>

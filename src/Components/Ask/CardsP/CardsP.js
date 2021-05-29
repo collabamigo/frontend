@@ -32,7 +32,7 @@ function CardsP (props) {
                     <div>
                         <button
                             className="btn btn-primary"
-                            id="UncontrolledPopover"
+                            id={"UncontrolledPopover" + props.key_value}
                             onClick={() => setMessage("")}
                             type="button"
                         >
@@ -41,7 +41,7 @@ function CardsP (props) {
 
                         <UncontrolledPopover
                             placement="bottom"
-                            target="UncontrolledPopover"
+                            target={"UncontrolledPopover" + props.key_value}
                             trigger="legacy"
                         >
                             <PopoverHeader>
@@ -131,7 +131,9 @@ CardsP.propTypes = {
     batch:PropTypes.string.isRequired,
     description:PropTypes.string.isRequired,
     insta:PropTypes.string.isRequired,
+    key_value: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+
 }
 
 export default CardsP;
