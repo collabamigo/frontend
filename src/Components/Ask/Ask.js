@@ -27,15 +27,15 @@ class Ask extends React.Component {
     }
 
     handleMatch = (searchTerm) => {
+        this.setState({
+            searchTerm: searchTerm
+        })
         this.getTeacherIds(searchTerm)
+
     }
 
     handleGetNext = () => {
 
-    }
-
-    handleChange = (value) => {
-        this.setState({"searchTerm": value, "found_match":false});
     }
 
     getTeacherIds = (searchTerm) => {
@@ -83,6 +83,7 @@ class Ask extends React.Component {
                                     insta={"https://www.instagram.com/"+ item.Handle}
                                     key_value={item.id}
                                     name={item.First_Name + " " + item.Last_Name}
+                                    skills={[this.state.searchTerm]}
                                 />
                             </div>
                           ))}
@@ -113,7 +114,6 @@ class Ask extends React.Component {
                           <Autocomplete
                               onChange={this.handleChange}
                               onMatch={this.handleMatch}
-                              searchTerm={this.state.searchTerm}
                               suggestions={this.state.temp_l}
                           />
                       </div>

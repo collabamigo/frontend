@@ -4,15 +4,15 @@ import Card from "react-bootstrap/Card";
 import "./CardsP.css";
 import PropTypes from "prop-types";
 import { UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
-// import backend from "../../../env";
+import backend from "../../../env";
+import axios from "axios";
 
-function handleSubmit(e, message, teacher_id){
-    console.log(e,message, teacher_id)
-    // axios.post(backend+"connect/request/", {
-    //     id: teacher_id,
-    //     message: message,
-    //     skills:
-    // })
+function handleSubmit(e, message, teacher_id, skills){
+    axios.post(backend+"connect/request/", {
+        id: teacher_id,
+        message: message,
+        skills: skills
+    })
 
     e.preventDefault()
 }
@@ -55,7 +55,7 @@ function CardsP (props) {
                             </PopoverHeader>
 
                             <PopoverBody>
-                                <form onSubmit={(e) => handleSubmit(e, message)}>
+                                <div>
                                     <label>
                                         To : @
                                         {''}
@@ -73,12 +73,12 @@ function CardsP (props) {
 
                                     <button
                                         className="btn btn-primary"
-                                        onClick={(e) => handleSubmit(e, message, props.key_value)}
+                                        onClick={(e) => handleSubmit(e, message, props.key_value, props.skills)}
                                         type="button"
                                     >
                                         Send
                                     </button>
-                                </form>
+                                </div>
 
                             </PopoverBody>
                         </UncontrolledPopover>
@@ -139,6 +139,7 @@ CardsP.propTypes = {
     insta:PropTypes.string.isRequired,
     key_value: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    skills: PropTypes.array.isRequired,
 
 }
 
