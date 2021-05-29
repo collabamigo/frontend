@@ -12,7 +12,17 @@ function handleSubmit(e, message, teacher_id, skills){
         id: teacher_id,
         message: message,
         skills: skills
+    }).then(()=> {
+        alert("Your connection request has been sent")
     })
+        .catch((err) => {
+            if (err.response.status == 429) // THROTTLED
+                alert("You have submitted too many requests in the past 24 hours. Please wait before submitting more.")
+            else if (err.response.status == 403) // Previous unaccepted request logged
+                alert("You have already sent a similar request to the same person")
+            else
+                alert("Unexpected error occured. Please contact us if you see this message repeatedly.")
+        })
 
     e.preventDefault()
 }
