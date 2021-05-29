@@ -1,10 +1,18 @@
 
-import React from "react";
+import React, {useState} from "react";
 import Card from "react-bootstrap/Card";
 import "./CardsP.css";
 import PropTypes from "prop-types";
+import { UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
+
+function handleSubmit(e, message){
+    console.log(e,message)
+
+    e.preventDefault()
+}
 
 function CardsP (props) {
+    const [message, setMessage] = useState("");
     return (
         <div className="float-right">
             <Card className="card_main" >
@@ -20,6 +28,55 @@ function CardsP (props) {
                     <Card.Text>
                         {props.description}
                     </Card.Text>
+
+                    <div>
+                        <button
+                            className="btn btn-primary"
+                            id="UncontrolledPopover"
+                            onClick={() => setMessage("")}
+                            type="button"
+                        >
+                            Connect
+                        </button>
+
+                        <UncontrolledPopover
+                            placement="bottom"
+                            target="UncontrolledPopover"
+                            trigger="legacy"
+                        >
+                            <PopoverHeader>
+                                Popover Title
+                            </PopoverHeader>
+
+                            <PopoverBody>
+                                <form onSubmit={(e) => handleSubmit(e, message)}>
+                                    <label>
+                                        To : @
+                                        {''}
+
+                                        {props.name}
+                                    </label>
+
+                                    <input
+                                        className="form-control"
+                                        onChange={(e) => setMessage(e.target.value)}
+                                        placeholder="Enter message"
+                                        type="text-area"
+                                        value={message}
+                                    />
+
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={(e) => handleSubmit(e, message)}
+                                        type="button"
+                                    >
+                                        Send
+                                    </button>
+                                </form>
+
+                            </PopoverBody>
+                        </UncontrolledPopover>
+                    </div>
 
                     <Card.Link href={props.insta}>
                         <svg
