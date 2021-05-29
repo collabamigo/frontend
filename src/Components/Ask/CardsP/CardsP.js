@@ -139,7 +139,7 @@ CardsP.propTypes = {
     insta:PropTypes.string.isRequired,
     key_value: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    skills: PropTypes.array.isRequired,
+    skills: PropTypes.arrayOf(PropTypes.string).isRequired,
 
 }
 
