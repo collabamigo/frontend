@@ -99,10 +99,12 @@ class Ask extends React.Component {
                                 key={item.id}
                             >
                                 <CardsP
-                                    batch={item.course}
+                                    Git={item.Gitname}
+                                    batch={item.degree + ", " + item.course}
                                     description="My Tech Stack is "
-                                    insta={"https://www.instagram.com/"+ item.Handle}
+                                    // insta={"https://www.instagram.com/"+ item.Handle}
                                     key_value={item.id}
+                                    linked={item.Linkedin}
                                     name={item.First_Name + " " + item.Last_Name}
                                     skills={[this.state.searchTerm]}
                                 />
