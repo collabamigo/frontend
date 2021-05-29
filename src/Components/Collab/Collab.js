@@ -12,8 +12,7 @@ function Collab(props) {
 
     return (
         <div
-            className={props.className}
-            id="header"
+            className={props.className+ " header"}
         >
             <div className="row">
                 <div className="col-3" />
