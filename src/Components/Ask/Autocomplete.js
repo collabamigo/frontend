@@ -55,14 +55,6 @@ class Autocomplete extends React.Component {
               searchTerm: e.target.value,
           });
            this.props.onChange(e.target.value);
-           //  if (this.state.suggestions && this.state.suggestions[0].toLowerCase() === e.target.value.toLowerCase()){
-           //      this.props.onMatch(e.target.value);
-           //  }
-           //  else {
-           //      this.setState({
-           //          showSuggestions: true
-           //      })
-           //  }
       };
 
       handleClick = (e) => {
@@ -80,11 +72,6 @@ class Autocomplete extends React.Component {
               })
           }
           this.props.onMatch(e.target.innerText);
-          // this.handleChange({
-          //     target: {
-          //         value: e.target.innerText
-          //     }
-          // })
       };
 
       handleKeyDown(e) {

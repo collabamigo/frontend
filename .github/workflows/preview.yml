@@ -23,11 +23,11 @@ jobs:
           FIREBASE_CLI_PREVIEWS: hostingchannels
   Create-issues-using-TODO:
     runs-on: self-hosted
-    needs: build_and_deploy
     steps:
       - uses: actions/checkout@v2
         with:
             fetch-depth: 2
+
       - name: Github login
         run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
 
