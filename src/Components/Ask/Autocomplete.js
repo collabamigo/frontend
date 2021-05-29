@@ -75,11 +75,12 @@ class Autocomplete extends React.Component {
 
       handleKeyDown(e) {
         if (e.key === 'Enter' || e.key === 'Tab') {
-          this.handleClick({
-              target : {
-                  innerText: this.state.suggestions[0]
-              }
-          })
+            if (this.state.suggestions !== undefined)
+                  this.handleClick({
+                      target : {
+                          innerText: this.state.suggestions[0]
+                      }
+                  })
           e.preventDefault()
         }
       }
