@@ -4,10 +4,9 @@ import Chart from "react-google-charts";
 class DashBoard extends React.Component {
 
     shouldComponentUpdate () {
-
         return false;
-
     }
+
 
     render () {
         return (
