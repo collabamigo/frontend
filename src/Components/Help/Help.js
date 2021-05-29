@@ -7,36 +7,37 @@ import HelpForm from "./HelpForm/HelpForm";
 
 // eslint-disable-next-line react/require-optimization
 class Ask extends React.Component {
-    
-    constructor (props) {
+
+    constructor(props) {
         super(props);
         this.state = {
-            "teacher" : ""
+            "teacher": ""
         };
     }
 
 
-
     componentDidMount() {
-        axios.get(backend+"connect/api/teacher/", {
-            params:{
-                format:"json",
+        axios.get(backend + "connect/api/teacher/", {
+            params: {
+                format: "json",
             }
         })
             .then((res) => {
-                this.setState ( {teacher: Boolean(res.data.length)})
+                this.setState({teacher: Boolean(res.data.length)})
             })
     }
 
-    shouldComponentUpdate () {
+    shouldComponentUpdate() {
         return true;
     }
+
     handlerSubmit() {
         this.setState({
             teacher: true
         })
     }
-    render () {
+
+    render() {
         if (this.state.teacher) {
 
             return (
@@ -44,24 +45,47 @@ class Ask extends React.Component {
             );
 
         }
-        
-        else
-        {
-           return (
-               <div>
-                   <h3>
-                       Hey ! We see you are eager to help others !
-                   </h3>
+        else if (this.state.teacher === false) {
+            return (
+                <div>
+                    <h3>
+                        Hey ! We see you are eager to help others !
+                    </h3>
 
-                   <p>
-                       In order to help others Please register with us
-                   </p>
+                    <p>
+                        In order to help others Please register with us
+                    </p>
 
-                   <HelpForm
-                       handleSubmit={this.handlerSubmit.bind(this)}
-                   />
-               </div>
-           );
+                    <HelpForm
+                        handleSubmit={this.handlerSubmit.bind(this)}
+                    />
+                </div>
+            )
+        }
+        else {
+            return(
+                <div>
+                    <div
+                        className="spinner-border"
+                        role="status"
+                    >
+                        <span className="sr-only">
+                            Loading...
+                        </span>
+                    </div>
+
+                    <div
+                        className="spinner-grow"
+                        // style="width: 3rem; height: 3rem;"
+                        role="status"
+                    >
+                        <span className="sr-only">
+                            Loading...
+                        </span>
+                    </div>
+                </div>
+                )
+
         }
     }
 }

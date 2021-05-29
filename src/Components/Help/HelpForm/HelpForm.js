@@ -71,8 +71,8 @@ class HelpForm extends React.Component{
         axios.post(backend+"connect/api/teacher/",{
             Contact: this.state.Contact,
             Gitname: this.state.Github,
-            LinkedIn: this.state.Linkedin,
-            skills: tags
+            Linkedin: this.state.Linkedin.slice(28),
+            skills: tags,
         }).then(this.props.handleSubmit())
     }
 

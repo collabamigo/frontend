@@ -107,7 +107,7 @@ class Step1 extends React.Component {
                             <input
                                 className="form-control col-auto"
                                 onChange={this.props.handleChangeLinkedin}
-                                placeholder="LinkedIn account"
+                                placeholder="paste your LinkedIn URL"
                                 required
                                 type='text'
                                 value={this.props.Linkedin}
