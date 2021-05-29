@@ -71,7 +71,7 @@ class Autocomplete extends React.Component {
           });
           if (this.props.version === 1) {
               this.setState({
-                  searchTerm: e.target.value
+                  searchTerm: e.target.innerText
               })
           }
           else {
@@ -79,7 +79,7 @@ class Autocomplete extends React.Component {
                   searchTerm: ""
               })
           }
-          this.props.onMatch(e.target.value);
+          this.props.onMatch(e.target.innerText);
           // this.handleChange({
           //     target: {
           //         value: e.target.innerText
@@ -91,7 +91,7 @@ class Autocomplete extends React.Component {
         if (e.key === 'Enter' || e.key === 'Tab') {
           this.handleClick({
               target : {
-                  value: this.state.suggestions[0]
+                  innerText: this.state.suggestions[0]
               }
           })
           e.preventDefault()
@@ -100,7 +100,6 @@ class Autocomplete extends React.Component {
 
 
       render () {
-          console.log("rerender", this.state)
           let suggestionsListComponent;
 
           if (this.state.showSuggestions && this.state.searchTerm) {

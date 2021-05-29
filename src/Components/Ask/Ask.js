@@ -28,9 +28,7 @@ class Ask extends React.Component {
     }
 
     handleMatch = (searchTerm) => {
-        this.setState({"found_match": true});
         this.getTeacherIds(searchTerm)
-
     }
 
     handleGetNext = () => {
@@ -53,7 +51,9 @@ class Ask extends React.Component {
                          id_list: JSON.stringify(res.data["Teacher_set"])
                      }
                 })
-                    .then((response) => this.setState({"tempList": response.data}))
+                    .then((response) => this.setState({
+                        tempList: response.data,
+                        found_match: true}))
                     .catch((err) => console.log(err));
             })
             .catch((err) => console.log(err));
@@ -141,7 +141,7 @@ class Ask extends React.Component {
                                   key={item.id}
                               >
                                   <CardsP
-                                      batch={item.Course}
+                                      batch={item.course}
                                       description="My Tech Stack is "
                                       insta={"https://www.instagram.com/"+ item.Handle}
                                       name={item.First_Name + " " + item.Last_Name}
