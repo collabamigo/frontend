@@ -59,9 +59,48 @@ class Ask extends React.Component {
             .catch((err) => console.log(err));
     };
 
-      render () {
-          if (!this.state.found_match) {
+    renderCardsIfNeeded() {
+        if (this.state.found_match) {
+            return (
+                <div>
 
+
+                    {/* TODO: Remove function duplication */}
+
+
+                    {/* TODO: Remove Instagram Handle */}
+
+                    {/* TODO: Add undefined case handling */}
+
+                    <div>
+                        {this.state.tempList.map(item => (
+                            <div
+                                className="row-auto"
+                                key={item.id}
+                            >
+                                <CardsP
+                                    batch={item.course}
+                                    description="My Tech Stack is "
+                                    insta={"https://www.instagram.com/"+ item.Handle}
+                                    key_value={item.id}
+                                    name={item.First_Name + " " + item.Last_Name}
+                                />
+                            </div>
+                          ))}
+                    </div>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div className="float-centre">
+                    Loading...
+                </div>
+            )
+        }
+    }
+
+      render () {
               return (
                   <div >
                       <div>
@@ -80,10 +119,8 @@ class Ask extends React.Component {
                           />
                       </div>
 
-                      <div className="float-centre">
-                          Loading...
-                      </div>
-
+                      {this.renderCardsIfNeeded()}
+                      
                       <div className="row">
                           <div className="col-auto" />
 
@@ -108,52 +145,6 @@ class Ask extends React.Component {
               );
 
           }
-          else{
-              return (
-                  <div>
-                      <div>
-                          <h1 className="col-sm-5 col-md-5">
-                              {" "}
-
-                              Skill Search
-
-                              {" "}
-                          </h1>
-
-                          {/* TODO: Remove function duplication */}
-
-                          <Autocomplete
-                              onChange={this.handleChange}
-                              onMatch={this.handleMatch}
-                              searchTerm={this.state.searchTerm}
-                              suggestions={this.state.temp_l}
-                          />
-                      </div>
-
-                      {/* TODO: Remove Instagram Handle */}
-
-                      {/* TODO: Add undefined case handling */}
-
-                      <div>
-                          {this.state.tempList.map(item => (
-                              <div
-                                  className="row-auto"
-                                  key={item.id}
-                              >
-                                  <CardsP
-                                      batch={item.course}
-                                      description="My Tech Stack is "
-                                      insta={"https://www.instagram.com/"+ item.Handle}
-                                      key_value={item.id}
-                                      name={item.First_Name + " " + item.Last_Name}
-                                  />
-                              </div>
-                          ))}
-                      </div>
-                  </div>
-            );
-          }
-      }
 }
 
 export default Ask;

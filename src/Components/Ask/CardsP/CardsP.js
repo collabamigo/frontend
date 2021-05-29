@@ -4,9 +4,15 @@ import Card from "react-bootstrap/Card";
 import "./CardsP.css";
 import PropTypes from "prop-types";
 import { UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
+// import backend from "../../../env";
 
-function handleSubmit(e, message){
-    console.log(e,message)
+function handleSubmit(e, message, teacher_id){
+    console.log(e,message, teacher_id)
+    // axios.post(backend+"connect/request/", {
+    //     id: teacher_id,
+    //     message: message,
+    //     skills:
+    // })
 
     e.preventDefault()
 }
@@ -67,7 +73,7 @@ function CardsP (props) {
 
                                     <button
                                         className="btn btn-primary"
-                                        onClick={(e) => handleSubmit(e, message)}
+                                        onClick={(e) => handleSubmit(e, message, props.key_value)}
                                         type="button"
                                     >
                                         Send

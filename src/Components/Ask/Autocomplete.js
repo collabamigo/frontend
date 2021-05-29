@@ -11,10 +11,9 @@ class Autocomplete extends React.Component {
         onChange: PropTypes.func.isRequired,
         onMatch:PropTypes.func.isRequired,
         version: PropTypes.number
-
     };
 
-    static defaultProps={
+    static defaultProps = {
         version:1
     }
     constructor (props) {
