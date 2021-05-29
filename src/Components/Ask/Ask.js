@@ -17,6 +17,8 @@ class Ask extends React.Component {
             "temp_l": [],
             "found_match": false,
             "tempList": [{}],
+            "list":[],
+            "listIndex":4,
         }
 
     }
@@ -35,7 +37,25 @@ class Ask extends React.Component {
     }
 
     handleGetNext = () => {
+        axios.get(backend + "connect/teachersdata/", {
+            params: {
+                id_list: JSON.stringify(this.state.list.slice(this.state.listIndex, this.state.listIndex+4))
+            }
+        }).then(r => this.setState((state)  => ({listIndex:state.listIndex+4, tempList:r.data})))
+    }
 
+    handleGetPrev =() => {
+        console.log(this.state.list)
+        axios.get(backend + "connect/teachersdata/", {
+            params: {
+                id_list: JSON.stringify(this.state.list.slice(this.state.listIndex-8, this.state.listIndex-4))
+            }
+        }).then(r => this.setState((state)  => ({listIndex:state.listIndex-4, tempList:r.data})))
+    }
+
+
+    handleChange = (value) => {
+        this.setState({"searchTerm": value, "found_match":false});
     }
 
     getTeacherIds = (searchTerm) => {
@@ -45,9 +65,10 @@ class Ask extends React.Component {
         }
           })
             .then((res) => {
+                this.setState({list:res.data["Teacher_set"]})
                 axios.get(backend+"connect/teachersdata/",{
                      params:{
-                         id_list: JSON.stringify(res.data["Teacher_set"])
+                         id_list: JSON.stringify(res.data["Teacher_set"].slice(0,4))
                      }
                 })
                     .then((response) => this.setState({
@@ -71,10 +92,10 @@ class Ask extends React.Component {
 
                     {/* TODO: Add undefined case handling */}
 
-                    <div>
+                    <div className="row">
                         {this.state.tempList.map(item => (
                             <div
-                                className="row-auto"
+                                className="col-auto"
                                 key={item.id}
                             >
                                 <CardsP
@@ -87,6 +108,28 @@ class Ask extends React.Component {
                                 />
                             </div>
                           ))}
+                    </div>
+                    
+                    <div className="row">
+                        <div className="col-auto" />
+
+                        <button
+                            className="btn btn-primary"
+                            onClick={this.handleGetNext}
+                            type="button"
+                        >
+                            Next
+                        </button>
+
+                        <div className="col-auto" />
+
+                        <button
+                            className="btn btn-primary"
+                            onClick={this.handleGetPrev}
+                            type="button"
+                        >
+                            Previous
+                        </button>
                     </div>
                 </div>
             )
@@ -101,8 +144,9 @@ class Ask extends React.Component {
     }
 
       render () {
+        console.log(this.state.display,this.state.tempList, this.state.id_list)
               return (
-                  <div >
+                  <div>
                       <div>
                           <h1 className="col-sm-5 col-md-5">
                               {" "}
@@ -118,27 +162,10 @@ class Ask extends React.Component {
                           />
                       </div>
 
-                      {this.renderCardsIfNeeded()}
-                      
-                      <div className="row">
-                          <div className="col-auto" />
-
-                          <button
-                              className="btn btn-primary"
-                              onClick={this.handleGetNext}
-                              type="button"
-                          >
-                              Next
-                          </button>
-                          
-                          <div className="col-auto" />
-                          
-                          <button
-                              className="btn btn-primary"
-                              type="button"
-                          >
-                              Previous
-                          </button>
+                      <div className="row-auto">
+                          <div className="col-auto">
+                              {this.renderCardsIfNeeded()}
+                          </div>
                       </div>
                   </div>
               );

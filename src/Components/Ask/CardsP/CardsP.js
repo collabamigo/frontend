@@ -84,6 +84,8 @@ function CardsP (props) {
                         </UncontrolledPopover>
                     </div>
 
+                    <br />
+
                     <Card.Link href={props.insta}>
                         <svg
                             className="bi bi-instagram"
