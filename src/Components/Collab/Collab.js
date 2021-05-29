@@ -2,7 +2,6 @@ import React from "react";
 import "./Collab.css";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
 
 function Collab (props) {
 
@@ -21,12 +20,12 @@ function Collab (props) {
 
                     {/* eslint-disable-next-line react/jsx-no-undef */}
 
-                    <Link
-                        className="link"
-                        to="/"
+                    <a
+                        className="text-body display-4"
+                        href="/"
                     >
                         {props.title}
-                    </Link>
+                    </a>
 
                     {" "}
                 </h1>

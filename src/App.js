@@ -17,7 +17,7 @@ import axios from "axios";
 import Profile from "./Components/Profile/Profile";
 import Card from "react-bootstrap/Card";
 import Connect from './Components/Connect/Connect'
-import DarkMode from "./Components/Collab/DarkMode/DarkMode";
+// import DarkMode from "./Components/Collab/DarkMode/DarkMode";
 import ConnectionRequest from "./Components/ConnectionRequest/ConnectionRequest";
 // import Welcome from "./Components/Welcome/Welcome";
 
@@ -71,7 +71,7 @@ class App extends React.Component {
                                     title="Collab Connect"
                                 />
 
-                                <DarkMode />
+                                {/*<DarkMode />*/}
                             </Route>
 
                             <Route>
@@ -157,31 +157,49 @@ class App extends React.Component {
                                     <div className="row">
                                         <div className="col-auto" />
 
-                                        <Card className="card_main cc_main card-body text-secondary">
-                                            <Card.Body>
-                                                <Card.Title className="card-header font-weight-bold">
-                                                    Collaborate and Connect
-                                                </Card.Title>
+                                        {/*<Card className="card_main cc_main card-body text-secondary">*/}
 
-                                                <br />
+                                        {/*    <Card.Body>*/}
 
-                                                <Card.Text >
-                                                    <p>
-                                                        It is a place where you can find new projects to work
-                                                        upon and gain new experience. One can also apply for helping
-                                                        a team by being a part of it or on interim basis depending on the team.
-                                                        Lets keep the learning and helping community alive.
-                                                    </p>
-                                                </Card.Text>
+                                        {/*        <Card.Title className="card-header font-weight-bold">*/}
 
-                                                <Link
-                                                    className="col-auto btn btn-primary"
-                                                    to="/collab_connect"
-                                                >
-                                                    Lets Collaborate
-                                                </Link>
-                                            </Card.Body>
-                                        </Card>
+                                        {/*            Collaborate and Connect*/}
+
+                                        {/*        </Card.Title>*/}
+
+                                        {/*        <br />*/}
+
+                                        {/*        <Card.Text >*/}
+
+                                        {/*            <p>*/}
+
+                                        {/*                It is a place where you can find new projects to work*/}
+
+                                        {/*                upon and gain new experience. One can also apply for helping*/}
+
+                                        {/*                a team by being a part of it or on interim basis depending on the team.*/}
+
+                                        {/*                Lets keep the learning and helping community alive.*/}
+
+                                        {/*            </p>*/}
+
+                                        {/*        </Card.Text>*/}
+
+                                        {/*        <Link*/}
+
+                                        {/*            className="col-auto btn btn-primary"*/}
+
+                                        {/*            to="/collab_connect"*/}
+
+                                        {/*        >*/}
+
+                                        {/*            Lets Collaborate*/}
+
+                                        {/*        </Link>*/}
+
+                                        {/*    </Card.Body>*/}
+
+                                        {/*</Card>*/}
                                     </div>
                                 </>
 
