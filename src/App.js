@@ -26,15 +26,29 @@ import ConnectionRequest from "./Components/ConnectionRequest/ConnectionRequest"
 class App extends React.Component {
     constructor(props) {
         super(props);
+
+        // This interceptor adds authentication credentials
         axios.interceptors.request.use(function (config) {
             config.headers['aeskey'] = localStorage.getItem('aes_key')
             config.headers['iv'] = localStorage.getItem('iv')
             config.headers['token'] = localStorage.getItem('encrypted_token')
-            console.log(config)
             return config;
         }, function (error) {
             return Promise.reject(error);
         });
+
+        axios.interceptors.response.use(function (response) {
+            return response;
+          }, function (error) {
+            if (localStorage.getItem("err") !== JSON.stringify(error)) {
+                localStorage.setItem("err", JSON.stringify(error))
+                if (error.response.status === 500)
+                    alert("Unexpected error occurred. Please contact us if you see this message repeatedly.")
+                else if (error.response.status === 401)
+                    alert("Authentication error. Please try signing out and signing back in")
+            }
+            return Promise.reject(error);
+          });
 
         this.state = {
             "signedIn": false,
