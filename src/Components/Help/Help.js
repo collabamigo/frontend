@@ -25,7 +25,7 @@ class Ask extends React.Component {
         })
             .then((res) => {
                 this.setState({teacher: Boolean(res.data.length),
-                skills:res.data[0]["skills"]})
+                skills:res.data.length?res.data[0]["skills"]:[]})
             })
     }
 
