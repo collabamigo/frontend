@@ -23,21 +23,3 @@ jobs:
           projectId: default
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
-  Create-issues-using-TODO:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v2
-        with:
-            fetch-depth: 2
-
-      - name: Github login
-        run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
-
-      - name: Creating issues
-        run: readarray -t array <<< $(git diff HEAD^ --name-only -G "TODO" -- ':!:*.yml' | xargs --no-run-if-empty git
-                grep -n "TODO" --) && for command in "${array[@]}"; do
-                    gh issue create --title "${command##*:}" --body "${command}" --label "todo" || echo "ERROR ${command}";
-                      done
-
-      - name: Github logout
-        run: gh auth logout --hostname github.com
