@@ -115,9 +115,6 @@ class Profile extends React.Component{
     this.setState({LastName: event.target.value});
   }
 
-    email = "shikhar20121@iiitd.ac.in"
-    first_name = "Shikhar Sharma"
-    name = this.first_name.split(' ')
 
   render() {
     return (
@@ -179,7 +176,7 @@ class Profile extends React.Component{
                         disabled
                         placeholder={this.email}
                         type='text'
-                        value={this.email}
+                        value={this.state.data[0]["email"]}
                     />
                 </div>
             </div>
