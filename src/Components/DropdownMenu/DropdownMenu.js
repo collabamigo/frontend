@@ -30,16 +30,19 @@ function DropdownMenu (props) {
         };
 
         return (
-            <Route>
+            <Route className="dropdown">
                 <DropdownButton
                     alignRight
                     id="dropdown-menu-align-right"
                     onSelect={handleSelect}
                     title={props.title}
                 >
-
-                    <Dropdown.Item eventKey="profile">
+                    <Dropdown.Item
+                        className="dropdown-item"
+                        eventKey="profile"
+                    >
                         <Link
+                            className="text-body"
                             to="/profile"
                         >
                             Profile
@@ -49,7 +52,10 @@ function DropdownMenu (props) {
                         </Link>
                     </Dropdown.Item>
 
-                    <Dropdown.Item eventKey="settings">
+                    <Dropdown.Item
+                        className="dropdown-item"
+                        eventKey="settings"
+                    >
                         Settings
                         <span className="material-icons col-2">
                             settings

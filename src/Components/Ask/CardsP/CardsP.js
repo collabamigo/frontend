@@ -29,17 +29,17 @@ function CardsP (props) {
     const [message, setMessage] = useState("");
     return (
         <div className="float-right">
-            <Card className="card_main" >
-                <Card.Body>
+            <Card className="card_main card bg-info text-white" >
+                <Card.Body className="card-body">
                     <Card.Title className="main_title">
                         {props.name}
                     </Card.Title>
 
-                    <Card.Subtitle className="mb-2 text-muted">
+                    <Card.Subtitle className="mb-2 text-muted card-subtitle">
                         {props.batch}
                     </Card.Subtitle>
 
-                    <Card.Text>
+                    <Card.Text className="card-text">
                         {props.description}
                     </Card.Text>
 
@@ -80,7 +80,7 @@ function CardsP (props) {
                                     />
 
                                     <button
-                                        className="btn btn-primary"
+                                        className="btn btn-outline-primary"
                                         onClick={(e) => handleSubmit(e, message, props.key_value, props.skills)}
                                         type="button"
                                     >

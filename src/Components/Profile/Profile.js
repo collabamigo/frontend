@@ -220,7 +220,7 @@ class Profile extends React.Component{
                 <label className="col-auto col-form-label">
                     Degree:
                     <select
-                        className="form-control col-auto"
+                        className="form-control col-auto form-select"
                         onChange={this.handleChangeDegree}
                         value={this.state.degree}
                     >
@@ -244,7 +244,7 @@ class Profile extends React.Component{
                 <label className="col-auto col-form-label">
                     Course:
                     <select
-                        className="form-control col-auto"
+                        className="form-control col-auto form-select"
                         onChange={this.handleChangeCourse}
                         value={this.state.course}
                     >
