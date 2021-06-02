@@ -1,9 +1,7 @@
-
+import "./App.css";
 import Collab from "./Components/Collab/Collab";
 import React from "react";
-// import 'bootswatch/dist/sketchy/bootstrap.min.css';
 import GoogleSignIn from "./Components/GoogleSignIn/GoogleSignIn";
-import "./App.css";
 import Ask from "./Components/Ask/Ask";
 import Help from "./Components/Help/Help";
 import {
@@ -114,7 +112,7 @@ class App extends React.Component {
                                     <div className="container">
                                         <div className="row">
                                             <div className="col-lg-4 mb-4">
-                                                <Card className="card card_main mb-3">
+                                                <Card className="card_main help_card_main text-secondary">
                                                     <img
                                                         alt=""
                                                         className="card-img-top"
@@ -122,14 +120,13 @@ class App extends React.Component {
                                                     />
 
                                                     <Card.Body>
-                                                        <Card.Title className="card-title font-weight-bold">
+                                                        <Card.Title className="card-header font-weight-bold">
                                                             HELP OTHERS
                                                         </Card.Title>
 
                                                         <br />
 
-
-                                                        <Card.Text className="card-text">
+                                                        <Card.Text>
                                                             Solve other&apos;s doubts and be the mentor you always wanted.
                                                             Using our platform you can reach a larger curious community.
                                                         </Card.Text>
@@ -145,10 +142,8 @@ class App extends React.Component {
                                                 </Card>
                                             </div>
 
-
-
                                             <div className="col-lg-4 mb-4">
-                                                <Card className="card card_main mb-3">
+                                                <Card className="card_main card ask_card_main text-secondary">
                                                     <img
                                                         alt="noobmaster"
                                                         className="card-img-top"
@@ -156,7 +151,7 @@ class App extends React.Component {
                                                     />
 
                                                     <Card.Body className="card-body">
-                                                        <Card.Title className="card-title font-weight-bold">
+                                                        <Card.Title className="card-header font-weight-bold">
                                                             ASK FOR HELP
                                                         </Card.Title>
 
@@ -187,7 +182,7 @@ class App extends React.Component {
                                             </div>
 
                                             <div className="col-lg-4 mb-4">
-                                                <Card className="card card_main disabled mb-3">
+                                                <Card className="card_main cc_main text-secondary">
                                                     <img
                                                         alt=""
                                                         className="card-img-top"
@@ -195,7 +190,7 @@ class App extends React.Component {
                                                     />
 
                                                     <Card.Body className="card-body">
-                                                        <Card.Title className="card-title font-weight-bold">
+                                                        <Card.Title className="card-header font-weight-bold">
                                                             LET&apos;S  COLLABORATE
                                                         </Card.Title>
 
@@ -207,11 +202,12 @@ class App extends React.Component {
                                                             Lets keep the learning and helping community alive.
                                                         </Card.Text>
 
-                                                        <div
-                                                            className="col-auto btn btn-primary disabled"
+                                                        <Link
+                                                            className="col-auto btn btn-primary"
+                                                            to="/collab_connect"
                                                         >
-                                                            Coming soon...
-                                                        </div>
+                                                            Lets Collaborate
+                                                        </Link>
 
                                                     </Card.Body>
                                                 </Card>
