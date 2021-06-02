@@ -20,8 +20,6 @@ function handleSubmit(e, message, teacher_id, skills){
                 alert("You have submitted too many requests in the past 24 hours. Please wait before submitting more.")
             else if (err.response.status === 403) // Previous unaccepted request logged
                 alert("You have already sent a similar request to the same person")
-            else
-                alert("Unexpected error occurred. Please contact us if you see this message repeatedly.")
         })
 
     e.preventDefault()
