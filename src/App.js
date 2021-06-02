@@ -112,7 +112,7 @@ class App extends React.Component {
                                     <div className="container">
                                         <div className="row">
                                             <div className="col-lg-4 mb-4">
-                                                <Card className="card_main help_card_main text-secondary">
+                                                <Card className="card_main help_card_main text-secondary card">
                                                     <img
                                                         alt=""
                                                         className="card-img-top"
@@ -182,7 +182,7 @@ class App extends React.Component {
                                             </div>
 
                                             <div className="col-lg-4 mb-4">
-                                                <Card className="card_main cc_main text-secondary">
+                                                <Card className="card_main card cc_main text-secondary">
                                                     <img
                                                         alt=""
                                                         className="card-img-top"
