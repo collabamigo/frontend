@@ -63,7 +63,7 @@ class FormSignIn extends React.Component {
             course :this.state.course,
         }
 
-        axios.post(backend + "connect/api/profile/", payload)
+        axios.post(backend + "connect/profile/", payload)
             .then(res => {
             alert('You have been registered. ' + this.state.LastName);
             console.log(res);

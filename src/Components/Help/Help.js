@@ -18,7 +18,7 @@ class Ask extends React.Component {
 
 
     componentDidMount() {
-        axios.get(backend + "connect/api/teacher/", {
+        axios.get(backend + "connect/teacher/", {
             params: {
                 format: "json",
             }

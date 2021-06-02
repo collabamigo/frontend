@@ -25,6 +25,46 @@ function handleSubmit(e, message, teacher_id, skills){
     e.preventDefault()
 }
 
+function handleSpanUp(){
+    console.log("up")
+}
+
+function handleSpanDown(){
+    console.log("down")
+}
+
+function renderVotesNeeded(props) {
+    if (props.votes) {
+        return (
+            <div className="row">
+                <div className="col-3" />
+
+                <div className="col-3">
+                    <span
+                        className="material-icons col-auto btn btn-lg"
+                        onClick={handleSpanUp}
+                    >
+                        thumb_up
+                    </span>
+                </div>
+
+                <div className="col-1">
+                    <span
+                        className="material-icons col-auto btn btn-lg"
+                        onClick={handleSpanDown}
+                    >
+                        thumb_down
+                    </span>
+                </div>
+            </div>
+        )
+    }
+
+    else{
+        return(null)
+    }
+}
+
 function CardsP (props) {
     const [message, setMessage] = useState("");
     return (
@@ -42,6 +82,8 @@ function CardsP (props) {
                     <Card.Text>
                         {props.description}
                     </Card.Text>
+
+                    {renderVotesNeeded(props)}
 
                     <div>
                         <button

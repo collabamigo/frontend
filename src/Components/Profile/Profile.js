@@ -28,7 +28,7 @@ class Profile extends React.Component{
             data: data,
         }
 
-        axios.get(backend+"connect/api/profile?format=json")
+        axios.get(backend+"connect/profile?format=json")
             .then(res => {
                 const data = res.data;
                 this.setState({data});
@@ -76,7 +76,7 @@ class Profile extends React.Component{
             "Handle":"",
             "IsTeacher":false}
 
-        axios.post(backend+"connect/api/profile/", payload)
+        axios.post(backend+"connect/profile/", payload)
             .then(res => {
             console.log(res);
             console.log(res.data);
