@@ -86,7 +86,7 @@ body {
   border-top: none;
 }
 
-.card-header{
+.card-title{
   color: var(--text-color);
 }
 
