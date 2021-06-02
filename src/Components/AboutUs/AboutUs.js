@@ -46,7 +46,6 @@ class AboutUs extends React.Component {
                     <div className="column">
                         <div className="card">
                             <img
-                                alt="Jane"
                                 src="/w3images/team1.jpg"
                                 style={{ width: '100%' }}
                             />
@@ -57,7 +56,7 @@ class AboutUs extends React.Component {
                                 </h2>
 
                                 <p className="title">
-                                    CEO and Founder
+                                    Co-Founder
                                 </p>
 
                                 <p>
@@ -80,7 +79,6 @@ class AboutUs extends React.Component {
                     <div className="column">
                         <div className="card">
                             <img
-                                alt="Mike"
                                 src="/w3images/team2.jpg"
                                 style={{ width: '100%' }}
                             />
@@ -91,7 +89,7 @@ class AboutUs extends React.Component {
                                 </h2>
 
                                 <p className="title">
-                                    Art Director
+                                    Founder
                                 </p>
 
                                 <p>
@@ -114,7 +112,6 @@ class AboutUs extends React.Component {
                     <div className="column">
                         <div className="card">
                             <img
-                                alt="John"
                                 src="/w3images/team3.jpg"
                                 style={{ width: '100%' }}
                             />
@@ -125,7 +122,7 @@ class AboutUs extends React.Component {
                                 </h2>
 
                                 <p className="title">
-                                    Designer
+                                    Co-Founder
                                 </p>
 
                                 <p>
