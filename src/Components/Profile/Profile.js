@@ -118,191 +118,194 @@ class Profile extends React.Component{
 
   render() {
     return (
-        <form onSubmit={this.handleSubmit}>
-            <div className="form-group row">
-                <label className="col-auto col-form-label">
-                    First Name
-                </label>
+        <div className="Custom-form-dialog">
+            <form onSubmit={this.handleSubmit}>
+                <div className="form-group row">
+                    <label className="col-auto col-form-label">
+                        First Name
+                    </label>
 
-                <div>
-                    <input
-                        className="form-control col-auto"
-                        disabled
-                        onChange={this.handleChangeFirstName}
-                        placeholder={this.state.data[0]["First_Name"]}
-                        type='text'
-                        value={this.state.data[0]["First_Name"]}
-                    />
+                    <div>
+                        <input
+                            className="form-control col-auto"
+                            disabled
+                            onChange={this.handleChangeFirstName}
+                            placeholder={this.state.data[0]["First_Name"]}
+                            type='text'
+                            value={this.state.data[0]["First_Name"]}
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <br />
+                <br />
 
-            <div className="form-group row">
-                <label className="col-auto col-form-label">
-                    Last Name
-                </label>
+                <div className="form-group row">
+                    <label className="col-auto col-form-label">
+                        Last Name
+                    </label>
 
-                <div className="row-auto">
-                    <input
-                        className="form-control col-auto"
-                        disabled
-                        onChange={this.handleChangeLastName}
-                        placeholder={this.state.data[0]["Last_Name"]}
-                        type='text'
-                        value={this.state.data[0]["Last_Name"]}
-                    />
+                    <div className="row-auto">
+                        <input
+                            className="form-control col-auto"
+                            disabled
+                            onChange={this.handleChangeLastName}
+                            placeholder={this.state.data[0]["Last_Name"]}
+                            type='text'
+                            value={this.state.data[0]["Last_Name"]}
+                        />
 
-                    <button
-                        className="btn btn-outline-info col-auto"
-                        type="button"
-                    >
-                        Help
-                    </button>
+                        
 
+                    </div>
                 </div>
-            </div>
 
-            <br />
+                <br />
 
-            <div className="form-group row">
-                <label className="col-auto col-form-label">
-                    Email
-                </label>
+                <div className="form-group row">
+                    <label className="col-auto col-form-label">
+                        Email
+                    </label>
 
-                <div>
-                    <input
-                        className="form-control col-auto"
-                        disabled
-                        placeholder={this.email}
-                        type='text'
-                        value={this.state.data[0]["email"]}
-                    />
+                    <div>
+                        <input
+                            className="form-control col-auto"
+                            disabled
+                            placeholder={this.email}
+                            type='text'
+                            value={this.state.data[0]["email"]}
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <br />
+                <br />
 
-            <div className="form-group row">
-                <label className="col-auto col-form-label">
-                    Handle
-                </label>
+                <div className="form-group row">
+                    <label className="col-auto col-form-label">
+                        Handle
+                    </label>
 
-                <div>
-                    <input
-                        className="form-control col-auto"
-                        onChange={this.handleChangeHandle}
-                        placeholder={this.state.Handle}
-                        type='text'
-                        value={this.state.Handle}
-                    />
+                    <div>
+                        <input
+                            className="form-control col-auto"
+                            onChange={this.handleChangeHandle}
+                            placeholder={this.state.Handle}
+                            type='text'
+                            value={this.state.Handle}
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <br />
+                <br />
 
-            <div className="form-group row">
-                <label className="col-auto col-form-label">
-                    Contact
-                </label>
+                <div className="form-group row">
+                    <label className="col-auto col-form-label">
+                        Contact
+                    </label>
 
-                <div>
-                    <input
-                        className="form-control col-auto"
-                        onChange={this.handleChangeContact}
-                        type='number'
-                        value={this.state.Contact}
-                    />
+                    <div>
+                        <input
+                            className="form-control col-auto"
+                            onChange={this.handleChangeContact}
+                            type='number'
+                            value={this.state.Contact}
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <div className="form-group row">
-                <label className="col-auto col-form-label">
-                    Degree:
-                    <select
-                        className="form-control col-auto form-select"
-                        onChange={this.handleChangeDegree}
-                        value={this.state.degree}
-                    >
-                        <option
-                            selected
-                            value=""
+                <div className="form-group row">
+                    <label className="col-auto col-form-label">
+                        Degree:
+                        <select
+                            className="form-control col-auto form-select"
+                            onChange={this.handleChangeDegree}
+                            value={this.state.degree}
                         >
-                            ---Select Degree---
-                        </option>
+                            <option
+                                selected
+                                value=""
+                            >
+                                ---Select Degree---
+                            </option>
 
-                        <option value="M" >
-                            M-Tech
-                        </option>
+                            <option value="M" >
+                                M-Tech
+                            </option>
 
-                        <option value="B">
-                            B-Tech
-                        </option>
-                    </select>
-                </label>
+                            <option value="B">
+                                B-Tech
+                            </option>
+                        </select>
+                    </label>
 
-                <label className="col-auto col-form-label">
-                    Course:
-                    <select
-                        className="form-control col-auto form-select"
-                        onChange={this.handleChangeCourse}
-                        value={this.state.course}
-                    >
-                        <option
-                            selected
-                            value=""
-
+                    <label className="col-auto col-form-label">
+                        Course:
+                        <select
+                            className="form-control col-auto form-select"
+                            onChange={this.handleChangeCourse}
+                            value={this.state.course}
                         >
-                            ---Select Course---
-                        </option>
+                            <option
+                                selected
+                                value=""
+                            >
+                                ---Select Course---
+                            </option>
 
-                        <option value="CSAI">
-                            CSAI
-                        </option>
+                            <option value="CSAI">
+                                CSAI
+                            </option>
 
-                        <option value="CSE">
-                            CSE
-                        </option>
+                            <option value="CSE">
+                                CSE
+                            </option>
 
-                        <option value="CSB">
-                            CSB
-                        </option>
+                            <option value="CSB">
+                                CSB
+                            </option>
 
-                        <option value="CSD">
-                            CSD
-                        </option>
+                            <option value="CSD">
+                                CSD
+                            </option>
 
-                        <option value="CSS">
-                            CSS
-                        </option>
+                            <option value="CSS">
+                                CSS
+                            </option>
 
-                        <option value="CSAM">
-                            CSAM
-                        </option>
+                            <option value="CSAM">
+                                CSAM
+                            </option>
 
-                        <option value="ECE">
-                            ECE
-                        </option>
+                            <option value="ECE">
+                                ECE
+                            </option>
 
-                    </select>
-                </label>
+                        </select>
+                    </label>
 
-            </div>
+                </div>
 
-            <br />
+                <br />
 
-            <br />
+                <br />
 
-            <button
-                className="btn btn-primary mb-2"
-                onChange={this.handleChange}
-                type="submit"
-                value="Submit"
-            >
-                Submit
-            </button>
+                <button
+                    className="btn btn-primary mb-2 col-2"
+                    onChange={this.handleChange}
+                    type="submit"
+                    value="Submit"
+                >
+                    Submit
+                </button>
 
-        </form>
+                <button
+                    className="btn btn-primary mb-2 col-2"
+                    type="button"
+                >
+                    Help
+                </button>
+
+            </form>
+        </div>
     );
   }
 }
