@@ -12,7 +12,12 @@ class Ask extends React.Component {
         super(props);
         this.state = {
             "teacher": "",
-            "skills":[]
+            "skills":[],
+            "name":"",
+            "linkedin":"",
+            "git":"",
+            "upvote":0,
+            "downvote":0,
         };
     }
 
@@ -26,6 +31,15 @@ class Ask extends React.Component {
             .then((res) => {
                 this.setState({teacher: Boolean(res.data.length),
                 skills:res.data.length?res.data[0]["skills"]:[]})
+            })
+
+        axios.get(backend+"connect/profile?format=json")
+            .then(res => {
+                this.setState({name:res.data.length ? res.data[0]["First_Name"]:[],
+                linkedin:res.data.length ? res.data[0]["Linkedin"]:[],
+                git:res.data.length ? res.data[0]["Gitname"]:[],
+                upvote:res.data.length ? res.data[0]["UpVotes"]:[],
+                downvote:res.data.length ? res.data[0]["DownVotes"]:[]});
             })
     }
 
@@ -42,10 +56,19 @@ class Ask extends React.Component {
     render() {
         if (this.state.teacher) {
             return (
-                <DashBoard skills={this.state.skills} />
+                <DashBoard
+                    downvote={this.state.downvote}
+                    git={this.state.git}
+                    linkedin={this.state.linkedin}
+                    name={this.state.name}
+                    skills={this.state.skills}
+                    upvote={this.state.upvote}
+
+                />
             );
 
         }
+
         else if (this.state.teacher === false) {
             return (
                 <div>
