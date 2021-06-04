@@ -2,6 +2,7 @@ import {Link, Route, Switch} from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import React from "react";
 import {Fade} from "react-awesome-reveal";
+import {isMobile} from "react-device-detect";
 
 function AuthenticatedHome() {
     return (
@@ -21,7 +22,7 @@ function AuthenticatedHome() {
                     <div className="row">
                         <Fade
                             className="col-lg-4 mb-4"
-                            direction="up"
+                            direction={isMobile?"left":"up"}
                         >
                             <Card className="card_main help_card_main text-secondary card">
                                 <img
@@ -55,7 +56,7 @@ function AuthenticatedHome() {
 
                         <Fade
                             className="col-lg-4 mb-4"
-                            direction="down"
+                            direction={isMobile?"right":"down"}
                         >
                             <Card className="card_main card ask_card_main text-secondary">
                                 <img
@@ -97,7 +98,7 @@ function AuthenticatedHome() {
 
                         <Fade
                             className="col-lg-4 mb-4"
-                            direction="up"
+                            direction={isMobile?"left":"up"}
                         >
                             <Card className="card_main card cc_main text-secondary">
                                 <img
