@@ -7,6 +7,8 @@ import {isMobile} from "react-device-detect";
 function AuthenticatedHome() {
     return (
         <div>
+            {isMobile.toString()}
+
             <Switch>
                 <Route
                     exact
