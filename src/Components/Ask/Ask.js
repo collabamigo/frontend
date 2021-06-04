@@ -19,6 +19,7 @@ class Ask extends React.Component {
             "tempList": [{}],
             "list":[],
             "listIndex":4,
+            "voting":true
         }
 
     }
@@ -53,13 +54,12 @@ class Ask extends React.Component {
         }).then(r => this.setState((state)  => ({listIndex:state.listIndex-4, tempList:r.data})))
     }
 
-
     handleChange = (value) => {
         this.setState({"searchTerm": value, "found_match":false});
     }
 
     getTeacherIds = (searchTerm) => {
-        axios.get(backend+"connect/api/skill/"+ searchTerm ,{
+        axios.get(backend+"connect/skill/"+ searchTerm ,{
         params: {
             format: "json",
         }
@@ -107,31 +107,32 @@ class Ask extends React.Component {
                                     linked={item.Linkedin}
                                     name={item.First_Name + " " + item.Last_Name}
                                     skills={[this.state.searchTerm]}
+                                    votes={this.state.voting}
                                 />
                             </div>
                           ))}
                     </div>
-                    
+
                     <div className="row">
-                        <div className="col-auto" />
+                        <div className="col-1" />
 
-                        <button
-                            className="btn btn-primary"
-                            onClick={this.handleGetNext}
-                            type="button"
-                        >
-                            Next
-                        </button>
+                        <div className="col-auto">
+                            <span
+                                className="btn material-icons"
+                                onClick={this.handleGetPrev}
+                            >
+                                arrow_back_ios
+                            </span>
+                        </div>
 
-                        <div className="col-auto" />
-
-                        <button
-                            className="btn btn-primary"
-                            onClick={this.handleGetPrev}
-                            type="button"
-                        >
-                            Previous
-                        </button>
+                        <div className="col-auto">
+                            <span
+                                className="btn material-icons"
+                                onClick={this.handleGetNext}
+                            >
+                                arrow_forward_ios
+                            </span>
+                        </div>
                     </div>
                 </div>
             )
@@ -145,7 +146,7 @@ class Ask extends React.Component {
         }
     }
 
-      render () {
+    render () {
         console.log(this.state.display,this.state.tempList, this.state.id_list)
               return (
                   <div>
