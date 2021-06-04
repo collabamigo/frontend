@@ -22,7 +22,7 @@ function AuthenticatedHome() {
                     <div className="row">
                         <Fade
                             className="col-lg-4 mb-4"
-                            direction={isMobile?"left":"up"}
+                            direction={isMobile?"left":"down"}
                         >
                             <Card className="card_main help_card_main text-secondary card">
                                 <img
@@ -98,7 +98,7 @@ function AuthenticatedHome() {
 
                         <Fade
                             className="col-lg-4 mb-4"
-                            direction={isMobile?"left":"up"}
+                            direction={isMobile?"left":"down"}
                         >
                             <Card className="card_main card cc_main text-secondary">
                                 <img
