@@ -76,9 +76,6 @@ class HelpForm extends React.Component{
         }).then(this.props.handleSubmit())
     }
 
-    
-
-
     render() {
         console.log(this.state.currentStep)
         console.log(this.state.data)

@@ -1,0 +1,21 @@
+.card-pieChart{
+    width:24rem;
+    height:22rem;
+}
+
+.main-profile{
+    height:300px;
+}
+
+.card-profile-title{
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: larger;
+}
+
+.main-profile-footer{
+    border-top: none!important;
+}
+
+.card-votes{
+    height:440px;
+}

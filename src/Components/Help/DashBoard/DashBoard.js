@@ -25,7 +25,7 @@ class DashBoard extends React.Component {
             labels: ["Up Votes","Down Votes"],
             datasets: [
                 {
-                    data: [props.upvote, props.downvote ],
+                    data: [props.upvote+1, props.downvote+1],
                     backgroundColor: ["#F7464A", "#46BFBD"],
                     hoverBackgroundColor: [
                         "#FF5A5E",
