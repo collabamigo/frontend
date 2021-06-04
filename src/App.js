@@ -2,7 +2,6 @@
 import React from "react";
 // import 'bootswatch/dist/sketchy/bootstrap.min.css';
 import "./App.css";
-// import GoogleSignIn from "./Components/GoogleSignIn/GoogleSignIn";
 import Ask from "./Components/Ask/Ask";
 import Help from "./Components/Help/Help";
 import {
@@ -19,6 +18,7 @@ import Connect from './Components/Connect/Connect'
 import ConnectionRequest from "./Components/ConnectionRequest/ConnectionRequest";
 import AuthenticatedHome from "./Components/AuthenticatedHome/AuthenticatedHome";
 import UnauthenticatedHome from "./Components/UnauthenticatedHome/UnauthenticatedHome";
+import Collab from "./Components/Collab/Collab";
 
 
 // eslint-disable-next-line react/require-optimization
@@ -73,19 +73,17 @@ class App extends React.Component {
             <div className="App">
                 <Router>
                     <>
+                        {this.state.signedIn ?
+                            <Collab
+                                className="jumbotron"
+                                title="Collab Connect"
+                            />
+                            : null}
+
                         <Route
                             exact
                             path="/"
                         >
-                            {/*<GoogleSignIn*/}
-
-                            {/*    onClick={this.handleLogin}*/}
-
-                            {/*    visibility={!this.state.signedIn}*/}
-
-                            {/*/>*/}
-
-                            {/*<Welcome visibility={this.state.signedIn} />*/}
 
                             {this.state.signedIn ?
                                 <AuthenticatedHome />

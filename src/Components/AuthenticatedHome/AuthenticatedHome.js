@@ -1,5 +1,4 @@
 import {Link, Route, Switch} from "react-router-dom";
-import Collab from "../Collab/Collab";
 import Card from "react-bootstrap/Card";
 import React from "react";
 
@@ -11,10 +10,6 @@ function AuthenticatedHome() {
                     exact
                     path="/"
                 >
-                    <Collab
-                        className="jumbotron"
-                        title="Collab Connect"
-                    />
 
                     {/*<DarkMode />*/}
                 </Route>
