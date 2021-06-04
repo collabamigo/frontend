@@ -37,23 +37,22 @@ function DropdownMenu (props) {
                     onSelect={handleSelect}
                     title={props.title}
                 >
-                    <Dropdown.Item
-                        className="dropdown-item"
+                    <Link
+                        className="text-body dropdown-item"
                         eventKey="profile"
+                        to="/profile"
                     >
-                        <Link
-                            className="text-body"
-                            to="/profile"
-                        >
-                            Profile
-                            <span className="material-icons col-2">
-                                perm_identity
-                            </span>
-                        </Link>
-                    </Dropdown.Item>
+
+                        Profile
+                        <span className="material-icons col-2">
+                            perm_identity
+                        </span>
+                        
+                    </Link>
 
                     <Dropdown.Item
                         className="dropdown-item"
+                        disabled
                         eventKey="settings"
                     >
                         Settings

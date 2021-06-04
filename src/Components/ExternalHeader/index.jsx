@@ -1,38 +1,26 @@
 
 import React from 'react'
-import { useState } from "react";
-import { Row, Col, Drawer } from "antd";
 import { withTranslation } from "react-i18next";
 import Container from "../../common/Container";
 import { SvgIcon } from "../../common/SvgIcon";
 import {
   HeaderSection,
   LogoContainer,
-  Burger,
   NotHidden,
-  Menu,
-  Label,
-  Outline,
 } from "./styles";
+import PropTypes from "prop-types";
+import DropdownMenu from "../DropdownMenu/DropdownMenu";
 
-function ExternalHeader() {
-  const [visible, setVisibility] = useState(false);
-
-  const showDrawer = () => {
-    setVisibility(!visible);
-  };
-
-  const onClose = () => {
-    setVisibility(!visible);
-  };
+function ExternalHeader({isAuthenticated}) {
 
 
   return (
       <HeaderSection>
           <Container>
-              <Row justify="space-between">
+              <div className="row">
                   <LogoContainer
                       aria-label="homepage"
+                      className='col-auto'
                       to="/"
                   >
                       <SvgIcon
@@ -42,20 +30,26 @@ function ExternalHeader() {
                       />
                   </LogoContainer>
 
-                  <NotHidden />
+                  <NotHidden className="col" />
 
-                  <Burger onClick={showDrawer}>
+                  { isAuthenticated?
+                      <DropdownMenu
+                          title={localStorage.getItem("userName")}
+                          visibility
+                      />: null}
+
+                  {/*<Burger onClick={showDrawer}>
                       <Outline />
-                  </Burger>
-              </Row>
+                  </Burger>*/}
+              </div>
 
-              <Drawer
+              {/*<<Drawer
                   closable={false}
                   onClose={onClose}
                   visible={visible}
               >
                   <Col style={{ marginBottom: "2.5rem" }}>
-                      <Label onClick={onClose}>
+                      Label onClick={onClose}>
                           <Col span={12}>
                               <Menu>
                                   Menu
@@ -66,12 +60,17 @@ function ExternalHeader() {
                               <Outline />
                           </Col>
                       </Label>
+                      
                   </Col>
 
-              </Drawer>
+              </Drawer>*/}
           </Container>
       </HeaderSection>
   );
+}
+
+ExternalHeader.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired
 }
 
 export default withTranslation()(ExternalHeader);

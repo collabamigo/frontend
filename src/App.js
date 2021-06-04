@@ -18,7 +18,8 @@ import Connect from './Components/Connect/Connect'
 import ConnectionRequest from "./Components/ConnectionRequest/ConnectionRequest";
 import AuthenticatedHome from "./Components/AuthenticatedHome/AuthenticatedHome";
 import UnauthenticatedHome from "./Components/UnauthenticatedHome/UnauthenticatedHome";
-import Collab from "./Components/Collab/Collab";
+// import Collab from "./Components/Collab/Collab";
+import ExternalHeader from "./Components/ExternalHeader";
 
 // eslint-disable-next-line react/require-optimization
 class App extends React.Component {
@@ -72,12 +73,7 @@ class App extends React.Component {
             <div className="App">
                 <Router>
                     <>
-                        {this.state.signedIn ?
-                            <Collab
-                                className="jumbotron"
-                                title="Collab Connect"
-                            />
-                            : null}
+                        <ExternalHeader isAuthenticated={this.state.signedIn} />
 
                         <Route
                             exact
