@@ -23,7 +23,7 @@ function AuthenticatedHome() {
                     <div className="row">
                         <Fade
                             className="col-lg-4 mb-4"
-                            direction={isMobile?"left":"down"}
+                            direction={isMobile?"left":"up"}
                             triggerOnce
                         >
                             <Card className="card_main help_card_main text-secondary card">
@@ -58,7 +58,7 @@ function AuthenticatedHome() {
 
                         <Fade
                             className="col-lg-4 mb-4"
-                            direction={isMobile?"right":"down"}
+                            direction={isMobile?"right":"up"}
                             triggerOnce
                         >
                             <Card className="card_main card ask_card_main text-secondary">
@@ -101,7 +101,7 @@ function AuthenticatedHome() {
 
                         <Fade
                             className="col-lg-4 mb-4"
-                            direction={isMobile?"left":"down"}
+                            direction={isMobile?"left":"up"}
                             triggerOnce
                         >
                             <Card className="card_main card cc_main text-secondary">
