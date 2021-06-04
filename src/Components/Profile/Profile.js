@@ -8,8 +8,6 @@ class Profile extends React.Component{
 
     constructor(props) {
         super(props);
-        this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
-        this.handleChangeLastName = this.handleChangeLastName.bind(this);
         this.handleChangeDegree = this.handleChangeDegree.bind(this);
         this.handleChangeCourse = this.handleChangeCourse.bind(this);
         this.handleChangeHandle = this.handleChangeHandle.bind(this);
@@ -39,13 +37,6 @@ class Profile extends React.Component{
         return true;
     }
 
-    handleChangeFirstName(e) {
-        this.setState({ FirstName: e.target.value })
-    }
-
-    handleChangeLastName(e) {
-        this.setState({ LastName: e.target.value })
-    }
 
     handleChangeDegree(e) {
         this.setState({ degree: e.target.value })
@@ -65,8 +56,6 @@ class Profile extends React.Component{
 
     handleSubmit(e) {
 
-        alert('A name was submitted: ' + this.state.LastName);
-
         let payload = {
             "First_Name":this.state.data[0]["First_Name"],
             "Last_Name":this.state.data[0]["Last_Name"],
@@ -77,43 +66,14 @@ class Profile extends React.Component{
             "IsTeacher":false}
 
         axios.post(backend+"connect/profile/", payload)
-            .then(res => {
-            console.log(res);
-            console.log(res.data);
+            .then(() => {
+            alert("Profile update successful")
           })
 
-        //     "Last_Name": "", n
-        //     "Gender": "",
-        //     "Degree": "", n
-        //     "Course": "", n
-        //     "Email": "", n
-        //     "Handle": "",
-        //     "IsTeacher": false n
-        // }
-
-        console.log(this.state.FirstName)
-        console.log(this.state.LastName)
-        console.log(this.email)
-        console.log(this.state.Handle)
-        console.log(this.state.Contact)
-        console.log(this.state.degree)
-        console.log(this.state.course)
-
-        this.setState({
-            FirstName: '',
-            LastName:'',
-            degree: '',
-            course:'',
-            Contact:'',
-            Handle:''
-        })
         e.preventDefault();
 
     }
 
-    handleChange(event) {
-    this.setState({LastName: event.target.value});
-  }
 
 
   render() {
@@ -125,17 +85,16 @@ class Profile extends React.Component{
                         First Name
                     </label>
 
-                    <div>
-                        <input
-                            className="form-control col-auto"
-                            disabled
-                            onChange={this.handleChangeFirstName}
-                            placeholder={this.state.data[0]["First_Name"]}
-                            type='text'
-                            value={this.state.data[0]["First_Name"]}
-                        />
-                    </div>
+                <div>
+                    <input
+                        className="form-control col-auto"
+                        disabled
+                        placeholder={this.state.data[0]["First_Name"]}
+                        type='text'
+                        value={this.state.data[0]["First_Name"]}
+                    />
                 </div>
+            </div>
 
                 <br />
 
@@ -144,17 +103,16 @@ class Profile extends React.Component{
                         Last Name
                     </label>
 
-                    <div className="row-auto">
-                        <input
-                            className="form-control col-auto"
-                            disabled
-                            onChange={this.handleChangeLastName}
-                            placeholder={this.state.data[0]["Last_Name"]}
-                            type='text'
-                            value={this.state.data[0]["Last_Name"]}
-                        />
+                <div className="row-auto">
+                    <input
+                        className="form-control col-auto"
+                        disabled
+                        placeholder={this.state.data[0]["Last_Name"]}
+                        type='text'
+                        value={this.state.data[0]["Last_Name"]}
+                    />
 
-                        
+
 
                     </div>
                 </div>
@@ -166,16 +124,15 @@ class Profile extends React.Component{
                         Email
                     </label>
 
-                    <div>
-                        <input
-                            className="form-control col-auto"
-                            disabled
-                            placeholder={this.email}
-                            type='text'
-                            value={this.state.data[0]["email"]}
-                        />
-                    </div>
+                <div>
+                    <input
+                        className="form-control col-auto"
+                        disabled
+                        type='text'
+                        value={this.state.data[0]["email"]}
+                    />
                 </div>
+            </div>
 
                 <br />
 

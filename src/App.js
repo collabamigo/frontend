@@ -1,27 +1,24 @@
 
-import Collab from "./Components/Collab/Collab";
 import React from "react";
 // import 'bootswatch/dist/sketchy/bootstrap.min.css';
 import "./App.css";
-import GoogleSignIn from "./Components/GoogleSignIn/GoogleSignIn";
+// import GoogleSignIn from "./Components/GoogleSignIn/GoogleSignIn";
 import Ask from "./Components/Ask/Ask";
 import Help from "./Components/Help/Help";
 import {
-    Link,
     Route,
     BrowserRouter as Router,
-    Switch
 } from "react-router-dom";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import Footer from "./Components/Footer/Footer";
 import AboutUs from "./Components/AboutUs/AboutUs";
 import axios from "axios";
 import Profile from "./Components/Profile/Profile";
-import Card from "react-bootstrap/Card";
 import Connect from './Components/Connect/Connect'
 // import DarkMode from "./Components/Collab/DarkMode/DarkMode";
 import ConnectionRequest from "./Components/ConnectionRequest/ConnectionRequest";
-import Welcome from "./Components/Welcome/Welcome";
+import AuthenticatedHome from "./Components/AuthenticatedHome/AuthenticatedHome";
+import UnauthenticatedHome from "./Components/UnauthenticatedHome/UnauthenticatedHome";
 
 
 // eslint-disable-next-line react/require-optimization
@@ -71,6 +68,7 @@ class App extends React.Component {
     }
 
     render() {
+
         return (
             <div className="App">
                 <Router>
@@ -79,139 +77,21 @@ class App extends React.Component {
                             exact
                             path="/"
                         >
-                            <GoogleSignIn
-                                onClick={this.handleLogin}
-                                visibility={!this.state.signedIn}
-                            />
+                            {/*<GoogleSignIn*/}
 
-                            <Welcome visibility={this.state.signedIn} />
+                            {/*    onClick={this.handleLogin}*/}
+
+                            {/*    visibility={!this.state.signedIn}*/}
+
+                            {/*/>*/}
+
+                            {/*<Welcome visibility={this.state.signedIn} />*/}
 
                             {this.state.signedIn ?
-                                <div>
-                                    <Switch>
-                                        <Route
-                                            exact
-                                            path="/"
-                                        >
-                                            <Collab
-                                                className="jumbotron"
-                                                title="Collab Connect"
-                                            />
-
-                                            {/*<DarkMode />*/}
-                                        </Route>
-                                    </Switch>
-
-                                    <section>
-                                        <div className="container">
-                                            <div className="row">
-                                                <div className="col-lg-4 mb-4">
-                                                    <Card className="card_main help_card_main text-secondary card">
-                                                        <img
-                                                            alt=""
-                                                            className="card-img-top"
-                                                            src="https://images.unsplash.com/photo-1495653797063-114787b77b23?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-                                                        />
-
-                                                        <Card.Body>
-                                                            <Card.Title className="card-title font-weight-bold">
-                                                                HELP OTHERS
-                                                            </Card.Title>
-
-                                                            <br />
-
-                                                            <Card.Text className="card-text masthead">
-                                                                Solve other&apos;s doubts and be the mentor you always wanted.
-                                                                Using our platform you can reach a larger curious community.
-                                                            </Card.Text>
-
-                                                            <Link
-                                                                className="col-auto btn btn-primary"
-                                                                to="/help"
-                                                            >
-                                                                Help others
-                                                            </Link>
-
-                                                        </Card.Body>
-                                                    </Card>
-                                                </div>
-
-                                                <div className="col-lg-4 mb-4">
-                                                    <Card className="card_main card ask_card_main text-secondary">
-                                                        <img
-                                                            alt="noobmaster"
-                                                            className="card-img-top"
-                                                            src="https://images.unsplash.com/photo-1534551767192-78b8dd45b51b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-                                                        />
-
-                                                        <Card.Body className="card-body">
-                                                            <Card.Title className="card-title font-weight-bold">
-                                                                ASK FOR HELP
-                                                            </Card.Title>
-
-                                                            <br />
-
-                                                            <Card.Text className="card-text">
-                                                                <b>
-                                                                    Stack Overflow:404!
-                                                                </b>
-
-                                                                {" "}
-                                                                Answer not found,
-
-                                                                <br />
-                                                                The button below can solve it
-                                                            </Card.Text>
-
-                                                            <br />
-
-                                                            <Link
-                                                                className="col-auto btn btn-primary"
-                                                                to="/ask"
-                                                            >
-                                                                Ask for help
-                                                            </Link>
-                                                        </Card.Body>
-                                                    </Card>
-                                                </div>
-
-                                                <div className="col-lg-4 mb-4">
-                                                    <Card className="card_main card cc_main text-secondary">
-                                                        <img
-                                                            alt=""
-                                                            className="card-img-top"
-                                                            src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
-                                                        />
-
-                                                        <Card.Body className="card-body">
-                                                            <Card.Title className="card-title font-weight-bold">
-                                                                LET&apos;S  COLLABORATE
-                                                            </Card.Title>
-
-                                                            <br />
-
-                                                            <Card.Text className="card-text">
-                                                                Find new projects to work.
-                                                                Apply for teams and Collaborations.
-                                                                Lets keep the learning and helping community alive.
-                                                            </Card.Text>
-
-                                                            <div
-                                                                className="col-auto btn btn-primary disabled"
-                                                                to="/collab_connect"
-                                                            >
-                                                                Coming Soon...
-                                                            </div>
-
-                                                        </Card.Body>
-                                                    </Card>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-
-                                : null}
+                                <AuthenticatedHome />
+                                : <UnauthenticatedHome 
+                                        onLogin={this.handleLogin}
+                                  />}
                         </Route>
 
                         <ProtectedRoute
