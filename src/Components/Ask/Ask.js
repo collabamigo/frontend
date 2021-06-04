@@ -19,7 +19,8 @@ class Ask extends React.Component {
             "tempList": [{}],
             "list":[],
             "listIndex":4,
-            "voting":true
+            "voting":true,
+            loading: false
         }
 
     }
@@ -38,20 +39,30 @@ class Ask extends React.Component {
     }
 
     handleGetNext = () => {
+        this.setState({
+            loading: true
+        })
         axios.get(backend + "connect/teachersdata/", {
             params: {
                 id_list: JSON.stringify(this.state.list.slice(this.state.listIndex, this.state.listIndex+4))
             }
-        }).then(r => this.setState((state)  => ({listIndex:state.listIndex+4, tempList:r.data})))
+        }).then(r => this.setState((state)  => ({
+            listIndex:state.listIndex+4, tempList:r.data,
+            loading: false})))
     }
 
     handleGetPrev =() => {
-        console.log(this.state.list)
+        this.setState({
+            loading: true
+        })
         axios.get(backend + "connect/teachersdata/", {
             params: {
                 id_list: JSON.stringify(this.state.list.slice(this.state.listIndex-8, this.state.listIndex-4))
             }
-        }).then(r => this.setState((state)  => ({listIndex:state.listIndex-4, tempList:r.data})))
+        }).then(r => this.setState((state)  => ({
+            listIndex:state.listIndex-4, tempList:r.data,
+            loading: false,
+        })))
     }
 
     handleChange = (value) => {
@@ -59,6 +70,9 @@ class Ask extends React.Component {
     }
 
     getTeacherIds = (searchTerm) => {
+        this.setState({
+            loading: true
+        })
         axios.get(backend+"connect/skill/"+ searchTerm ,{
         params: {
             format: "json",
@@ -73,7 +87,8 @@ class Ask extends React.Component {
                 })
                     .then((response) => this.setState({
                         tempList: response.data,
-                        found_match: true}))
+                        found_match: true,
+                        loading: false}))
                     .catch((err) => console.log(err));
             })
             .catch((err) => console.log(err));
@@ -140,14 +155,23 @@ class Ask extends React.Component {
         else {
             return (
                 <div className="float-centre">
-                    Loading...
+                    {this.state.loading ?
+                        <div
+                            className="spinner-border"
+                            role="status"
+                        >
+                            <span className="sr-only">
+                                Loading...
+                            </span>
+                        </div> : "No matches found"}
                 </div>
             )
         }
     }
+    // TODO: Show next/previous button if more elements actually exist.
 
+    // TODO: Show voting button only when valid
     render () {
-        console.log(this.state.display,this.state.tempList, this.state.id_list)
               return (
                   <div>
                       <div>

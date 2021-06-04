@@ -1,6 +1,7 @@
 import {Link, Route, Switch} from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import React from "react";
+import {Fade} from "react-awesome-reveal";
 
 function AuthenticatedHome() {
     return (
@@ -18,7 +19,10 @@ function AuthenticatedHome() {
             <section>
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-4 mb-4">
+                        <Fade
+                            className="col-lg-4 mb-4"
+                            direction="up"
+                        >
                             <Card className="card_main help_card_main text-secondary card">
                                 <img
                                     alt=""
@@ -47,9 +51,12 @@ function AuthenticatedHome() {
 
                                 </Card.Body>
                             </Card>
-                        </div>
+                        </Fade>
 
-                        <div className="col-lg-4 mb-4">
+                        <Fade
+                            className="col-lg-4 mb-4"
+                            direction="down"
+                        >
                             <Card className="card_main card ask_card_main text-secondary">
                                 <img
                                     alt="noobmaster"
@@ -86,9 +93,12 @@ function AuthenticatedHome() {
                                     </Link>
                                 </Card.Body>
                             </Card>
-                        </div>
+                        </Fade>
 
-                        <div className="col-lg-4 mb-4">
+                        <Fade
+                            className="col-lg-4 mb-4"
+                            direction="up"
+                        >
                             <Card className="card_main card cc_main text-secondary">
                                 <img
                                     alt=""
@@ -118,7 +128,7 @@ function AuthenticatedHome() {
 
                                 </Card.Body>
                             </Card>
-                        </div>
+                        </Fade>
                     </div>
                 </div>
             </section>

@@ -7,6 +7,7 @@ import { UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
 import backend from "../../../env";
 import axios from "axios";
 import {SvgIcon} from "../../../common/SvgIcon";
+import {Fade} from "react-awesome-reveal";
 
 function handleSubmit(e, message, teacher_id, skills){
     axios.post(backend+"connect/request/", {
@@ -62,14 +63,14 @@ function renderVotesNeeded(props) {
     }
 
     else{
-        return(null)
+        return null
     }
 }
 
 function CardsP (props) {
     const [message, setMessage] = useState("");
     return (
-        <div className="float-right">
+        <Fade className="float-right" >
             <Card className="card_main" >
                 <Card.Body>
                     <Card.Title className="main_title">
@@ -176,7 +177,7 @@ function CardsP (props) {
                     </Card.Link>
                 </Card.Body>
             </Card>
-        </div>
+        </Fade>
     );
 
 }
