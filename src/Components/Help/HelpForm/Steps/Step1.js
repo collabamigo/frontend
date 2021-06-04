@@ -1,7 +1,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-
+import Card from 'react-bootstrap/Card';
 class Step1 extends React.Component {
     static propTypes = {
             Contact:PropTypes.string.isRequired,
@@ -23,7 +23,7 @@ class Step1 extends React.Component {
     nextButton(){
         return (
             <button
-                className="btn btn-primary"
+                className="btn btn-primary col-5"
                 onClick={this.props.handleNext}
                 type="button"
                 value="Next"
@@ -39,88 +39,110 @@ class Step1 extends React.Component {
         else
         {
             return (
-                <>
-                    <div className="form-group row">
-                        <label className="col-auto col-form-label">
-                            Handle
-                        </label>
+                <div className="container-fluid col-5 ">
+                    <Card className="card shadow-sm border-0 px-3 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light container  ">
 
-                        <div>
-                            <input
-                                className="form-control col-auto"
-                                onChange={this.props.handleChangeHandle}
-                                placeholder="@instagram"
-                                required
-                                type='text'
-                                value={this.props.Handle}
-                            />
+                        <Card.Header>
+                            <h2>
+                                Hey ! We see you are eager to help others !
+                            </h2>
 
-                        </div>
-                    </div>
+                            <br />
+                            In order to help others Please register with us
+                        </Card.Header>
 
-                    <br />
+                        <Card.Body>
+                            <form
+                                className="card-body"
+                                onSubmit={this.handleSubmit}
+                            >
+                                <div className="form-group">
+                                    <div className="col-auto form-inline col-form-label">
 
-                    <div className="form-group row">
-                        <label className="col-auto col-form-label">
-                            Contact
-                        </label>
+                                        <label>
+                                            Telegram Handle
+                                        </label>
 
-                        <div>
-                            <input
-                                className="form-control col-auto"
-                                onChange={this.props.handleChangeContact}
-                                placeholder="Mobile Number"
-                                required
-                                type='number'
-                                value={this.props.Contact}
-                            />
-                        </div>
-                    </div>
+                                    </div>
 
-                    <br />
+                                    <div>
+                                        <input
+                                            className="form-control col-auto"
+                                            onChange={this.props.handleChangeHandle}
+                                            placeholder="@instagram"
+                                            required
+                                            type='text'
+                                            value={this.props.Handle}
+                                        />
+                                    </div>
 
-                    <div className="form-group row">
-                        <label className="col-auto col-form-label">
-                            Github Profile
-                        </label>
 
-                        <div>
-                            <input
-                                className="form-control col-auto"
-                                onChange={this.props.handleChangeGithub}
-                                placeholder="Github account"
-                                required
-                                type='text'
-                                value={this.props.Github}
-                            />
-                        </div>
-                    </div>
+                                </div>
 
-                    <br />
+                                <div className="form-group">
+                                    <div className="col-auto form-inline col-form-label">
 
-                    <div className="form-group row">
-                        <label className="col-auto col-form-label">
-                            LinkedIn Profile
-                        </label>
+                                        <label>
+                                            Contact Number
+                                        </label>
 
-                        <div>
-                            <input
-                                className="form-control col-auto"
-                                onChange={this.props.handleChangeLinkedin}
-                                placeholder="paste your LinkedIn URL"
-                                required
-                                type='text'
-                                value={this.props.Linkedin}
-                            />
-                        </div>
-                    </div>
 
-                    <br />
+                                    </div>
 
-                    <div />
+                                    <div className="row-auto">
+                                        <input
+                                            className="form-control col-auto"
+                                            onChange={this.props.handleChangeContact}
+                                            placeholder="Mobile Number"
+                                            required
+                                            type='number'
+                                            value={this.props.Contact}
+                                        />
+                                    </div>
+                                </div>
 
-                    {this.nextButton()}
-                </>
+                                <div className="form-group">
+                                    <label className="col-auto form-inline col-form-label">
+                                        Github Profile
+                                    </label>
+
+                                    <div>
+                                        <input
+                                            className="form-control col-auto"
+                                            onChange={this.props.handleChangeGithub}
+                                            placeholder="Github account"
+                                            required
+                                            type='text'
+                                            value={this.props.Github}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="col-auto form-inline col-form-label">
+                                        LinkedIn Profile
+                                    </label>
+
+                                    <div>
+                                        <input
+                                            className="form-control col-auto"
+                                            onChange={this.props.handleChangeLinkedin}
+                                            placeholder="paste your LinkedIn URL"
+                                            required
+                                            type='text'
+                                            value={this.props.Linkedin}
+                                        />
+                                    </div>
+                                </div>
+
+                            </form>
+                        </Card.Body>
+
+                        <Card.Footer>
+                            {this.nextButton()}
+                        </Card.Footer>
+                    </Card>
+                </div>
             );
         }
     }

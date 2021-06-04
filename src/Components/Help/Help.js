@@ -49,14 +49,6 @@ class Ask extends React.Component {
         else if (this.state.teacher === false) {
             return (
                 <div>
-                    <h3>
-                        Hey ! We see you are eager to help others !
-                    </h3>
-
-                    <p>
-                        In order to help others Please register with us
-                    </p>
-
                     <HelpForm
                         handleSubmit={this.handlerSubmit.bind(this)}
                     />
