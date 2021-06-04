@@ -85,16 +85,16 @@ class Profile extends React.Component{
                         First Name
                     </label>
 
-                <div>
-                    <input
-                        className="form-control col-auto"
-                        disabled
-                        placeholder={this.state.data[0]["First_Name"]}
-                        type='text'
-                        value={this.state.data[0]["First_Name"]}
-                    />
+                    <div>
+                        <input
+                            className="form-control col-auto"
+                            disabled
+                            placeholder={this.state.data[0]["First_Name"]}
+                            type='text'
+                            value={this.state.data[0]["First_Name"]}
+                        />
+                    </div>
                 </div>
-            </div>
 
                 <br />
 
@@ -103,14 +103,14 @@ class Profile extends React.Component{
                         Last Name
                     </label>
 
-                <div className="row-auto">
-                    <input
-                        className="form-control col-auto"
-                        disabled
-                        placeholder={this.state.data[0]["Last_Name"]}
-                        type='text'
-                        value={this.state.data[0]["Last_Name"]}
-                    />
+                    <div className="row-auto">
+                        <input
+                            className="form-control col-auto"
+                            disabled
+                            placeholder={this.state.data[0]["Last_Name"]}
+                            type='text'
+                            value={this.state.data[0]["Last_Name"]}
+                        />
 
 
 
@@ -124,15 +124,15 @@ class Profile extends React.Component{
                         Email
                     </label>
 
-                <div>
-                    <input
-                        className="form-control col-auto"
-                        disabled
-                        type='text'
-                        value={this.state.data[0]["email"]}
-                    />
+                    <div>
+                        <input
+                            className="form-control col-auto"
+                            disabled
+                            type='text'
+                            value={this.state.data[0]["email"]}
+                        />
+                    </div>
                 </div>
-            </div>
 
                 <br />
 
