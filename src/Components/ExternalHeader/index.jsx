@@ -33,14 +33,13 @@ function ExternalHeader({isAuthenticated}) {
                   <NotHidden className="col" />
 
                   { isAuthenticated?
-                      <DropdownMenu
-                          title={localStorage.getItem("userName")}
-                          visibility
-                      />: null}
+                      <div className="mt-3">
+                          <DropdownMenu
+                              title={localStorage.getItem("userName")}
+                              visibility
+                          />
+                      </div>: null}
 
-                  {/*<Burger onClick={showDrawer}>
-                      <Outline />
-                  </Burger>*/}
               </div>
 
               {/*<<Drawer
