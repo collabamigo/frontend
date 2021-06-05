@@ -1,7 +1,7 @@
 
 import React from "react";
 import "./Ask.css";
-import CardsP from "./CardsP/CardsP";
+import CardsP from "../CardsP/CardsP";
 import Autocomplete from "./Autocomplete";
 import axios from "axios";
 import backend from "../../env";

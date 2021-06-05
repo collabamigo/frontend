@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import "./CardsP.css";
 import PropTypes from "prop-types";
 import { UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
-import {SvgIcon} from "../../../common/SvgIcon";
+import {SvgIcon} from "../../common/SvgIcon";
 import {Fade} from "react-awesome-reveal";
 
 
