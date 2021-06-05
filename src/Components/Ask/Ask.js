@@ -5,7 +5,7 @@ import CardsP from "../CardsP/CardsP";
 import Autocomplete from "./Autocomplete";
 import axios from "axios";
 import backend from "../../env";
-import {Card, Col} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 
 
 class Ask extends React.Component {
@@ -201,13 +201,13 @@ class Ask extends React.Component {
                           </Card.Title>
                           
                           <Card.Body>
-                              <Col>
+                              <div className="col">
                                   <Autocomplete
                                       onChange={this.handleChange}
                                       onMatch={this.handleMatch}
                                       suggestions={this.state.temp_l}
                                   />
-                              </Col>
+                              </div>
 
                               <div className="row-auto pt-5">
                                   <div className="col-auto pl-lg-5">
