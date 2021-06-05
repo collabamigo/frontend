@@ -5,7 +5,7 @@ import CardsP from "../CardsP/CardsP";
 import Autocomplete from "./Autocomplete";
 import axios from "axios";
 import backend from "../../env";
-import {Card} from "react-bootstrap";
+import {Card, Col} from "react-bootstrap";
 
 
 class Ask extends React.Component {
@@ -190,7 +190,7 @@ class Ask extends React.Component {
     render () {
               return (
                   <div>
-                      <Card>
+                      <Card className="card card_skillSearch">
                           <Card.Title>
                               <h1 className="col-sm-5 col-md-5">
                                   {" "}
@@ -200,18 +200,23 @@ class Ask extends React.Component {
                               </h1>
                           </Card.Title>
                           
-                          <Autocomplete
-                              onChange={this.handleChange}
-                              onMatch={this.handleMatch}
-                              suggestions={this.state.temp_l}
-                          />
+                          <Card.Body>
+                              <Col>
+                                  <Autocomplete
+                                      onChange={this.handleChange}
+                                      onMatch={this.handleMatch}
+                                      suggestions={this.state.temp_l}
+                                  />
+                              </Col>
 
-
-                          <div className="row-auto">
-                              <div className="col-auto">
-                                  {this.renderCardsIfNeeded()}
+                              <div className="row-auto pt-5">
+                                  <div className="col-auto pl-lg-5">
+                                      {this.renderCardsIfNeeded()}
+                                  </div>
                               </div>
-                          </div>
+                              
+                              
+                          </Card.Body>
                       </Card>
                   </div>
               );
