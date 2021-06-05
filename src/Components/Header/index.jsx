@@ -29,7 +29,7 @@ function ExternalHeader({isAuthenticated}) {
 
 
   return (
-      <HeaderSection>
+      <HeaderSection className="pt-3 pr-2 pb-5 pl-2">
           <Container>
               <div className="row">
                   <LogoContainer
