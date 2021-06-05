@@ -4,28 +4,10 @@ import Card from "react-bootstrap/Card";
 import "./CardsP.css";
 import PropTypes from "prop-types";
 import { UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
-import backend from "../../../env";
-import axios from "axios";
 import {SvgIcon} from "../../../common/SvgIcon";
 import {Fade} from "react-awesome-reveal";
 
-function handleSubmit(e, message, teacher_id, skills){
-    axios.post(backend+"connect/request/", {
-        id: teacher_id,
-        message: message,
-        skills: skills
-    }).then(()=> {
-        alert("Your connection request has been sent")
-    })
-        .catch((err) => {
-            if (err.response.status === 429) // THROTTLED
-                alert("You have submitted too many requests in the past 24 hours. Please wait before submitting more.")
-            else if (err.response.status === 403) // Previous unaccepted request logged
-                alert("You have already sent a similar request to the same person")
-        })
 
-    e.preventDefault()
-}
 
 function handleSpanUp(){
     console.log("up")
@@ -68,6 +50,14 @@ function renderVotesNeeded(props) {
 }
 
 function CardsP (props) {
+
+
+
+    function handleSubmit(e, message, teacher_id){
+        props.onConnect(message, teacher_id)
+        e.preventDefault()
+    }
+
     const [message, setMessage] = useState("");
     return (
         <Fade className="float-right" >
@@ -87,54 +77,55 @@ function CardsP (props) {
 
                     {renderVotesNeeded(props)}
 
-                    <div>
-                        <button
-                            className="btn btn-primary"
-                            id={"UncontrolledPopover" + props.key_value}
-                            onClick={() => setMessage("")}
-                            type="button"
-                        >
-                            Connect
-                        </button>
+                    {props.showConnect?
+                        <div>
+                            <button
+                                className="btn btn-primary"
+                                id={"UncontrolledPopover" + props.key_value}
+                                onClick={() => setMessage("")}
+                                type="button"
+                            >
+                                Connect
+                            </button>
 
-                        <UncontrolledPopover
-                            placement="bottom"
-                            target={"UncontrolledPopover" + props.key_value}
-                            trigger="legacy"
-                        >
-                            <PopoverHeader>
-                                Popover Title
-                            </PopoverHeader>
+                            <UncontrolledPopover
+                                placement="bottom"
+                                target={"UncontrolledPopover" + props.key_value}
+                                trigger="legacy"
+                            >
+                                <PopoverHeader>
+                                    Popover Title
+                                </PopoverHeader>
 
-                            <PopoverBody>
-                                <div>
-                                    <label>
-                                        To : @
-                                        {''}
+                                <PopoverBody>
+                                    <div>
+                                        <label>
+                                            To : @
+                                            {''}
 
-                                        {props.name}
-                                    </label>
+                                            {props.name}
+                                        </label>
 
-                                    <input
-                                        className="form-control"
-                                        onChange={(e) => setMessage(e.target.value)}
-                                        placeholder="Enter message"
-                                        type="text-area"
-                                        value={message}
-                                    />
+                                        <input
+                                            className="form-control"
+                                            onChange={(e) => setMessage(e.target.value)}
+                                            placeholder="Enter message"
+                                            type="text-area"
+                                            value={message}
+                                        />
 
-                                    <button
-                                        className="btn btn-primary"
-                                        onClick={(e) => handleSubmit(e, message, props.key_value, props.skills)}
-                                        type="button"
-                                    >
-                                        Send
-                                    </button>
-                                </div>
+                                        <button
+                                            className="btn btn-primary"
+                                            onClick={(e) => handleSubmit(e, message, props.key_value)}
+                                            type="button"
+                                        >
+                                            Send
+                                        </button>
+                                    </div>
 
-                            </PopoverBody>
-                        </UncontrolledPopover>
-                    </div>
+                                </PopoverBody>
+                            </UncontrolledPopover>
+                        </div>:null}
 
                     <br />
 
@@ -186,12 +177,16 @@ CardsP.propTypes = {
     Git:PropTypes.string.isRequired,
     batch:PropTypes.string.isRequired,
     description:PropTypes.string.isRequired,
-    // insta:PropTypes.string.isRequired,
     key_value: PropTypes.string.isRequired,
     linked:PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onConnect: PropTypes.func,
+    showConnect: PropTypes.bool,
+}
 
+CardsP.defaultProps = {
+    onConnect: null,
+    showConnect: false
 }
 
 export default CardsP;

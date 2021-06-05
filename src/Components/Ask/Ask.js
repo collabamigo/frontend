@@ -38,6 +38,23 @@ class Ask extends React.Component {
 
     }
 
+
+    handleConnect = (message, teacher_id) => {
+        axios.post(backend+"connect/request/", {
+            id: teacher_id,
+            message: message,
+            skills: [this.state.searchTerm]
+        }).then(()=> {
+            alert("Your connection request has been sent")
+        })
+            .catch((err) => {
+                if (err.response.status === 429) // THROTTLED
+                    alert("You have submitted too many requests in the past 24 hours. Please wait before submitting more.")
+                else if (err.response.status === 403) // Previous unaccepted request logged
+                    alert("You have already sent a similar request to the same person")
+            })
+    }
+
     handleGetNext = () => {
         this.setState({
             loading: true
@@ -117,11 +134,11 @@ class Ask extends React.Component {
                                     Git={item.Gitname}
                                     batch={item.degree + ", " + item.course}
                                     description="My Tech Stack is "
-                                    // insta={"https://www.instagram.com/"+ item.Handle}
                                     key_value={item.id}
                                     linked={item.Linkedin}
                                     name={item.First_Name + " " + item.Last_Name}
-                                    skills={[this.state.searchTerm]}
+                                    onConnect={this.handleConnect.bind(this)}
+                                    showConnect
                                     votes={this.state.voting}
                                 />
                             </div>
