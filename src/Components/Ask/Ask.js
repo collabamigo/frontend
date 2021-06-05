@@ -132,7 +132,8 @@ class Ask extends React.Component {
                             >
                                 <CardsP
                                     Git={item.Gitname}
-                                    batch={item.degree + ", " + item.course}
+                                    batch={item.degree}
+                                    course={item.course}
                                     description="My Tech Stack is "
                                     key_value={item.id}
                                     linked={item.Linkedin}
