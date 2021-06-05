@@ -3,11 +3,10 @@ import React, {useState} from "react";
 import Card from "react-bootstrap/Card";
 import "./CardsP.css";
 import PropTypes from "prop-types";
-import { UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
 import {SvgIcon} from "../../common/SvgIcon";
 import {Fade} from "react-awesome-reveal";
-import {Col, Row} from "react-bootstrap";
-
+import {Col, OverlayTrigger, Row} from "react-bootstrap";
+import {Popover} from "react-bootstrap";
 
 function handleSpanUp(){
     console.log("up")
@@ -57,6 +56,38 @@ function CardsP (props) {
     }
 
     const [message, setMessage] = useState("");
+    
+    const connectPopover = (
+        <Popover>
+            <Popover.Content>
+
+                <div>
+                    <label>
+                        To : @
+                        {props.name}
+                    </label>
+
+                    <input
+                        className="form-control"
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder="Enter message"
+                        type="text-area"
+                        value={message}
+                    />
+
+                    <button
+                        className="btn btn-primary mt-2"
+                        onClick={(e) => handleSubmit(e, message, props.key_value)}
+                        type="button"
+                    >
+                        Send
+                    </button>
+                </div>
+
+            </Popover.Content>
+        </Popover>
+    )
+
     return (
         <Fade className="float-right" >
             <Card className="card card_P" >
@@ -120,52 +151,25 @@ function CardsP (props) {
 
                             {renderVotesNeeded(props)}
 
-                            <button
-                                className="btn btn-primary"
-                                id={"UncontrolledPopover" + props.key_value}
-                                onClick={() => setMessage("")}
-                                type="button"
-                            >
-                                Connect
-                            </button>
-
-                            <UncontrolledPopover
+                            <OverlayTrigger
+                                overlay={connectPopover}
                                 placement="bottom"
-                                target={"UncontrolledPopover" + props.key_value}
-                                trigger="legacy"
+                                rootClose
+                                transition={null}
+                                trigger="click"
                             >
-                                <PopoverHeader>
-                                    Popover Title
-                                </PopoverHeader>
+                                {({ ref, ...triggerHandler }) => (
+                                    <div
+                                        className="btn btn-primary"
+                                        {...triggerHandler}
+                                    >
+                                        <span ref={ref}>
+                                            Connect
+                                        </span>
+                                    </div>)}
+                            </OverlayTrigger>
 
-                                <PopoverBody>
-                                    <div>
-                                        <label>
-                                            To : @
-                                            {''}
 
-                                            {props.name}
-                                        </label>
-
-                                        <input
-                                            className="form-control"
-                                            onChange={(e) => setMessage(e.target.value)}
-                                            placeholder="Enter message"
-                                            type="text-area"
-                                            value={message}
-                                        />
-
-                                        <button
-                                            className="btn btn-primary"
-                                            onClick={(e) => handleSubmit(e, message, props.key_value)}
-                                            type="button"
-                                        >
-                                            Send
-                                        </button>
-                                    </div>
-
-                                </PopoverBody>
-                            </UncontrolledPopover>
                         </div>:null}
 
                 </Card.Body>
