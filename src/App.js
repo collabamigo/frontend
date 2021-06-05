@@ -9,7 +9,7 @@ import {
     BrowserRouter as Router,
 } from "react-router-dom";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
-import Footer from "./Components/Footer/Footer";
+// import Footer from "./Components/Footer/Footer";
 import AboutUs from "./Components/AboutUs/AboutUs";
 import axios from "axios";
 import Profile from "./Components/Profile/Profile";
@@ -149,7 +149,7 @@ class App extends React.Component {
                             </a>
                         </Route>
 
-                        <Footer />
+                        {/*<Footer />*/}
                     </>
                 </Router>
             </div >
