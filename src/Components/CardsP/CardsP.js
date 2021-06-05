@@ -94,9 +94,9 @@ function CardsP (props) {
                                 target="_blank"
                             >
                                 <SvgIcon
-                                    height="20px"
+                                    height="24px"
                                     src="linkedin.svg"
-                                    width="20px"
+                                    width="24px"
                                 />
                             </Card.Link>
 
@@ -105,9 +105,9 @@ function CardsP (props) {
                                 target="_blank"
                             >
                                 <SvgIcon
-                                    height="25px"
+                                    height="30px"
                                     src="github.svg"
-                                    width="25px"
+                                    width="30px"
                                 />
                             </Card.Link>
                         </Col>

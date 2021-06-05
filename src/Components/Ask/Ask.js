@@ -5,6 +5,7 @@ import CardsP from "../CardsP/CardsP";
 import Autocomplete from "./Autocomplete";
 import axios from "axios";
 import backend from "../../env";
+import {Card} from "react-bootstrap";
 
 
 class Ask extends React.Component {
@@ -37,7 +38,6 @@ class Ask extends React.Component {
         this.getTeacherIds(searchTerm)
 
     }
-
 
     handleConnect = (message, teacher_id) => {
         axios.post(backend+"connect/request/", {
@@ -115,8 +115,6 @@ class Ask extends React.Component {
         if (this.state.found_match) {
             return (
                 <div>
-
-
                     {/* TODO: Remove function duplication */}
 
 
@@ -192,26 +190,29 @@ class Ask extends React.Component {
     render () {
               return (
                   <div>
-                      <div>
-                          <h1 className="col-sm-5 col-md-5">
-                              {" "}
-                              Skill Search
+                      <Card>
+                          <Card.Title>
+                              <h1 className="col-sm-5 col-md-5">
+                                  {" "}
+                                  Skill Search
 
-                              {" "}
-                          </h1>
-
+                                  {" "}
+                              </h1>
+                          </Card.Title>
+                          
                           <Autocomplete
                               onChange={this.handleChange}
                               onMatch={this.handleMatch}
                               suggestions={this.state.temp_l}
                           />
-                      </div>
 
-                      <div className="row-auto">
-                          <div className="col-auto">
-                              {this.renderCardsIfNeeded()}
+
+                          <div className="row-auto">
+                              <div className="col-auto">
+                                  {this.renderCardsIfNeeded()}
+                              </div>
                           </div>
-                      </div>
+                      </Card>
                   </div>
               );
 
