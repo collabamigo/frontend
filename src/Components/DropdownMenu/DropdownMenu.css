@@ -1,0 +1,24 @@
+.magic_span {
+    transition: all 0.3s ease-in-out;
+    color: #18216d;
+    font-size: 21px;
+    line-height: 1.41;
+}
+
+.magic_span:hover{
+    color: rgb(255, 130, 92);
+    text-underline-position: under;
+    text-decoration: rgb(255, 130, 92) underline;
+}
+
+.magic_span:active{
+    color: rgb(255, 130, 92);
+    text-underline-position: under;
+    text-decoration: rgb(255, 130, 92) underline;
+}
+
+.magic_span:focus{
+    color: rgb(255, 130, 92);
+    text-underline-position: under;
+    text-decoration: rgb(255, 130, 92) underline;
+}

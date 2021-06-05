@@ -1,11 +1,8 @@
 import React from "react";
+import "./DropdownMenu.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
-import PropTypes from "prop-types";
 import {
     Link,
-    Route,
 } from "react-router-dom";
 
 function signOut () {
@@ -19,67 +16,50 @@ function signOut () {
     });
 
 }
-function DropdownMenu (props) {
 
-    if (props.visibility) {
+import {
+  CustomNavLinkSmall,
+} from "../ExternalHeader/styles";
+import {withTranslation} from "react-i18next";
 
-        const handleSelect = (e) => {
-            if (e === "signOut") {
-                signOut();
-            }
-        };
+  function DropdownMenu () {
+    return (
+        <>
 
-        return (
-            <Route className="dropdown">
-                <DropdownButton
-                    alignRight
-                    id="dropdown-menu-align-right"
-                    onSelect={handleSelect}
-                    title={props.title}
+            <CustomNavLinkSmall className="btn">
+                <Link
+                    className="magic_span"
+                    to="/about"
                 >
-                    <Link
-                        className="text-body dropdown-item"
-                        eventKey="profile"
-                        to="/profile"
-                    >
+                    About Us
+                </Link>
+            </CustomNavLinkSmall>
 
-                        Profile
-                        <span className="material-icons col-2">
-                            perm_identity
-                        </span>
-                        
-                    </Link>
+            <CustomNavLinkSmall className="btn">
+                <Link
+                    className="magic_span"
+                    to="/profile"
+                >
+                    Profile
+                </Link>
+            </CustomNavLinkSmall>
 
-                    <Dropdown.Item
-                        className="dropdown-item"
-                        disabled
-                        eventKey="settings"
-                    >
-                        Settings
-                        <span className="material-icons col-2">
-                            settings
-                        </span>
-                    </Dropdown.Item>
+            <CustomNavLinkSmall>
+                <span className="btn btn-primary btn-block disabled">
+                    <div >
+                        Rate others
+                    </div>
+                </span>
+            </CustomNavLinkSmall>
 
-                    <Dropdown.Divider />
-
-                    <Dropdown.Item eventKey="signOut">
+            <CustomNavLinkSmall>
+                <span className="btn">
+                    <div onClick={signOut}>
                         Sign Out
-                        <span className="material-icons col-2">
-                            logout
-                        </span>
-                    </Dropdown.Item>
-                </DropdownButton>
-            </Route>
-        );
-
-    }
-    return null;
-
-}
-
-DropdownMenu.propTypes = {
-    title: PropTypes.string.isRequired,
-    visibility:PropTypes.bool.isRequired,
-}
-export default DropdownMenu;
+                    </div>
+                </span>
+            </CustomNavLinkSmall>
+        </>
+    );
+  }
+export default withTranslation()(DropdownMenu);
