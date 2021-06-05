@@ -19,7 +19,7 @@ import ConnectionRequest from "./Components/ConnectionRequest/ConnectionRequest"
 import AuthenticatedHome from "./Components/AuthenticatedHome/AuthenticatedHome";
 import UnauthenticatedHome from "./Components/UnauthenticatedHome/UnauthenticatedHome";
 // import Collab from "./Components/Collab/Collab";
-import ExternalHeader from "./Components/ExternalHeader";
+import ExternalHeader from "./Components/Header";
 
 // eslint-disable-next-line react/require-optimization
 class App extends React.Component {

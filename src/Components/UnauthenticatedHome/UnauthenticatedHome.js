@@ -2,7 +2,7 @@
 import React from "react";
 import Home from "../../pages/Home";
 import { Styles } from "../../styles/styles";
-// import ExternalHeader from "../ExternalHeader";
+// import Header from "../Header";
 import PropTypes from "prop-types";
 
 function UnauthenticatedHome({onLogin}) {
@@ -10,7 +10,7 @@ function UnauthenticatedHome({onLogin}) {
         <>
             <Styles />
 
-            {/*<ExternalHeader isAuthenticated={false} />*/}
+            {/*<Header isAuthenticated={false} />*/}
 
             <Home onLogin={onLogin} />
 

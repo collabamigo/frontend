@@ -19,7 +19,7 @@ function signOut () {
 
 import {
   CustomNavLinkSmall,
-} from "../ExternalHeader/styles";
+} from "../Header/styles";
 import {withTranslation} from "react-i18next";
 
   function DropdownMenu () {
