@@ -1,10 +1,11 @@
 .card-pieChart{
-    width:24rem;
-    height:22rem;
+    width:auto;
+    height:440px;
 }
 
 .main-profile{
     height:300px;
+    width:auto;
 }
 
 .card-profile-title{
@@ -18,4 +19,15 @@
 
 .card-votes{
     height:440px;
+    width:auto;
+}
+
+.card-empty{
+    height:440px;
+    width:auto;
+}
+
+.card-trending{
+    height:440px;
+    width:auto;
 }

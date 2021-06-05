@@ -10,7 +10,7 @@ import { Doughnut } from "react-chartjs-2";
 
 class DashBoard extends React.Component {
     static propTypes = {
-        downvote:PropTypes.number.isRequired,
+        // downvote:PropTypes.number.isRequired,
         git:PropTypes.string.isRequired,
         linkedin:PropTypes.string.isRequired,
         name:PropTypes.string.isRequired,
@@ -25,7 +25,7 @@ class DashBoard extends React.Component {
             labels: ["Up Votes","Down Votes"],
             datasets: [
                 {
-                    data: [props.upvote+1, props.downvote+1],
+                    data: [1, 1],
                     backgroundColor: ["#F7464A", "#46BFBD"],
                     hoverBackgroundColor: [
                         "#FF5A5E",
@@ -63,11 +63,11 @@ class DashBoard extends React.Component {
                                         src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
                                     />
 
-                                    <Card.Text calssName="card-text">
+                                    <Card.Text className="card-text">
                                         <div className="col-auto">
                                             <div className="row">
                                                 <h2 className="display-4 fw-bold p-3 float-left">
-                                                    {this.props.name+ " Sharma"}
+                                                    {this.props.name}
                                                 </h2>
                                             </div>
 
@@ -81,7 +81,7 @@ class DashBoard extends React.Component {
 
                                     <hr />
 
-                                    <Card.Footer className="main-profile-footer">
+                                    <Card.Footer className="card-footer main-profile-footer" >
                                         <Card.Link
                                             className="float-left"
                                             href={"https://www.linkedin.com/in/"+ this.props.linkedin}
@@ -114,9 +114,11 @@ class DashBoard extends React.Component {
 
                     <Row>
                         <Col>
-                            <Card className="card">
+                            <Card className="card card-empty">
                                 <Card.Body>
-                                    lol here
+                                    <Card.Title>
+                                        Still thinking
+                                    </Card.Title>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -136,44 +138,61 @@ class DashBoard extends React.Component {
                         </Col>
 
                     </Row>
+
+                    <Row>
+                        <Col>
+
+
+                            <div>
+                                <br />
+
+                                <br />
+
+                                <h2>
+                                    Skills
+                                </h2>
+
+                                <Chart
+                                    chartType="PieChart"
+                                    data={[
+                                                ["hello", 'Percentage covered'],
+                                                [this.props.skills[0], 53],
+                                                [this.props.skills[1], 83],
+                                              ]}
+                                    height='25rem'
+                                    loader={
+                                        <div>
+                                            Loading Chart
+                                        </div>
+                                            }
+                                    options={{
+                                                // title: 'Work Summary',
+                                                legend: 'none',
+                                                pieSliceText: 'label',
+                                                slices: {
+                                                  // 1: { offset: 0.2 },
+                                                  // 2: { offset: 0.3 },
+                                                  2: { offset: 0.2 },
+                                                },
+                                              }}
+                                    rootProps={{ 'data-testid': '5' }}
+                                    width='auto'
+                                />
+                            </div>                               
+                        </Col>
+
+                        <Col>
+                            <Card className="card card-trending">
+                                <Card.Body className="card-body">
+                                    <Card.Title>
+                                        Trending Skills
+                                    </Card.Title>
+
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
                 </Container>
-
-                <Card className="card-pieChart">
-                    <Card.Body>
-
-                        <Card.Title>
-                            Skill set
-                        </Card.Title>
-
-                        <Chart
-                            chartType="PieChart"
-                            data={[
-                        ["hello", 'Percentage covered'],
-                        [this.props.skills[0], 53],
-                        [this.props.skills[1], 83],
-                        [this.props.skills[2], 20],
-                      ]}
-                            height='18rem'
-                            loader={
-                                <div>
-                                    Loading Chart
-                                </div>
-                        }
-                            options={{
-                        // title: 'Work Summary',
-                        legend: 'none',
-                        pieSliceText: 'label',
-                        slices: {
-                          // 1: { offset: 0.2 },
-                          // 2: { offset: 0.3 },
-                          2: { offset: 0.2 },
-                        },
-                      }}
-                            rootProps={{ 'data-testid': '5' }}
-                            width='22rem'
-                        />
-                    </Card.Body>
-                </Card>
             </div>
         );
     }
