@@ -89,7 +89,7 @@ class AboutUs extends React.Component {
                                 </h2>
 
                                 <p className="title">
-                                    Founder
+                                    Still looking for a place in this cruel world
                                 </p>
 
                                 <p>
