@@ -5,34 +5,38 @@ import backend from "../../env";
 import './Profile.css';
 import Card from 'react-bootstrap/Card';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import Popover from 'react-bootstrap/Popover';
+import {Tooltip} from 'react-bootstrap';
 
 const popover = (
-    <Popover id="popover-basic">
-        <Popover.Title as="h3">
+    <Tooltip
+        id="popover-basic"
+    >
+        {/*<Popover.Title as="h3">
             <strong>
                 My name is not right!
             </strong>
         </Popover.Title>
 
-        <Popover.Content>
-            Feel free to contact us at our email 
-            {' '}
+        <Popover.Content>*/}
+        Feel free to contact us at our email 
 
-            <strong>
-                watsonhex@gmail.com
-            </strong>
+        {' '}
 
-            {' '}
-            and we will get it right.
+        <strong>
+            watsonhex@gmail.com
+        </strong>
 
-            <br />
+        {' '}
+        and we will get it right.
+
+        <br />
             
-            Thank you.
+        Thank you.
 
-            {' '}
-        </Popover.Content>
-    </Popover>
+        {' '}
+
+        {/*</Popover.Content>*/}
+    </Tooltip>
   );
 class Profile extends React.Component{
 
@@ -126,18 +130,26 @@ class Profile extends React.Component{
                                         </label>
 
                                         <OverlayTrigger 
-                                            classname=""
                                             overlay={popover}
                                             placement="right"
-                                            trigger="hover"
+                                            rootClose
+                                            trigger="click"
                                         >
-                                            <div>
+                                            {({ ref, ...triggerHandler }) => (
+                                                <div
+                                                    className="btn m-0 p-0"
+                                                    {...triggerHandler}
+                                                >
                                             &nbsp;
 
-                                                <span className="material-icons">
-                                                    help_outline
-                                                </span>
-                                            </div>
+                                                    <span
+                                                        className="material-icons"
+                                                        ref={ref}
+                                                    >
+                                                        help_outline
+                                                    </span>
+                                                </div>
+                                    )}
                                         </OverlayTrigger>
 
                                     </div>
@@ -164,18 +176,25 @@ class Profile extends React.Component{
                                         </label>
 
                                         <OverlayTrigger 
-                                            classname=""
                                             overlay={popover}
                                             placement="right"
-                                            trigger="hover"
+                                            rootClose
+                                            trigger="click"
                                         >
-                                            <div>
+                                            {({ ref, ...triggerHandler }) => (
+                                                <div
+                                                    className="btn m-0 p-0"
+                                                    {...triggerHandler}
+                                                >
                                                 &nbsp;
 
-                                                <span className="material-icons">
-                                                    help_outline
-                                                </span>
-                                            </div>
+                                                    <span
+                                                        className="material-icons"
+                                                        ref={ref}
+                                                    >
+                                                        help_outline
+                                                    </span>
+                                                </div>)}
                                         </OverlayTrigger>
 
                                     </div>
