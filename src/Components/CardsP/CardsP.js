@@ -125,7 +125,10 @@ function CardsP (props) {
             <Card className="card card_P" >
                 <Card.Body>
                     <Card.Title className="main_P_title">
-                        {props.name}
+                        <strong>
+                            {props.name}
+                        </strong>
+
                     </Card.Title>
 
                     <hr />
