@@ -131,6 +131,7 @@ class Ask extends React.Component {
                                     linked={item.Linkedin}
                                     name={item.First_Name + " " + item.Last_Name}
                                     onConnect={this.handleConnect.bind(this)}
+                                    showConnect
                                     showVoting
                                 />
                             </div>
