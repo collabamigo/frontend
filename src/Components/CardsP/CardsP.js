@@ -111,8 +111,8 @@ function CardsP (props) {
 
                     <br />
 
-                    <div className="row">
-                        <div className="col" />
+                    <div className="row justify-content-center">
+                        <div className="col-auto" />
 
                         {props.showVoting? (
                             <>
@@ -122,6 +122,8 @@ function CardsP (props) {
                                 >
                                     thumb_up
                                 </span>
+
+                                <div className="col-auto" />
 
                                 <span
                                     className="material-icons col-auto btn"
@@ -136,7 +138,7 @@ function CardsP (props) {
 
                         {props.showConnect?(
                             <>
-                                <div className="col" />
+                                <div className="col-auto" />
                             
                                 <OverlayTrigger
                                     className="col-auto"
@@ -159,7 +161,7 @@ function CardsP (props) {
                             </>
                     ):null}
 
-                        <div className="col" />
+                        <div className="col-auto" />
 
                     </div>
 
