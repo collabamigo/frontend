@@ -135,27 +135,29 @@ function CardsP (props) {
                             (props.showConnect?<div className="col-auto" />:null)}
 
                         {props.showConnect?(
-                            <OverlayTrigger
-                                className="col-auto"
-                                overlay={connectPopover}
-                                placement="bottom"
-                                rootClose
-                                transition={null}
-                                trigger="click"
-                            >
-                                {({ ref, ...triggerHandler }) => (
-                                    <div
-                                        className="btn btn-primary col-auto"
-                                        {...triggerHandler}
-                                    >
-                                        <span ref={ref}>
-                                            Connect
-                                        </span>
-                                    </div>)}
-                            </OverlayTrigger>
-                    ):null}
+                            <>
+                                <OverlayTrigger
+                                    className="col-auto"
+                                    overlay={connectPopover}
+                                    placement="bottom"
+                                    rootClose
+                                    transition={null}
+                                    trigger="click"
+                                >
+                                    {({ ref, ...triggerHandler }) => (
+                                        <div
+                                            className="btn btn-primary col-auto"
+                                            {...triggerHandler}
+                                        >
+                                            <span ref={ref}>
+                                                Connect
+                                            </span>
+                                        </div>)}
+                                </OverlayTrigger>
 
-                        {props.showConnect ? <div className="col-auto" /> : null}
+                                <div className="col-auto" />
+                            </>
+                    ):null}
 
                     </div>
 
