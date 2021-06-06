@@ -63,21 +63,17 @@ class DashBoard extends React.Component {
                                         src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
                                     />
 
-                                    <Card.Text className="card-text">
-                                        <div className="col-auto">
-                                            <div className="row">
-                                                <h2 className="display-4 fw-bold p-3 float-left">
-                                                    {this.props.name}
-                                                </h2>
-                                            </div>
+                                    <div className="card-text col-auto">
+                                        <h2 className="display-4 fw-bold p-3 float-left row">
+                                            {this.props.name}
+                                        </h2>
 
-                                            <div className="display-5 col-lg-6">
-                                                Your time is limited, so dont waste it living someone elses life. Dont
-                                                be trapped by dogma – which is living with the results of other peoples
-                                                thinking. -Steve Jobs
-                                            </div>
+                                        <div className="display-5 col-lg-6 row">
+                                            Your time is limited, so dont waste it living someone elses life. Dont
+                                            be trapped by dogma – which is living with the results of other peoples
+                                            thinking. -Steve Jobs
                                         </div>
-                                    </Card.Text>
+                                    </div>
 
                                     <hr />
 
