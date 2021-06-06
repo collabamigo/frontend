@@ -1,36 +1,35 @@
 @import url(//fonts.googleapis.com/css?family=Montserrat:300,400,500);
 
-.main-contents {
+.contents-heeman {
   font-family: "Montserrat", sans-serif;
   color: #8d97ad;
   font-weight: 300;
 }
 
-.main-contents h1,
-.main-contents h2,
-.main-contents h3,
-.main-contents h4,
-.main-contents h5,
-.main-contents h6 {
+.contents-heeman h3,
+.contents-heeman h4,
+.contents-heeman h5,
+.contents-heeman h6 {
   color: #3e4555;
 }
 
 
-.main-contents .p {
+.contents-heeman .p {
   font-size: 20px;
+  color: #000000;
 }
 
-.main-contents h4 {
+.contents-heeman h4 {
   line-height: 28px;
   font-size: 26px;
 }
 
-.main-contents h5 {
+.contents-heeman h5 {
   line-height: 22px;
   font-size: 22px;
 }
 
-ul li a {
+.contents-heeman ul li a {
   color: #8d97ad;
   padding-right: 15px;
   -webkit-transition: 0.1s ease-in;
@@ -38,13 +37,13 @@ ul li a {
   transition: 0.1s ease-in;
 }
 
-ul li a:hover {
+.contents-heeman ul li a:hover {
   -webkit-transform: translate3d(0px, -5px, 0px);
   transform: translate3d(0px, -5px, 0px);
 
 }
 
-.main-contents .subtitle {
+.contents-heeman .subtitle {
 
   line-height: 24px;
   margin: 0 0 20px 0;
@@ -56,4 +55,8 @@ ul li a:hover {
 
 .github:hover {
   color: #000000;
+}
+
+.linkedin:hover {
+  color: #0442b6;
 }

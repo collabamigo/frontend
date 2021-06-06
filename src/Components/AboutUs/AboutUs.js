@@ -10,8 +10,7 @@ class AboutUs extends React.Component {
     render() {
         return (
             <div>
-
-                <div className="py-5 main-contents">
+                <div className="py-5 contents-heeman">
                     <div className="container">
                         <div className="row justify-content-center mb-4">
                             <div className="col-md-7 text-center">
@@ -46,14 +45,14 @@ class AboutUs extends React.Component {
                                                 Co - Founder
                                             </h5>
 
-                                            <p className="p">
+                                            <p className="p font-weight-normal">
                                                 I dont know what to say other than I dont know what to say. 
                                             </p>
 
                                             <ul className="list-inline mt-4">
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1"
+                                                        className="text-decoration-none d-block px-1 linkedin"
                                                         href="https://www.linkedin.com/in/devmrfitz/"
                                                     >
                                                         <svg
@@ -140,7 +139,7 @@ class AboutUs extends React.Component {
                                             <ul className="list-inline mt-4">
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1"
+                                                        className="text-decoration-none d-block px-1 linkedin"
                                                         href="https://www.linkedin.com/in/heemankv"
                                                     >
                                                         <svg
@@ -225,7 +224,7 @@ class AboutUs extends React.Component {
                                             <ul className="list-inline mt-4">
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1"
+                                                        className="text-decoration-none d-block px-1 linkedin"
                                                         href="https://www.linkedin.com/in/shikhar-sharma-007/"
                                                     >
                                                         <svg
