@@ -41,11 +41,19 @@ ul li a {
 ul li a:hover {
   -webkit-transform: translate3d(0px, -5px, 0px);
   transform: translate3d(0px, -5px, 0px);
-  color: #2b3f97;
+
 }
 
 .main-contents .subtitle {
-  color: #2b3f97;
+
   line-height: 24px;
   margin: 0 0 20px 0;
+}
+
+.instagram:hover {
+  color: #fd0061;
+}
+
+.github:hover {
+  color: #000000;
 }

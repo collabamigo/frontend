@@ -71,7 +71,7 @@ class AboutUs extends React.Component {
 
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1"
+                                                        className="text-decoration-none d-block px-1 github"
                                                         href="https://github.com/devmrfitz"
                                                         rel="noopener noreferrer"
                                                         target="_blank"
@@ -91,7 +91,7 @@ class AboutUs extends React.Component {
 
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1"
+                                                        className="text-decoration-none d-block px-1 instagram"
                                                         href="https://www.instagram.com/apsaditya51/"
                                                     >
                                                         <svg
@@ -158,7 +158,7 @@ class AboutUs extends React.Component {
 
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1"
+                                                        className="text-decoration-none d-block px-1 github"
                                                         href="https://github.com/heemankv"
                                                         rel="noopener noreferrer"
                                                         target="_blank"
@@ -178,7 +178,7 @@ class AboutUs extends React.Component {
 
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1"
+                                                        className="text-decoration-none d-block px-1 instagram"
                                                         href="https://www.instagram.com/heemank_v/"
                                                     >
                                                         <svg
@@ -243,8 +243,8 @@ class AboutUs extends React.Component {
 
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1"
-                                                        href="https://github.com/Shikharhacks007"
+                                                        className="text-decoration-none d-block px-1 github"
+                                                        href="https://github.com/Shikharhacks007 "
                                                         rel="noopener noreferrer"
                                                         target="_blank"
                                                     >
@@ -263,7 +263,7 @@ class AboutUs extends React.Component {
 
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1"
+                                                        className="text-decoration-none d-block px-1 instagram"
                                                         href="https://www.instagram.com/shikhar_s_/"
                                                     >
                                                         <svg
