@@ -1,28 +1,24 @@
 
 import React from "react";
-import "./Ask.css";
+import './index.css';
 import CardsP from "../CardsP/CardsP";
-import Autocomplete from "./Autocomplete";
 import axios from "axios";
 import backend from "../../env";
 import {Card} from "react-bootstrap";
 
 
-class Ask extends React.Component {
+class ConnectionHistory extends React.Component {
 
     constructor (props) {
 
         super(props);
         this.state = {
-            "searchTerm": "",
-            "temp_l": [],
-            "found_match": false,
             "tempList": [{}],
             "list":[],
             "listIndex":4,
-            "canVote":true,
-            "loading": false
+            loading: false
         }
+        this.getTeacherIds();
 
     }
 
@@ -31,38 +27,14 @@ class Ask extends React.Component {
         return true;
     }
 
-    handleMatch = (searchTerm) => {
-        this.setState({
-            searchTerm: searchTerm
-        })
-        this.getTeacherIds(searchTerm)
-
-    }
-
-    handleConnect = (message, teacher_id) => {
-        axios.post(backend+"connect/request/", {
-            id: teacher_id,
-            message: message,
-            skills: [this.state.searchTerm]
-        }).then(()=> {
-            alert("Your connection request has been sent")
-        })
-            .catch((err) => {
-                if (err.response.status === 429) // THROTTLED
-                    alert("You have submitted too many requests in the past 24 hours. Please wait before submitting more.")
-                else if (err.response.status === 403) // Previous unaccepted request logged
-                    alert("You have already sent a similar request to the same person")
-            })
-    }
-
     handleGetNext = () => {
         this.setState({
             loading: true
         })
         axios.get(backend + "connect/teachersdata/", {
             params: {
-                id_list: this.state.list.slice(this.state.listIndex, this.state.listIndex+4)
-            },
+                id_list: JSON.stringify(this.state.list.slice(this.state.listIndex, this.state.listIndex+4))
+            }
         }).then(r => this.setState((state)  => ({
             listIndex:state.listIndex+4, tempList:r.data,
             loading: false})))
@@ -74,37 +46,33 @@ class Ask extends React.Component {
         })
         axios.get(backend + "connect/teachersdata/", {
             params: {
-                id_list: this.state.list.slice(this.state.listIndex-8, this.state.listIndex-4)
-            },
+                id_list: JSON.stringify(this.state.list.slice(this.state.listIndex-8, this.state.listIndex-4))
+            }
         }).then(r => this.setState((state)  => ({
             listIndex:state.listIndex-4, tempList:r.data,
             loading: false,
         })))
     }
 
-    handleChange = (value) => {
-        this.setState({"searchTerm": value, "found_match":false});
-    }
 
-    getTeacherIds = (searchTerm) => {
+    getTeacherIds = () => {
         this.setState({
             loading: true
         })
-        axios.get(backend+"connect/skill/"+ searchTerm ,{
+        axios.get(backend+"connect/approvals/" ,{
         params: {
             format: "json",
         }
           })
             .then((res) => {
-                this.setState({list:res.data["Teacher_set"]})
+                this.setState({list:res.data})
                 axios.get(backend+"connect/teachersdata/",{
                      params:{
-                         id_list: res.data["Teacher_set"].slice(0,4)
+                         id_list: res.data.slice(0,4)
                      },
                 })
                     .then((response) => this.setState({
                         tempList: response.data,
-                        found_match: true,
                         loading: false}))
                     .catch((err) => console.log(err));
             })
@@ -112,16 +80,8 @@ class Ask extends React.Component {
     };
 
     renderCardsIfNeeded() {
-        if (this.state.found_match) {
             return (
                 <div>
-                    {/* TODO: Remove function duplication */}
-
-
-                    {/* TODO: Remove Instagram Handle */}
-
-                    {/* TODO: Add undefined case handling */}
-
                     <div className="row">
                         {this.state.tempList.map(item => (
                             <div
@@ -131,14 +91,13 @@ class Ask extends React.Component {
                                 <CardsP
                                     Git={item.Gitname}
                                     batch={item.degree}
-                                    canVote={this.state.canVote}
                                     course={item.course}
                                     description="My Tech Stack is "
                                     key_value={item.id}
                                     linked={item.Linkedin}
                                     name={item.First_Name + " " + item.Last_Name}
-                                    onConnect={this.handleConnect.bind(this)}
-                                    showConnect
+                                    showConnect={false}
+                                    votes={this.state.voting}
                                 />
                             </div>
                           ))}
@@ -168,26 +127,20 @@ class Ask extends React.Component {
                 </div>
             )
         }
-        else {
+
+    render () {
+        if (this.state.loading)
             return (
-                <div className="float-centre">
-                    {this.state.loading ?
-                        <div
-                            className="spinner-border"
-                            role="status"
-                        >
-                            <span className="sr-only">
-                                Loading...
-                            </span>
-                        </div> : "No matches found"}
+                <div
+                    className="spinner-border"
+                    role="status"
+                >
+                    <span className="sr-only">
+                        Loading...
+                    </span>
                 </div>
             )
-        }
-    }
-    // TODO: Show next/previous button if more elements actually exist.
-
-    // TODO: Show voting button only when valid
-    render () {
+        else
               return (
                   <div>
                       <Card className="card card_skillSearch">
@@ -199,23 +152,15 @@ class Ask extends React.Component {
                                   {" "}
                               </h1>
                           </Card.Title>
-                          
-                          <Card.Body>
-                              <div className="col">
-                                  <Autocomplete
-                                      onChange={this.handleChange}
-                                      onMatch={this.handleMatch}
-                                      suggestions={this.state.temp_l}
-                                  />
-                              </div>
 
+                          <Card.Body>
                               <div className="row-auto pt-5">
                                   <div className="col-auto pl-lg-5">
                                       {this.renderCardsIfNeeded()}
                                   </div>
                               </div>
-                              
-                              
+
+
                           </Card.Body>
                       </Card>
                   </div>
@@ -224,4 +169,4 @@ class Ask extends React.Component {
           }
 }
 
-export default Ask;
+export default ConnectionHistory;

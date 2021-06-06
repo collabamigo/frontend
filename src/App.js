@@ -20,6 +20,7 @@ import AuthenticatedHome from "./Components/AuthenticatedHome/AuthenticatedHome"
 import UnauthenticatedHome from "./Components/UnauthenticatedHome/UnauthenticatedHome";
 // import Collab from "./Components/Collab/Collab";
 import ExternalHeader from "./Components/Header";
+import ConnectionHistory from "./Components/ConnectionHistory";
 
 // eslint-disable-next-line react/require-optimization
 class App extends React.Component {
@@ -126,6 +127,12 @@ class App extends React.Component {
                             path="/connection/"
                         >
                             <ConnectionRequest />
+                        </Route>
+
+                        <Route
+                            path="/history/"
+                        >
+                            <ConnectionHistory />
                         </Route>
 
                         <Route
