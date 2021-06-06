@@ -1,11 +1,11 @@
 
 import React from "react";
 import "./Ask.css";
-import CardsP from "../CardsP/CardsP";
 import Autocomplete from "./Autocomplete";
 import axios from "axios";
 import backend from "../../env";
 import {Card} from "react-bootstrap";
+import CardExplorer from "../CardExplorer";
 
 
 class Ask extends React.Component {
@@ -13,13 +13,11 @@ class Ask extends React.Component {
     constructor (props) {
 
         super(props);
+        this.CARDS_PER_PAGE = 4
         this.state = {
             searchTerm: "",
-            temp_l: [],
             found_match: false,
-            tempList: [{}],
             list:[],
-            listIndex:4,
             loading: false
         }
 
@@ -32,7 +30,8 @@ class Ask extends React.Component {
 
     handleMatch = (searchTerm) => {
         this.setState({
-            searchTerm: searchTerm
+            searchTerm: searchTerm,
+            found_match: true
         })
         this.getTeacherIds(searchTerm)
 
@@ -53,33 +52,7 @@ class Ask extends React.Component {
                     alert("You have already sent a similar request to the same person")
             })
     }
-
-    handleGetNext = () => {
-        this.setState({
-            loading: true
-        })
-        axios.get(backend + "connect/teachersdata/", {
-            params: {
-                id_list: this.state.list.slice(this.state.listIndex, this.state.listIndex+4)
-            },
-        }).then(r => this.setState((state)  => ({
-            listIndex:state.listIndex+4, tempList:r.data,
-            loading: false})))
-    }
-
-    handleGetPrev =() => {
-        this.setState({
-            loading: true
-        })
-        axios.get(backend + "connect/teachersdata/", {
-            params: {
-                id_list: this.state.list.slice(this.state.listIndex-8, this.state.listIndex-4)
-            },
-        }).then(r => this.setState((state)  => ({
-            listIndex:state.listIndex-4, tempList:r.data,
-            loading: false,
-        })))
-    }
+    
 
     handleChange = (value) => {
         this.setState({"searchTerm": value, "found_match":false});
@@ -90,90 +63,26 @@ class Ask extends React.Component {
             loading: true
         })
         axios.get(backend+"connect/skill/"+ searchTerm ,)
-            .then((res) => {
-                this.setState({list:res.data["Teacher_set"]})
-                axios.get(backend+"connect/teachersdata/",{
-                     params:{
-                         id_list: res.data["Teacher_set"].slice(0,4)
-                     },
-                })
-                    .then((response) => this.setState({
-                        tempList: response.data,
-                        found_match: true,
-                        loading: false}))
-                    .catch((err) => console.log(err));
-            })
-            .catch((err) => console.log(err));
+            .then((res) => 
+                this.setState({list:res.data["Teacher_set"],
+                loading: false,}))
     };
 
     renderCardsIfNeeded() {
         if (this.state.found_match) {
             return (
-                <div>
-                    {/* TODO: Remove function duplication */}
-
-
-                    {/* TODO: Remove Instagram Handle */}
-
-                    {/* TODO: Add undefined case handling */}
-
-                    <div className="row">
-                        {this.state.tempList.map(item => (
-                            <div
-                                className="col-auto"
-                                key={item.id}
-                            >
-                                <CardsP
-                                    Git={item.Gitname}
-                                    batch={item.degree}
-                                    course={item.course}
-                                    key_value={item.id}
-                                    linked={item.Linkedin}
-                                    name={item.First_Name + " " + item.Last_Name}
-                                    onConnect={this.handleConnect.bind(this)}
-                                    showConnect
-                                    showVoting
-                                />
-                            </div>
-                          ))}
-                    </div>
-
-                    <div className="row">
-                        <div className="col-1" />
-
-                        <div className="col-auto">
-                            <span
-                                className="btn material-icons"
-                                onClick={this.handleGetPrev}
-                            >
-                                arrow_back_ios
-                            </span>
-                        </div>
-
-                        <div className="col-auto">
-                            <span
-                                className="btn material-icons"
-                                onClick={this.handleGetNext}
-                            >
-                                arrow_forward_ios
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                <CardExplorer
+                    isLoading={this.state.loading}
+                    onConnect={this.handleConnect.bind(this)}
+                    parentList={this.state.list}
+                    showConnectAll
+                />
             )
         }
         else {
             return (
                 <div className="float-centre">
-                    {this.state.loading ?
-                        <div
-                            className="spinner-border"
-                            role="status"
-                        >
-                            <span className="sr-only">
-                                Loading...
-                            </span>
-                        </div> : "No matches found"}
+                    No matches found
                 </div>
             )
         }
@@ -199,7 +108,6 @@ class Ask extends React.Component {
                                   <Autocomplete
                                       onChange={this.handleChange}
                                       onMatch={this.handleMatch}
-                                      suggestions={this.state.temp_l}
                                   />
                               </div>
 
