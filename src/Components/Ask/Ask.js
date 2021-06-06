@@ -20,8 +20,8 @@ class Ask extends React.Component {
             "tempList": [{}],
             "list":[],
             "listIndex":4,
-            "voting":true,
-            loading: false
+            "canVote":true,
+            "loading": false
         }
 
     }
@@ -131,6 +131,7 @@ class Ask extends React.Component {
                                 <CardsP
                                     Git={item.Gitname}
                                     batch={item.degree}
+                                    canVote={this.state.canVote}
                                     course={item.course}
                                     description="My Tech Stack is "
                                     key_value={item.id}
@@ -138,7 +139,6 @@ class Ask extends React.Component {
                                     name={item.First_Name + " " + item.Last_Name}
                                     onConnect={this.handleConnect.bind(this)}
                                     showConnect
-                                    votes={this.state.voting}
                                 />
                             </div>
                           ))}
