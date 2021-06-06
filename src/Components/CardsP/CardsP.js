@@ -16,8 +16,8 @@ function handleSpanDown(){
     console.log("down")
 }
 
-function renderVotesNeeded(props) {
-    if (props.votes) {
+function renderVotesNeeded(canVote) {
+    if (canVote) {
         return (
             <div className="row">
                 <div className="col-3" />
@@ -97,12 +97,6 @@ function CardsP (props) {
                     </Card.Title>
 
                     <hr />
-
-                    {/*<Card.Subtitle className="mb-2 text-muted float left">*/}
-
-                    {/*    {props.batch}*/}
-
-                    {/*</Card.Subtitle>*/}
                         
                     <Row>
                         <Col>
@@ -149,7 +143,7 @@ function CardsP (props) {
                     {props.showConnect?
                         <div className="row">
 
-                            {renderVotesNeeded(props)}
+                            {renderVotesNeeded(props.canVote)}
 
                             <OverlayTrigger
                                 overlay={connectPopover}
@@ -182,6 +176,7 @@ function CardsP (props) {
 CardsP.propTypes = {
     Git:PropTypes.string.isRequired,
     batch:PropTypes.string.isRequired,
+    canVote:PropTypes.bool,
     course:PropTypes.string.isRequired,
     // description:PropTypes.string.isRequired,
     key_value: PropTypes.string.isRequired,
@@ -192,8 +187,10 @@ CardsP.propTypes = {
 }
 
 CardsP.defaultProps = {
+    canVote:false,
     onConnect: null,
-    showConnect: false
+    showConnect: false,
+
 }
 
 export default CardsP;
