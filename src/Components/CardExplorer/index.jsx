@@ -15,9 +15,9 @@ class CardExplorer extends React.Component{
         onConnect: PropTypes.func,
         parentList: PropTypes.arrayOf(PropTypes.string).isRequired,
         showConnectAll: PropTypes.bool,
-        // showConnectList: PropTypes.arrayOf(PropTypes.string),
+        showConnectList: PropTypes.arrayOf(PropTypes.string),
         showVotingAll: PropTypes.bool,
-        // showVotingList: PropTypes.arrayOf(PropTypes.string),
+        showVotingList: PropTypes.arrayOf(PropTypes.string),
     }
 
 
@@ -26,9 +26,9 @@ class CardExplorer extends React.Component{
         isLoading: false,
         onConnect: () => {},
         showConnectAll: false,
-        // showConnectList: [],
+        showConnectList: [],
         showVotingAll: false,
-        // showVotingList: [],
+        showVotingList: [],
 
     }
 
@@ -116,8 +116,8 @@ class CardExplorer extends React.Component{
                                 linked={item.Linkedin}
                                 name={item.First_Name + " " + item.Last_Name}
                                 onConnect={this.props.onConnect}
-                                showConnect={this.props.showConnectAll}
-                                showVoting={this.props.showVotingAll}
+                                showConnect={this.props.showConnectAll || this.props.showConnectList.includes(item.id)}
+                                showVoting={this.props.showVotingAll || this.props.showVotingList.includes(item.id)}
                             />
                         </div>
                       ))}
