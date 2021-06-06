@@ -116,14 +116,14 @@ function CardsP (props) {
                         {props.showVoting? (
                             <>
                                 <span
-                                    className="material-icons col-auto btn float-left mr-1"
+                                    className="material-icons col-auto btn float-left mr-1 btn-lg"
                                     onClick={handleSpanUp}
                                 >
                                     thumb_up
                                 </span>
 
                                 <span
-                                    className="material-icons col-auto btn float-left ml-1"
+                                    className="material-icons col-auto btn float-left ml-1 btn-lg"
                                     onClick={handleSpanDown}
                                 >
                                     thumb_down
@@ -146,7 +146,7 @@ function CardsP (props) {
                                 >
                                     {({ ref, ...triggerHandler }) => (
                                         <div
-                                            className="btn btn-primary col-auto"
+                                            className="btn btn-primary col-auto mb-4"
                                             {...triggerHandler}
                                         >
                                             <span ref={ref}>
