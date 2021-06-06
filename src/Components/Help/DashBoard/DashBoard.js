@@ -56,7 +56,7 @@ class DashBoard extends React.Component {
                 <Container fluid>
                     <Row>
                         <Col>
-                            <Card className="card main-profile">
+                            <Card className="card_dashboard m-2 card main-profile">
                                 <Card.Body className="card-body">
                                     <img
                                         className="rounded-circle float-right"
@@ -110,7 +110,7 @@ class DashBoard extends React.Component {
 
                     <Row>
                         <Col>
-                            <Card className="card card-empty">
+                            <Card className="card_dashboard m-2 card card-empty">
                                 <Card.Body>
                                     <Card.Title>
                                         Still thinking
@@ -120,7 +120,7 @@ class DashBoard extends React.Component {
                         </Col>
 
                         <Col>
-                            <Card className="card card-votes">
+                            <Card className="card_dashboard m-2 card card-votes">
                                 <Card.Body className="card-body col-md-7">
                                     <Doughnut
                                         data={this.state.dataDoughnut}
@@ -178,7 +178,7 @@ class DashBoard extends React.Component {
                         </Col>
 
                         <Col>
-                            <Card className="card card-trending">
+                            <Card className="card_dashboard m-2 card card-trending">
                                 <Card.Body className="card-body">
                                     <Card.Title>
                                         Trending Skills
