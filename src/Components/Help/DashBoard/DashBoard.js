@@ -3,7 +3,7 @@ import Chart from "react-google-charts";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
 import './DashBoard.css'
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import {SvgIcon} from "../../../common/SvgIcon";
 import { Doughnut } from "react-chartjs-2";
 
@@ -53,7 +53,7 @@ class DashBoard extends React.Component {
                     </span>
                 </h1>
 
-                <Container fluid>
+                <div className="container-xl lol">
                     <Row>
                         <Col>
                             <Card className="card_dashboard m-2 card main-profile">
@@ -188,7 +188,7 @@ class DashBoard extends React.Component {
                             </Card>
                         </Col>
                     </Row>
-                </Container>
+                </div>
             </div>
         );
     }
