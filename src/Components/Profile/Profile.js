@@ -47,21 +47,19 @@ class Profile extends React.Component{
         this.handleChangeHandle = this.handleChangeHandle.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
-        const data = [{
-            FirstName: '',
-            LastName:'',
+        this.state ={
+            First_Name: '',
+            Last_Name:'',
             degree: '',
             course:'',
             Handle:'',
-        }]
-        this.state ={
-            data: data,
-        }
+            loading: true }
 
         axios.get(backend+"connect/profile?format=json")
             .then(res => {
-                const data = res.data;
-                this.setState({data});
+                const data = res.data[0];
+                this.setState({...data,
+                loading: false});
             })
     }
 
@@ -85,17 +83,14 @@ class Profile extends React.Component{
     handleSubmit(e) {
 
         let payload = {
-            "First_Name":this.state.data[0]["First_Name"],
-            "Last_Name":this.state.data[0]["Last_Name"],
-            "Gender":"",
-            "Degree":this.state.degree,
-            "Course":this.state.course,
-            "Handle":"",
-            "IsTeacher":false}
-
-        axios.post(backend+"connect/profile/", payload)
+            degree:this.state.degree,
+            course:this.state.course,
+            Handle:this.state.Handle, }
+        this.setState({loading:true})
+        axios.patch(backend+"connect/profile/"+this.state.id+"/", payload)
             .then(() => {
-            alert("Profile update successful")
+                this.setState({loading:false})
+                alert("Profile update successful")
           })
 
         e.preventDefault();
@@ -105,234 +100,244 @@ class Profile extends React.Component{
 
 
   render() {
-    return (
-        <div>
-            <div>
-                <div className="container-fluid ">
-                    <Card className="card shadow-sm border-0 px-3 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light container  ">
-                        
-                        <Card.Header>
-                            <h1>
-                                Profile
-                            </h1>
-                        </Card.Header>
-
-                        <Card.Body>
-                            <form 
-                                className="card-body"
-                                onSubmit={this.handleSubmit}
-                            >
-                                <div className="form-group">
-                                    <div className="col-auto form-inline col-form-label">
-                                    
-                                        <label>
-                                            First Name
-                                        </label>
-
-                                        <OverlayTrigger 
-                                            overlay={popover}
-                                            placement="right"
-                                            rootClose
-                                            trigger="click"
-                                        >
-                                            {({ ref, ...triggerHandler }) => (
-                                                <div
-                                                    className="btn m-0 p-0"
-                                                    {...triggerHandler}
-                                                >
-                                            &nbsp;
-
-                                                    <span
-                                                        className="material-icons"
-                                                        ref={ref}
-                                                    >
-                                                        help_outline
-                                                    </span>
-                                                </div>
-                                    )}
-                                        </OverlayTrigger>
-
-                                    </div>
-
-                                    <div>
-                                        <input
-                                            className="form-control col-auto"
-                                            disabled
-                                            onChange={this.handleChangeFirstName}
-                                            placeholder={this.state.data[0]["First_Name"]}
-                                            type='text'
-                                            value={this.state.data[0]["First_Name"]}
-                                        />
-                                    </div>
-
-                                    
-                                </div>
-
-                                <div className="form-group">
-                                    <div className="col-auto form-inline col-form-label">
-                                    
-                                        <label>
-                                            Last Name
-                                        </label>
-
-                                        <OverlayTrigger 
-                                            overlay={popover}
-                                            placement="right"
-                                            rootClose
-                                            trigger="click"
-                                        >
-                                            {({ ref, ...triggerHandler }) => (
-                                                <div
-                                                    className="btn m-0 p-0"
-                                                    {...triggerHandler}
-                                                >
-                                                &nbsp;
-
-                                                    <span
-                                                        className="material-icons"
-                                                        ref={ref}
-                                                    >
-                                                        help_outline
-                                                    </span>
-                                                </div>)}
-                                        </OverlayTrigger>
-
-                                    </div>
-
-                                    <div className="row-auto">
-                                        <input
-                                            className="form-control col-auto"
-                                            disabled
-                                            onChange={this.handleChangeLastName}
-                                            placeholder={this.state.data[0]["Last_Name"]}
-                                            type='text'
-                                            value={this.state.data[0]["Last_Name"]}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="form-group">
-                                    <label className="col-auto form-inline col-form-label">
-                                        Email Address
-                                    </label>
-
-                                    <div>
-                                        <input
-                                            className="form-control col-auto"
-                                            disabled
-                                            placeholder={this.email}
-                                            type='text'
-                                            value={this.state.data[0]["email"]}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="form-group">
-                                    <label className="col-auto form-inline col-form-label">
-                                        Telegram Usename
-                                    </label>
-
-                                    <div>
-                                        <input
-                                            className="form-control col-auto"
-                                            onChange={this.handleChangeHandle}
-                                            placeholder={this.state.Handle}
-                                            type='text'
-                                            value={this.state.Handle}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="form-group">
-                                    <label className="col-auto col-form-label mr-1">
-                                        Degree:
-                                        <select
-                                            className="form-control col-auto form-select m-2 p-6"
-                                            onChange={this.handleChangeDegree}
-                                            value={this.state.degree}
-                                        >
-                                            <option
-                                                selected
-                                                value=""
-                                            >
-                                                ---Select Degree---
-                                            </option>
-
-                                            <option value="M" >
-                                                M-Tech
-                                            </option>
-
-                                            <option value="B">
-                                                B-Tech
-                                            </option>
-                                        </select>
-                                    </label>
-
-                                    <label className="col-auto col-form-label ml-1">
-                                        Course:
-                                        <select
-                                            className="form-control col-auto form-select m-2 p-6  "
-                                            onChange={this.handleChangeCourse}
-                                            value={this.state.course}
-                                        >
-                                            <option
-                                                selected
-                                                value=""
-                                            >
-                                                ---Select Course---
-                                            </option>
-
-                                            <option value="CSAI">
-                                                CSAI
-                                            </option>
-
-                                            <option value="CSE">
-                                                CSE
-                                            </option>
-
-                                            <option value="CSB">
-                                                CSB
-                                            </option>
-
-                                            <option value="CSD">
-                                                CSD
-                                            </option>
-
-                                            <option value="CSS">
-                                                CSS
-                                            </option>
-
-                                            <option value="CSAM">
-                                                CSAM
-                                            </option>
-
-                                            <option value="ECE">
-                                                ECE
-                                            </option>
-
-                                        </select>
-                                    </label>
-
-                                </div>
-                            </form>
-                        </Card.Body>
-
-                        <Card.Footer>
-                            <button
-                                className="btn btn-lg btn-primary col-5"
-                                onChange={this.handleChange}
-                                type="submit"
-                                value="Submit"
-                            >
-                                Submit
-                            </button>
-                        </Card.Footer>
-
-                    </Card>
+        if (this.state.loading)
+            return(
+                <div>
+                    <div
+                        className="spinner-border"
+                        role="status"
+                    >
+                        <span className="sr-only">
+                            Loading...
+                        </span>
+                    </div>
                 </div>
-            </div>
-        </div>
-    );
+                )
+        else
+            return (
+                <div>
+                    <div>
+                        <div className="container-fluid ">
+                            <Card className="card shadow-sm border-0 px-3 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light container  ">
+
+                                <Card.Header>
+                                    <h1>
+                                        Profile
+                                    </h1>
+                                </Card.Header>
+
+                                <Card.Body>
+                                    <form
+                                        className="card-body"
+                                        onSubmit={this.handleSubmit}
+                                    >
+                                        <div className="form-group">
+                                            <div className="col-auto form-inline col-form-label">
+
+                                                <label>
+                                                    First Name
+                                                </label>
+
+                                                <OverlayTrigger
+                                                    overlay={popover}
+                                                    placement="right"
+                                                    rootClose
+                                                    trigger="click"
+                                                >
+                                                    {({ ref, ...triggerHandler }) => (
+                                                        <div
+                                                            className="btn m-0 p-0"
+                                                            {...triggerHandler}
+                                                        >
+                                                    &nbsp;
+
+                                                            <span
+                                                                className="material-icons"
+                                                                ref={ref}
+                                                            >
+                                                                help_outline
+                                                            </span>
+                                                        </div>
+                                            )}
+                                                </OverlayTrigger>
+
+                                            </div>
+
+                                            <div>
+                                                <input
+                                                    className="form-control col-auto"
+                                                    disabled
+                                                    onChange={this.handleChangeFirstName}
+                                                    type='text'
+                                                    value={this.state.First_Name}
+                                                />
+                                            </div>
+
+
+                                        </div>
+
+                                        <div className="form-group">
+                                            <div className="col-auto form-inline col-form-label">
+
+                                                <label>
+                                                    Last Name
+                                                </label>
+
+                                                <OverlayTrigger
+                                                    overlay={popover}
+                                                    placement="right"
+                                                    rootClose
+                                                    trigger="click"
+                                                >
+                                                    {({ ref, ...triggerHandler }) => (
+                                                        <div
+                                                            className="btn m-0 p-0"
+                                                            {...triggerHandler}
+                                                        >
+                                                        &nbsp;
+
+                                                            <span
+                                                                className="material-icons"
+                                                                ref={ref}
+                                                            >
+                                                                help_outline
+                                                            </span>
+                                                        </div>)}
+                                                </OverlayTrigger>
+
+                                            </div>
+
+                                            <div className="row-auto">
+                                                <input
+                                                    className="form-control col-auto"
+                                                    disabled
+                                                    onChange={this.handleChangeLastName}
+                                                    type='text'
+                                                    value={this.state.Last_Name}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label className="col-auto form-inline col-form-label">
+                                                Email Address
+                                            </label>
+
+                                            <div>
+                                                <input
+                                                    className="form-control col-auto"
+                                                    disabled
+                                                    type='text'
+                                                    value={this.state.email}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label className="col-auto form-inline col-form-label">
+                                                Telegram Username
+                                            </label>
+
+                                            <div>
+                                                <input
+                                                    className="form-control col-auto"
+                                                    onChange={this.handleChangeHandle}
+                                                    placeholder={this.state.Handle}
+                                                    type='text'
+                                                    value={this.state.Handle}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label className="col-auto col-form-label mr-1">
+                                                Degree:
+                                                <select
+                                                    className="form-control col-auto form-select m-2 p-6"
+                                                    onChange={this.handleChangeDegree}
+                                                    value={this.state.degree}
+                                                >
+                                                    <option
+                                                        selected
+                                                        value=""
+                                                    >
+                                                        ---Select Degree---
+                                                    </option>
+
+                                                    <option value="M" >
+                                                        M-Tech
+                                                    </option>
+
+                                                    <option value="B">
+                                                        B-Tech
+                                                    </option>
+                                                </select>
+                                            </label>
+
+                                            <label className="col-auto col-form-label ml-1">
+                                                Course:
+                                                <select
+                                                    className="form-control col-auto form-select m-2 p-6"
+                                                    onChange={this.handleChangeCourse}
+                                                    value={this.state.course}
+                                                >
+                                                    <option
+                                                        selected
+                                                        value=""
+                                                    >
+                                                        ---Select Course---
+                                                    </option>
+
+                                                    <option value="CSAI">
+                                                        CSAI
+                                                    </option>
+
+                                                    <option value="CSE">
+                                                        CSE
+                                                    </option>
+
+                                                    <option value="CSB">
+                                                        CSB
+                                                    </option>
+
+                                                    <option value="CSD">
+                                                        CSD
+                                                    </option>
+
+                                                    <option value="CSS">
+                                                        CSS
+                                                    </option>
+
+                                                    <option value="CSAM">
+                                                        CSAM
+                                                    </option>
+
+                                                    <option value="ECE">
+                                                        ECE
+                                                    </option>
+
+                                                </select>
+                                            </label>
+
+                                        </div>
+                                    </form>
+                                </Card.Body>
+
+                                <Card.Footer>
+                                    <button
+                                        className="btn btn-lg btn-primary col-5"
+                                        onClick={this.handleSubmit.bind(this)}
+                                        type="button"
+                                    >
+                                        Submit
+                                    </button>
+                                </Card.Footer>
+
+                            </Card>
+                        </div>
+                    </div>
+                </div>
+            );
   }
 }
 
