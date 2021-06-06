@@ -16,51 +16,17 @@ function handleSpanDown(){
     console.log("down")
 }
 
-function renderVotesNeeded(canVote) {
-    if (canVote) {
-        return (
-            <div className="row">
-                <div className="col-3" />
-
-                <div className="col-3">
-                    <span
-                        className="material-icons col-auto btn btn-lg"
-                        onClick={handleSpanUp}
-                    >
-                        thumb_up
-                    </span>
-                </div>
-
-                <div className="col-1">
-                    <span
-                        className="material-icons col-auto btn btn-lg"
-                        onClick={handleSpanDown}
-                    >
-                        thumb_down
-                    </span>
-                </div>
-            </div>
-        )
-    }
-
-    else{
-        return null
-    }
-}
-
-function CardsP (props) {
+function renderVotesNeeded(canVote,props) {
 
     function handleSubmit(e, message, teacher_id){
-        props.onConnect(message, teacher_id)
-        e.preventDefault()
-    }
+    props.onConnect(message, teacher_id)
+    e.preventDefault()
+}
 
     const [message, setMessage] = useState("");
-    
+
     const connectPopover = (
-        <Popover
-            id="popover-basic"
-        >
+        <Popover>
             <Popover.Content>
 
                 <div>
@@ -90,6 +56,70 @@ function CardsP (props) {
         </Popover>
     )
 
+    function  handleConnect(){
+        return(
+            <OverlayTrigger
+                overlay={connectPopover}
+                placement="bottom"
+                rootClose
+                transition={null}
+                trigger="click"
+            >
+                {({ ref, ...triggerHandler }) => (
+                    <div
+                        className="btn btn-primary col-auto"
+                        {...triggerHandler}
+                    >
+                        <span ref={ref}>
+                            Connect
+                        </span>
+                    </div>)}
+            </OverlayTrigger>
+        )
+    }
+            
+    
+    if (canVote) {
+        return (
+            <Row>
+                <Col>
+                    <span
+                        className="material-icons col-auto btn btn-lg"
+                        onClick={handleSpanUp}
+                    >
+                        thumb_up
+                    </span>
+                </Col>
+
+                <Col>
+                    <span
+                        className="material-icons col-auto btn btn-lg"
+                        onClick={handleSpanDown}
+                    >
+                        thumb_down
+                    </span>
+                </Col>
+
+                {handleConnect()}
+            </Row>
+        )
+    }
+    else if (canVote === false){
+        return(
+            <Row>
+                <Col>
+                    {handleConnect()}
+                </Col>
+            </Row>
+        )
+    }
+
+    else{
+        return null
+    }
+}
+
+function CardsP (props) {
     return (
         <Fade className="float-right" >
             <Card className="card card_P" >
@@ -142,33 +172,13 @@ function CardsP (props) {
 
                     <br />
 
-                    
-                    <div className="row">
+                    {props.showConnect?
+                        <div className="row">
+                            <div className="col">
+                                {renderVotesNeeded(props.canVote,props)}
+                            </div>
 
-                        {renderVotesNeeded(props.showVoting)}
-
-                        {props.showConnect?
-                            <OverlayTrigger
-                                overlay={connectPopover}
-                                placement="bottom"
-                                rootClose
-                                transition={null}
-                                trigger="click"
-                            >
-                                {({ ref, ...triggerHandler }) => (
-                                    <div
-                                        className="btn btn-primary"
-                                        {...triggerHandler}
-                                    >
-                                        <span ref={ref}>
-                                            Connect
-                                        </span>
-                                    </div>)}
-                            </OverlayTrigger>
-
-
-                        :null}
-                    </div>
+                        </div>:null}
 
                 </Card.Body>
             </Card>
@@ -180,22 +190,27 @@ function CardsP (props) {
 CardsP.propTypes = {
     Git:PropTypes.string.isRequired,
     batch:PropTypes.string.isRequired,
+    canVote:PropTypes.bool,
     course:PropTypes.string.isRequired,
-    key_value: PropTypes.string.isRequired,
+    // description:PropTypes.string.isRequired,
     linked:PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    onConnect: PropTypes.func,
-    showConnect: PropTypes.bool,
-    showVoting:PropTypes.bool,
 
+    showConnect: PropTypes.bool,
 }
 
 CardsP.defaultProps = {
-    onConnect: null,
+    canVote:false,
     showConnect: false,
-    showVoting:false,
+}
 
+renderVotesNeeded.PropTypes={
+    key_value: PropTypes.string.isRequired,
+    onConnect: PropTypes.func,
+}
 
+renderVotesNeeded.defaultProps ={
+    onConnect: null,
 }
 
 export default CardsP;
