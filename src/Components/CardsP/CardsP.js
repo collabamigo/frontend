@@ -5,7 +5,7 @@ import "./CardsP.css";
 import PropTypes from "prop-types";
 import {SvgIcon} from "../../common/SvgIcon";
 import {Fade} from "react-awesome-reveal";
-import {Col, OverlayTrigger, Row} from "react-bootstrap";
+import {OverlayTrigger} from "react-bootstrap";
 import {Popover} from "react-bootstrap";
 
 function handleSpanUp(){
@@ -16,15 +16,16 @@ function handleSpanDown(){
     console.log("down")
 }
 
-function renderVotesNeeded(canVote,props) {
 
+
+function CardsP (props) {
     function handleSubmit(e, message, teacher_id){
-    props.onConnect(message, teacher_id)
-    e.preventDefault()
-}
+        props.onConnect(message, teacher_id)
+        e.preventDefault()
+    }
 
     const [message, setMessage] = useState("");
-
+    
     const connectPopover = (
         <Popover>
             <Popover.Content>
@@ -55,71 +56,6 @@ function renderVotesNeeded(canVote,props) {
             </Popover.Content>
         </Popover>
     )
-
-    function  handleConnect(){
-        return(
-            <OverlayTrigger
-                overlay={connectPopover}
-                placement="bottom"
-                rootClose
-                transition={null}
-                trigger="click"
-            >
-                {({ ref, ...triggerHandler }) => (
-                    <div
-                        className="btn btn-primary col-auto"
-                        {...triggerHandler}
-                    >
-                        <span ref={ref}>
-                            Connect
-                        </span>
-                    </div>)}
-            </OverlayTrigger>
-        )
-    }
-
-
-    if (canVote) {
-        return (
-            <Row>
-                <Col>
-                    <span
-                        className="material-icons col-auto btn btn-lg"
-                        onClick={handleSpanUp}
-                    >
-                        thumb_up
-                    </span>
-                </Col>
-
-                <Col>
-                    <span
-                        className="material-icons col-auto btn btn-lg"
-                        onClick={handleSpanDown}
-                    >
-                        thumb_down
-                    </span>
-                </Col>
-
-                {handleConnect()}
-            </Row>
-        )
-    }
-    else if (canVote === false){
-        return(
-            <Row>
-                <Col>
-                    {handleConnect()}
-                </Col>
-            </Row>
-        )
-    }
-
-    else{
-        return null
-    }
-}
-
-function CardsP (props) {
     return (
         <Fade className="float-right" >
             <Card className="card card_P" >
@@ -133,8 +69,8 @@ function CardsP (props) {
 
                     <hr />
 
-                    <Row>
-                        <Col>
+                    <div className="row">
+                        <div className="col">
                             <Card.Text className="mb-2 text-muted float-left">
                                 {/*{props.description}*/}
 
@@ -145,9 +81,9 @@ function CardsP (props) {
                                 {props.course}
 
                             </Card.Text>
-                        </Col>
+                        </div>
 
-                        <Col>
+                        <div className="col">
                             <Card.Link
                                 className="float-right"
                                 href={"https://www.linkedin.com/in/"+ props.linked}
@@ -170,18 +106,62 @@ function CardsP (props) {
                                     width="30px"
                                 />
                             </Card.Link>
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
 
                     <br />
 
-                    {props.showConnect?
-                        <div className="row">
-                            <div className="col">
-                                {renderVotesNeeded(props.canVote,props)}
-                            </div>
+                    <div className="row">
+                        <div className="col" />
 
-                        </div>:null}
+                        {props.showVoting? (
+                            <>
+                                <span
+                                    className="material-icons col-auto btn"
+                                    onClick={handleSpanUp}
+                                >
+                                    thumb_up
+                                </span>
+
+                                <span
+                                    className="material-icons col-auto btn"
+                                    onClick={handleSpanDown}
+                                >
+                                    thumb_down
+                                </span>
+
+                            </>):null}
+
+                        
+
+                        {props.showConnect?(
+                            <>
+                                <div className="col" />
+                            
+                                <OverlayTrigger
+                                    className="col-auto"
+                                    overlay={connectPopover}
+                                    placement="bottom"
+                                    rootClose
+                                    transition={null}
+                                    trigger="click"
+                                >
+                                    {({ ref, ...triggerHandler }) => (
+                                        <div
+                                            className="btn btn-primary col-auto"
+                                            {...triggerHandler}
+                                        >
+                                            <span ref={ref}>
+                                                Connect
+                                            </span>
+                                        </div>)}
+                                </OverlayTrigger>
+                            </>
+                    ):null}
+
+                        <div className="col" />
+
+                    </div>
 
                 </Card.Body>
             </Card>
@@ -193,27 +173,19 @@ function CardsP (props) {
 CardsP.propTypes = {
     Git:PropTypes.string.isRequired,
     batch:PropTypes.string.isRequired,
-    canVote:PropTypes.bool,
     course:PropTypes.string.isRequired,
-    // description:PropTypes.string.isRequired,
+    key_value: PropTypes.string.isRequired,
     linked:PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-
+    onConnect: PropTypes.func,
     showConnect: PropTypes.bool,
+    showVoting: PropTypes.bool,
 }
 
 CardsP.defaultProps = {
-    canVote:false,
+    onConnect: () => {},
     showConnect: false,
-}
-
-renderVotesNeeded.PropTypes={
-    key_value: PropTypes.string.isRequired,
-    onConnect: PropTypes.func,
-}
-
-renderVotesNeeded.defaultProps ={
-    onConnect: null,
+    showVoting: false
 }
 
 export default CardsP;
