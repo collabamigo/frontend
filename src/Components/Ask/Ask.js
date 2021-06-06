@@ -14,13 +14,14 @@ class Ask extends React.Component {
 
         super(props);
         this.state = {
-            searchTerm: "",
-            temp_l: [],
-            found_match: false,
-            tempList: [{}],
-            list:[],
-            listIndex:4,
-            loading: false
+            "searchTerm": "",
+            "temp_l": [],
+            "found_match": false,
+            "tempList": [{}],
+            "list":[],
+            "listIndex":4,
+            "canVote":false,
+            "loading": false
         }
 
     }
@@ -130,6 +131,7 @@ class Ask extends React.Component {
                                 <CardsP
                                     Git={item.Gitname}
                                     batch={item.degree}
+                                    canVote={this.state.canVote}
                                     course={item.course}
                                     key_value={item.id}
                                     linked={item.Linkedin}

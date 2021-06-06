@@ -77,8 +77,8 @@ function renderVotesNeeded(canVote,props) {
             </OverlayTrigger>
         )
     }
-            
-    
+
+
     if (canVote) {
         return (
             <Row>
@@ -129,7 +129,7 @@ function CardsP (props) {
                     </Card.Title>
 
                     <hr />
-                        
+
                     <Row>
                         <Col>
                             <Card.Text className="mb-2 text-muted float-left">
@@ -143,7 +143,7 @@ function CardsP (props) {
 
                             </Card.Text>
                         </Col>
-                        
+
                         <Col>
                             <Card.Link
                                 className="float-right"
