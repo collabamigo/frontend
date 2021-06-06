@@ -45,13 +45,12 @@ import {withTranslation} from "react-i18next";
             </CustomNavLinkSmall>
 
             <CustomNavLinkSmall>
-                <span className="btn btn-primary btn-block disabled">
-                    <Link 
-                        to="/history"
-                    >
-                        Rate others
-                    </Link>
-                </span>
+                <Link
+                    className="magic_span"
+                    to="/history"
+                >
+                    Connections
+                </Link>
             </CustomNavLinkSmall>
 
             <CustomNavLinkSmall>

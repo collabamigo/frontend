@@ -13,10 +13,10 @@ class ConnectionHistory extends React.Component {
 
         super(props);
         this.state = {
-            "tempList": [{}],
-            "list":[],
-            "listIndex":4,
-            loading: false
+            tempList: [{}],
+            list:[],
+            listIndex:4,
+            loading: true
         }
         this.getTeacherIds();
 
@@ -33,7 +33,7 @@ class ConnectionHistory extends React.Component {
         })
         axios.get(backend + "connect/teachersdata/", {
             params: {
-                id_list: JSON.stringify(this.state.list.slice(this.state.listIndex, this.state.listIndex+4))
+                id_list: this.state.list.slice(this.state.listIndex, this.state.listIndex+4)
             }
         }).then(r => this.setState((state)  => ({
             listIndex:state.listIndex+4, tempList:r.data,
@@ -41,12 +41,9 @@ class ConnectionHistory extends React.Component {
     }
 
     handleGetPrev =() => {
-        this.setState({
-            loading: true
-        })
         axios.get(backend + "connect/teachersdata/", {
             params: {
-                id_list: JSON.stringify(this.state.list.slice(this.state.listIndex-8, this.state.listIndex-4))
+                id_list: this.state.list.slice(this.state.listIndex-8, this.state.listIndex-4)
             }
         }).then(r => this.setState((state)  => ({
             listIndex:state.listIndex-4, tempList:r.data,
@@ -56,9 +53,6 @@ class ConnectionHistory extends React.Component {
 
 
     getTeacherIds = () => {
-        this.setState({
-            loading: true
-        })
         axios.get(backend+"connect/approvals/" ,{
         params: {
             format: "json",
@@ -74,9 +68,7 @@ class ConnectionHistory extends React.Component {
                     .then((response) => this.setState({
                         tempList: response.data,
                         loading: false}))
-                    .catch((err) => console.log(err));
             })
-            .catch((err) => console.log(err));
     };
 
     renderCardsIfNeeded() {
@@ -92,12 +84,11 @@ class ConnectionHistory extends React.Component {
                                     Git={item.Gitname}
                                     batch={item.degree}
                                     course={item.course}
-                                    description="My Tech Stack is "
                                     key_value={item.id}
                                     linked={item.Linkedin}
                                     name={item.First_Name + " " + item.Last_Name}
                                     showConnect={false}
-                                    votes={this.state.voting}
+                                    showVoting
                                 />
                             </div>
                           ))}
@@ -131,14 +122,23 @@ class ConnectionHistory extends React.Component {
     render () {
         if (this.state.loading)
             return (
-                <div
-                    className="spinner-border"
-                    role="status"
-                >
-                    <span className="sr-only">
-                        Loading...
-                    </span>
-                </div>
+                <>
+                    <h1 className="col-sm-5 col-md-5">
+                        {" "}
+                        My Connection History
+
+                        {" "}
+                    </h1>
+
+                    <div
+                        className="spinner-border"
+                        role="status"
+                    >
+                        <span className="sr-only">
+                            Loading...
+                        </span>
+                    </div>
+                </>
             )
         else
               return (
@@ -147,7 +147,7 @@ class ConnectionHistory extends React.Component {
                           <Card.Title>
                               <h1 className="col-sm-5 col-md-5">
                                   {" "}
-                                  Skill Search
+                                  My Connection History
 
                                   {" "}
                               </h1>

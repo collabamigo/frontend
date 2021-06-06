@@ -58,7 +58,9 @@ function CardsP (props) {
     const [message, setMessage] = useState("");
     
     const connectPopover = (
-        <Popover>
+        <Popover
+            id="popover-basic"
+        >
             <Popover.Content>
 
                 <div>
@@ -140,11 +142,12 @@ function CardsP (props) {
 
                     <br />
 
-                    {props.showConnect?
-                        <div className="row">
+                    
+                    <div className="row">
 
-                            {renderVotesNeeded(props.canVote)}
+                        {renderVotesNeeded(props.showVoting)}
 
+                        {props.showConnect?
                             <OverlayTrigger
                                 overlay={connectPopover}
                                 placement="bottom"
@@ -164,7 +167,8 @@ function CardsP (props) {
                             </OverlayTrigger>
 
 
-                        </div>:null}
+                        :null}
+                    </div>
 
                 </Card.Body>
             </Card>
@@ -176,20 +180,21 @@ function CardsP (props) {
 CardsP.propTypes = {
     Git:PropTypes.string.isRequired,
     batch:PropTypes.string.isRequired,
-    canVote:PropTypes.bool,
     course:PropTypes.string.isRequired,
-    // description:PropTypes.string.isRequired,
     key_value: PropTypes.string.isRequired,
     linked:PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     onConnect: PropTypes.func,
     showConnect: PropTypes.bool,
+    showVoting:PropTypes.bool,
+
 }
 
 CardsP.defaultProps = {
-    canVote:false,
     onConnect: null,
     showConnect: false,
+    showVoting:false,
+
 
 }
 
