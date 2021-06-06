@@ -116,7 +116,7 @@ function CardsP (props) {
                         {props.showVoting? (
                             <>
                                 <span
-                                    className="material-icons col-auto btn float-left mr-1 btn-lg"
+                                    className="material-icons col-auto btn float-left mt-0 pt-0 btn-lg"
                                     onClick={handleSpanUp}
                                 >
                                     thumb_up
