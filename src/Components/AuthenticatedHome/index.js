@@ -1,10 +1,13 @@
+
 import {Link, Route, Switch} from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import React from "react";
 import {Fade} from "react-awesome-reveal";
 import {isMobile} from "react-device-detect";
+import {SvgIcon} from "../../common/SvgIcon";
+import './index.css'
 
-function AuthenticatedHome() {
+function Index() {
     return (
         <div>
 
@@ -26,10 +29,11 @@ function AuthenticatedHome() {
                             direction={isMobile?"left":"up"}
                             triggerOnce
                         >
-                            <Card className="card_main help_card_main text-secondary card">
+                            <Card className="authenticatedHome_card_main text-secondary card">
                                 <img
                                     alt=""
                                     className="card-img-top"
+                                    height="220"
                                     src="https://images.unsplash.com/photo-1495653797063-114787b77b23?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
                                 />
 
@@ -61,11 +65,10 @@ function AuthenticatedHome() {
                             direction={isMobile?"right":"up"}
                             triggerOnce
                         >
-                            <Card className="card_main card ask_card_main text-secondary">
-                                <img
-                                    alt="noobmaster"
-                                    className="card-img-top"
-                                    src="https://images.unsplash.com/photo-1534551767192-78b8dd45b51b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+                            <Card className="card authenticatedHome_card_main text-secondary">
+                                <SvgIcon
+                                    height="220"
+                                    src="5236.svg"
                                 />
 
                                 <Card.Body className="card-body">
@@ -104,10 +107,11 @@ function AuthenticatedHome() {
                             direction={isMobile?"left":"up"}
                             triggerOnce
                         >
-                            <Card className="card_main card cc_main text-secondary">
+                            <Card className="card authenticatedHome_card_main text-secondary">
                                 <img
                                     alt=""
                                     className="card-img-top"
+                                    height="220"
                                     src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
                                 />
 
@@ -142,4 +146,4 @@ function AuthenticatedHome() {
     )    
 } 
 
-export default AuthenticatedHome
+export default Index

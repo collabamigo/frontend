@@ -10,8 +10,6 @@ function UnauthenticatedHome({onLogin}) {
         <>
             <Styles />
 
-            {/*<Header isAuthenticated={false} />*/}
-
             <Home onLogin={onLogin} />
 
         </>

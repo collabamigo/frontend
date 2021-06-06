@@ -38,9 +38,9 @@ function ExternalHeader({isAuthenticated}) {
                       href="/"
                   >
                       <SvgIcon
-                          height="64px"
+                          height="68px"
                           src="logo.svg"
-                          width="202px"
+                          width="221px"
                       />
                   </LogoContainer>
 
@@ -62,8 +62,7 @@ function ExternalHeader({isAuthenticated}) {
                               visible={visible}
                           >
                               <div
-                                  className="col"
-                                  style={{ marginBottom: "2.5rem" }}
+                                  className="col mb-4"
                               >
                                   <Label onClick={onClose}>
                                       <div className="col">
@@ -82,39 +81,7 @@ function ExternalHeader({isAuthenticated}) {
                           </Drawer>
                       </>:null}
 
-                  {/*<NotHidden className="col" />
-
-                  { isAuthenticated?
-                      <div className="mt-3">
-                          <DropdownMenu
-                              title={localStorage.getItem("userName")}
-                              visibility
-                          />
-                      </div>: null}*/}
-
               </div>
-
-              {/*<<Drawer
-                  closable={false}
-                  onClose={onClose}
-                  visible={visible}
-              >
-                  <div className="col" style={{ marginBottom: "2.5rem" }}>
-                      Label onClick={onClose}>
-                          <div className="col" span={12}>
-                              <Menu>
-                                  Menu
-                              </Menu>
-                          </div>
-
-                          <div className="col" span={12}>
-                              <Outline />
-                          </div>
-                      </Label>
-                      
-                  </div>
-
-              </Drawer>*/}
           </Container>
       </HeaderSection>
   );

@@ -16,7 +16,7 @@ import Profile from "./Components/Profile/Profile";
 import Connect from './Components/Connect/Connect'
 // import DarkMode from "./Components/Collab/DarkMode/DarkMode";
 import ConnectionRequest from "./Components/ConnectionRequest/ConnectionRequest";
-import AuthenticatedHome from "./Components/AuthenticatedHome/AuthenticatedHome";
+import Index from "./Components/AuthenticatedHome";
 import UnauthenticatedHome from "./Components/UnauthenticatedHome/UnauthenticatedHome";
 // import Collab from "./Components/Collab/Collab";
 import ExternalHeader from "./Components/Header";
@@ -82,7 +82,7 @@ class App extends React.Component {
                         >
 
                             {this.state.signedIn ?
-                                <AuthenticatedHome />
+                                <Index />
                                 : <UnauthenticatedHome 
                                         onLogin={this.handleLogin}
                                   />}
