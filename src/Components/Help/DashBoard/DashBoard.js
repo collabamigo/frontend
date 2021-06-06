@@ -174,7 +174,7 @@ class DashBoard extends React.Component {
                                     rootProps={{ 'data-testid': '5' }}
                                     width='auto'
                                 />
-                            </div>                               
+                            </div>
                         </Col>
 
                         <Col>
