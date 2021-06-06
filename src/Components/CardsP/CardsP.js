@@ -112,7 +112,6 @@ function CardsP (props) {
                     <br />
 
                     <div className="row justify-content-center">
-                        <div className="col-auto" />
 
                         {props.showVoting? (
                             <>
@@ -134,34 +133,29 @@ function CardsP (props) {
 
                             </>):null}
 
-                        
+                        {props.showVoting && props.showConnect?<div className="col-auto" />:null}
 
                         {props.showConnect?(
-                            <>
-                                <div className="col-auto" />
-                            
-                                <OverlayTrigger
-                                    className="col-auto"
-                                    overlay={connectPopover}
-                                    placement="bottom"
-                                    rootClose
-                                    transition={null}
-                                    trigger="click"
-                                >
-                                    {({ ref, ...triggerHandler }) => (
-                                        <div
-                                            className="btn btn-primary col-auto"
-                                            {...triggerHandler}
-                                        >
-                                            <span ref={ref}>
-                                                Connect
-                                            </span>
-                                        </div>)}
-                                </OverlayTrigger>
-                            </>
+                            <OverlayTrigger
+                                className="col-auto"
+                                overlay={connectPopover}
+                                placement="bottom"
+                                rootClose
+                                transition={null}
+                                trigger="click"
+                            >
+                                {({ ref, ...triggerHandler }) => (
+                                    <div
+                                        className="btn btn-primary col-auto"
+                                        {...triggerHandler}
+                                    >
+                                        <span ref={ref}>
+                                            Connect
+                                        </span>
+                                    </div>)}
+                            </OverlayTrigger>
                     ):null}
 
-                        <div className="col-auto" />
 
                     </div>
 
