@@ -35,7 +35,7 @@ function ExternalHeader({isAuthenticated}) {
                   <LogoContainer
                       aria-label="homepage"
                       className='col-auto'
-                      to="/"
+                      href="/"
                   >
                       <SvgIcon
                           height="64px"
