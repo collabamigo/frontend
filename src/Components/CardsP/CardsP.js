@@ -70,22 +70,20 @@ function CardsP (props) {
                     <hr />
 
                     <div className="row">
-                        <div className="col">
-                            <Card.Text className="mb-2 text-muted float-left">
-                                {/*{props.description}*/}
+                        <Card.Text className="col-auto mb-2 text-muted text-left ml-2">
+                            {props.batch + ".Tech"}
 
-                                {props.batch + ".Tech,"}
+                            <br />
 
-                                <br />
+                            {props.course}
 
-                                {props.course}
+                        </Card.Text>
 
-                            </Card.Text>
-                        </div>
+                        <div className="col" />
 
-                        <div className="col">
+                        <div className="col-auto">
                             <Card.Link
-                                className="float-right"
+                                className="float-right ml-3"
                                 href={"https://www.linkedin.com/in/"+ props.linked}
                                 target="_blank"
                             >
@@ -95,6 +93,8 @@ function CardsP (props) {
                                     width="24px"
                                 />
                             </Card.Link>
+
+                            {/*<div className="col-auto" />*/}
 
                             <Card.Link
                                 href={"https://www.github.com/"+ props.Git}
@@ -116,16 +116,14 @@ function CardsP (props) {
                         {props.showVoting? (
                             <>
                                 <span
-                                    className="material-icons col-auto btn"
+                                    className="material-icons col-auto btn float-left mr-1"
                                     onClick={handleSpanUp}
                                 >
                                     thumb_up
                                 </span>
 
-                                <div className="col-auto" />
-
                                 <span
-                                    className="material-icons col-auto btn"
+                                    className="material-icons col-auto btn float-left ml-1"
                                     onClick={handleSpanDown}
                                 >
                                     thumb_down
@@ -133,7 +131,8 @@ function CardsP (props) {
 
                             </>):null}
 
-                        {props.showVoting && props.showConnect?<div className="col-auto" />:null}
+                        {props.showVoting && props.showConnect?<div className="col" />:
+                            (props.showConnect?<div className="col-auto" />:null)}
 
                         {props.showConnect?(
                             <OverlayTrigger
@@ -156,6 +155,7 @@ function CardsP (props) {
                             </OverlayTrigger>
                     ):null}
 
+                        {props.showConnect ? <div className="col-auto" /> : null}
 
                     </div>
 
