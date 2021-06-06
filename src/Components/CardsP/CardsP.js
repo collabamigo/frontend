@@ -27,7 +27,7 @@ function CardsP (props) {
     const [message, setMessage] = useState("");
     
     const connectPopover = (
-        <Popover>
+        <Popover id="popover-basic">
             <Popover.Content>
 
                 <div>
