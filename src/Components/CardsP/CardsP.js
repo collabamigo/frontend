@@ -1,24 +1,29 @@
 
 import React, {useState} from "react";
-import Card from "react-bootstrap/Card";
 import "./CardsP.css";
 import PropTypes from "prop-types";
 import {SvgIcon} from "../../common/SvgIcon";
 import {Fade} from "react-awesome-reveal";
-import {OverlayTrigger} from "react-bootstrap";
-import {Popover} from "react-bootstrap";
+import {OverlayTrigger, Popover, Card} from "react-bootstrap";
 
-function handleSpanUp(){
-    console.log("up")
-}
-
-function handleSpanDown(){
-    console.log("down")
-}
 
 
 
 function CardsP (props) {
+    function handleUpVote(){
+        if (props.voteValue === 1)
+            props.onVote(props.key_value, 0)
+        else
+            props.onVote(props.key_value, 1)
+    }
+
+    function handleDownVote(){
+        if (props.voteValue === -1)
+            props.onVote(props.key_value, 0)
+        else
+            props.onVote(props.key_value, -1)
+    }
+
     function handleSubmit(e, message, teacher_id){
         props.onConnect(message, teacher_id)
         e.preventDefault()
@@ -116,15 +121,15 @@ function CardsP (props) {
                         {props.showVoting? (
                             <>
                                 <span
-                                    className="material-icons col-auto btn float-left mt-0 pt-0 btn-lg"
-                                    onClick={handleSpanUp}
+                                    className={"material-icons"+((props.voteValue === 1)?"":"-outlined")+" col-auto btn float-left mt-0 pt-0 btn-lg"}
+                                    onClick={handleUpVote}
                                 >
                                     thumb_up
                                 </span>
 
                                 <span
-                                    className="material-icons col-auto btn float-left ml-1 btn-lg"
-                                    onClick={handleSpanDown}
+                                    className={"material-icons"+((props.voteValue === -1)?"":"-outlined")+" col-auto btn float-left ml-1 btn-lg"}
+                                    onClick={handleDownVote}
                                 >
                                     thumb_down
                                 </span>
@@ -176,14 +181,18 @@ CardsP.propTypes = {
     linked:PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     onConnect: PropTypes.func,
+    onVote: PropTypes.func,
     showConnect: PropTypes.bool,
     showVoting: PropTypes.bool,
+    voteValue: PropTypes.number,
 }
 
 CardsP.defaultProps = {
     onConnect: () => {},
+    onVote: () => {},
     showConnect: false,
-    showVoting: false
+    showVoting: false,
+    voteValue: 0,
 }
 
 export default CardsP;

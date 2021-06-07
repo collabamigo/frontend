@@ -18,7 +18,8 @@ class Ask extends React.Component {
             searchTerm: "",
             found_match: false,
             list:[],
-            loading: false
+            loading: false,
+            voteAllowedList: []
         }
 
     }
@@ -62,10 +63,17 @@ class Ask extends React.Component {
         this.setState({
             loading: true
         })
-        axios.get(backend+"connect/skill/"+ searchTerm)
-            .then((res) => 
-                this.setState({list:res.data["Teacher_set"],
-                loading: false,}))
+        axios.get(backend+"connect/approvals/" ,{
+            params: {
+                format: "json",
+            }
+              })
+            .then((res) =>
+            axios.get(backend+"connect/skill/"+ searchTerm ,)
+                .then((res2) =>
+                    this.setState({list:res2.data["Teacher_set"],
+                        voteAllowedList: res.data,
+                    loading: false,})))
     };
 
     renderCardsIfNeeded() {
@@ -76,6 +84,7 @@ class Ask extends React.Component {
                     onConnect={this.handleConnect.bind(this)}
                     parentList={this.state.list}
                     showConnectAll
+                    showVotingList={this.state.voteAllowedList}
                 />
             )
         }

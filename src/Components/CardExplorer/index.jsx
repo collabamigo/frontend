@@ -18,6 +18,7 @@ class CardExplorer extends React.Component{
         showConnectList: PropTypes.arrayOf(PropTypes.string),
         showVotingAll: PropTypes.bool,
         showVotingList: PropTypes.arrayOf(PropTypes.string),
+        voteValues: PropTypes.objectOf(PropTypes.number),
     }
 
 
@@ -29,7 +30,7 @@ class CardExplorer extends React.Component{
         showConnectList: [],
         showVotingAll: false,
         showVotingList: [],
-
+        voteValues: {},
     }
 
     constructor(props) {
@@ -37,10 +38,19 @@ class CardExplorer extends React.Component{
         this.state = {
             isLoading: true,
             tempList: [{}],
-            listIndex: 0
+            listIndex: 0,
+            voteValues: this.props.voteValues,
         }
     }
 
+    static getDerivedStateFromProps(props, state) {
+        if (state.voteValues === undefined && props.voteValues !== undefined)
+            return {
+                voteValues: props.voteValues
+            }
+        else
+            return null
+    }
 
     componentDidMount() {
         if (this.props.parentList && this.props.parentList.length)
@@ -57,32 +67,47 @@ class CardExplorer extends React.Component{
             this.fetchData()
     }
 
+
+    handleVote(teacherId, vote) {
+        axios.post(backend+"rating/", {
+            teacher: teacherId,
+            vote: vote,
+        }).then(() =>
+            this.setState((state) => ({
+                voteValues: {
+                    ...(state.voteValues),
+                    [teacherId]: vote
+                }
+            }))
+        )
+    }
+
     handleGetNext() {
         this.setState((state) => ({
             isLoading: true,
             listIndex: state.listIndex + this.props.cardsPerPage
-        }))
-        this.fetchData()
-    }    
+        }), this.fetchData)
+    }
     
     handleGetPrev() {
         this.setState((state) => ({
             isLoading: true,
             listIndex: state.listIndex - this.props.cardsPerPage
-        }))
-        this.fetchData()
-    }        
+        }), this.fetchData)
+    }
 
-    fetchData() {
-        console.log(this.props.parentList)
+    fetchData(listIndex) {
+        if (listIndex === undefined)
+            listIndex=this.state.listIndex
         axios.get(backend + "connect/teachersdata/", {
             params: {
-                id_list: this.props.parentList.slice(this.state.listIndex, this.state.listIndex + this.props.cardsPerPage)
+                id_list: this.props.parentList.slice(listIndex, listIndex + this.props.cardsPerPage)
             },
-        }).then(r => this.setState({
-            tempList: r.data,
-            isLoading:false
-        }))
+        }).then(res1 => axios.get(backend + "rating/").then(res2 => this.setState({
+            tempList: res1.data,
+            voteValues: res2.data,
+            isLoading:false}))
+        )
     }
 
     render () {
@@ -99,7 +124,7 @@ class CardExplorer extends React.Component{
                 </div>
             </div>
             )
-    else
+    else if (this.props.parentList && this.props.parentList.length)
         return (
             <div>
                 <div className="row">
@@ -116,35 +141,45 @@ class CardExplorer extends React.Component{
                                 linked={item.Linkedin}
                                 name={item.First_Name + " " + item.Last_Name}
                                 onConnect={this.props.onConnect}
+                                onVote={this.handleVote.bind(this)}
                                 showConnect={this.props.showConnectAll || this.props.showConnectList.includes(item.id)}
                                 showVoting={this.props.showVotingAll || this.props.showVotingList.includes(item.id)}
+                                voteValue={(this.state.voteValues[item.id]!==undefined)?this.state.voteValues[item.id]:0}
                             />
                         </div>
                       ))}
                 </div>
 
-                <div className="row">
-                    <div className="col-1" />
+                <div className="row mt-5">
+                    <div className="col" />
 
                     <div className="col-auto">
-                        <span
-                            className="btn material-icons"
+                        <button
+                            className="btn material-icons btn-primary"
+                            disabled={this.state.listIndex<=0}
                             onClick={this.handleGetPrev.bind(this)}
+                            type="button"
                         >
                             arrow_back_ios
-                        </span>
+                        </button>
                     </div>
 
                     <div className="col-auto">
-                        <span
-                            className="btn material-icons"
+                        <button
+                            className="btn material-icons btn-primary"
+                            disabled={this.state.listIndex+this.props.cardsPerPage>=this.props.parentList.length}
                             onClick={this.handleGetNext.bind(this)}
+                            type="button"
                         >
                             arrow_forward_ios
-                        </span>
+                        </button>
                     </div>
+
+                    <div className="col" />
                 </div>
             </div>
         )
+        else
+            return null
 }}
 export default CardExplorer
