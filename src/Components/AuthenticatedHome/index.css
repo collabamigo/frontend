@@ -15,21 +15,41 @@
 }
 
 .changing-img {
-  background-color: rgb(110, 169, 247) !important;
+  background-color: rgb(241, 237, 237) !important;
 }
 
 .border-mine {
-  border-color: rgb(110, 169, 247) !important;
+  border-color: rgb(84, 100, 246) !important;
 }
 
 .image-setting-1 {
-  height: 510px !important;
+  height: 505px !important;
 }
 
 .image-setting-2 {
-  height: 510px !important;
+  height: 470px !important;
 }
 
 .image-setting-3 {
-  height: 510px !important;
+  height: 455px !important;
 }
+
+.btn-mine {
+  background-color: rgb(26, 224, 59) !important;
+  border-color: rgb(65, 63, 63);
+}
+
+.text-mine {
+  color: rgb(234, 255, 0);
+}
+
+.upper-text {
+  color: rgb(69, 70, 68);
+}
+
+.self-footer {
+  background-color: rgb(84, 100, 246) !important;
+  text-decoration: none !important;
+}
+
+/* Need to work on finding appropriate color scheme */
