@@ -87,6 +87,7 @@ class DashBoard extends React.Component {
 
                                     <div className="col-md-4 pt-4">
                                         <img
+                                            alt="profile_pic"
                                             className="rounded-circle float-center"
                                             src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
                                         />
