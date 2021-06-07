@@ -62,7 +62,7 @@ class Ask extends React.Component {
         this.setState({
             loading: true
         })
-        axios.get(backend+"connect/skill/"+ searchTerm ,)
+        axios.get(backend+"connect/skill/"+ searchTerm)
             .then((res) => 
                 this.setState({list:res.data["Teacher_set"],
                 loading: false,}))
