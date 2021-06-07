@@ -29,7 +29,7 @@ function Index() {
                             direction={isMobile?"left":"up"}
                             triggerOnce
                         >
-                            <Card className="authenticatedHome_card_main text-secondary card ml-3">
+                            <Card className="authenticatedHome_card_main text-secondary card ml-3 mb-3">
                                 <SvgIcon
                                     height="220"
                                     src="help_others.svg"
@@ -63,7 +63,7 @@ function Index() {
                             direction={isMobile?"right":"up"}
                             triggerOnce
                         >
-                            <Card className="card authenticatedHome_card_main text-secondary ml-3">
+                            <Card className="card authenticatedHome_card_main text-secondary ml-3 mb-3">
                                 <SvgIcon
                                     height="210"
                                     src="ask_for_help.svg"

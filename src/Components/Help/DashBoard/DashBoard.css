@@ -1,37 +1,55 @@
-.card-pieChart{
-    width:auto;
-    height:440px;
+.card-pieChart {
+    width: auto;
+    height: 440px;
 }
 
-.main-profile{
-    height:300px;
-    width:auto;
+.main-profile {
+    height: 50%;
+    width: auto;
 }
 
-.card-profile-title{
+.card-profile-title {
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
     font-size: larger;
 }
 
-.main-profile-footer{
-    border-top: none!important;
+.main-profile-footer {
+    border-top: none !important;
 }
 
-.card-votes{
-    height:440px;
-    width:auto;
+.card-votes {
+    height: 440px;
+    width: auto;
 }
 
-.card-empty{
-    height:440px;
-    width:auto;
+.card-empty {
+    height: 440px;
+    width: auto;
 }
 
-.card-trending{
-    height:440px;
-    width:auto;
+.card-trending {
+    height: 440px;
+    width: auto;
 }
 
 .card_dashboard {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+
+
+.max-weight-name {
+    max-width: 70%;
+}
+
+.loql {
+    max-width: 66%;
+}
+
+.lower-text {
+    max-width: 60%;
+}
+
+
+/* .upper-text {
+    max-width: 100%;
+} */
