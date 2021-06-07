@@ -21,15 +21,15 @@ function Index() {
                 </Route>
             </Switch>
 
-            <section>
+            <section className=" lowl container">
                 <div className="container">
                     <div className="row">
                         <Fade
-                            className="col-lg-4 mb-4"
+                            className=""
                             direction={isMobile?"left":"up"}
                             triggerOnce
                         >
-                            <Card className="authenticatedHome_card_main text-secondary card">
+                            <Card className="authenticatedHome_card_main text-secondary card ml-3">
                                 <SvgIcon
                                     height="220"
                                     src="help_others.svg"
@@ -59,14 +59,15 @@ function Index() {
                         </Fade>
 
                         <Fade
-                            className="col-lg-4 mb-4"
+                            className=""
                             direction={isMobile?"right":"up"}
                             triggerOnce
                         >
-                            <Card className="card authenticatedHome_card_main text-secondary">
+                            <Card className="card authenticatedHome_card_main text-secondary ml-3">
                                 <SvgIcon
-                                    height="220"
+                                    height="210"
                                     src="ask_for_help.svg"
+                                    width="300"
                                 />
 
                                 <Card.Body className="card-body">
@@ -101,11 +102,11 @@ function Index() {
                         </Fade>
 
                         <Fade
-                            className="col-lg-4 mb-4"
+                            className=""
                             direction={isMobile?"left":"up"}
                             triggerOnce
                         >
-                            <Card className="card authenticatedHome_card_main text-secondary">
+                            <Card className="card authenticatedHome_card_main text-secondary ml-3">
                                 <SvgIcon
                                     height="220"
                                     src="collaborate.svg"
@@ -142,5 +143,5 @@ function Index() {
     )    
 } 
 
-export default Index
+export default Index;
 // TODO: Attribution to freepik.com pending

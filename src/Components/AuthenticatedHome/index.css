@@ -1,4 +1,10 @@
-.authenticatedHome_card_main{
-  height:30rem;
-  width:20rem;
+.authenticatedHome_card_main {
+  align-items: center;
+  height: 30rem;
+  width: 20rem;
+}
+
+.lowl {
+  max-width: 85%;
+  display: flexbox;
 }
