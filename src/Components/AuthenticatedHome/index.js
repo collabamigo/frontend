@@ -1,4 +1,4 @@
-
+//  Kuch na kuch toh kr hi lenge
 import {Link, Route, Switch} from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import React from "react";
@@ -24,8 +24,8 @@ function Index() {
 
             <div className="container-fluid lowl">
                 <div className="row row-cols-1 row-cols-md-3 g-4">
-                    <div className="col card-stype">
-                        <Card>
+                    <div className="col">
+                        <Card className="card-stype">
                             <SvgIcon 
                                 className="image-setting-1"
                                 src="help_others.svg"
@@ -54,8 +54,8 @@ function Index() {
                         </Card>
                     </div>
 
-                    <div className="col  card-stype">
-                        <Card>
+                    <div className="col"> 
+                        <Card className="card-stype">
                             <SvgIcon
                                 className="image-setting-2"
                                 src="ask_for_help.svg"
@@ -92,8 +92,8 @@ function Index() {
                         </Card>
                     </div>
 
-                    <div className="col card-stype">
-                        <Card>
+                    <div className="col">
+                        <Card className="card-stype">
                             <SvgIcon
                                 className="image-setting-3"
                                 src="collaborate.svg"
