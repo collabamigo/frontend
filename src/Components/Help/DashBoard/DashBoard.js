@@ -3,7 +3,6 @@ import Chart from "react-google-charts";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
 import './DashBoard.css'
-import {Col, Row} from "react-bootstrap";
 import {SvgIcon} from "../../../common/SvgIcon";
 import { Doughnut } from "react-chartjs-2";
 
@@ -54,8 +53,8 @@ class DashBoard extends React.Component {
                 </h1>
 
                 <div className="container-xl lol">
-                    <Row>
-                        <Col>
+                    <div className="row">
+                        <div className="col">
                             <Card className="card_dashboard m-2 card main-profile">
                                 <Card.Body className="card-body">
                                     <img
@@ -105,11 +104,11 @@ class DashBoard extends React.Component {
 
                                 </Card.Body>
                             </Card>
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
 
-                    <Row>
-                        <Col>
+                    <div className="row">
+                        <div className="col">
                             <Card className="card_dashboard m-2 card card-empty">
                                 <Card.Body>
                                     <Card.Title>
@@ -117,9 +116,9 @@ class DashBoard extends React.Component {
                                     </Card.Title>
                                 </Card.Body>
                             </Card>
-                        </Col>
+                        </div>
 
-                        <Col>
+                        <div className="col">
                             <Card className="card_dashboard m-2 card card-votes">
                                 <Card.Body className="card-body col-md-7">
                                     <Doughnut
@@ -131,14 +130,12 @@ class DashBoard extends React.Component {
                                 </Card.Body>
 
                             </Card>
-                        </Col>
+                        </div>
 
-                    </Row>
+                    </div>
 
-                    <Row>
-                        <Col>
-
-
+                    <div className="row">
+                        <div className="col">
                             <div>
                                 <br />
 
@@ -175,19 +172,20 @@ class DashBoard extends React.Component {
                                     width='auto'
                                 />
                             </div>
-                        </Col>
+                        </div>
 
-                        <Col>
+                        <div className="col">
                             <Card className="card_dashboard m-2 card card-trending">
                                 <Card.Body className="card-body">
                                     <Card.Title>
                                         Trending Skills
                                     </Card.Title>
 
+
                                 </Card.Body>
                             </Card>
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
