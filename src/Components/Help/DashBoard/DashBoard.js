@@ -122,6 +122,8 @@ class DashBoard extends React.Component {
 
                                     <h4 className="card-text float-right">
                                         <small className="text-muted">
+                                            {"- Since  "}
+
                                             {this.props.created.slice(8,10) + "th "}
 
                                             {this.state.months[parseInt(this.props.created.slice(5,7))] + ", "}
