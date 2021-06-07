@@ -18,7 +18,6 @@ class CardExplorer extends React.Component{
         showConnectList: PropTypes.arrayOf(PropTypes.string),
         showVotingAll: PropTypes.bool,
         showVotingList: PropTypes.arrayOf(PropTypes.string),
-        voteValues: PropTypes.objectOf(PropTypes.number),
     }
 
 
@@ -30,7 +29,6 @@ class CardExplorer extends React.Component{
         showConnectList: [],
         showVotingAll: false,
         showVotingList: [],
-        voteValues: {},
     }
 
     constructor(props) {
@@ -39,17 +37,8 @@ class CardExplorer extends React.Component{
             isLoading: true,
             tempList: [{}],
             listIndex: 0,
-            voteValues: this.props.voteValues,
+            voteValues: {},
         }
-    }
-
-    static getDerivedStateFromProps(props, state) {
-        if (state.voteValues === undefined && props.voteValues !== undefined)
-            return {
-                voteValues: props.voteValues
-            }
-        else
-            return null
     }
 
     componentDidMount() {
