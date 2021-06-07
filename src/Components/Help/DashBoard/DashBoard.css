@@ -1,4 +1,4 @@
-.card-pieChart {
+.pieChart {
     width: auto;
     height: 440px;
 }
@@ -49,6 +49,9 @@
     max-width: 60%;
 }
 
+li.trending{
+    list-style-type: none;
+}
 
 /* .upper-text {
     max-width: 100%;

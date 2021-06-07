@@ -5,6 +5,8 @@ import Card from "react-bootstrap/Card";
 import './DashBoard.css'
 import {SvgIcon} from "../../../common/SvgIcon";
 import { Doughnut } from "react-chartjs-2";
+import backend from "../../../env";
+import axios from "axios";
 
 
 class DashBoard extends React.Component {
@@ -14,13 +16,14 @@ class DashBoard extends React.Component {
         linkedin:PropTypes.string.isRequired,
         name:PropTypes.string.isRequired,
         skills: PropTypes.arrayOf(PropTypes.string).isRequired,
-        upvote: PropTypes.number.isRequired,
+        // upvote: PropTypes.number.isRequired,
         
     }
 
     constructor(props) {
         super(props);
         this.state={
+            trendingSkills:[],
             dataDoughnut: {
             labels: ["Up Votes","Down Votes"],
             datasets: [
@@ -37,13 +40,19 @@ class DashBoard extends React.Component {
         }
     }
 
-    shouldComponentUpdate () {
-        return false;
+    componentDidMount() {
+        this.handleTrending()
     }
 
+    shouldComponentUpdate () {
+        return true;
+    }
+
+    handleTrending() {
+        axios.get(backend+"connect/statistics/skills").then((res) => {this.setState({trendingSkills:res.data})})
+    }
 
     render () {
-        console.log(this.props.upvote)
         return (
             <div className="">
                 <h1 className="font-weight-bold">
@@ -115,56 +124,6 @@ class DashBoard extends React.Component {
                                     </h4>   
                                 </Card.Footer>
                             </Card>
-
-                            <Card className="card_dashboard m-2 card main-profile">
-                                <Card.Body className="card-body">
-                                    <img
-                                        className="rounded-circle float-right"
-                                        src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
-                                    />
-
-                                    <div className="card-text col-auto">
-                                        <h2 className="display-4 fw-bold p-3 float-left row">
-                                            {this.props.name}
-                                        </h2>
-
-                                        <div className="display-5 col-lg-6 row">
-                                            Your time is limited, so dont waste it living someone elses life. Dont
-                                            be trapped by dogma – which is living with the results of other peoples
-                                            thinking. -Steve Jobs
-                                        </div>
-                                    </div>
-
-                                    <hr />
-
-                                    <Card.Footer className="card-footer main-profile-footer" >
-                                        <Card.Link
-                                            className="float-left"
-                                            href={"https://www.linkedin.com/in/"+ this.props.linkedin}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="31px"
-                                                src="linkedin.svg"
-                                                width="44px"
-                                            />
-                                        </Card.Link>
-
-                                        <Card.Link
-                                            className="float-left"
-                                            href={"https://www.github.com/"+ this.props.git}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="34px"
-                                                src="github.svg"
-                                                width="43px"
-                                            />
-                                        </Card.Link>
-                                    </Card.Footer>
-
-                                </Card.Body>
-                            </Card>
                         </div>
                     </div>
 
@@ -197,7 +156,7 @@ class DashBoard extends React.Component {
 
                     <div className="row">
                         <div className="col">
-                            <div>
+                            <div className="pieChart">
                                 <br />
 
                                 <br />
@@ -238,11 +197,25 @@ class DashBoard extends React.Component {
                         <div className="col">
                             <Card className="card_dashboard m-2 card card-trending">
                                 <Card.Body className="card-body">
-                                    <Card.Title>
+                                    <Card.Title className="pd-4">
                                         Trending Skills
                                     </Card.Title>
 
-
+                                    {this.state.trendingSkills.map(item => (
+                                        <div
+                                            className="col-auto"
+                                            key={item}
+                                        >
+                                            <li
+                                                className="trending"
+                                                key={item}
+                                            >
+                                                <ol className="un-list">
+                                                    {item}
+                                                </ol>
+                                            </li>
+                                        </div>
+                                        ))}
                                 </Card.Body>
                             </Card>
                         </div>
