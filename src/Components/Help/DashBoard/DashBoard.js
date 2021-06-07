@@ -12,6 +12,7 @@ import axios from "axios";
 class DashBoard extends React.Component {
     static propTypes = {
         // downvote:PropTypes.number.isRequired,
+        created: PropTypes.arrayOf(PropTypes.string).isRequired,
         git:PropTypes.string.isRequired,
         linkedin:PropTypes.string.isRequired,
         name:PropTypes.string.isRequired,
@@ -23,6 +24,7 @@ class DashBoard extends React.Component {
     constructor(props) {
         super(props);
         this.state={
+            months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             trendingSkills:[],
             dataDoughnut: {
             labels: ["Up Votes","Down Votes"],
@@ -51,8 +53,9 @@ class DashBoard extends React.Component {
     handleTrending() {
         axios.get(backend+"connect/statistics/skills").then((res) => {this.setState({trendingSkills:res.data})})
     }
-
+// year month day
     render () {
+        console.log(this.props.created)
         return (
             <div className="">
                 <h1 className="font-weight-bold">
@@ -89,7 +92,6 @@ class DashBoard extends React.Component {
                                         />
                                     </div>
 
-                                    
                                 </Card.Body>
 
                                 <Card.Footer className="mb-0 mt-3 card-hf-color-dasboard">
@@ -119,7 +121,14 @@ class DashBoard extends React.Component {
 
                                     <h4 className="card-text float-right">
                                         <small className="text-muted">
-                                            Since 31st May
+                                            {this.props.created.slice(8,10) + "th "}
+
+                                            {this.state.months[parseInt(this.props.created.slice(5,7))] + ", "}
+
+                                            {" "}
+
+                                            {this.props.created.slice(0,4)}
+
                                         </small>
                                     </h4>   
                                 </Card.Footer>

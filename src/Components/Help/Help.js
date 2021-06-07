@@ -19,6 +19,7 @@ class Help extends React.Component {
             "git":"",
             "upvote":0,
             "downvote":0,
+            "created":[],
         };
     }
 
@@ -45,7 +46,8 @@ class Help extends React.Component {
                             git:res.data[0]["Gitname"],
                             upvote:res.data[0]["UpVotes"],
                             downvote:res.data[0]["DownVotes"],
-                            skills:res.data[0]['skills']});
+                            skills:res.data[0]['skills'],
+                            created:res.data[0]['Created'].split('T')[0]});
             })
     }
 
@@ -78,6 +80,7 @@ class Help extends React.Component {
         else if (this.state.isTeacher) {
             return (
                 <DashBoard
+                    created={this.state.created}
                     downvote={this.state.downvote}
                     git={this.state.git}
                     linkedin={this.state.linkedin}

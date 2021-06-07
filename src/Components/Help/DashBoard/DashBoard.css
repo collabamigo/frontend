@@ -59,4 +59,5 @@ li.trending{
 
 .card-hf-color-dasboard {
     background-color: white !important;
+    border-top: none!important;
 }
