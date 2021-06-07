@@ -14,6 +14,7 @@ export interface ButtonProps {
 }
 
 export interface SvgIconProps {
+  className: string,
   src: string;
   width: string;
   height: string;
