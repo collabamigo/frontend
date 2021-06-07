@@ -83,7 +83,7 @@ class DashBoard extends React.Component {
                                     
                                 </Card.Body>
 
-                                <Card.Footer className="mb-0 mt-3">
+                                <Card.Footer className="mb-0 mt-3 card-hf-color-dasboard">
                                     <Card.Link
                                         className="float-left ml-2 mb-0"
                                         href={"https://www.linkedin.com/in/"+ this.props.linkedin}
