@@ -14,6 +14,7 @@ import {
 import PropTypes from "prop-types";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import { Drawer, Menu } from "antd";
+import SvgIcon from "../../common/SvgIcon";
 
 function ExternalHeader({ isAuthenticated }) {
     const [visible, setVisibility] = useState(false);
@@ -37,9 +38,11 @@ function ExternalHeader({ isAuthenticated }) {
                         className='col-auto'
                         href="/"
                     >
-                        <div className="mt-1 h1 text-left">
-                            CollabConnect
-                        </div>
+                        <SvgIcon
+                            height="68px"
+                            src="logo.svg"
+                            width="221px"
+                        />
 
                         {/* TODO: Make better logo and left align it */}
 
