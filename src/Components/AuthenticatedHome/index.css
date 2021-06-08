@@ -1,31 +1,9 @@
 .authenticatedHome_card_main {
   align-items: center;
-
+  height: 30rem;
+  width: 20rem;
 }
 
 .lowl {
   max-width: 85%;
-}
-
-.card-stype {
-  min-height: 100%;
-  max-height: 100%;
-  min-width: 30% !important;
-  background-color: rgb(255, 255, 255) !important;
-}
-
-.changing-img {
-  background-color: white !important;
-}
-
-.image-setting-1 {
-  height: 510px !important;
-}
-
-.image-setting-2 {
-  height: 490px !important;
-}
-
-.image-setting-3 {
-  height: 510px !important;
 }
