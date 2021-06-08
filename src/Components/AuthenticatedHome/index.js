@@ -1,5 +1,5 @@
 
-import {Link, Route, Switch} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import React from "react";
 import {Fade} from "react-awesome-reveal";
@@ -9,135 +9,118 @@ import './index.css'
 
 function Index() {
     return (
-        <div>
+        <div className="row justify-content-center h-100">
+            <Fade
+                className="col-4 h-100"
+                direction={isMobile?"left":"up"}
+                triggerOnce
+            >
+                <Card className="authenticatedHome_card_main text-secondary h-75 card mb-3 ml-4">
+                    <SvgIcon
+                        height="220"
+                        src="help_others.svg"
+                    />
 
-            <Switch>
-                <Route
-                    exact
-                    path="/"
-                >
+                    <Card.Body>
+                        <Card.Title className="card-title font-weight-bold">
+                            HELP OTHERS
+                        </Card.Title>
 
-                    {/*<DarkMode />*/}
-                </Route>
-            </Switch>
+                        <br />
 
-            <section className=" lowl container">
-                <div className="container">
-                    <div className="row">
-                        <Fade
-                            className=""
-                            direction={isMobile?"left":"up"}
-                            triggerOnce
+                        <Card.Text className="card-text masthead">
+                            Solve other&apos;s doubts and be the mentor you always wanted.
+                            Using our platform you can reach a larger curious community.
+                        </Card.Text>
+
+                        <Link
+                            className="col-auto btn btn-primary"
+                            to="/help"
                         >
-                            <Card className="authenticatedHome_card_main text-secondary card ml-3 mb-3">
-                                <SvgIcon
-                                    height="220"
-                                    src="help_others.svg"
-                                />
+                            Help others
+                        </Link>
 
-                                <Card.Body>
-                                    <Card.Title className="card-title font-weight-bold">
-                                        HELP OTHERS
-                                    </Card.Title>
+                    </Card.Body>
+                </Card>
+            </Fade>
 
-                                    <br />
+            <Fade
+                className="col-4 h-100"
+                direction={isMobile?"right":"up"}
+                triggerOnce
+            >
+                <Card className="card authenticatedHome_card_main h-75 text-secondary mb-3 mx-2">
+                    <SvgIcon
+                        height="210"
+                        src="ask_for_help.svg"
+                        width="300"
+                    />
 
-                                    <Card.Text className="card-text masthead">
-                                        Solve other&apos;s doubts and be the mentor you always wanted.
-                                        Using our platform you can reach a larger curious community.
-                                    </Card.Text>
+                    <Card.Body className="card-body">
+                        <Card.Title className="card-title font-weight-bold">
+                            ASK FOR HELP
+                        </Card.Title>
 
-                                    <Link
-                                        className="col-auto btn btn-primary"
-                                        to="/help"
-                                    >
-                                        Help others
-                                    </Link>
+                        <br />
 
-                                </Card.Body>
-                            </Card>
-                        </Fade>
+                        <Card.Text className="card-text">
+                            <b>
+                                Stack Overflow:404!
+                            </b>
 
-                        <Fade
-                            className=""
-                            direction={isMobile?"right":"up"}
-                            triggerOnce
+                            {" "}
+                            Answer not found,
+
+                            <br />
+                            The button below can solve it
+                        </Card.Text>
+
+                        <br />
+
+                        <Link
+                            className="col-auto btn btn-primary"
+                            to="/ask"
                         >
-                            <Card className="card authenticatedHome_card_main text-secondary ml-3 mb-3">
-                                <SvgIcon
-                                    height="210"
-                                    src="ask_for_help.svg"
-                                    width="300"
-                                />
+                            Ask for help
+                        </Link>
+                    </Card.Body>
+                </Card>
+            </Fade>
 
-                                <Card.Body className="card-body">
-                                    <Card.Title className="card-title font-weight-bold">
-                                        ASK FOR HELP
-                                    </Card.Title>
+            <Fade
+                className="col-4 h-100"
+                direction={isMobile?"left":"up"}
+                triggerOnce
+            >
+                <Card className="card authenticatedHome_card_main h-75 text-secondary mr-4">
+                    <SvgIcon
+                        height="220"
+                        src="collaborate.svg"
+                    />
 
-                                    <br />
+                    <Card.Body className="card-body">
+                        <Card.Title className="card-title font-weight-bold">
+                            LET&apos;S  COLLABORATE
+                        </Card.Title>
 
-                                    <Card.Text className="card-text">
-                                        <b>
-                                            Stack Overflow:404!
-                                        </b>
+                        <br />
 
-                                        {" "}
-                                        Answer not found,
+                        <Card.Text className="card-text">
+                            Find new projects to work.
+                            Apply for teams and Collaborations.
+                            Lets keep the learning and helping community alive.
+                        </Card.Text>
 
-                                        <br />
-                                        The button below can solve it
-                                    </Card.Text>
-
-                                    <br />
-
-                                    <Link
-                                        className="col-auto btn btn-primary"
-                                        to="/ask"
-                                    >
-                                        Ask for help
-                                    </Link>
-                                </Card.Body>
-                            </Card>
-                        </Fade>
-
-                        <Fade
-                            className=""
-                            direction={isMobile?"left":"up"}
-                            triggerOnce
+                        <div
+                            className="col-auto btn btn-primary disabled"
+                            to="/collab_connect"
                         >
-                            <Card className="card authenticatedHome_card_main text-secondary ml-3">
-                                <SvgIcon
-                                    height="220"
-                                    src="collaborate.svg"
-                                />
+                            Coming Soon...
+                        </div>
 
-                                <Card.Body className="card-body">
-                                    <Card.Title className="card-title font-weight-bold">
-                                        LET&apos;S  COLLABORATE
-                                    </Card.Title>
-
-                                    <br />
-
-                                    <Card.Text className="card-text">
-                                        Find new projects to work.
-                                        Apply for teams and Collaborations.
-                                        Lets keep the learning and helping community alive.
-                                    </Card.Text>
-
-                                    <div
-                                        className="col-auto btn btn-primary disabled"
-                                        to="/collab_connect"
-                                    >
-                                        Coming Soon...
-                                    </div>
-
-                                </Card.Body>
-                            </Card>
-                        </Fade>
-                    </div>
-                </div>
-            </section>
+                    </Card.Body>
+                </Card>
+            </Fade>
         </div>
         
     )    
