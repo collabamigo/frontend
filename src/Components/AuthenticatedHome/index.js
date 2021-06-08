@@ -21,123 +21,121 @@ function Index() {
                 </Route>
             </Switch>
 
-            <section className=" container lowl ">
-                <div className="row justify-content-center">
-                    <Fade
-                        className=""
-                        direction={isMobile?"left":"up"}
-                        triggerOnce
-                    >
-                        <Card className="authenticatedHome_card_main text-secondary card ml-3 mb-5 mr-3 zoom-my-card">
+            <section className=" lowl container">
+                <div className="container">
+                    <div className="row">
+                        <Fade
+                            className=""
+                            direction={isMobile?"left":"up"}
+                            triggerOnce
+                        >
+                            <Card className="authenticatedHome_card_main text-secondary card ml-3 mb-3">
+                                <SvgIcon
+                                    height="220"
+                                    src="help_others.svg"
+                                />
 
-                            <SvgIcon
-                                className=" card-img-top card-img-topy clsImg "
-                                height="360"
-                                src="help_others.svg"
-                                width="500"
-                            />
-
-                            <Card.Body>
-                                <Card.Title className="card-title font-weight-bold">
-                                    HELP OTHERS
-                                </Card.Title>
-
-                                <Card.Text className="card-text masthead">
-                                    Solve other&apos;s doubts and be the mentor
-                                    <br />
-                                    you always wanted.
-                                    Using our platform you can reach a larger curious community.
-                                </Card.Text>
-
-                                <Link
-                                    className="col-auto btn btn-primary"
-                                    to="/help"
-                                >
-                                    Help others
-                                </Link>
-
-                            </Card.Body>
-                        </Card>
-                    </Fade>
-
-                    <Fade
-                        className=""
-                        direction={isMobile?"right":"up"}
-                        triggerOnce
-                    >
-                        <Card className="card authenticatedHome_card_main text-secondary ml-3 mb-5 mr-3 zoom-my-card">
-                            <SvgIcon
-                                className="container card-img-top"
-                                height="360"
-                                src="ask_for_help.svg"
-                                width="380"
-                            />
-
-                            <Card.Body className="card-body">
-                                <Card.Title className="card-title font-weight-bold">
-                                    ASK FOR HELP
-                                </Card.Title>
-
-
-                                <Card.Text className="card-text">
-                                    <b>
-                                        Stack Overflow:404!
-                                    </b>
-
-                                    {" "}
-                                    Answer not found,
+                                <Card.Body>
+                                    <Card.Title className="card-title font-weight-bold">
+                                        HELP OTHERS
+                                    </Card.Title>
 
                                     <br />
-                                    The button below can
-                                    solve it
-                                </Card.Text>                            
 
-                                <br />
+                                    <Card.Text className="card-text masthead">
+                                        Solve other&apos;s doubts and be the mentor you always wanted.
+                                        Using our platform you can reach a larger curious community.
+                                    </Card.Text>
 
-                                <Link
-                                    className="col-auto btn btn-primary"
-                                    to="/ask"
-                                >
-                                    Ask for help
-                                </Link>
-                            </Card.Body>
-                            
-                        </Card>
-                    </Fade>
+                                    <Link
+                                        className="col-auto btn btn-primary"
+                                        to="/help"
+                                    >
+                                        Help others
+                                    </Link>
 
-                    <Fade
-                        className=""
-                        direction={isMobile?"left":"up"}
-                        triggerOnce
-                    >
-                        <Card className="card authenticatedHome_card_main text-secondary ml-3 mb-5 zoom-my-card">
-                            <SvgIcon
-                                height="360"
-                                src="collaborate.svg"
-                                width="400"
-                            />
+                                </Card.Body>
+                            </Card>
+                        </Fade>
 
-                            <Card.Body className="card-body">
-                                <Card.Title className="card-title font-weight-bold">
-                                    LET&apos;S  COLLABORATE
-                                </Card.Title>
+                        <Fade
+                            className=""
+                            direction={isMobile?"right":"up"}
+                            triggerOnce
+                        >
+                            <Card className="card authenticatedHome_card_main text-secondary ml-3 mb-3">
+                                <SvgIcon
+                                    height="210"
+                                    src="ask_for_help.svg"
+                                    width="300"
+                                />
 
-                                <Card.Text className="card-text">
-                                    Find new projects to work.
-                                    Apply for teams and Collaborations.
-                                    Lets keep the learning and helping community alive.
-                                </Card.Text>
+                                <Card.Body className="card-body">
+                                    <Card.Title className="card-title font-weight-bold">
+                                        ASK FOR HELP
+                                    </Card.Title>
 
-                                <div
-                                    className="col-auto btn btn-primary disabled"
-                                    to="/collab_connect"
-                                >
-                                    Coming Soon...
-                                </div>
+                                    <br />
 
-                            </Card.Body>
-                        </Card>
-                    </Fade>
+                                    <Card.Text className="card-text">
+                                        <b>
+                                            Stack Overflow:404!
+                                        </b>
+
+                                        {" "}
+                                        Answer not found,
+
+                                        <br />
+                                        The button below can solve it
+                                    </Card.Text>
+
+                                    <br />
+
+                                    <Link
+                                        className="col-auto btn btn-primary"
+                                        to="/ask"
+                                    >
+                                        Ask for help
+                                    </Link>
+                                </Card.Body>
+                            </Card>
+                        </Fade>
+
+                        <Fade
+                            className=""
+                            direction={isMobile?"left":"up"}
+                            triggerOnce
+                        >
+                            <Card className="card authenticatedHome_card_main text-secondary ml-3">
+                                <SvgIcon
+                                    height="220"
+                                    src="collaborate.svg"
+                                />
+
+                                <Card.Body className="card-body">
+                                    <Card.Title className="card-title font-weight-bold">
+                                        LET&apos;S  COLLABORATE
+                                    </Card.Title>
+
+                                    <br />
+
+                                    <Card.Text className="card-text">
+                                        Find new projects to work.
+                                        Apply for teams and Collaborations.
+                                        Lets keep the learning and helping community alive.
+                                    </Card.Text>
+
+                                    <div
+                                        className="col-auto btn btn-primary disabled"
+                                        to="/collab_connect"
+                                    >
+                                        Coming Soon...
+                                    </div>
+
+                                </Card.Body>
+                            </Card>
+                        </Fade>
+                    </div>
                 </div>
             </section>
         </div>
