@@ -40,17 +40,19 @@ class Ask extends React.Component {
 
     handleConnect = (message, teacher_id) => {
         axios.post(backend+"connect/request/", {
-            id: teacher_id,
+            teacher_id: teacher_id,
             message: message,
             skills: [this.state.searchTerm]
         }).then(()=> {
             alert("Your connection request has been sent")
         })
             .catch((err) => {
-                if (err.response.status === 429) // THROTTLED
+                if (err.response.data === "THROTTLED")
                     alert("You have submitted too many requests in the past 24 hours. Please wait before submitting more.")
-                else if (err.response.status === 403) // Previous unaccepted request logged
+                else if (err.response.data === "BLOCKED")
                     alert("You have already sent a similar request to the same person")
+                else if (err.response.data === "SELF-CONNECTION NOT ALLOWED")
+                    alert("You can't connect with yourself")
             })
     }
     
