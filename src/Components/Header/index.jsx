@@ -1,100 +1,94 @@
 
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import { withTranslation } from "react-i18next";
 import Container from "../../common/Container";
-// import { SvgIcon } from "../../common/SvgIcon";
+import { SvgIcon } from "../../common/SvgIcon";
 import {
-    HeaderSection,
-    LogoContainer,
-    NotHidden,
+  HeaderSection,
+  LogoContainer,
+  NotHidden,
     Outline,
     Burger,
     Label
 } from "./styles";
 import PropTypes from "prop-types";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
-import { Drawer, Menu } from "antd";
+import {Drawer, Menu} from "antd";
 
-function ExternalHeader({ isAuthenticated }) {
-    const [visible, setVisibility] = useState(false);
+function ExternalHeader({isAuthenticated}) {
+  const [visible, setVisibility] = useState(false);
 
-    const showDrawer = () => {
-        setVisibility(!visible);
-    };
+  const showDrawer = () => {
+    setVisibility(!visible);
+  };
 
-    const onClose = () => {
-        setVisibility(!visible);
-    };
+  const onClose = () => {
+    setVisibility(!visible);
+  };
 
 
 
-    return (
-        <HeaderSection className="pt-3 pr-2 pb-5 pl-2">
-            <Container>
-                <div className="row ">
-                    <LogoContainer
-                        aria-label="homepage"
-                        className='col-auto'
-                        href="/"
-                    >
-                        <div className="mt-1 h1 text-left">
-                            CollabConnect
-                        </div>
+  return (
+      <HeaderSection className="pt-3 pr-2 pb-5 pl-2">
+          <Container>
+              <div className="row">
+                  <LogoContainer
+                      aria-label="homepage"
+                      className='col-auto'
+                      href="/"
+                  >
+                      <SvgIcon
+                          height="68px"
+                          src="logo.svg"
+                          width="221px"
+                      />
+                  </LogoContainer>
 
-                        {/* TODO: Make better logo and left align it */}
+                  <div className="col" />
 
-                        {/* <SvgIcon
-                            height="68px"
-                            src="logo.svg"
-                            width="221px"
-                        /> */}
-                    </LogoContainer>
+                  { isAuthenticated? 
+                      <>
+                          <NotHidden>
+                              <DropdownMenu />
+                          </NotHidden>
 
-                    <div className="col" />
+                          <Burger onClick={showDrawer}>
+                              <Outline />
+                          </Burger>
 
-                    {isAuthenticated ?
-                        <>
-                            <NotHidden>
-                                <DropdownMenu />
-                            </NotHidden>
+                          <Drawer
+                              closable={false}
+                              onClose={onClose}
+                              visible={visible}
+                          >
+                              <div
+                                  className="col mb-4"
+                              >
+                                  <Label onClick={onClose}>
+                                      <div className="col">
+                                          <Menu>
+                                              Menu
+                                          </Menu>
+                                      </div>
 
-                            <Burger onClick={showDrawer}>
-                                <Outline />
-                            </Burger>
+                                      <div className="col">
+                                          <Outline />
+                                      </div>
+                                  </Label>
+                              </div>
 
-                            <Drawer
-                                closable={false}
-                                onClose={onClose}
-                                visible={visible}
-                            >
-                                <div
-                                    className="col mb-4"
-                                >
-                                    <Label onClick={onClose}>
-                                        <div className="col">
-                                            <Menu>
-                                                Menu
-                                            </Menu>
-                                        </div>
+                              <DropdownMenu />
+                          </Drawer>
+                      </>:null}
 
-                                        <div className="col">
-                                            <Outline />
-                                        </div>
-                                    </Label>
-                                </div>
-
-                                <DropdownMenu />
-                            </Drawer>
-                        </> : null}
-
-                </div>
-            </Container>
-        </HeaderSection>
-    );
+              </div>
+          </Container>
+      </HeaderSection>
+  );
 }
 
 ExternalHeader.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired
 }
 
 export default withTranslation()(ExternalHeader);

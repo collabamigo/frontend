@@ -36,12 +36,9 @@ function Index() {
                                     src="help_others.svg"
                                 />
 
-                                <br />
-
-                                <br />
-                                
-
                                 <Card.Body className="changing-img">
+
+                                    <br />
 
                                     <Card.Text className="card-text h4 upper-text">
                                         Solve other&apos;s doubts and be the mentor you always wanted.
@@ -49,10 +46,8 @@ function Index() {
                                     </Card.Text>
 
 
-                                    <br />
 
                                 </Card.Body>
-
 
                                 <Link
                                     className="col-auto text-mine self-footer"
@@ -85,6 +80,7 @@ function Index() {
                                 
 
                                     <Card.Text className="card-text h4 upper-text">
+                                        <br />
 
                                         <b>
                                             Stack Overflow:404!
