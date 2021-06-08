@@ -6,6 +6,8 @@ import './Profile.css';
 import Card from 'react-bootstrap/Card';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import {Tooltip,Popover} from 'react-bootstrap';
+import SvgIcon from "../../common/SvgIcon";
+import {isMobile} from "react-device-detect";
 
 const popover = (
     <Tooltip
@@ -115,21 +117,25 @@ class Profile extends React.Component{
                 )
         else
             return (
-                <section className=" lowl container sectionn">
+                <section className="container section-profile">
                     <div className="container-fluid">
                         <div className="row" >
-                            <div className="col container" >
-                                <div className=" float-right mr-5">
-                                    <img
-                                        className="profile-image"
-                                        src="https://i.imgur.com/PaOjJ3A.png"
-                                    />
+                            {isMobile?null:(
+                                <div className="col container">
+                                    <div className=" float-right mr-5">
+                                        <SvgIcon
+                                            className="profile-image mt-3"
+                                            height="100%"
+                                            src="waving.svg"
+                                            width="120%"
+                                        />
 
-                                    <h4 className="text-center">
-                                        Here is all the information we have about you, feel free to contact us if something doesnot feel right
-                                    </h4>
-                                </div>
-                            </div>
+                                        <h4 className="text-center">
+                                            Here is all the information we have about you, feel free to contact us if
+                                            something doesn&apos;t feel right
+                                        </h4>
+                                    </div>
+                                </div>)}
 
                             <div className="col container" >
                                 <Card className="card ml-5 rounded-4 profilecard container border-primary float-left">
