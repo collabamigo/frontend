@@ -5,20 +5,24 @@
     line-height: 1.41;
 }
 
-.magic_span:hover{
+.magic_span:hover {
     color: rgb(255, 130, 92);
     text-underline-position: under;
     text-decoration: rgb(255, 130, 92) underline;
 }
 
-.magic_span:active{
+.magic_span:active {
     color: rgb(255, 130, 92);
     text-underline-position: under;
     text-decoration: rgb(255, 130, 92) underline;
 }
 
-.magic_span:focus{
+.magic_span:focus {
     color: rgb(255, 130, 92);
     text-underline-position: under;
     text-decoration: rgb(255, 130, 92) underline;
+}
+
+.lowwl {
+    max-width: 80%;
 }
