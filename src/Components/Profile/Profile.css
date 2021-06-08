@@ -1,20 +1,3 @@
-.profilecard {
-    max-width: 90% !important;
-    min-width: 500px !important;
-    max-height: 98%;
-}
-
-
 .card-hf-color {
     background-color: rgb(255, 255, 255) !important;
-}
-
-.profile-image {
-    max-width: 120%;
-    max-height: 100%;
-}
-
-.section-profile {
-    max-width: 80% !important;
-    min-width: 700px !important;
 }

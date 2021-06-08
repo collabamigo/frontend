@@ -117,247 +117,245 @@ class Profile extends React.Component{
                 )
         else
             return (
-                <section className="container section-profile">
-                    <div className="container-fluid">
-                        <div className="row" >
-                            {isMobile?null:(
-                                <div className="col container">
-                                    <div className=" float-right mr-5">
-                                        <SvgIcon
-                                            className="profile-image mt-3"
-                                            height="100%"
-                                            src="waving.svg"
-                                            width="120%"
-                                        />
+                <section className="container mb-4 container-fluid">
+                    <div className="row" >
+                        {isMobile?null:(
+                            <div className="col container">
+                                <div className=" float-right mr-5">
+                                    <SvgIcon
+                                        className="profile-image mt-3"
+                                        height="100%"
+                                        src="waving.svg"
+                                        width="120%"
+                                    />
 
-                                        <h4 className="text-center">
-                                            Here is all the information we have about you, feel free to contact us if
-                                            something doesn&apos;t feel right
-                                        </h4>
-                                    </div>
-                                </div>)}
+                                    <h4 className="text-center">
+                                        Here is all the information we have about you, feel free to contact us if
+                                        something doesn&apos;t feel right
+                                    </h4>
+                                </div>
+                            </div>)}
 
-                            <div className="col container" >
-                                <Card className="card ml-5 rounded-4 profilecard container border-primary float-left">
+                        <div className="col container" >
+                            <Card className="card ml-5 rounded-4 profilecard container border-primary float-left">
 
-                                    <Card.Header className="card-hf-color">
-                                        <h1>
-                                            Profile
-                                        </h1>
-                                    </Card.Header>
+                                <Card.Header className="card-hf-color">
+                                    <h1>
+                                        Profile
+                                    </h1>
+                                </Card.Header>
 
-                                    <Card.Body>
-                                        <form
-                                            className="card-body"
-                                            onSubmit={this.handleSubmit}
-                                        >
-                                            <div className="form-group">
-                                                <div className="col-auto form-inline col-form-label">
+                                <Card.Body>
+                                    <form
+                                        className="card-body"
+                                        onSubmit={this.handleSubmit}
+                                    >
+                                        <div className="form-group">
+                                            <div className="col-auto form-inline col-form-label">
 
-                                                    <label>
-                                                        First Name
-                                                    </label>
+                                                <label>
+                                                    First Name
+                                                </label>
 
-                                                    <OverlayTrigger
-                                                        overlay={popover}
-                                                        placement="right"
-                                                        rootClose
-                                                        trigger="click"
-                                                    >
-                                                        {({ ref, ...triggerHandler }) => (
-                                                            <div
-                                                                className="btn m-0 p-0"
-                                                                {...triggerHandler}
-                                                            >
+                                                <OverlayTrigger
+                                                    overlay={popover}
+                                                    placement="right"
+                                                    rootClose
+                                                    trigger="click"
+                                                >
+                                                    {({ ref, ...triggerHandler }) => (
+                                                        <div
+                                                            className="btn m-0 p-0"
+                                                            {...triggerHandler}
+                                                        >
                                                     &nbsp;
 
-                                                                <span
-                                                                    className="material-icons"
-                                                                    ref={ref}
-                                                                >
-                                                                    help_outline
-                                                                </span>
-                                                            </div>
+                                                            <span
+                                                                className="material-icons"
+                                                                ref={ref}
+                                                            >
+                                                                help_outline
+                                                            </span>
+                                                        </div>
                                             )}
-                                                    </OverlayTrigger>
-
-                                                </div>
-
-                                                <div>
-                                                    <input
-                                                        className="form-control col-auto"
-                                                        disabled
-                                                        onChange={this.handleChangeFirstName}
-                                                        type='text'
-                                                        value={this.state.First_Name}
-                                                    />
-                                                </div>
-
+                                                </OverlayTrigger>
 
                                             </div>
 
-                                            <div className="form-group">
-                                                <div className="col-auto form-inline col-form-label">
+                                            <div>
+                                                <input
+                                                    className="form-control col-auto"
+                                                    disabled
+                                                    onChange={this.handleChangeFirstName}
+                                                    type='text'
+                                                    value={this.state.First_Name}
+                                                />
+                                            </div>
 
-                                                    <label>
-                                                        Last Name
-                                                    </label>
 
-                                                    <OverlayTrigger
-                                                        overlay={popover}
-                                                        placement="right"
-                                                        rootClose
-                                                        trigger="click"
-                                                    >
-                                                        {({ ref, ...triggerHandler }) => (
-                                                            <div
-                                                                className="btn m-0 p-0"
-                                                                {...triggerHandler}
-                                                            >
+                                        </div>
+
+                                        <div className="form-group">
+                                            <div className="col-auto form-inline col-form-label">
+
+                                                <label>
+                                                    Last Name
+                                                </label>
+
+                                                <OverlayTrigger
+                                                    overlay={popover}
+                                                    placement="right"
+                                                    rootClose
+                                                    trigger="click"
+                                                >
+                                                    {({ ref, ...triggerHandler }) => (
+                                                        <div
+                                                            className="btn m-0 p-0"
+                                                            {...triggerHandler}
+                                                        >
                                                         &nbsp;
 
-                                                                <span
-                                                                    className="material-icons"
-                                                                    ref={ref}
-                                                                >
-                                                                    help_outline
-                                                                </span>
-                                                            </div>)}
-                                                    </OverlayTrigger>
+                                                            <span
+                                                                className="material-icons"
+                                                                ref={ref}
+                                                            >
+                                                                help_outline
+                                                            </span>
+                                                        </div>)}
+                                                </OverlayTrigger>
 
-                                                </div>
-
-                                                <div className="row-auto">
-                                                    <input
-                                                        className="form-control col-auto"
-                                                        disabled
-                                                        onChange={this.handleChangeLastName}
-                                                        type='text'
-                                                        value={this.state.Last_Name}
-                                                    />
-                                                </div>
                                             </div>
 
-                                            <div className="form-group">
-                                                <label className="col-auto form-inline col-form-label">
-                                                    Email Address
-                                                </label>
-
-                                                <div>
-                                                    <input
-                                                        className="form-control col-auto"
-                                                        disabled
-                                                        type='text'
-                                                        value={this.state.email}
-                                                    />
-                                                </div>
+                                            <div className="row-auto">
+                                                <input
+                                                    className="form-control col-auto"
+                                                    disabled
+                                                    onChange={this.handleChangeLastName}
+                                                    type='text'
+                                                    value={this.state.Last_Name}
+                                                />
                                             </div>
+                                        </div>
 
-                                            <div className="form-group">
-                                                <label className="col-auto form-inline col-form-label">
-                                                    Telegram Username
-                                                </label>
+                                        <div className="form-group">
+                                            <label className="col-auto form-inline col-form-label">
+                                                Email Address
+                                            </label>
 
-                                                <div>
-                                                    <input
-                                                        className="form-control col-auto"
-                                                        onChange={this.handleChangeHandle}
-                                                        placeholder={this.state.Handle}
-                                                        type='text'
-                                                        value={this.state.Handle}
-                                                    />
-                                                </div>
+                                            <div>
+                                                <input
+                                                    className="form-control col-auto"
+                                                    disabled
+                                                    type='text'
+                                                    value={this.state.email}
+                                                />
                                             </div>
+                                        </div>
 
-                                            <div className="form-group">
-                                                <label className="col-auto col-form-label mr-1">
-                                                    Degree:
-                                                    <select
-                                                        className="form-control col-auto form-select m-2 p-6"
-                                                        onChange={this.handleChangeDegree}
-                                                        value={this.state.degree}
+                                        <div className="form-group">
+                                            <label className="col-auto form-inline col-form-label">
+                                                Telegram Username
+                                            </label>
+
+                                            <div>
+                                                <input
+                                                    className="form-control col-auto"
+                                                    onChange={this.handleChangeHandle}
+                                                    placeholder={this.state.Handle}
+                                                    type='text'
+                                                    value={this.state.Handle}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label className="col-auto col-form-label mr-1">
+                                                Degree:
+                                                <select
+                                                    className="form-control col-auto form-select m-2 p-6"
+                                                    onChange={this.handleChangeDegree}
+                                                    value={this.state.degree}
+                                                >
+                                                    <option
+                                                        selected
+                                                        value=""
                                                     >
-                                                        <option
-                                                            selected
-                                                            value=""
-                                                        >
-                                                            ---Select Degree---
-                                                        </option>
+                                                        ---Select Degree---
+                                                    </option>
 
-                                                        <option value="M" >
-                                                            M-Tech
-                                                        </option>
+                                                    <option value="M" >
+                                                        M-Tech
+                                                    </option>
 
-                                                        <option value="B">
-                                                            B-Tech
-                                                        </option>
-                                                    </select>
-                                                </label>
+                                                    <option value="B">
+                                                        B-Tech
+                                                    </option>
+                                                </select>
+                                            </label>
 
-                                                <label className="col-auto col-form-label ml-1">
-                                                    Course:
-                                                    <select
-                                                        className="form-control col-auto form-select m-2 p-6"
-                                                        onChange={this.handleChangeCourse}
-                                                        value={this.state.course}
+                                            <label className="col-auto col-form-label ml-1">
+                                                Course:
+                                                <select
+                                                    className="form-control col-auto form-select m-2 p-6"
+                                                    onChange={this.handleChangeCourse}
+                                                    value={this.state.course}
+                                                >
+                                                    <option
+                                                        selected
+                                                        value=""
                                                     >
-                                                        <option
-                                                            selected
-                                                            value=""
-                                                        >
-                                                            ---Select Course---
-                                                        </option>
+                                                        ---Select Course---
+                                                    </option>
 
-                                                        <option value="CSAI">
-                                                            CSAI
-                                                        </option>
+                                                    <option value="CSAI">
+                                                        CSAI
+                                                    </option>
 
-                                                        <option value="CSE">
-                                                            CSE
-                                                        </option>
+                                                    <option value="CSE">
+                                                        CSE
+                                                    </option>
 
-                                                        <option value="CSB">
-                                                            CSB
-                                                        </option>
+                                                    <option value="CSB">
+                                                        CSB
+                                                    </option>
 
-                                                        <option value="CSD">
-                                                            CSD
-                                                        </option>
+                                                    <option value="CSD">
+                                                        CSD
+                                                    </option>
 
-                                                        <option value="CSS">
-                                                            CSS
-                                                        </option>
+                                                    <option value="CSS">
+                                                        CSS
+                                                    </option>
 
-                                                        <option value="CSAM">
-                                                            CSAM
-                                                        </option>
+                                                    <option value="CSAM">
+                                                        CSAM
+                                                    </option>
 
-                                                        <option value="ECE">
-                                                            ECE
-                                                        </option>
+                                                    <option value="ECE">
+                                                        ECE
+                                                    </option>
 
-                                                    </select>
-                                                </label>
+                                                </select>
+                                            </label>
 
-                                            </div>
-                                        </form>
-                                    </Card.Body>
+                                        </div>
+                                    </form>
+                                </Card.Body>
 
-                                    <Card.Footer className="card-hf-color">
-                                        <button
-                                            className="btn btn-lg btn-primary col-5"
-                                            onClick={this.handleSubmit.bind(this)}
-                                            type="button"
-                                        >
-                                            Submit
-                                        </button>
-                                    </Card.Footer>
+                                <Card.Footer className="card-hf-color">
+                                    <button
+                                        className="btn btn-lg btn-primary col-5"
+                                        onClick={this.handleSubmit.bind(this)}
+                                        type="button"
+                                    >
+                                        Submit
+                                    </button>
+                                </Card.Footer>
 
-                                </Card>
-                            </div>
-
-
+                            </Card>
                         </div>
+
+
                     </div>
                 </section>
             );
