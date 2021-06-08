@@ -342,7 +342,7 @@ class Profile extends React.Component{
                                     </form>
                                 </Card.Body>
 
-                                <Card.Footer className="card-hf-color">
+                                <Card.Footer className="custom-modal-footer-p">
                                     <button
                                         className="btn btn-lg btn-primary col-5"
                                         onClick={this.handleSubmit.bind(this)}
