@@ -32,9 +32,9 @@ function Index() {
 
                             <SvgIcon
                                 className=" card-img-top card-img-topy clsImg "
-                                height="400"
+                                height="360"
                                 src="help_others.svg"
-                                width="520"
+                                width="500"
                             />
 
                             <Card.Body>
@@ -68,9 +68,9 @@ function Index() {
                         <Card className="card authenticatedHome_card_main text-secondary ml-3 mb-5 mr-3 zoom-my-card">
                             <SvgIcon
                                 className="container card-img-top"
-                                height="400"
+                                height="360"
                                 src="ask_for_help.svg"
-                                width="460"
+                                width="380"
                             />
 
                             <Card.Body className="card-body">
@@ -89,20 +89,19 @@ function Index() {
 
                                     <br />
                                     The button below can
-
-                                    <br />
                                     solve it
-                                </Card.Text>
-                            </Card.Body>
+                                </Card.Text>                            
 
-                            <Card.Footer className="custom-modal-footer pb-4">
+                                <br />
+
                                 <Link
                                     className="col-auto btn btn-primary"
                                     to="/ask"
                                 >
                                     Ask for help
                                 </Link>
-                            </Card.Footer>
+                            </Card.Body>
+                            
                         </Card>
                     </Fade>
 
@@ -113,9 +112,9 @@ function Index() {
                     >
                         <Card className="card authenticatedHome_card_main text-secondary ml-3 mb-5 zoom-my-card">
                             <SvgIcon
-                                height="400"
+                                height="360"
                                 src="collaborate.svg"
-                                width="450"
+                                width="400"
                             />
 
                             <Card.Body className="card-body">

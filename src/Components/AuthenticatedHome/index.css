@@ -1,7 +1,7 @@
 .authenticatedHome_card_main {
   align-items: center;
-  height: 38rem;
-  width: 30rem;
+  height: 36rem;
+  width: 25rem;
 }
 
 .lowl {
@@ -17,6 +17,6 @@
 }
 
 .custom-modal-footer {
-  border-top: 0 none;
-  background-color: white;
+  border-top: 0 none!important;
+  background-color: white!important;
 }
