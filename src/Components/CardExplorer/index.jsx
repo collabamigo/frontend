@@ -58,17 +58,16 @@ class CardExplorer extends React.Component{
 
 
     handleVote(teacherId, vote) {
+        this.setState((state) => ({
+            voteValues: {
+                ...(state.voteValues),
+                [teacherId]: vote
+            }
+        }))
         axios.post(backend+"rating/", {
             teacher: teacherId,
             vote: vote,
-        }).then(() =>
-            this.setState((state) => ({
-                voteValues: {
-                    ...(state.voteValues),
-                    [teacherId]: vote
-                }
-            }))
-        )
+        })
     }
 
     handleGetNext() {
