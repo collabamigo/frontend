@@ -25,13 +25,13 @@ function Index() {
             <div className="container-fluid lowl">
                 <div className="row row-cols-1 row-cols-md-3 g-4">
                     <div className="col">
-                        <Card className="card-stype border-mine">
+                        <Card className="card-stype">
                             <SvgIcon 
                                 className="image-setting-1"
                                 src="help_others.svg"
                             />
 
-                            <Card.Body className="changing-img">
+                            <Card.Body>
                                 <Card.Title className="card-title font-weight-bold">
                                     HELP OTHERS
                                 </Card.Title>
@@ -55,13 +55,13 @@ function Index() {
                     </div>
 
                     <div className="col"> 
-                        <Card className="card-stype border-mine">
+                        <Card className="card-stype">
                             <SvgIcon
                                 className="image-setting-2"
                                 src="ask_for_help.svg"
                             />
 
-                            <Card.Body className="changing-img">
+                            <Card.Body className="card-body">
                                 <Card.Title className="card-title font-weight-bold">
                                     ASK FOR HELP
                                 </Card.Title>
@@ -93,13 +93,13 @@ function Index() {
                     </div>
 
                     <div className="col">
-                        <Card className="card-stype border-mine">
+                        <Card className="card-stype">
                             <SvgIcon
                                 className="image-setting-3"
                                 src="collaborate.svg"
                             />
 
-                            <Card.Body className="card-body changing-img">
+                            <Card.Body className="card-body">
                                 <Card.Title className="card-title font-weight-bold">
                                     LET&apos;S  COLLABORATE
                                 </Card.Title>

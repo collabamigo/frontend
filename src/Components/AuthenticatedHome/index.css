@@ -10,16 +10,12 @@
 .card-stype {
   min-height: 100%;
   max-height: 100%;
-  min-width: 50% !important;
+  min-width: 30% !important;
   background-color: rgb(255, 255, 255) !important;
 }
 
 .changing-img {
-  background-color: rgb(110, 169, 247) !important;
-}
-
-.border-mine {
-  border-color: rgb(110, 169, 247) !important;
+  background-color: white !important;
 }
 
 .image-setting-1 {
@@ -27,7 +23,7 @@
 }
 
 .image-setting-2 {
-  height: 510px !important;
+  height: 490px !important;
 }
 
 .image-setting-3 {
