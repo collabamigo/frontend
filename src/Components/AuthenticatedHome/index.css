@@ -1,9 +1,22 @@
 .authenticatedHome_card_main {
   align-items: center;
-  height: 30rem;
-  width: 20rem;
+  height: 38rem;
+  width: 30rem;
 }
 
 .lowl {
-  max-width: 85%;
+  max-width: 85% !important;
+}
+
+.zoom-my-card {
+  transition: transform .2s;
+}
+
+.zoom-my-card:hover {
+  transform: scale(1.1);
+}
+
+.custom-modal-footer {
+  border-top: 0 none;
+  background-color: white;
 }
