@@ -11,11 +11,11 @@ function Index() {
     return (
         <div className="row justify-content-center h-75">
             <Fade
-                className="col-lg-4 h-100"
+                className="col-lg-4  col-md-6 col-sm-12 h-100 mb-3"
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="authenticatedHome_card_main text-secondary h-100 card mb-3 ml-5 mr-1">
+                <Card className="authenticatedHome_card_main text-secondary h-100 card ml-5 mr-1">
                     <SvgIcon
                         height="56%"
                         src="help_others.svg"
@@ -46,11 +46,11 @@ function Index() {
             </Fade>
 
             <Fade
-                className="col-lg-4 h-100"
+                className="col-lg-4 col-md-6 col-sm-12 h-100 mb-3"
                 direction={isMobile?"right":"up"}
                 triggerOnce
             >
-                <Card className="card authenticatedHome_card_main h-100 text-secondary mb-3 mx-3">
+                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-3">
                     <SvgIcon
                         height="56%"
                         src="ask_for_help.svg"
@@ -89,7 +89,7 @@ function Index() {
             </Fade>
 
             <Fade
-                className="col-lg-4 h-100"
+                className="col-lg-4 col-md-6 col-sm-12 h-100 mt-md-2 mb-3"
                 direction={isMobile?"left":"up"}
                 triggerOn100
             >
@@ -115,7 +115,6 @@ function Index() {
 
                         <div
                             className="col-auto btn btn-primary disabled"
-                            to="/collab_connect"
                         >
                             Coming Soon...
                         </div>
