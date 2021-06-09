@@ -5,14 +5,14 @@ import backend from "../../env";
 import './Profile.css';
 import Card from 'react-bootstrap/Card';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import {Tooltip,Popover} from 'react-bootstrap';
+import {Popover} from 'react-bootstrap';
 import SvgIcon from "../../common/SvgIcon";
 import {isMobile} from "react-device-detect";
 
-const popover = (
-    <Tooltip
-        className="bac"
-        id="popover"
+const popoverRight = (
+    <Popover
+        id="popover-positioned-right"
+        title="Popover right"
     >
         <Popover.Title as="h3">
             <strong>
@@ -33,14 +33,44 @@ const popover = (
             and we will get it right.
 
             <br />
-            
             Thank you.
 
             {' '}
-
         </Popover.Content>
-    </Tooltip>
+    </Popover>
   );
+
+// const popover = (
+//     <Tooltip
+//         id="popover"
+//     >
+        // <Popover.Title as="h3">
+        //     <strong>
+        //         My name is not right!
+        //     </strong>
+        // </Popover.Title>
+
+        // <Popover.Content>
+        //     Feel free to contact us at our email 
+
+        //     {' '}
+
+        //     <strong>
+        //         watsonhex@gmail.com
+        //     </strong>
+
+        //     {' '}
+        //     and we will get it right.
+
+        //     <br />
+            
+        //     Thank you.
+
+        //     {' '}
+
+        // </Popover.Content>
+//     </Tooltip>
+//   );
 class Profile extends React.Component{
 
     constructor(props) {
@@ -159,6 +189,20 @@ class Profile extends React.Component{
                                                 </label>
 
                                                 <OverlayTrigger
+                                                    overlay={popoverRight}
+                                                    placement="right"
+                                                    trigger="click"
+                                                >
+                                                    <div className="btn">
+                                                        <span
+                                                            className="material-icons"
+                                                        >
+                                                            help_outline
+                                                        </span>
+                                                    </div>
+                                                </OverlayTrigger>
+
+                                                {/* <OverlayTrigger
                                                     overlay={popover}
                                                     placement="right"
                                                     rootClose
@@ -179,7 +223,7 @@ class Profile extends React.Component{
                                                             </span>
                                                         </div>
                                             )}
-                                                </OverlayTrigger>
+                                                </OverlayTrigger> */}
 
                                             </div>
 
@@ -204,6 +248,20 @@ class Profile extends React.Component{
                                                 </label>
 
                                                 <OverlayTrigger
+                                                    overlay={popoverRight}
+                                                    placement="right"
+                                                    trigger="click"
+                                                >
+                                                    <div className="btn">
+                                                        <span
+                                                            className="material-icons"
+                                                        >
+                                                            help_outline
+                                                        </span>
+                                                    </div>
+                                                </OverlayTrigger>
+
+                                                {/* <OverlayTrigger
                                                     overlay={popover}
                                                     placement="right"
                                                     rootClose
@@ -223,7 +281,7 @@ class Profile extends React.Component{
                                                                 help_outline
                                                             </span>
                                                         </div>)}
-                                                </OverlayTrigger>
+                                                </OverlayTrigger> */}
 
                                             </div>
 
