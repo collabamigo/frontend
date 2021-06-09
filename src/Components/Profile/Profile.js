@@ -252,8 +252,8 @@ class Profile extends React.Component{
                                             </div>
                                         </div>
 
-                                        <div className="form-group">
-                                            <label className="col-auto form-inline col-form-label">
+                                        <div className="form-group ">
+                                            <label className=" form-inline col-form-label">
                                                 Telegram Username
                                             </label>
 
@@ -268,8 +268,8 @@ class Profile extends React.Component{
                                             </div>
                                         </div>
 
-                                        <div className="row form-group">
-                                            <label className="col-auto col-form-label mr-1">
+                                        <div className="row form-group justify-content-center">
+                                            <label className="col-form-label">
                                                 Degree:
                                                 <select
                                                     className="form-control col-auto form-select m-2 p-6"

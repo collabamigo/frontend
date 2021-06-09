@@ -9,7 +9,7 @@ import './index.css'
 
 function AuthenticatedHome() {
     return (
-        <div className="row container-fluid h-75 w-100 justify-content-center ">
+        <div className="row container-fluid h-75 w-100 justify-content-center">
             <Fade
                 className="col-lg-4 col-md-6 col-sm-12 h-100 mt-2 mb-3"
                 direction={isMobile?"left":"up"}
