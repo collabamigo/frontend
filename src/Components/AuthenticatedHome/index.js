@@ -11,7 +11,7 @@ function Index() {
     return (
         <div className="row justify-content-center h-75">
             <Fade
-                className="col-4 h-100"
+                className="col-lg-4 h-100"
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
@@ -19,7 +19,7 @@ function Index() {
                     <SvgIcon
                         height="56%"
                         src="help_others.svg"
-                        weight="100%"
+                        width="100%"
                     />
 
                     <Card.Body>
@@ -46,7 +46,7 @@ function Index() {
             </Fade>
 
             <Fade
-                className="col-4 h-100"
+                className="col-lg-4 h-100"
                 direction={isMobile?"right":"up"}
                 triggerOnce
             >
@@ -89,7 +89,7 @@ function Index() {
             </Fade>
 
             <Fade
-                className="col-4 h-100"
+                className="col-lg-4 h-100"
                 direction={isMobile?"left":"up"}
                 triggerOn100
             >
