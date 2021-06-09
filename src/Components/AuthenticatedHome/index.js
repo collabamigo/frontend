@@ -7,15 +7,15 @@ import {isMobile} from "react-device-detect";
 import {SvgIcon} from "../../common/SvgIcon";
 import './index.css'
 
-function Index() {
+function AuthenticatedHome() {
     return (
-        <div className="row justify-content-center h-75">
+        <div className="row justify-content-center h-75 w-100">
             <Fade
-                className="col-lg-4  col-md-6 col-sm-12 h-100 mb-3"
+                className="col-lg-4 col-md-6 col-sm-12 h-100 mt-2 mb-3"
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="authenticatedHome_card_main text-secondary h-100 card ml-5 mr-1">
+                <Card className="authenticatedHome_card_main text-secondary h-100 card ml-4 mr-1">
                     <SvgIcon
                         height="56%"
                         src="help_others.svg"
@@ -46,11 +46,11 @@ function Index() {
             </Fade>
 
             <Fade
-                className="col-lg-4 col-md-6 col-sm-12 h-100 mb-3"
+                className="col-lg-4 col-md-6 col-sm-12 h-100 mt-2 mb-3"
                 direction={isMobile?"right":"up"}
                 triggerOnce
             >
-                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-3">
+                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-lg-3 mr-md-4 ml-md-2 ml-sm-4 mr-sm-1">
                     <SvgIcon
                         height="56%"
                         src="ask_for_help.svg"
@@ -89,11 +89,11 @@ function Index() {
             </Fade>
 
             <Fade
-                className="col-lg-4 col-md-6 col-sm-12 h-100 mt-md-2 mb-3"
+                className="col-lg-4 col-md-6 col-sm-12 h-100 mt-2 mb-3"
                 direction={isMobile?"left":"up"}
                 triggerOn100
             >
-                <Card className="card authenticatedHome_card_main h-100 text-secondary mr-5 ml-1">
+                <Card className="card authenticatedHome_card_main h-100 text-secondary mr-lg-2 ml-lg-1 ml-sm-4 mr-sm-1">
                     <SvgIcon
                         height="56%"
                         src="collaborate.svg"
@@ -127,5 +127,5 @@ function Index() {
     )    
 } 
 
-export default Index;
+export default AuthenticatedHome;
 // TODO: Attribution to freepik.com pending
