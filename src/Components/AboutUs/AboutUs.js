@@ -118,7 +118,7 @@ class AboutUs extends React.Component {
                                     <div className="col-md-12 pro-pic">
                                         <img
                                             className="img-fluid"
-                                            src="https://images.unsplash.com/photo-1542909192-2f2241a99c9d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                            src="https://i.imgur.com/tx3AYvP.jpg"
                                         />
                                     </div>
 
@@ -203,7 +203,7 @@ class AboutUs extends React.Component {
                                     <div className="col-md-12 pro-pic">
                                         <img
                                             className="img-fluid"
-                                            src="https://images.unsplash.com/photo-1542178243-bc20204b769f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                            src="https://i.imgur.com/y624kGA.jpg"
                                         />
                                     </div>
 
