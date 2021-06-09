@@ -42,18 +42,21 @@ class Step2 extends React.Component {
     renderAutocomplete({addTag, ...props}) {
         console.log(props)
         return (
-            <Autocomplete
-                onChange={(val) => this.handleChange(val)}
-                onMatch={(val) => {
+            <div>
+                <Autocomplete
+                    onChange={(val) => this.handleChange(val)}
+                    onMatch={(val) => {
                     this.handleMatch.bind(this)
                     if (!this.state.tags.includes(val)) {
                         addTag(val)
                     }
                 }}
-                searchTerm={this.state.searchTerm}
-                suggestions={this.state.temp_l}
-                version={2}
-            />
+                    searchTerm={this.state.searchTerm}
+                    suggestions={this.state.temp_l}
+                    version={2}
+                />
+            </div>
+            
         )
     }
     handleSubmit() {
@@ -86,8 +89,6 @@ class Step2 extends React.Component {
                 </label>
 
                 <div className="center">
-
-
                     <TagsInput
                         onChange={this.handleChangeTag.bind(this)}
                         renderInput={this.renderAutocomplete.bind(this)}
