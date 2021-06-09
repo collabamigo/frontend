@@ -33,6 +33,9 @@ class Autocomplete extends React.Component {
     }
 
       handleChange = (e) => {
+        this.setState({
+            suggestions: undefined
+        })
             axios.get(backend+"autocomplete/",{
                 params:{
                     query: e.target.value,
@@ -46,7 +49,6 @@ class Autocomplete extends React.Component {
                     }
                     )
       })
-                .catch((err)=> console.log(err,"err"))
 
           this.setState({
               activeSuggestion: 0,

@@ -103,35 +103,30 @@ class Ask extends React.Component {
     // TODO: Show voting button only when valid
     render () {
               return (
-                  <div>
-                      <Card className="card card_skillSearch">
-                          <Card.Title>
-                              <h1 className="col-sm-5 col-md-5">
-                                  {" "}
+                  <Card className="card card_skillSearch">
+                      <Card.Body className="card-body">
+                          <Card.Title className="card-title mb-4">
+                              <h1 className="col-sm-5 col-md-5 display-4">
                                   Skill Search
-
-                                  {" "}
                               </h1>
                           </Card.Title>
-                          
-                          <Card.Body>
-                              <div className="col">
-                                  <Autocomplete
-                                      onChange={this.handleChange}
-                                      onMatch={this.handleMatch}
-                                  />
-                              </div>
 
-                              <div className="row-auto pt-5">
-                                  <div className="col-auto pl-lg-5">
-                                      {this.renderCardsIfNeeded()}
-                                  </div>
+                          <div className="col">
+                              <Autocomplete
+                                  onChange={this.handleChange}
+                                  onMatch={this.handleMatch}
+                              />
+                          </div>
+
+                          <div className="row-auto pt-5">
+                              <div className="col-auto pl-lg-5">
+                                  {this.renderCardsIfNeeded()}
                               </div>
+                          </div>
                               
                               
-                          </Card.Body>
-                      </Card>
-                  </div>
+                      </Card.Body>
+                  </Card>
               );
 
           }
