@@ -1,5 +1,6 @@
 import {Modal} from "react-bootstrap";
 import React, {useState} from "react";
+import './mymodal.css'
 
 
 // eslint-disable-next-line react/prop-types
