@@ -5,7 +5,18 @@ import backend from "../../env";
 import axios from "axios";
 import HelpForm from "./HelpForm/HelpForm";
 
-// eslint-disable-next-line react/require-optimization
+function removeItemAll(arr, value) {
+  let i = 0;
+  while (i < arr.length) {
+    if (arr[i] === value) {
+      arr.splice(i, 1);
+    } else {
+      ++i;
+    }
+  }
+  return arr;
+}
+
 class Help extends React.Component {
 
     constructor(props) {
@@ -20,6 +31,7 @@ class Help extends React.Component {
             "upvote":0,
             "downvote":0,
             "created":[],
+            "id":"",
         };
     }
 
@@ -47,7 +59,8 @@ class Help extends React.Component {
                             upvote:res.data[0]["UpVotes"],
                             downvote:res.data[0]["DownVotes"],
                             skills:res.data[0]['skills'],
-                            created:res.data[0]['Created'].split('T')[0]});
+                            created:res.data[0]['Created'].split('T')[0],
+                            id:res.data[0]['id']});
             })
     }
 
@@ -61,6 +74,13 @@ class Help extends React.Component {
         })
     }
 
+    handleDelete(item) {
+        const payload = {
+            skills: removeItemAll(this.state.skills, item)
+        }
+        axios.patch(backend+"connect/teacher/"+this.state.id+"/" ,payload)
+            .then(() => this.setState(payload))
+    }
     render() {
         if (this.state.loading){
             return(
@@ -85,6 +105,7 @@ class Help extends React.Component {
                     git={this.state.git}
                     linkedin={this.state.linkedin}
                     name={this.state.name}
+                    onDelete={this.handleDelete.bind(this)}
                     skills={this.state.skills}
                     upvote={this.state.upvote}
                 />
