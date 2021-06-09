@@ -11,7 +11,8 @@ import {isMobile} from "react-device-detect";
 
 const popover = (
     <Tooltip
-        id="popover-basic"
+        className="bac"
+        id="popover"
     >
         <Popover.Title as="h3">
             <strong>
@@ -117,7 +118,7 @@ class Profile extends React.Component{
                 )
         else
             return (
-                <section className="container mb-4 container-fluid">
+                <section className="container-fluid mb-4 lowwl">
                     <div className="row" >
                         {isMobile?null:(
                             <div className="col container">
