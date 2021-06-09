@@ -73,12 +73,12 @@ class HelpForm extends React.Component{
             Gitname: this.state.Github,
             Linkedin: this.state.Linkedin.slice(28),
             skills: tags,
-        }).then(this.props.handleSubmit())
+        }).then((res) => this.props.handleSubmit({
+            data: [res.data]
+        }))
     }
 
     render() {
-        console.log(this.state.currentStep)
-        console.log(this.state.data)
         return (
             <form onSubmit={this.handleSubmit}>
 

@@ -50,17 +50,7 @@ class Help extends React.Component {
         axios.get(backend+"connect/teacher?format=json")
             .then(res => {
                 if (res.data.length)
-                        this.setState({
-                            isTeacher: Boolean(res.data.length),
-                            loading: false,
-                            name:localStorage.getItem("userName"),
-                            linkedin: res.data[0]["Linkedin"],
-                            git:res.data[0]["Gitname"],
-                            upvote:res.data[0]["UpVotes"],
-                            downvote:res.data[0]["DownVotes"],
-                            skills:res.data[0]['skills'],
-                            created:res.data[0]['Created'].split('T')[0],
-                            id:res.data[0]['id']})
+                        this.handlerSubmit(res)
                 else 
                     this.setState({
                         loading: false
@@ -72,10 +62,18 @@ class Help extends React.Component {
         return true;
     }
 
-    handlerSubmit() {
+    handlerSubmit(res) {
         this.setState({
-            isTeacher: true
-        })
+            isTeacher: Boolean(res.data.length),
+            loading: false,
+            name:localStorage.getItem("userName"),
+            linkedin: res.data[0]["Linkedin"],
+            git:res.data[0]["Gitname"],
+            upvote:res.data[0]["UpVotes"],
+            downvote:res.data[0]["DownVotes"],
+            skills:res.data[0]['skills'],
+            created:res.data[0]['Created'].split('T')[0],
+            id:res.data[0]['id']})
     }
 
     handleDelete(item) {
@@ -113,7 +111,7 @@ class Help extends React.Component {
             );
         }
 
-        else if (!this.state.isTeacher) {
+        else
             return (
                 <div>
                     <HelpForm
@@ -122,7 +120,6 @@ class Help extends React.Component {
                 </div>
             )
         }
-    }
 }
 
 export default Help;
