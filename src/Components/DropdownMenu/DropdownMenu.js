@@ -21,6 +21,7 @@ import {
   CustomNavLinkSmall,
 } from "../Header/styles";
 import {withTranslation} from "react-i18next";
+import {isMobile} from "react-device-detect";
 
   function DropdownMenu () {
     return (
@@ -54,9 +55,11 @@ import {withTranslation} from "react-i18next";
 
             <CustomNavLinkSmall>
                 <div
-                    className="btn" 
+                    className="btn magic_span"
                     onClick={signOut}
                 >
+                    {isMobile?"Sign Out":null}
+
                     <svg
                         className="bi bi-box-arrow-right"
                         fill="currentColor"
