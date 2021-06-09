@@ -40,37 +40,6 @@ const popoverRight = (
     </Popover>
   );
 
-// const popover = (
-//     <Tooltip
-//         id="popover"
-//     >
-        // <Popover.Title as="h3">
-        //     <strong>
-        //         My name is not right!
-        //     </strong>
-        // </Popover.Title>
-
-        // <Popover.Content>
-        //     Feel free to contact us at our email 
-
-        //     {' '}
-
-        //     <strong>
-        //         watsonhex@gmail.com
-        //     </strong>
-
-        //     {' '}
-        //     and we will get it right.
-
-        //     <br />
-            
-        //     Thank you.
-
-        //     {' '}
-
-        // </Popover.Content>
-//     </Tooltip>
-//   );
 class Profile extends React.Component{
 
     constructor(props) {
@@ -148,21 +117,23 @@ class Profile extends React.Component{
                 )
         else
             return (
-                <section className="container-fluid mb-4 lowwl">
+                <section className="container-fluid lowwl mt-0">
                     <div className="row" >
                         {isMobile?null:(
                             <div className="col container">
-                                <div className=" float-right mr-5">
+                                <div className=" float-right mr-5 mt-5">
                                     <SvgIcon
-                                        className="profile-image mt-3"
+                                        className="profile-image mt-5"
                                         height="100%"
                                         src="waving.svg"
                                         width="120%"
                                     />
 
                                     <h4 className="text-center">
-                                        Here is all the information we have about you, feel free to contact us if
-                                        something doesn&apos;t feel right
+                                        Here is all the information we have about you,
+                                        <br />
+                                        feel free to contact us if
+                                        something doesn&apos;t feel right.
                                     </h4>
                                 </div>
                             </div>)}
@@ -176,7 +147,7 @@ class Profile extends React.Component{
                                     </h1>
                                 </Card.Header>
 
-                                <Card.Body>
+                                <Card.Body className="pt-0 mt-0">
                                     <form
                                         className="card-body"
                                         onSubmit={this.handleSubmit}
@@ -201,29 +172,6 @@ class Profile extends React.Component{
                                                         </span>
                                                     </div>
                                                 </OverlayTrigger>
-
-                                                {/* <OverlayTrigger
-                                                    overlay={popover}
-                                                    placement="right"
-                                                    rootClose
-                                                    trigger="click"
-                                                >
-                                                    {({ ref, ...triggerHandler }) => (
-                                                        <div
-                                                            className="btn m-0 p-0"
-                                                            {...triggerHandler}
-                                                        >
-                                                    &nbsp;
-
-                                                            <span
-                                                                className="material-icons"
-                                                                ref={ref}
-                                                            >
-                                                                help_outline
-                                                            </span>
-                                                        </div>
-                                            )}
-                                                </OverlayTrigger> */}
 
                                             </div>
 
@@ -260,28 +208,6 @@ class Profile extends React.Component{
                                                         </span>
                                                     </div>
                                                 </OverlayTrigger>
-
-                                                {/* <OverlayTrigger
-                                                    overlay={popover}
-                                                    placement="right"
-                                                    rootClose
-                                                    trigger="click"
-                                                >
-                                                    {({ ref, ...triggerHandler }) => (
-                                                        <div
-                                                            className="btn m-0 p-0"
-                                                            {...triggerHandler}
-                                                        >
-                                                        &nbsp;
-
-                                                            <span
-                                                                className="material-icons"
-                                                                ref={ref}
-                                                            >
-                                                                help_outline
-                                                            </span>
-                                                        </div>)}
-                                                </OverlayTrigger> */}
 
                                             </div>
 
@@ -401,14 +327,16 @@ class Profile extends React.Component{
                                     </form>
                                 </Card.Body>
 
-                                <Card.Footer className="custom-modal-footer-p pb-5">
-                                    <button
-                                        className="btn btn-lg btn-primary col-5"
-                                        onClick={this.handleSubmit.bind(this)}
-                                        type="button"
-                                    >
-                                        Submit
-                                    </button>
+                                <Card.Footer className="custom-modal-footer-p">
+                                    <div className="pb-5">
+                                        <button
+                                            className="btn btn-lg btn-primary col-5"
+                                            onClick={this.handleSubmit.bind(this)}
+                                            type="button"
+                                        >
+                                            Submit
+                                        </button>
+                                    </div>
                                 </Card.Footer>
 
                             </Card>
