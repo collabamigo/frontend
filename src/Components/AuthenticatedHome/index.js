@@ -9,13 +9,13 @@ import './index.css'
 
 function AuthenticatedHome() {
     return (
-        <div className="row justify-content-center h-75 w-100">
+        <div className="row justify-content-center h-75 w-100 pl-4">
             <Fade
                 className="col-lg-4 col-md-6 col-sm-12 h-100 mt-2 mb-3"
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="authenticatedHome_card_main text-secondary h-100 card ml-4 mr-1">
+                <Card className="authenticatedHome_card_main text-secondary h-100 card mx-2">
                     <SvgIcon
                         height="56%"
                         src="help_others.svg"
@@ -50,7 +50,7 @@ function AuthenticatedHome() {
                 direction={isMobile?"right":"up"}
                 triggerOnce
             >
-                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-lg-3 mr-md-4 ml-md-2 ml-sm-4 mr-sm-1">
+                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-lg-2 mr-md-4 ml-md-2 ml-sm-4 mr-sm-1">
                     <SvgIcon
                         height="56%"
                         src="ask_for_help.svg"
@@ -93,7 +93,7 @@ function AuthenticatedHome() {
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="card authenticatedHome_card_main h-100 text-secondary mr-lg-2 ml-lg-1 ml-sm-4 mr-sm-1">
+                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-lg-2 ml-sm-4 mr-sm-1">
                     <SvgIcon
                         height="56%"
                         src="collaborate.svg"
