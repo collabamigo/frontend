@@ -9,16 +9,17 @@ import './index.css'
 
 function Index() {
     return (
-        <div className="row justify-content-center h-100">
+        <div className="row justify-content-center h-75">
             <Fade
                 className="col-4 h-100"
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="authenticatedHome_card_main text-secondary h-75 card mb-3 ml-4">
+                <Card className="authenticatedHome_card_main text-secondary h-100 card mb-3 ml-5 mr-1">
                     <SvgIcon
-                        height="220"
+                        height="56%"
                         src="help_others.svg"
+                        weight="100%"
                     />
 
                     <Card.Body>
@@ -49,11 +50,11 @@ function Index() {
                 direction={isMobile?"right":"up"}
                 triggerOnce
             >
-                <Card className="card authenticatedHome_card_main h-75 text-secondary mb-3 mx-2">
+                <Card className="card authenticatedHome_card_main h-100 text-secondary mb-3 mx-3">
                     <SvgIcon
-                        height="210"
+                        height="56%"
                         src="ask_for_help.svg"
-                        width="300"
+                        width="100%"
                     />
 
                     <Card.Body className="card-body">
@@ -90,12 +91,13 @@ function Index() {
             <Fade
                 className="col-4 h-100"
                 direction={isMobile?"left":"up"}
-                triggerOnce
+                triggerOn100
             >
-                <Card className="card authenticatedHome_card_main h-75 text-secondary mr-4">
+                <Card className="card authenticatedHome_card_main h-100 text-secondary mr-5 ml-1">
                     <SvgIcon
-                        height="220"
+                        height="56%"
                         src="collaborate.svg"
+                        width="100%"
                     />
 
                     <Card.Body className="card-body">
