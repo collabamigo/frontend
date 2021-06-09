@@ -9,39 +9,41 @@ import './index.css'
 
 function AuthenticatedHome() {
     return (
-        <div className="row justify-content-center h-75 w-100 pl-4">
+        <div className="row container-fluid h-75 w-100 justify-content-center ">
             <Fade
                 className="col-lg-4 col-md-6 col-sm-12 h-100 mt-2 mb-3"
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="authenticatedHome_card_main text-secondary h-100 card mx-2">
+                <Card className="authenticatedHome_card_main text-secondary h-100 card ml-4 mr-1 zoom-my-card">
                     <SvgIcon
                         height="56%"
                         src="help_others.svg"
                         width="100%"
                     />
 
-                    <Card.Body>
+                    <Card.Body className="mt-3">
                         <Card.Title className="card-title font-weight-bold">
                             HELP OTHERS
                         </Card.Title>
 
                         <br />
 
-                        <Card.Text className="card-text masthead">
+                        <Card.Text className="card-text masthead lead">
                             Solve other&apos;s doubts and be the mentor you always wanted.
                             Using our platform you can reach a larger curious community.
                         </Card.Text>
+                    </Card.Body>
 
+                    <Card.Footer className="footer-custom mb-4">
                         <Link
                             className="col-auto btn btn-primary"
                             to="/help"
                         >
                             Help others
                         </Link>
-
-                    </Card.Body>
+                    </Card.Footer>
+                    
                 </Card>
             </Fade>
 
@@ -50,21 +52,21 @@ function AuthenticatedHome() {
                 direction={isMobile?"right":"up"}
                 triggerOnce
             >
-                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-2">
+                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-2 zoom-my-card">
                     <SvgIcon
                         height="56%"
                         src="ask_for_help.svg"
                         width="100%"
                     />
 
-                    <Card.Body className="card-body">
+                    <Card.Body className="mt-3">
                         <Card.Title className="card-title font-weight-bold">
                             ASK FOR HELP
                         </Card.Title>
 
                         <br />
 
-                        <Card.Text className="card-text">
+                        <Card.Text className="card-text lead">
                             <b>
                                 Stack Overflow:404!
                             </b>
@@ -75,16 +77,16 @@ function AuthenticatedHome() {
                             <br />
                             The button below can solve it
                         </Card.Text>
+                    </Card.Body>
 
-                        <br />
-
+                    <Card.Footer className="footer-custom mb-4">
                         <Link
                             className="col-auto btn btn-primary"
                             to="/ask"
                         >
                             Ask for help
                         </Link>
-                    </Card.Body>
+                    </Card.Footer>
                 </Card>
             </Fade>
 
@@ -93,33 +95,37 @@ function AuthenticatedHome() {
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-2">
+                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-2 zoom-my-card">
                     <SvgIcon
                         height="56%"
                         src="collaborate.svg"
                         width="100%"
                     />
 
-                    <Card.Body className="card-body">
+                    <Card.Body className="mt-3">
                         <Card.Title className="card-title font-weight-bold">
                             LET&apos;S  COLLABORATE
                         </Card.Title>
 
                         <br />
 
-                        <Card.Text className="card-text">
+                        <Card.Text className="card-text lead">
                             Find new projects to work.
                             Apply for teams and Collaborations.
                             Lets keep the learning and helping community alive.
                         </Card.Text>
 
+                        
+                    </Card.Body>
+
+                    <Card.Footer className="footer-custom mb-4">
                         <div
                             className="col-auto btn btn-primary disabled"
                         >
                             Coming Soon...
                         </div>
+                    </Card.Footer>
 
-                    </Card.Body>
                 </Card>
             </Fade>
         </div>

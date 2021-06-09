@@ -1,0 +1,12 @@
+.zoom-my-card {
+    transition: transform .2s;
+}
+
+.zoom-my-card:hover {
+    transform: scale(1.08);
+}
+
+.footer-custom {
+    background-color: white !important;
+    border-top: 0 none !important;
+}
