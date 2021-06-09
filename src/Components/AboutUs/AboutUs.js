@@ -10,7 +10,7 @@ class AboutUs extends React.Component {
     render() {
         return (
             <div>
-                <div className="py-5 contents-heeman">
+                <div className="contents-heeman">
                     <div className="container">
                         <div className="row justify-content-center mb-4">
                             <div className="col-md-9 text-center">
@@ -41,7 +41,7 @@ class AboutUs extends React.Component {
                                                 Aditya Pratap Singh
                                             </h4>
 
-                                            <h5 className="subtitle pt-1">
+                                            <h5 className="subtitle pt-2">
                                                 Co - Founder
                                             </h5>
 
@@ -128,7 +128,7 @@ class AboutUs extends React.Component {
                                                 Heemank Verma
                                             </h4>
 
-                                            <h5 className="subtitle pt-1">
+                                            <h5 className="subtitle pt-2">
                                                 Co - Founder
                                             </h5>
 
@@ -213,7 +213,7 @@ class AboutUs extends React.Component {
                                                 Shikhar Sharma
                                             </h4>
 
-                                            <h5 className="subtitle pt-1">
+                                            <h5 className="subtitle pt-2">
                                                 Co - Founder
                                             </h5>
 
