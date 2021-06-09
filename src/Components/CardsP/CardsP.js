@@ -62,7 +62,7 @@ function CardsP (props) {
         </Popover>
     )
     return (
-        <Fade className="float-right" >
+        <Fade className={"float-right" + props.className} >
             <Card className="card card_P" >
                 <Card.Body>
                     <Card.Title className="main_P_title">
@@ -98,8 +98,6 @@ function CardsP (props) {
                                     width="24px"
                                 />
                             </Card.Link>
-
-                            {/*<div className="col-auto" />*/}
 
                             <Card.Link
                                 href={"https://www.github.com/"+ props.Git}
@@ -176,6 +174,7 @@ function CardsP (props) {
 CardsP.propTypes = {
     Git:PropTypes.string.isRequired,
     batch:PropTypes.string.isRequired,
+    className: PropTypes.string,
     course:PropTypes.string.isRequired,
     key_value: PropTypes.string.isRequired,
     linked:PropTypes.string.isRequired,
@@ -188,6 +187,7 @@ CardsP.propTypes = {
 }
 
 CardsP.defaultProps = {
+    className: "",
     onConnect: () => {},
     onVote: () => {},
     showConnect: false,

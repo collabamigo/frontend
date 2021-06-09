@@ -22,16 +22,16 @@ class Help extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            "isTeacher": "",
-            // "loading":true,
-            "skills":[],
-            "name":"",
-            "linkedin":"",
-            "git":"",
-            "upvote":0,
-            "downvote":0,
-            "created":[],
-            "id":"",
+            isTeacher: false,
+            loading:true,
+            skills:[],
+            name:"",
+            linkedin:"",
+            git:"",
+            upvote:0,
+            downvote:0,
+            created:[],
+            id:"",
         };
     }
 
@@ -52,7 +52,7 @@ class Help extends React.Component {
                 if (res.data.length)
                         this.setState({
                             isTeacher: Boolean(res.data.length),
-                            // loading: false,
+                            loading: false,
                             name:localStorage.getItem("userName"),
                             linkedin: res.data[0]["Linkedin"],
                             git:res.data[0]["Gitname"],
@@ -60,7 +60,11 @@ class Help extends React.Component {
                             downvote:res.data[0]["DownVotes"],
                             skills:res.data[0]['skills'],
                             created:res.data[0]['Created'].split('T')[0],
-                            id:res.data[0]['id']});
+                            id:res.data[0]['id']})
+                else 
+                    this.setState({
+                        loading: false
+                    })
             })
     }
 
@@ -82,22 +86,19 @@ class Help extends React.Component {
             .then(() => this.setState(payload))
     }
     render() {
-        // if (this.state.loading){
-        //     return(
-        //         <div>
-        //             <div
-        //                 className="spinner-border"
-        //                 role="status"
-        //             >
-        //                 <span className="sr-only">
-        //                     Loading...
-        //                 </span>
-        //             </div>
-        //         </div>
-        //         )
-        // }
+        if (this.state.loading)
+            return(
+                <div
+                    className="spinner-border"
+                    role="status"
+                >
+                    <span className="sr-only">
+                        Loading...
+                    </span>
+                </div>
+            )
 
-        if (this.state.isTeacher) {
+        else if (this.state.isTeacher) {
             return (
                 <DashBoard
                     created={this.state.created}
