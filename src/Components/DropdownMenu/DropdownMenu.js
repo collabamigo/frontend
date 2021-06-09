@@ -55,13 +55,13 @@ import {isMobile} from "react-device-detect";
 
             <CustomNavLinkSmall>
                 <div
-                    className="btn magic_span"
+                    className="btn"
                     onClick={signOut}
                 >
                     {isMobile?"Sign Out":null}
 
                     <svg
-                        className="bi bi-box-arrow-right"
+                        className="bi bi-box-arrow-right magic_span"
                         fill="currentColor"
                         height="24"
                         viewBox="0 0 16 16"
