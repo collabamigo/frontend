@@ -268,7 +268,7 @@ class Profile extends React.Component{
                                             </div>
                                         </div>
 
-                                        <div className="form-group">
+                                        <div className="row form-group">
                                             <label className="col-auto col-form-label mr-1">
                                                 Degree:
                                                 <select
@@ -342,7 +342,7 @@ class Profile extends React.Component{
                                     </form>
                                 </Card.Body>
 
-                                <Card.Footer className="custom-modal-footer-p">
+                                <Card.Footer className="custom-modal-footer-p pb-5">
                                     <button
                                         className="btn btn-lg btn-primary col-5"
                                         onClick={this.handleSubmit.bind(this)}
