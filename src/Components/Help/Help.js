@@ -23,7 +23,7 @@ class Help extends React.Component {
         super(props);
         this.state = {
             "isTeacher": "",
-            "loading":true,
+            // "loading":true,
             "skills":[],
             "name":"",
             "linkedin":"",
@@ -52,7 +52,7 @@ class Help extends React.Component {
                 if (res.data.length)
                         this.setState({
                             isTeacher: Boolean(res.data.length),
-                            loading: false,
+                            // loading: false,
                             name:localStorage.getItem("userName"),
                             linkedin: res.data[0]["Linkedin"],
                             git:res.data[0]["Gitname"],
@@ -82,22 +82,22 @@ class Help extends React.Component {
             .then(() => this.setState(payload))
     }
     render() {
-        if (this.state.loading){
-            return(
-                <div>
-                    <div
-                        className="spinner-border"
-                        role="status"
-                    >
-                        <span className="sr-only">
-                            Loading...
-                        </span>
-                    </div>
-                </div>
-                )
-        }
+        // if (this.state.loading){
+        //     return(
+        //         <div>
+        //             <div
+        //                 className="spinner-border"
+        //                 role="status"
+        //             >
+        //                 <span className="sr-only">
+        //                     Loading...
+        //                 </span>
+        //             </div>
+        //         </div>
+        //         )
+        // }
 
-        else if (this.state.isTeacher) {
+        if (this.state.isTeacher) {
             return (
                 <DashBoard
                     created={this.state.created}
