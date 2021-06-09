@@ -31,7 +31,7 @@ class AboutUs extends React.Component {
                                     <div className="col-md-12">
                                         <img
                                             className="img-fluid rounded-circle"
-                                            src="https://images.unsplash.com/photo-1527585743534-7113e3211270?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                                            src="https://i.imgur.com/E7GyC8A.jpg"
                                         />
                                     </div>
 
