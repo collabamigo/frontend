@@ -53,6 +53,10 @@ li.trending{
     list-style-type: none;
 }
 
+li.skills{
+    list-style-type: none;
+    overflow:auto;
+}
 /* .upper-text {
     max-width: 100%;
 } */

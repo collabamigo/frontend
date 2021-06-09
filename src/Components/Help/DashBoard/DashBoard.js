@@ -7,22 +7,24 @@ import {SvgIcon} from "../../../common/SvgIcon";
 import { Doughnut } from "react-chartjs-2";
 import backend from "../../../env";
 import axios from "axios";
+import Odal from "./mymodal";
 
 
 class DashBoard extends React.Component {
     static propTypes = {
-        // downvote:PropTypes.number.isRequired,
         created: PropTypes.arrayOf(PropTypes.string).isRequired,
+        downvote:PropTypes.number.isRequired,
         git:PropTypes.string.isRequired,
         linkedin:PropTypes.string.isRequired,
         name:PropTypes.string.isRequired,
+        onDelete: PropTypes.func.isRequired,
         skills: PropTypes.arrayOf(PropTypes.string).isRequired,
-        // upvote: PropTypes.number.isRequired,
-        
+        upvote: PropTypes.number.isRequired,
     }
 
     constructor(props) {
         super(props);
+        this.handleTrending()
         this.state={
             months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             trendingSkills:[],
@@ -30,7 +32,7 @@ class DashBoard extends React.Component {
             labels: ["Up Votes","Down Votes"],
             datasets: [
                 {
-                    data: [1, 1],
+                    data: [0+props.upvote,0+props.downvote],
                     backgroundColor: ["#F7464A", "#46BFBD"],
                     hoverBackgroundColor: [
                         "#FF5A5E",
@@ -42,10 +44,6 @@ class DashBoard extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.handleTrending()
-    }
-
     shouldComponentUpdate () {
         return true;
     }
@@ -53,7 +51,27 @@ class DashBoard extends React.Component {
     handleTrending() {
         axios.get(backend+"connect/statistics/skills").then((res) => {this.setState({trendingSkills:res.data})})
     }
-// year month day
+
+    handleDoughnut () {
+        if (this.props.upvote > 0 || this.props.downvote>0){
+            return(
+                <Doughnut
+                    data={this.state.dataDoughnut}
+                    height={10}
+                    options={{ responsive: true, maintainAspectRatio: true}}
+                    width={10}
+                />
+            )
+        }
+        else{
+            return (
+                <div>
+                    first work bro
+                </div>
+            )
+        }
+    }
+
     render () {
         console.log(this.props.created)
         return (
@@ -141,33 +159,6 @@ class DashBoard extends React.Component {
 
                     <div className="row">
                         <div className="col">
-                            <Card className="card_dashboard m-2 card card-empty">
-                                <Card.Body>
-                                    <Card.Title>
-                                        Still thinking
-                                    </Card.Title>
-                                </Card.Body>
-                            </Card>
-                        </div>
-
-                        <div className="col">
-                            <Card className="card_dashboard m-2 card card-votes">
-                                <Card.Body className="card-body col-md-7">
-                                    <Doughnut
-                                        data={this.state.dataDoughnut}
-                                        height={10}
-                                        options={{ responsive: true, maintainAspectRatio: true}}
-                                        width={10}
-                                    />
-                                </Card.Body>
-
-                            </Card>
-                        </div>
-
-                    </div>
-
-                    <div className="row">
-                        <div className="col">
                             <div className="pieChart">
                                 <br />
 
@@ -229,6 +220,52 @@ class DashBoard extends React.Component {
                                         </div>
                                         ))}
                                 </Card.Body>
+                            </Card>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col">
+                            <Card className="card_dashboard m-2 card card-empty">
+                                <Card.Body>
+                                    <Card.Title>
+                                        Your Skills
+                                    </Card.Title>
+
+                                    <div>
+                                        {this.props.skills.map(item => (
+                                            <div
+                                                className="col-auto"
+                                                key={item}
+                                            >
+                                                <li
+                                                    className="skills"
+                                                    key={item}
+                                                >
+                                                    <ol className="">
+                                                        {item}
+
+                                                        <Odal
+                                                            item={item}
+                                                            onDelete={this.props.onDelete}
+                                                        />
+                                                    </ol>
+                                                </li>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        </div>
+
+                        <div className="col">
+                            <Card className="card_dashboard m-2 card card-votes">
+                                <Card.Body className="card-body col-md-7">
+
+                                    {this.handleDoughnut()}
+
+                                </Card.Body>
+
                             </Card>
                         </div>
                     </div>
