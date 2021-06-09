@@ -91,7 +91,7 @@ function AuthenticatedHome() {
             <Fade
                 className="col-lg-4 col-md-6 col-sm-12 h-100 mt-2 mb-3"
                 direction={isMobile?"left":"up"}
-                triggerOn100
+                triggerOnce
             >
                 <Card className="card authenticatedHome_card_main h-100 text-secondary mr-lg-2 ml-lg-1 ml-sm-4 mr-sm-1">
                     <SvgIcon
