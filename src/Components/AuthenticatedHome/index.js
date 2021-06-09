@@ -50,7 +50,7 @@ function AuthenticatedHome() {
                 direction={isMobile?"right":"up"}
                 triggerOnce
             >
-                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-lg-2 mr-md-4 ml-md-2 ml-sm-4 mr-sm-1">
+                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-2">
                     <SvgIcon
                         height="56%"
                         src="ask_for_help.svg"
@@ -93,7 +93,7 @@ function AuthenticatedHome() {
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-lg-2 ml-sm-4 mr-sm-1">
+                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-2">
                     <SvgIcon
                         height="56%"
                         src="collaborate.svg"
