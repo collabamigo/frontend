@@ -1,7 +1,13 @@
-.card_P{
+.card_P {
     width: 18rem;
-    height:13rem;
+    height: 13rem;
 }
-.main_P_title{
+
+.main_P_title {
     color: #18216d;
+}
+
+.header-custom-das {
+    background-color: white !important;
+    font-size: 1.5rem;
 }

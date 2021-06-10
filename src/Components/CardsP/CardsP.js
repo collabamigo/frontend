@@ -37,7 +37,7 @@ function CardsP (props) {
 
                 <div>
                     <label>
-                        To : @
+                        To :
                         {props.name}
                     </label>
 
@@ -64,31 +64,33 @@ function CardsP (props) {
     return (
         <Fade className={"float-right " + props.className} >
             <Card className="card card_P" >
+                
+                <Card.Header className="main_P_title header-custom-das">
+                    <span>
+                        {props.name}
+                    </span>
+                </Card.Header>
+
                 <Card.Body>
-                    <Card.Title className="main_P_title">
-                        <strong>
-                            {props.name}
-                        </strong>
-
-                    </Card.Title>
-
-                    <hr />
-
                     <div className="row">
-                        <Card.Text className="col-auto mb-2 text-muted text-left ml-2">
-                            {props.batch + ".Tech"}
+                        <Card.Text className="col-auto text-muted text-left ml-1">
+                            <span className="h4">
+                                {props.batch + ".Tech"}
+                            </span>
 
                             <br />
 
-                            {props.course}
+                            <span className="h5">
+
+                                {props.course}
+
+                            </span>
 
                         </Card.Text>
 
-                        <div className="col" />
-
-                        <div className="col-auto">
+                        <div className="col-auto float-right ml-5 ">
                             <Card.Link
-                                className="float-right ml-3"
+                                className=""
                                 href={"https://www.linkedin.com/in/"+ props.linked}
                                 target="_blank"
                             >
@@ -113,58 +115,57 @@ function CardsP (props) {
                     </div>
 
                     <br />
+                </Card.Body>
 
-                    <div className="row justify-content-center">
+                <Card.Footer className="footer-custom">
 
-                        {props.showVoting? (
-                            <>
-                                <span
-                                    className={"material-icons"+((props.voteValue === 1)?"":"-outlined")+" col-auto btn float-left mt-0 pt-0 btn-lg"}
-                                    onClick={handleUpVote}
-                                >
-                                    thumb_up
-                                </span>
+                    {props.showVoting? (
+                        <>
+                            <span
+                                className={"material-icons"+((props.voteValue === 1)?"":"-outlined")+" col-auto btn float-center pt-0 btn-lg"}
+                                onClick={handleUpVote}
+                            >
+                                thumb_up
+                            </span>
 
-                                <span
-                                    className={"material-icons"+((props.voteValue === -1)?"":"-outlined")+" col-auto btn float-left ml-1 btn-lg"}
-                                    onClick={handleDownVote}
-                                >
-                                    thumb_down
-                                </span>
+                            <span
+                                className={"material-icons"+((props.voteValue === -1)?"":"-outlined")+" col-auto btn float-center pt-0 btn-lg"}
+                                onClick={handleDownVote}
+                            >
+                                thumb_down
+                            </span>
 
-                            </>):null}
+                        </>):null}
 
-                        {props.showVoting && props.showConnect?<div className="col" />:
+                    {props.showVoting && props.showConnect?<div className="col" />:
                             (props.showConnect?<div className="col-auto" />:null)}
 
-                        {props.showConnect?(
-                            <>
-                                <OverlayTrigger
-                                    className="col-auto"
-                                    overlay={connectPopover}
-                                    placement="bottom"
-                                    rootClose
-                                    transition={null}
-                                    trigger="click"
-                                >
-                                    {({ ref, ...triggerHandler }) => (
-                                        <div
-                                            className="btn btn-primary col-auto mb-4"
-                                            {...triggerHandler}
-                                        >
-                                            <span ref={ref}>
-                                                Connect
-                                            </span>
-                                        </div>)}
-                                </OverlayTrigger>
+                    {props.showConnect?(
+                        <>
+                            <OverlayTrigger
+                                className=""
+                                overlay={connectPopover}
+                                placement="bottom"
+                                rootClose
+                                transition={null}
+                                trigger="click"
+                            >
+                                {({ ref, ...triggerHandler }) => (
+                                    <div
+                                        className="btn btn-primary"
+                                        {...triggerHandler}
+                                    >
+                                        <span ref={ref}>
+                                            Connect
+                                        </span>
+                                    </div>)}
+                            </OverlayTrigger>
 
-                                <div className="col-auto" />
-                            </>
+                            <div className="col-auto" />
+                        </>
                     ):null}
 
-                    </div>
-
-                </Card.Body>
+                </Card.Footer>
             </Card>
         </Fade>
     );
