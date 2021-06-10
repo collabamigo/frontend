@@ -246,7 +246,7 @@ class Profile extends React.Component{
                                                 <input
                                                     className="form-control col-auto"
                                                     onChange={this.handleChangeHandle}
-                                                    placeholder={this.state.Handle}
+                                                    placeholder={this.state.handle}
                                                     type='text'
                                                     value={this.state.Handle}
                                                 />
