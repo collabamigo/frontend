@@ -269,12 +269,10 @@ class DashBoard extends React.Component {
                                                 className="list-group"
                                                 key={item}
                                             >
-                                                <li className="d-flex justify-content-between flex-lg-row pb-2">
+                                                <li className="d-flex justify-content-between flex-lg-row pb-3">
                                                     <div className="ms-2 me-auto">
                                                         <div className="fssm">
-                                                            {capitalizeFirstLetter(item)}
-
-                                                            
+                                                            {capitalizeFirstLetter(item)}                                                            
                                                         </div>
                                                     </div>
 
