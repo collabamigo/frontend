@@ -18,16 +18,14 @@ class HelpForm extends React.Component{
         this.handlerChangeLinkedin = this.handlerChangeLinkedin.bind(this);
         this.handlerChangeContact = this.handlerChangeContact.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        const data = {
+
+        this.state ={
             Handle:'',
             Contact:undefined,
             Github: undefined,
             Linkedin:undefined,
-        }
-
-        this.state ={
-            ...data,
-            currentStep: 1
+            currentStep: 1,
+            isLoading: false
         }
     }
 
@@ -68,6 +66,9 @@ class HelpForm extends React.Component{
     }
 
     handlerSubmit = (tags) => {
+        this.setState({
+            isLoading: true
+        })
         axios.post(backend+"connect/teacher/",{
             Contact: this.state.Contact,
             Gitname: this.state.Github,
@@ -79,33 +80,47 @@ class HelpForm extends React.Component{
     }
 
     render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
+        if (this.state.isLoading)
+            return (
+                <div className="float-centre">
+                    <div
+                        className="spinner-border"
+                        role="status"
+                    >
+                        <span className="sr-only">
+                            Loading...
+                        </span>
+                    </div>
+                </div>
+                )
+        else
+            return (
+                <form onSubmit={this.handleSubmit}>
 
-                <Step1
-                    Contact={this.state.Contact}
-                    Github={this.state.Github}
-                    Handle={this.state.Handle}
-                    Linkedin={this.state.Linkedin}
-                    currentStep={this.state.currentStep}
-                    handleChangeContact={this.handlerChangeContact}
-                    handleChangeGithub={this.handlerChangeGithub}
-                    handleChangeHandle={this.handlerChangeHandle}
-                    handleChangeLinkedin={this.handlerChangeLinkedin}
-                    handleNext={this.handlerNext}
-                />
+                    <Step1
+                        Contact={this.state.Contact}
+                        Github={this.state.Github}
+                        Handle={this.state.Handle}
+                        Linkedin={this.state.Linkedin}
+                        currentStep={this.state.currentStep}
+                        handleChangeContact={this.handlerChangeContact}
+                        handleChangeGithub={this.handlerChangeGithub}
+                        handleChangeHandle={this.handlerChangeHandle}
+                        handleChangeLinkedin={this.handlerChangeLinkedin}
+                        handleNext={this.handlerNext}
+                    />
 
-                <Step2
-                    currentStep={this.state.currentStep}
-                    handlePrev={this.handlerPrev}
-                    handleSubmit={this.handlerSubmit}
-                    // onChange={e=> {this.handleSubmit(e)}}
-                />
+                    <Step2
+                        currentStep={this.state.currentStep}
+                        handlePrev={this.handlerPrev}
+                        handleSubmit={this.handlerSubmit}
+                        // onChange={e=> {this.handleSubmit(e)}}
+                    />
 
-                <br />
+                    <br />
 
-            </form>
-        );
+                </form>
+            );
   }
 
 }
