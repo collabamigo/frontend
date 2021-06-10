@@ -81,6 +81,13 @@ li.skills {
     font-size: x-large;
 }
 
+.card-text-lol {
+    font-size: 2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 
 /* import React from "react";
 import Chart from "react-google-charts";

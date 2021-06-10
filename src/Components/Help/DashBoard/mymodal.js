@@ -1,5 +1,6 @@
 import {Modal} from "react-bootstrap";
 import React, {useState} from "react";
+import SvgIcon from "../../../common/SvgIcon";
 import './mymodal.css'
 
 
@@ -18,13 +19,18 @@ function Odal({item, onDelete}) {
        const handleClose = () => setShow(false);
       return (
           <>
-              <span
-                  className="btn material-icons-outlined"
+              <div
+                  className="btn"
                   onClick={handleShow}
-                  type="button"
               >
-                  delete
-              </span>
+                  <SvgIcon
+                      className="profile-image mt-5 "
+                      height="34rem"
+                      src="delete.svg"
+                      type="button"
+                      width="34rem"
+                  />
+              </div>
 
 
               <Modal

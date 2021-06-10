@@ -205,7 +205,7 @@ class DashBoard extends React.Component {
                                     Trending Skills
                                 </Card.Header>
 
-                                <Card.Body className="card-body col-md-12">
+                                <Card.Body className="card-body col-md-12 overflow-auto">
                                     
 
                                     {this.state.trendingSkills.map(item => (
@@ -252,36 +252,55 @@ class DashBoard extends React.Component {
 
                     <div className="row">
                         <div className="col">
-                            <Card className="card_dashboard m-2 card card-empty">
-                                <Card.Body>
-                                    <Card.Title>
-                                        Your Skills
-                                    </Card.Title>
+                            <Card className="card_dashboard m-2 card card-trending">
+                                <Card.Header className="h1 header-custom">
+                                    Skill Bar
+                                </Card.Header>
 
-                                    <div>
-                                        {this.props.skills.map(item => (
-                                            <div
-                                                className="col-auto"
+                                <Card.Body className="overflow-auto">
+                                    
+
+                                    {this.props.skills.map(item => (
+                                        <div
+                                            className=""
+                                            key={item}
+                                        >
+
+                                            <ol  
+                                                className="list-group"
                                                 key={item}
                                             >
-                                                <li
-                                                    className="skills"
-                                                    key={item}
-                                                >
-                                                    <ol className="">
-                                                        {item}
+                                                <li className="d-flex justify-content-between flex-lg-row">
+                                                    <div className="ms-2 me-auto">
+                                                        <div className="fsxxl">
+                                                            {capitalizeFirstLetter(item)}
 
-                                                        <Odal
-                                                            item={item}
-                                                            onDelete={this.props.onDelete}
-                                                        />
-                                                    </ol>
+                                                            
+                                                        </div>
+                                                    </div>
+
+                                                    <Odal
+                                                        item={item}
+                                                        onDelete={this.props.onDelete}
+                                                    />     
                                                 </li>
-                                            </div>
+                                            </ol>
+                                        </div>
                                         ))}
-                                    </div>
+
+                                    
                                 </Card.Body>
+                                
+                                <hr />
+
+                                <Card.Footer className="header-custom">
+                                    <span className="fssm">
+                                        Lorem Ipsium
+                                    </span>
+                                </Card.Footer>
                             </Card>
+
+
                         </div>
 
                         <div className="col">
