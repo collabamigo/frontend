@@ -29,7 +29,8 @@ class FormSignIn extends React.Component {
             LastName:this.props.lastName,
             email: this.props.emailId,
             degree: '',
-            course:''
+            course:'',
+            isLoading: false
         }
     }
 
@@ -55,6 +56,7 @@ class FormSignIn extends React.Component {
     }
     
     handleSubmit(e) {
+        this.setState({isLoading: true})
 
         let payload = {
             First_Name :this.state.FirstName,
@@ -86,171 +88,185 @@ class FormSignIn extends React.Component {
 
 
   render() {
-    return (
-        <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-                <div className="row">
-                    <div className="col">
-                        <label className="row">
-                            <div className="col" />
-
-                            <div className="col-2" >
-                                First Name:
-                            </div>
-
-                            <div className="col-auto" />
-
-                            <input
-                                onChange={this.handleChangeFirstName}
-                                required
-                                type='text'
-                                value={this.state.FirstName}
-                            />
-
-                            <div className="col" />
-
-                        </label>
-
-                        <br />
-
-                        <label className="row">
-                            <div className="col" />
-
-                            <div className="col-2">
-                                Last Name:
-                            </div>
-
-                            <div className="col-auto" />
-
-                            <input
-                                onChange={this.handleChangeLastName}
-                                required
-                                type='text'
-                                value={this.state.LastName}
-                            />
-
-                            <div className="col" />
-
-                        </label>
-
-                        <br />
-
-                        <label className="row">
-                            <div className="col" />
-
-                            <div className="col-2">
-                                Email Address:
-                            </div>
-
-                            <div className="col-auto" />
-
-                            <input
-                                disabled
-                                type='text'
-                                value={this.state.email}
-                            />
-
-                            <div className="col" />
-
-                        </label>
-
-                        <br />
-
-                        <div className="row">
-                            <div className="col" />
-
-                            <label className="col-auto">
-                                Degree:
-                                <select
-                                    className="form-control"
-                                    onChange={this.handleChangeDegree}
-                                    required
-                                    value={this.state.degree}
-                                >
-                                    <option
-                                        value=""
-                                    >
-                                        ---Select Degree---
-                                    </option>
-
-                                    <option value="M" >
-                                        M-Tech
-                                    </option>
-
-                                    <option value="B">
-                                        B-Tech
-                                    </option>
-                                </select>
-                            </label>
-
-                            <label className="col-auto">
-                                Course:
-                                <select
-                                    className="form-control"
-                                    onChange={this.handleChangecourse}
-                                    required
-                                    value={this.state.course}
-                                >
-
-                                    <option
-                                        value=""
-                                    >
-                                        ---Select Course---
-                                    </option>
-
-                                    <option value="CSAI">
-                                        CSAI
-                                    </option>
-
-                                    <option value="CSE">
-                                        CSE
-                                    </option>
-
-                                    <option value="CSB">
-                                        CSB
-                                    </option>
-
-                                    <option value="CSD">
-                                        CSD
-                                    </option>
-
-                                    <option value="CSS">
-                                        CSS
-                                    </option>
-
-                                    <option value="CSAM">
-                                        CSAM
-                                    </option>
-
-                                    <option value="ECE">
-                                        ECE
-                                    </option>
-
-                                </select>
-                            </label>
-
-                            <div className="col" />
-
-                        </div>
-
-                        <br />
-
-                        <br />
-
-                        <button
-                            className="btn btn-primary"
-                            onChange={this.handleChange}
-                            type="submit" 
-                            value="Submit"
-                        >
-                            Submit
-                        </button>
-
-                    </div>
+    if (this.state.isLoading)
+        return (
+            <div className="float-centre">
+                <div
+                    className="spinner-border"
+                    role="status"
+                >
+                    <span className="sr-only">
+                        Loading...
+                    </span>
                 </div>
             </div>
-        </form>
-    );
+            )     
+    else
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                    <div className="row">
+                        <div className="col">
+                            <label className="row">
+                                <div className="col" />
+    
+                                <div className="col-2" >
+                                    First Name:
+                                </div>
+    
+                                <div className="col-auto" />
+    
+                                <input
+                                    onChange={this.handleChangeFirstName}
+                                    required
+                                    type='text'
+                                    value={this.state.FirstName}
+                                />
+    
+                                <div className="col" />
+    
+                            </label>
+    
+                            <br />
+    
+                            <label className="row">
+                                <div className="col" />
+    
+                                <div className="col-2">
+                                    Last Name:
+                                </div>
+    
+                                <div className="col-auto" />
+    
+                                <input
+                                    onChange={this.handleChangeLastName}
+                                    required
+                                    type='text'
+                                    value={this.state.LastName}
+                                />
+    
+                                <div className="col" />
+    
+                            </label>
+    
+                            <br />
+    
+                            <label className="row">
+                                <div className="col" />
+    
+                                <div className="col-2">
+                                    Email Address:
+                                </div>
+    
+                                <div className="col-auto" />
+    
+                                <input
+                                    disabled
+                                    type='text'
+                                    value={this.state.email}
+                                />
+    
+                                <div className="col" />
+    
+                            </label>
+    
+                            <br />
+    
+                            <div className="row">
+                                <div className="col" />
+    
+                                <label className="col-auto">
+                                    Degree:
+                                    <select
+                                        className="form-control"
+                                        onChange={this.handleChangeDegree}
+                                        required
+                                        value={this.state.degree}
+                                    >
+                                        <option
+                                            value=""
+                                        >
+                                            ---Select Degree---
+                                        </option>
+    
+                                        <option value="M" >
+                                            M-Tech
+                                        </option>
+    
+                                        <option value="B">
+                                            B-Tech
+                                        </option>
+                                    </select>
+                                </label>
+    
+                                <label className="col-auto">
+                                    Course:
+                                    <select
+                                        className="form-control"
+                                        onChange={this.handleChangecourse}
+                                        required
+                                        value={this.state.course}
+                                    >
+    
+                                        <option
+                                            value=""
+                                        >
+                                            ---Select Course---
+                                        </option>
+    
+                                        <option value="CSAI">
+                                            CSAI
+                                        </option>
+    
+                                        <option value="CSE">
+                                            CSE
+                                        </option>
+    
+                                        <option value="CSB">
+                                            CSB
+                                        </option>
+    
+                                        <option value="CSD">
+                                            CSD
+                                        </option>
+    
+                                        <option value="CSS">
+                                            CSS
+                                        </option>
+    
+                                        <option value="CSAM">
+                                            CSAM
+                                        </option>
+    
+                                        <option value="ECE">
+                                            ECE
+                                        </option>
+    
+                                    </select>
+                                </label>
+    
+                                <div className="col" />
+    
+                            </div>
+    
+                            <br />
+    
+                            <br />
+    
+                            <button
+                                className="btn btn-primary"
+                                onChange={this.handleChange}
+                                type="submit" 
+                                value="Submit"
+                            >
+                                Submit
+                            </button>
+    
+                        </div>
+                    </div>
+                </div>
+            </form>
+        );
   }
 }
 

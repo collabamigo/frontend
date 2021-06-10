@@ -41,10 +41,8 @@ class Step2 extends React.Component {
                 <Autocomplete
                     onChange={(val) => this.handleChange(val)}
                     onMatch={(val) => {
-                    this.handleMatch.bind(this)
-                    if (!this.state.tags.includes(val)) {
+                    if (!this.state.tags.includes(val))
                         addTag(val)
-                    }
                 }}
                     searchTerm={this.state.searchTerm}
                     suggestions={this.state.temp_l}
