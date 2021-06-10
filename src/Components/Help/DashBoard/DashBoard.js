@@ -209,15 +209,15 @@ class DashBoard extends React.Component {
 
                                     {this.state.trendingSkills.map(item => (
                                         <div
-                                            className="col-auto container-fluid lool"
+                                            className="container-fluid lool"
                                             key={item}
                                         >
                                             <ol 
                                                 className="list-group mt-1"
                                                 key={item}
                                             >
-                                                <li className="d-flex justify-content-between align-items-start fsxxl container-fluid">
-                                                    <div className="ms-2 me-auto">
+                                                <li className="d-flex justify-content-between fsxxl">
+                                                    <div className="">
                                                         <div className="fssm">
                                                             {capitalizeFirstLetter(item["name"])}
                                                         </div>
@@ -269,9 +269,9 @@ class DashBoard extends React.Component {
                                                 className="list-group"
                                                 key={item}
                                             >
-                                                <li className="d-flex justify-content-between flex-lg-row">
+                                                <li className="d-flex justify-content-between flex-lg-row pb-2">
                                                     <div className="ms-2 me-auto">
-                                                        <div className="fsxxl">
+                                                        <div className="fssm">
                                                             {capitalizeFirstLetter(item)}
 
                                                             
