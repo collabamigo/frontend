@@ -17,7 +17,6 @@ class Step2 extends React.Component {
         super(props);
         this.state = {
             searchTerm: "",
-            found_match: false,
             temp_l: [],
             tags: [],
         }
@@ -29,10 +28,6 @@ class Step2 extends React.Component {
 
     handleChange(value) {
         this.setState({"searchTerm": value});
-    }
-
-    handleMatch = () => {
-        this.setState({"found_match": true});
     }
 
     handleChangeTag(tags) {
