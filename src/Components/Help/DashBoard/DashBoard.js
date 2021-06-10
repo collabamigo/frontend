@@ -67,9 +67,11 @@ class DashBoard extends React.Component {
         }
         else{
             return (
-                <div>
-                    first work bro
-                </div>
+
+                <Card.Title className="text-center pt-5 container">
+                    {' '}
+                    No one has voted you yet , ask your peers to vote you to the the assesment
+                </Card.Title>
             )
         }
     }
@@ -287,14 +289,6 @@ class DashBoard extends React.Component {
 
                                     
                                 </Card.Body>
-
-                                <hr />
-
-                                <Card.Footer className="header-custom">
-                                    <span className="fssm">
-                                        Lorem Ipsium
-                                    </span>
-                                </Card.Footer>
                             </Card>
 
 
@@ -302,7 +296,7 @@ class DashBoard extends React.Component {
 
                         <div className="col">
                             <Card className="card_dashboard m-2 card card-votes">
-                                <Card.Body className="card-body col-md-7">
+                                <Card.Body className="col-md-12">
 
                                     {this.handleDoughnut()}
 
