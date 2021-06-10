@@ -74,7 +74,7 @@ li.skills {
 }
 
 .fsxxl {
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 .fssm {
@@ -82,7 +82,7 @@ li.skills {
 }
 
 .card-text-lol {
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

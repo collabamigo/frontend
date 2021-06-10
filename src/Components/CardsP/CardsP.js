@@ -73,8 +73,8 @@ function CardsP (props) {
 
                 <Card.Body>
                     <div className="row">
-                        <Card.Text className="col-auto text-muted text-left ml-1">
-                            <span className="h4">
+                        <Card.Text className="col-auto text-muted text-left ml-1 mr-4">
+                            <span className="h5">
                                 {props.batch + ".Tech"}
                             </span>
 
@@ -88,7 +88,7 @@ function CardsP (props) {
 
                         </Card.Text>
 
-                        <div className="col-auto float-right ml-5 ">
+                        <div className="col-auto float-right ml-5">
                             <Card.Link
                                 className=""
                                 href={"https://www.linkedin.com/in/"+ props.linked}

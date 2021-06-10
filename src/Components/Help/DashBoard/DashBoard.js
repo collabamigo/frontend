@@ -289,7 +289,7 @@ class DashBoard extends React.Component {
 
                                     
                                 </Card.Body>
-                                
+
                                 <hr />
 
                                 <Card.Footer className="header-custom">
