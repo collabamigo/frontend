@@ -87,7 +87,7 @@ class Profile extends React.Component{
         let payload = {
             degree:this.state.degree,
             course:this.state.course,
-            Handle:this.state.Handle, }
+            handle:this.state.Handle}
         this.setState({loading:true})
         axios.patch(backend+"connect/profile/"+this.state.id+"/", payload)
             .then(() => {
