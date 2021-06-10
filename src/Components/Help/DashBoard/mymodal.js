@@ -1,6 +1,6 @@
 import {Modal} from "react-bootstrap";
 import React, {useState} from "react";
-import SvgIcon from "../../../common/SvgIcon";
+// import SvgIcon from "../../../common/SvgIcon";
 import './mymodal.css'
 
 
@@ -23,13 +23,9 @@ function Odal({item, onDelete}) {
                   className="btn"
                   onClick={handleShow}
               >
-                  <SvgIcon
-                      className="profile-image mt-5 "
-                      height="22rem"
-                      src="delete.svg"
-                      type="button"
-                      width="22rem"
-                  />
+                  <span className="material-icons dustbin">
+                      delete_outline
+                  </span>
               </div>
 
 
