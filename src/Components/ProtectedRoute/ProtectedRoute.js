@@ -1,16 +1,13 @@
 import React from "react";
-import {Redirect, Route} from "react-router-dom";
+import {Redirect, Route, useLocation} from "react-router-dom";
 import PropTypes from "prop-types";
 
 function ProtectedRoute (props) {
-
     let ret;
-    if (localStorage.getItem("encrypted_token")) {
-
+    const { state: { internal } = {} } = useLocation();
+    if (internal || window.location.hostname === "localhost")
         ret = props.children;
-
-    } else {
-
+    else
         ret =
             (
                 <Redirect to={
@@ -19,8 +16,6 @@ function ProtectedRoute (props) {
               }
           }
                 />)
-
-    }
     return (
         // eslint-disable-next-line react/jsx-props-no-spreading
         <Route {...props}>

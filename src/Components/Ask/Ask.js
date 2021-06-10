@@ -99,26 +99,25 @@ class Ask extends React.Component {
     }
 
     render () {
-              return (
-                  <div className="row">
-                      <div className="col-6">
-                          <h1 className="display-4">
-                              Skill Search
-                          </h1>
+          return (
+              <div className="row">
+                  <div className="col-6">
+                      <h1 className="display-4">
+                          Skill Search
+                      </h1>
 
-                          <Autocomplete
-                              onChange={this.handleChange}
-                              onMatch={this.handleMatch}
-                          />
-                      </div>
-
-                      <div className="pt-5 col-6 justify-content-center">
-                          {this.renderCardsIfNeeded()}
-                      </div>
+                      <Autocomplete
+                          onChange={this.handleChange}
+                          onMatch={this.handleMatch}
+                      />
                   </div>
-              );
 
-          }
+                  <div className="pt-5 col-6 justify-content-center">
+                      {this.renderCardsIfNeeded()}
+                  </div>
+              </div>
+          );
+    }
 }
 
 export default Ask;

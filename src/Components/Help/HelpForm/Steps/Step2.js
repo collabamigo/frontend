@@ -79,7 +79,6 @@ class Step2 extends React.Component {
     }
     render() {
         if (this.props.currentStep !== 2) {
-            console.log(this.state.found_match)
             return null
         }
         return (

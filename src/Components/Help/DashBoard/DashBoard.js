@@ -75,7 +75,6 @@ class DashBoard extends React.Component {
     }
 
     render () {
-        console.log(this.props.created)
         return (
             <div className="">
                 <h1 className="font-weight-bold">

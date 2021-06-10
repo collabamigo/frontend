@@ -139,21 +139,26 @@ class App extends React.Component {
                             exact
                             path="/403"
                         >
-                            <h6>
-                                ERROR: This page is only visible to logged in users. Meet Gandalf
+
+                            <h6 className="row justify-content-center m-2">
+                                ERROR: This page is not meant to be directly accessed.
                             </h6>
 
                             <img
                                 alt="Gandalf you shall not pass"
+                                className="justify-content-center m-2"
                                 loading="lazy"
                                 src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
                             />
 
-                            <a href="/">
-                                <h5>
+                            <div className="row justify-content-center m-2">
+                                <a
+                                    className="btn-lg btn-primary"
+                                    href="/"
+                                >
                                     Sign in to continue
-                                </h5>
-                            </a>
+                                </a>
+                            </div>
                         </Route>
 
                         {/*<Footer />*/}

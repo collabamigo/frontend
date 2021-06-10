@@ -1,11 +1,11 @@
 
-import {Link} from "react-router-dom";
+import Link from "../../common/Link";
 import Card from "react-bootstrap/Card";
 import React from "react";
 import {Fade} from "react-awesome-reveal";
 import {isMobile} from "react-device-detect";
 import {SvgIcon} from "../../common/SvgIcon";
-import './index.css'
+import './index.css';
 
 function AuthenticatedHome() {
     return (

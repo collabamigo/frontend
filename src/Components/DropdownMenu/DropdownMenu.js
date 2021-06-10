@@ -1,15 +1,12 @@
+
 import React from "react";
 import "./DropdownMenu.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-    Link,
-} from "react-router-dom";
+import Link from "../../common/Link";
 
 function signOut () {
-
     const auth2 = window.gapi.auth2.getAuthInstance();
     auth2.signOut().then(() => {
-
         localStorage.clear();
         window.location.href = "/";
 
