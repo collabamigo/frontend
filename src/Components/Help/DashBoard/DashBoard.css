@@ -49,19 +49,34 @@
     max-width: 60%;
 }
 
-li.trending{
+li.trending {
     list-style-type: none;
 }
 
-li.skills{
+li.skills {
     list-style-type: none;
-    overflow:auto;
+    overflow: auto;
 }
+
 /* .upper-text {
     max-width: 100%;
 } */
 
 .card-hf-color-dasboard {
     background-color: white !important;
-    border-top: none!important;
+    border-top: none !important;
+}
+
+.header-custom {
+    background-color: white !important;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+.fsxxl {
+    font-size: xx-large;
+}
+
+.fssm {
+    font-size: x-large;
 }

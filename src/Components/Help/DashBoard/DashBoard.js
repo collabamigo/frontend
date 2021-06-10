@@ -9,7 +9,9 @@ import backend from "../../../env";
 import axios from "axios";
 import Odal from "./mymodal";
 
-
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 class DashBoard extends React.Component {
     static propTypes = {
         created: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -89,11 +91,11 @@ class DashBoard extends React.Component {
                             <Card className="mb-5 upper-text main-profile">
                                 <Card.Body className="row">
                                     <div className="col-md-8 float-center">
-                                        <h1 className="card-title display-4 fw-bold mt-3 ml-auto float-center row">
+                                        <h1 className="card-title fw-bold mt-3 ml-3 row ">
                                             {this.props.name}
                                         </h1>
 
-                                        <div className="card-text col-auto row mt-5">
+                                        <div className="card-text col-auto row mt-5 float-left">
 
                                             <p className="ml-5 blockquote">
                                                 Your time is limited, so dont waste it living someone elses life. Dont
@@ -199,27 +201,51 @@ class DashBoard extends React.Component {
 
                         <div className="col">
                             <Card className="card_dashboard m-2 card card-trending">
-                                <Card.Body className="card-body">
-                                    <Card.Title className="pd-4">
-                                        Trending Skills
-                                    </Card.Title>
+                                <Card.Header className="h1 header-custom">
+                                    Trending Skills
+                                </Card.Header>
+
+                                <Card.Body className="card-body col-md-12">
+                                    
 
                                     {this.state.trendingSkills.map(item => (
                                         <div
                                             className="col-auto"
                                             key={item}
                                         >
-                                            <li
-                                                className="trending"
+                                            <ol 
+                                                className="list-group mt-1"
                                                 key={item}
                                             >
-                                                <ol className="un-list">
-                                                    {item}
-                                                </ol>
-                                            </li>
+                                                <li className="d-flex justify-content-between align-items-start fsxxl container-fluid">
+                                                    <div className="ms-2 me-auto">
+                                                        <div className="fs-1">
+                                                            {capitalizeFirstLetter(item["name"])}
+                                                        </div>
+                                                    </div>
+
+                                                    <span className="badge rounded-pill">
+                                                        <span >
+                                                            <SvgIcon
+                                                                height="34px"
+                                                                src="trending_up_black_48dp.svg"
+                                                                width="43px"
+                                                            />
+                                                        </span>
+
+                                                        {item["count"]}
+                                                    </span>
+                                                </li>
+                                            </ol>
                                         </div>
                                         ))}
                                 </Card.Body>
+
+                                <Card.Footer className="header-custom">
+                                    <span className="fssm">
+                                        Lorem Ipsium
+                                    </span>
+                                </Card.Footer>
                             </Card>
                         </div>
                     </div>
