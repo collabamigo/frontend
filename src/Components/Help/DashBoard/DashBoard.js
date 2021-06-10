@@ -200,16 +200,16 @@ class DashBoard extends React.Component {
 
                         <div className="col">
                             <Card className="card_dashboard m-2 card card-trending">
-                                <Card.Header className="h1 header-custom">
+                                <Card.Header className="h2 header-custom">
                                     Trending Skills
                                 </Card.Header>
 
-                                <Card.Body className="card-body col-md-12 overflow-auto">
+                                <Card.Body className="card-body col-md-12 mt-4 overflow-auto">
                                     
 
                                     {this.state.trendingSkills.map(item => (
                                         <div
-                                            className="col-auto"
+                                            className="col-auto container-fluid lool"
                                             key={item}
                                         >
                                             <ol 
@@ -218,7 +218,7 @@ class DashBoard extends React.Component {
                                             >
                                                 <li className="d-flex justify-content-between align-items-start fsxxl container-fluid">
                                                     <div className="ms-2 me-auto">
-                                                        <div className="fs-1">
+                                                        <div className="fssm">
                                                             {capitalizeFirstLetter(item["name"])}
                                                         </div>
                                                     </div>
@@ -252,7 +252,7 @@ class DashBoard extends React.Component {
                     <div className="row">
                         <div className="col">
                             <Card className="card_dashboard m-2 card card-trending">
-                                <Card.Header className="h1 header-custom">
+                                <Card.Header className="h2 header-custom">
                                     Skill Bar
                                 </Card.Header>
 
@@ -261,7 +261,7 @@ class DashBoard extends React.Component {
 
                                     {this.props.skills.map(item => (
                                         <div
-                                            className=""
+                                            className="container-fluid lool"
                                             key={item}
                                         >
 

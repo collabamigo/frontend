@@ -88,6 +88,9 @@ li.skills {
     overflow: hidden;
 }
 
+.lool {
+    max-width: 90%;
+}
 
 /* import React from "react";
 import Chart from "react-google-charts";
