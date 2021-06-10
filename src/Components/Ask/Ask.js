@@ -4,7 +4,6 @@ import "./Ask.css";
 import Autocomplete from "./Autocomplete";
 import axios from "axios";
 import backend from "../../env";
-import {Card} from "react-bootstrap";
 import CardExplorer from "../CardExplorer";
 
 
@@ -98,35 +97,25 @@ class Ask extends React.Component {
             )
         }
     }
-    // TODO: Show next/previous button if more elements actually exist.
 
-    // TODO: Show voting button only when valid
     render () {
               return (
-                  <Card className="card card_skillSearch">
-                      <Card.Body className="card-body">
-                          <Card.Title className="card-title mb-4">
-                              <h1 className="col-sm-5 col-md-5 display-4">
-                                  Skill Search
-                              </h1>
-                          </Card.Title>
+                  <div className="row">
+                      <div className="col-6">
+                          <h1 className="display-4">
+                              Skill Search
+                          </h1>
 
-                          <div className="col">
-                              <Autocomplete
-                                  onChange={this.handleChange}
-                                  onMatch={this.handleMatch}
-                              />
-                          </div>
+                          <Autocomplete
+                              onChange={this.handleChange}
+                              onMatch={this.handleMatch}
+                          />
+                      </div>
 
-                          <div className="row-auto pt-5">
-                              <div className="col-auto pl-lg-5">
-                                  {this.renderCardsIfNeeded()}
-                              </div>
-                          </div>
-                              
-                              
-                      </Card.Body>
-                  </Card>
+                      <div className="pt-5 col-6 justify-content-center">
+                          {this.renderCardsIfNeeded()}
+                      </div>
+                  </div>
               );
 
           }

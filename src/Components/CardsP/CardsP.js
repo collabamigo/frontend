@@ -62,7 +62,7 @@ function CardsP (props) {
         </Popover>
     )
     return (
-        <Fade className={"float-right" + props.className} >
+        <Fade className={"float-right " + props.className} >
             <Card className="card card_P" >
                 <Card.Body>
                     <Card.Title className="main_P_title">

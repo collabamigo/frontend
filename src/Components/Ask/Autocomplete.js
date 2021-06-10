@@ -97,7 +97,7 @@ class Autocomplete extends React.Component {
 
                   suggestionsListComponent =
                       (
-                          <ul className="suggestions col-sm-4 col-md-3">
+                          <ul className="suggestions col-9">
                               {this.state.suggestions.map((suggestion, index) => {
 
                       let className;
@@ -133,11 +133,10 @@ class Autocomplete extends React.Component {
 
           return (
               <>
-                  <div className="row">
-                      <div className="col-sm-1 col-md-1" />
+                  <div className="row mx-5 justify-content-center">
 
                       <input
-                          className="col-sm-4 col-md-3"
+                          className="col-9"
                           onChange={this.handleChange.bind(this)}
                           onKeyDown={this.handleKeyDown.bind(this)}
                           type="text"
@@ -145,8 +144,7 @@ class Autocomplete extends React.Component {
                       />
                   </div>
 
-                  <div className="row">
-                      <div className="col-sm-1 col-md-1" />
+                  <div className="row mx-5 justify-content-center">
 
                       {suggestionsListComponent}
                   </div>
