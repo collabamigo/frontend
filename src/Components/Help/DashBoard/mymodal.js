@@ -25,10 +25,10 @@ function Odal({item, onDelete}) {
               >
                   <SvgIcon
                       className="profile-image mt-5 "
-                      height="30rem"
+                      height="26rem"
                       src="delete.svg"
                       type="button"
-                      width="30rem"
+                      width="26rem"
                   />
               </div>
 
