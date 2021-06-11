@@ -28,15 +28,7 @@ const popoverRight = (
             
             {' '}
 
-            <strong>
-
-                {/* <a
-                    href="none"
-                    onClick={mailtoo('test@gmail.com', 'Subject', 'Body')}
-                >
-                    test@gmail.com
-                </a> */}
-                
+            <strong>                
                 <a
                     href="mailto:watsonhex@gmail.com ?subject=My Name is not correct"
                     onClick="window.open(this.href)"

@@ -45,11 +45,11 @@ class Step1 extends React.Component {
                 <section className="container-fluid lowwl mt-0">
                     <div className="row" >
                         <div className="col container" >
-                            <Card className="card rounded-4 profilecard container border-primary">
+                            <Card className="card profilecard container">
 
                                 <Card.Header className="card-hf-color">
                                     <h2>
-                                        Hey ! We see you are eager to help others !
+                                        Hey, We see you are eager to help others !
                                     </h2>
 
                                     <br />
