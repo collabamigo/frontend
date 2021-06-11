@@ -161,7 +161,7 @@ class Step1 extends React.Component {
                                     />
 
                                     <h4 className="">
-                                        Help in building a stronger community for the IIITD and let the brainstroming begin
+                                        Now that you are here let&#39; brainstorm together
                                     </h4>
                                 </div>
                             </div>)}

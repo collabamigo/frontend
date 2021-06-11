@@ -259,13 +259,14 @@ class Profile extends React.Component{
 
                                         <div className="form-group ">
                                             <label className=" form-inline col-form-label">
-                                                Telegram Username
+                                                Telegram
                                             </label>
 
                                             <div>
                                                 <input
                                                     className="form-control col-auto"
                                                     onChange={this.handleChangeHandle}
+                                                    placeholder="username"
                                                     type='text'
                                                     value={this.state.handle}
                                                 />
