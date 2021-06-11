@@ -113,7 +113,7 @@ class DashBoard extends React.Component {
                             <Card className="mb-5 upper-text main-profile">
                                 <Card.Body className="row">
                                     <div className="col-md-8 float-center">
-                                        <h1 className="card-title fw-bold mt-3 ml-3 row">
+                                        <h1 className="card-title font-weight-bold mt-3 ml-3 row">
                                             {this.props.name}
                                         </h1>
 
