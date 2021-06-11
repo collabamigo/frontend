@@ -126,7 +126,7 @@ class Autocomplete extends React.Component {
                       (
                           <div className="no-suggestions">
                               <em>
-                                  No suggestions, you are on your own!
+                                  Be patient while we take your patience
                               </em>
                           </div>
                       );
