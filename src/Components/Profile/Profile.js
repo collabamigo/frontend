@@ -328,8 +328,8 @@ class Profile extends React.Component{
                                                         CSD
                                                     </option>
 
-                                                    <option value="CSS">
-                                                        CSS
+                                                    <option value="CSSS">
+                                                        CSSS
                                                     </option>
 
                                                     <option value="CSAM">

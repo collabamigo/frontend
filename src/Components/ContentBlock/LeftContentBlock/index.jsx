@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useState} from 'react';
 import { Row, Col } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
 import { SvgIcon } from "../../../common/SvgIcon";
@@ -16,23 +16,25 @@ import {
 import GoogleSignIn from "../../GoogleSignIn/GoogleSignIn";
 
 function LeftContentBlock({
-  icon,
-  title,
-  content,
-  section,
-  t,
-  id, 
-  onLogin
+    alt_content,
+    alt_title,
+    icon,
+    title,
+    content,
+    section,
+    t,
+    id,
+    onLogin
 }: ContentBlockProps) {
+    const [stage, setStage] = useState("button");
 
   return (
-      <LeftContentSection>
+      <LeftContentSection className={(stage==="form")?"p-0":""}>
           <Fade direction="left">
               <div
                   align="middle"
                   className="row justify-content-center"
                   id={id}
-                  // justify="space-between"
               >
                   <div
                       className="col-lg-6 col-md-11 col-sm-12"
@@ -49,11 +51,11 @@ function LeftContentBlock({
                   >
                       <ContentWrapper>
                           <h6 className="text-left">
-                              {t(title)}
+                              {(stage==="button")?t(title):t(alt_title)}
                           </h6>
 
-                          <Content className="text-left">
-                              {t(content)}
+                          <Content className={"text-left "+(stage==="form")?"h1 font-weight-bold":null}>
+                              {(stage==="button")?t(content):t(alt_content)}
                           </Content>
 
                           <ServiceWrapper>
@@ -87,6 +89,8 @@ function LeftContentBlock({
 
                       <GoogleSignIn
                           onClick={onLogin}
+                          setStage={setStage}
+                          stage={stage}
                           visibility
                       />
                   </div>

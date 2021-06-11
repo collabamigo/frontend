@@ -21,7 +21,7 @@ class FormSignIn extends React.Component {
         this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
         this.handleChangeLastName = this.handleChangeLastName.bind(this);
         this.handleChangeDegree = this.handleChangeDegree.bind(this);
-        this.handleChangecourse = this.handleChangecourse.bind(this);
+        this.handleChangeCourse = this.handleChangeCourse.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
@@ -51,7 +51,7 @@ class FormSignIn extends React.Component {
         this.setState({ degree: e.target.value })
     }
 
-    handleChangecourse(e) {
+    handleChangeCourse(e) {
         this.setState({ course: e.target.value })
     }
     
@@ -67,7 +67,6 @@ class FormSignIn extends React.Component {
 
         axios.post(backend + "connect/profile/", payload)
             .then(() => {
-            alert('You have been successfully registered.');
             this.props.onSubmit()
           })
 
@@ -108,66 +107,57 @@ class FormSignIn extends React.Component {
                     <div className="row">
                         <div className="col">
                             <label className="row">
-                                <div className="col" />
-    
-                                <div className="col-2" >
+
+                                <div className="col-auto form-text" >
                                     First Name:
                                 </div>
     
-                                <div className="col-auto" />
-    
+
                                 <input
+                                    className="form-control"
                                     onChange={this.handleChangeFirstName}
                                     required
                                     type='text'
                                     value={this.state.FirstName}
                                 />
     
-                                <div className="col" />
-    
+
                             </label>
     
                             <br />
     
                             <label className="row">
-                                <div className="col" />
-    
-                                <div className="col-2">
+
+                                <div className="col-auto form-text">
                                     Last Name:
                                 </div>
-    
-                                <div className="col-auto" />
-    
+
                                 <input
+                                    className="form-control"
                                     onChange={this.handleChangeLastName}
                                     required
                                     type='text'
                                     value={this.state.LastName}
                                 />
     
-                                <div className="col" />
-    
+
                             </label>
     
                             <br />
     
                             <label className="row">
-                                <div className="col" />
-    
-                                <div className="col-2">
+
+                                <div className="col-auto form-text">
                                     Email Address:
                                 </div>
-    
-                                <div className="col-auto" />
-    
+
                                 <input
+                                    className="form-control disabled"
                                     disabled
-                                    type='text'
+                                    type="email"
                                     value={this.state.email}
                                 />
-    
-                                <div className="col" />
-    
+
                             </label>
     
                             <br />
@@ -175,7 +165,7 @@ class FormSignIn extends React.Component {
                             <div className="row">
                                 <div className="col" />
     
-                                <label className="col-auto">
+                                <label className="col-auto form-text">
                                     Degree:
                                     <select
                                         className="form-control"
@@ -199,11 +189,11 @@ class FormSignIn extends React.Component {
                                     </select>
                                 </label>
     
-                                <label className="col-auto">
+                                <label className="col-auto form-text">
                                     Course:
                                     <select
                                         className="form-control"
-                                        onChange={this.handleChangecourse}
+                                        onChange={this.handleChangeCourse}
                                         required
                                         value={this.state.course}
                                     >
@@ -230,8 +220,8 @@ class FormSignIn extends React.Component {
                                             CSD
                                         </option>
     
-                                        <option value="CSS">
-                                            CSS
+                                        <option value="CSSS">
+                                            CSSS
                                         </option>
     
                                         <option value="CSAM">
