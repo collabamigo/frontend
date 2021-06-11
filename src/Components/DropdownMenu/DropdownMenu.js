@@ -22,7 +22,7 @@ import {isMobile} from "react-device-detect";
 
   function DropdownMenu () {
     return (
-        <div className="row">
+        <div className="row pt-3">
             
             <CustomNavLinkSmall className="btn">
                 <Link

@@ -39,9 +39,9 @@ function ExternalHeader({ isAuthenticated }) {
                             href="/"
                         >
                             <SvgIcon
-                                height="68px"
+                                height="78px"
                                 src="logo.svg"
-                                width="221px"
+                                width="300px"
                             />
                         </LogoContainer>
                     </div>
