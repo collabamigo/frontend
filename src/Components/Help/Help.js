@@ -78,7 +78,7 @@ class Help extends React.Component {
             help_history:res.data[0]['help_history']})
     }
 
-    handleDelete(item) {
+    handleSkillDelete(item) {
         const payload = {
             skills: removeItemAll(this.state.skills, item)
         }
@@ -86,7 +86,7 @@ class Help extends React.Component {
             .then(() => this.setState(payload))
     }
     
-    handleCreate() {
+    handleSkillCreate() {
         const payload = {
             skills: this.state.skills
         }
@@ -116,8 +116,8 @@ class Help extends React.Component {
                     help_history={this.state.help_history}
                     linkedin={this.state.linkedin}
                     name={this.state.name}
-                    onCreate={this.handleCreate.bind(this)}
-                    onDelete={this.handleDelete.bind(this)}
+                    onCreate={this.handleSkillCreate.bind(this)}
+                    onDelete={this.handleSkillDelete.bind(this)}
                     setSkills={(skills) => this.setState({
                         skills: skills,
                     })}

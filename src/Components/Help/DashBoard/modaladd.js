@@ -11,8 +11,9 @@ import PropTypes from "prop-types";
 
 function Oadd({skills , onCreate, setSkills}) {
 
-    function handleSubmit(e,skills){
-        onCreate(skills)
+    function handleSubmit(e){
+        e.preventDefault();
+        onCreate()
         setState({show: false})
         alert("skill added successfully")
     }
@@ -95,7 +96,7 @@ function Oadd({skills , onCreate, setSkills}) {
                   <Modal.Footer>
                       <button
                           className="btn btn-warning"
-                          onClick={(e) => handleSubmit(e,skills)}
+                          onClick={handleSubmit}
                           type="button"
                       >
                           Confirm
