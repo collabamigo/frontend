@@ -189,7 +189,7 @@ class DashBoard extends React.Component {
                                 <br />
 
                                 <h2>
-                                    Skills
+                                    Work Summary
                                 </h2>
 
                                 <Chart
@@ -207,7 +207,7 @@ class DashBoard extends React.Component {
                                         </div>
                                             }
                                     options={{
-                                                title: 'Work Summary',
+                                                // title: 'Work Summary',
                                                 legend: 'none',
                                                 pieSliceText: 'label',
                                                 slices: {
