@@ -2,8 +2,8 @@ import {Modal} from "react-bootstrap";
 import React, {useState} from "react";
 // import SvgIcon from "../../../common/SvgIcon";
 import './modaldelete.css'
+import PropTypes from "prop-types";
 
-// eslint-disable-next-line react/prop-types
 function Odal({item, onDelete}) {
       const [show, setShow] = useState(false);
 
@@ -59,4 +59,10 @@ function Odal({item, onDelete}) {
           </>
       );
     }
+
+Odal.propTypes = {
+    item:PropTypes.string.isRequired,
+    onDelete: PropTypes.func.isRequired,
+}
+
 export default Odal
