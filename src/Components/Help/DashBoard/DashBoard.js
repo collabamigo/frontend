@@ -113,17 +113,23 @@ class DashBoard extends React.Component {
                             <Card className="mb-5 upper-text main-profile">
                                 <Card.Body className="row">
                                     <div className="col-md-8 float-center">
-                                        <h1 className="card-title font-weight-bold mt-3 ml-3 row">
+                                        <h1 className="card-title mt-3 ml-3 row display-4">
                                             {this.props.name}
                                         </h1>
 
                                         <div className="card-text col-auto row mt-5 float-left">
 
-                                            <p className="ml-5 blockquote">
-                                                Your time is limited, so dont waste it living someone elses life. Dont
-                                                be trapped by dogma – which is living with the results of other peoples
-                                                thinking. -Steve Jobs
-                                            </p>
+                                            <blockquote className="blockquote text-center pl-5">
+                                                <p className="mb-0">
+                                                    “I think goals should never be easy, they should force you to work, even if they are uncomfortable at the time.”  
+                                                </p>
+
+                                                <footer className="blockquote-footer">
+                                                    <cite title="Source Title">
+                                                        Michael Phelps
+                                                    </cite>
+                                                </footer>
+                                            </blockquote>
                                         </div>                                     
                                     </div>
 
@@ -137,14 +143,14 @@ class DashBoard extends React.Component {
 
                                 </Card.Body>
 
-                                <Card.Footer className="mb-0 mt-3 card-hf-color-dasboard">
+                                <Card.Footer className="mb-0 mt-3 pb-3 card-hf-color-dasboard">
                                     <Card.Link
                                         className="float-left ml-2 mb-0"
                                         href={"https://www.linkedin.com/in/"+ this.props.linkedin}
                                         target="_blank"
                                     >
                                         <SvgIcon
-                                            height="31px"
+                                            height="34px"
                                             src="linkedin.svg"
                                             width="44px"
                                         />
@@ -156,14 +162,14 @@ class DashBoard extends React.Component {
                                         target="_blank"
                                     >
                                         <SvgIcon
-                                            height="34px"
+                                            height="36px"
                                             src="github.svg"
                                             width="43px"
                                         />
                                     </Card.Link>
 
                                     <h4 className="card-text float-right">
-                                        <small className="text-muted">
+                                        <small className="text-muted h4">
                                             {"- Since  "}
 
                                             {this.props.created.slice(8,10) + "th "}
