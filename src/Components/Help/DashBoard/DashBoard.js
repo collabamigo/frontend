@@ -102,7 +102,7 @@ class DashBoard extends React.Component {
         return (
             <div className="">
                 <h1 className="font-weight-bold">
-                    <span className="material-icons pr-2">
+                    <span className="material-icons icon-dashboard pr-2">
                         dashboard
                     </span>
                     Dashboard

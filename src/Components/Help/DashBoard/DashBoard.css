@@ -3,6 +3,10 @@
     height: 440px;
 }
 
+.icon-dashboard {
+    transform: scale(1.5);
+}
+
 .main-profile {
     height: 50%;
     width: auto;

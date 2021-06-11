@@ -61,14 +61,13 @@ function Oadd({skills , onCreate, setSkills}) {
       return (
           <>
               <div
-                  className="btn"
-                  onClick={handleShow}
+                  className="btn float-right"
               >
                   <span
-                      className="material-icons float-right"
-                      onClick=""
+                      className="material-icons "
+                      onClick={handleShow}
                   >
-                      add
+                      add_circle_outline
                   </span>
               </div>
 
