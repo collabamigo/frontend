@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import Autocomplete from "../../../Ask/Autocomplete";
 import TagsInput from 'react-tagsinput';
 import Card from 'react-bootstrap/Card';
-import SvgIcon from "../../../../common/SvgIcon";
-import {isMobile} from "react-device-detect";
 import './tag.css'
 
 class Step2 extends React.Component {
@@ -79,30 +77,15 @@ class Step2 extends React.Component {
             return null
         }
         return (
-            <section className="container-fluid lowwl mt-0">
+            <section className="container-fluid">
                 <div className="row" >
-                    {isMobile?null:(
-                        <div className="col container">
-                            <div className=" float-right mr-5 mt-5">
-                                <SvgIcon
-                                    className="profile-image mt-5"
-                                    height="100%"
-                                    src="waving.svg"
-                                    width="120%"
-                                />
 
-                                <h4 className="text-center">
-                                    Add skills you can provide help in...
-                                </h4>
-                            </div>
-                        </div>)}
-
-                    <div className="col container" >
+                    <div className="col-auto container" >
                         <Card className="card rounded-5 profilecard container border-primary">
 
                             <Card.Header className="card-hf-color row">
                                 <div className="h1 float-left col-auto float-left">
-                                    Add your skill
+                                    Add your skills
                                 </div>
 
                                 <div className="material-icons-outlined float-right col-auto">
@@ -153,37 +136,6 @@ class Step2 extends React.Component {
                     </div>
                 </div>
             </section>
-            // <div className="form-group justify-content-center">
-            //     <label className="col-auto h3">
-            //         Add your skills
-            //     </label>
-
-            //     <div className="row justify-content-center">
-            //         <div className="justify-content-center col-6">
-            //             <TagsInput
-            //                 className="border-0"
-            //                 onChange={this.handleChangeTag.bind(this)}
-            //                 renderInput={this.renderAutocomplete.bind(this)}
-            //                 value={this.state.tags}
-            //             />
-            //         </div>
-            //     </div>
-
-            //     <br />
-
-            //     {this.previousButton()}
-
-            //     <button
-            //         className="btn btn-primary mb-2"
-            //         onChange={this.handleChange}
-            //         onClick={this.handleSubmit.bind(this)}
-            //         type="button"
-            //         value="Submit"
-            //     >
-            //         Submit
-            //     </button>
-            // </div>
-            
         );
     }
 }
