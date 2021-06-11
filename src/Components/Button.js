@@ -8,8 +8,6 @@ function Button (props) {
     const {visibility, ...other} = props;
     if (visibility === undefined) {
 
-        console.log("WARNING: Button called without visibility attribute");
-
     }
     if (visibility) {
 
