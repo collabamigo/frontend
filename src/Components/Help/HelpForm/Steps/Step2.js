@@ -55,6 +55,7 @@ class Step2 extends React.Component {
             
         )
     }
+
     handleSubmit() {
         this.props.handleSubmit(this.state.tags)
     }

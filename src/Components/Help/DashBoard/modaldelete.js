@@ -1,8 +1,7 @@
 import {Modal} from "react-bootstrap";
 import React, {useState} from "react";
 // import SvgIcon from "../../../common/SvgIcon";
-import './mymodal.css'
-
+import './modaldelete.css'
 
 // eslint-disable-next-line react/prop-types
 function Odal({item, onDelete}) {

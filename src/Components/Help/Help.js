@@ -85,6 +85,15 @@ class Help extends React.Component {
         axios.patch(backend+"connect/teacher/"+this.state.id+"/" ,payload)
             .then(() => this.setState(payload))
     }
+    
+    handleCreate() {
+        const payload = {
+            skills: this.state.skills
+        }
+        axios.patch(backend+"connect/teacher/"+this.state.id+"/" ,payload)
+            .then(() => this.setState(payload))
+    }
+    
     render() {
         if (this.state.loading)
             return(
@@ -107,6 +116,7 @@ class Help extends React.Component {
                     help_history={this.state.help_history}
                     linkedin={this.state.linkedin}
                     name={this.state.name}
+                    onCreate={this.handleCreate.bind(this)}
                     onDelete={this.handleDelete.bind(this)}
                     skills={this.state.skills}
                     upvote={this.state.upvote}

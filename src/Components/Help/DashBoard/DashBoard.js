@@ -7,7 +7,8 @@ import {SvgIcon} from "../../../common/SvgIcon";
 import { Doughnut } from "react-chartjs-2";
 import backend from "../../../env";
 import axios from "axios";
-import Odal from "./mymodal";
+import Odal from "./modaldelete";
+import Oadd from "./modaladd"
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -20,6 +21,7 @@ class DashBoard extends React.Component {
         help_history:PropTypes.arrayOf(PropTypes.object).isRequired,
         linkedin:PropTypes.string.isRequired,
         name:PropTypes.string.isRequired,
+        onCreate:PropTypes.string.isRequired,
         onDelete: PropTypes.func.isRequired,
         skills: PropTypes.arrayOf(PropTypes.string).isRequired,
         upvote: PropTypes.number.isRequired,
@@ -284,6 +286,10 @@ class DashBoard extends React.Component {
                             <Card className="card_dashboard m-2 card card-trending">
                                 <Card.Header className="h2 header-custom">
                                     Skill Bar
+                                    <Oadd
+                                        onCreate={this.props.onCreate}
+                                        skills={this.props.skills}
+                                    />
                                 </Card.Header>
 
                                 <Card.Body className="overflow-auto">
