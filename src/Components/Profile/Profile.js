@@ -152,10 +152,10 @@ class Profile extends React.Component{
                                         width="120%"
                                     />
 
-                                    <h4 className="text-center">
+                                    <h5 className="text-center">
                                         Here is all the information we have about you,
                                         feel free to change whatever doesn&apos;t fit right.
-                                    </h4>
+                                    </h5>
                                 </div>
                             </div>)}
 

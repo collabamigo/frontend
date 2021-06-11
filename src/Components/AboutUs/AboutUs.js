@@ -15,10 +15,10 @@ class AboutUs extends React.Component {
                         <div className="row justify-content-center mb-4">
                             <div className="col-md-9 text-center">
                                 <h2 className="mb-4">
-                                    The Core Team helping IIITD collaborate better
+                                    The Core Team
                                 </h2>
 
-                                <h6 className="font-weight-normal mb-4">
+                                <h6 className="font-weight-bold text-muted mb-4">
                                     The young man wanted a role model. He looked long and hard in his youth, but that role model never materialized. His only choice was to embrace all the people in his life he didnt want to be like.
                                 </h6>
                             </div>
@@ -46,7 +46,7 @@ class AboutUs extends React.Component {
                                             </h5>
 
                                             <p className="p font-weight-normal">
-                                                I dont know what to say other than I dont know what to say. 
+                                                Bugs ??? We don&#39;t do that here
                                             </p>
 
                                             <ul className="list-inline mt-4">
@@ -218,7 +218,7 @@ class AboutUs extends React.Component {
                                             </h5>
 
                                             <p className="p">
-                                                I dont know what to say other than I dont know what to say. 
+                                                Talk Code To Me
                                             </p>
 
                                             <ul className="list-inline mt-4">

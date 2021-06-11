@@ -100,11 +100,11 @@ class Ask extends React.Component {
 
     render () {
           return (
-              <div className="row">
+              <div className="row p-4">
                   <div className="col-6">
-                      <h1 className="display-4">
+                      <h2>
                           Skill Search
-                      </h1>
+                      </h2>
 
                       <Autocomplete
                           onChange={this.handleChange}

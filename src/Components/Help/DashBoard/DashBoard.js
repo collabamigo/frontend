@@ -68,7 +68,6 @@ class DashBoard extends React.Component {
     }
 
     handleGetPi(){
-        // console.log("test",this.props.help_history)
         const temp=[]
         temp.push(["skill", 'Percentage covered'])
         for (let i=0; i < this.props.help_history.length ; ++i)
