@@ -24,7 +24,7 @@ function AuthenticatedHome() {
 
                     <Card.Body className="mt-3">
                         <Card.Title className="card-title font-weight-bold">
-                            HELP OTHERS
+                            BECOME A CONTRIBUTOR
                         </Card.Title>
 
                         <br />
@@ -61,15 +61,15 @@ function AuthenticatedHome() {
 
                     <Card.Body className="mt-3">
                         <Card.Title className="card-title font-weight-bold">
-                            ASK FOR HELP
+                            GET SOLUTIONS
                         </Card.Title>
 
                         <br />
 
                         <Card.Text className="card-text lead">
-                            <b>
+                            <span>
                                 Stack Overflow:404!
-                            </b>
+                            </span>
 
                             {" "}
                             Answer not found,

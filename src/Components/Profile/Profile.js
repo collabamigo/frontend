@@ -9,6 +9,7 @@ import {Popover} from 'react-bootstrap';
 import SvgIcon from "../../common/SvgIcon";
 import {isMobile} from "react-device-detect";
 
+
 const popoverRight = (
     <Popover
         id="popover-positioned-right"
@@ -21,12 +22,32 @@ const popoverRight = (
         </Popover.Title>
 
         <Popover.Content>
-            Feel free to contact us at our email 
-
+            Your name was authenticated from your google account.
+            {' '}
+            Contact us at our email  
+            
             {' '}
 
             <strong>
-                watsonhex@gmail.com
+
+                {/* <a
+                    href="none"
+                    onClick={mailtoo('test@gmail.com', 'Subject', 'Body')}
+                >
+                    test@gmail.com
+                </a> */}
+                
+                <a
+                    href="mailto:watsonhex@gmail.com ?subject=My Name is not correct"
+                    onClick="window.open(this.href)"
+                    onKeyPress="window.open(this.href)"
+                    rel="noreferrer"
+                    target="_blank"
+                >
+                    watsonhex@gmail.com
+                </a>
+
+
             </strong>
 
             {' '}
@@ -132,8 +153,7 @@ class Profile extends React.Component{
                                     <h4 className="text-center">
                                         Here is all the information we have about you,
                                         <br />
-                                        feel free to contact us if
-                                        something doesn&apos;t feel right.
+                                        feel free to change whatever doesn&apos;t fit right.
                                     </h4>
                                 </div>
                             </div>)}
