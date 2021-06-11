@@ -193,8 +193,6 @@ class DashBoard extends React.Component {
                             <div className="pieChart">
                                 <br />
 
-                                <br />
-
                                 <h2>
                                     Work Summary
                                 </h2>

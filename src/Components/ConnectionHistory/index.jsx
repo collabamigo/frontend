@@ -72,7 +72,7 @@ class ConnectionHistory extends React.Component {
             )
         else
             return (
-                <div className="container-fluid lowwl">
+                <div className="container-fluid">
                     <Card className="card card_skillSearch">
                         <Card.Title>
                             <h1 className="col-sm-5 col-md-5">
