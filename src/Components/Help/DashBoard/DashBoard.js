@@ -200,14 +200,14 @@ class DashBoard extends React.Component {
                                     //             [this.props.skills[0], 53],
                                     //             [this.props.skills[1], 83],
                                     //           ]}
-                                    height='25rem'
+                                    height='80%'
                                     loader={
                                         <div>
                                             Loading Chart
                                         </div>
                                             }
                                     options={{
-                                                // title: 'Work Summary',
+                                                title: 'Work Summary',
                                                 legend: 'none',
                                                 pieSliceText: 'label',
                                                 slices: {
@@ -215,7 +215,7 @@ class DashBoard extends React.Component {
                                                   2: { offset: 0.15 },
                                                   3: { offset: 0.25 },
                                                 },
-                                              }}
+                                    }}
                                     rootProps={{ 'data-testid': '5' }}
                                     width='auto'
                                 />
