@@ -30,7 +30,7 @@ function Header({ isAuthenticated }) {
 
     return (
         <HeaderSection className="pt-3 pr-2 pb-5 pl-2">
-            <div className="container-fluid">
+            <div className="container-fluid lowwla">
                 <div className=" row justify-content-center">
                     <div className="col ml-5">
                         <LogoContainer

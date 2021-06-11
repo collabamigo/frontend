@@ -153,6 +153,36 @@ class Step2 extends React.Component {
                     </div>
                 </div>
             </section>
+            // <div className="form-group justify-content-center">
+            //     <label className="col-auto h3">
+            //         Add your skills
+            //     </label>
+
+            //     <div className="row justify-content-center">
+            //         <div className="justify-content-center col-6">
+            //             <TagsInput
+            //                 className="border-0"
+            //                 onChange={this.handleChangeTag.bind(this)}
+            //                 renderInput={this.renderAutocomplete.bind(this)}
+            //                 value={this.state.tags}
+            //             />
+            //         </div>
+            //     </div>
+
+            //     <br />
+
+            //     {this.previousButton()}
+
+            //     <button
+            //         className="btn btn-primary mb-2"
+            //         onChange={this.handleChange}
+            //         onClick={this.handleSubmit.bind(this)}
+            //         type="button"
+            //         value="Submit"
+            //     >
+            //         Submit
+            //     </button>
+            // </div>
             
         );
     }
