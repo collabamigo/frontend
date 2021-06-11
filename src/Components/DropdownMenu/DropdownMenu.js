@@ -23,12 +23,13 @@ import {isMobile} from "react-device-detect";
   function DropdownMenu () {
     return (
         <div className="row">
+            
             <CustomNavLinkSmall className="btn">
                 <Link
                     className="magic_span"
-                    to="/about"
+                    to="/history"
                 >
-                    About Us
+                    Connections
                 </Link>
             </CustomNavLinkSmall>
 
@@ -41,12 +42,14 @@ import {isMobile} from "react-device-detect";
                 </Link>
             </CustomNavLinkSmall>
 
+            
+
             <CustomNavLinkSmall className="btn">
                 <Link
                     className="magic_span"
-                    to="/history"
+                    to="/about"
                 >
-                    Connections
+                    About Us
                 </Link>
             </CustomNavLinkSmall>
 
