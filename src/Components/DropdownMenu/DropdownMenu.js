@@ -54,9 +54,10 @@ import {isMobile} from "react-device-detect";
             </CustomNavLinkSmall>
 
             <CustomNavLinkSmall>
-                <div
+                <a
                     className="btn"
                     onClick={signOut}
+                    title="Sign Out"
                 >
                     {isMobile?"Sign Out":null}
 
@@ -78,7 +79,7 @@ import {isMobile} from "react-device-detect";
                             fillRule="evenodd"
                         />
                     </svg>
-                </div>
+                </a>
             </CustomNavLinkSmall>
         </div>
     );
