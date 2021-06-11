@@ -17,7 +17,6 @@ class HelpForm extends React.Component{
         this.handlerChangeGithub = this.handlerChangeGithub.bind(this);
         this.handlerChangeLinkedin = this.handlerChangeLinkedin.bind(this);
         this.handlerChangeContact = this.handlerChangeContact.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state ={
             Handle:'',
