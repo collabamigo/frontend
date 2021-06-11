@@ -84,29 +84,31 @@ function CardsP (props) {
 
                         </Card.Text>
 
-                        <div className="col-auto float-right ml-4">
-                            <Card.Link
-                                className=""
-                                href={"https://www.linkedin.com/in/"+ props.linked}
-                                target="_blank"
-                            >
-                                <SvgIcon
-                                    height="24px"
-                                    src="linkedin.svg"
-                                    width="24px"
-                                />
-                            </Card.Link>
+                        <div className="col">
+                            <div className="justify-content-right pl-5">
+                                <Card.Link
+                                    className=""
+                                    href={"https://www.linkedin.com/in/"+ props.linked}
+                                    target="_blank"
+                                >
+                                    <SvgIcon
+                                        height="24px"
+                                        src="linkedin.svg"
+                                        width="24px"
+                                    />
+                                </Card.Link>
 
-                            <Card.Link
-                                href={"https://www.github.com/"+ props.Git}
-                                target="_blank"
-                            >
-                                <SvgIcon
-                                    height="30px"
-                                    src="github.svg"
-                                    width="30px"
-                                />
-                            </Card.Link>
+                                <Card.Link
+                                    href={"https://www.github.com/"+ props.Git}
+                                    target="_blank"
+                                >
+                                    <SvgIcon
+                                        height="30px"
+                                        src="github.svg"
+                                        width="30px"
+                                    />
+                                </Card.Link>
+                            </div>
                         </div>
                     </div>
 
