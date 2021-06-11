@@ -10,3 +10,7 @@
     background-color: white !important;
     border-top: 0 none !important;
 }
+
+.header-color {
+    color: rgb(100, 98, 98);
+}

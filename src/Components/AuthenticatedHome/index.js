@@ -23,7 +23,7 @@ function AuthenticatedHome() {
                     />
 
                     <Card.Body className="mt-3">
-                        <Card.Title className="font-weight-bold">
+                        <Card.Title className="font-weight-bold header-color">
                             BECOME A CONTRIBUTOR
                         </Card.Title>
 
@@ -60,7 +60,7 @@ function AuthenticatedHome() {
                     />
 
                     <Card.Body className="mt-3">
-                        <Card.Title className="card-title font-weight-bold">
+                        <Card.Title className="font-weight-bold header-color">
                             GET SOLUTIONS
                         </Card.Title>
 
@@ -103,7 +103,7 @@ function AuthenticatedHome() {
                     />
 
                     <Card.Body className="mt-3">
-                        <Card.Title className="card-title font-weight-bold">
+                        <Card.Title className="card-title font-weight-bold header-color">
                             LET&apos;S  COLLABORATE
                         </Card.Title>
 
