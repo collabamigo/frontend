@@ -15,7 +15,7 @@ function AuthenticatedHome() {
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="authenticatedHome_card_main text-secondary h-100 card ml-4 mr-1 zoom-my-card">
+                <Card className="h-100 card ml-4 mr-1 zoom-my-card">
                     <SvgIcon
                         height="56%"
                         src="help_others.svg"
@@ -23,13 +23,13 @@ function AuthenticatedHome() {
                     />
 
                     <Card.Body className="mt-3">
-                        <Card.Title className="card-title font-weight-bold">
+                        <Card.Title className="font-weight-bold">
                             BECOME A CONTRIBUTOR
                         </Card.Title>
 
                         <br />
 
-                        <Card.Text className="card-text masthead lead">
+                        <Card.Text className="card-text lead text-muted">
                             Solve other&apos;s doubts and be the mentor you always wanted.
                             Using our platform you can reach a larger curious community.
                         </Card.Text>
@@ -52,7 +52,7 @@ function AuthenticatedHome() {
                 direction={isMobile?"right":"up"}
                 triggerOnce
             >
-                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-2 zoom-my-card">
+                <Card className="card h-100 mx-2 zoom-my-card">
                     <SvgIcon
                         height="56%"
                         src="ask_for_help.svg"
@@ -66,7 +66,7 @@ function AuthenticatedHome() {
 
                         <br />
 
-                        <Card.Text className="card-text lead">
+                        <Card.Text className="card-text lead text-muted ">
                             <span>
                                 Stack Overflow:404!
                             </span>
@@ -75,7 +75,7 @@ function AuthenticatedHome() {
                             Answer not found,
 
                             <br />
-                            The button below can solve it
+                            The button below can solve it.
                         </Card.Text>
                     </Card.Body>
 
@@ -95,7 +95,7 @@ function AuthenticatedHome() {
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="card authenticatedHome_card_main h-100 text-secondary mx-2 zoom-my-card">
+                <Card className="card h-100 mx-2 zoom-my-card">
                     <SvgIcon
                         height="56%"
                         src="collaborate.svg"
@@ -109,13 +109,11 @@ function AuthenticatedHome() {
 
                         <br />
 
-                        <Card.Text className="card-text lead">
+                        <Card.Text className="card-text lead text-muted">
                             Find new projects to work.
                             Apply for teams and Collaborations.
                             Lets keep the learning and helping community alive.
                         </Card.Text>
-
-                        
                     </Card.Body>
 
                     <Card.Footer className="footer-custom mb-4">
