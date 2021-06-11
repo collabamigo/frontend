@@ -29,7 +29,7 @@ function AuthenticatedHome() {
 
                         <br />
 
-                        <Card.Text className="card-text lead text-muted">
+                        <Card.Text className="card-text h5 text-muted ">
                             Solve other&apos;s doubts and be the mentor you always wanted.
                             Using our platform you can reach a larger curious community.
                         </Card.Text>
@@ -66,7 +66,7 @@ function AuthenticatedHome() {
 
                         <br />
 
-                        <Card.Text className="card-text lead text-muted ">
+                        <Card.Text className="card-text h5 text-muted ">
                             <span>
                                 Stack Overflow:404!
                             </span>
@@ -109,7 +109,7 @@ function AuthenticatedHome() {
 
                         <br />
 
-                        <Card.Text className="card-text lead text-muted">
+                        <Card.Text className="card-text h5 text-muted">
                             Find new projects to work.
                             Apply for teams and Collaborations.
                             Lets keep the learning and helping community alive.

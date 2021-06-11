@@ -136,7 +136,7 @@ class Profile extends React.Component{
                     <div className="row" >
                         {isMobile?null:(
                             <div className="col container">
-                                <div className=" float-right mr-5 mt-5">
+                                <div className="mr-5 mt-5">
                                     <SvgIcon
                                         className="profile-image mt-5"
                                         height="100%"
@@ -152,7 +152,7 @@ class Profile extends React.Component{
                             </div>)}
 
                         <div className="col container" >
-                            <Card className="card ml-5 rounded-4 profilecard container border-primary float-left">
+                            <Card className="card ml-5 rounded-4 container">
 
                                 <Card.Header className="card-hf-color">
                                     <h1 className="" >
