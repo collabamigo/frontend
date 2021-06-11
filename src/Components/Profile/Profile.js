@@ -162,14 +162,13 @@ class Profile extends React.Component{
                             <Card className="card ml-5 rounded-4 profilecard container border-primary float-left">
 
                                 <Card.Header className="card-hf-color">
-                                    <h1>
+                                    <h1 className="" >
                                         Profile
                                     </h1>
                                 </Card.Header>
 
                                 <Card.Body className="pt-0 mt-0">
                                     <form
-                                        className="card-body"
                                         onSubmit={this.handleSubmit}
                                     >
                                         <div className="form-group">
@@ -347,8 +346,8 @@ class Profile extends React.Component{
                                     </form>
                                 </Card.Body>
 
-                                <Card.Footer className="custom-modal-footer-p">
-                                    <div className="pb-5">
+                                <Card.Footer className="custom-modal-footer-p pb-4">
+                                    <div className="">
                                         <button
                                             className="btn btn-lg btn-primary col-5"
                                             onClick={this.handleSubmit.bind(this)}
@@ -358,11 +357,8 @@ class Profile extends React.Component{
                                         </button>
                                     </div>
                                 </Card.Footer>
-
                             </Card>
                         </div>
-
-
                     </div>
                 </section>
             );
