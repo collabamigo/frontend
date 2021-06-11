@@ -118,6 +118,9 @@ class Help extends React.Component {
                     name={this.state.name}
                     onCreate={this.handleCreate.bind(this)}
                     onDelete={this.handleDelete.bind(this)}
+                    setSkills={(skills) => this.setState({
+                        skills: skills,
+                    })}
                     skills={this.state.skills}
                     upvote={this.state.upvote}
                 />

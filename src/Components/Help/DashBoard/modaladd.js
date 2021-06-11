@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 
 
 
-function Oadd({skills , onCreate}) {
+function Oadd({skills , onCreate, setSkills}) {
 
     function handleSubmit(e,skills){
         onCreate(skills)
@@ -19,24 +19,19 @@ function Oadd({skills , onCreate}) {
 
     const initialState = {
         show: false,
-        tags:[...skills],
-    }
-    function handleChangeTag(tags) {
-        setState({tags: tags})
     }
 
     function handleChange(value){
         setState({"searchTerm": value, "found_match":false});
     }
 
-    function renderAutocomplete({addTag, ...props}) {
-        console.log(props)
+    function renderAutocomplete({addTag, }) {
         return (
             <div>
                 <Autocomplete
                     onChange={(val) => handleChange(val)}
                     onMatch={(val) => {
-                    if (!state.tags.includes(val))
+                    if (!skills.includes(val))
                         addTag(val)
                 }}
                     searchTerm={state.searchTerm}
@@ -90,9 +85,9 @@ function Oadd({skills , onCreate}) {
                   <Modal.Body>
                       Go on, add more Skills
                       <TagsInput
-                          onChange={handleChangeTag}
+                          onChange={setSkills}
                           renderInput={renderAutocomplete}
-                          value={state.tags}
+                          value={skills}
                       />
                       
                   </Modal.Body>
@@ -113,6 +108,7 @@ function Oadd({skills , onCreate}) {
 
 Oadd.propTypes = {
     onCreate:PropTypes.func.isRequired,
+    setSkills: PropTypes.func.isRequired,
     skills:PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 

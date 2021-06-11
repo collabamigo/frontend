@@ -23,6 +23,7 @@ class DashBoard extends React.Component {
         name:PropTypes.string.isRequired,
         onCreate:PropTypes.string.isRequired,
         onDelete: PropTypes.func.isRequired,
+        setSkills: PropTypes.func.isRequired,
         skills: PropTypes.arrayOf(PropTypes.string).isRequired,
         upvote: PropTypes.number.isRequired,
     }
@@ -286,8 +287,10 @@ class DashBoard extends React.Component {
                             <Card className="card_dashboard m-2 card card-trending">
                                 <Card.Header className="h2 header-custom">
                                     Skill Bar
+
                                     <Oadd
                                         onCreate={this.props.onCreate}
+                                        setSkills={this.props.setSkills}
                                         skills={this.props.skills}
                                     />
                                 </Card.Header>
