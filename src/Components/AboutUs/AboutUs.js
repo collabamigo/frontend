@@ -18,9 +18,9 @@ class AboutUs extends React.Component {
                                     The Core Team
                                 </h1>
 
-                                <h5 className=" text-muted mb-4">
+                                <p className=" text-muted mb-4 h5">
                                     The young man wanted a role model. He looked long and hard in his youth, but that role model never materialized. His only choice was to embrace all the people in his life he didnt want to be like.
-                                </h5>
+                                </p>
                             </div>
                         </div>
 
