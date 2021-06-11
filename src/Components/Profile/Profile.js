@@ -278,6 +278,7 @@ class Profile extends React.Component{
                                                 <select
                                                     className="form-control col-auto form-select m-2 p-6"
                                                     onChange={this.handleChangeDegree}
+                                                    required
                                                     value={this.state.degree}
                                                 >
                                                     <option
@@ -302,6 +303,7 @@ class Profile extends React.Component{
                                                 <select
                                                     className="form-control col-auto form-select m-2 p-6"
                                                     onChange={this.handleChangeCourse}
+                                                    required
                                                     value={this.state.course}
                                                 >
                                                     <option
@@ -343,20 +345,18 @@ class Profile extends React.Component{
                                             </label>
 
                                         </div>
+
+                                        <div>
+                                            <button
+                                                className="btn btn-lg btn-primary col-5"
+                                            // onClick={this.handleSubmit.bind(this)}
+                                                type="submit"
+                                            >
+                                                Submit
+                                            </button>
+                                        </div>
                                     </form>
                                 </Card.Body>
-
-                                <Card.Footer className="custom-modal-footer-p pb-4">
-                                    <div className="">
-                                        <button
-                                            className="btn btn-lg btn-primary col-5"
-                                            onClick={this.handleSubmit.bind(this)}
-                                            type="button"
-                                        >
-                                            Submit
-                                        </button>
-                                    </div>
-                                </Card.Footer>
                             </Card>
                         </div>
                     </div>
