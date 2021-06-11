@@ -9,6 +9,7 @@ import CardExplorer from "../CardExplorer";
 
 class ConnectionHistory extends React.Component {
 
+    // TODO: connections showing oneself
     constructor(props) {
 
         super(props);

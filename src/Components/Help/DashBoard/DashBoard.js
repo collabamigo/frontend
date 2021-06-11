@@ -14,6 +14,9 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 class DashBoard extends React.Component {
+    // TODO: image link not working
+    // TODO: upvote ,downvote chart not working
+
     static propTypes = {
         created: PropTypes.string.isRequired,
         downvote:PropTypes.number.isRequired,
