@@ -8,13 +8,15 @@ import axios from "axios";
 class Autocomplete extends React.Component {
 
     static propTypes = {
+        integrated: PropTypes.bool,
         onChange: PropTypes.func.isRequired,
         onMatch:PropTypes.func.isRequired,
         version: PropTypes.number
     };
 
     static defaultProps = {
-        version:1
+        integrated: false,
+        version:1,
     }
     constructor (props) {
       super(props);
@@ -97,7 +99,7 @@ class Autocomplete extends React.Component {
 
                   suggestionsListComponent =
                       (
-                          <ul className="suggestions col-9">
+                          <ul className={"suggestions "+((!this.props.integrated)?" col-9":" col-auto")}>
                               {this.state.suggestions.map((suggestion, index) => {
 
                       let className;
@@ -132,11 +134,11 @@ class Autocomplete extends React.Component {
           }
 
           return (
-              <>
-                  <div className="row mx-5 justify-content-center">
+              <div className="container-fluid">
+                  <div className={"row mx-5 "+((!this.props.integrated)?"justify-content-center":null)}>
 
                       <input
-                          className="col-9"
+                          className={((!this.props.integrated)?"col-9":"col-auto")}
                           onChange={this.handleChange.bind(this)}
                           onKeyDown={this.handleKeyDown.bind(this)}
                           type="text"
@@ -144,12 +146,12 @@ class Autocomplete extends React.Component {
                       />
                   </div>
 
-                  <div className="row mx-5 justify-content-center">
+                  <div className={"row mx-5 "+((!this.props.integrated)?"justify-content-center":null)}>
 
                       {suggestionsListComponent}
                   </div>
-              </>
-          );
+              </div>
+          )
 
       }
 

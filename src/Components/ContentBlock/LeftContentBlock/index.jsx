@@ -54,7 +54,7 @@ function LeftContentBlock({
                               {(stage==="button")?t(title):t(alt_title)}
                           </h6>
 
-                          <Content className={"text-left "+(stage==="form")?"h1 font-weight-bold":null}>
+                          <Content className={"text-left "+((stage==="form")?"h1 font-weight-bold":null)}>
                               {(stage==="button")?t(content):t(alt_content)}
                           </Content>
 

@@ -70,22 +70,26 @@ class Step2 extends React.Component {
       }
       return null;
     }
+
     render() {
         if (this.props.currentStep !== 2) {
             return null
         }
         return (
-            <div className="form-group">
-                <label className="col-auto col-form-label">
+            <div className="form-group justify-content-center">
+                <label className="col-auto h3">
                     Add your skills
                 </label>
 
-                <div className="center">
-                    <TagsInput
-                        onChange={this.handleChangeTag.bind(this)}
-                        renderInput={this.renderAutocomplete.bind(this)}
-                        value={this.state.tags}
-                    />
+                <div className="row justify-content-center">
+                    <div className="justify-content-center col-6">
+                        <TagsInput
+                            className="border-0"
+                            onChange={this.handleChangeTag.bind(this)}
+                            renderInput={this.renderAutocomplete.bind(this)}
+                            value={this.state.tags}
+                        />
+                    </div>
                 </div>
 
                 <br />
