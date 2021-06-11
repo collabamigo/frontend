@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import { Drawer, Menu } from "antd";
 
-function ExternalHeader({ isAuthenticated }) {
+function Header({ isAuthenticated }) {
     const [visible, setVisibility] = useState(false);
 
     const showDrawer = () => {
@@ -30,7 +30,7 @@ function ExternalHeader({ isAuthenticated }) {
 
     return (
         <HeaderSection className="pt-3 pr-2 pb-5 pl-2">
-            <div className="container-fluid lowwl">
+            <div className="container-fluid">
                 <div className=" row justify-content-center">
                     <div className="col ml-5">
                         <LogoContainer
@@ -45,6 +45,8 @@ function ExternalHeader({ isAuthenticated }) {
                             />
                         </LogoContainer>
                     </div>
+
+                    <div className="col-1" />
 
                     {isAuthenticated ?
                         <>
@@ -86,8 +88,8 @@ function ExternalHeader({ isAuthenticated }) {
     );
 }
 
-ExternalHeader.propTypes = {
+Header.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired
 }
 
-export default withTranslation()(ExternalHeader);
+export default withTranslation()(Header);
