@@ -19,7 +19,7 @@ class HelpForm extends React.Component{
         this.handlerChangeContact = this.handlerChangeContact.bind(this);
 
         this.state ={
-            Handle:'',
+            handle:'',
             Contact:undefined,
             Github: undefined,
             Linkedin:undefined,
@@ -28,12 +28,20 @@ class HelpForm extends React.Component{
         }
     }
 
+    componentDidMount() {
+        axios.get(backend+"connect/profile/").then(
+            (res) => this.setState({
+                handle: res.data[0].handle
+            })
+        )
+    }
+
     shouldComponentUpdate () {
         return true;
     }
 
     handlerChangeHandle(e) {
-        this.setState({ Handle: e.target.value })
+        this.setState({ handle: e.target.value })
     }
 
     handlerChangeGithub(e) {
@@ -70,9 +78,12 @@ class HelpForm extends React.Component{
             Gitname: this.state.Github,
             Linkedin: this.state.Linkedin.split("/in/")[1],
             skills: tags,
-        }).then((res) => this.props.handleSubmit({
-            data: [res.data]
-        }))
+        }).then((res) => axios.patch(backend+"connect/profile/"+res.data.id+"/",{
+            handle: this.state.handle
+        }).then((res2) => this.props.handleSubmit({
+            data: [{...res.data,
+            handle: res2.data.handle}]
+        })))
     }
 
     render() {
@@ -96,9 +107,9 @@ class HelpForm extends React.Component{
                     <Step1
                         Contact={this.state.Contact}
                         Github={this.state.Github}
-                        Handle={this.state.Handle}
                         Linkedin={this.state.Linkedin}
                         currentStep={this.state.currentStep}
+                        handle={this.state.handle}
                         handleChangeContact={this.handlerChangeContact}
                         handleChangeGithub={this.handlerChangeGithub}
                         handleChangeHandle={this.handlerChangeHandle}

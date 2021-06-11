@@ -10,9 +10,9 @@ class Step1 extends React.Component {
     static propTypes = {
             Contact:PropTypes.string.isRequired,
             Github:PropTypes.string.isRequired,
-            Handle:PropTypes.string.isRequired,
             Linkedin:PropTypes.string.isRequired,
             currentStep:PropTypes.number.isRequired,
+            handle:PropTypes.string.isRequired,
             handleChangeContact:PropTypes.func.isRequired,
             handleChangeGithub:PropTypes.func.isRequired,
             handleChangeHandle:PropTypes.func.isRequired,
@@ -65,7 +65,7 @@ class Step1 extends React.Component {
                                             <div className="col-auto form-inline col-form-label">
 
                                                 <label>
-                                                    Telegram Handle
+                                                    Telegram Username
                                                 </label>
 
                                             </div>
@@ -74,10 +74,9 @@ class Step1 extends React.Component {
                                                 <input
                                                     className="form-control col-auto"
                                                     onChange={this.props.handleChangeHandle}
-                                                    placeholder="@instagram"
                                                     required
                                                     type='text'
-                                                    value={this.props.Handle}
+                                                    value={this.props.handle}
                                                 />
                                             </div>
                                         </div>
