@@ -49,9 +49,6 @@ class HelpForm extends React.Component{
         this.setState({ Contact: e.target.value })
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-    }
 
     handlerNext = () => {
         this.setState({
@@ -95,7 +92,7 @@ class HelpForm extends React.Component{
                 )
         else
             return (
-                <form onSubmit={this.handleSubmit}>
+                <div>
 
                     <Step1
                         Contact={this.state.Contact}
@@ -119,7 +116,7 @@ class HelpForm extends React.Component{
 
                     <br />
 
-                </form>
+                </div>
             );
   }
 
