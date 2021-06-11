@@ -14,13 +14,13 @@ class AboutUs extends React.Component {
                     <div className="container">
                         <div className="row justify-content-center mb-4">
                             <div className="col-md-9 text-center">
-                                <h2 className="mb-4">
+                                <h1 className="mb-4">
                                     The Core Team
-                                </h2>
+                                </h1>
 
-                                <h6 className="font-weight-bold text-muted mb-4">
+                                <h5 className=" text-muted mb-4">
                                     The young man wanted a role model. He looked long and hard in his youth, but that role model never materialized. His only choice was to embrace all the people in his life he didnt want to be like.
-                                </h6>
+                                </h5>
                             </div>
                         </div>
 
@@ -133,7 +133,7 @@ class AboutUs extends React.Component {
                                             </h5>
 
                                             <p className="p">
-                                                I dont know what to say other than I dont know what to say. 
+                                                It works on my machine.
                                             </p>
 
                                             <ul className="list-inline mt-4">
