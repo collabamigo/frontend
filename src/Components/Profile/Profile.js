@@ -154,7 +154,6 @@ class Profile extends React.Component{
 
                                     <h4 className="text-center">
                                         Here is all the information we have about you,
-                                        <br />
                                         feel free to change whatever doesn&apos;t fit right.
                                     </h4>
                                 </div>
