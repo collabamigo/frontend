@@ -74,7 +74,6 @@ class DashBoard extends React.Component {
         for (let i=0; i < this.props.help_history.length ; ++i)
             temp.push([this.props.help_history[i]["name"], this.props.help_history[i]["count"]]);
         this.setState({pi:temp})
-        console.log("temp", temp)
     }
 
     handleDoughnut () {
@@ -100,7 +99,6 @@ class DashBoard extends React.Component {
     }
 
     render () {
-        console.log("lol", [this.state.pi])
         return (
             <div className="">
                 <h1 className="font-weight-bold">

@@ -37,8 +37,7 @@ class Step2 extends React.Component {
         this.setState({tags: tags})
     }
 
-    renderAutocomplete({addTag, ...props}) {
-        console.log(props)
+    renderAutocomplete({addTag, }) {
         return (
             <div>
                 <Autocomplete
