@@ -28,7 +28,7 @@ class AboutUs extends React.Component {
                             <div className="col-lg-4 mb-4">
 
                                 <div className="row">
-                                    <div className="col-md-12">
+                                    <div className="col-md-11">
                                         <img
                                             className="img-fluid rounded-circle"
                                             src="https://i.imgur.com/E7GyC8A.jpg"
@@ -46,7 +46,7 @@ class AboutUs extends React.Component {
                                             </h5>
 
                                             <p className="p font-weight-normal">
-                                                Bugs ??? We don&#39;t do that here
+                                                Bugs??? We don&#39;t do that here.
                                             </p>
 
                                             <ul className="list-inline mt-4">
@@ -115,7 +115,7 @@ class AboutUs extends React.Component {
                             <div className="col-lg-4 mb-4">
 
                                 <div className="row">
-                                    <div className="col-md-12 pro-pic">
+                                    <div className="col-md-11">
                                         <img
                                             className="img-fluid rounded-circle"
                                             src="https://i.imgur.com/tx3AYvP.jpg"
@@ -200,7 +200,7 @@ class AboutUs extends React.Component {
 
                             <div className="col-lg-4 mb-4">
                                 <div className="row">
-                                    <div className="col-md-12 pro-pic">
+                                    <div className="col-md-11">
                                         <img
                                             className="img-fluid rounded-circle"
                                             src="https://i.imgur.com/y624kGA.jpg"
@@ -218,7 +218,7 @@ class AboutUs extends React.Component {
                                             </h5>
 
                                             <p className="p">
-                                                Talk Code To Me
+                                                Talk Code To Me.
                                             </p>
 
                                             <ul className="list-inline mt-4">
