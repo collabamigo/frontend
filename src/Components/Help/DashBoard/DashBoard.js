@@ -14,9 +14,10 @@ function capitalizeFirstLetter(string) {
   }
 class DashBoard extends React.Component {
     static propTypes = {
-        created: PropTypes.arrayOf(PropTypes.string).isRequired,
+        created: PropTypes.string.isRequired,
         downvote:PropTypes.number.isRequired,
         git:PropTypes.string.isRequired,
+        help_history:PropTypes.arrayOf(PropTypes.object).isRequired,
         linkedin:PropTypes.string.isRequired,
         name:PropTypes.string.isRequired,
         onDelete: PropTypes.func.isRequired,
@@ -26,10 +27,11 @@ class DashBoard extends React.Component {
 
     constructor(props) {
         super(props);
-        this.handleTrending()
         this.state={
             months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             trendingSkills:[],
+            pi:[],
+            // piTemp:[],
             dataDoughnut: {
             labels: ["Up Votes","Down Votes"],
             datasets: [
@@ -46,12 +48,30 @@ class DashBoard extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.handleGet()
+    }
+
     shouldComponentUpdate () {
         return true;
     }
 
-    handleTrending() {
-        axios.get(backend+"connect/statistics/skills").then((res) => {this.setState({trendingSkills:res.data})})
+    handleGet() {
+        axios.get(backend+"connect/statistics/skills")
+            .then((res) => {
+                this.setState({trendingSkills:res.data})}
+            )
+        this.handleGetPi()
+    }
+
+    handleGetPi(){
+        // console.log("test",this.props.help_history)
+        const temp=[]
+        temp.push(["skill", 'Percentage covered'])
+        for (let i=0; i < this.props.help_history.length ; ++i)
+            temp.push([this.props.help_history[i]["name"], this.props.help_history[i]["count"]]);
+        this.setState({pi:temp})
+        console.log("temp", temp)
     }
 
     handleDoughnut () {
@@ -77,6 +97,7 @@ class DashBoard extends React.Component {
     }
 
     render () {
+        console.log("lol", [this.state.pi])
         return (
             <div className="">
                 <h1 className="font-weight-bold">
@@ -92,7 +113,7 @@ class DashBoard extends React.Component {
                             <Card className="mb-5 upper-text main-profile">
                                 <Card.Body className="row">
                                     <div className="col-md-8 float-center">
-                                        <h1 className="card-title fw-bold mt-3 ml-3 row ">
+                                        <h1 className="card-title fw-bold mt-3 ml-3 row">
                                             {this.props.name}
                                         </h1>
 
@@ -173,11 +194,12 @@ class DashBoard extends React.Component {
 
                                 <Chart
                                     chartType="PieChart"
-                                    data={[
-                                                ["hello", 'Percentage covered'],
-                                                [this.props.skills[0], 53],
-                                                [this.props.skills[1], 83],
-                                              ]}
+                                    data={this.state.pi}
+                                    // data={[
+                                    //             ["skill", 'Percentage covered'],
+                                    //             [this.props.skills[0], 53],
+                                    //             [this.props.skills[1], 83],
+                                    //           ]}
                                     height='25rem'
                                     loader={
                                         <div>
@@ -189,9 +211,9 @@ class DashBoard extends React.Component {
                                                 legend: 'none',
                                                 pieSliceText: 'label',
                                                 slices: {
-                                                  // 1: { offset: 0.2 },
-                                                  // 2: { offset: 0.3 },
-                                                  2: { offset: 0.2 },
+                                                  1: { offset: 0.1 },
+                                                  2: { offset: 0.15 },
+                                                  3: { offset: 0.25 },
                                                 },
                                               }}
                                     rootProps={{ 'data-testid': '5' }}
@@ -211,15 +233,15 @@ class DashBoard extends React.Component {
 
                                     {this.state.trendingSkills.map(item => (
                                         <div
-                                            className="container-fluid lool"
+                                            className="col-auto container-fluid lool"
                                             key={item}
                                         >
                                             <ol 
                                                 className="list-group mt-1"
                                                 key={item}
                                             >
-                                                <li className="d-flex justify-content-between fsxxl">
-                                                    <div className="">
+                                                <li className="d-flex justify-content-between align-items-start fsxxl container-fluid">
+                                                    <div className="ms-2 me-auto">
                                                         <div className="fssm">
                                                             {capitalizeFirstLetter(item["name"])}
                                                         </div>
@@ -267,21 +289,21 @@ class DashBoard extends React.Component {
                                             key={item}
                                         >
 
-                                            <ol  
+                                            <ol
                                                 className="list-group"
                                                 key={item}
                                             >
                                                 <li className="d-flex justify-content-between flex-lg-row pb-3">
                                                     <div className="ms-2 me-auto">
-                                                        <div className="fssm">
-                                                            {capitalizeFirstLetter(item)}                                                            
+                                                        <div className="fsxxl">
+                                                            {capitalizeFirstLetter(item)}
                                                         </div>
                                                     </div>
 
                                                     <Odal
                                                         item={item}
                                                         onDelete={this.props.onDelete}
-                                                    />     
+                                                    />
                                                 </li>
                                             </ol>
                                         </div>
