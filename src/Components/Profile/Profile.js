@@ -75,9 +75,11 @@ class Profile extends React.Component{
             Last_Name:'',
             degree: '',
             course:'',
-            Handle:'',
+            handle:'',
             loading: true }
+    }
 
+    componentDidMount() {
         axios.get(backend+"connect/profile?format=json")
             .then(res => {
                 const data = res.data[0];
@@ -100,7 +102,7 @@ class Profile extends React.Component{
     }
 
     handleChangeHandle(e) {
-        this.setState({ Handle: e.target.value })
+        this.setState({ handle: e.target.value })
     }
 
     handleSubmit(e) {
@@ -108,7 +110,7 @@ class Profile extends React.Component{
         let payload = {
             degree:this.state.degree,
             course:this.state.course,
-            handle:this.state.Handle}
+            handle:this.state.handle}
         this.setState({loading:true})
         axios.patch(backend+"connect/profile/"+this.state.id+"/", payload)
             .then(() => {
@@ -265,9 +267,8 @@ class Profile extends React.Component{
                                                 <input
                                                     className="form-control col-auto"
                                                     onChange={this.handleChangeHandle}
-                                                    placeholder={this.state.handle}
                                                     type='text'
-                                                    value={this.state.Handle}
+                                                    value={this.state.handle}
                                                 />
                                             </div>
                                         </div>
