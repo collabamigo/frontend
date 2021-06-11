@@ -5,10 +5,6 @@ import PropTypes from "prop-types";
 import {SvgIcon} from "../../common/SvgIcon";
 import {Fade} from "react-awesome-reveal";
 import {OverlayTrigger, Popover, Card} from "react-bootstrap";
-
-
-
-
 function CardsP (props) {
     function handleUpVote(){
         if (props.voteValue === 1)
