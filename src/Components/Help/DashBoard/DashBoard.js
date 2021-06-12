@@ -178,12 +178,16 @@ class DashBoard extends React.Component {
                                         </div>                                     
                                     </div>
 
-                                    <div className="col-md-4 pt-4">
+                                    <div className="col-md-4 pt-4 display-pic">
                                         <img
                                             alt="profile_pic"
                                             className="rounded-circle float-center h-75 w-auto"
                                             src={this.props.image}
                                         />
+
+                                        <div className="text">
+                                            To change your Display picture, please change the Google Profile Picture
+                                        </div>
                                     </div>
 
                                 </Card.Body>
@@ -296,7 +300,6 @@ class DashBoard extends React.Component {
                             <Card className="card_dashboard m-2 card card-trending">
                                 <Card.Header className="h2 header-custom">
                                     Skill Bar
-
                                     <Oadd
                                         onCreate={this.props.onCreate}
                                         setSkills={this.props.setSkills}
