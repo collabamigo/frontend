@@ -21,6 +21,7 @@ import UnauthenticatedHome from "./Components/UnauthenticatedHome/Unauthenticate
 // import Collab from "./Components/Collab/Collab";
 import ExternalHeader from "./Components/Header";
 import ConnectionHistory from "./Components/ConnectionHistory";
+import Rickroll from "./Components/Rickroll";
 
 // eslint-disable-next-line react/require-optimization
 class App extends React.Component {
@@ -121,6 +122,13 @@ class App extends React.Component {
                             path="/about"
                         >
                             <AboutUs />
+                        </Route>
+
+                        <Route
+                            exact
+                            path="/oops"
+                        >
+                            <Rickroll />
                         </Route>
 
                         <Route

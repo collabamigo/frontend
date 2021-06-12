@@ -90,7 +90,7 @@ class Ask extends React.Component {
                     onConnect={this.handleConnect.bind(this)}
                     parentList={this.state.list}
                     showConnectAll
-                    showVotingList={this.state.voteAllowedList}
+                    showVotingList={[...(this.state.voteAllowedList), localStorage.getItem("id")]}
                 />
             )
         }

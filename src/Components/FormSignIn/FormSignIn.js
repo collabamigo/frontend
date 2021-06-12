@@ -66,7 +66,8 @@ class FormSignIn extends React.Component {
         }
 
         axios.post(backend + "connect/profile/", payload)
-            .then(() => {
+            .then((res) => {
+                localStorage.setItem("id", res.data.id)
             this.props.onSubmit()
           })
 

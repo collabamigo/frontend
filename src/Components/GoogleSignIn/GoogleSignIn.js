@@ -90,6 +90,8 @@ function GoogleSignIn (props) {
                 props.setStage("form");
             }
             else{
+                if (res.res.data[0].id)
+                    localStorage.setItem("id", res.res.data[0].id)
                 if (googleUserState){
                     localStorage.setItem(
                     "userName",
