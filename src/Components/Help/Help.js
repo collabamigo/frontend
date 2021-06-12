@@ -39,15 +39,6 @@ class Help extends React.Component {
 
 
     componentDidMount() {
-        // axios.get(backend + "connect/teacher/", {
-        //     params: {
-        //         format: "json",
-        //     }
-        // })
-        //     .then((res) => {
-        //         this.setState({teacher: Boolean(res.data.length),
-        //         skills:res.data.length?res.data[0]["skills"]:[]})
-        //     })
 
         axios.get(backend+"connect/teacher?format=json")
             .then(res => {
