@@ -80,18 +80,18 @@ class Profile extends React.Component{
         axios.get(backend+"connect/profile/?format=json")
             .then(res => axios.get(backend+"connect/teacher/").then((res2) => {
 
-                if (res2.data.length) {
+                if (res2.data.length)
                     this.setState({
                         isTeacher: true,
-                        linkedIn: res.data[0]["Linkedin"],
-                        github:res.data[0]["Gitname"],
-                        contact: res.data[0]["Contact"],
+                        linkedIn: res2.data[0]["Linkedin"],
+                        github:res2.data[0]["Gitname"],
+                        contact: res2.data[0]["Contact"],
                     })
                 this.setState({
                     ...(res.data[0]),
                     loading: false
                 });
-                }
+
             }))
     }
 
@@ -134,8 +134,10 @@ class Profile extends React.Component{
         axios.patch(backend+"connect/profile/"+this.state.id+"/", payload)
             .then(() => {
                 if (this.state.isTeacher)
-                    axios.patch(backend + "connect/profile/" + this.state.id + "/", {
-                        Linkedin: this.state.linkedIn
+                    axios.patch(backend + "connect/teacher/" + this.state.id + "/", {
+                        Linkedin: this.state.linkedIn,
+                        Gitname: this.state.github,
+                        Contact: this.state.contact,
                     })
 
                 this.setState({loading:false})
