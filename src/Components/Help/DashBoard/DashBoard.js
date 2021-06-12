@@ -181,7 +181,7 @@ class DashBoard extends React.Component {
                                     <div className="col-md-4 pt-4">
                                         <img
                                             alt="profile_pic"
-                                            className="rounded-circle float-center"
+                                            className="rounded-circle float-center h-75 w-auto"
                                             src={this.props.image}
                                         />
                                     </div>
