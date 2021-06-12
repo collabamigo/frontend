@@ -107,7 +107,7 @@ class Ask extends React.Component {
     render () {
           return (
               <div className="row m-2">
-                  <div className="col-6">
+                  <div className="col-lg-6 col-md-auto col-sm-auto col-xl-6">
                       <h2>
                           Skill Search
                       </h2>
@@ -135,7 +135,7 @@ class Ask extends React.Component {
                       
                   </div>
 
-                  <div className="pt-5 col-6 justify-content-center">
+                  <div className="pt-5 col-lg-6 col-md-auto col-sm-auto col-xl-6 justify-content-center">
                       {this.renderCardsIfNeeded()}
                   </div>
               </div>
