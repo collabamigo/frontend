@@ -179,15 +179,14 @@ class DashBoard extends React.Component {
                                     </div>
 
                                     <div className="col-md-4 pt-4 display-pic">
-                                        <img
-                                            alt="profile_pic"
-                                            className="rounded-circle float-center h-75 w-auto"
-                                            src={this.props.image}
-                                        />
+                                        <a title="Profile picture taken from Google">
+                                            <img
+                                                alt="profile_pic"
+                                                className="rounded-circle float-center h-75 w-auto"
+                                                src={this.props.image}
+                                            />
 
-                                        <div className="text">
-                                            To change your Display picture, please change the Google Profile Picture
-                                        </div>
+                                        </a>
                                     </div>
 
                                 </Card.Body>
