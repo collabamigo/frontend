@@ -100,7 +100,7 @@ class Ask extends React.Component {
 
     render () {
           return (
-              <div className="row p-4">
+              <div className="row m-2">
                   <div className="col-6">
                       <h2>
                           Skill Search
