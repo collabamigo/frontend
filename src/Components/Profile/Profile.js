@@ -63,18 +63,32 @@ class Profile extends React.Component{
             First_Name: '',
             Last_Name:'',
             degree: '',
+            contact: null,
             course:'',
+            github: null,
             handle:'',
+            isTeacher: false,
+            linkedIn: null,
             loading: true }
     }
 
     componentDidMount() {
-        axios.get(backend+"connect/profile?format=json")
-            .then(res => {
-                const data = res.data[0];
-                this.setState({...data,
-                loading: false});
-            })
+        axios.get(backend+"connect/profile/?format=json")
+            .then(res => axios.get(backend+"connect/teacher/").then((res2) => {
+
+                if (res2.data.length) {
+                    this.setState({
+                        isTeacher: true,
+                        linkedIn: res.data[0]["Linkedin"],
+                        github:res.data[0]["Gitname"],
+                        contact: res.data[0]["Contact"],
+                    })
+                this.setState({
+                    ...(res.data[0]),
+                    loading: false
+                });
+                }
+            }))
     }
 
     shouldComponentUpdate () {
@@ -86,6 +100,10 @@ class Profile extends React.Component{
         this.setState({ degree: e.target.value })
     }
 
+    handleChangeLinkedIn(e) {
+        this.setState({ linkedIn: e.target.value })
+    }
+    
     handleChangeCourse(e) {
         this.setState({ course: e.target.value })
     }
@@ -103,9 +121,15 @@ class Profile extends React.Component{
         this.setState({loading:true})
         axios.patch(backend+"connect/profile/"+this.state.id+"/", payload)
             .then(() => {
+                if (this.state.isTeacher)
+                    axios.patch(backend + "connect/profile/" + this.state.id + "/", {
+                        Linkedin: this.state.linkedIn
+                    })
+
                 this.setState({loading:false})
                 alert("Profile update successful")
-          })
+
+            })
 
         e.preventDefault();
 
@@ -262,6 +286,23 @@ class Profile extends React.Component{
                                             </div>
                                         </div>
 
+                                        {this.state.isTeacher?
+                                            <div className="form-group ">
+                                                <label className=" form-inline col-form-label">
+                                                    LinkedIn URL
+                                                </label>
+
+                                                <div>
+                                                    <input
+                                                        className="form-control col-auto"
+                                                        onChange={this.handleChangeLinkedIn}
+                                                        placeholder="username"
+                                                        type="text"
+                                                        value={this.state.linkedIn}
+                                                    />
+                                                </div>
+                                            </div>:null}
+                                        
                                         <div className="row form-group justify-content-center">
                                             <label className="col-form-label">
                                                 Degree:
