@@ -37,7 +37,7 @@ class ConnectionHistory extends React.Component {
             }
         })
             .then((res) =>
-                this.setState({ list: res.data, loading: false }))
+                this.setState({ list: [...(res.data), localStorage.getItem("id")], loading: false }))
     };
 
     renderCardsIfNeeded() {
