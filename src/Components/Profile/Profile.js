@@ -45,9 +45,6 @@ const popoverRight = (
             {' '}
             and we will get it right.
 
-            <br />
-            Thank you.
-
             {' '}
         </Popover.Content>
     </Popover>
@@ -146,7 +143,7 @@ class Profile extends React.Component{
 
                                     <h5 className="text-center">
                                         Here is all the information we have about you,
-                                        feel free to change whatever doesn&apos;t fit right.
+                                        feel free to change whatever doesn&apos;t fit right
                                     </h5>
                                 </div>
                             </div>)}
