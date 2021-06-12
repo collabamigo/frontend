@@ -57,6 +57,10 @@ class Profile extends React.Component{
         this.handleChangeDegree = this.handleChangeDegree.bind(this);
         this.handleChangeCourse = this.handleChangeCourse.bind(this);
         this.handleChangeHandle = this.handleChangeHandle.bind(this);
+        this.handleChangeLinkedIn = this.handleChangeLinkedIn.bind(this);
+        this.handleChangeGitHub = this.handleChangeGitHub.bind(this);
+        this.handleChangeContact = this.handleChangeContact.bind(this);
+
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state ={
@@ -110,6 +114,14 @@ class Profile extends React.Component{
 
     handleChangeHandle(e) {
         this.setState({ handle: e.target.value })
+    }
+
+    handleChangeGitHub(e){
+        this.setState({github:e.target.value})
+    }
+
+    handleChangeContact(e){
+        this.setState({contact:e.target.value})
     }
 
     handleSubmit(e) {
@@ -296,9 +308,37 @@ class Profile extends React.Component{
                                                     <input
                                                         className="form-control col-auto"
                                                         onChange={this.handleChangeLinkedIn}
-                                                        placeholder="username"
+                                                        placeholder="https://www.linkedin.com/in/example-here"
                                                         type="text"
                                                         value={this.state.linkedIn}
+                                                    />
+                                                </div>
+
+                                                <label className=" form-inline col-form-label">
+                                                    GitHub
+                                                </label>
+
+                                                <div>
+                                                    <input
+                                                        className="form-control col-auto"
+                                                        onChange={this.handleChangeGitHub}
+                                                        placeholder="Username"
+                                                        type="text"
+                                                        value={this.state.github}
+                                                    />
+                                                </div>
+
+                                                <label className=" form-inline col-form-label">
+                                                    Contact
+                                                </label>
+
+                                                <div>
+                                                    <input
+                                                        className="form-control col-auto"
+                                                        onChange={this.handleChangeContact}
+                                                        placeholder="Mobile Number"
+                                                        type="number"
+                                                        value={this.state.contact}
                                                     />
                                                 </div>
                                             </div>:null}
