@@ -87,6 +87,7 @@ class Ask extends React.Component {
             return (
                 <CardExplorer
                     isLoading={this.state.loading}
+                    layout="grid"
                     onConnect={this.handleConnect.bind(this)}
                     parentList={this.state.list}
                     showConnectAll

@@ -12,6 +12,7 @@ class CardExplorer extends React.Component{
     static propTypes = {
         cardsPerPage: PropTypes.number,
         isLoading: PropTypes.bool,
+        layout: PropTypes.string,
         onConnect: PropTypes.func,
         parentList: PropTypes.arrayOf(PropTypes.string).isRequired,
         showConnectAll: PropTypes.bool,
@@ -24,6 +25,7 @@ class CardExplorer extends React.Component{
     static defaultProps = {
         cardsPerPage: 4,
         isLoading: false,
+        layout: "horizontal",
         onConnect: () => {},
         showConnectAll: false,
         showConnectList: [],
@@ -122,7 +124,7 @@ class CardExplorer extends React.Component{
                 <div className="container-fluid row justify-content-center">
                     {this.state.tempList.map(item => (
                         <div
-                            className="col-auto justify-content-center"
+                            className={((this.props.layout==="horizontal")?"col-auto":"col-lg-6 col-md-auto col-sm-auto col-xl-6")+ " justify-content-center"}
                             key={item.id}
                         >
                             <CardsP
