@@ -187,7 +187,7 @@ class Profile extends React.Component{
                             </div>)}
 
                         <div className="col container" >
-                            <Card className="card ml-5 rounded-4 container">
+                            <Card className="card ml-5 rounded-4 container mb-5">
 
                                 <Card.Header className="card-hf-color">
                                     <h1 className="" >
