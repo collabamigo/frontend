@@ -8,7 +8,7 @@ function Rickroll() {
             allowFullScreen
             frameBorder='0'
             height="60%"
-            src='https://www.youtube.com/embed/j5a0jTc9S10?autoplay=1&controls=0'
+            src='https://www.youtube.com/embed/j5a0jTc9S10?autoplay=1&controls=0&mute=1'
             title='video'
             width="60%"
         />
