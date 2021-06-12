@@ -67,49 +67,45 @@ function CardsP (props) {
                     </span>
                 </Card.Header>
 
-                <Card.Body>
-                    <div className="row">
-                        <Card.Text className="col-auto text-muted text-left ml-1 mr-4">
-                            <span className="h6">
-                                {props.batch + ".Tech"}
-                            </span>
+                <Card.Body className="row">
+                    <Card.Text className="col text-muted text-left">
+                        <span className="h6">
+                            {props.batch + ".Tech"}
+                        </span>
 
-                            <br />
+                        <br />
 
-                            <span className="h6">
+                        <span className="h6">
 
-                                {props.course}
+                            {props.course}
 
-                            </span>
+                        </span>
 
-                        </Card.Text>
+                    </Card.Text>
 
-                        <div className="col">
-                            <div className="justify-content-right pl-5">
-                                <Card.Link
-                                    className=""
-                                    href={"https://www.linkedin.com/in/"+ props.linked}
-                                    target="_blank"
-                                >
-                                    <SvgIcon
-                                        height="24px"
-                                        src="linkedin.svg"
-                                        width="24px"
-                                    />
-                                </Card.Link>
+                    <div className="col">
+                        <Card.Link
+                            className=""
+                            href={"https://www.linkedin.com/in/"+ props.linked}
+                            target="_blank"
+                        >
+                            <SvgIcon
+                                height="24px"
+                                src="linkedin.svg"
+                                width="24px"
+                            />
+                        </Card.Link>
 
-                                <Card.Link
-                                    href={"https://www.github.com/"+ props.Git}
-                                    target="_blank"
-                                >
-                                    <SvgIcon
-                                        height="30px"
-                                        src="github.svg"
-                                        width="30px"
-                                    />
-                                </Card.Link>
-                            </div>
-                        </div>
+                        <Card.Link
+                            href={"https://www.github.com/"+ props.Git}
+                            target="_blank"
+                        >
+                            <SvgIcon
+                                height="30px"
+                                src="github.svg"
+                                width="30px"
+                            />
+                        </Card.Link>
                     </div>
 
                     <br />
