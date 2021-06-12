@@ -3,10 +3,19 @@ import './AboutUs.css'
 
 class AboutUs extends React.Component {
     // Noinspection JSCheckFunctionSignatures
+
+
+    componentDidMount() {
+      this.scrollToBottom();
+    }
+
     shouldComponentUpdate() {
         return false;
     }
 
+    scrollToBottom = () => {
+      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
     render() {
         return (
             <div>
@@ -285,6 +294,10 @@ class AboutUs extends React.Component {
                         </div>
                     </div>
                 </div>
+
+                <div
+                    ref={(el) => { this.messagesEnd = el; }}
+                />                
             </div >
         );
 
