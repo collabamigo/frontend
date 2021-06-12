@@ -35,7 +35,7 @@ function AuthenticatedHome() {
                         </Card.Text>
                     </Card.Body>
 
-                    <Card.Footer className="footer-custom mb-4">
+                    <Card.Footer className="footer-custom pb-4">
                         <Link
                             className="col-auto btn btn-primary"
                             to="/help"
@@ -79,7 +79,7 @@ function AuthenticatedHome() {
                         </Card.Text>
                     </Card.Body>
 
-                    <Card.Footer className="footer-custom mb-4">
+                    <Card.Footer className="footer-custom pb-4">
                         <Link
                             className="col-auto btn btn-primary"
                             to="/ask"
@@ -116,7 +116,7 @@ function AuthenticatedHome() {
                         </Card.Text>
                     </Card.Body>
 
-                    <Card.Footer className="footer-custom mb-4">
+                    <Card.Footer className="footer-custom pb-4">
                         <div
                             className="col-auto btn btn-primary disabled"
                         >
