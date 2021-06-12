@@ -110,6 +110,22 @@ class Ask extends React.Component {
                           onChange={this.handleChange}
                           onMatch={this.handleMatch}
                       />
+                      
+                      <div className="text-muted">
+                          Skill not found ? Email us at
+                          {" "}
+
+                          <a
+                              href="mailto:watsonhex@gmail.com ?subject=Skill Not found"
+                              onClick="window.open(this.href)"
+                              onKeyPress="window.open(this.href)"
+                              rel="noreferrer"
+                              target="_blank"
+                          >
+                              watsonhex@gmail.com
+                          </a>
+                      </div>
+                      
                   </div>
 
                   <div className="pt-5 col-6 justify-content-center">

@@ -106,6 +106,21 @@ class Step2 extends React.Component {
                                                     renderInput={this.renderAutocomplete.bind(this)}
                                                     value={this.state.tags}
                                                 />
+
+                                                <div className="text-muted">
+                                                    Skill not found ? Email us at
+                                                    {" "}
+                            
+                                                    <a
+                                                        href="mailto:watsonhex@gmail.com ?subject=Skill Not found"
+                                                        onClick="window.open(this.href)"
+                                                        onKeyPress="window.open(this.href)"
+                                                        rel="noreferrer"
+                                                        target="_blank"
+                                                    >
+                                                        watsonhex@gmail.com
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
