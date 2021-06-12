@@ -17,18 +17,23 @@ class HelpForm extends React.Component{
         this.handlerChangeGithub = this.handlerChangeGithub.bind(this);
         this.handlerChangeLinkedin = this.handlerChangeLinkedin.bind(this);
         this.handlerChangeContact = this.handlerChangeContact.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        const data = {
-            Handle:'',
+
+        this.state ={
+            handle:'',
             Contact:undefined,
             Github: undefined,
             Linkedin:undefined,
+            currentStep: 1,
+            isLoading: false
         }
+    }
 
-        this.state ={
-            ...data,
-            currentStep: 1
-        }
+    componentDidMount() {
+        axios.get(backend+"connect/profile/").then(
+            (res) => this.setState({
+                handle: res.data[0].handle
+            })
+        )
     }
 
     shouldComponentUpdate () {
@@ -36,7 +41,7 @@ class HelpForm extends React.Component{
     }
 
     handlerChangeHandle(e) {
-        this.setState({ Handle: e.target.value })
+        this.setState({ handle: e.target.value })
     }
 
     handlerChangeGithub(e) {
@@ -51,9 +56,6 @@ class HelpForm extends React.Component{
         this.setState({ Contact: e.target.value })
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-    }
 
     handlerNext = () => {
         this.setState({
@@ -68,47 +70,64 @@ class HelpForm extends React.Component{
     }
 
     handlerSubmit = (tags) => {
-        axios.post(backend+"connect/api/teacher/",{
+        this.setState({
+            isLoading: true
+        })
+        axios.post(backend+"connect/teacher/",{
             Contact: this.state.Contact,
             Gitname: this.state.Github,
-            Linkedin: this.state.Linkedin.slice(28),
+            Linkedin: this.state.Linkedin.split("/in/")[1],
             skills: tags,
-        }).then(this.props.handleSubmit())
+        }).then((res) => axios.patch(backend+"connect/profile/"+res.data.id+"/",{
+            handle: this.state.handle
+        }).then((res2) => this.props.handleSubmit({
+            data: [{...res.data,
+            handle: res2.data.handle}]
+        })))
     }
 
-    
-
-
     render() {
-        console.log(this.state.currentStep)
-        console.log(this.state.data)
-        return (
-            <form onSubmit={this.handleSubmit}>
+        if (this.state.isLoading)
+            return (
+                <div className="float-centre">
+                    <div
+                        className="spinner-border"
+                        role="status"
+                    >
+                        <span className="sr-only">
+                            Loading...
+                        </span>
+                    </div>
+                </div>
+                )
+        else
+            return (
+                <div>
 
-                <Step1
-                    Contact={this.state.Contact}
-                    Github={this.state.Github}
-                    Handle={this.state.Handle}
-                    Linkedin={this.state.Linkedin}
-                    currentStep={this.state.currentStep}
-                    handleChangeContact={this.handlerChangeContact}
-                    handleChangeGithub={this.handlerChangeGithub}
-                    handleChangeHandle={this.handlerChangeHandle}
-                    handleChangeLinkedin={this.handlerChangeLinkedin}
-                    handleNext={this.handlerNext}
-                />
+                    <Step1
+                        Contact={this.state.Contact}
+                        Github={this.state.Github}
+                        Linkedin={this.state.Linkedin}
+                        currentStep={this.state.currentStep}
+                        handle={this.state.handle}
+                        handleChangeContact={this.handlerChangeContact}
+                        handleChangeGithub={this.handlerChangeGithub}
+                        handleChangeHandle={this.handlerChangeHandle}
+                        handleChangeLinkedin={this.handlerChangeLinkedin}
+                        handleNext={this.handlerNext}
+                    />
 
-                <Step2
-                    currentStep={this.state.currentStep}
-                    handlePrev={this.handlerPrev}
-                    handleSubmit={this.handlerSubmit}
-                    // onChange={e=> {this.handleSubmit(e)}}
-                />
+                    <Step2
+                        currentStep={this.state.currentStep}
+                        handlePrev={this.handlerPrev}
+                        handleSubmit={this.handlerSubmit}
+                        // onChange={e=> {this.handleSubmit(e)}}
+                    />
 
-                <br />
+                    <br />
 
-            </form>
-        );
+                </div>
+            );
   }
 
 }

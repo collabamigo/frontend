@@ -27,3 +27,4 @@ yarn-error.log*
 firebase-debug.log
 
 src/env.js
+/src/react-app-env.d.ts

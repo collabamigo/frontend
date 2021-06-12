@@ -35,11 +35,10 @@ function rsa_encrypt (plaintext) {
 }
 
 function GoogleSignIn (props) {
-    const [stage, changeStage] = useState("button");
     async function profileExists (googleUser) {
-        if (stage==="button")
+        if (props.stage==="button")
             return {
-                res:await axios.get(backend+"connect/api/profile/?format=json"),
+                res:await axios.get(backend+"connect/profile/?format=json"),
                 googleUser: googleUser
             }
         else
@@ -53,7 +52,7 @@ function GoogleSignIn (props) {
     const [googleUserState, setGoogleUserState] = useState(undefined);
 
     function onSignIn (googleUser) {
-        if (stage==="button") {
+        if (props.stage==="button") {
             const crypto = require('crypto');
             const CryptoJS = require("crypto-js");
 
@@ -88,9 +87,11 @@ function GoogleSignIn (props) {
             if (!res.res.data.length) {
                 if (!googleUserState)
                     setGoogleUserState(res.googleUser);
-                changeStage("form");
+                props.setStage("form");
             }
             else{
+                if (res.res.data[0].id)
+                    localStorage.setItem("id", res.res.data[0].id)
                 if (googleUserState){
                     localStorage.setItem(
                     "userName",
@@ -115,13 +116,13 @@ function GoogleSignIn (props) {
 
     if (props.visibility) {
 
-        if (stage==="button")
+        if (props.stage==="button")
             return (<div
                 className="g-signin2"
                 data-onsuccess="onSignIn"
                 data-theme="dark"
                     />);
-        else if (stage==="form")
+        else if (props.stage==="form")
             return (
                 <FormSignIn
                     emailId={googleUserState.getBasicProfile().getEmail()}
@@ -138,6 +139,8 @@ function GoogleSignIn (props) {
 
 GoogleSignIn.propTypes={
     onClick: PropTypes.func.isRequired,
+    setStage: PropTypes.func.isRequired,
+    stage: PropTypes.string.isRequired,
     visibility: PropTypes.bool.isRequired,
 }
 export default GoogleSignIn;

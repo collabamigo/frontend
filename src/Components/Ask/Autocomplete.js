@@ -8,13 +8,15 @@ import axios from "axios";
 class Autocomplete extends React.Component {
 
     static propTypes = {
+        integrated: PropTypes.bool,
         onChange: PropTypes.func.isRequired,
         onMatch:PropTypes.func.isRequired,
         version: PropTypes.number
     };
 
     static defaultProps = {
-        version:1
+        integrated: false,
+        version:1,
     }
     constructor (props) {
       super(props);
@@ -32,29 +34,31 @@ class Autocomplete extends React.Component {
         return true;
     }
 
-      handleChange = (e) => {
-            axios.get(backend+"autocomplete/",{
-                params:{
-                    query: e.target.value,
-                    cache: this.state.cacheId,
+    handleChange = (e) => {
+    this.setState({
+        suggestions: undefined,
+    })
+        axios.get(backend+"autocomplete/",{
+            params:{
+                query: e.target.value,
+                cache: this.state.cacheId,
+            }
+        }).then(
+            (res) => {
+                this.setState({
+                    suggestions: res.data["recommendations"],
+                    cacheId: res.data["cache_id"]
                 }
-            }).then(
-                (res) => {
-                    this.setState({
-                        suggestions: res.data["recommendations"],
-                        cacheId: res.data["cache_id"]
-                    }
-                    )
-      })
-                .catch((err)=> console.log(err,"err"))
+                )
+    })
 
-          this.setState({
-              activeSuggestion: 0,
-              showSuggestions: true,
-              searchTerm: e.target.value,
-          });
-           this.props.onChange(e.target.value);
-      };
+      this.setState({
+          activeSuggestion: 0,
+          showSuggestions: true,
+          searchTerm: e.target.value,
+      });
+       this.props.onChange(e.target.value);
+    };
 
       handleClick = (e) => {
           this.setState({
@@ -95,7 +99,7 @@ class Autocomplete extends React.Component {
 
                   suggestionsListComponent =
                       (
-                          <ul className="suggestions col-sm-4 col-md-3">
+                          <ul className={"suggestions "+((!this.props.integrated)?" col-9":" col-auto")}>
                               {this.state.suggestions.map((suggestion, index) => {
 
                       let className;
@@ -122,7 +126,7 @@ class Autocomplete extends React.Component {
                       (
                           <div className="no-suggestions">
                               <em>
-                                  No suggestions, you are on your own!
+                                  Be patient while we take your patience
                               </em>
                           </div>
                       );
@@ -130,12 +134,11 @@ class Autocomplete extends React.Component {
           }
 
           return (
-              <>
-                  <div className="row">
-                      <div className="col-sm-1 col-md-1" />
+              <div className="container-fluid">
+                  <div className={"row mx-5 "+((!this.props.integrated)?"justify-content-center":null)}>
 
                       <input
-                          className="col-sm-4 col-md-3"
+                          className={((!this.props.integrated)?"col-9":"col-auto")}
                           onChange={this.handleChange.bind(this)}
                           onKeyDown={this.handleKeyDown.bind(this)}
                           type="text"
@@ -143,13 +146,12 @@ class Autocomplete extends React.Component {
                       />
                   </div>
 
-                  <div className="row">
-                      <div className="col-sm-1 col-md-1" />
+                  <div className={"row mx-5 "+((!this.props.integrated)?"justify-content-center":null)}>
 
                       {suggestionsListComponent}
                   </div>
-              </>
-          );
+              </div>
+          )
 
       }
 

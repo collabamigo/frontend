@@ -2,7 +2,8 @@
 import React from "react"
 import PropTypes from "prop-types";
 import Autocomplete from "../../../Ask/Autocomplete";
-import TagsInput from 'react-tagsinput'
+import TagsInput from 'react-tagsinput';
+import Card from 'react-bootstrap/Card';
 import './tag.css'
 
 class Step2 extends React.Component {
@@ -17,7 +18,6 @@ class Step2 extends React.Component {
         super(props);
         this.state = {
             searchTerm: "",
-            found_match: false,
             temp_l: [],
             tags: [],
         }
@@ -31,31 +31,28 @@ class Step2 extends React.Component {
         this.setState({"searchTerm": value});
     }
 
-    handleMatch = () => {
-        this.setState({"found_match": true});
-    }
-
     handleChangeTag(tags) {
         this.setState({tags: tags})
     }
 
-    renderAutocomplete({addTag, ...props}) {
-        console.log(props)
+    renderAutocomplete({addTag, }) {
         return (
-            <Autocomplete
-                onChange={(val) => this.handleChange(val)}
-                onMatch={(val) => {
-                    this.handleMatch.bind(this)
-                    if (!this.state.tags.includes(val)) {
+            <div>
+                <Autocomplete
+                    onChange={(val) => this.handleChange(val)}
+                    onMatch={(val) => {
+                    if (!this.state.tags.includes(val))
                         addTag(val)
-                    }
                 }}
-                searchTerm={this.state.searchTerm}
-                suggestions={this.state.temp_l}
-                version={2}
-            />
+                    searchTerm={this.state.searchTerm}
+                    suggestions={this.state.temp_l}
+                    version={2}
+                />
+            </div>
+            
         )
     }
+
     handleSubmit() {
         this.props.handleSubmit(this.state.tags)
     }
@@ -74,41 +71,86 @@ class Step2 extends React.Component {
       }
       return null;
     }
+
     render() {
         if (this.props.currentStep !== 2) {
-            console.log(this.state.found_match)
             return null
         }
         return (
-            <div className="form-group">
-                <label className="col-auto col-form-label">
-                    Add your skills
-                </label>
+            <section className="container-fluid">
+                <div className="row" >
 
-                <div className="center">
+                    <div className="col-auto container" >
+                        <Card className="card rounded-5 profilecard container border-primary">
 
+                            <Card.Header className="card-hf-color row">
+                                <div className="h1 float-left col-auto float-left">
+                                    Add your skills
+                                </div>
 
-                    <TagsInput
-                        onChange={this.handleChangeTag.bind(this)}
-                        renderInput={this.renderAutocomplete.bind(this)}
-                        value={this.state.tags}
-                    />
+                                <div className="material-icons-outlined float-right col-auto">
+                                    playlist_add
+                                </div>
+                                
+                            </Card.Header>
+
+                            <Card.Body className="pt-4 mt-0">
+                                <div>
+                                    <div className="form-group justify-content-center">
+
+                                        <div className="row justify-content-center">
+                                            <div className="justify-content-center col-mb-12">
+                                                <TagsInput
+                                                    className="border-0"
+                                                    onChange={this.handleChangeTag.bind(this)}
+                                                    renderInput={this.renderAutocomplete.bind(this)}
+                                                    value={this.state.tags}
+                                                />
+
+                                                <div className="text-muted">
+                                                    Skill not found ? Email us at
+                                                    {" "}
+                            
+                                                    <a
+                                                        href="mailto:watsonhex@gmail.com ?subject=Skill Not found"
+                                                        onClick="window.open(this.href)"
+                                                        onKeyPress="window.open(this.href)"
+                                                        rel="noreferrer"
+                                                        target="_blank"
+                                                    >
+                                                        watsonhex@gmail.com
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+                            </Card.Body>
+
+                            <Card.Footer className="custom-modal-footer-p pb-4">
+                                <div className="row justify-content-center">
+                                    {this.previousButton()}
+
+                                    <div className="pl-2">
+
+                                        <button
+                                            className="btn btn-primary"
+                                            onChange={this.handleChange}
+                                            onClick={this.handleSubmit.bind(this)}
+                                            type="button"
+                                            value="Submit"
+                                        >
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </Card.Footer>
+                        </Card>
+                    </div>
                 </div>
-
-                <br />
-
-                {this.previousButton()}
-
-                <button
-                    className="btn btn-primary mb-2"
-                    onChange={this.handleChange}
-                    onClick={this.handleSubmit.bind(this)}
-                    type="button"
-                    value="Submit"
-                >
-                    Submit
-                </button>
-            </div>
+            </section>
         );
     }
 }

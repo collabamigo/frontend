@@ -1,10 +1,10 @@
 
 import React from "react";
 import "./Ask.css";
-import CardsP from "./CardsP/CardsP";
 import Autocomplete from "./Autocomplete";
 import axios from "axios";
 import backend from "../../env";
+import CardExplorer from "../CardExplorer";
 
 
 class Ask extends React.Component {
@@ -12,13 +12,14 @@ class Ask extends React.Component {
     constructor (props) {
 
         super(props);
+        this.CARDS_PER_PAGE = 4
         this.state = {
-            "searchTerm": "",
-            "temp_l": [],
-            "found_match": false,
-            "tempList": [{}],
-            "list":[],
-            "listIndex":4,
+            searchTerm: "",
+            found_match: false,
+            list:[],
+            loading: false,
+            // validSkill: false,
+            voteAllowedList: [],
         }
 
     }
@@ -30,149 +31,116 @@ class Ask extends React.Component {
 
     handleMatch = (searchTerm) => {
         this.setState({
-            searchTerm: searchTerm
+            searchTerm: searchTerm,
+            found_match: true,
+            list:[]
         })
         this.getTeacherIds(searchTerm)
 
     }
 
-    handleGetNext = () => {
-        axios.get(backend + "connect/teachersdata/", {
-            params: {
-                id_list: JSON.stringify(this.state.list.slice(this.state.listIndex, this.state.listIndex+4))
-            }
-        }).then(r => this.setState((state)  => ({listIndex:state.listIndex+4, tempList:r.data})))
+    handleConnect = (message, teacher_id) => {
+        axios.post(backend+"connect/request/", {
+            teacher_id: teacher_id,
+            message: message,
+            skills: [this.state.searchTerm]
+        }).then(()=> {
+            alert("Your connection request has been sent")
+        })
+            .catch((err) => {
+                if (err.response.data === "THROTTLED")
+                    alert("You have submitted too many requests in the past 24 hours. Please wait before submitting more.")
+                else if (err.response.data === "BLOCKED")
+                    alert("You have already sent a similar request to the same person")
+                else if (err.response.data === "SELF-CONNECTION NOT ALLOWED")
+                    alert("You can't connect with yourself")
+            })
     }
-
-    handleGetPrev =() => {
-        console.log(this.state.list)
-        axios.get(backend + "connect/teachersdata/", {
-            params: {
-                id_list: JSON.stringify(this.state.list.slice(this.state.listIndex-8, this.state.listIndex-4))
-            }
-        }).then(r => this.setState((state)  => ({listIndex:state.listIndex-4, tempList:r.data})))
-    }
-
+    
 
     handleChange = (value) => {
-        this.setState({"searchTerm": value, "found_match":false});
+        this.setState({
+            searchTerm: value, 
+            found_match:false
+        });
     }
 
     getTeacherIds = (searchTerm) => {
-        axios.get(backend+"connect/api/skill/"+ searchTerm ,{
-        params: {
-            format: "json",
-        }
-          })
-            .then((res) => {
-                this.setState({list:res.data["Teacher_set"]})
-                axios.get(backend+"connect/teachersdata/",{
-                     params:{
-                         id_list: JSON.stringify(res.data["Teacher_set"].slice(0,4))
-                     }
-                })
-                    .then((response) => this.setState({
-                        tempList: response.data,
-                        found_match: true}))
-                    .catch((err) => console.log(err));
-            })
-            .catch((err) => console.log(err));
+        this.setState({
+            loading: true
+        })
+        axios.get(backend+"connect/approvals/" ,{
+            params: {
+                format: "json",
+            }
+              })
+            .then((res) =>
+            axios.get(backend+"connect/skill/"+ searchTerm ,)
+                .then((res2) =>
+                    this.setState({list:res2.data["Teacher_set"],
+                        voteAllowedList: res.data,
+                    loading: false,})))
     };
 
     renderCardsIfNeeded() {
         if (this.state.found_match) {
             return (
-                <div>
-
-
-                    {/* TODO: Remove function duplication */}
-
-
-                    {/* TODO: Remove Instagram Handle */}
-
-                    {/* TODO: Add undefined case handling */}
-
-                    <div className="row">
-                        {this.state.tempList.map(item => (
-                            <div
-                                className="col-auto"
-                                key={item.id}
-                            >
-                                <CardsP
-                                    Git={item.Gitname}
-                                    batch={item.degree + ", " + item.course}
-                                    description="My Tech Stack is "
-                                    // insta={"https://www.instagram.com/"+ item.Handle}
-                                    key_value={item.id}
-                                    linked={item.Linkedin}
-                                    name={item.First_Name + " " + item.Last_Name}
-                                    skills={[this.state.searchTerm]}
-                                />
-                            </div>
-                          ))}
-                    </div>
-                    
-                    <div className="row">
-                        <div className="col-auto" />
-
-                        <button
-                            className="btn btn-primary"
-                            onClick={this.handleGetNext}
-                            type="button"
-                        >
-                            Next
-                        </button>
-
-                        <div className="col-auto" />
-
-                        <button
-                            className="btn btn-primary"
-                            onClick={this.handleGetPrev}
-                            type="button"
-                        >
-                            Previous
-                        </button>
-                    </div>
-                </div>
+                <CardExplorer
+                    isLoading={this.state.loading}
+                    layout="grid"
+                    onConnect={this.handleConnect.bind(this)}
+                    parentList={this.state.list}
+                    showConnectAll
+                    showVotingList={[...(this.state.voteAllowedList), localStorage.getItem("id")]}
+                />
             )
         }
         else {
             return (
                 <div className="float-centre">
-                    Loading...
+                    Please select a skill
                 </div>
             )
         }
     }
 
-      render () {
-        console.log(this.state.display,this.state.tempList, this.state.id_list)
-              return (
-                  <div>
-                      <div>
-                          <h1 className="col-sm-5 col-md-5">
+    render () {
+          return (
+              <div className="row m-2">
+                  <div className="col-6">
+                      <h2>
+                          Skill Search
+                      </h2>
+
+                      <Autocomplete
+                          onChange={this.handleChange}
+                          onMatch={this.handleMatch}
+                      />
+
+                      {this.state.searchTerm && !this.state.found_match?
+                          <div className="text-muted">
+                              Skill not found ? Email us at
                               {" "}
-                              Skill Search
 
-                              {" "}
-                          </h1>
-
-                          <Autocomplete
-                              onChange={this.handleChange}
-                              onMatch={this.handleMatch}
-                              suggestions={this.state.temp_l}
-                          />
-                      </div>
-
-                      <div className="row-auto">
-                          <div className="col-auto">
-                              {this.renderCardsIfNeeded()}
-                          </div>
-                      </div>
+                              <a
+                                  href="mailto:watsonhex@gmail.com ?subject=Skill Not found"
+                                  onClick="window.open(this.href)"
+                                  onKeyPress="window.open(this.href)"
+                                  rel="noreferrer"
+                                  target="_blank"
+                              >
+                                  watsonhex@gmail.com
+                              </a>
+                          </div>:null}
+                      
                   </div>
-              );
 
-          }
+                  <div className="pt-5 col-6 justify-content-center">
+                      {this.renderCardsIfNeeded()}
+                  </div>
+              </div>
+          );
+    }
 }
 
 export default Ask;
