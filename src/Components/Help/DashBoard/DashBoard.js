@@ -95,8 +95,49 @@ class DashBoard extends React.Component {
 
                 <Card.Title className="text-center pt-5 container">
                     {' '}
-                    No one has voted you yet , ask your peers to vote you to the the assessment
+                    No one has voted you yet , ask your peers to vote you to the the assessment to see your Voting
                 </Card.Title>
+            )
+        }
+    }
+    
+    handlePieChart(){
+        if (this.props.help_history.length > 0) {
+            return(
+                <Chart
+                    chartType="PieChart"
+                    data={this.state.pi}
+                    // data={[
+                    //             ["skill", 'Percentage covered'],
+                    //             [this.props.skills[0], 53],
+                    //             [this.props.skills[1], 83],
+                    //           ]}
+                    height='80%'
+                    loader={
+                        <div>
+                            Loading Chart
+                        </div>
+                    }
+                    options={{
+                            // title: 'Work Summary',
+                            legend: 'none',
+                            pieSliceText: 'label',
+                            slices: {
+                              1: { offset: 0.1 },
+                              2: { offset: 0.15 },
+                              3: { offset: 0.25 },
+                            },
+                    }}
+                    rootProps={{ 'data-testid': '5' }}
+                    width='auto'
+                />
+            )
+        }
+        else{
+            return(
+                <div>
+                    Help others too see your work graph and your most used skills!!
+                </div>
             )
         }
     }
@@ -200,33 +241,8 @@ class DashBoard extends React.Component {
                                     Work Summary
                                 </h2>
 
-                                <Chart
-                                    chartType="PieChart"
-                                    data={this.state.pi}
-                                    // data={[
-                                    //             ["skill", 'Percentage covered'],
-                                    //             [this.props.skills[0], 53],
-                                    //             [this.props.skills[1], 83],
-                                    //           ]}
-                                    height='80%'
-                                    loader={
-                                        <div>
-                                            Loading Chart
-                                        </div>
-                                            }
-                                    options={{
-                                                // title: 'Work Summary',
-                                                legend: 'none',
-                                                pieSliceText: 'label',
-                                                slices: {
-                                                  1: { offset: 0.1 },
-                                                  2: { offset: 0.15 },
-                                                  3: { offset: 0.25 },
-                                                },
-                                    }}
-                                    rootProps={{ 'data-testid': '5' }}
-                                    width='auto'
-                                />
+                                {this.handlePieChart()}
+
                             </div>
                         </div>
 
@@ -271,12 +287,6 @@ class DashBoard extends React.Component {
                                         </div>
                                         ))}
                                 </Card.Body>
-
-                                <Card.Footer className="header-custom">
-                                    <span className="fssm">
-                                        Lorem Ipsium
-                                    </span>
-                                </Card.Footer>
                             </Card>
                         </div>
                     </div>
