@@ -33,6 +33,7 @@ class Help extends React.Component {
             created:[],
             id:"",
             help_history:[],
+            image:'',
         };
     }
 
@@ -75,7 +76,8 @@ class Help extends React.Component {
             skills:res.data[0]['skills'],
             created:res.data[0]['Created'].split('T')[0],
             id:res.data[0]['id'],
-            help_history:res.data[0]['help_history']})
+            help_history:res.data[0]['help_history'],
+            image:res.data[0]['image']})
     }
 
     handleSkillDelete(item) {
@@ -114,6 +116,7 @@ class Help extends React.Component {
                     downvote={this.state.downvote}
                     git={this.state.git}
                     help_history={this.state.help_history}
+                    image={this.state.image}
                     linkedin={this.state.linkedin}
                     name={this.state.name}
                     onCreate={this.handleSkillCreate.bind(this)}

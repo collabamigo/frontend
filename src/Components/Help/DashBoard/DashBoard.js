@@ -22,6 +22,7 @@ class DashBoard extends React.Component {
         downvote:PropTypes.number.isRequired,
         git:PropTypes.string.isRequired,
         help_history:PropTypes.arrayOf(PropTypes.object).isRequired,
+        image:PropTypes.string.isRequired,
         linkedin:PropTypes.string.isRequired,
         name:PropTypes.string.isRequired,
         onCreate:PropTypes.string.isRequired,
@@ -94,7 +95,7 @@ class DashBoard extends React.Component {
 
                 <Card.Title className="text-center pt-5 container">
                     {' '}
-                    No one has voted you yet , ask your peers to vote you to the the assesment
+                    No one has voted you yet , ask your peers to vote you to the the assessment
                 </Card.Title>
             )
         }
@@ -140,7 +141,7 @@ class DashBoard extends React.Component {
                                         <img
                                             alt="profile_pic"
                                             className="rounded-circle float-center"
-                                            src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+                                            src={this.props.image}
                                         />
                                     </div>
 
@@ -177,7 +178,7 @@ class DashBoard extends React.Component {
 
                                             {this.props.created.slice(8,10) + "th "}
 
-                                            {this.state.months[parseInt(this.props.created.slice(5,7))] + ", "}
+                                            {this.state.months[parseInt(this.props.created.slice(5,7))-1] + ", "}
 
                                             {" "}
 
