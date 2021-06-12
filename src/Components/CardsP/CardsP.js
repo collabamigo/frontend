@@ -112,53 +112,54 @@ function CardsP (props) {
                 </Card.Body>
 
                 <Card.Footer className="footer-custom">
+                    <div className="row justify-content-center">
 
-                    {props.showVoting? (
-                        <>
-                            <span
-                                className={"material-icons"+((props.voteValue === 1)?"":"-outlined")+" col-auto btn float-center pt-0 btn-lg"}
-                                onClick={handleUpVote}
-                            >
-                                thumb_up
-                            </span>
+                        {props.showVoting? (
+                            <>
+                                <span
+                                    className={"material-icons"+((props.voteValue === 1)?"":"-outlined")+" col-auto btn float-center pt-0 btn-lg"}
+                                    onClick={handleUpVote}
+                                >
+                                    thumb_up
+                                </span>
 
-                            <span
-                                className={"material-icons"+((props.voteValue === -1)?"":"-outlined")+" col-auto btn float-center pt-0 btn-lg"}
-                                onClick={handleDownVote}
-                            >
-                                thumb_down
-                            </span>
+                                <span
+                                    className={"material-icons"+((props.voteValue === -1)?"":"-outlined")+" col-auto btn float-center pt-0 btn-lg"}
+                                    onClick={handleDownVote}
+                                >
+                                    thumb_down
+                                </span>
 
-                        </>):null}
+                            </>):null}
 
-                    {props.showVoting && props.showConnect?<div className="col" />:
+                        {props.showVoting && props.showConnect?<div className="col" />:
                             (props.showConnect?<div className="col-auto" />:null)}
 
-                    {props.showConnect?(
-                        <>
-                            <OverlayTrigger
-                                className=""
-                                overlay={connectPopover}
-                                placement="bottom"
-                                rootClose
-                                transition={null}
-                                trigger="click"
-                            >
-                                {({ ref, ...triggerHandler }) => (
-                                    <div
-                                        className="btn btn-primary"
-                                        {...triggerHandler}
-                                    >
-                                        <span ref={ref}>
-                                            Connect
-                                        </span>
-                                    </div>)}
-                            </OverlayTrigger>
+                        {props.showConnect?(
+                            <>
+                                <OverlayTrigger
+                                    className=""
+                                    overlay={connectPopover}
+                                    placement="bottom"
+                                    rootClose
+                                    transition={null}
+                                    trigger="click"
+                                >
+                                    {({ ref, ...triggerHandler }) => (
+                                        <div
+                                            className="btn btn-primary"
+                                            {...triggerHandler}
+                                        >
+                                            <span ref={ref}>
+                                                Connect
+                                            </span>
+                                        </div>)}
+                                </OverlayTrigger>
 
-                            <div className="col-auto" />
-                        </>
+                                <div className="col-auto" />
+                            </>
                     ):null}
-
+                    </div>
                 </Card.Footer>
             </Card>
         </Fade>

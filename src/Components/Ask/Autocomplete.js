@@ -34,31 +34,31 @@ class Autocomplete extends React.Component {
         return true;
     }
 
-      handleChange = (e) => {
-        this.setState({
-            suggestions: undefined
-        })
-            axios.get(backend+"autocomplete/",{
-                params:{
-                    query: e.target.value,
-                    cache: this.state.cacheId,
+    handleChange = (e) => {
+    this.setState({
+        suggestions: undefined,
+    })
+        axios.get(backend+"autocomplete/",{
+            params:{
+                query: e.target.value,
+                cache: this.state.cacheId,
+            }
+        }).then(
+            (res) => {
+                this.setState({
+                    suggestions: res.data["recommendations"],
+                    cacheId: res.data["cache_id"]
                 }
-            }).then(
-                (res) => {
-                    this.setState({
-                        suggestions: res.data["recommendations"],
-                        cacheId: res.data["cache_id"]
-                    }
-                    )
-      })
+                )
+    })
 
-          this.setState({
-              activeSuggestion: 0,
-              showSuggestions: true,
-              searchTerm: e.target.value,
-          });
-           this.props.onChange(e.target.value);
-      };
+      this.setState({
+          activeSuggestion: 0,
+          showSuggestions: true,
+          searchTerm: e.target.value,
+      });
+       this.props.onChange(e.target.value);
+    };
 
       handleClick = (e) => {
           this.setState({

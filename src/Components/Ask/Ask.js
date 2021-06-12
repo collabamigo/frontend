@@ -18,7 +18,8 @@ class Ask extends React.Component {
             found_match: false,
             list:[],
             loading: false,
-            voteAllowedList: []
+            // validSkill: false,
+            voteAllowedList: [],
         }
 
     }
@@ -31,7 +32,8 @@ class Ask extends React.Component {
     handleMatch = (searchTerm) => {
         this.setState({
             searchTerm: searchTerm,
-            found_match: true
+            found_match: true,
+            list:[]
         })
         this.getTeacherIds(searchTerm)
 
@@ -57,7 +59,10 @@ class Ask extends React.Component {
     
 
     handleChange = (value) => {
-        this.setState({"searchTerm": value, "found_match":false});
+        this.setState({
+            searchTerm: value, 
+            found_match:false
+        });
     }
 
     getTeacherIds = (searchTerm) => {
@@ -92,7 +97,7 @@ class Ask extends React.Component {
         else {
             return (
                 <div className="float-centre">
-                    No matches found
+                    Please select a skill
                 </div>
             )
         }
@@ -110,21 +115,22 @@ class Ask extends React.Component {
                           onChange={this.handleChange}
                           onMatch={this.handleMatch}
                       />
-                      
-                      <div className="text-muted">
-                          Skill not found ? Email us at
-                          {" "}
 
-                          <a
-                              href="mailto:watsonhex@gmail.com ?subject=Skill Not found"
-                              onClick="window.open(this.href)"
-                              onKeyPress="window.open(this.href)"
-                              rel="noreferrer"
-                              target="_blank"
-                          >
-                              watsonhex@gmail.com
-                          </a>
-                      </div>
+                      {this.state.searchTerm && !this.state.found_match?
+                          <div className="text-muted">
+                              Skill not found ? Email us at
+                              {" "}
+
+                              <a
+                                  href="mailto:watsonhex@gmail.com ?subject=Skill Not found"
+                                  onClick="window.open(this.href)"
+                                  onKeyPress="window.open(this.href)"
+                                  rel="noreferrer"
+                                  target="_blank"
+                              >
+                                  watsonhex@gmail.com
+                              </a>
+                          </div>:null}
                       
                   </div>
 
