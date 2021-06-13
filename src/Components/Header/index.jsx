@@ -29,7 +29,7 @@ function Header({ isAuthenticated }) {
 
 
     return (
-        <HeaderSection className="pt-3 pr-2 pb-5 pl-2">
+        <HeaderSection className="mt-3 mr-2 mb-3 ml-2">
             <div className="container-fluid lowwla">
                 <div className=" row justify-content-center">
                     <div className="col ml-5">
