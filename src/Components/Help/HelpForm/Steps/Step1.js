@@ -54,14 +54,21 @@ class Step1 extends React.Component {
 
                                     <br />
                                     In order to help others Please register with us
+
+                                    <br />
+
                                 </Card.Header>
 
                                 <Card.Body className="pt-0 mt-0">
+                                    <p className="text-danger float-left">
+                                        * Required
+                                    </p>
+
                                     <form
                                         className="card-body"
                                         onSubmit={this.props.handleNext}
                                     >
-                                        <div className="form-group">
+                                        <div className="form-group required">
                                             <div className="col-auto form-inline col-form-label">
 
                                                 <label>
@@ -81,10 +88,10 @@ class Step1 extends React.Component {
                                             </div>
                                         </div>
 
-                                        <div className="form-group">
+                                        <div className="form-group required">
                                             <div className="col-auto form-inline col-form-label">
 
-                                                <label>
+                                                <label className="required">
                                                     Contact Number
                                                 </label>
 
@@ -103,7 +110,7 @@ class Step1 extends React.Component {
                                             </div>
                                         </div>
 
-                                        <div className="form-group">
+                                        <div className="form-group required">
                                             <label className="col-auto form-inline col-form-label">
                                                 Github Profile
                                             </label>
@@ -120,7 +127,7 @@ class Step1 extends React.Component {
                                             </div>
                                         </div>
 
-                                        <div className="form-group">
+                                        <div className="form-group required">
                                             <label className="col-auto form-inline col-form-label">
                                                 LinkedIn Profile
                                             </label>

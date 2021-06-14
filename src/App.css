@@ -55,4 +55,10 @@ body {
   background-color: var(--background-color-jumbotron) !important;
 }
 
+
+.required label:after {
+    color: #dc3545;
+    content: ' *';
+    display:inline;
+}
 /* Adding Bootstrap values */
