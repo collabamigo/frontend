@@ -15,7 +15,7 @@ function AuthenticatedHome() {
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="h-auto card ml-4 mr-1 zoom-my-card min-vh-80 justify-content-center">
+                <Card className="h-auto card ml-4 mr-1 zoom-my-card min-vh-80 justify-content-center mb-3">
                     <div className="justify-content-center">
                         <SvgIcon
                             src="help_others.svg"
@@ -53,7 +53,7 @@ function AuthenticatedHome() {
                 direction={isMobile?"right":"up"}
                 triggerOnce
             >
-                <Card className="card h-auto mx-2 zoom-my-card">
+                <Card className="card h-auto mx-2 zoom-my-card mb-3">
                     <SvgIcon
                         height="56%"
                         src="ask_for_help.svg"
@@ -96,7 +96,7 @@ function AuthenticatedHome() {
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="card h-auto mx-2 zoom-my-card">
+                <Card className="card h-auto mx-2 zoom-my-card mb-3">
                     <SvgIcon
                         height="56%"
                         src="collaborate.svg"

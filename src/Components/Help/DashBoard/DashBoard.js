@@ -13,6 +13,7 @@ import Oadd from "./modaladd"
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
 class DashBoard extends React.Component {
     // TODO: image link not working
     // TODO: upvote ,downvote chart not working
@@ -123,9 +124,9 @@ class DashBoard extends React.Component {
                             legend: 'none',
                             pieSliceText: 'label',
                             slices: {
-                              1: { offset: 0.1 },
-                              2: { offset: 0.15 },
-                              3: { offset: 0.25 },
+                              0: { offset: 0.1 },
+                              1: { offset: 0.15 },
+                              // 3: { offset: 0.25 },
                             },
                     }}
                     rootProps={{ 'data-testid': '5' }}
@@ -136,7 +137,7 @@ class DashBoard extends React.Component {
         else{
             return(
                 <div>
-                    Help others too see your work graph and your most used skills!!
+                    Help others to see your work graph and your most used skills!!
                 </div>
             )
         }
