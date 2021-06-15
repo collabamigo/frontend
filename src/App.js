@@ -76,7 +76,7 @@ class App extends React.Component {
 
         return (
             <div className="App h-100 w-100">
-                <Suspense fallback={Loading}>
+                <Suspense fallback={<Loading />}>
                     <Router>
                         <>
                             <ExternalHeader isAuthenticated={this.state.signedIn} />
