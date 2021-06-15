@@ -45,9 +45,11 @@ class Ask extends React.Component {
             message: message,
             skills: [this.state.searchTerm]
         }).then(()=> {
+            document.body.click()
             alert("Your connection request has been sent")
         })
             .catch((err) => {
+                document.body.click()
                 if (err.response.data === "THROTTLED")
                     alert("You have submitted too many requests in the past 24 hours. Please wait before submitting more.")
                 else if (err.response.data === "BLOCKED")
@@ -123,9 +125,7 @@ class Ask extends React.Component {
                               {" "}
 
                               <a
-                                  href="mailto:watsonhex@gmail.com ?subject=Skill Not found"
-                                  onClick="window.open(this.href)"
-                                  onKeyPress="window.open(this.href)"
+                                  href={"mailto:watsonhex@gmail.com?subject=Skill Not found&body=Skill: " + this.state.searchTerm}
                                   rel="noreferrer"
                                   target="_blank"
                               >
