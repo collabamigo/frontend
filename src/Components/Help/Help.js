@@ -4,6 +4,7 @@ import DashBoard from "./DashBoard/DashBoard";
 import backend from "../../env";
 import axios from "axios";
 import HelpForm from "./HelpForm/HelpForm";
+import Loading from "../../common/Loading";
 
 function removeItemAll(arr, value) {
   let i = 0;
@@ -89,16 +90,7 @@ class Help extends React.Component {
     
     render() {
         if (this.state.loading)
-            return(
-                <div
-                    className="spinner-border"
-                    role="status"
-                >
-                    <span className="sr-only">
-                        Loading...
-                    </span>
-                </div>
-            )
+            return <Loading />
 
         else if (this.state.isTeacher) {
             return (

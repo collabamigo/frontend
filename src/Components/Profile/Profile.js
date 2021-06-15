@@ -8,6 +8,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import {Popover} from 'react-bootstrap';
 import SvgIcon from "../../common/SvgIcon";
 import {isMobile} from "react-device-detect";
+import Loading from "../../common/Loading";
 
 
 const popoverRight = (
@@ -153,18 +154,7 @@ class Profile extends React.Component{
 
   render() {
         if (this.state.loading)
-            return(
-                <div>
-                    <div
-                        className="spinner-border"
-                        role="status"
-                    >
-                        <span className="sr-only">
-                            Loading...
-                        </span>
-                    </div>
-                </div>
-                )
+            return <Loading />
         else
             return (
                 <section className="container-fluid lowwl mt-0">

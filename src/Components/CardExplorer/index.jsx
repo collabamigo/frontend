@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import CardsP from "../CardsP/CardsP";
 import axios from "axios";
 import backend from "../../env";
+import Loading from "../../common/Loading";
 
 
 class CardExplorer extends React.Component{
@@ -106,18 +107,7 @@ class CardExplorer extends React.Component{
 
     render () {
     if (this.state.isLoading || this.props.isLoading)
-        return (
-            <div className="float-centre">
-                <div
-                    className="spinner-border"
-                    role="status"
-                >
-                    <span className="sr-only">
-                        Loading...
-                    </span>
-                </div>
-            </div>
-            )
+        return <Loading />
     else if (this.props.parentList && this.props.parentList.length)
         return (
             <div className="justify-content-center">

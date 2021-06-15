@@ -3,6 +3,7 @@ import React from 'react'
 import axios from "axios";
 import PropTypes from "prop-types";
 import backend from "../../env";
+import Loading from "../../common/Loading";
 
 class FormSignIn extends React.Component {
     static propTypes = {
@@ -89,18 +90,7 @@ class FormSignIn extends React.Component {
 
   render() {
     if (this.state.isLoading)
-        return (
-            <div className="float-centre">
-                <div
-                    className="spinner-border"
-                    role="status"
-                >
-                    <span className="sr-only">
-                        Loading...
-                    </span>
-                </div>
-            </div>
-            )     
+        return <Loading />     
     else
         return (
             <>
