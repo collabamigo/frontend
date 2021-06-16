@@ -127,6 +127,7 @@ class CardExplorer extends React.Component{
                                 name={item.First_Name + " " + item.Last_Name}
                                 onConnect={this.props.onConnect}
                                 onVote={this.handleVote.bind(this)}
+                                pid={item.id}
                                 showConnect={this.props.showConnectAll || this.props.showConnectList.includes(item.id)}
                                 showVoting={this.props.showVotingAll || this.props.showVotingList.includes(item.id)}
                                 voteValue={(this.state.voteValues[item.id]!==undefined)?this.state.voteValues[item.id]:0}
