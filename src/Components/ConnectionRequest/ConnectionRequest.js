@@ -14,7 +14,7 @@ class ConnectionRequest extends React.Component{
         super(props);
         this.state={
             checked:false,
-            class_change:"badge badge-warning"
+            class_change:"badge badge-danger"
         }
         this.query = useQuery()
     }
@@ -26,7 +26,7 @@ class ConnectionRequest extends React.Component{
     handleCheckboxChange = (e) => {
         this.setState({checked: e.target.checked})
         if (this.state.checked === true) {
-            this.setState({class_change:"badge badge-warning"})
+            this.setState({class_change:"badge badge-danger"})
         }
         else{
             this.setState({class_change:"badge badge-success"})
@@ -34,7 +34,6 @@ class ConnectionRequest extends React.Component{
     }
 
     handleSubmit = (e) => {
-
         axios.post(backend+"connect/approve/", {
             request_id: this.query.get("request_id"),
             mobile: this.state.checked?1:0})
@@ -60,46 +59,56 @@ class ConnectionRequest extends React.Component{
             return(
                 <div>
                     <p>
-                        <h4>
+                        <h1>
                             Eager to work with your next peers ?
                             <br />
-                            Feel free to increase connectivity with your peers
-                        </h4>
+                            Feel free to increase connectivity
+                        </h1>
 
-                        Data we are sharing:
+                        <h3 className="font-italic">
+                            Data we are sharing:
+                        </h3>
+
                         <br />
+                        
+                        <div className="col-auto">
+                            <div className="row-auto">
+                                <span className="badge badge-success col-auto">
+                                    Social Handle
+                                </span>
 
-                        <span className="badge badge-success col-auto">
-                            Social Handle
-                        </span>
+                                <span>
+                                     &nbsp;
+                                     &nbsp;
+                                </span>
 
-                        <span>
-                             &nbsp;
-                             &nbsp;
-                        </span>
+                                <span className="badge badge-success col-auto">
+                                    Github Username
+                                </span>
 
-                        <span className="badge badge-success col-auto">
-                            Github Username
-                        </span>
+                                <span>
+                                 &nbsp;
+                                 &nbsp;
+                                </span>
 
-                        <span>
-                             &nbsp;
-                             &nbsp;
-                        </span>
+                            </div>
 
-                        <span className="badge badge-success col-auto">
-                            Email Address
-                        </span>
+                            <div className="row-auto">
+                                <span className="badge badge-success col-auto">
+                                    Email Address
+                                </span>
 
-                        <span>
-                             &nbsp;
-                             &nbsp;
-                        </span>
+                                <span>
+                                 &nbsp;
+                                 &nbsp;
+                                </span>
 
-                        <span className={this.state.class_change}>
-                            Contact Number
-                        </span>
-
+                                <span className={this.state.class_change}>
+                                    Contact Number
+                                </span>
+                            </div>
+                        </div>
+                        
                     </p>
 
                     <form>
@@ -115,7 +124,7 @@ class ConnectionRequest extends React.Component{
                                 className="form-check-label"
                                 htmlFor="exampleCheck1"
                             >
-                                Check me out
+                                Share Contact number
                             </label>
 
                             <br />
