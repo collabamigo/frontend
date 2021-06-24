@@ -21,9 +21,9 @@ class HelpForm extends React.Component{
 
         this.state ={
             handle:'',
-            Contact:undefined,
-            Github: undefined,
-            Linkedin:undefined,
+            Contact:"",
+            Github: "",
+            Linkedin:"",
             currentStep: 1,
             isLoading: false
         }

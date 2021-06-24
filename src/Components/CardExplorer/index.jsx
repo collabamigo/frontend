@@ -62,7 +62,7 @@ class CardExplorer extends React.Component{
 
     handleVote(teacherId, vote) {
         if (teacherId===localStorage.getItem("id")) {
-            window.alert("You tried to upvote yourself. OOPS")
+            window.alert("You tried to vote for yourself. OOPS")
             window.location="oops"
         }
         this.setState((state) => ({

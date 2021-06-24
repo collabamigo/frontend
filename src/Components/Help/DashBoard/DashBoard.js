@@ -83,11 +83,10 @@ class DashBoard extends React.Component {
     handleDoughnut () {
         if (this.props.upvote > 0 || this.props.downvote>0){
             return(
-                <Doughnut
+                <Doughnut 
+                    cutoutPercentage={50}
                     data={this.state.dataDoughnut}
-                    height={10}
-                    options={{ responsive: true, maintainAspectRatio: true}}
-                    width={10}
+                    options={{ responsive: true, maintainAspectRatio: false}}
                 />
             )
         }
@@ -345,7 +344,7 @@ class DashBoard extends React.Component {
 
                         <div className="col">
                             <Card className="card_dashboard m-2 card card-votes">
-                                <Card.Body className="col-md-12">
+                                <Card.Body className="container col-md-12 ">
 
                                     {this.handleDoughnut()}
 

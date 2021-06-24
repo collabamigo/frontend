@@ -64,6 +64,8 @@ class Step1 extends React.Component {
                                         * Required
                                     </p>
 
+                                    <br />
+
                                     <form
                                         className="card-body"
                                         onSubmit={this.props.handleNext}
@@ -168,7 +170,7 @@ class Step1 extends React.Component {
                                     />
 
                                     <h4 className="">
-                                        Now that you are here let&#39; brainstorm together
+                                        Now that you are here let&#39;s brainstorm together
                                     </h4>
                                 </div>
                             </div>)}
