@@ -40,8 +40,11 @@ class ConnectionRequest extends React.Component{
             .then(res => {
                 if (res.status === 208)
                     alert("You have already approved this connection request")
-                else if (res.status === 200)
-                    alert("Request successfully approved")
+                else if (res.status === 200) {
+                    alert("Request successfully approved. Redirecting to homepage")
+                    window.location = "/"
+                }
+
           })
         e.preventDefault()
     }
