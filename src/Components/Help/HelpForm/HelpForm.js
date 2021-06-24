@@ -26,6 +26,7 @@ class HelpForm extends React.Component{
             Linkedin:"",
             currentStep: 1,
             isLoading: false
+            // heemank is dumb
         }
     }
 
