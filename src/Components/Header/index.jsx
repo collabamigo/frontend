@@ -5,7 +5,6 @@ import { withTranslation } from "react-i18next";
 import { SvgIcon } from "../../common/SvgIcon";
 import {
     HeaderSection,
-    LogoContainer,
     NotHidden,
     Outline,
     Burger,
@@ -33,7 +32,7 @@ function Header({ isAuthenticated }) {
             <div className="container-fluid lowwla">
                 <div className=" row justify-content-center">
                     <div className="col ml-5">
-                        <LogoContainer
+                        <a
                             aria-label="homepage"
                             className='col-auto'
                             href="/"
@@ -43,10 +42,10 @@ function Header({ isAuthenticated }) {
                                 src="logo.svg"
                                 width="300px"
                             />
-                        </LogoContainer>
+                        </a>
                     </div>
 
-                    <div className="col-1" />
+                    <div className="col" />
 
                     {isAuthenticated ?
                         <>
