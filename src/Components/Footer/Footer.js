@@ -14,7 +14,7 @@ class Footer extends React.Component {
             <section>
                 <div className="footer row">
                     <div className="link-footer col-md-7">
-                        <b className="float-right pr-4">
+                        <b className="float-right pr-5">
                             
                             {" "}
 
