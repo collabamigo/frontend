@@ -6,7 +6,8 @@ export const HeaderSection = styled("header")`
     align-items: center;
     text-align: center;
   }
-     // background-color: #efefef;
+  width:95%;
+  // background-color: #406fbf;
 
 `;
 

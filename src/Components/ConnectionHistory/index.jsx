@@ -35,10 +35,9 @@ class ConnectionHistory extends React.Component {
             )
         else
             return (
-                <div>
-                    Previous Connections are shown here as of now
-                    No connections are available.
-                </div>
+                <>
+                    Your Connections will be shown here once you connect with others
+                </>
             )
     }
 

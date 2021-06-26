@@ -174,7 +174,6 @@ class App extends React.Component {
                                 </div>
                             </Route>
 
-                            {/*<Footer />*/}
                         </>
                     </Router>
                 </Suspense>
