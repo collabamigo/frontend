@@ -47,40 +47,37 @@ function Header({ isAuthenticated }) {
 
                     <div className="col" />
 
-                    {isAuthenticated ?
-                        <>
-                            <NotHidden>
-                                <DropdownMenu />
-                            </NotHidden>
+                    <NotHidden>
+                        <DropdownMenu isAuthenticated={isAuthenticated} />
+                    </NotHidden>
 
-                            <Burger onClick={showDrawer}>
-                                <Outline />
-                            </Burger>
+                    <Burger onClick={showDrawer}>
+                        <Outline />
+                    </Burger>
 
-                            <Drawer
-                                closable={false}
-                                onClose={onClose}
-                                visible={visible}
-                            >
-                                <div
-                                    className="col mb-4"
-                                >
-                                    <Label onClick={onClose}>
-                                        <div className="col">
-                                            <Menu>
-                                                Menu
-                                            </Menu>
-                                        </div>
-
-                                        <div className="col">
-                                            <Outline />
-                                        </div>
-                                    </Label>
+                    <Drawer
+                        closable={false}
+                        onClose={onClose}
+                        visible={visible}
+                    >
+                        <div
+                            className="col mb-4"
+                        >
+                            <Label onClick={onClose}>
+                                <div className="col">
+                                    <Menu>
+                                        Menu
+                                    </Menu>
                                 </div>
 
-                                <DropdownMenu />
-                            </Drawer>
-                        </> : null}
+                                <div className="col">
+                                    <Outline />
+                                </div>
+                            </Label>
+                        </div>
+
+                        <DropdownMenu isAuthenticated={isAuthenticated} />
+                    </Drawer>
                 </div>
             </div>
         </HeaderSection >
