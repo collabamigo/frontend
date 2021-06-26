@@ -40,7 +40,7 @@ class AboutUs extends React.Component {
                                     <div className="col-md-11">
                                         <img
                                             className="img-fluid rounded-circle"
-                                            src="https://i.imgur.com/E7GyC8A.jpg"
+                                            src="/img/jpg/never.jpg"
                                         />
                                     </div>
 
@@ -131,7 +131,7 @@ class AboutUs extends React.Component {
                                     <div className="col-md-11">
                                         <img
                                             className="img-fluid rounded-circle"
-                                            src="https://i.imgur.com/tx3AYvP.jpg"
+                                            src="/img/jpg/gonna.jpg"
                                         />
                                     </div>
 
@@ -220,7 +220,7 @@ class AboutUs extends React.Component {
                                     <div className="col-md-11">
                                         <img
                                             className="img-fluid rounded-circle"
-                                            src="https://i.imgur.com/y624kGA.jpg"
+                                            src="/img/jpg/give_you_up.jpg"
                                         />
                                     </div>
 

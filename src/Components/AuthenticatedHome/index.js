@@ -19,7 +19,7 @@ function AuthenticatedHome() {
                     <div className="justify-content-center">
                         <SvgIcon
                             src="help_others.svg"
-                            width="75%"
+                            width="97%"
                         />
                     </div>
 
