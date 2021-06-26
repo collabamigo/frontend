@@ -11,32 +11,38 @@ class Footer extends React.Component {
 
     render() {
         return (
-            <div className="footer justify-content-center">
+            <section>
+                <div className="footer row">
+                    <div className="link-footer col-md-7">
+                        <b className="float-right pr-4">
+                            
+                            {" "}
 
-                <b className="link-footer">
-                    &#169; 2021
-                    {" "}
+                            <a
+                                className="link-footer"
+                                href="https://github.com/watson-hex"
+                                rel="noreferrer"
+                                target="_blank"
+                            >
+                                Watson-Hex &#169; 2021
+                            </a>
+                        </b>
+                    </div>
 
-                    <a
-                        className="link-footer"
-                        href="https://github.com/watson-hex"
-                        rel="noreferrer"
-                        target="_blank"
-                    >
-                        Watson-Hex
-                    </a>
-                </b>
-
-                <a
-                    className="float-right text-black-50"
-                    href="https://forms.gle/MScukDTAhm2N3ixA8"
-                    rel="noreferrer"
-                    target="_blank"
-                >
-                    Review us
-                </a>
+                    <div className="col-md-5 float-right">
+                        <a
+                            className="text-black-50 float-right pr-3"
+                            href="https://forms.gle/MScukDTAhm2N3ixA8"
+                            rel="noreferrer"
+                            target="_blank"
+                        >
+                            Review us
+                        </a>
+                    </div>
                     
-            </div>
+                </div>
+            </section>
+
         )
     }
 
