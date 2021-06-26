@@ -27,7 +27,19 @@ class ConnectionHistory extends React.Component {
         return true;
     }
 
-
+    caller() {
+        if ((this.state.list).length > 0)
+            return (
+                this.renderCardsIfNeeded()
+            )
+        else
+            return (
+                <div>
+                    Previous Connections are shown here as of now
+                    No connections are available.
+                </div>
+            )
+    }
 
     getTeacherIds = () => {
         axios.get(backend + "connect/approvals/", {
@@ -86,7 +98,7 @@ class ConnectionHistory extends React.Component {
                         <Card.Body>
                             <div className="row-auto pt-5">
                                 <div className="col-auto pl-lg-5">
-                                    {this.renderCardsIfNeeded()}
+                                    {this.caller()}
                                 </div>
                             </div>
 
