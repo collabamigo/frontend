@@ -13,6 +13,7 @@ import axios from "axios";
 import UnauthenticatedHome from "./Components/UnauthenticatedHome/UnauthenticatedHome";
 import ExternalHeader from "./Components/Header";
 import Loading from "./common/Loading";
+import Footer from "./Components/Footer/Footer";
 
 const Help = lazy(() => import("./Components/Help/Help"))
 const Ask = lazy(()=> import("./Components/Ask/Ask"))
@@ -177,6 +178,8 @@ class App extends React.Component {
                         </>
                     </Router>
                 </Suspense>
+
+                <Footer />
             </div >
         );
 
