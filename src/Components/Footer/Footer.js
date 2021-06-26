@@ -15,9 +15,6 @@ class Footer extends React.Component {
                 <div className="footer row">
                     <div className="link-footer col-md-7">
                         <b className="float-right pr-5">
-                            
-                            {" "}
-
                             <a
                                 className="link-footer"
                                 href="https://github.com/watson-hex"
