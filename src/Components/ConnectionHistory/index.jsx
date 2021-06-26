@@ -28,7 +28,8 @@ class ConnectionHistory extends React.Component {
     }
 
     caller() {
-        if ((this.state.list).length > 0)
+
+        if ((this.state.list).length > 1)
             return (
                 this.renderCardsIfNeeded()
             )
