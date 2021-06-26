@@ -41,7 +41,7 @@ function AuthenticatedHome() {
                             className="col-auto btn btn-primary"
                             to="/help"
                         >
-                            Help others
+                            Lets Collaborate
                         </Link>
                     </Card.Footer>
                     
