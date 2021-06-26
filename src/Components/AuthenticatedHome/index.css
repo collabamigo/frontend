@@ -1,9 +1,10 @@
 .zoom-my-card {
     transition: transform .2s;
+    min-height: 80vh !important;
 }
 
 .zoom-my-card:hover {
-    transform: scale(1.08);
+    transform: scale(1.06);
 }
 
 .footer-custom {

@@ -40,7 +40,7 @@ class AboutUs extends React.Component {
                                     <div className="col-md-11">
                                         <img
                                             className="img-fluid rounded-circle"
-                                            src="https://i.imgur.com/E7GyC8A.jpg"
+                                            src="/img/jpg/never.jpg"
                                         />
                                     </div>
 
@@ -63,6 +63,8 @@ class AboutUs extends React.Component {
                                                     <a
                                                         className="text-decoration-none d-block px-1 linkedin"
                                                         href="https://www.linkedin.com/in/devmrfitz/"
+                                                        rel="noreferrer"
+                                                        target="_blank"
                                                     >
                                                         <svg
                                                             className="bi bi-linkedin"
@@ -101,6 +103,8 @@ class AboutUs extends React.Component {
                                                     <a
                                                         className="text-decoration-none d-block px-1 instagram"
                                                         href="https://www.instagram.com/apsaditya51/"
+                                                        rel="noreferrer"
+                                                        target="_blank"
                                                     >
                                                         <svg
                                                             className="bi bi-instagram"
@@ -127,7 +131,7 @@ class AboutUs extends React.Component {
                                     <div className="col-md-11">
                                         <img
                                             className="img-fluid rounded-circle"
-                                            src="https://i.imgur.com/tx3AYvP.jpg"
+                                            src="/img/jpg/gonna.jpg"
                                         />
                                     </div>
 
@@ -150,6 +154,8 @@ class AboutUs extends React.Component {
                                                     <a
                                                         className="text-decoration-none d-block px-1 linkedin  "
                                                         href="https://www.linkedin.com/in/heemankv"
+                                                        rel="noreferrer"
+                                                        target="_blank"
                                                     >
                                                         <svg
                                                             className="bi bi-linkedin"
@@ -188,6 +194,8 @@ class AboutUs extends React.Component {
                                                     <a
                                                         className="text-decoration-none d-block px-1 instagram"
                                                         href="https://www.instagram.com/heemank_v/"
+                                                        rel="noreferrer"
+                                                        target="_blank"
                                                     >
                                                         <svg
                                                             className="bi bi-instagram"
@@ -212,7 +220,7 @@ class AboutUs extends React.Component {
                                     <div className="col-md-11">
                                         <img
                                             className="img-fluid rounded-circle"
-                                            src="https://i.imgur.com/y624kGA.jpg"
+                                            src="/img/jpg/give_you_up.jpg"
                                         />
                                     </div>
 
@@ -235,6 +243,9 @@ class AboutUs extends React.Component {
                                                     <a
                                                         className="text-decoration-none d-block px-1 linkedin"
                                                         href="https://www.linkedin.com/in/shikhar-sharma-007/"
+                                                        rel="noreferrer"
+                                                        target="_blank"
+                                                        
                                                     >
                                                         <svg
                                                             className="bi bi-linkedin"
@@ -273,6 +284,8 @@ class AboutUs extends React.Component {
                                                     <a
                                                         className="text-decoration-none d-block px-1 instagram"
                                                         href="https://www.instagram.com/shikhar_s_/"
+                                                        rel="noreferrer"
+                                                        target="_blank"
                                                     >
                                                         <svg
                                                             className="bi bi-instagram"

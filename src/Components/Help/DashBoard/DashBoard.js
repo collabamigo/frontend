@@ -13,6 +13,7 @@ import Oadd from "./modaladd"
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
 class DashBoard extends React.Component {
     // TODO: image link not working
     // TODO: upvote ,downvote chart not working
@@ -82,11 +83,10 @@ class DashBoard extends React.Component {
     handleDoughnut () {
         if (this.props.upvote > 0 || this.props.downvote>0){
             return(
-                <Doughnut
+                <Doughnut 
+                    cutoutPercentage={50}
                     data={this.state.dataDoughnut}
-                    height={10}
-                    options={{ responsive: true, maintainAspectRatio: true}}
-                    width={10}
+                    options={{ responsive: true, maintainAspectRatio: false}}
                 />
             )
         }
@@ -123,9 +123,9 @@ class DashBoard extends React.Component {
                             legend: 'none',
                             pieSliceText: 'label',
                             slices: {
-                              1: { offset: 0.1 },
-                              2: { offset: 0.15 },
-                              3: { offset: 0.25 },
+                              0: { offset: 0.1 },
+                              1: { offset: 0.15 },
+                              // 3: { offset: 0.25 },
                             },
                     }}
                     rootProps={{ 'data-testid': '5' }}
@@ -136,7 +136,7 @@ class DashBoard extends React.Component {
         else{
             return(
                 <div>
-                    Help others too see your work graph and your most used skills!!
+                    Help others to see your work graph and your most used skills!!
                 </div>
             )
         }
@@ -235,126 +235,130 @@ class DashBoard extends React.Component {
                         </div>
                     </div>
 
-                    <div className="row">
-                        <div className="col">
-                            <div className="pieChart">
-                                <br />
+                    <div className="pb-5">
+                        <div className="row">
+                            <div className="col">
+                                <div className="pieChart">
+                                    <br />
 
-                                <h2>
-                                    Work Summary
-                                </h2>
+                                    <h2>
+                                        Work Summary
+                                    </h2>
 
-                                {this.handlePieChart()}
+                                    {this.handlePieChart()}
 
+                                </div>
+                            </div>
+
+                            <div className="col">
+                                <Card className="card_dashboard m-2 card card-trending">
+                                    <Card.Header className="h2 header-custom">
+                                        Trending Skills
+                                    </Card.Header>
+
+                                    <Card.Body className="card-body col-md-12 mt-4 overflow-auto">
+                                    
+
+                                        {this.state.trendingSkills.map(item => (
+                                            <div
+                                                className="col-auto container-fluid lool"
+                                                key={item}
+                                            >
+                                                <ol 
+                                                    className="list-group mt-1"
+                                                    key={item}
+                                                >
+                                                    <li className="d-flex justify-content-between align-items-start fsxxl container-fluid">
+                                                        <div className="ms-2 me-auto">
+                                                            <div className="fssm">
+                                                                {capitalizeFirstLetter(item["name"])}
+                                                            </div>
+                                                        </div>
+
+                                                        <span className="badge rounded-pill">
+                                                            <span >
+                                                                <SvgIcon
+                                                                    height="34px"
+                                                                    src="trending_up_black_48dp.svg"
+                                                                    width="43px"
+                                                                />
+                                                            </span>
+
+                                                            {item["count"]}
+                                                        </span>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        ))}
+                                    </Card.Body>
+                                </Card>
                             </div>
                         </div>
 
-                        <div className="col">
-                            <Card className="card_dashboard m-2 card card-trending">
-                                <Card.Header className="h2 header-custom">
-                                    Trending Skills
-                                </Card.Header>
 
-                                <Card.Body className="card-body col-md-12 mt-4 overflow-auto">
+                        <div className="row">
+                            <div className="col">
+                                <Card className="card_dashboard m-2 card card-trending">
+                                    <Card.Header className="h2 header-custom">
+                                        Skill Bar
+                                        <Oadd
+                                            onCreate={this.props.onCreate}
+                                            setSkills={this.props.setSkills}
+                                            skills={this.props.skills}
+                                        />
+                                    </Card.Header>
+
+                                    <Card.Body className="overflow-auto">
                                     
 
-                                    {this.state.trendingSkills.map(item => (
-                                        <div
-                                            className="col-auto container-fluid lool"
-                                            key={item}
-                                        >
-                                            <ol 
-                                                className="list-group mt-1"
+                                        {this.props.skills.map(item => (
+                                            <div
+                                                className="container-fluid lool"
                                                 key={item}
                                             >
-                                                <li className="d-flex justify-content-between align-items-start fsxxl container-fluid">
-                                                    <div className="ms-2 me-auto">
-                                                        <div className="fssm">
-                                                            {capitalizeFirstLetter(item["name"])}
+
+                                                <ol
+                                                    className="list-group"
+                                                    key={item}
+                                                >
+                                                    <li className="d-flex justify-content-between flex-lg-row pb-3">
+                                                        <div className="ms-2 me-auto">
+                                                            <div className="fsxxl">
+                                                                {capitalizeFirstLetter(item)}
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <span className="badge rounded-pill">
-                                                        <span >
-                                                            <SvgIcon
-                                                                height="34px"
-                                                                src="trending_up_black_48dp.svg"
-                                                                width="43px"
-                                                            />
-                                                        </span>
-
-                                                        {item["count"]}
-                                                    </span>
-                                                </li>
-                                            </ol>
-                                        </div>
-                                        ))}
-                                </Card.Body>
-                            </Card>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col">
-                            <Card className="card_dashboard m-2 card card-trending">
-                                <Card.Header className="h2 header-custom">
-                                    Skill Bar
-                                    <Oadd
-                                        onCreate={this.props.onCreate}
-                                        setSkills={this.props.setSkills}
-                                        skills={this.props.skills}
-                                    />
-                                </Card.Header>
-
-                                <Card.Body className="overflow-auto">
-                                    
-
-                                    {this.props.skills.map(item => (
-                                        <div
-                                            className="container-fluid lool"
-                                            key={item}
-                                        >
-
-                                            <ol
-                                                className="list-group"
-                                                key={item}
-                                            >
-                                                <li className="d-flex justify-content-between flex-lg-row pb-3">
-                                                    <div className="ms-2 me-auto">
-                                                        <div className="fsxxl">
-                                                            {capitalizeFirstLetter(item)}
-                                                        </div>
-                                                    </div>
-
-                                                    <Odal
-                                                        item={item}
-                                                        onDelete={this.props.onDelete}
-                                                    />
-                                                </li>
-                                            </ol>
-                                        </div>
+                                                        <Odal
+                                                            item={item}
+                                                            onDelete={this.props.onDelete}
+                                                        />
+                                                    </li>
+                                                </ol>
+                                            </div>
                                         ))}
 
                                     
-                                </Card.Body>
-                            </Card>
+                                    </Card.Body>
+                                </Card>
 
 
-                        </div>
+                            </div>
 
-                        <div className="col">
-                            <Card className="card_dashboard m-2 card card-votes">
-                                <Card.Body className="col-md-12">
+                            <div className="col">
+                                <Card className="card_dashboard m-2 card card-votes">
+                                    <Card.Body className="container col-md-12 ">
 
-                                    {this.handleDoughnut()}
+                                        {this.handleDoughnut()}
 
-                                </Card.Body>
+                                    </Card.Body>
 
-                            </Card>
+                                </Card>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         );
     }
 }

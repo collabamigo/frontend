@@ -77,7 +77,8 @@ function CardsP (props) {
 
                         <span className="h6">
 
-                            {props.course}
+                            {props.course + "-" + props.key_value.substring(1,3)}
+
 
                         </span>
 
@@ -180,6 +181,7 @@ CardsP.propTypes = {
     showConnect: PropTypes.bool,
     showVoting: PropTypes.bool,
     voteValue: PropTypes.number,
+    
 }
 
 CardsP.defaultProps = {

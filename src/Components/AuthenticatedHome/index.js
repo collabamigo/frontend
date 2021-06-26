@@ -11,16 +11,17 @@ function AuthenticatedHome() {
     return (
         <div className="row container-fluid h-75 w-100 justify-content-center">
             <Fade
-                className="col-lg-4 col-md-6 col-sm-12 h-100 mt-2 mb-3"
+                className="col-lg-4 col-md-6 col-sm-12 h-auto mt-2 mb-3"
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="h-100 card ml-4 mr-1 zoom-my-card">
-                    <SvgIcon
-                        height="56%"
-                        src="help_others.svg"
-                        width="100%"
-                    />
+                <Card className="h-auto card ml-4 mr-1 zoom-my-card min-vh-80 justify-content-center mb-3">
+                    <div className="justify-content-center">
+                        <SvgIcon
+                            src="help_others.svg"
+                            width="97%"
+                        />
+                    </div>
 
                     <Card.Body className="mt-3">
                         <Card.Title className="font-weight-bold header-color">
@@ -29,9 +30,9 @@ function AuthenticatedHome() {
 
                         <br />
 
-                        <Card.Text className="card-text h5 text-muted ">
+                        <Card.Text className="card-text text-muted h5">
                             Solve other&apos;s doubts and be the mentor you always wanted.
-                            Using our platform you can reach a larger curious community.
+                            Using our platform you can reach a larger community.
                         </Card.Text>
                     </Card.Body>
 
@@ -40,7 +41,7 @@ function AuthenticatedHome() {
                             className="col-auto btn btn-primary"
                             to="/help"
                         >
-                            Help others
+                            Lets Collaborate
                         </Link>
                     </Card.Footer>
                     
@@ -48,11 +49,11 @@ function AuthenticatedHome() {
             </Fade>
 
             <Fade
-                className="col-lg-4 col-md-6 col-sm-12 h-100 mt-2 mb-3"
+                className="col-lg-4 col-md-6 col-sm-12 h-auto mt-2 mb-3"
                 direction={isMobile?"right":"up"}
                 triggerOnce
             >
-                <Card className="card h-100 mx-2 zoom-my-card">
+                <Card className="card h-auto mx-2 zoom-my-card mb-3">
                     <SvgIcon
                         height="56%"
                         src="ask_for_help.svg"
@@ -91,11 +92,11 @@ function AuthenticatedHome() {
             </Fade>
 
             <Fade
-                className="col-lg-4 col-md-6 col-sm-12 h-100 mt-2 mb-3"
+                className="col-lg-4 col-md-6 col-sm-12 h-auto mt-2 mb-3"
                 direction={isMobile?"left":"up"}
                 triggerOnce
             >
-                <Card className="card h-100 mx-2 zoom-my-card">
+                <Card className="card h-auto mx-2 zoom-my-card mb-3">
                     <SvgIcon
                         height="56%"
                         src="collaborate.svg"

@@ -5,7 +5,6 @@ import { withTranslation } from "react-i18next";
 import { SvgIcon } from "../../common/SvgIcon";
 import {
     HeaderSection,
-    LogoContainer,
     NotHidden,
     Outline,
     Burger,
@@ -29,11 +28,11 @@ function Header({ isAuthenticated }) {
 
 
     return (
-        <HeaderSection className="pt-3 pr-2 pb-5 pl-2">
-            <div className="container-fluid lowwla">
+        <HeaderSection className="mt-3 mr-2 mb-3 ml-2">
+            <div className="container-fluid">
                 <div className=" row justify-content-center">
-                    <div className="col ml-5">
-                        <LogoContainer
+                    <div className="col-auto ml-5">
+                        <a
                             aria-label="homepage"
                             className='col-auto'
                             href="/"
@@ -43,45 +42,42 @@ function Header({ isAuthenticated }) {
                                 src="logo.svg"
                                 width="300px"
                             />
-                        </LogoContainer>
+                        </a>
                     </div>
 
-                    <div className="col-1" />
+                    <div className="col" />
 
-                    {isAuthenticated ?
-                        <>
-                            <NotHidden>
-                                <DropdownMenu />
-                            </NotHidden>
+                    <NotHidden>
+                        <DropdownMenu isAuthenticated={isAuthenticated} />
+                    </NotHidden>
 
-                            <Burger onClick={showDrawer}>
-                                <Outline />
-                            </Burger>
+                    <Burger onClick={showDrawer}>
+                        <Outline />
+                    </Burger>
 
-                            <Drawer
-                                closable={false}
-                                onClose={onClose}
-                                visible={visible}
-                            >
-                                <div
-                                    className="col mb-4"
-                                >
-                                    <Label onClick={onClose}>
-                                        <div className="col">
-                                            <Menu>
-                                                Menu
-                                            </Menu>
-                                        </div>
-
-                                        <div className="col">
-                                            <Outline />
-                                        </div>
-                                    </Label>
+                    <Drawer
+                        closable={false}
+                        onClose={onClose}
+                        visible={visible}
+                    >
+                        <div
+                            className="col mb-4"
+                        >
+                            <Label onClick={onClose}>
+                                <div className="col">
+                                    <Menu>
+                                        Menu
+                                    </Menu>
                                 </div>
 
-                                <DropdownMenu />
-                            </Drawer>
-                        </> : null}
+                                <div className="col">
+                                    <Outline />
+                                </div>
+                            </Label>
+                        </div>
+
+                        <DropdownMenu isAuthenticated={isAuthenticated} />
+                    </Drawer>
                 </div>
             </div>
         </HeaderSection >

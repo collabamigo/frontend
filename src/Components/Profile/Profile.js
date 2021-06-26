@@ -8,6 +8,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import {Popover} from 'react-bootstrap';
 import SvgIcon from "../../common/SvgIcon";
 import {isMobile} from "react-device-detect";
+import Loading from "../../common/Loading";
 
 
 const popoverRight = (
@@ -153,18 +154,7 @@ class Profile extends React.Component{
 
   render() {
         if (this.state.loading)
-            return(
-                <div>
-                    <div
-                        className="spinner-border"
-                        role="status"
-                    >
-                        <span className="sr-only">
-                            Loading...
-                        </span>
-                    </div>
-                </div>
-                )
+            return <Loading />
         else
             return (
                 <section className="container-fluid lowwl mt-0">
@@ -189,17 +179,21 @@ class Profile extends React.Component{
                         <div className="col container" >
                             <Card className="card ml-5 rounded-4 container mb-5">
 
-                                <Card.Header className="card-hf-color">
-                                    <h1 className="" >
+                                <Card.Header className="card-hf-color card-header">
+                                    <h1>
                                         Profile
                                     </h1>
+
+                                    <p className="text-danger float-left">
+                                        * Required
+                                    </p>
                                 </Card.Header>
 
                                 <Card.Body className="pt-0 mt-0">
                                     <form
                                         onSubmit={this.handleSubmit}
                                     >
-                                        <div className="form-group">
+                                        <div className="form-group required">
                                             <div className="col-auto form-inline col-form-label">
 
                                                 <label>
@@ -235,7 +229,7 @@ class Profile extends React.Component{
 
                                         </div>
 
-                                        <div className="form-group">
+                                        <div className="form-group required">
                                             <div className="col-auto form-inline col-form-label">
 
                                                 <label>
@@ -269,7 +263,7 @@ class Profile extends React.Component{
                                             </div>
                                         </div>
 
-                                        <div className="form-group">
+                                        <div className="form-group required">
                                             <label className="col-auto form-inline col-form-label">
                                                 Email Address
                                             </label>
@@ -301,7 +295,7 @@ class Profile extends React.Component{
                                         </div>
 
                                         {this.state.isTeacher?
-                                            <div className="form-group ">
+                                            <div className="form-group required">
                                                 <label className=" form-inline col-form-label">
                                                     LinkedIn URL
                                                 </label>
@@ -346,8 +340,11 @@ class Profile extends React.Component{
                                             </div>:null}
                                         
                                         <div className="row form-group justify-content-center">
-                                            <label className="col-form-label">
-                                                Degree:
+                                            <div className="col-form-label required">
+                                                <label>
+                                                    Degree:
+                                                </label>
+
                                                 <select
                                                     className="form-control col-auto form-select m-2 p-6"
                                                     onChange={this.handleChangeDegree}
@@ -369,10 +366,13 @@ class Profile extends React.Component{
                                                         B-Tech
                                                     </option>
                                                 </select>
-                                            </label>
+                                            </div>
 
-                                            <label className="col-auto col-form-label ml-1">
-                                                Course:
+                                            <div className="col-auto col-form-label ml-1 required">
+                                                <label>
+                                                    Course:
+                                                </label>
+
                                                 <select
                                                     className="form-control col-auto form-select m-2 p-6"
                                                     onChange={this.handleChangeCourse}
@@ -415,7 +415,7 @@ class Profile extends React.Component{
                                                     </option>
 
                                                 </select>
-                                            </label>
+                                            </div>
 
                                         </div>
 

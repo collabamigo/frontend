@@ -1,9 +1,7 @@
 
-import React from "react";
-// import 'bootswatch/dist/sketchy/bootstrap.min.css';
+import React, {lazy, Suspense} from "react";
 import "./App.css";
-import Ask from "./Components/Ask/Ask";
-import Help from "./Components/Help/Help";
+
 import {
     Route,
     BrowserRouter as Router,
@@ -12,18 +10,20 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 // import Footer from "./Components/Footer/Footer";
 import AboutUs from "./Components/AboutUs/AboutUs";
 import axios from "axios";
-import Profile from "./Components/Profile/Profile";
-import Connect from './Components/Connect/Connect'
-// import DarkMode from "./Components/Collab/DarkMode/DarkMode";
-import ConnectionRequest from "./Components/ConnectionRequest/ConnectionRequest";
-import Index from "./Components/AuthenticatedHome";
 import UnauthenticatedHome from "./Components/UnauthenticatedHome/UnauthenticatedHome";
-// import Collab from "./Components/Collab/Collab";
 import ExternalHeader from "./Components/Header";
-import ConnectionHistory from "./Components/ConnectionHistory";
-import Rickroll from "./Components/Rickroll";
+import Loading from "./common/Loading";
+import Footer from "./Components/Footer/Footer";
 
-// eslint-disable-next-line react/require-optimization
+const Help = lazy(() => import("./Components/Help/Help"))
+const Ask = lazy(()=> import("./Components/Ask/Ask"))
+const AuthenticatedHome = lazy(() => import("./Components/AuthenticatedHome"))
+const Connect = lazy(() => import('./Components/Connect/Connect'))
+const Profile = lazy(() => import("./Components/Profile/Profile"))
+const ConnectionRequest = lazy(() => import("./Components/ConnectionRequest/ConnectionRequest"))
+const ConnectionHistory = lazy(() => import("./Components/ConnectionHistory"))
+const Rickroll = lazy(() => import("./Components/Rickroll"))
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -63,6 +63,10 @@ class App extends React.Component {
         );
     }
 
+    shouldComponentUpdate() {
+        return true
+    }
+
     handleLogin = () => {
         this.setState({
             "signedIn": true
@@ -73,105 +77,108 @@ class App extends React.Component {
 
         return (
             <div className="App h-100 w-100">
-                <Router>
-                    <>
-                        <ExternalHeader isAuthenticated={this.state.signedIn} />
+                <Suspense fallback={<Loading />}>
+                    <Router>
+                        <>
+                            <ExternalHeader isAuthenticated={this.state.signedIn} />
 
-                        <Route
-                            exact
-                            path="/"
-                        >
+                            <Route
+                                exact
+                                path="/"
+                            >
 
-                            {this.state.signedIn ?
-                                <Index />
+                                {this.state.signedIn ?
+                                    <AuthenticatedHome />
                                 : <UnauthenticatedHome 
                                         onLogin={this.handleLogin}
                                   />}
-                        </Route>
+                            </Route>
 
-                        <ProtectedRoute
-                            exact
-                            path="/ask"
-                        >
-                            <Ask />
-                        </ProtectedRoute>
+                            <ProtectedRoute
+                                exact
+                                path="/ask"
+                            >
+                                <Ask />
+                            </ProtectedRoute>
 
-                        <ProtectedRoute
-                            exact
-                            path="/help"
-                        >
-                            <Help />
-                        </ProtectedRoute>
+                            <ProtectedRoute
+                                exact
+                                path="/help"
+                            >
+                                <Help />
+                            </ProtectedRoute>
 
-                        <ProtectedRoute
-                            exact
-                            path="/profile"
-                        >
-                            <Profile />
-                        </ProtectedRoute>
+                            <ProtectedRoute
+                                exact
+                                path="/profile"
+                            >
+                                <Profile />
+                            </ProtectedRoute>
 
-                        <ProtectedRoute
-                            exact
-                            path="/collab_connect"
-                        >
-                            <Connect />
-                        </ProtectedRoute>
+                            <ProtectedRoute
+                                exact
+                                path="/collab_connect"
+                            >
+                                <Connect />
+                            </ProtectedRoute>
 
-                        <Route
-                            exact
-                            path="/about"
-                        >
-                            <AboutUs />
-                        </Route>
+                            <Route
+                                exact
+                                path="/about"
+                            >
+                                <AboutUs />
+                            </Route>
 
-                        <Route
-                            exact
-                            path="/oops"
-                        >
-                            <Rickroll />
-                        </Route>
+                            <Route
+                                exact
+                                path="/oops"
+                            >
+                                <Rickroll />
+                            </Route>
 
-                        <Route
-                            path="/connection/"
-                        >
-                            <ConnectionRequest />
-                        </Route>
+                            <Route
+                                path="/connection/"
+                            >
+                                <ConnectionRequest />
+                            </Route>
 
-                        <Route
-                            path="/history/"
-                        >
-                            <ConnectionHistory />
-                        </Route>
+                            <Route
+                                path="/history/"
+                            >
+                                <ConnectionHistory />
+                            </Route>
 
-                        <Route
-                            exact
-                            path="/403"
-                        >
+                            <Route
+                                exact
+                                path="/403"
+                            >
 
-                            <h6 className="row justify-content-center m-2">
-                                ERROR: This page is not meant to be directly accessed.
-                            </h6>
+                                <h6 className="row justify-content-center m-2">
+                                    ERROR: This page is not meant to be directly accessed.
+                                </h6>
 
-                            <img
-                                alt="Gandalf you shall not pass"
-                                className="justify-content-center m-2"
-                                loading="lazy"
-                                src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
-                            />
+                                <img
+                                    alt="Gandalf you shall not pass"
+                                    className="justify-content-center m-2"
+                                    loading="lazy"
+                                    src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
+                                />
 
-                            <div className="row justify-content-center m-2">
-                                <a
-                                    className="btn-lg btn-primary"
-                                    href="/"
-                                >
-                                    Sign in to continue
-                                </a>
-                            </div>
-                        </Route>
+                                <div className="row justify-content-center m-2">
+                                    <a
+                                        className="btn-lg btn-primary"
+                                        href="/"
+                                    >
+                                        Sign in to continue
+                                    </a>
+                                </div>
+                            </Route>
 
-                        {/*<Footer />*/}
-                    </>
-                </Router>
+                        </>
+                    </Router>
+                </Suspense>
+
+                <Footer />
             </div >
         );
 
