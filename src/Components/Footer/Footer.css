@@ -25,14 +25,14 @@
    bottom: 0;
    left: 0;
    padding: 0.2rem;
-   background-color: #efefef !important;
+   background-color: #8fa7f6 !important;
    text-align: center;
  }
 
  .link-footer {
-   color: #6c757d;
+   color: #000000;
  }
 
  .link-footer:hover {
-   color: #6c757d;
+   color: #05620a;
  }

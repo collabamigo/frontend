@@ -29,9 +29,9 @@ class Footer extends React.Component {
                         </b>
                     </div>
 
-                    <div className="col-md-5 float-right">
+                    <div className="col-md-5 float-right ">
                         <a
-                            className="text-black-50 float-right pr-3"
+                            className="float-right pr-3 link-footer"
                             href="https://forms.gle/MScukDTAhm2N3ixA8"
                             rel="noreferrer"
                             target="_blank"
