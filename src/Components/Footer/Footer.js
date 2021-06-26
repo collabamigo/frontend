@@ -11,35 +11,32 @@ class Footer extends React.Component {
 
     render() {
         return (
-            <section>
-                <div className="footer justify-content-center">
+            <div className="footer justify-content-center">
 
-                    <b className="link-footer">
-                        &#169; 2021
-                        {" "}
-
-                        <a
-                            className="link-footer"
-                            href="https://github.com/watson-hex"
-                            rel="noreferrer"
-                            target="_blank"
-                        >
-                            Watson-Hex
-                        </a>
-                    </b>
+                <b className="link-footer">
+                    &#169; 2021
+                    {" "}
 
                     <a
-                        className="float-right text-black-50"
-                        href="https://forms.gle/MScukDTAhm2N3ixA8"
+                        className="link-footer"
+                        href="https://github.com/watson-hex"
                         rel="noreferrer"
                         target="_blank"
                     >
-                        Review us
+                        Watson-Hex
                     </a>
-                    
-                </div>
-            </section>
+                </b>
 
+                <a
+                    className="float-right text-black-50"
+                    href="https://forms.gle/MScukDTAhm2N3ixA8"
+                    rel="noreferrer"
+                    target="_blank"
+                >
+                    Review us
+                </a>
+                    
+            </div>
         )
     }
 
