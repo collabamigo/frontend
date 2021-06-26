@@ -12,14 +12,10 @@ class Footer extends React.Component {
     render() {
         return (
             <section>
-                <div className="footer">
-                    <span className="material-icons link-footer">
-                        copyright
-                        {" "}
-                    </span>
+                <div className="footer justify-content-center">
 
                     <b className="link-footer">
-                        2021
+                        &#169; 2021
                         {" "}
 
                         <a
@@ -31,6 +27,16 @@ class Footer extends React.Component {
                             Watson-Hex
                         </a>
                     </b>
+
+                    <a
+                        className="float-right text-black-50"
+                        href="https://forms.gle/MScukDTAhm2N3ixA8"
+                        rel="noreferrer"
+                        target="_blank"
+                    >
+                        Review CollabConnect
+                    </a>
+                    
                 </div>
             </section>
 

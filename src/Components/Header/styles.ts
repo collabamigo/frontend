@@ -6,6 +6,8 @@ export const HeaderSection = styled("header")`
     align-items: center;
     text-align: center;
   }
+     // background-color: #efefef;
+
 `;
 
 export const LogoContainer = styled("a")`
