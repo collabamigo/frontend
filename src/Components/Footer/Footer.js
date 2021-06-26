@@ -34,7 +34,7 @@ class Footer extends React.Component {
                         rel="noreferrer"
                         target="_blank"
                     >
-                        Review CollabConnect
+                        Review us
                     </a>
                     
                 </div>
