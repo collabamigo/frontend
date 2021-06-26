@@ -31,7 +31,7 @@ function Header({ isAuthenticated }) {
         <HeaderSection className="mt-3 mr-2 mb-3 ml-2">
             <div className="container-fluid">
                 <div className=" row justify-content-center">
-                    <div className="col ml-5">
+                    <div className="col-auto ml-5">
                         <a
                             aria-label="homepage"
                             className='col-auto'
