@@ -26,7 +26,6 @@ class HelpForm extends React.Component{
             Linkedin:"",
             currentStep: 1,
             isLoading: false
-            // heemank is dumb
         }
     }
 
@@ -78,7 +77,7 @@ class HelpForm extends React.Component{
         axios.post(backend+"connect/teacher/",{
             Contact: this.state.Contact,
             Gitname: this.state.Github,
-            Linkedin: this.state.Linkedin.split("/in/")[1],
+            Linkedin: this.state.Linkedin,
             skills: tags,
         }).then((res) => axios.patch(backend+"connect/profile/"+res.data.id+"/",{
             handle: this.state.handle
