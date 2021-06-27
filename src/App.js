@@ -77,7 +77,7 @@ class App extends React.Component {
 
         return (
             <div className="App h-100 w-100">
-                <div className="position-relative">
+                <div className="position-relative min-vh-100">
                     <Suspense
                         fallback={<Loading />}
                     >
