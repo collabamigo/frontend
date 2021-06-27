@@ -77,108 +77,113 @@ class App extends React.Component {
 
         return (
             <div className="App h-100 w-100">
-                <Suspense fallback={<Loading />}>
-                    <Router>
-                        <>
-                            <ExternalHeader isAuthenticated={this.state.signedIn} />
+                <div className="position-relative">
+                    <Suspense
+                        fallback={<Loading />}
+                    >
+                        <Router>
+                            <>
+                                <ExternalHeader isAuthenticated={this.state.signedIn} />
 
-                            <Route
-                                exact
-                                path="/"
-                            >
+                                <Route
+                                    exact
+                                    path="/"
+                                >
 
-                                {this.state.signedIn ?
-                                    <AuthenticatedHome />
+                                    {this.state.signedIn ?
+                                        <AuthenticatedHome />
                                 : <UnauthenticatedHome 
                                         onLogin={this.handleLogin}
                                   />}
-                            </Route>
+                                </Route>
 
-                            <ProtectedRoute
-                                exact
-                                path="/ask"
-                            >
-                                <Ask />
-                            </ProtectedRoute>
+                                <ProtectedRoute
+                                    exact
+                                    path="/ask"
+                                >
+                                    <Ask />
+                                </ProtectedRoute>
 
-                            <ProtectedRoute
-                                exact
-                                path="/help"
-                            >
-                                <Help />
-                            </ProtectedRoute>
+                                <ProtectedRoute
+                                    exact
+                                    path="/help"
+                                >
+                                    <Help />
+                                </ProtectedRoute>
 
-                            <ProtectedRoute
-                                exact
-                                path="/profile"
-                            >
-                                <Profile />
-                            </ProtectedRoute>
+                                <ProtectedRoute
+                                    exact
+                                    path="/profile"
+                                >
+                                    <Profile />
+                                </ProtectedRoute>
 
-                            <ProtectedRoute
-                                exact
-                                path="/collab_connect"
-                            >
-                                <Connect />
-                            </ProtectedRoute>
+                                <ProtectedRoute
+                                    exact
+                                    path="/collab_connect"
+                                >
+                                    <Connect />
+                                </ProtectedRoute>
 
-                            <Route
-                                exact
-                                path="/about"
-                            >
-                                <AboutUs />
-                            </Route>
+                                <Route
+                                    exact
+                                    path="/about"
+                                >
+                                    <AboutUs />
+                                </Route>
 
-                            <Route
-                                exact
-                                path="/oops"
-                            >
-                                <Rickroll />
-                            </Route>
+                                <Route
+                                    exact
+                                    path="/oops"
+                                >
+                                    <Rickroll />
+                                </Route>
 
-                            <Route
-                                path="/connection/"
-                            >
-                                <ConnectionRequest />
-                            </Route>
+                                <Route
+                                    path="/connection/"
+                                >
+                                    <ConnectionRequest />
+                                </Route>
 
-                            <Route
-                                path="/history/"
-                            >
-                                <ConnectionHistory />
-                            </Route>
+                                <Route
+                                    path="/history/"
+                                >
+                                    <ConnectionHistory />
+                                </Route>
 
-                            <Route
-                                exact
-                                path="/403"
-                            >
+                                <Route
+                                    exact
+                                    path="/403"
+                                >
 
-                                <h6 className="row justify-content-center m-2">
-                                    ERROR: This page is not meant to be directly accessed.
-                                </h6>
+                                    <h6 className="row justify-content-center m-2">
+                                        ERROR: This page is not meant to be directly accessed.
+                                    </h6>
 
-                                <img
-                                    alt="Gandalf you shall not pass"
-                                    className="justify-content-center m-2"
-                                    loading="lazy"
-                                    src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
-                                />
+                                    <img
+                                        alt="Gandalf you shall not pass"
+                                        className="justify-content-center m-2"
+                                        loading="lazy"
+                                        src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
+                                    />
 
-                                <div className="row justify-content-center m-2">
-                                    <a
-                                        className="btn-lg btn-primary"
-                                        href="/"
-                                    >
-                                        Sign in to continue
-                                    </a>
-                                </div>
-                            </Route>
+                                    <div className="row justify-content-center m-2">
+                                        <a
+                                            className="btn-lg btn-primary"
+                                            href="/"
+                                        >
+                                            Sign in to continue
+                                        </a>
+                                    </div>
+                                </Route>
 
-                        </>
-                    </Router>
-                </Suspense>
+                            </>
+                        </Router>
+                    </Suspense>
+                </div>
 
                 <Footer />
+                
             </div >
         );
 
