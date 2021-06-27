@@ -7,7 +7,6 @@ import {
     BrowserRouter as Router,
 } from "react-router-dom";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
-// import Footer from "./Components/Footer/Footer";
 import AboutUs from "./Components/AboutUs/AboutUs";
 import axios from "axios";
 import UnauthenticatedHome from "./Components/UnauthenticatedHome/UnauthenticatedHome";
@@ -46,7 +45,7 @@ class App extends React.Component {
                 if (error.response.status === 500)
                     alert("Unexpected error occurred. Please contact us if you see this message repeatedly.")
                 else if (error.response.status === 401)
-                    alert("Authentication error. Please try signing out and signing back in")
+                    alert("Authentication error. Please try clicking/tapping on the CollabConnect logo to re-authenticate")
             }
             return Promise.reject(error);
           });

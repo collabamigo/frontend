@@ -57,6 +57,22 @@ function CardsP (props) {
             </Popover.Content>
         </Popover>
     )
+    let batch = ""
+    // Batch assignment
+    switch (props.batch) {
+        case "B":
+            batch = "B.Tech."
+            break
+        case "M":
+            batch = "M.Tech."
+            break
+        case "P":
+            batch = "Ph.D"
+            break
+        case "F":
+            batch = "Faculty"
+            break
+    }
     return (
         <Fade className={"float-right " + props.className} >
             <Card className="card card_P" >
@@ -70,14 +86,14 @@ function CardsP (props) {
                 <Card.Body className="row">
                     <Card.Text className="col text-muted text-left">
                         <span className="h6">
-                            {props.batch + ".Tech"}
+                            {batch}
                         </span>
 
                         <br />
 
                         <span className="h6">
 
-                            {props.course + "-" + props.key_value.substring(1,3)}
+                            {props.batch!=="F"?props.course + "-" + props.key_value.substring(1,3):null}
 
 
                         </span>

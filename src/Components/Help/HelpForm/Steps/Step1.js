@@ -114,7 +114,7 @@ class Step1 extends React.Component {
 
                                         <div className="form-group required">
                                             <label className="col-auto form-inline col-form-label">
-                                                Github Profile
+                                                Github Username
                                             </label>
 
                                             <div>
@@ -131,7 +131,7 @@ class Step1 extends React.Component {
 
                                         <div className="form-group required">
                                             <label className="col-auto form-inline col-form-label">
-                                                LinkedIn Profile
+                                                LinkedIn URL
                                             </label>
 
                                             <div>
