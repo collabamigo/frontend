@@ -11,34 +11,32 @@ class Footer extends React.Component {
 
     render() {
         return (
-            <section>
-                <div className="footer row">
-                    <div className="link-footer col-md-7">
-                        <b className="float-right pr-5">
-                            <a
-                                className="link-footer"
-                                href="https://github.com/watson-hex"
-                                rel="noreferrer"
-                                target="_blank"
-                            >
-                                Watson-Hex &#169; 2021
-                            </a>
-                        </b>
-                    </div>
-
-                    <div className="col-md-5 float-right ">
+            <div className="footer row">
+                <div className="link-footer col-md-7">
+                    <b className="float-right pr-5">
                         <a
-                            className="float-right pr-3 link-footer"
-                            href="https://forms.gle/MScukDTAhm2N3ixA8"
+                            className="link-footer"
+                            href="https://github.com/watson-hex"
                             rel="noreferrer"
                             target="_blank"
                         >
-                            Review Us
+                            Watson-Hex &#169; 2021
                         </a>
-                    </div>
-                    
+                    </b>
                 </div>
-            </section>
+
+                <div className="col-md-5 float-right ">
+                    <a
+                        className="float-right pr-3 link-footer"
+                        href="https://forms.gle/MScukDTAhm2N3ixA8"
+                        rel="noreferrer"
+                        target="_blank"
+                    >
+                        Review Us
+                    </a>
+                </div>
+                    
+            </div>
 
         )
     }
