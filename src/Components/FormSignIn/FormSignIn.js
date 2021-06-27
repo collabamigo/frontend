@@ -189,6 +189,15 @@ class FormSignIn extends React.Component {
                                         <option value="B">
                                             B-Tech
                                         </option>
+
+                                        <option value="P">
+                                            Ph.D.
+                                        </option>
+
+                                        <option value="F">
+                                            Faculty
+                                        </option>
+
                                     </select>
                                 </div>
 
@@ -200,7 +209,7 @@ class FormSignIn extends React.Component {
                                     <select
                                         className="form-control"
                                         onChange={this.handleChangeCourse}
-                                        required
+                                        required={this.state.degree==="B"}
                                         value={this.state.course}
                                     >
     
