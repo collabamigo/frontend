@@ -57,11 +57,21 @@ class HelpForm extends React.Component{
         this.setState({ Contact: e.target.value })
     }
 
+    isFormValid() {
+        // Validate phone number
+        if (!(this.state.Contact === undefined || (1000000 <= parseInt(this.state.Contact.slice(1)) && parseInt(this.state.Contact.slice(1)) <= 100000000000000))) {
+            alert("Your mobile number seems invalid. Please recheck.")
+            return false
+        }
+        else
+            return true
+    }
 
     handlerNext = () => {
-        this.setState({
-          currentStep: 2
-        })
+        if (this.isFormValid())
+            this.setState({
+              currentStep: 2
+            })
     }
 
     handlerPrev = () => {
@@ -75,7 +85,7 @@ class HelpForm extends React.Component{
             isLoading: true
         })
         axios.post(backend+"connect/teacher/",{
-            Contact: this.state.Contact,
+            Contact: (this.state.Contact === undefined)?0:parseInt(this.state.Contact.slice(1)),
             Gitname: this.state.Github,
             Linkedin: this.state.Linkedin,
             skills: tags,
