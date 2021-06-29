@@ -78,12 +78,12 @@ function Oadd({skills , onCreate, setSkills}) {
               >
                   <Modal.Header closeButton>
                       <Modal.Title>
-                          Modal heading
+                          Add Skills
                       </Modal.Title>
                   </Modal.Header>
 
                   <Modal.Body>
-                      Go on, add more Skills
+                      Glad to see you get excited
                       <TagsInput
                           onChange={setSkills}
                           renderInput={renderAutocomplete}
