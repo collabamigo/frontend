@@ -150,10 +150,8 @@ class Step2 extends React.Component {
                         </Card>
 
                         <div>
-                            <p>
-                                Add minimum of one skill
-                                You can also add skills in your dashboard
-                            </p>
+                            Add minimum of one skill
+                            You can also add skills in your dashboard
                         </div>
                     </div>
                 </div>
