@@ -54,7 +54,7 @@ class HelpForm extends React.Component{
     }
 
     handlerChangeContact(e) {
-        this.setState({ Contact: e.target.value })
+        this.setState({ Contact: e })
     }
 
     isFormValid() {

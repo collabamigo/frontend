@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import {isMobile} from "react-device-detect";
 import SvgIcon from "../../../../common/SvgIcon";
 import PhoneInput from "react-phone-number-input";
+import 'react-phone-number-input/style.css'
 
 class Step1 extends React.Component {
     static propTypes = {
