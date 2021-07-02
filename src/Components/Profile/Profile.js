@@ -9,7 +9,8 @@ import {Popover} from 'react-bootstrap';
 import SvgIcon from "../../common/SvgIcon";
 import {isMobile} from "react-device-detect";
 import Loading from "../../common/Loading";
-
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 const popoverRight = (
     <Popover
@@ -51,6 +52,7 @@ const popoverRight = (
     </Popover>
   );
 
+// eslint-disable-next-line react/no-multi-comp
 class Profile extends React.Component{
 
     constructor(props) {
@@ -68,7 +70,7 @@ class Profile extends React.Component{
             First_Name: '',
             Last_Name:'',
             degree: '',
-            contact: null,
+            contact: undefined,
             course:'',
             github: null,
             handle:'',
@@ -81,13 +83,21 @@ class Profile extends React.Component{
         axios.get(backend+"connect/profile/?format=json")
             .then(res => axios.get(backend+"connect/teacher/").then((res2) => {
 
-                if (res2.data.length)
+                if (res2.data.length){
                     this.setState({
                         isTeacher: true,
                         linkedIn: res2.data[0]["Linkedin"],
                         github:res2.data[0]["Gitname"],
-                        contact: res2.data[0]["Contact"],
                     })
+
+                    if (res2.data[0]["Contact"].toString() !== "0"){
+                        this.setState({contact: "+" + res2.data[0]["Contact"].toString()})
+                    }
+
+                    else{
+                        this.setState({contact:undefined})
+                    }
+                }
                 this.setState({
                     ...(res.data[0]),
                     loading: false
@@ -121,30 +131,43 @@ class Profile extends React.Component{
         this.setState({github:e.target.value})
     }
 
-    handleChangeContact(e){
-        this.setState({contact:e.target.value})
+    handleChangeContact(value){
+        this.setState({contact:value})
+    }
+
+    isFormValid() {
+        // Validate phone number
+        if (!(this.state.contact === undefined || (1000000 <= parseInt(this.state.contact.slice(1)) && parseInt(this.state.contact.slice(1)) <= 100000000000000))) {
+            alert("Your mobile number seems invalid. Please recheck.")
+            return false
+        }
+        else
+            return true
     }
 
     handleSubmit(e) {
+        if (this.isFormValid()) {
 
-        let payload = {
-            degree:this.state.degree,
-            course:this.state.course,
-            handle:this.state.handle}
-        this.setState({loading:true})
-        axios.patch(backend+"connect/profile/"+this.state.id+"/", payload)
-            .then(() => {
-                if (this.state.isTeacher)
-                    axios.patch(backend + "connect/teacher/" + this.state.id + "/", {
-                        Linkedin: this.state.linkedIn,
-                        Gitname: this.state.github,
-                        Contact: this.state.contact,
-                    })
+            let payload = {
+                degree: this.state.degree,
+                course: this.state.course,
+                handle: this.state.handle
+            }
+            this.setState({loading: true})
+            axios.patch(backend + "connect/profile/" + this.state.id + "/", payload)
+                .then(() => {
+                    if (this.state.isTeacher)
+                        axios.patch(backend + "connect/teacher/" + this.state.id + "/", {
+                            Linkedin: this.state.linkedIn,
+                            Gitname: this.state.github,
+                            Contact: (this.state.contact === undefined)?0:parseInt(this.state.contact.slice(1)),
+                        })
 
-                this.setState({loading:false})
-                alert("Profile update successful")
+                    this.setState({loading: false})
+                    alert("Profile update successful")
 
-            })
+                })
+        }
 
         e.preventDefault();
 
@@ -295,47 +318,55 @@ class Profile extends React.Component{
                                         </div>
 
                                         {this.state.isTeacher?
-                                            <div className="form-group required">
-                                                <label className=" form-inline col-form-label">
-                                                    LinkedIn URL
-                                                </label>
+                                            <div>
+                                                <div className="form-group required">
+                                                    <label className=" form-inline col-form-label">
+                                                        LinkedIn URL
+                                                    </label>
 
-                                                <div>
-                                                    <input
-                                                        className="form-control col-auto"
-                                                        onChange={this.handleChangeLinkedIn}
-                                                        placeholder="https://www.linkedin.com/in/example-here"
-                                                        type="text"
-                                                        value={this.state.linkedIn}
-                                                    />
+                                                    <div>
+                                                        <input
+                                                            className="form-control col-auto"
+                                                            onChange={this.handleChangeLinkedIn}
+                                                            placeholder="https://www.linkedin.com/in/example-here"
+                                                            type="text"
+                                                            value={this.state.linkedIn}
+                                                        />
+                                                    </div>
                                                 </div>
 
-                                                <label className=" form-inline col-form-label">
-                                                    GitHub
-                                                </label>
+                                                <div className="form-group required">
+                                                    <label className=" form-inline col-form-label">
+                                                        GitHub
+                                                    </label>
 
-                                                <div>
-                                                    <input
-                                                        className="form-control col-auto"
-                                                        onChange={this.handleChangeGitHub}
-                                                        placeholder="Username"
-                                                        type="text"
-                                                        value={this.state.github}
-                                                    />
+                                                    <div>
+                                                        <input
+                                                            className="form-control col-auto"
+                                                            onChange={this.handleChangeGitHub}
+                                                            placeholder="Username"
+                                                            type="text"
+                                                            value={this.state.github}
+                                                        />
+                                                    </div>
                                                 </div>
 
-                                                <label className=" form-inline col-form-label">
-                                                    Contact
-                                                </label>
+                                                <div className="form-group">
+                                                    <label className=" form-inline col-form-label">
+                                                        Contact
+                                                    </label>
 
-                                                <div>
-                                                    <input
-                                                        className="form-control col-auto"
-                                                        onChange={this.handleChangeContact}
-                                                        placeholder="Mobile Number"
-                                                        type="number"
-                                                        value={this.state.contact}
-                                                    />
+
+                                                    <div>
+                                                        <PhoneInput
+                                                            className="form-control col-auto"
+                                                            defaultCountry="IN"
+                                                            onChange={this.handleChangeContact}
+                                                            placeholder="Mobile Number"
+                                                            value={this.state.contact}
+                                                        />                                                    
+
+                                                    </div>
                                                 </div>
                                             </div>:null}
                                         
@@ -351,19 +382,20 @@ class Profile extends React.Component{
                                                     required
                                                     value={this.state.degree}
                                                 >
-                                                    <option
-                                                        selected
-                                                        value=""
-                                                    >
-                                                        ---Select Degree---
-                                                    </option>
-
                                                     <option value="M" >
                                                         M-Tech
                                                     </option>
-
+    
                                                     <option value="B">
                                                         B-Tech
+                                                    </option>
+
+                                                    <option value="P">
+                                                        Ph.D.
+                                                    </option>
+
+                                                    <option value="F">
+                                                        Faculty
                                                     </option>
                                                 </select>
                                             </div>
@@ -376,11 +408,9 @@ class Profile extends React.Component{
                                                 <select
                                                     className="form-control col-auto form-select m-2 p-6"
                                                     onChange={this.handleChangeCourse}
-                                                    required
                                                     value={this.state.course}
                                                 >
                                                     <option
-                                                        selected
                                                         value=""
                                                     >
                                                         ---Select Course---

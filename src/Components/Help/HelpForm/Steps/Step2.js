@@ -148,6 +148,11 @@ class Step2 extends React.Component {
                                 </div>
                             </Card.Footer>
                         </Card>
+
+                        <div>
+                            Add minimum of one skill
+                            You can also add skills in your dashboard
+                        </div>
                     </div>
                 </div>
             </section>

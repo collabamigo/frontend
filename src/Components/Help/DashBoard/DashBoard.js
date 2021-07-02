@@ -14,6 +14,26 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+function dateParsor(props){
+    console.log(typeof props)
+    if (props === "01")
+     return (props.slice(1) + "st ")
+
+    else if (props === "02"){
+        return (props.slice(1)+ "nd ")
+    }
+    else if (props.slice(0,1) === "03"){
+        return (props.slice(1)+ "rd ")
+    }
+    else if (props.slice(0,1) === "0"){
+        return (props.slice(1)+ "th ")
+    }
+    else{
+        return (props + "th ")
+    }
+}
+
+
 class DashBoard extends React.Component {
     // TODO: image link not working
     // TODO: upvote ,downvote chart not working
@@ -220,7 +240,7 @@ class DashBoard extends React.Component {
                                         <small className="text-muted h4">
                                             {"- Since  "}
 
-                                            {this.props.created.slice(8,10) + "th "}
+                                            {dateParsor(this.props.created.slice(8,10))}
 
                                             {this.state.months[parseInt(this.props.created.slice(5,7))-1] + ", "}
 

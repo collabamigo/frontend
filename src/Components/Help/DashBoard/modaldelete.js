@@ -34,7 +34,7 @@ function Odal({item, onDelete}) {
               >
                   <Modal.Header closeButton>
                       <Modal.Title>
-                          Modal heading
+                          Delete Skill
                       </Modal.Title>
                   </Modal.Header>
 
@@ -43,7 +43,9 @@ function Odal({item, onDelete}) {
 
                       {" "}
 
-                      {item}
+                      <strong>
+                          {item}
+                      </strong>
                   </Modal.Body>
 
                   <Modal.Footer>

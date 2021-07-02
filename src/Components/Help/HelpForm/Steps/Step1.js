@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card';
 import {isMobile} from "react-device-detect";
 import SvgIcon from "../../../../common/SvgIcon";
+import PhoneInput from "react-phone-number-input";
+import 'react-phone-number-input/style.css'
 
 class Step1 extends React.Component {
     static propTypes = {
@@ -36,10 +38,9 @@ class Step1 extends React.Component {
             </button>
         )
     }
-    render (){
-        if (this.props.currentStep !== 1) {
-                        return null
-                    }
+    render () {
+        if (this.props.currentStep !== 1)
+            return null
         else
             return (
                 <section className="container-fluid lowwl mt-0">
@@ -101,14 +102,13 @@ class Step1 extends React.Component {
                                             </div>
 
                                             <div className="row-auto">
-                                                <input
+                                                <PhoneInput
                                                     className="form-control col-auto"
+                                                    defaultCountry="IN"
                                                     onChange={this.props.handleChangeContact}
                                                     placeholder="Mobile Number"
-                                                    required
-                                                    type='number'
                                                     value={this.props.Contact}
-                                                />
+                                                />   
                                             </div>
                                         </div>
 
