@@ -14,11 +14,13 @@ class Footer extends React.Component {
             <div className="footer row">
                 <div className="link-footer col-md-7">
                     <b className="float-right pr-5">
+                        {/*eslint-disable-next-line*/}
                         <a
                             className="link-footer"
                             href="https://github.com/watson-hex"
-                            rel="noreferrer"
+                            rel="noopener"
                             target="_blank"
+                            type="external"
                         >
                             Watson-Hex &#169; 2021
                         </a>

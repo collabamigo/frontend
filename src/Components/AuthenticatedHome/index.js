@@ -15,6 +15,8 @@ class AuthenticatedHome extends React.Component {
         this.state = {
             first:"BECOME A CONTRIBUTOR",
             second:"Contribute",
+            third:"Solve other's doubts and be the mentor you always wanted.\n" +
+                    "Using our platform you can reach a larger community."
         };
     }
 
@@ -25,8 +27,11 @@ class AuthenticatedHome extends React.Component {
             .then(res => {
                 if (res.data.length)
                         this.setState({
-                            first:"ALREADY A CONTRIBUTOR",
-                            second:"Dashboard"
+                            first:"VIEW DASHBOARD",
+                            second:"Dashboard",
+                            third:"Hi Collaborator," +
+                                "\nView and edit your skills here. You can also see your " +
+                                "work summary and the hot trending skills on the platform "
                         })
                 })
             }
@@ -60,8 +65,7 @@ class AuthenticatedHome extends React.Component {
                             <br />
     
                             <Card.Text className="card-text text-muted h5">
-                                Solve other&apos;s doubts and be the mentor you always wanted.
-                                Using our platform you can reach a larger community.
+                                {this.state.third}
                             </Card.Text>
                         </Card.Body>
     
