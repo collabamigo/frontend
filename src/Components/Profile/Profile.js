@@ -83,7 +83,7 @@ class Profile extends React.Component{
         axios.get(backend+"connect/profile/?format=json")
             .then(res => axios.get(backend+"connect/teacher/").then((res2) => {
 
-                if (res2.data.length)
+                if (res2.data.length && (res2.data[0]["Contact"].toString() !== "0"))
                     this.setState({
                         isTeacher: true,
                         linkedIn: res2.data[0]["Linkedin"],
@@ -92,7 +92,8 @@ class Profile extends React.Component{
                     })
                 this.setState({
                     ...(res.data[0]),
-                    loading: false
+                    loading: false,
+                    contact: undefined
                 });
 
             }))
