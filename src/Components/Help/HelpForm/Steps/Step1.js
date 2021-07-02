@@ -104,6 +104,7 @@ class Step1 extends React.Component {
                                             <div className="row-auto">
                                                 <PhoneInput
                                                     className="form-control col-auto"
+                                                    defaultCountry="IN"
                                                     onChange={this.props.handleChangeContact}
                                                     placeholder="Mobile Number"
                                                     value={this.props.Contact}

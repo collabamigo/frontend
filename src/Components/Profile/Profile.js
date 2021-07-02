@@ -360,6 +360,7 @@ class Profile extends React.Component{
                                                     <div>
                                                         <PhoneInput
                                                             className="form-control col-auto"
+                                                            defaultCountry="IN"
                                                             onChange={this.handleChangeContact}
                                                             placeholder="Mobile Number"
                                                             value={this.state.contact}
