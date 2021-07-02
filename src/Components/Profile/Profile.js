@@ -83,17 +83,24 @@ class Profile extends React.Component{
         axios.get(backend+"connect/profile/?format=json")
             .then(res => axios.get(backend+"connect/teacher/").then((res2) => {
 
-                if (res2.data.length && (res2.data[0]["Contact"].toString() !== "0"))
+                if (res2.data.length){
                     this.setState({
                         isTeacher: true,
                         linkedIn: res2.data[0]["Linkedin"],
                         github:res2.data[0]["Gitname"],
-                        contact: "+" + res2.data[0]["Contact"].toString(),
                     })
+
+                    if (res2.data[0]["Contact"].toString() !== "0"){
+                        this.setState({contact: "+" + res2.data[0]["Contact"].toString()})
+                    }
+
+                    else{
+                        this.setState({contact:undefined})
+                    }
+                }
                 this.setState({
                     ...(res.data[0]),
-                    loading: false,
-                    contact: undefined
+                    loading: false
                 });
 
             }))
