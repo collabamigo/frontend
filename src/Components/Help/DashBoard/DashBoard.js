@@ -22,6 +22,9 @@ function dateParsor(props){
     else if (props === "02"){
         return (props.slice(1)+ "nd ")
     }
+    else if (props.slice(0,1) === "03"){
+        return (props.slice(1)+ "rd ")
+    }
     else if (props.slice(0,1) === "0"){
         return (props.slice(1)+ "th ")
     }
