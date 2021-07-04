@@ -151,11 +151,12 @@ class AuthenticatedHome extends React.Component {
                         </Card.Body>
     
                         <Card.Footer className="footer-custom pb-4">
-                            <div
-                                className="col-auto btn btn-primary disabled"
+                            <Link
+                                className="col-auto btn btn-primary"
+                                to="/project"
                             >
-                                Coming Soon...
-                            </div>
+                                Project
+                            </Link>
                         </Card.Footer>
     
                     </Card>
