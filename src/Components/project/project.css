@@ -1,0 +1,28 @@
+.carousel-image-size {
+  width: 60%;
+  height: 100%;
+}
+.text-background {
+  background-color: rgb(245, 245, 245) !important;
+}
+
+.zoom-my-card {
+  transition: transform 0.2s;
+}
+
+.zoom-my-card:hover {
+  transform: scale(1.06);
+}
+
+.footer-custom {
+  background-color: white !important;
+  border-top: 0 none !important;
+}
+
+.header-color {
+  color: rgb(100, 98, 98);
+}
+
+.card-min-size {
+  min-width: 20rem !important;
+}
