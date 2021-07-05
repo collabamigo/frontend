@@ -1,6 +1,5 @@
 .zoom-my-card {
     transition: transform .2s;
-    min-height: 80vh !important;
 }
 
 .zoom-my-card:hover {

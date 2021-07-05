@@ -1,17 +1,10 @@
-// import Link from "../../common/Link";
+
 import Card from "react-bootstrap/Card";
 import React from "react";
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Jumbotron from 'react-bootstrap/Jumbotron'
-// import axios from "axios";
-// import backend from "../../env";
 import Carousel from 'react-bootstrap/Carousel'
-// import {Fade} from "react-awesome-reveal";
-// import {isMobile} from "react-device-detect";
-// import {SvgIcon} from "../../common/SvgIcon";
-// import { Fragment } from 'react';
-// import ScrollButton from './scroll/scrollbutton';
 import './project.css';
 
 class project extends React.Component {
@@ -85,6 +78,15 @@ class project extends React.Component {
 
                             </div>
 
+                        </div>
+
+                        <div className="col">
+                            <button
+                                className="btn btn-primary"
+                                type="button"
+                            >
+                                Register Now
+                            </button>
                         </div>
 
                     </div>

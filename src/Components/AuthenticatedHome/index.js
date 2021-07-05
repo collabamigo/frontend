@@ -43,9 +43,9 @@ class AuthenticatedHome extends React.Component {
     render() {
 
         return (
-            <div className="row container-fluid h-75 w-100 justify-content-center">
+            <div className="row container-fluid h-75 w-100 justify-content-center card-group">
                 <Fade
-                    className="col-lg-4 col-md-6 col-sm-12 h-auto mt-2 mb-3"
+                    className="col-lg-4 col-md-6 col-sm-12 h-auto mt-2 mb-3 card-group"
                     direction={isMobile?"left":"up"}
                     triggerOnce
                 >
@@ -79,13 +79,8 @@ class AuthenticatedHome extends React.Component {
                         </Card.Footer>
                         
                     </Card>
-                </Fade>
-    
-                <Fade
-                    className="col-lg-4 col-md-6 col-sm-12 h-auto mt-2 mb-3"
-                    direction={isMobile?"right":"up"}
-                    triggerOnce
-                >
+
+
                     <Card className="card h-auto mx-2 zoom-my-card mb-3">
                         <SvgIcon
                             height="56%"
@@ -122,13 +117,7 @@ class AuthenticatedHome extends React.Component {
                             </Link>
                         </Card.Footer>
                     </Card>
-                </Fade>
-    
-                <Fade
-                    className="col-lg-4 col-md-6 col-sm-12 h-auto mt-2 mb-3"
-                    direction={isMobile?"left":"up"}
-                    triggerOnce
-                >
+                
                     <Card className="card h-auto mx-2 zoom-my-card mb-3">
                         <SvgIcon
                             height="56%"
