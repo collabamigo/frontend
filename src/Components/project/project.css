@@ -4,6 +4,7 @@
 }
 .text-background {
   background-color: rgb(245, 245, 245) !important;
+  width: 90% !important;
 }
 
 .zoom-my-card {
