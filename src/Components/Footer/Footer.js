@@ -11,7 +11,7 @@ class Footer extends React.Component {
 
     render() {
         return (
-            <div className="footer row">
+            <footer className="footer row">
                 <div className="link-footer col-md-7">
                     <b className="float-right pr-5">
                         {/*eslint-disable-next-line*/}
@@ -38,7 +38,7 @@ class Footer extends React.Component {
                     </a>
                 </div>
                     
-            </div>
+            </footer>
 
         )
     }

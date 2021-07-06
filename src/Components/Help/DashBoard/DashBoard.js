@@ -165,7 +165,7 @@ class DashBoard extends React.Component {
     render () {
         return (
             <div className="">
-                <h1 className="font-weight-bold">
+                <h1 className="font-weight-light display-4">
                     <span className="material-icons icon-dashboard pr-2">
                         dashboard
                     </span>
@@ -178,11 +178,11 @@ class DashBoard extends React.Component {
                             <Card className="mb-5 upper-text main-profile">
                                 <Card.Body className="row">
                                     <div className="col-md-8 float-center">
-                                        <h1 className="card-title mt-3 ml-3 row display-4">
+                                        <div className="card-title mt-3 ml-3 row h1">
                                             {this.props.name}
-                                        </h1>
+                                        </div>
 
-                                        <div className="card-text col-auto row mt-5 float-left">
+                                        <div className="card-text col-auto row mt-3 float-left">
 
                                             <blockquote className="blockquote text-center pl-5">
                                                 <p className="mb-0">
