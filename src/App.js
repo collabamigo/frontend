@@ -13,6 +13,8 @@ import UnauthenticatedHome from "./Components/UnauthenticatedHome/Unauthenticate
 import ExternalHeader from "./Components/Header";
 import Loading from "./common/Loading";
 import Footer from "./Components/Footer/Footer";
+import Demo from "./Components/Demo/Demo";
+
 
 const Help = lazy(() => import("./Components/Help/Help"))
 const Ask = lazy(()=> import("./Components/Ask/Ask"))
@@ -131,6 +133,15 @@ class App extends React.Component {
                                 >
                                     <Project />
                                 </Route>
+
+                                <Route
+                                    exact
+                                    path="/demo"
+                                >
+                                    <Demo />
+                                </Route>
+
+
 
                                 <Route
                                     exact
