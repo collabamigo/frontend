@@ -16,7 +16,7 @@ class Demo extends React.Component {
                         <div className="row justify-content-center mb-4">
                             <div className="col-md-9 text-center">
                                 <h1 className="mb-4">
-                                    Heres a sneek peek for you
+                                    Here&apos;s a sneak peek for you
                                 </h1>
                             </div>
                         </div>
@@ -27,7 +27,7 @@ class Demo extends React.Component {
                                 allowFullScreen
                                 className="video-adjustments"
                                 frameBorder="0"
-                                src="https://www.youtube.com/embed/SHniGbz4I_4"
+                                src="https://www.youtube.com/embed/SHniGbz4I_4?controls=0"
                                 title="YouTube video player"
                             />
 
