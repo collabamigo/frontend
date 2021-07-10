@@ -58,13 +58,6 @@ function LeftContentBlock({
                                 {(stage === "button") ? t(content) : t(alt_content)}
                             </Content>
 
-                            <p
-                                className="linkcustom"
-                                href="/demo"
-                            >
-                                Take a sneek peek
-                            </p>
-
                             <ServiceWrapper>
                                 <Row justify="space-between">
                                     {typeof section === "object" &&
