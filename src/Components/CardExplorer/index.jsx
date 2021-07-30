@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from "prop-types";
 import CardsP from "../CardsP/CardsP";
 import axios from "axios";
-import backend from "../../env";
 import Loading from "../../common/Loading";
 
 
@@ -71,7 +70,7 @@ class CardExplorer extends React.Component{
                 [teacherId]: vote
             }
         }))
-        axios.post(backend+"rating/", {
+        axios.post("rating/", {
             teacher: teacherId,
             vote: vote,
         })
@@ -94,11 +93,11 @@ class CardExplorer extends React.Component{
     fetchData(listIndex) {
         if (listIndex === undefined)
             listIndex=this.state.listIndex
-        axios.get(backend + "connect/teachersdata/", {
+        axios.get("connect/teachersdata/", {
             params: {
                 id_list: this.props.parentList.slice(listIndex, listIndex + this.props.cardsPerPage)
             },
-        }).then(res1 => axios.get(backend + "rating/").then(res2 => this.setState({
+        }).then(res1 => axios.get("rating/").then(res2 => this.setState({
             tempList: res1.data,
             voteValues: res2.data,
             isLoading:false}))

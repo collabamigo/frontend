@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import PropTypes from 'prop-types'
 import FormSignIn from "../FormSignIn/FormSignIn";
 import axios from "axios";
-import backend from "../../env";
 
 function rsa_encrypt (plaintext) {
 
@@ -38,7 +37,7 @@ function GoogleSignIn (props) {
     async function profileExists (googleUser) {
         if (props.stage==="button")
             return {
-                res:await axios.get(backend+"connect/profile/?format=json"),
+                res:await axios.get("connect/profile/?format=json"),
                 googleUser: googleUser
             }
         else

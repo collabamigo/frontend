@@ -5,7 +5,6 @@ import Card from "react-bootstrap/Card";
 import './DashBoard.css'
 import {SvgIcon} from "../../../common/SvgIcon";
 import { Doughnut } from "react-chartjs-2";
-import backend from "../../../env";
 import axios from "axios";
 import Odal from "./modaldelete";
 import Oadd from "./modaladd"
@@ -85,7 +84,7 @@ class DashBoard extends React.Component {
     }
 
     handleGet() {
-        axios.get(backend+"connect/statistics/skills")
+        axios.get("connect/statistics/skills")
             .then((res) => {
                 this.setState({trendingSkills:res.data})}
             )

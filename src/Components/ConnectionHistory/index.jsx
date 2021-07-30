@@ -2,7 +2,6 @@
 import React from "react";
 import './index.css';
 import axios from "axios";
-import backend from "../../env";
 import { Card } from "react-bootstrap";
 import CardExplorer from "../CardExplorer";
 
@@ -42,7 +41,7 @@ class ConnectionHistory extends React.Component {
     }
 
     getTeacherIds = () => {
-        axios.get(backend + "connect/approvals/", {
+        axios.get("connect/approvals/", {
             params: {
                 format: "json",
             }

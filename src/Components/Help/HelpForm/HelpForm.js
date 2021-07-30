@@ -3,7 +3,6 @@ import axios from "axios";
 import './HelpForm.css'
 import Step1 from './Steps/Step1'
 import Step2 from './Steps/Step2'
-import backend from "../../../env";
 import PropTypes from "prop-types";
 import Loading from "../../../common/Loading";
 
@@ -30,7 +29,7 @@ class HelpForm extends React.Component{
     }
 
     componentDidMount() {
-        axios.get(backend+"connect/profile/").then(
+        axios.get("connect/profile/").then(
             (res) => this.setState({
                 handle: res.data[0].handle
             })
@@ -84,12 +83,12 @@ class HelpForm extends React.Component{
         this.setState({
             isLoading: true
         })
-        axios.post(backend+"connect/teacher/",{
+        axios.post("connect/teacher/",{
             Contact: (this.state.Contact === undefined)?0:parseInt(this.state.Contact.slice(1)),
             Gitname: this.state.Github,
             Linkedin: this.state.Linkedin,
             skills: tags,
-        }).then((res) => axios.patch(backend+"connect/profile/"+res.data.id+"/",{
+        }).then((res) => axios.patch("connect/profile/"+res.data.id+"/",{
             handle: this.state.handle
         }).then((res2) => this.props.handleSubmit({
             data: [{...res.data,

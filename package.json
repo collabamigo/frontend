@@ -17,6 +17,7 @@
     "bootswatch": "^5.0.1",
     "chart.js": "^3.3.2",
     "crypto-js": "^4.0.0",
+    "env-cmd": "^10.1.0",
     "firebase": "^8.4.1",
     "firebase-tools": "^9.10.0",
     "node-rsa": "^1.1.1",
@@ -37,8 +38,8 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env-cmd -f .env.frontend react-scripts start",
+    "build:frontend":"env-cmd -f .env.frontend react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "preview": "npm ci && npm run build && firebase hosting:channel:deploy preview"

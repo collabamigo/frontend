@@ -2,7 +2,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Autocomplete.css";
-import backend from "../../env";
 import axios from "axios";
 
 class Autocomplete extends React.Component {
@@ -38,7 +37,7 @@ class Autocomplete extends React.Component {
     this.setState({
         suggestions: undefined,
     })
-        axios.get(backend+"autocomplete/",{
+        axios.get("autocomplete/",{
             params:{
                 query: e.target.value,
                 cache: this.state.cacheId,
