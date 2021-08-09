@@ -55,7 +55,7 @@ class AboutUs extends React.Component {
                                             </h5>
 
                                             <p className="p font-weight-normal">
-                                                Bugs?? We don&#39;t do that here
+                                                Bugs??? We don&#39;t do that here
                                             </p>
 
                                             <ul className="list-inline mt-4">
