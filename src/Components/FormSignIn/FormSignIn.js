@@ -2,6 +2,7 @@
 import React from 'react'
 import axios from "axios";
 import PropTypes from "prop-types";
+import backend from "../../env";
 import Loading from "../../common/Loading";
 
 class FormSignIn extends React.Component {
@@ -65,7 +66,7 @@ class FormSignIn extends React.Component {
             course :this.state.course,
         }
 
-        axios.post("connect/profile/", payload)
+        axios.post(backend + "connect/profile/", payload)
             .then((res) => {
                 localStorage.setItem("id", res.data.id)
             this.props.onSubmit()

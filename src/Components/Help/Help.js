@@ -1,6 +1,7 @@
 import React from "react";
 import "./Help.css";
 import DashBoard from "./DashBoard/DashBoard";
+import backend from "../../env";
 import axios from "axios";
 import HelpForm from "./HelpForm/HelpForm";
 import Loading from "../../common/Loading";
@@ -40,7 +41,7 @@ class Help extends React.Component {
 
     componentDidMount() {
 
-        axios.get("connect/teacher?format=json")
+        axios.get(backend+"connect/teacher?format=json")
             .then(res => {
                 if (res.data.length)
                         this.handlerSubmit(res)
@@ -75,7 +76,7 @@ class Help extends React.Component {
         const payload = {
             skills: removeItemAll(this.state.skills, item)
         }
-        axios.patch("connect/teacher/"+this.state.id+"/" ,payload)
+        axios.patch(backend+"connect/teacher/"+this.state.id+"/" ,payload)
             .then(() => this.setState(payload))
     }
     
@@ -83,7 +84,7 @@ class Help extends React.Component {
         const payload = {
             skills: this.state.skills
         }
-        axios.patch("connect/teacher/"+this.state.id+"/" ,payload)
+        axios.patch(backend+"connect/teacher/"+this.state.id+"/" ,payload)
             .then(() => this.setState(payload))
     }
     

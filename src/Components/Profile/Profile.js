@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Profile.css";
 import axios from "axios";
+import backend from "../../env";
 import './Profile.css';
 import Card from 'react-bootstrap/Card';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
@@ -77,9 +78,10 @@ class Profile extends React.Component{
             linkedIn: null,
             loading: true }
     }
+
     componentDidMount() {
-        axios.get("connect/profile/?format=json")
-            .then(res => axios.get("connect/teacher/").then((res2) => {
+        axios.get(backend+"connect/profile/?format=json")
+            .then(res => axios.get(backend+"connect/teacher/").then((res2) => {
 
                 if (res2.data.length){
                     this.setState({
@@ -152,10 +154,10 @@ class Profile extends React.Component{
                 handle: this.state.handle
             }
             this.setState({loading: true})
-            axios.patch("connect/profile/" + this.state.id + "/", payload)
+            axios.patch(backend + "connect/profile/" + this.state.id + "/", payload)
                 .then(() => {
                     if (this.state.isTeacher)
-                        axios.patch("connect/teacher/" + this.state.id + "/", {
+                        axios.patch(backend + "connect/teacher/" + this.state.id + "/", {
                             Linkedin: this.state.linkedIn,
                             Gitname: this.state.github,
                             Contact: (this.state.contact === undefined)?0:parseInt(this.state.contact.slice(1)),

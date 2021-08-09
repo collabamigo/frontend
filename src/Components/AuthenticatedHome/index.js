@@ -2,6 +2,7 @@ import Link from "../../common/Link";
 import Card from "react-bootstrap/Card";
 import React from "react";
 import axios from "axios";
+import backend from "../../env";
 import {Fade} from "react-awesome-reveal";
 import {isMobile} from "react-device-detect";
 import {SvgIcon} from "../../common/SvgIcon";
@@ -22,7 +23,7 @@ class AuthenticatedHome extends React.Component {
 
     componentDidMount() {
 
-        axios.get("connect/teacher?format=json")
+        axios.get(backend+"connect/teacher?format=json")
             .then(res => {
                 if (res.data.length)
                         this.setState({

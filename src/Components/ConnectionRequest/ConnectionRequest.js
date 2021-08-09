@@ -2,6 +2,7 @@
 import React from 'react'
 // import {Button, Form} from "react-bootstrap";
 import axios from "axios";
+import backend from "../../env";
 import {Redirect} from "react-router-dom";
 
 function useQuery() {
@@ -33,7 +34,7 @@ class ConnectionRequest extends React.Component{
     }
 
     handleSubmit = (e) => {
-        axios.post("connect/approve/", {
+        axios.post(backend+"connect/approve/", {
             request_id: this.query.get("request_id"),
             mobile: this.state.checked?1:0})
             .then(res => {
