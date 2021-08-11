@@ -69,6 +69,11 @@ class App extends React.Component {
         return true
     }
 
+    componentDidMount() {
+        if (location.host==="collabconnect.web.app" || location.host==="collabamigo.web.app")
+            location.host="collabamigo.com"
+
+    }
     handleLogin = () => {
         this.setState({
             "signedIn": true
