@@ -65,15 +65,17 @@ class App extends React.Component {
         );
     }
 
-    shouldComponentUpdate() {
-        return true
-    }
-
     componentDidMount() {
         if (location.host==="collabconnect.web.app" || location.host==="collabamigo.web.app")
             location.host="collabamigo.com"
 
     }
+
+    shouldComponentUpdate() {
+        return true
+    }
+
+
     handleLogin = () => {
         this.setState({
             "signedIn": true
