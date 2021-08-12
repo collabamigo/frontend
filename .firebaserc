@@ -14,7 +14,7 @@
     "collabconnect-development": {
       "hosting": {
         "development": [
-          "collabconnect-development"
+          "collabamigo-dev"
         ]
       }
     }
