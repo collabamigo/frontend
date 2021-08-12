@@ -17,7 +17,7 @@ class Footer extends React.Component {
                         {/*eslint-disable-next-line*/}
                         <a
                             className="link-footer"
-                            href="https://github.com/watson-hex/react-collabconnect/"
+                            href="https://github.com/watson-hex/frontend-collabamigo/"
                             rel="noopener"
                             target="_blank"
                             type="external"

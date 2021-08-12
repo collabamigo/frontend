@@ -38,7 +38,7 @@ export default Connect
 //                 id="header"
 //             >
 //                 <h1 className="display-3">
-//                     CollabConnect
+//                     CollabAmigo
 //                 </h1>
 
 //                 <p className="lead">
