@@ -1,20 +1,20 @@
 {
   "projects": {
-    "default": "collabconnect-242d8",
-    "development": "collabconnect-development"
+    "default": "collabamigo",
+    "testing": "collabamigo-testing"
   },
   "targets": {
-    "collabconnect-242d8": {
+    "collabamigo": {
       "hosting": {
         "production": [
           "collabamigo"
         ]
       }
     },
-    "collabconnect-development": {
+    "collabamigo-testing": {
       "hosting": {
-        "development": [
-          "collabamigo-dev"
+        "testing": [
+          "collabamigo-testing"
         ]
       }
     }
