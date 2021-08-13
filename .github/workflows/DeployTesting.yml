@@ -16,9 +16,9 @@ jobs:
         with:
           target: development
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COLLABCONNECT_242D8 }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COLLABAMIGO }}'
           channelId: live
-          projectId: development
+          projectId: testing
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
   Create-issues-using-TODO:
