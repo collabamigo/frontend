@@ -15,7 +15,7 @@
     ]
   },
   {
-    "target": "development",
+    "target": "testing",
     "public": "build",
     "ignore": [
       "firebase.json",
