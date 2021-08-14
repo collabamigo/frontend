@@ -18,7 +18,7 @@ jobs:
         with:
           target: production
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COLLABCONNECT_242D8 }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COLLABAMIGO_PRODUCTION }}'
           channelId: live
           projectId: default
         env:
