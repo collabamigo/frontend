@@ -14,9 +14,9 @@ jobs:
       - run: npm ci && npx eslint src && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          target: development
+          target: testing
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COLLABAMIGO }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COLLABAMIGO_TESTING }}'
           channelId: live
           projectId: testing
         env:
