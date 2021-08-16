@@ -56,7 +56,6 @@ function GoogleSignIn (props) {
     const [googleUserState, setGoogleUserState] = useState(undefined);
 
     function onSignIn (googleUser) {
-        console.log(googleUser)
         if (props.stage==="button") {
             const crypto = require('crypto');
             const CryptoJS = require("crypto-js");
