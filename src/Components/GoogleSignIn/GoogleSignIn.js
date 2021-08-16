@@ -128,7 +128,6 @@ function GoogleSignIn (props) {
                         data-callback="onSignIn"
                         data-client_id="597159953447-snucndrn3auafnv7gutico5vqvj20j3s.apps.googleusercontent.com"
                         data-context="signin"
-                        data-nonce=""
                         data-ux_mode="popup"
                         id="g_id_onload"
                     />
