@@ -145,9 +145,9 @@ function GoogleSignIn (props) {
         else if (props.stage==="form")
             return (
                 <FormSignIn
-                    emailId={googleUserState.getBasicProfile().getEmail()}
-                    firstName={googleUserState.getBasicProfile().getGivenName()}
-                    lastName={googleUserState.getBasicProfile().getFamilyName()}
+                    emailId={googleUserState.email}
+                    firstName={googleUserState.name}
+                    lastName=""
                     onSubmit={onSignIn}
                 />
             )
