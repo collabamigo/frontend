@@ -6,7 +6,6 @@ import axios from "axios";
 import backend from "../../env";
 import jws from "jsonwebtoken";
 
-// eslint-disable-next-line no-unused-vars
 function rsa_encrypt (plaintext) {
 
     const NodeRSA = require("node-rsa"),
@@ -37,7 +36,6 @@ function rsa_encrypt (plaintext) {
 }
 
 function GoogleSignIn (props) {
-    // eslint-disable-next-line no-unused-vars
     async function profileExists (googleUser) {
         if (props.stage==="button")
             return {
@@ -52,11 +50,18 @@ function GoogleSignIn (props) {
     }
 
 
-    // eslint-disable-next-line no-unused-vars
     const [googleUserState, setGoogleUserState] = useState(undefined);
 
     function onSignIn (googleUser) {
         if (props.stage==="button") {
+            if (jws.decode(googleUser.credential).hd !== "iiitd.ac.in") {
+                alert("Please login using your IIITD ID")
+                window.google.accounts.id.revoke(jws.decode(googleUser.credential).email, () => {
+                    localStorage.clear();
+                    window.location.href = "/";
+                })
+            }
+
             const crypto = require('crypto');
             const CryptoJS = require("crypto-js");
 
