@@ -142,8 +142,8 @@ function GoogleSignIn (props) {
                         data-logo_alignment="left"
                         data-shape="pill"
                         data-size="large"
-                        data-text="signin_with"
-                        data-theme="filled_black"
+                        data-text="continue_with"
+                        data-theme="filled_blue"
                         data-type="standard"
                     />
                 </>);
@@ -164,7 +164,6 @@ function GoogleSignIn (props) {
 
 GoogleSignIn.propTypes={
     onClick: PropTypes.func.isRequired,
-    // eslint-disable-next-line react/no-unused-prop-types
     setStage: PropTypes.func.isRequired,
     stage: PropTypes.string.isRequired,
     visibility: PropTypes.bool.isRequired,
