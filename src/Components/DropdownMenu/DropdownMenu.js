@@ -5,13 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "../../common/Link";
 
 function signOut() {
-    const auth2 = window.gapi.auth2.getAuthInstance();
-    auth2.signOut().then(() => {
         localStorage.clear();
         window.location.href = "/";
-
-    });
-
 }
 
 import {

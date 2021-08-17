@@ -124,7 +124,7 @@ function GoogleSignIn (props) {
             return (
                 <>
                     <div
-                        data-auto_select="true"
+                        data-auto_select={Boolean(localStorage.getItem("encrypted_token"))}
                         data-callback="onSignIn"
                         data-client_id="597159953447-snucndrn3auafnv7gutico5vqvj20j3s.apps.googleusercontent.com"
                         data-context="signin"
@@ -158,7 +158,6 @@ function GoogleSignIn (props) {
 }
 
 GoogleSignIn.propTypes={
-    // eslint-disable-next-line react/no-unused-prop-types
     onClick: PropTypes.func.isRequired,
     // eslint-disable-next-line react/no-unused-prop-types
     setStage: PropTypes.func.isRequired,
