@@ -11,6 +11,7 @@ import AboutUs from "./Components/AboutUs/AboutUs";
 import axios from "axios";
 import UnauthenticatedHome from "./Components/UnauthenticatedHome/UnauthenticatedHome";
 import ExternalHeader from "./Components/Header";
+import ClubHomePage from "./Components/ClubHomePage/ClubHomePage";
 import Loading from "./common/Loading";
 import Footer from "./Components/Footer/Footer";
 import Demo from "./Components/Demo/Demo";
@@ -127,6 +128,14 @@ class App extends React.Component {
                                     <Connect />
                                 </ProtectedRoute>
 
+
+                                <ProtectedRoute
+                                    exact
+                                    path="/club"
+                                >
+                                    <ClubHomePage />
+                                </ProtectedRoute>
+
                                 <Route
                                     exact
                                     path="/project"
@@ -168,6 +177,7 @@ class App extends React.Component {
                                 >
                                     <ConnectionHistory />
                                 </Route>
+
 
 
 
