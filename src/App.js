@@ -125,7 +125,7 @@ class App extends React.Component {
                                     exact
                                     path="/collab_connect"
                                 >
-                                    <Connect />
+                                    <Connect className="Demo_Club" />
                                 </ProtectedRoute>
 
 

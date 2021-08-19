@@ -8,7 +8,7 @@ import { Doughnut } from "react-chartjs-2";
 import backend from "../../../env";
 import axios from "axios";
 import Odal from "./modaldelete";
-import Oadd from "./modaladd"
+import Oadd from "./modaladd";
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
