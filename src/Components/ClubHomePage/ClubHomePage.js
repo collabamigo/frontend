@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 // import axios from "axios";
 // import backend from "../../env";
 import PropTypes from "prop-types";
-
-
-// import PropTypes from 'prop-types'
-
 class ClubHomePage extends Component {
     static propTypes = {
         clubName : PropTypes.string.isRequired,
@@ -54,7 +50,10 @@ class ClubHomePage extends Component {
 
 
         return (
-            <div />
+            <div>
+                hello
+            </div>
+
         );
     }
 }

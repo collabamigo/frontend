@@ -125,7 +125,7 @@ class App extends React.Component {
                                     exact
                                     path="/collab_connect"
                                 >
-                                    <Connect className="Demo_Club" />
+                                    <Connect  />
                                 </ProtectedRoute>
 
 
@@ -133,7 +133,7 @@ class App extends React.Component {
                                     exact
                                     path="/club"
                                 >
-                                    <ClubHomePage />
+                                    <ClubHomePage clubName="Demo_Club" />
                                 </ProtectedRoute>
 
                                 <Route
