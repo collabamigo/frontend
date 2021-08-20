@@ -14,3 +14,15 @@
 .header-color {
     color: rgb(100, 98, 98);
 }
+
+.club-list {
+    width: 70px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+}
+
+.club-logo {
+    width: 70px;
+    height: 70px;
+}
