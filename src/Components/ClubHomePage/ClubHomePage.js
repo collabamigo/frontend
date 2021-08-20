@@ -16,7 +16,7 @@ class ClubHomePage extends Component {
         this.state={
             basicInformation : {
                 Name: "Demo Club",
-                logoLink: "https://via.placeholder.com/100X100",
+                logoLink: "https://via.placeholder.com/50X50",
                 tagline: "bleh bleh bleh",
                 description: "bleh bleh bleh * 2",
                 socialmediaLink: {
@@ -62,7 +62,7 @@ class ClubHomePage extends Component {
                             <div className="col"> 
                                 <Image 
                                     fluid
-                                    src="holder.js/100px250"
+                                    src={this.state.basicInformation.logoLink}
                                 />
 
                                 <span className="">
