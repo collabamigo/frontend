@@ -13,19 +13,37 @@ import "./index.css";
 class AuthenticatedHome extends React.Component {
     constructor(props) {
         super(props);
+        // this.anything = this.anything.bind(this);
         this.state = {
             first: "BECOME A CONTRIBUTOR",
             second: "Contribute",
             third:
                 "Solve other's doubts and be the mentor you always wanted.\n" +
                 "Using our platform you can reach a larger community.",
+            // clubList: {
+            //     0 : ["Tasveer", "https://via.placeholder.com/70X70"],
+            //     1 : ["MicDrop", "https://via.placeholder.com/70X70"],
+            //     2 : ["Byld", "https://via.placeholder.com/70X70"],
+            //     3 : ["D4rkcode", "https://via.placeholder.com/70X70"],
+            //     4 : ["Litsoc", "https://via.placeholder.com/70X70"],
+            // },
             clubList: {
-                0 : ["Tasveer", "https://via.placeholder.com/70X70"],
-                1 : ["MicDrop", "https://via.placeholder.com/70X70"],
-                2 : ["Byld", "https://via.placeholder.com/70X70"],
-                3 : ["D4rkcode", "https://via.placeholder.com/70X70"],
-                4 : ["Litsoc", "https://via.placeholder.com/70X70"],
-            },
+                    "Tasveer": "https://via.placeholder.com/70X70",
+                    "MicDrop": "https://via.placeholder.com/70X70",
+                    "Byld": "https://via.placeholder.com/70X70",
+                    "D4rkcode": "https://via.placeholder.com/70X70",
+                    "Litsoc": "https://via.placeholder.com/70X70",
+                    "Salt": "https://via.placeholder.com/70X70",
+                    "Travel": "https://via.placeholder.com/70X70",
+                    "CP": "https://via.placeholder.com/70X70",
+                    "Foo": "https://via.placeholder.com/70X70",
+                    "Philsoc": "https://via.placeholder.com/70X70",
+                    "Seintards": "https://via.placeholder.com/70X70",
+                    "Hehee": "https://via.placeholder.com/70X70",
+                    "lol": "https://via.placeholder.com/70X70",
+                    "anything": "https://via.placeholder.com/70X70",
+                    "machaan": "https://via.placeholder.com/70X70",
+                },
         };
     }
 
@@ -45,6 +63,30 @@ class AuthenticatedHome extends React.Component {
 
     shouldComponentUpdate() {
         return true;
+    }
+
+    anything() {
+        let abcs = null;
+        for (let i = 0; i < 100; i++) {
+            abcs += (
+                <div className="row mx-4">
+                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div className="club-list">
+                            <img
+                                className="club-logo rounded-circle"
+                                src={this.state.clubList[0][1]}
+                            />
+
+                            <p>
+                                {this.state.clubList[0][0]}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                    );
+        }
+        console.log(abcs);
+        return (abcs)
     }
 
     render() {
@@ -170,23 +212,39 @@ class AuthenticatedHome extends React.Component {
                             />
                         </div>
 
-                        <Container>
-                            <div className="d-flex flex-row m-5">
-                                <div className="row">
-                                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div className="club-list">
-                                            <img
-                                                className="club-logo rounded-circle"
-                                                src={this.state.clubList[0][1]}
-                                            />
+                        {/* <Container className="d-flex flex-row m-5">
+                            <div className="row">
+                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div className="club-list">
+                                        <img
+                                            className="club-logo rounded-circle"
+                                            src={this.state.clubList[0][1]}
+                                        />
 
-                                            <p>
-                                                {this.state.clubList[0][0]}
-                                            </p>
-                                        </div>
+                                        <p>
+                                            {this.state.clubList[0][0]}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
+                        </Container> */}
+
+                        <Container className="d-flex flex-wrap m-5">
+                            {Object.keys(this.state.clubList).map((clubLink) => (
+                                <div
+                                    className="club-list mx-5 my-4"
+                                    key={this.key}
+                                >
+                                    <img
+                                        className="club-logo rounded-circle"
+                                        src={this.state.clubList[clubLink]}
+                                    />
+
+                                    <p>
+                                        {clubLink}
+                                    </p>
+                                </div>
+                            ))}
                         </Container>
                     </Container>
                 </Jumbotron>
