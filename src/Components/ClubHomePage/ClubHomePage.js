@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 // import axios from "axios";
 // import backend from "../../env";
+import Image from 'react-bootstrap/Image'
 import PropTypes from "prop-types";
+import Card from 'react-bootstrap/Card'
+import Carousel from 'react-bootstrap/Carousel'
 class ClubHomePage extends Component {
     static propTypes = {
         clubName : PropTypes.string.isRequired,
@@ -13,7 +16,7 @@ class ClubHomePage extends Component {
         this.state={
             basicInformation : {
                 Name: "Demo Club",
-                logoLink: "https://via.placeholder.com/100X100",
+                logoLink: "https://via.placeholder.com/50X50",
                 tagline: "bleh bleh bleh",
                 description: "bleh bleh bleh * 2",
                 socialmediaLink: {
@@ -51,7 +54,150 @@ class ClubHomePage extends Component {
 
         return (
             <div>
-                hello
+                <hr />
+
+                <section className="">
+                    <div>
+                        <div className="">
+                            <div className="col"> 
+                                <Image 
+                                    fluid
+                                    src={this.state.basicInformation.logoLink}
+                                />
+
+                                <span className="">
+                                    {this.state.basicInformation.Name}
+                                </span>
+                            </div>
+
+                            <div className="col">
+                                {this.state.basicInformation.tagline}
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <Card
+                                className=""
+                                style={{ width: '18rem' }}
+                            >
+                                <Card.Body>
+                                    
+                                    <Card.Text>
+                                        {this.state.basicInformation.description}
+                                    </Card.Text>
+
+                                    <Card.Link href="#">
+                                        W
+                                    </Card.Link>
+
+                                    <Card.Link href="#">
+                                        I
+                                    </Card.Link>
+
+                                    <Card.Link href="#">
+                                        F
+                                    </Card.Link>
+
+                                    <Card.Link href="#">
+                                        L
+                                    </Card.Link>
+                                </Card.Body>
+
+                                <Card.Footer className="d-flex justify-content-end">
+                                    here since 
+                                    {' '}
+
+                                    {this.state.basicInformation.joinDate}
+                                </Card.Footer>
+                            </Card>
+
+                            <Card
+                                className=""
+                                style={{ width: '18rem' }}
+                            >
+                                <Card.Body>
+                                    
+                                    <Card.Title>
+                                        Top Events
+                                    </Card.Title>
+
+
+                                    {/* Implement mapping function */}
+
+                                    {/* <Card.Text>
+                                        {this.state.basicInformation.description}
+                                    </Card.Text> */}
+
+                                    {/*  */}
+                                </Card.Body>
+
+                            </Card>
+                        </div>
+                        
+                        <hr />
+
+                        <Carousel className="container-fluid w-50 mb-4">
+                            <Carousel.Item>
+                                <img
+                                    alt="First slide"
+                                    className="d-block w-100"
+                                    src="https://via.placeholder.com/720X480"
+                                />
+
+                                <Carousel.Caption>
+                                    <h3>
+                                        First slide label
+                                    </h3>
+
+                                    <p>
+                                        Nulla vitae elit libero, a pharetra augue mollis interdum.
+                                    </p>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+
+                            <Carousel.Item>
+                                <img
+                                    alt="Second slide"
+                                    className="d-block w-100"
+                                    src="https://via.placeholder.com/720X480"
+                                />
+
+                                <Carousel.Caption>
+                                    <h3>
+                                        Second slide label
+                                    </h3>
+
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    </p>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+
+                            <Carousel.Item>
+                                <img
+                                    alt="Third slide"
+                                    className="d-block w-100"
+                                    src="https://via.placeholder.com/720X480"
+                                />
+
+                                <Carousel.Caption>
+                                    <h3>
+                                        Third slide label
+                                    </h3>
+
+                                    <p>
+                                        Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                                    </p>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                        </Carousel>
+                        
+                        <hr />
+
+
+                    </div>
+
+                </section>
             </div>
 
         );
