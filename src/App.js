@@ -129,12 +129,12 @@ class App extends React.Component {
                                 </ProtectedRoute>
 
 
-                                <ProtectedRoute
+                                <Route
                                     exact
                                     path="/club"
                                 >
                                     <ClubHomePage clubName="Demo_Club" />
-                                </ProtectedRoute>
+                                </Route>
 
                                 <Route
                                     exact
