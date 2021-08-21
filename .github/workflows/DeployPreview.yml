@@ -1,7 +1,10 @@
 name: Deploy to Preview Channel
 
 on:
+  push:
+    branches: [ main, testing, testing-pragyan ]
   pull_request:
+    branches: [ main, testing ]
 
 jobs:
   build_and_preview:
