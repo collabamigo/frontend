@@ -1,13 +1,14 @@
 import {Link} from "gatsby";
 import Card from "react-bootstrap/Card";
-import Container from 'react-bootstrap/Container'
-import Jumbotron from 'react-bootstrap/Jumbotron'
+import Container from "react-bootstrap/Container";
+import Jumbotron from "react-bootstrap/Jumbotron";
 import React from "react";
 import axios from "axios";
 import backend from "../../env";
 import { Fade } from "react-awesome-reveal";
 import { isMobile } from "react-device-detect";
 import { SvgIcon } from "../../common/SvgIcon";
+import { ReadMore } from "../ReadMore/ReadMore";
 import "./index.css";
 
 class AuthenticatedHome extends React.Component {
@@ -63,30 +64,6 @@ class AuthenticatedHome extends React.Component {
 
     shouldComponentUpdate() {
         return true;
-    }
-
-    anything() {
-        let abcs = null;
-        for (let i = 0; i < 100; i++) {
-            abcs += (
-                <div className="row mx-4">
-                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div className="club-list">
-                            <img
-                                className="club-logo rounded-circle"
-                                src={this.state.clubList[0][1]}
-                            />
-
-                            <p>
-                                {this.state.clubList[0][0]}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                    );
-        }
-        console.log(abcs);
-        return (abcs)
     }
 
     render() {
@@ -244,6 +221,11 @@ class AuthenticatedHome extends React.Component {
                                         {clubLink}
                                     </p>
                                 </div>
+                                <ReadMore
+                                    key={this.key}
+                                    link={this.state.clubList[clubLink]}
+                                    name={clubLink}
+                                />
                             ))}
                         </Container>
                     </Container>
