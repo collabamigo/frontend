@@ -5,6 +5,8 @@ import Image from 'react-bootstrap/Image'
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 class ClubHomePage extends Component {
     static propTypes = {
         clubName : PropTypes.string.isRequired,
@@ -59,7 +61,7 @@ class ClubHomePage extends Component {
                 <section className="">
                     <div>
                         <div className="">
-                            <div className="col"> 
+                            <div className="d-flex justify-content-start ml-3 "> 
                                 <Image 
                                     fluid
                                     src={this.state.basicInformation.logoLink}
@@ -68,14 +70,29 @@ class ClubHomePage extends Component {
                                 <span className="">
                                     {this.state.basicInformation.Name}
                                 </span>
-                            </div>
 
-                            <div className="col">
-                                {this.state.basicInformation.tagline}
+                                <Row
+                                    md={2}
+                                    xs={1}
+                                >
+                                    <Col>
+                                        {"  "}
+
+                                        <br />
+                                    </Col>
+
+                                    <Col>
+                                        {"  "}
+                                    </Col>
+
+                                    {/* <Col>
+                                        {this.state.basicInformation.tagline}
+                                    </Col> */}
+                                </Row>
                             </div>
                         </div>
 
-                        <div className="row">
+                        <Row>
                             <Card
                                 className=""
                                 style={{ width: '18rem' }}
@@ -132,7 +149,7 @@ class ClubHomePage extends Component {
                                 </Card.Body>
 
                             </Card>
-                        </div>
+                        </Row>
                         
                         <hr />
 
