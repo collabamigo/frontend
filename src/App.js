@@ -12,6 +12,8 @@ import axios from "axios";
 import UnauthenticatedHome from "./Components/UnauthenticatedHome/UnauthenticatedHome";
 import ExternalHeader from "./Components/Header";
 import ClubHomePage from "./Components/ClubHomePage/ClubHomePage";
+import EventPage from "./Components/EventPage/Eventpage";
+
 import Loading from "./common/Loading";
 import Footer from "./Components/Footer/Footer";
 import Demo from "./Components/Demo/Demo";
@@ -134,6 +136,13 @@ class App extends React.Component {
                                     path="/club"
                                 >
                                     <ClubHomePage clubName="Demo_Club" />
+                                </Route>
+
+                                <Route
+                                    exact
+                                    path="/event"
+                                >
+                                    <EventPage />
                                 </Route>
 
                                 <Route
