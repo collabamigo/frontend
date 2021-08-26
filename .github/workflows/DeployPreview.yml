@@ -2,6 +2,8 @@ name: Deploy to Preview Channel
 
 on:
   pull_request:
+    branches:
+      - testing
 
 jobs:
   build_and_preview:
