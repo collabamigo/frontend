@@ -5,8 +5,8 @@ import Image from 'react-bootstrap/Image'
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import "./ClubHomePage.css"
+
 class ClubHomePage extends Component {
     static propTypes = {
         clubName : PropTypes.string.isRequired,
@@ -18,7 +18,7 @@ class ClubHomePage extends Component {
         this.state={
             basicInformation : {
                 Name: "Demo Club",
-                logoLink: "https://via.placeholder.com/50X50",
+                logoLink: "https://via.placeholder.com/60X60",
                 tagline: "bleh bleh bleh",
                 description: "bleh bleh bleh * 2",
                 socialmediaLink: {
@@ -31,8 +31,6 @@ class ClubHomePage extends Component {
                 clubBanners:["https://via.placeholder.com/1280X480","https://via.placeholder.com/1280X480","https://via.placeholder.com/1280X480"]
             }
         }
-
-
     }
 
     componentDidMount() {
@@ -58,43 +56,29 @@ class ClubHomePage extends Component {
             <div>
                 <hr />
 
-                <section className="">
+                <section className="clubDetails">
                     <div>
-                        <div className="">
-                            <div className="d-flex justify-content-start ml-3 "> 
-                                <Image 
+                        <div className="clubHeader row">
+                            <div className="col-4 offset-0">
+                                <Image
+                                    className="logo"
                                     fluid
                                     src={this.state.basicInformation.logoLink}
                                 />
 
-                                <span className="">
+                                <span className="clubName offset-1">
                                     {this.state.basicInformation.Name}
                                 </span>
+                            </div>
 
-                                <Row
-                                    md={2}
-                                    xs={1}
-                                >
-                                    <Col>
-                                        {"  "}
-
-                                        <br />
-                                    </Col>
-
-                                    <Col>
-                                        {"  "}
-                                    </Col>
-
-                                    {/* <Col>
-                                        {this.state.basicInformation.tagline}
-                                    </Col> */}
-                                </Row>
+                            <div className="row my-custom-row justify-content-start align-content-end">
+                                {this.state.basicInformation.tagline}
                             </div>
                         </div>
 
-                        <Row>
+                        <div className="row p-3">
                             <Card
-                                className=""
+                                className="card1 col-4 offset-1"
                                 style={{ width: '18rem' }}
                             >
                                 <Card.Body>
@@ -120,7 +104,7 @@ class ClubHomePage extends Component {
                                     </Card.Link>
                                 </Card.Body>
 
-                                <Card.Footer className="d-flex justify-content-end">
+                                <Card.Footer className=" cardFooter d-flex justify-content-end">
                                     here since 
                                     {' '}
 
@@ -129,7 +113,7 @@ class ClubHomePage extends Component {
                             </Card>
 
                             <Card
-                                className=""
+                                className="card2 col-4 offset-2"
                                 style={{ width: '18rem' }}
                             >
                                 <Card.Body>
@@ -149,7 +133,7 @@ class ClubHomePage extends Component {
                                 </Card.Body>
 
                             </Card>
-                        </Row>
+                        </div>
                         
                         <hr />
 

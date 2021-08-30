@@ -1,4 +1,3 @@
-
 import React from 'react';
 import IntroContent from "../../content/IntroContent.json";
 import Container from "../../common/Container";
