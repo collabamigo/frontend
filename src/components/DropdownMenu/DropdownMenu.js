@@ -12,7 +12,7 @@ function signOut() {
 import {
     CustomNavLinkSmall,
 } from "../Header/styles";
-import { withTranslation } from "react-i18next";
+
 import { isMobile } from "react-device-detect";
 import PropTypes from "prop-types";
 
@@ -95,4 +95,4 @@ function DropdownMenu({ isAuthenticated }) {
 DropdownMenu.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired
 }
-export default withTranslation()(DropdownMenu);
+export default DropdownMenu

@@ -24,10 +24,6 @@ module.exports = {
     `gatsby-transformer-remark`,
   ],
   flags: {
-    DEV_SSR: false,
-    FAST_DEV: true,
-    PRESERVE_FILE_DOWNLOAD_CACHE: true,
-    PRESERVE_WEBPACK_CACHE: true,
   },
 
 }

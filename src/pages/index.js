@@ -1,10 +1,7 @@
-import React, {lazy, Suspense} from "react";
+import React from "react";
 import "./App.css";
 
-import {
-    Route,
-    BrowserRouter as Router,
-} from "react-router-dom";
+import { Router } from "@reach/router";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import AboutUs from "../components/AboutUs/AboutUs";
 import axios from "axios";
@@ -14,20 +11,19 @@ import ClubHomePage from "../components/ClubHomePage/ClubHomePage";
 import EventPage from "../components/EventPage/Eventpage";
 
 import { Helmet } from "react-helmet"
-import Loading from "../common/Loading";
 import Footer from "../components/Footer/Footer";
 import Demo from "../components/Demo/Demo";
+import AuthenticatedHome from "../components/AuthenticatedHome";
+import Ask from "../components/Ask/Ask";
+import Profile from "../components/Profile/Profile";
+import Connect from "../components/Connect/Connect";
+import Help from "../components/Help/Help";
+import ConnectionRequest from "../components/ConnectionRequest/ConnectionRequest";
+import Rickroll from "../components/Rickroll";
+import ConnectionHistory from "../components/ConnectionHistory";
+import Project from "../components/project/project";
 
 
-const Help = lazy(() => import("../components/Help/Help"))
-const Ask = lazy(() => import("../components/Ask/Ask"))
-const AuthenticatedHome = lazy(() => import("../components/AuthenticatedHome"))
-const Connect = lazy(() => import('../components/Connect/Connect'))
-const Profile = lazy(() => import("../components/Profile/Profile"))
-const Project = lazy(() => import("../components/project/project"))
-const ConnectionRequest = lazy(() => import("../components/ConnectionRequest/ConnectionRequest"))
-const ConnectionHistory = lazy(() => import("../components/ConnectionHistory"))
-const Rickroll = lazy(() => import("../components/Rickroll"))
 
 class App extends React.Component {
     constructor(props) {
@@ -81,6 +77,7 @@ class App extends React.Component {
     }
 
     render() {
+        console.log("HEYYYYYYYYYYY")
 
         return (
             <div className="App h-100 w-100">
@@ -154,145 +151,89 @@ class App extends React.Component {
                 </Helmet>
 
                 <div className="position-relative min-vh-100">
-                    <Suspense
-                        fallback={<Loading />}
-                    >
-                        <Router>
-                            <>
-                                <ExternalHeader isAuthenticated={this.state.signedIn} />
+                    {/*<ExternalHeader isAuthenticated={this.state.signedIn} />*/}
 
-                                <Route
-                                    exact
-                                    path="/"
-                                >
+                    <Router>
 
-                                    {this.state.signedIn ?
-                                        <AuthenticatedHome />
+                        {this.state.signedIn ?
+                            <AuthenticatedHome path="/" />
                                         : <UnauthenticatedHome
                                                 onLogin={this.handleLogin}
+                                                path="/"
                                           />}
-                                </Route>
 
-                                <ProtectedRoute
-                                    exact
-                                    path="/ask"
+                        <Ask path="/ask" />
+
+                        <Help path="/help" />
+
+                        <Profile path="/profile" />
+
+
+                        <Connect path="/collab_connect" />
+
+
+
+                        <ClubHomePage
+                            clubName="Demo_Club"
+                            path="/club"
+                        />
+
+
+                        <EventPage path="/event" />
+
+
+                        <Project path="/project" />
+
+
+                        <Demo path="/demo" />
+
+
+
+                        <AboutUs path="/about" />
+
+
+                        <Rickroll path="/oops" />
+
+
+                        <ConnectionRequest path="/connection/" />
+
+
+                        <ConnectionHistory path="/history/" />
+
+
+                        {/*<div
+                            path="/403"
+                        >
+
+                            <h6 className="row justify-content-center m-2">
+                                ERROR: This page is not meant to be directly accessed.
+                            </h6>
+
+                            <img
+                                alt="Gandalf you shall not pass"
+                                className="justify-content-center m-2"
+                                loading="lazy"
+                                src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
+                            />
+
+                            <div className="row justify-content-center m-2">
+                                <a
+                                    className="btn-lg btn-primary"
+                                    href="/"
                                 >
-                                    <Ask />
-                                </ProtectedRoute>
+                                    Sign in to continue
+                                </a>
+                            </div>
+                        </div>*/}
 
-                                <ProtectedRoute
-                                    exact
-                                    path="/help"
-                                >
-                                    <Help />
-                                </ProtectedRoute>
-
-                                <ProtectedRoute
-                                    exact
-                                    path="/profile"
-                                >
-                                    <Profile />
-                                </ProtectedRoute>
-
-                                <ProtectedRoute
-                                    exact
-                                    path="/collab_connect"
-                                >
-                                    <Connect />
-                                </ProtectedRoute>
-
-
-                                <Route
-                                    exact
-                                    path="/club"
-                                >
-                                    <ClubHomePage clubName="Demo_Club" />
-                                </Route>
-
-                                <Route
-                                    exact
-                                    path="/event"
-                                >
-                                    <EventPage />
-                                </Route>
-
-                                <Route
-                                    exact
-                                    path="/project"
-                                >
-                                    <Project />
-                                </Route>
-
-                                <Route
-                                    exact
-                                    path="/demo"
-                                >
-                                    <Demo />
-                                </Route>
-
-
-                                <Route
-                                    exact
-                                    path="/about"
-                                >
-                                    <AboutUs />
-                                </Route>
-
-                                <Route
-                                    exact
-                                    path="/oops"
-                                >
-                                    <Rickroll />
-                                </Route>
-
-                                <Route
-                                    path="/connection/"
-                                >
-                                    <ConnectionRequest />
-                                </Route>
-
-                                <Route
-                                    path="/history/"
-                                >
-                                    <ConnectionHistory />
-                                </Route>
-
-
-                                <Route
-                                    exact
-                                    path="/403"
-                                >
-
-                                    <h6 className="row justify-content-center m-2">
-                                        ERROR: This page is not meant to be directly accessed.
-                                    </h6>
-
-                                    <img
-                                        alt="Gandalf you shall not pass"
-                                        className="justify-content-center m-2"
-                                        loading="lazy"
-                                        src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
-                                    />
-
-                                    <div className="row justify-content-center m-2">
-                                        <a
-                                            className="btn-lg btn-primary"
-                                            href="/"
-                                        >
-                                            Sign in to continue
-                                        </a>
-                                    </div>
-                                </Route>
-
-                            </>
-                        </Router>
-                    </Suspense>
+                    </Router>
                 </div>
 
                 <Footer />
 
             </div>
         );
+
 
     }
 

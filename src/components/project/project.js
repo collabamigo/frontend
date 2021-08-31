@@ -7,7 +7,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import Carousel from 'react-bootstrap/Carousel'
 import './project.css';
 
-class project extends React.Component {
+class Project extends React.Component {
 
 
     shouldComponentUpdate() {
@@ -35,7 +35,7 @@ class project extends React.Component {
                             src="https://via.placeholder.com/1280X480"
                         />
 
-                        
+
                     </Carousel.Item>
 
                     <Carousel.Item>
@@ -45,11 +45,11 @@ class project extends React.Component {
                             src="https://via.placeholder.com/1280X480"
                         />
 
-                        
+
                     </Carousel.Item>
                 </Carousel>
 
-                <div className="col-md-10 container-fluid mb-4"> 
+                <div className="col-md-10 container-fluid mb-4">
                     <div className="row">
                         <Card style={{ width: '8rem' }}>
                             <Card.Img
@@ -160,7 +160,7 @@ class project extends React.Component {
                     <div className="row container-fluid col-md-12 m-3">
 
                         <Card
-                            className="col zoom-my-card m-4 card-min-size" 
+                            className="col zoom-my-card m-4 card-min-size"
                             style={{ width: '18rem' }}
                         >
                             <Card.Body>
@@ -187,7 +187,7 @@ class project extends React.Component {
                         </Card>
 
                         <Card
-                            className="col zoom-my-card m-4 card-min-size" 
+                            className="col zoom-my-card m-4 card-min-size"
                             style={{ width: '18rem' }}
                         >
                             <Card.Body>
@@ -214,7 +214,7 @@ class project extends React.Component {
                         </Card>
 
                         <Card
-                            className="col zoom-my-card m-4 card-min-size" 
+                            className="col zoom-my-card m-4 card-min-size"
                             style={{ width: '18rem' }}
                         >
                             <Card.Body>
@@ -240,15 +240,15 @@ class project extends React.Component {
                             </Card.Body>
 
                             {' '}
-                        
+
                         </Card>
                     </div>
                 </div>
 
-                {/* 
+                {/*
                 <ScrollButton /> */}
             </div>
         )
     }
 }
-export default project
+export default Project
