@@ -78,7 +78,7 @@ function GoogleSignIn (props) {
 
                 localStorage.setItem(
                     "aes_key",
-                    rsa_encrypt(encrypted_token.key.toString())
+                    encrypted_token.key.toString()
                 );
 
                 localStorage.setItem(

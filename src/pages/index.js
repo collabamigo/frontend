@@ -1,4 +1,3 @@
-
 import React, {lazy, Suspense} from "react";
 import "./App.css";
 
@@ -6,55 +5,58 @@ import {
     Route,
     BrowserRouter as Router,
 } from "react-router-dom";
-import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
-import AboutUs from "./Components/AboutUs/AboutUs";
+import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
+import AboutUs from "../components/AboutUs/AboutUs";
 import axios from "axios";
-import UnauthenticatedHome from "./Components/UnauthenticatedHome/UnauthenticatedHome";
-import ExternalHeader from "./Components/Header";
-import ClubHomePage from "./Components/ClubHomePage/ClubHomePage";
-import EventPage from "./Components/EventPage/Eventpage";
+import UnauthenticatedHome from "../components/UnauthenticatedHome/UnauthenticatedHome";
+import ExternalHeader from "../components/Header";
+import ClubHomePage from "../components/ClubHomePage/ClubHomePage";
+import EventPage from "../components/EventPage/Eventpage";
 
-import Loading from "./common/Loading";
-import Footer from "./Components/Footer/Footer";
-import Demo from "./Components/Demo/Demo";
+import { Helmet } from "react-helmet"
+import Loading from "../common/Loading";
+import Footer from "../components/Footer/Footer";
+import Demo from "../components/Demo/Demo";
 
 
-const Help = lazy(() => import("./Components/Help/Help"))
-const Ask = lazy(()=> import("./Components/Ask/Ask"))
-const AuthenticatedHome = lazy(() => import("./Components/AuthenticatedHome"))
-const Connect = lazy(() => import('./Components/Connect/Connect'))
-const Profile = lazy(() => import("./Components/Profile/Profile"))
-const Project = lazy(() => import("./Components/project/project"))
-const ConnectionRequest = lazy(() => import("./Components/ConnectionRequest/ConnectionRequest"))
-const ConnectionHistory = lazy(() => import("./Components/ConnectionHistory"))
-const Rickroll = lazy(() => import("./Components/Rickroll"))
+const Help = lazy(() => import("../components/Help/Help"))
+const Ask = lazy(() => import("../components/Ask/Ask"))
+const AuthenticatedHome = lazy(() => import("../components/AuthenticatedHome"))
+const Connect = lazy(() => import('../components/Connect/Connect'))
+const Profile = lazy(() => import("../components/Profile/Profile"))
+const Project = lazy(() => import("../components/project/project"))
+const ConnectionRequest = lazy(() => import("../components/ConnectionRequest/ConnectionRequest"))
+const ConnectionHistory = lazy(() => import("../components/ConnectionHistory"))
+const Rickroll = lazy(() => import("../components/Rickroll"))
 
 class App extends React.Component {
     constructor(props) {
         super(props);
 
+        if (typeof localStorage !== `undefined`) {
         // This interceptor adds authentication credentials
-        axios.interceptors.request.use(function (config) {
-            config.headers['aeskey'] = localStorage.getItem('aes_key')
-            config.headers['iv'] = localStorage.getItem('iv')
-            config.headers['token'] = localStorage.getItem('encrypted_token')
-            return config;
-        }, function (error) {
-            return Promise.reject(error);
-        });
+            axios.interceptors.request.use(function (config) {
+                config.headers['aeskey'] = localStorage.getItem('aes_key')
+                config.headers['iv'] = localStorage.getItem('iv')
+                config.headers['token'] = localStorage.getItem('encrypted_token')
+                return config;
+            }, function (error) {
+                return Promise.reject(error);
+            });
 
-        axios.interceptors.response.use(function (response) {
-            return response;
-          }, function (error) {
-            if (localStorage.getItem("err") !== JSON.stringify(error)) {
-                localStorage.setItem("err", JSON.stringify(error))
-                if (error.response.status === 500)
-                    alert("Unexpected error occurred. Please contact us if you see this message repeatedly.")
-                else if (error.response.status === 401)
-                    alert("Authentication error. Please try clicking/tapping on the CollabAmigo logo to re-authenticate")
-            }
-            return Promise.reject(error);
-          });
+            axios.interceptors.response.use(function (response) {
+                return response;
+            }, function (error) {
+                if (localStorage.getItem("err") !== JSON.stringify(error)) {
+                    localStorage.setItem("err", JSON.stringify(error))
+                    if (error.response.status === 500)
+                        alert("Unexpected error occurred. Please contact us if you see this message repeatedly.")
+                    else if (error.response.status === 401)
+                        alert("Authentication error. Please try clicking/tapping on the CollabAmigo logo to re-authenticate")
+                }
+                return Promise.reject(error);
+            });
+    }
 
         this.state = {
             "signedIn": false,
@@ -62,8 +64,8 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        if (location.host==="collabconnect.web.app" || location.host==="collabamigo.web.app")
-            location.host="collabamigo.com"
+        if (location.host === "collabconnect.web.app" || location.host === "collabamigo.web.app")
+            location.host = "collabamigo.com"
 
     }
 
@@ -82,6 +84,75 @@ class App extends React.Component {
 
         return (
             <div className="App h-100 w-100">
+                <Helmet>
+                    <meta charSet="utf-8" />
+
+                    <link
+                        href="https://collabamigo.com"
+                        rel="canonical"
+                    />
+
+                    <link
+                        href="%PUBLIC_URL%/icons/favicon_dark.ico"
+                        rel="icon"
+                    />
+
+                    <meta
+                        content="width=device-width, initial-scale=1"
+                        name="viewport"
+                    />
+
+                    <meta
+                        content="#18216d"
+                        name="theme-color"
+                    />
+
+                    <meta
+                        content="A platform to learn and grow"
+                        name="description"
+                    />
+
+                    <meta
+                        content="iiitd.ac.in"
+                        name="google-signin-hosted_domain"
+                    />
+
+                    <meta
+                        content="1O70mbIh0GWQJ6g3UsfCEnQyNUoygyq7k1CbvmWZzsU"
+                        name="google-site-verification"
+                    />
+
+                    <script
+                        async
+                        defer
+                        src="https://accounts.google.com/gsi/client"
+                    />
+
+                    <link
+                        href="./img/svg/developer.svg"
+                        rel="apple-touch-icon"
+                    />
+
+                    <link
+                        href="img/icons/favicon_dark.ico"
+                        rel="shortcut icon"
+                    />
+
+                    <link
+                        href="%PUBLIC_URL%/manifest.json"
+                        rel="manifest"
+                    />
+
+                    <title>
+                        CollabAmigo
+                    </title>
+
+                    <link
+                        href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined&display=swap"
+                        rel="stylesheet"
+                    />
+                </Helmet>
+
                 <div className="position-relative min-vh-100">
                     <Suspense
                         fallback={<Loading />}
@@ -97,9 +168,9 @@ class App extends React.Component {
 
                                     {this.state.signedIn ?
                                         <AuthenticatedHome />
-                                : <UnauthenticatedHome 
-                                        onLogin={this.handleLogin}
-                                  />}
+                                        : <UnauthenticatedHome
+                                                onLogin={this.handleLogin}
+                                          />}
                                 </Route>
 
                                 <ProtectedRoute
@@ -127,7 +198,7 @@ class App extends React.Component {
                                     exact
                                     path="/collab_connect"
                                 >
-                                    <Connect  />
+                                    <Connect />
                                 </ProtectedRoute>
 
 
@@ -160,7 +231,6 @@ class App extends React.Component {
                                 </Route>
 
 
-
                                 <Route
                                     exact
                                     path="/about"
@@ -186,12 +256,6 @@ class App extends React.Component {
                                 >
                                     <ConnectionHistory />
                                 </Route>
-
-
-
-
-
-
 
 
                                 <Route
@@ -226,8 +290,8 @@ class App extends React.Component {
                 </div>
 
                 <Footer />
-                
-            </div >
+
+            </div>
         );
 
     }
@@ -235,3 +299,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+
