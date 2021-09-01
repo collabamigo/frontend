@@ -208,41 +208,28 @@ class AuthenticatedHome extends React.Component {
 
                         <Container className="d-flex flex-wrap m-5">
                             {Object.keys(this.state.clubList).map((clubLink) => (
-                                <div
-                                    className="club-list mx-5 my-4"
-                                    key={this.key}
-                                >
-                                    <img
-                                        className="club-logo rounded-circle"
-                                        src={this.state.clubList[clubLink]}
-                                    />
+                                <>
+                                    <div
+                                        className="club-list mx-5 my-4"
+                                        key={this.key}
+                                    >
+                                        <img
+                                            className="club-logo rounded-circle"
+                                            src={this.state.clubList[clubLink]}
+                                        />
 
-                                    <p>
-                                        {clubLink}
-                                    </p>
-                                </div>
-                                <ReadMore
-                                    key={this.key}
-                                    link={this.state.clubList[clubLink]}
-                                    name={clubLink}
-                                />
-                            ))}
                                         <p>
-                                            {this.state.clubList[0][0]}
+                                            {clubLink}
                                         </p>
                                     </div>
-                                </div>
-                            </div>
-                        </Container> */}
 
-                        <Container className="d-flex flex-wrap m-5">
-                            {Object.keys(this.state.clubList).map((clubLink) => (
-                                <ReadMore
-                                    key={this.key}
-                                    link={this.state.clubList[clubLink]}
-                                    name={clubLink}
-                                />
-                            ))}
+                                    <ReadMore
+                                        key={this.key}
+                                        link={this.state.clubList[clubLink]}
+                                        name={clubLink}
+                                    />
+                                </>
+                                ))}
                         </Container>
                     </Container>
                 </Jumbotron>
