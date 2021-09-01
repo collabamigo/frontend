@@ -80,7 +80,7 @@ class AuthenticatedHome extends React.Component {
                             <Card.Footer className="footer-custom pb-4">
                                 <Link
                                     className="col-auto btn btn-primary"
-                                    to="/help"
+                                    to="/app/help"
                                 >
                                     {this.state.second}
                                 </Link>
@@ -115,7 +115,7 @@ class AuthenticatedHome extends React.Component {
                             <Card.Footer className="footer-custom pb-4">
                                 <Link
                                     className="col-auto btn btn-primary"
-                                    to="/ask"
+                                    to="/app/ask"
                                 >
                                     Ask for help
                                 </Link>
@@ -146,7 +146,7 @@ class AuthenticatedHome extends React.Component {
                             <Card.Footer className="footer-custom pb-4">
                                 <Link
                                     className="col-auto btn btn-primary"
-                                    to="/project"
+                                    to="/app/project"
                                 >
                                     Project
                                 </Link>

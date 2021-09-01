@@ -43,7 +43,7 @@ function DropdownMenu({ isAuthenticated }) {
                 <CustomNavLinkSmall className="btn">
                     <Link
                         className="magic_span"
-                        to="/Demo"
+                        to="/app/Demo"
                     >
                         Demo
                     </Link>

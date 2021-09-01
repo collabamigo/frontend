@@ -87,8 +87,9 @@ function Layout({children}) {
                   {children}
               </main>
 
-              <Footer />
+
           </div>
+          <Footer/>
       </div>)
 }
 

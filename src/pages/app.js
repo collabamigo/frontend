@@ -61,10 +61,6 @@ class App extends React.Component{
 
               <Demo path="/app/demo" />
 
-
-              <AboutUs path="/app/about" />
-
-
               <Rickroll path="/app/oops" />
 
 
