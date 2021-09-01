@@ -7,7 +7,7 @@
 module.exports = {
   siteMetadata: {
     title: `CollabAmigo`,
-    siteUrl: `https://collabamigo.app`,
+    siteUrl: `https://collabamigo.com`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
