@@ -227,6 +227,22 @@ class AuthenticatedHome extends React.Component {
                                     name={clubLink}
                                 />
                             ))}
+                                        <p>
+                                            {this.state.clubList[0][0]}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </Container> */}
+
+                        <Container className="d-flex flex-wrap m-5">
+                            {Object.keys(this.state.clubList).map((clubLink) => (
+                                <ReadMore
+                                    key={this.key}
+                                    link={this.state.clubList[clubLink]}
+                                    name={clubLink}
+                                />
+                            ))}
                         </Container>
                     </Container>
                 </Jumbotron>
