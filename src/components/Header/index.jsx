@@ -25,7 +25,6 @@ function Header({ isAuthenticated }) {
     };
 
 
-    console.log("THERE")
     return (
         <HeaderSection className="mt-3 mr-2 mb-3 ml-2">
             <div className="container-fluid">

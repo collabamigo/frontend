@@ -5,6 +5,7 @@ import FormSignIn from "../FormSignIn/FormSignIn";
 import axios from "axios";
 import backend from "../../env";
 import jws from "jsonwebtoken";
+import {setLoggedIn} from "../../utils/auth"
 
 
 function GoogleSignIn (props) {
@@ -58,6 +59,7 @@ function GoogleSignIn (props) {
                     encrypted_token.iv.toString()
                 );
 
+                setLoggedIn()
 
             }
         }

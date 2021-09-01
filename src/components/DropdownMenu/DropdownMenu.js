@@ -25,7 +25,7 @@ function DropdownMenu({ isAuthenticated }) {
                     <CustomNavLinkSmall className="btn">
                         <Link
                             className="magic_span"
-                            to="/history"
+                            to="/app/history"
                         >
                             Connections
                         </Link>
@@ -34,7 +34,7 @@ function DropdownMenu({ isAuthenticated }) {
                     <CustomNavLinkSmall className="btn">
                         <Link
                             className="magic_span"
-                            to="/profile"
+                            to="/app/profile"
                         >
                             Profile
                         </Link>
