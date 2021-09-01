@@ -2,14 +2,12 @@ import React from "react"
 import {Router} from "@reach/router"
 import Layout from "../components/Layout"
 import {isLoggedIn} from "../utils/auth"
-import Ask from "../components/Ask/Ask";
 import Help from "../components/Help/Help";
 import Connect from "../components/Connect/Connect";
 import ClubHomePage from "../components/ClubHomePage/ClubHomePage";
 import EventPage from "../components/EventPage/Eventpage";
 import Project from "../components/project/project";
 import Demo from "../components/Demo/Demo";
-import AboutUs from "../components/AboutUs/AboutUs";
 import Rickroll from "../components/Rickroll";
 import ConnectionRequest from "../components/ConnectionRequest/ConnectionRequest";
 import ConnectionHistory from "../components/ConnectionHistory";
