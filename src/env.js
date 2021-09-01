@@ -4,7 +4,7 @@ let backend = ""
 
 if (production)
     backend="https://mysterious-savannah-09391.herokuapp.com/"
-else 
-    backend="https://blooming-peak-53825.herokuapp.com/"
+else
+    backend="http://localhost:8000/"
 
 export default backend

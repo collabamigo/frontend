@@ -5,7 +5,7 @@ import "./Autocomplete.css";
 import backend from "../../env";
 import axios from "axios";
 
-class Autocomplete extends React.Component {
+class Index extends React.Component {
 
     static propTypes = {
         integrated: PropTypes.bool,
@@ -28,7 +28,7 @@ class Autocomplete extends React.Component {
           cacheId: 0,
       };
     }
-  
+
     // noinspection JSCheckFunctionSignatures
     shouldComponentUpdate () {
         return true;
@@ -157,4 +157,4 @@ class Autocomplete extends React.Component {
 
 }
 
-export default Autocomplete;
+export default Index;
