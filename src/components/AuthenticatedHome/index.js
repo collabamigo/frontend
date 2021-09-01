@@ -115,7 +115,7 @@ class AuthenticatedHome extends React.Component {
                             <Card.Footer className="footer-custom pb-4">
                                 <Link
                                     className="col-auto btn btn-primary"
-                                    to="/app/ask"
+                                    to="/ask"
                                 >
                                     Ask for help
                                 </Link>

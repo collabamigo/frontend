@@ -37,8 +37,6 @@ class App extends React.Component{
   return (
       <Layout>
           <Router>
-              <Ask path="/app/ask" />
-
               <Help path="/app/help" />
 
               <Profile path="/app/profile" />

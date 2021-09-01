@@ -4,7 +4,7 @@ import "./Ask.css";
 import Autocomplete from "./Autocomplete";
 import axios from "axios";
 import backend from "../../env";
-import CardExplorer from "../CardExplorer";
+import CardExplorer from "../../components/CardExplorer";
 
 
 class Ask extends React.Component {
@@ -58,11 +58,11 @@ class Ask extends React.Component {
                     alert("You can't connect with yourself")
             })
     }
-    
+
 
     handleChange = (value) => {
         this.setState({
-            searchTerm: value, 
+            searchTerm: value,
             found_match:false
         });
     }
@@ -132,7 +132,7 @@ class Ask extends React.Component {
                                   watsonhex@gmail.com
                               </a>
                           </div>:null}
-                      
+
                   </div>
 
                   <div className="pt-5 col-lg-6 col-md-auto col-sm-auto col-xl-6 justify-content-center">
