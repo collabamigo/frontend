@@ -3,7 +3,6 @@ import React from 'react'
 // import {Button, Form} from "react-bootstrap";
 import axios from "axios";
 import backend from "../../env";
-import {Redirect} from "react-router-dom";
 
 function useQuery() {
   return new URLSearchParams(window.location.search);
@@ -22,7 +21,7 @@ class ConnectionRequest extends React.Component{
     shouldComponentUpdate() {
         return true
     }
-    
+
     handleCheckboxChange = (e) => {
         this.setState({checked: e.target.checked})
         if (this.state.checked === true) {
@@ -48,17 +47,18 @@ class ConnectionRequest extends React.Component{
           })
         e.preventDefault()
     }
-    
+
     render(){
-        if (this.query.get("request_id") === null)
-            return(
-                <Redirect to={
-                      {
-                          pathname: '/403',
-                      }
-                  }
-                />)
-        else
+        // TEMPORARY
+        // if (this.query.get("request_id") === null)
+        //     return(
+        //         <Redirect to={
+        //               {
+        //                   pathname: '/403',
+        //               }
+        //           }
+        //         />)
+        // else
             return(
                 <div>
                     <p>
@@ -73,7 +73,7 @@ class ConnectionRequest extends React.Component{
                         </h3>
 
                         <br />
-                        
+
                         <div className="col-auto">
                             <div className="row-auto">
                                 <span className="badge badge-success col-auto">
@@ -111,7 +111,7 @@ class ConnectionRequest extends React.Component{
                                 </span>
                             </div>
                         </div>
-                        
+
                     </p>
 
                     <form>

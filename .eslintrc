@@ -1,5 +1,5 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "plugins": [
     "react"
   ],
@@ -30,7 +30,7 @@
         {"property": "observer", "object": "<pragma>"} // sets `object` to whatever value `settings.react.pragma` is set to
     ],
     "linkComponents": [
-      // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
+      // components used as alternatives to <a> for linking, eg. <Link to={ url } />
       "Hyperlink",
       {"name": "Link", "linkAttribute": "to"}
     ]
@@ -40,7 +40,7 @@
     "ecmaVersion": 6,
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
   },
       "env": {
         "browser": true,
