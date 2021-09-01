@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import { Row, Col } from "react-bootstrap";
-import { withTranslation } from "react-i18next";
 import { SvgIcon } from "../../../common/SvgIcon";
 import { ContentBlockProps } from "../types";
 import { Fade } from "react-awesome-reveal";
@@ -51,11 +50,11 @@ function LeftContentBlock({
                     >
                         <ContentWrapper>
                             <h6 className="text-left">
-                                {(stage === "button") ? t(title) : t(alt_title)}
+                                {(stage === "button") ? (title) : (alt_title)}
                             </h6>
 
                             <Content className={"text-left " + ((stage === "form") ? "h1 font-weight-bold" : null)}>
-                                {(stage === "button") ? t(content) : t(alt_content)}
+                                {(stage === "button") ? (content) : (alt_content)}
                             </Content>
 
                             <ServiceWrapper>
@@ -102,4 +101,4 @@ function LeftContentBlock({
     );
 }
 
-export default withTranslation()(LeftContentBlock);
+export default LeftContentBlock;

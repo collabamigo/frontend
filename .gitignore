@@ -29,3 +29,5 @@ firebase-debug.log
 src/env.js
 /src/react-app-env.d.ts
 .firebase/*.cache
+.cache
+public

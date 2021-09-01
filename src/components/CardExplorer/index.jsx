@@ -61,10 +61,11 @@ class CardExplorer extends React.Component{
 
 
     handleVote(teacherId, vote) {
-        if (teacherId===localStorage.getItem("id")) {
-            window.alert("You tried to vote for yourself. OOPS")
-            window.location="oops"
-        }
+        if (typeof window !== undefined)
+            if (teacherId===localStorage.getItem("id")) {
+                window.alert("You tried to vote for yourself. OOPS")
+                window.location="oops"
+            }
         this.setState((state) => ({
             voteValues: {
                 ...(state.voteValues),
@@ -83,7 +84,7 @@ class CardExplorer extends React.Component{
             listIndex: state.listIndex + this.props.cardsPerPage
         }), this.fetchData)
     }
-    
+
     handleGetPrev() {
         this.setState((state) => ({
             isLoading: true,
