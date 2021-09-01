@@ -2,7 +2,7 @@
 import React from "react";
 import "./DropdownMenu.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Link from "../../common/Link";
+import {Link} from "@reach/router";
 
 function signOut() {
         localStorage.clear();

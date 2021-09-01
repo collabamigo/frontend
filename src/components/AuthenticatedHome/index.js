@@ -1,4 +1,4 @@
-import Link from "../../common/Link";
+import {Link} from "gatsby";
 import Card from "react-bootstrap/Card";
 import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
@@ -50,6 +50,7 @@ class AuthenticatedHome extends React.Component {
     render() {
         return (
             <div>
+
                 <div className="row container-fluid h-75 w-100 justify-content-center card-group">
                     <Fade
                         className="col-lg-4 col-md-6 col-sm-12 h-auto mt-2 mb-3 card-group"
@@ -58,8 +59,8 @@ class AuthenticatedHome extends React.Component {
                     >
                         <Card className="h-auto card ml-4 mr-1 zoom-my-card min-vh-80 justify-content-center mb-3">
                             <div className="justify-content-center">
-                                <SvgIcon 
-                                    src="help_others.svg" 
+                                <SvgIcon
+                                    src="help_others.svg"
                                     width="97%"
                                 />
                             </div>
@@ -105,7 +106,7 @@ class AuthenticatedHome extends React.Component {
                                         Stack Overflow:404!
                                     </span>
                                     Answer not found,
-                                    
+
                                     <br />
                                     The button below can solve it.
                                 </Card.Text>
@@ -161,11 +162,11 @@ class AuthenticatedHome extends React.Component {
                                 Associated Clubs
                             </h1>
 
-                            <input 
-                                aria-label="Search" 
-                                className="form-control w-25" 
+                            <input
+                                aria-label="Search"
+                                className="form-control w-25"
                                 placeholder="Search..."
-                                type="text" 
+                                type="text"
                             />
                         </div>
 

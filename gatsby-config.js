@@ -4,26 +4,12 @@
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
 
-const webpack = require("webpack");
 module.exports = {
   siteMetadata: {
-    title: `CSE Department, IIIT Delhi`,
-    siteUrl: `https://www.iiitd-cse.netlify.app`,
-    description: `This is the official website of the CSE Department of IIIT Delhi`,
+    title: `CollabAmigo`,
+    siteUrl: `https://collabamigo.app`,
   },
   plugins: [
-      `gatsby-transformer-json`,
     `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `./public/`,
-        name: `site-pages`,
-      },
-    },
-    `gatsby-transformer-remark`,
   ],
-  flags: {
-  },
-
 }

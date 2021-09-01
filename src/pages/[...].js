@@ -70,16 +70,15 @@ class App extends React.Component {
     }
 
 
-    handleLogin = () => {
+    handleLogin () {
         this.setState({
-            "signedIn": true
+            signedIn: true
         });
     }
 
     render() {
-        console.log("HEYYYYYYYYYYY")
-
         return (
+
             <div className="App h-100 w-100">
                 <Helmet>
                     <meta charSet="utf-8" />
@@ -151,14 +150,16 @@ class App extends React.Component {
                 </Helmet>
 
                 <div className="position-relative min-vh-100">
-                    {/*<ExternalHeader isAuthenticated={this.state.signedIn} />*/}
+                    <nav>
+                        <ExternalHeader isAuthenticated={this.state.signedIn} />
+                    </nav>
 
-                    <Router>
+                    <Router basepath="/">
 
                         {this.state.signedIn ?
                             <AuthenticatedHome path="/" />
                                         : <UnauthenticatedHome
-                                                onLogin={this.handleLogin}
+                                                onLogin={this.handleLogin.bind(this)}
                                                 path="/"
                                           />}
 
@@ -195,13 +196,13 @@ class App extends React.Component {
                         <Rickroll path="/oops" />
 
 
-                        <ConnectionRequest path="/connection/" />
+                        <ConnectionRequest path="/connection" />
 
 
-                        <ConnectionHistory path="/history/" />
+                        <ConnectionHistory path="/history" />
 
 
-                        {/*<div
+                        <div
                             path="/403"
                         >
 
@@ -224,7 +225,7 @@ class App extends React.Component {
                                     Sign in to continue
                                 </a>
                             </div>
-                        </div>*/}
+                        </div>
 
                     </Router>
                 </div>
