@@ -1,17 +1,16 @@
 
 import React, {useState} from 'react'
-// import Container from "../../common/Container";
 import { SvgIcon } from "../../common/SvgIcon";
 import {
     HeaderSection,
     NotHidden,
-    // Outline,
-    // Burger,
-    // Label
+    Outline,
+    Burger,
+    Label
 } from "./styles";
 import PropTypes from "prop-types";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
-// import { Drawer, Menu } from "antd";
+import { Drawer, Menu } from "antd";
 
 function Header({ isAuthenticated }) {
     const [visible, setVisibility] = useState(false);
@@ -49,7 +48,7 @@ function Header({ isAuthenticated }) {
                         <DropdownMenu isAuthenticated={isAuthenticated} />
                     </NotHidden>
 
-                    {/*<Burger onClick={showDrawer}>
+                    <Burger onClick={showDrawer}>
                         <Outline />
                     </Burger>
 
@@ -75,7 +74,7 @@ function Header({ isAuthenticated }) {
                         </div>
 
                         <DropdownMenu isAuthenticated={isAuthenticated} />
-                    </Drawer>*/}
+                    </Drawer>
                 </div>
             </div>
         </HeaderSection >

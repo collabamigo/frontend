@@ -1,5 +1,5 @@
 import styled from "styled-components";
-// import { MenuOutlined } from "@ant-design/icons";
+import { MenuOutlined } from "@ant-design/icons";
 
 export const HeaderSection = styled("header")`
   .ant-row-space-between {
@@ -32,7 +32,6 @@ export const CustomNavLink = styled("div")`
   }
 `;
 
-// eslint-disable-next-line no-undef
 export const ContactWrapper = styled("div")<any>`
   cursor: pointer;
   width: ${(p) => (p.width ? "100%" : "110px")};
@@ -86,10 +85,9 @@ export const Label = styled("span")`
   align-items: baseline;
 `;
 
-// // eslint-disable-next-line no-undef
-// export const Outline = styled(MenuOutlined)<any>`
-//   font-size: 22px;
-// `;
+export const Outline = styled(MenuOutlined)<any>`
+  font-size: 22px;
+`;
 
 export const Span = styled("span")`
   cursor: pointer;
