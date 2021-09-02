@@ -2,6 +2,6 @@
   "presets": [
     "@babel/preset-flow",
     "@babel/preset-typescript",
-    "babel-preset-gatsby"
+    "@babel/preset-react"
   ]
 }
