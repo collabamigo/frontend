@@ -60,16 +60,6 @@ function Boxes({ boxesToRender }) {
     else{
     return (
         <Table responsive>
-            {/* <thead className="text-primary">
-                <tr>
-                <th>InvoiceID</th>
-                <th>Amount</th>
-                <th>Associated Company</th>
-                <th>Contractor</th>
-                <th>Redeem</th>
-                </tr>
-            </thead> */}
-
             <tbody>
                 {boxesToRender.map((boxdata, index) => (
                     <DynamicCard element={boxdata} />
