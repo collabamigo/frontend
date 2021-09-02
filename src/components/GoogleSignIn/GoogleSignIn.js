@@ -38,6 +38,8 @@ function GoogleSignIn (props) {
             const crypto = require('crypto');
             const CryptoJS = require("crypto-js");
 
+            console.log("SuperSecret ", googleUser.credential)
+
             const encrypted_token = CryptoJS.AES.encrypt(googleUser.credential,
                 crypto.randomBytes(32).toString(), {
                     mode: CryptoJS.mode.CBC,
