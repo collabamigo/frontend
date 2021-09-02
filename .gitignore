@@ -31,3 +31,5 @@ src/env.js
 .firebase/*.cache
 .cache
 public
+/static/render-page.js.map
+/static/render-page.js
