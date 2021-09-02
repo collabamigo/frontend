@@ -87,8 +87,6 @@ function GoogleSignIn (props) {
                     jws.decode(res.googleUser.credential).name
                     );
                 }
-
-                props.onClick();
             }
         })
     }
@@ -140,7 +138,6 @@ function GoogleSignIn (props) {
 }
 
 GoogleSignIn.propTypes={
-    onClick: PropTypes.func.isRequired,
     setStage: PropTypes.func.isRequired,
     stage: PropTypes.string.isRequired,
     visibility: PropTypes.bool.isRequired,

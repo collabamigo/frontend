@@ -22,6 +22,10 @@ class App extends React.Component{
         };
     }
 
+    shouldComponentUpdate() {
+        return true;
+    }
+
     componentDidUpdate() {
         if (!this.state.signedIn && isLoggedIn()) {
             // eslint-disable-next-line react/no-did-update-set-state

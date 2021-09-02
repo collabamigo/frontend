@@ -31,3 +31,4 @@ src/env.js
 .firebase/*.cache
 .cache
 public
+.yarn

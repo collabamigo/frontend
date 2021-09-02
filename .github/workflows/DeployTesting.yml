@@ -10,7 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci && npm run build
+
+      - name: Installing yarn
+        run: npm install -g yarn
+
+      - name: Installing dependencies
+        run: yarn install --immutable
+
+      - name: ESLinting .js and .jsx files
+        run: yarn run eslint src --ext .js,.jsx
+
+      - name: Building
+        run: yarn build
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           target: testing
