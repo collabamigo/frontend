@@ -15,7 +15,7 @@ jobs:
         run: npm ci
 
       - name: ESLinting .js and .jsx files
-        run: npm run eslint src --ext .js,.jsx
+        run: npx eslint src --ext .js,.jsx
 
       - name: Building
         run: npm run build
