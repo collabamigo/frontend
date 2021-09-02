@@ -38,6 +38,8 @@ function GoogleSignIn (props) {
             const crypto = require('crypto');
             const CryptoJS = require("crypto-js");
 
+            console.log("SuperSecret ", googleUser.credential)
+
             const encrypted_token = CryptoJS.AES.encrypt(googleUser.credential,
                 crypto.randomBytes(32).toString(), {
                     mode: CryptoJS.mode.CBC,
@@ -87,8 +89,6 @@ function GoogleSignIn (props) {
                     jws.decode(res.googleUser.credential).name
                     );
                 }
-
-                props.onClick();
             }
         })
     }
@@ -140,7 +140,6 @@ function GoogleSignIn (props) {
 }
 
 GoogleSignIn.propTypes={
-    onClick: PropTypes.func.isRequired,
     setStage: PropTypes.func.isRequired,
     stage: PropTypes.string.isRequired,
     visibility: PropTypes.bool.isRequired,

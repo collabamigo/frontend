@@ -2,7 +2,7 @@
 import {Modal} from "react-bootstrap";
 import React, {useState} from "react";
 import TagsInput from "react-tagsinput";
-import Autocomplete from "../../Ask/Autocomplete";
+import Autocomplete from "../../Autocomplete";
 import PropTypes from "prop-types";
 // import SvgIcon from "../../../common/SvgIcon";
 // import './modaldelete.css'
@@ -89,7 +89,7 @@ function Oadd({skills , onCreate, setSkills}) {
                           renderInput={renderAutocomplete}
                           value={skills}
                       />
-                      
+
                   </Modal.Body>
 
                   <Modal.Footer>
