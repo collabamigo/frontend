@@ -1,5 +1,3 @@
-/* eslint-disable react/no-multi-comp */
-
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button';
@@ -41,7 +39,7 @@ class DynamicCard extends Component {
                 <div className=" mb-3 h-100">
 
                     <div className="">
-                        
+
                         <Image
                             className="logo"
                             fluid
