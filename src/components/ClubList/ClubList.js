@@ -1,9 +1,9 @@
-/* eslint-disable */
+/* eslint-disable react/no-multi-comp */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-
+import Image from 'react-bootstrap/Image';
 
 
 class DynamicCard extends Component {
@@ -37,21 +37,28 @@ class DynamicCard extends Component {
         }
         else{
         return (
-            <tr>
-                <td>
-                    {this.props.element.name}
-                </td>
+            <div className="col-sm-6 col-lg-4 mb-3">
+                <div className=" mb-3 h-100">
 
-                <td>
-                    {this.props.element.logo}
-                </td>
-            </tr>
-                )
-            }
+                    <div className="">
+                        
+                        <Image
+                            className="logo"
+                            fluid
+                            src={this.props.element.logo}
+                        />
+
+                        <h5 className="">
+                            {this.props.element.name}
+                        </h5>
+
+                    </div>
+                </div>
+            </div>
+            )
+        }
     }
 }
-
-
 
 function Boxes({ boxesToRender }) {
     console.log(boxesToRender, " is post")
@@ -59,15 +66,15 @@ function Boxes({ boxesToRender }) {
     else if(boxesToRender.length === 0){return null;}
     else{
     return (
-        <Table responsive>
-            <tbody>
+        <div className="container">
+            <div className="row">
                 {boxesToRender.map((boxdata, index) => (
                     <DynamicCard element={boxdata} />
-                ))}
-            </tbody>
-        </Table>
-  );
-      }
+                    ))}
+            </div>
+        </div>
+        );
+    }
 }
 
 export default class Clublist extends Component {
@@ -78,9 +85,9 @@ export default class Clublist extends Component {
         super(props)
         this.state = {
             boxToShow: [],
-            next:4,
+            next:3,
             arrayForHoldingboxes : [],
-            boxesPerPage: 4
+            boxesPerPage: 3
         }
         this.loopWithSlice = this.loopWithSlice.bind(this);
         this.handleShowMoreboxes = this.handleShowMoreboxes.bind(this);
@@ -109,27 +116,10 @@ export default class Clublist extends Component {
                     <Boxes boxesToRender={this.state.arrayForHoldingboxes} />
                     : null}
 
-                <Button onClick={this.handleShowMoreboxes}>Load more</Button>
+                <Button onClick={this.handleShowMoreboxes}>
+                    Load more
+                </Button>
             </div>
         )
     }
 }
-
-// export default class ClubBox extends Component {
-//     static propTypes = {
-//         logo: PropTypes.string.isRequired,
-//         name: PropTypes.string.isRequired,
-//     }
-
-//     shouldComponentUpdate(){
-//         return true;
-//     }
-
-//     render() {
-//         return (
-//             <div>
-//                 {this.props.name}
-//             </div>
-//         )
-//     }
-// }

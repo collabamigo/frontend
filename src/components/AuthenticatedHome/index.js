@@ -170,11 +170,6 @@ class AuthenticatedHome extends React.Component {
                             triggerOnce
                         >
                             <Card className="card h-auto mx-2 zoom-my-card mb-3">
-                                {/* <SvgIcon
-                                height="56%"
-                                src="collaborate.svg"
-                                width="70%"
-                            /> */}
 
                                 <Card.Body className="mt-3">
                                     <Card.Title className="card-title font-weight-bold header-color text-left">
@@ -190,81 +185,20 @@ class AuthenticatedHome extends React.Component {
                                             and helping community alive.ggffyyfyt
                                         </div>
 
+                                        <br />
+        
+                                        <br />
+
                                         <div>
                                             <Clublist clubList={this.state.clubList} />
-                                            
-                                            {/* {this.state.clubList.map((value) => {
-                                                return (
-                                                    // eslint-disable-next-line react/jsx-key
-                                                    <div>
-                                                        <Clublist
-                                                            clubList={value}
-                                                        />
-                                                    </div>
-                                                );
-
-                                            })} */}
                                         </div>
                                     </Card.Text>
                                 </Card.Body>
-
-                                <Card.Footer className="footer-custom pb-4">
-                                    <Link
-                                        className="col-auto btn btn-primary"
-                                        to="/app/project"
-                                    >
-                                        Project
-                                    </Link>
-                                </Card.Footer>
                             </Card>
                         </Fade>
 
-                        {/* <Jumbotron >
-                        <Container fluid>
-                            <div className="d-flex flex-row justify-content-between">
-                                <h1>
-                                    Associated Clubs
-                                </h1>
-
-                                <input
-                                    aria-label="Search"
-                                    className="form-control w-25"
-                                    placeholder="Search..."
-                                    type="text"
-                                />
-                            </div>
-
-                            <Container>
-                                <div className="d-flex flex-row m-5">
-                                    <div className="row">
-                                        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div className="club-list">
-                                                <img
-                                                    className="club-logo rounded-circle"
-                                                    src={this.state.clubList[0][1]}
-                                                />
-
-                                                <p>
-                                                    {this.state.clubList[0][0]}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Container>
-                        </Container>
-                    </Jumbotron> */}
-
                     </div>
-
-
-
-
                 </div>
-
-                
-
-                
             </div>
         );
     }
