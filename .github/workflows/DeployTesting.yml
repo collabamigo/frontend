@@ -14,8 +14,8 @@ jobs:
       - name: Installing yarn
         run: npm install -g yarn
 
-      - name: Installing dependencies
-        run: yarn install --immutable
+#      - name: Installing dependencies
+#        run: yarn install --immutable
 
       - name: ESLinting .js and .jsx files
         run: yarn run eslint src --ext .js,.jsx
