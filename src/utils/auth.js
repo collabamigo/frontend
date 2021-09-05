@@ -2,7 +2,6 @@
 export const isBrowser = () => typeof window !== "undefined"
 
 export const isLoggedIn = () => {
-    console.log(isBrowser() ? !!localStorage.getItem("access") : false, localStorage.getItem("access"))
     return isBrowser()?!!localStorage.getItem("access"):false;
 }
 
