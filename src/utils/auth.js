@@ -28,7 +28,9 @@ export const reload = (path) => {
 }
 
 export const checkLoginStatus = async () => {
-    if (!isLoggedIn())
-        window.open("/welcome?next="+location.pathname, "_self")
-    return(isLoggedIn())
+    if (isBrowser()) {
+        if (!isLoggedIn())
+            window.open("/welcome?next=" + location.pathname, "_self")
+        return (isLoggedIn())
+    }
 }
