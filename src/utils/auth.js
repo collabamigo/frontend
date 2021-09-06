@@ -1,6 +1,5 @@
 
 import { navigate } from "gatsby"
-import {redirectTo} from "@reach/router";
 
 export const isBrowser = () => typeof window !== "undefined"
 
@@ -8,7 +7,7 @@ let loginStatus = false
 
 export const isLoggedIn = () => {
     return loginStatus
-    return isBrowser()?!!sessionStorage.getItem("loginFlag"):false;
+    // return isBrowser()?!!sessionStorage.getItem("loginFlag"):false;
 }
 
 export const setLoggedIn = () => {
