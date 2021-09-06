@@ -1,7 +1,7 @@
 
 import React from 'react'
 // import {Button, Form} from "react-bootstrap";
-import axios from "axios";
+import axios from "utils/axios";
 import backend from "../../env";
 
 function useQuery() {

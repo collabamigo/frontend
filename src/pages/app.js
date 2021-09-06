@@ -3,7 +3,6 @@ import {Router} from "@reach/router"
 import Layout from "../components/Layout"
 import {isLoggedIn} from "../utils/auth"
 import Help from "../components/Help/Help";
-import Connect from "../components/Connect/Connect";
 import ClubHomePage from "../components/ClubHomePage/ClubHomePage";
 import EventPage from "../components/EventPage/Eventpage";
 import Project from "../components/project/project";
@@ -42,10 +41,6 @@ class App extends React.Component{
               <Help path="/app/help" />
 
               <Profile path="/app/profile" />
-
-
-              <Connect path="/app/collab_connect" />
-
 
               <ClubHomePage
                   clubName="Demo_Club"

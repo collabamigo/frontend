@@ -2,7 +2,7 @@ import React from "react";
 import "./Help.css";
 import DashBoard from "./DashBoard/DashBoard";
 import backend from "../../env";
-import axios from "axios";
+import axios from "utils/axios";
 import HelpForm from "./HelpForm/HelpForm";
 import Loading from "../../common/Loading";
 

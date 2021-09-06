@@ -1,15 +1,15 @@
-
 import React from "react";
-import { Styles } from "../../styles/styles";
+import {Styles} from "styles/styles";
 
-import Container from "../../common/Container";
-import ContentBlock from "./ContentBlock";
-import IntroContent from "../../content/IntroContent.json";
-import PostIntroContent from "../../content/PostIntroContent.json";
+import Container from "common/Container";
+import ContentBlock from "components/UnauthenticatedHome/ContentBlock";
+import IntroContent from "content/IntroContent.json";
+import PostIntroContent from "content/PostIntroContent.json";
+import Layout from "../components/Layout";
 
 function UnauthenticatedHome() {
     return (
-        <>
+        <Layout>
             <Styles />
 
             <Container>
@@ -24,7 +24,8 @@ function UnauthenticatedHome() {
                     type="left"
                 />
             </Container>
-        </>
+        </Layout>
     )
 }
+
 export default UnauthenticatedHome

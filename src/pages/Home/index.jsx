@@ -1,7 +1,7 @@
 import React from 'react';
 import IntroContent from "../../content/IntroContent.json";
 import Container from "../../common/Container";
-import ContentBlock from "../../components/ContentBlock";
+import ContentBlock from "../../components/UnauthenticatedHome/ContentBlock";
 import PropTypes from "prop-types";
 
 

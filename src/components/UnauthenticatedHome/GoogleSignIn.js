@@ -1,11 +1,12 @@
-import "./GoogleSignIn.css";
+
 import React, {useState} from "react";
 import PropTypes from 'prop-types'
 import FormSignIn from "../FormSignIn/FormSignIn";
-import axios from "axios";
+import axios from "utils/axios";
 import backend from "../../env";
 import jws from "jsonwebtoken";
-import {setLoggedIn} from "../../utils/auth"
+import {setLoggedIn, reload} from "../../utils/auth"
+import {setToken} from "../../utils/axios";
 
 
 function GoogleSignIn (props) {
@@ -25,8 +26,8 @@ function GoogleSignIn (props) {
 
     const [googleUserState, setGoogleUserState] = useState(undefined);
 
-    function onSignIn (googleUser) {
-        if (props.stage==="button") {
+    async function onSignIn(googleUser) {
+        if (props.stage === "button") {
             if (jws.decode(googleUser.credential).hd !== "iiitd.ac.in") {
                 alert("Please login using your IIITD ID")
                 window.google.accounts.id.revoke(jws.decode(googleUser.credential).email, () => {
@@ -35,58 +36,36 @@ function GoogleSignIn (props) {
                 })
             }
 
-            const crypto = require('crypto');
-            const CryptoJS = require("crypto-js");
+            let res_temp = await axios.post(backend + "authenticate/oauthcallback/", {
+                "jwt": googleUser.credential
+            })
+            setToken(res_temp.data['access_token'])
 
-            console.log("SuperSecret ", googleUser.credential)
 
-            const encrypted_token = CryptoJS.AES.encrypt(googleUser.credential,
-                crypto.randomBytes(32).toString(), {
-                    mode: CryptoJS.mode.CBC,
-                });
+            setLoggedIn()
+            reload("/")
 
-            {
-                localStorage.setItem(
-                    "encrypted_token",
-                    encrypted_token.ciphertext.toString()
-                );
-
-                localStorage.setItem(
-                    "aes_key",
-                    encrypted_token.key.toString()
-                );
-
-                localStorage.setItem(
-                    "iv",
-                    encrypted_token.iv.toString()
-                );
-
-                setLoggedIn()
-
-            }
         }
         if (!googleUserState)
             setGoogleUserState(jws.decode(googleUser.credential));
 
-        profileExists(googleUser).then((res)=>{
+        profileExists(googleUser).then((res) => {
             if (!res.res.data.length) {
                 if (!googleUserState)
                     setGoogleUserState(res.googleUser);
                 props.setStage("form");
-            }
-            else{
+            } else {
                 if (res.res.data[0].id)
                     localStorage.setItem("id", res.res.data[0].id)
-                if (googleUserState){
+                if (googleUserState) {
                     localStorage.setItem(
-                    "userName",
-                    googleUserState.name
+                        "userName",
+                        googleUserState.name
                     );
-                }
-                else{
+                } else {
                     localStorage.setItem(
-                    "userName",
-                    jws.decode(res.googleUser.credential).name
+                        "userName",
+                        jws.decode(res.googleUser.credential).name
                     );
                 }
             }

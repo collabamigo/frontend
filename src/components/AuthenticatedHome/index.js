@@ -2,7 +2,7 @@ import {Link} from "gatsby";
 import Card from "react-bootstrap/Card";
 import Clublist from '../ClubList/ClubList.js';
 import React from "react";
-import axios from "axios";
+import axios from "utils/axios";
 import backend from "../../env";
 import { Fade } from "react-awesome-reveal";
 import { isMobile } from "react-device-detect";
