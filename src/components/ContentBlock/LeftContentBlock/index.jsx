@@ -28,7 +28,10 @@ function LeftContentBlock({
 
     return (
         <LeftContentSection className={(stage === "form") ? "p-0" : ""}>
-            <Fade direction="left">
+            <Fade
+                direction="left"
+                fraction={0}
+            >
                 <div
                     align="middle"
                     className="row justify-content-center"
