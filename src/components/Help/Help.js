@@ -1,5 +1,4 @@
 import React from "react";
-import "./Help.css";
 import DashBoard from "./DashBoard/DashBoard";
 import backend from "../../env";
 import axios from "utils/axios";
