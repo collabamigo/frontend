@@ -1,11 +1,12 @@
-import "./GoogleSignIn.css";
+
 import React, {useState} from "react";
 import PropTypes from 'prop-types'
 import FormSignIn from "../FormSignIn/FormSignIn";
-import axios from "axios";
+import axios from "utils/axios";
 import backend from "../../env";
 import jws from "jsonwebtoken";
 import {setLoggedIn, reload} from "../../utils/auth"
+import {setToken} from "../../utils/axios";
 
 
 function GoogleSignIn (props) {
@@ -35,47 +36,15 @@ function GoogleSignIn (props) {
                 })
             }
 
-            const crypto = require('crypto');
-            const CryptoJS = require("crypto-js");
-
-            console.log("SuperSecret ", googleUser.credential)
             let res_temp = await axios.post(backend + "authenticate/oauthcallback/", {
                 "jwt": googleUser.credential
             })
-            localStorage.setItem("refresh", res_temp.data['refresh_token'])
-            localStorage.setItem("access", res_temp.data['access_token'])
-            axios.interceptors.request.use(function (config) {
-                config.headers['Authorization'] = "Token " + res_temp.data['access_token']
-                return config;
-            }, function (error) {
-                return Promise.reject(error);
-            })
+            setToken(res_temp.data['access_token'])
 
-            const encrypted_token = CryptoJS.AES.encrypt(googleUser.credential,
-                crypto.randomBytes(32).toString(), {
-                    mode: CryptoJS.mode.CBC,
-                });
 
-            {
-                localStorage.setItem(
-                    "encrypted_token",
-                    encrypted_token.ciphertext.toString()
-                );
+            setLoggedIn()
+            reload("/")
 
-                localStorage.setItem(
-                    "aes_key",
-                    encrypted_token.key.toString()
-                );
-
-                localStorage.setItem(
-                    "iv",
-                    encrypted_token.iv.toString()
-                );
-
-                setLoggedIn()
-                reload()
-
-            }
         }
         if (!googleUserState)
             setGoogleUserState(jws.decode(googleUser.credential));

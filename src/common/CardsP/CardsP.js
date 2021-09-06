@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import "./CardsP.css";
 import PropTypes from "prop-types";
-import {SvgIcon} from "../../common/SvgIcon";
+import {SvgIcon} from "../SvgIcon";
 import {Fade} from "react-awesome-reveal";
 import {OverlayTrigger, Popover, Card} from "react-bootstrap";
 function CardsP (props) {
@@ -26,7 +26,7 @@ function CardsP (props) {
     }
 
     const [message, setMessage] = useState("");
-    
+
     const connectPopover = (
         <Popover id="popover-basic">
             <Popover.Content>
@@ -76,7 +76,7 @@ function CardsP (props) {
     return (
         <Fade className={"float-right " + props.className} >
             <Card className="card card_P" >
-                
+
                 <Card.Header className="main_P_title header-custom-das">
                     <span>
                         {props.name}
@@ -197,7 +197,7 @@ CardsP.propTypes = {
     showConnect: PropTypes.bool,
     showVoting: PropTypes.bool,
     voteValue: PropTypes.number,
-    
+
 }
 
 CardsP.defaultProps = {

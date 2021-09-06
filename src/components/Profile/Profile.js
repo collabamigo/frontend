@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Profile.css";
-import axios from "axios";
+import axios from "utils/axios";
 import backend from "../../env";
 import './Profile.css';
 import Card from 'react-bootstrap/Card';

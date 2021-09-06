@@ -3,7 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Autocomplete.css";
 import backend from "../../env";
-import axios from "axios";
+import axios from "utils/axios";
 
 class Index extends React.Component {
 

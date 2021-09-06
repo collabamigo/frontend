@@ -6,7 +6,7 @@ import './DashBoard.css'
 import {SvgIcon} from "../../../common/SvgIcon";
 import { Doughnut } from "react-chartjs-2";
 import backend from "../../../env";
-import axios from "axios";
+import axios from "utils/axios";
 import Odal from "./modaldelete";
 import Oadd from "./modaladd";
 
