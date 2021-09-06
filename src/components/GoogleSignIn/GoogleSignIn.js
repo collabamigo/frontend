@@ -42,8 +42,8 @@ function GoogleSignIn (props) {
             let res_temp = await axios.post(backend + "authenticate/oauthcallback/", {
                 "jwt": googleUser.credential
             })
-            localStorage.setItem("refresh", res_temp.data['refresh_token'])
-            localStorage.setItem("access", res_temp.data['access_token'])
+            // localStorage.setItem("refresh", res_temp.data['refresh_token'])
+            // localStorage.setItem("access", res_temp.data['access_token'])
             axios.interceptors.request.use(function (config) {
                 config.headers['Authorization'] = "Token " + res_temp.data['access_token']
                 return config;

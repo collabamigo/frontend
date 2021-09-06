@@ -1,6 +1,5 @@
 import React from "react"
 import {Helmet} from "react-helmet"
-import "../../pages/index.css"
 import Header from "../Header"
 
 // Global styles and component-specific styles.

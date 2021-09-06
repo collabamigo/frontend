@@ -8,7 +8,7 @@ import UnauthenticatedHome from "../components/UnauthenticatedHome/Unauthenticat
 import AuthenticatedHome from "../components/AuthenticatedHome";
 import Layout from "../components/Layout";
 import {isLoggedIn} from "../utils/auth";
-
+import "./index.css"
 
 
 class App extends React.Component {
