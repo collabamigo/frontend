@@ -1,4 +1,6 @@
 
+import { navigate } from "gatsby"
+
 export const isBrowser = () => typeof window !== "undefined"
 
 export const isLoggedIn = () => {
@@ -16,5 +18,5 @@ export const setLoggedOut = () => {
 
 export const reload = () => {
     if (isBrowser())
-        location.reload()
+        navigate(location.pathname)
 }
