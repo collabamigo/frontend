@@ -23,7 +23,6 @@ function LeftContentBlock({
     section,
     t,
     id,
-    onLogin
 }: ContentBlockProps) {
     const [stage, setStage] = useState("button");
 
@@ -87,7 +86,6 @@ function LeftContentBlock({
                         </ContentWrapper>
 
                         <GoogleSignIn
-                            onClick={onLogin}
                             setStage={setStage}
                             stage={stage}
                             visibility

@@ -5,7 +5,7 @@ import FormSignIn from "../FormSignIn/FormSignIn";
 import axios from "axios";
 import backend from "../../env";
 import jws from "jsonwebtoken";
-import {setLoggedIn} from "../../utils/auth"
+import {setLoggedIn, reload} from "../../utils/auth"
 
 
 function GoogleSignIn (props) {
@@ -25,8 +25,8 @@ function GoogleSignIn (props) {
 
     const [googleUserState, setGoogleUserState] = useState(undefined);
 
-    function onSignIn (googleUser) {
-        if (props.stage==="button") {
+    async function onSignIn(googleUser) {
+        if (props.stage === "button") {
             if (jws.decode(googleUser.credential).hd !== "iiitd.ac.in") {
                 alert("Please login using your IIITD ID")
                 window.google.accounts.id.revoke(jws.decode(googleUser.credential).email, () => {
@@ -37,6 +37,19 @@ function GoogleSignIn (props) {
 
             const crypto = require('crypto');
             const CryptoJS = require("crypto-js");
+
+            console.log("SuperSecret ", googleUser.credential)
+            let res_temp = await axios.post(backend + "authenticate/oauthcallback/", {
+                "jwt": googleUser.credential
+            })
+            localStorage.setItem("refresh", res_temp.data['refresh_token'])
+            localStorage.setItem("access", res_temp.data['access_token'])
+            axios.interceptors.request.use(function (config) {
+                config.headers['Authorization'] = "Token " + res_temp.data['access_token']
+                return config;
+            }, function (error) {
+                return Promise.reject(error);
+            })
 
             const encrypted_token = CryptoJS.AES.encrypt(googleUser.credential,
                 crypto.randomBytes(32).toString(), {
@@ -60,35 +73,32 @@ function GoogleSignIn (props) {
                 );
 
                 setLoggedIn()
+                reload()
 
             }
         }
         if (!googleUserState)
             setGoogleUserState(jws.decode(googleUser.credential));
 
-        profileExists(googleUser).then((res)=>{
+        profileExists(googleUser).then((res) => {
             if (!res.res.data.length) {
                 if (!googleUserState)
                     setGoogleUserState(res.googleUser);
                 props.setStage("form");
-            }
-            else{
+            } else {
                 if (res.res.data[0].id)
                     localStorage.setItem("id", res.res.data[0].id)
-                if (googleUserState){
+                if (googleUserState) {
                     localStorage.setItem(
-                    "userName",
-                    googleUserState.name
+                        "userName",
+                        googleUserState.name
+                    );
+                } else {
+                    localStorage.setItem(
+                        "userName",
+                        jws.decode(res.googleUser.credential).name
                     );
                 }
-                else{
-                    localStorage.setItem(
-                    "userName",
-                    jws.decode(res.googleUser.credential).name
-                    );
-                }
-
-                props.onClick();
             }
         })
     }
@@ -140,7 +150,6 @@ function GoogleSignIn (props) {
 }
 
 GoogleSignIn.propTypes={
-    onClick: PropTypes.func.isRequired,
     setStage: PropTypes.func.isRequired,
     stage: PropTypes.string.isRequired,
     visibility: PropTypes.bool.isRequired,

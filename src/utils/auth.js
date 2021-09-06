@@ -2,7 +2,7 @@
 export const isBrowser = () => typeof window !== "undefined"
 
 export const isLoggedIn = () => {
-    return isBrowser()?!!localStorage.getItem("loginFlag"):false;
+    return isBrowser()?!!localStorage.getItem("access"):false;
 }
 
 export const setLoggedIn = () => {
@@ -12,4 +12,9 @@ export const setLoggedIn = () => {
 export const setLoggedOut = () => {
     if (isBrowser())
         localStorage.clear()
+}
+
+export const reload = () => {
+    if (isBrowser())
+        location.reload()
 }

@@ -11,7 +11,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: npm ci && npm run build
+      - name: Installing dependencies
+        run: npm ci
+
+      - name: ESLinting .js and .jsx files
+        run: npx eslint src --ext .js,.jsx
+
+      - name: Building
+        run: npm run build
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           target: preview

@@ -15,12 +15,10 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
-        if (typeof localStorage !== `undefined`) {
+        if (typeof localStorage !== `undefined` && localStorage.getItem('access')) {
         // This interceptor adds authentication credentials
             axios.interceptors.request.use(function (config) {
-                config.headers['aeskey'] = localStorage.getItem('aes_key')
-                config.headers['iv'] = localStorage.getItem('iv')
-                config.headers['token'] = localStorage.getItem('encrypted_token')
+                config.headers['Authorization'] = "Token " + localStorage.getItem('access')
                 return config;
             }, function (error) {
                 return Promise.reject(error);
@@ -51,53 +49,15 @@ class App extends React.Component {
         return true
     }
 
-
-    handleLogin () {
-        this.setState({
-            signedIn: true
-        });
-    }
-
     render() {
         return (
 
             <Layout >
 
-                {/*<Router basepath="/">*/}
-
                 {isLoggedIn() ?
                     <AuthenticatedHome />
-                                        : <UnauthenticatedHome
-                                                onLogin={this.handleLogin.bind(this)}
-                                          />}
+                                        : <UnauthenticatedHome />}
 
-
-                {/*<div
-                            path="/403"
-                        >
-
-                            <h6 className="row justify-content-center m-2">
-                                ERROR: This page is not meant to be directly accessed.
-                            </h6>
-
-                            <img
-                                alt="Gandalf you shall not pass"
-                                className="justify-content-center m-2"
-                                loading="lazy"
-                                src="https://i.giphy.com/media/njYrp176NQsHS/giphy.gif"
-                            />
-
-                            <div className="row justify-content-center m-2">
-                                <a
-                                    className="btn-lg btn-primary"
-                                    href="/"
-                                >
-                                    Sign in to continue
-                                </a>
-                            </div>
-                        </div>*/}
-
-                {/*</Router>*/}
 
             </Layout>
         );

@@ -1,7 +1,7 @@
 
 import React from "react"
 import PropTypes from "prop-types";
-import Autocomplete from "../../../Ask/Autocomplete";
+import Autocomplete from "../../../Autocomplete";
 import TagsInput from 'react-tagsinput';
 import Card from 'react-bootstrap/Card';
 import './tag.css'
@@ -49,7 +49,7 @@ class Step2 extends React.Component {
                     version={2}
                 />
             </div>
-            
+
         )
     }
 
@@ -91,7 +91,7 @@ class Step2 extends React.Component {
                                 <div className="material-icons-outlined float-right col-auto">
                                     playlist_add
                                 </div>
-                                
+
                             </Card.Header>
 
                             <Card.Body className="pt-4 mt-0">
@@ -110,7 +110,7 @@ class Step2 extends React.Component {
                                                 <div className="text-muted">
                                                     Skill not found ? Email us at
                                                     {" "}
-                            
+
                                                     <a
                                                         href="mailto:watsonhex@gmail.com ?subject=Skill Not found"
                                                         onClick="window.open(this.href)"
@@ -125,7 +125,7 @@ class Step2 extends React.Component {
                                         </div>
                                     </div>
 
-                                    
+
                                 </div>
                             </Card.Body>
 
