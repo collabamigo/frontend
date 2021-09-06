@@ -2,10 +2,11 @@
 import React from "react";
 import "./Ask.css";
 import Autocomplete from "../../components/Autocomplete";
-import axios from "axios";
+import axios from "utils/axios";
 import backend from "../../env";
 import CardExplorer from "../../components/CardExplorer";
 import Layout from "../../components/Layout";
+import {checkLoginStatus} from "../../utils/auth";
 
 
 class Ask extends React.Component {
@@ -13,6 +14,7 @@ class Ask extends React.Component {
     constructor (props) {
 
         super(props);
+        checkLoginStatus()
         this.CARDS_PER_PAGE = 4
         this.state = {
             searchTerm: "",

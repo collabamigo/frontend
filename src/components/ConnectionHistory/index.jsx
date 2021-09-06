@@ -1,7 +1,7 @@
 
 import React from "react";
 import './index.css';
-import axios from "axios";
+import axios from "utils/axios";
 import backend from "../../env";
 import { Card } from "react-bootstrap";
 import CardExplorer from "../CardExplorer";

@@ -11,6 +11,7 @@ import {
 import PropTypes from "prop-types";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
 import { Drawer, Menu } from "antd";
+import {Link} from "gatsby";
 
 function Header({ isAuthenticated }) {
     const [visible, setVisibility] = useState(false);
@@ -29,17 +30,17 @@ function Header({ isAuthenticated }) {
             <div className="container-fluid">
                 <div className=" row justify-content-center">
                     <div className="col-auto ml-5">
-                        <a
+                        <Link
                             aria-label="homepage"
                             className='col-auto'
-                            href="/"
+                            to="/"
                         >
                             <SvgIcon
                                 height="78px"
                                 src="logo.svg"
                                 width="300px"
                             />
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="col" />

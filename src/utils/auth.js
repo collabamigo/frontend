@@ -1,14 +1,19 @@
 
 import { navigate } from "gatsby"
+import {redirectTo} from "@reach/router";
 
 export const isBrowser = () => typeof window !== "undefined"
 
+let loginStatus = false
+
 export const isLoggedIn = () => {
-    return isBrowser()?!!localStorage.getItem("loginFlag"):false;
+    return loginStatus
+    return isBrowser()?!!sessionStorage.getItem("loginFlag"):false;
 }
 
 export const setLoggedIn = () => {
-    localStorage.setItem("loginFlag", "true")
+    loginStatus = true
+    sessionStorage.setItem("loginFlag", "true")
 }
 
 export const setLoggedOut = () => {
@@ -16,7 +21,15 @@ export const setLoggedOut = () => {
         localStorage.clear()
 }
 
-export const reload = () => {
-    if (isBrowser())
+export const reload = (path) => {
+    if (path)
+        navigate(path)
+    else
         navigate(location.pathname)
+}
+
+export const checkLoginStatus = async () => {
+    if (!isLoggedIn())
+        window.open("/welcome?next="+location.pathname, "_self")
+    return(isLoggedIn())
 }

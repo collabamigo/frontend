@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import axios from "axios";
+// import axios from "utils/axios";
 // import backend from "../../env";
 import Image from 'react-bootstrap/Image'
 import PropTypes from "prop-types";
