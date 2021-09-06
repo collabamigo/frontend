@@ -1,7 +1,7 @@
 
 import React from 'react';
 import PropTypes from "prop-types";
-import CardsP from "../CardsP/CardsP";
+import CardsP from "../../common/CardsP/CardsP";
 import axios from "axios";
 import backend from "../../env";
 import Loading from "../../common/Loading";

@@ -3,7 +3,7 @@ import React from "react";
 import { Styles } from "../../styles/styles";
 
 import Container from "../../common/Container";
-import ContentBlock from "../ContentBlock";
+import ContentBlock from "./ContentBlock";
 import IntroContent from "../../content/IntroContent.json";
 import PostIntroContent from "../../content/PostIntroContent.json";
 

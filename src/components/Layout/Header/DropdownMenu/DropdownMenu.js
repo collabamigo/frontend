@@ -11,7 +11,7 @@ function signOut() {
 
 import {
     CustomNavLinkSmall,
-} from "../Header/styles";
+} from "../styles";
 
 import { isMobile } from "react-device-detect";
 import PropTypes from "prop-types";

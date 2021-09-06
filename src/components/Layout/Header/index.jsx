@@ -1,6 +1,6 @@
 
 import React, {useState} from 'react'
-import { SvgIcon } from "../../common/SvgIcon";
+import { SvgIcon } from "../../../common/SvgIcon";
 import {
     HeaderSection,
     NotHidden,
@@ -9,7 +9,7 @@ import {
     Label
 } from "./styles";
 import PropTypes from "prop-types";
-import DropdownMenu from "../DropdownMenu/DropdownMenu";
+import DropdownMenu from "./DropdownMenu/DropdownMenu";
 import { Drawer, Menu } from "antd";
 
 function Header({ isAuthenticated }) {

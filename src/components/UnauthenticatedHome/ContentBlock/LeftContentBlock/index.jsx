@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Row, Col } from "react-bootstrap";
-import { SvgIcon } from "../../../common/SvgIcon";
+import { SvgIcon } from "../../../../common/SvgIcon";
 import { ContentBlockProps } from "../types";
 import {
     LeftContentSection,
@@ -11,7 +11,7 @@ import {
     MinTitle,
     MinPara,
 } from "./styles";
-import GoogleSignIn from "../../GoogleSignIn/GoogleSignIn";
+import GoogleSignIn from "../../GoogleSignIn";
 
 function LeftContentBlock({
     alt_content,

@@ -1,10 +1,10 @@
 import React from "react"
 import {Helmet} from "react-helmet"
-import Header from "../Header"
+import Header from "./Header"
 
 // Global styles and component-specific styles.
 import {isLoggedIn} from "../../utils/auth";
-import Footer from "../Footer/Footer";
+import Footer from "./Footer/Footer";
 import PropTypes from "prop-types";
 
 function Layout({children}) {
