@@ -1,12 +1,12 @@
 
 import React, {useState} from "react";
 import PropTypes from 'prop-types'
-import FormSignIn from "../FormSignIn/FormSignIn";
+import FormSignIn from "./FormSignIn/FormSignIn";
 import axios from "utils/axios";
-import backend from "../../env";
+import backend from "../env";
 import jws from "jsonwebtoken";
-import {setLoggedIn, reload} from "../../utils/auth"
-import {setToken} from "../../utils/axios";
+import {setLoggedIn, reload} from "../utils/auth"
+import {setToken} from "../utils/axios";
 
 
 function GoogleSignIn (props) {

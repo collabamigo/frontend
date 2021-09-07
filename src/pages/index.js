@@ -41,7 +41,6 @@ class AuthenticatedHome extends React.Component {
 
     async componentDidMount() {
         if (await checkLoginStatus())
-        // console.log("CALLING")
         axios.get(backend + "connect/teacher?format=json").then((res) => {
             if (res.data.length)
                 this.setState({
