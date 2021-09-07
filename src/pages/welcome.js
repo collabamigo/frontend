@@ -1,11 +1,13 @@
+
 import React from "react";
 import {Styles} from "styles/styles";
 
 import Container from "common/Container";
-import ContentBlock from "components/UnauthenticatedHome/ContentBlock";
+import ContentBlock from "components/ContentBlock";
 import IntroContent from "content/IntroContent.json";
 import PostIntroContent from "content/PostIntroContent.json";
 import Layout from "../components/Layout";
+import "./index.css";
 
 function UnauthenticatedHome() {
     return (

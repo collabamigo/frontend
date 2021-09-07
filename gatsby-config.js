@@ -12,4 +12,8 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
   ],
+  flags: {
+    FAST_DEV: true,
+    DEV_SSR: true
+  }
 }
