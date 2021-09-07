@@ -11,6 +11,7 @@ import {SvgIcon} from "common/SvgIcon";
 import "./index.css";
 import {checkLoginStatus} from "../utils/auth";
 import Layout from "../components/Layout";
+import ClubDashboard from "../components/Layout/ClubDashboard.js";
 
 class AuthenticatedHome extends React.Component {
     constructor(props) {
@@ -156,12 +157,14 @@ class AuthenticatedHome extends React.Component {
                                 </Card.Body>
 
                                 <Card.Footer className="footer-custom pb-4">
-                                    <Link
+                                    {/* <Link
                                         className="col-auto btn btn-primary"
                                         to="/app/project"
                                     >
                                         Project
-                                    </Link>
+                                    </Link> */}
+                                    
+                                    {/* <ClubDashboard /> */}
                                 </Card.Footer>
                             </Card>
                         </Fade>
