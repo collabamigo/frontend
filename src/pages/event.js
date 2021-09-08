@@ -31,7 +31,7 @@ export default class Event extends React.Component{
 
                 <section>
                     <div>
-                        <div className="d-flex justify-content-around">
+                        <div className="d-flex justify-content-around flex-wrap">
                             <div>
 
                                 <img
@@ -48,12 +48,18 @@ export default class Event extends React.Component{
                                 </span>
                             </div>
 
-                            <div className="abcd">
-                                <span>
+                            <div className="">
+
+                                <br />
+
+                                <br />
+
+                                <span >
                                     ~ Brought to you by
                                     {this.state.basicInformation.clubName}
                                 </span>
                             </div>
+
                         </div>
 
                         <div className="intro row pt-5 pl-5 pr-5 pb-4">
