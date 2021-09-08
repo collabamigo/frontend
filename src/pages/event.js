@@ -1,7 +1,6 @@
 
 import React from "react"
 import Layout from "../components/Layout";
-import Image from "react-bootstrap/Image";
 import Card from "react-bootstrap/Card";
 import "./event.css"
 
@@ -33,6 +32,7 @@ export default class Event extends React.Component{
                     <div>
                         <div className="d-flex justify-content-around flex-wrap">
                             <div>
+                                <br />
 
                                 <img
                                     alt="Club logo"
@@ -43,6 +43,8 @@ export default class Event extends React.Component{
                             </div>
 
                             <div>
+                                <br />
+
                                 <span className="eventName">
                                     {this.state.basicInformation.Name}
                                 </span>
@@ -62,9 +64,11 @@ export default class Event extends React.Component{
 
                         </div>
 
-                        <div className="intro row pt-5 pl-5 pr-5 pb-4">
+                        <br />
+
+                        <div className="intro d-flex justify-content-around">
                             <Card
-                                className="information col-4 offset-1"
+                                className="information col-7"
                                 style={{ width: '18rem' }}
                             >
                                 <Card.Body>
@@ -97,19 +101,22 @@ export default class Event extends React.Component{
                             </Card>
 
                             <Card
-                                className="poster col-4 offset-2"
+                                className="poster col-3"
                                 style={{ width: '18rem' }}
                             >
                                 <Card.Img
                                     src={this.state.basicInformation.poster}
+                                    variant="bottom"
                                 />
 
                             </Card>
                         </div>
 
-                        <div className="description row pt-4 pl-5 pr-5 pb-3">
+                        <br />
+
+                        <div className="description d-flex justify-content-around">
                             <Card
-                                className="card3 col-10 offset-1"
+                                className="card3 col-11"
                                 style={{ width: '18rem' }}
                             >
                                 <Card.Body>
@@ -131,6 +138,7 @@ export default class Event extends React.Component{
                                 </Card.Body>
                             </Card>
                         </div>
+                        <br />
                     </div>
                 </section>
 

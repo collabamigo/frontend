@@ -5,3 +5,7 @@
 .logo {
     border-radius: 100%;
 }
+.poster {
+    objectFit: 'cover';
+    width: 100%;
+}
