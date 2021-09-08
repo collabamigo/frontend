@@ -17,7 +17,8 @@
 
 */
 import React from "react";
-import { Link, useLocation } from "@reach/router";
+import { Link} from "gatsby";
+import { useLocation } from "@reach/router";
 import {
   Collapse,
   Navbar,
@@ -36,7 +37,7 @@ import {
   Input,
 } from "reactstrap";
 
-import routes from "../../routes.js"
+import routes from "../../routes.js";
 
 function Header(props) {
   const [isOpen, setIsOpen] = React.useState(false);

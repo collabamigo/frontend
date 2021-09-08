@@ -18,7 +18,7 @@
 
 */
 import React from "react";
-import { NavLink } from "@reach/router";
+import NavLink from "../../../../common/NavLink";
 import { Nav } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
