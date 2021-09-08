@@ -29,25 +29,27 @@ export default class Event extends React.Component{
             <div>
                 <hr />
 
-                <section className="clubDetails">
+                <section>
                     <div>
-                        <div className="clubHeader row">
-                            <div className="col-4 offset-0">
-                                <Image
-                                    className="logo"
-                                    fluid
+                        <div className="row ">
+                            <div className="col justify-content-center">
+
+                                <img
+                                    alt="Club logo"
+                                    className="logo img-fluid col-auto"
                                     src={this.state.basicInformation.logoLink}
                                 />
 
-                                <span className="eventName offset-1">
+                                <span className="eventName offset-1 col-auto">
                                     {this.state.basicInformation.Name}
                                 </span>
+
                             </div>
 
-                            <div className="row my-custom-row justify-content-start align-content-end">
+                            <span className="col-auto row align-content-end m-1">
                                 ~ Brought to you by
                                 {this.state.basicInformation.clubName}
-                            </div>
+                            </span>
                         </div>
 
                         <div className="intro row pt-5 pl-5 pr-5 pb-4">
