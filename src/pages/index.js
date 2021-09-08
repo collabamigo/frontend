@@ -11,7 +11,6 @@ import {SvgIcon} from "common/SvgIcon";
 import "./index.css";
 import {checkLoginStatus} from "../utils/auth";
 import Layout from "../components/Layout";
-import ClubDashboard from "../components/Layout/ClubDashboard.js";
 
 class AuthenticatedHome extends React.Component {
     constructor(props) {
@@ -163,7 +162,7 @@ class AuthenticatedHome extends React.Component {
                                     >
                                         Project
                                     </Link> */}
-                                    
+
                                     {/* <ClubDashboard /> */}
                                 </Card.Footer>
                             </Card>

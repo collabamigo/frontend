@@ -16,8 +16,8 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-const dashboard24HoursPerformanceChart = {
-  data: (canvas) => {
+export const dashboard24HoursPerformanceChart = {
+  data: () => {
     return {
       labels: [
         "Jan",
@@ -97,8 +97,8 @@ const dashboard24HoursPerformanceChart = {
   },
 };
 
-const dashboardEmailStatisticsChart = {
-  data: (canvas) => {
+export const dashboardEmailStatisticsChart = {
+  data: () => {
     return {
       labels: [1, 2, 3],
       datasets: [
@@ -148,8 +148,8 @@ const dashboardEmailStatisticsChart = {
   },
 };
 
-const dashboardNASDAQChart = {
-  data: (canvas) => {
+export const dashboardNASDAQChart = {
+  data: () => {
     return {
       labels: [
         "Jan",
@@ -196,10 +196,4 @@ const dashboardNASDAQChart = {
       legend: { display: false },
     },
   },
-};
-
-module.exports = {
-  dashboard24HoursPerformanceChart,
-  dashboardEmailStatisticsChart,
-  dashboardNASDAQChart,
 };
