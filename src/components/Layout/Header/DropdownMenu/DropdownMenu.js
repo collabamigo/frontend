@@ -2,8 +2,8 @@
 import React from "react";
 import "./DropdownMenu.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Link} from "@reach/router";
-// TODO: won't work,as router not working 
+import {Link} from "gatsby";
+
 function signOut() {
         localStorage.clear();
         window.location.href = "/";
