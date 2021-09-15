@@ -156,12 +156,14 @@ class AuthenticatedHome extends React.Component {
                                 </Card.Body>
 
                                 <Card.Footer className="footer-custom pb-4">
-                                    <Link
+                                    {/* <Link
                                         className="col-auto btn btn-primary"
                                         to="/app/project"
                                     >
                                         Project
-                                    </Link>
+                                    </Link> */}
+
+                                    {/* <ClubDashboard /> */}
                                 </Card.Footer>
                             </Card>
                         </Fade>
