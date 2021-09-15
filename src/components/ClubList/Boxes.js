@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default class Boxes extends Component {
     static propTypes = {
-        boxesToRender : PropTypes.arrayOf(PropTypes.string).isRequired,
+        boxesToRender : PropTypes.arrayOf(PropTypes.object).isRequired,
     }
 
     shouldComponentUpdate () 

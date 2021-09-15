@@ -1,6 +1,6 @@
 import {Link} from "gatsby";
 import Card from "react-bootstrap/Card";
-import Clublist from 'components/ClubList/ClubList.js';
+import ClubList from 'components/ClubList/ClubList.js';
 import React from "react";
 import axios from "utils/axios";
 import backend from "env";
@@ -22,25 +22,33 @@ class AuthenticatedHome extends React.Component {
             third:
                 "Solve other's doubts and be the mentor you always wanted.\n" +
                 "Using our platform you can reach a larger community.",
-            clubList: [
-                {name: "Tasveer", logo: "https://via.placeholder.com/70X70"},
-                {name: "MicDrop", logo: "https://via.placeholder.com/70X70"},
-                {name: "Byld", logo: "https://via.placeholder.com/70X70"},
-                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
-                {name: "Litsoc", logo: "https://via.placeholder.com/70X70"},
-                {name: "Meraki", logo: "https://via.placeholder.com/70X70"},
-                {name: "MUSE", logo: "https://via.placeholder.com/70X70"},
-                {name: "Philsoc", logo: "https://via.placeholder.com/70X70"},
-                {name: "Electroholics", logo: "https://via.placeholder.com/70X70"},
-                {name: "Cyborg", logo: "https://via.placeholder.com/70X70"},
-                {name: "Astronuts", logo: "https://via.placeholder.com/70X70"},
-                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
-            ],
+            // clubList: [
+                // {id: 1, name: "Tasveer", logo: "https://via.placeholder.com/70X70", picture: "https://via.placeholder.com/70X70", college: "IIIT Delhi"},
+                // {id: 2, name: "MicDrop", logo: "https://via.placeholder.com/70X70", picture: "https://via.placeholder.com/70X70", college: "IIIT Delhi"},
+                // {name: "Byld", logo: "https://via.placeholder.com/70X70"},
+                // {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
+                // {name: "Litsoc", logo: "https://via.placeholder.com/70X70"},
+            //     {name: "Meraki", logo: "https://via.placeholder.com/70X70"},
+            //     {name: "MUSE", logo: "https://via.placeholder.com/70X70"},
+            //     {name: "Philsoc", logo: "https://via.placeholder.com/70X70"},
+            //     {name: "Electroholics", logo: "https://via.placeholder.com/70X70"},
+            //     {name: "Cyborg", logo: "https://via.placeholder.com/70X70"},
+            //     {name: "Astronuts", logo: "https://via.placeholder.com/70X70"},
+            //     {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
+            // ],
+            clubList: [],
         };
     }
 
     async componentDidMount() {
         if (await checkLoginStatus())
+        axios.get(backend + "club/club").then((res) => {
+            let clubLists = [];
+            for (let i = 0; i < res.data.length; i++) {
+                clubLists.push(res.data[i]);
+            }
+            this.setState({clubList: clubLists});
+        });
         axios.get(backend + "connect/teacher?format=json").then((res) => {
             if (res.data.length)
                 this.setState({
@@ -194,7 +202,7 @@ class AuthenticatedHome extends React.Component {
                                         <br />
 
                                         <div>
-                                            <Clublist clubList={this.state.clubList} />
+                                            <ClubList clubList={this.state.clubList} />
                                         </div>
                                     </Card.Text>
                                 </Card.Body>

@@ -33,7 +33,6 @@ export default class ClubCard extends Component {
     }
 
     render() {
-        console.log(this.props.element, " hiiii")
         if(this.props.element === undefined) {
             return null;
         }
@@ -47,7 +46,7 @@ export default class ClubCard extends Component {
                         <Image
                             className="logo"
                             fluid
-                            src={this.props.element.logo}
+                            src={this.props.element.picture}
                         />
 
                         <h5 className="">
