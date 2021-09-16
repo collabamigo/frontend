@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from './Autocomplete.module.css';
+import {no_suggestions, suggestions, suggestion_active} from './Autocomplete.module.css';
 import backend from "../../env";
 import axios from "utils/axios";
 
@@ -98,13 +98,13 @@ class Index extends React.Component {
 
                   suggestionsListComponent =
                       (
-                          <ul className={styles.suggestions +((!this.props.integrated)?" col-9":" col-auto")}>
+                          <ul className={suggestions +((!this.props.integrated)?" col-9":" col-auto")}>
                               {this.state.suggestions.map((suggestion, index) => {
 
                       let className;
 
                       if (index === this.state.activeSuggestion) {
-                          className = styles.suggestion_active;
+                          className = suggestion_active;
                       }
                       return (
                           <li
@@ -122,7 +122,7 @@ class Index extends React.Component {
 
                   suggestionsListComponent =
                       (
-                          <div className={styles.no_suggestions}>
+                          <div className={no_suggestions}>
                               <em>
                                   Be patient while we take your patience
                               </em>

@@ -1,9 +1,3 @@
-input {
-    border: 1px solid #039be5;
-    padding: 0.5rem;
-    width: 300px;
-}
-
 .no_suggestions {
     color: #999;
     padding: 0.5rem;
