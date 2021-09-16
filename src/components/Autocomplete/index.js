@@ -4,7 +4,7 @@ import {no_suggestions, suggestion_active, suggestions, input} from './Autocompl
 import backend from "../../env";
 import axios from "utils/axios";
 
-class Index extends React.Component {
+class Autocomplete extends React.Component {
 
     static propTypes = {
         integrated: PropTypes.bool,
@@ -155,4 +155,4 @@ class Index extends React.Component {
 
 }
 
-export default Index;
+export default Autocomplete;
