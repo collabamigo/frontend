@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {no_suggestions, suggestions, suggestion_active} from './Autocomplete.module.css';
+import {no_suggestions, suggestion_active, suggestions, input} from './Autocomplete.module.css';
 import backend from "../../env";
 import axios from "utils/axios";
 
@@ -136,7 +136,7 @@ class Index extends React.Component {
                   <div className={"row mx-5 "+((!this.props.integrated)?"justify-content-center":null)}>
 
                       <input
-                          className={((!this.props.integrated)?"col-9":"col-auto")}
+                          className={((!this.props.integrated)?"col-9 ":"col-auto ") + input}
                           onChange={this.handleChange.bind(this)}
                           onKeyDown={this.handleKeyDown.bind(this)}
                           type="text"
