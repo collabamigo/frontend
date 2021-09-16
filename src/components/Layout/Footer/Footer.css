@@ -1,0 +1,23 @@
+ /**
+ * Footer Styles
+ */
+
+.footer {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0.2rem;
+    clear: both;
+    background-color: #212d9c !important;
+    text-align: center;
+    width: 100%;
+}
+
+.link-footer {
+    color: white;
+}
+
+.link-footer:hover {
+    color: #888888;
+}
