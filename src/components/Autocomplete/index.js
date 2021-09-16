@@ -98,13 +98,13 @@ class Index extends React.Component {
 
                   suggestionsListComponent =
                       (
-                          <ul className={'styles.suggestions' +((!this.props.integrated)?" col-9":" col-auto")}>
+                          <ul className={styles.suggestions +((!this.props.integrated)?" col-9":" col-auto")}>
                               {this.state.suggestions.map((suggestion, index) => {
 
                       let className;
 
                       if (index === this.state.activeSuggestion) {
-                          className = 'styles.suggestion-active';
+                          className = styles.suggestion_active;
                       }
                       return (
                           <li
@@ -122,7 +122,7 @@ class Index extends React.Component {
 
                   suggestionsListComponent =
                       (
-                          <div className='styles.no-suggestions'>
+                          <div className={styles.no_suggestions}>
                               <em>
                                   Be patient while we take your patience
                               </em>
