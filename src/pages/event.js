@@ -23,127 +23,129 @@ export default class Event extends React.Component{
         return true;
     }
 
-    render() {return (
-        <Layout>
-            <div>
-                <hr />
+    render() {
+        return (
+            <Layout>
+                <div>
+                    <hr />
 
-                <section>
-                    <div>
-                        <div className="d-flex justify-content-around flex-wrap">
-                            <div>
-                                <br />
+                    <section>
+                        <div>
+                            <div className="d-flex justify-content-around flex-wrap">
+                                <div>
+                                    <br />
 
-                                <img
-                                    alt="Club logo"
-                                    className="logo img-fluid col-auto"
-                                    src={this.state.basicInformation.logoLink}
-                                />
+                                    <img
+                                        alt="Club logo"
+                                        className="logo img-fluid col-auto"
+                                        src={this.state.basicInformation.logoLink}
+                                    />
+
+                                </div>
+
+                                <div>
+                                    <br />
+
+                                    <span className="eventName">
+                                        {this.state.basicInformation.Name}
+                                    </span>
+                                </div>
+
+                                <div className="">
+
+                                    <br />
+
+                                    <br />
+
+                                    <span >
+                                        ~ Brought to you by
+                                        {this.state.basicInformation.clubName}
+                                    </span>
+                                </div>
 
                             </div>
 
-                            <div>
-                                <br />
+                            <br />
 
-                                <span className="eventName">
-                                    {this.state.basicInformation.Name}
-                                </span>
+                            <div className="intro d-flex justify-content-around">
+                                <Card
+                                    className="information col-7"
+                                    style={{ width: '18rem' }}
+                                >
+                                    <Card.Body>
+                                        <Card.Title>
+                                            INFORMATION
+                                        </Card.Title>
+
+                                        <Card.Text>
+                                            {this.state.basicInformation.description}
+                                        </Card.Text>
+
+                                        <Card.Text>
+                                            {this.state.basicInformation.description}
+                                        </Card.Text>
+
+                                        <Card.Text>
+                                            {this.state.basicInformation.description}
+                                        </Card.Text>
+
+                                        <Card.Text>
+                                            {this.state.basicInformation.description}
+                                        </Card.Text>
+
+                                        <Card.Text>
+                                            {this.state.basicInformation.description}
+                                        </Card.Text>
+
+
+                                    </Card.Body>
+                                </Card>
+
+                                <Card
+                                    className="poster col-3"
+                                    style={{ width: '18rem' }}
+                                >
+                                    <Card.Img
+                                        src={this.state.basicInformation.poster}
+                                        variant="bottom"
+                                    />
+
+                                </Card>
                             </div>
 
-                            <div className="">
+                            <br />
 
-                                <br />
+                            <div className="description d-flex justify-content-around">
+                                <Card
+                                    className="card3 col-11"
+                                    style={{ width: '18rem' }}
+                                >
+                                    <Card.Body>
+                                        <Card.Title>
+                                            DESCRIPTION
+                                        </Card.Title>
 
-                                <br />
+                                        <Card.Text>
+                                            {this.state.basicInformation.description}
+                                        </Card.Text>
 
-                                <span >
-                                    ~ Brought to you by
-                                    {this.state.basicInformation.clubName}
-                                </span>
+                                        <Card.Text>
+                                            {this.state.basicInformation.description}
+                                        </Card.Text>
+
+                                        <Card.Text>
+                                            {this.state.basicInformation.description}
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
                             </div>
 
+                            <br />
                         </div>
+                    </section>
 
-                        <br />
-
-                        <div className="intro d-flex justify-content-around">
-                            <Card
-                                className="information col-7"
-                                style={{ width: '18rem' }}
-                            >
-                                <Card.Body>
-                                    <Card.Title>
-                                        INFORMATION
-                                    </Card.Title>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-
-                                </Card.Body>
-                            </Card>
-
-                            <Card
-                                className="poster col-3"
-                                style={{ width: '18rem' }}
-                            >
-                                <Card.Img
-                                    src={this.state.basicInformation.poster}
-                                    variant="bottom"
-                                />
-
-                            </Card>
-                        </div>
-
-                        <br />
-
-                        <div className="description d-flex justify-content-around">
-                            <Card
-                                className="card3 col-11"
-                                style={{ width: '18rem' }}
-                            >
-                                <Card.Body>
-                                    <Card.Title>
-                                        DESCRIPTION
-                                    </Card.Title>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </div>
-                        <br />
-                    </div>
-                </section>
-
-            </div>
-        </Layout>
+                </div>
+            </Layout>
     )
     }
 }
