@@ -6,7 +6,7 @@ import axios from "utils/axios";
 import backend from "env";
 import {Fade} from "react-awesome-reveal";
 import {isMobile} from "react-device-detect";
-
+import ClubDashboard from "../components/ClubDasboard";
 import {SvgIcon} from "common/SvgIcon";
 import "./index.css";
 import {checkLoginStatus} from "../utils/auth";
@@ -156,14 +156,14 @@ class AuthenticatedHome extends React.Component {
                                 </Card.Body>
 
                                 <Card.Footer className="footer-custom pb-4">
-                                    {/* <Link
+                                    <Link
                                         className="col-auto btn btn-primary"
                                         to="/app/project"
                                     >
                                         Project
-                                    </Link> */}
+                                    </Link>
 
-                                    {/* <ClubDashboard /> */}
+                                    <ClubDashboard />
                                 </Card.Footer>
                             </Card>
                         </Fade>
