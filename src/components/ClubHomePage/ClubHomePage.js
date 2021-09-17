@@ -5,7 +5,7 @@ import Image from 'react-bootstrap/Image'
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
-import "./ClubHomePage.css"
+import {logo, clubName} from './ClubHomePage.module.css';
 
 class ClubHomePage extends Component {
     static propTypes = {
@@ -61,12 +61,12 @@ class ClubHomePage extends Component {
                         <div className="clubHeader row">
                             <div className="col-4 offset-0">
                                 <Image
-                                    className="logo"
+                                    className={logo}
                                     fluid
                                     src={this.state.basicInformation.logoLink}
                                 />
 
-                                <span className="clubName offset-1">
+                                <span className={clubName + ' ' + 'offset-1'}>
                                     {this.state.basicInformation.Name}
                                 </span>
                             </div>

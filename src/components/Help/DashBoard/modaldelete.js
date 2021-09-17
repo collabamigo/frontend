@@ -1,7 +1,7 @@
 import {Modal} from "react-bootstrap";
 import React, {useState} from "react";
 // import SvgIcon from "../../../common/SvgIcon";
-import './modaldelete.css'
+import {dustbin} from './modaldelete.module.css';
 import PropTypes from "prop-types";
 
 function Odal({item, onDelete}) {
@@ -22,7 +22,7 @@ function Odal({item, onDelete}) {
                   className="btn"
                   onClick={handleShow}
               >
-                  <span className="material-icons dustbin">
+                  <span className={'material-icons' + ' ' + dustbin}>
                       delete_outline
                   </span>
               </div>

@@ -5,7 +5,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Carousel from 'react-bootstrap/Carousel'
-import './project.css';
+import {carouselImageSize, textBackground, cardMinSize, zoomMyCard} from './project.module.css';
 
 class Project extends React.Component {
 
@@ -22,7 +22,7 @@ class Project extends React.Component {
                     <Carousel.Item>
                         <img
                             alt="First slide"
-                            className="d-block container-fluid carousel-image-size"
+                            className={'d-block container-fluid' + ' ' + carouselImageSize}
                             src="https://via.placeholder.com/1280X480"
                         />
 
@@ -31,7 +31,7 @@ class Project extends React.Component {
                     <Carousel.Item>
                         <img
                             alt="Second slide"
-                            className="d-block container-fluid carousel-image-size"
+                            className={'d-block container-fluid' + ' ' + carouselImageSize}
                             src="https://via.placeholder.com/1280X480"
                         />
 
@@ -41,7 +41,7 @@ class Project extends React.Component {
                     <Carousel.Item>
                         <img
                             alt="Third slide"
-                            className="d-block container-fluid carousel-image-size"
+                            className={'d-block container-fluid' + ' ' + carouselImageSize}
                             src="https://via.placeholder.com/1280X480"
                         />
 
@@ -92,7 +92,7 @@ class Project extends React.Component {
                     </div>
                 </div>
 
-                <div className="text-background container-fluid">
+                <div className={textBackground + ' ' + 'container-fluid'}>
                     <Tabs
                         defaultActiveKey="profile"
                         id="uncontrolled-tab-example"
@@ -160,7 +160,7 @@ class Project extends React.Component {
                     <div className="row container-fluid col-md-12 m-3">
 
                         <Card
-                            className="col zoom-my-card m-4 card-min-size"
+                            className={'col m-4' + ' ' + cardMinSize + ' ' + zoomMyCard}
                             style={{ width: '18rem' }}
                         >
                             <Card.Body>
@@ -187,7 +187,7 @@ class Project extends React.Component {
                         </Card>
 
                         <Card
-                            className="col zoom-my-card m-4 card-min-size"
+                            className={'col m-4 card-min-size' + ' ' + zoomMyCard}
                             style={{ width: '18rem' }}
                         >
                             <Card.Body>
@@ -214,7 +214,7 @@ class Project extends React.Component {
                         </Card>
 
                         <Card
-                            className="col zoom-my-card m-4 card-min-size"
+                            className={'col m-4 card-min-size' + ' ' + zoomMyCard}
                             style={{ width: '18rem' }}
                         >
                             <Card.Body>
