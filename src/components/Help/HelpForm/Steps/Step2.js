@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Autocomplete from "../../../Autocomplete";
 import TagsInput from 'react-tagsinput';
 import Card from 'react-bootstrap/Card';
-import './tag.css'
 
 class Step2 extends React.Component {
 

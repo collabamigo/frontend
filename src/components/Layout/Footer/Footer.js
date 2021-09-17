@@ -1,5 +1,5 @@
 import React from "react";
-import "./Footer.css";
+import {footer, linkFooter} from './Footer.module.css';
 class Footer extends React.Component {
 
     // Noinspection JSCheckFunctionSignatures
@@ -11,12 +11,12 @@ class Footer extends React.Component {
 
     render() {
         return (
-            <footer className="footer d-flex flex-row">
-                <div className="link-footer col-md-7">
+            <footer className={'d-flex flex-row' + ' ' + footer}>
+                <div className={'col-md-7' + ' ' + linkFooter}>
                     <b className="float-right pr-5">
                         {/*eslint-disable-next-line*/}
                         <a
-                            className="link-footer"
+                            className={linkFooter}
                             href="https://github.com/watson-hex/frontend-collabamigo/"
                             rel="noopener"
                             target="_blank"
@@ -29,7 +29,7 @@ class Footer extends React.Component {
 
                 <div className="col-md-5 float-right ">
                     <a
-                        className="float-right link-footer"
+                        className={'float-right' + ' ' + linkFooter}
                         href="https://forms.gle/MScukDTAhm2N3ixA8"
                         rel="noreferrer"
                         target="_blank"

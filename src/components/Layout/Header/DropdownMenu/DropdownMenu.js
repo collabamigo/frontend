@@ -1,6 +1,6 @@
 
 import React from "react";
-import "./DropdownMenu.css";
+import {magicSpan} from './DropdownMenu.module.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Link} from "gatsby";
 
@@ -24,7 +24,7 @@ function DropdownMenu({ isAuthenticated }) {
                 <>
                     <CustomNavLinkSmall className="btn">
                         <Link
-                            className="magic_span"
+                            className={magicSpan}
                             to="/app/history"
                         >
                             Connections
@@ -33,7 +33,7 @@ function DropdownMenu({ isAuthenticated }) {
 
                     <CustomNavLinkSmall className="btn">
                         <Link
-                            className="magic_span"
+                            className={magicSpan}
                             to="/app/profile"
                         >
                             Profile
@@ -42,7 +42,7 @@ function DropdownMenu({ isAuthenticated }) {
                 </> :
                 <CustomNavLinkSmall className="btn">
                     <Link
-                        className="magic_span"
+                        className={magicSpan}
                         to="/app/Demo"
                     >
                         Demo
@@ -53,7 +53,7 @@ function DropdownMenu({ isAuthenticated }) {
 
             <CustomNavLinkSmall className="btn">
                 <Link
-                    className="magic_span"
+                    className={magicSpan}
                     to="/about"
                 >
                     About Us
@@ -70,7 +70,7 @@ function DropdownMenu({ isAuthenticated }) {
                         {isMobile ? "Sign Out" : null}
 
                         <svg
-                            className="bi bi-box-arrow-right magic_span"
+                            className={'bi bi-box-arrow-right' + ' ' + magicSpan}
                             fill="currentColor"
                             height="24"
                             viewBox="0 0 16 16"

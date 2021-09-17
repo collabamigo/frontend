@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from "utils/axios";
-import './HelpForm.css'
 import Step1 from './Steps/Step1'
 import Step2 from './Steps/Step2'
 import backend from "../../../env";
