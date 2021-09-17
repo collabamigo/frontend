@@ -1,6 +1,6 @@
 
 import React, {useState} from "react";
-import "./CardsP.css";
+import {card_P, main_P_title} from "./CardsP.module.css";
 import PropTypes from "prop-types";
 import {SvgIcon} from "../SvgIcon";
 import {Fade} from "react-awesome-reveal";
@@ -75,9 +75,9 @@ function CardsP (props) {
     }
     return (
         <Fade className={"float-right " + props.className} >
-            <Card className="card card_P" >
+            <Card className={"card" + card_P} >
 
-                <Card.Header className="main_P_title header-custom-das">
+                <Card.Header className={main_P_title}>
                     <span>
                         {props.name}
                     </span>
