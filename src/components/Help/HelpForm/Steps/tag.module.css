@@ -1,4 +1,4 @@
-.react-tagsinput {
+.reactTagsinput {
   background-color: #fff;
   border: 2px solid #ccc;
   overflow: hidden;
@@ -10,7 +10,7 @@
 /*  border-color: #007bff;*/
 /*}*/
 
-.react-tagsinput-tag {
+.reactTagsinputTag {
   background-color: #007bff;
   border-radius: 2px;
   border: 1px solid #007bff;
@@ -24,17 +24,17 @@
   padding: 5px;
 }
 
-.react-tagsinput-remove {
+.reactTagsinputRemove {
   cursor: pointer;
   font-weight: bold;
   color: #ffffff;
 }
 
-.react-tagsinput-tag a::before {
+.reactTagsinputTag a::before {
   content: " ×";
 }
 
-.react-tagsinput-input {
+.reactTagsinputInput {
   background: transparent;
   border: 0;
   color: #000000;

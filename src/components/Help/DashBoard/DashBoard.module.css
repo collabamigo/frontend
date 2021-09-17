@@ -3,45 +3,45 @@
     height: 440px;
 }
 
-.icon-dashboard {
+.iconDashboard {
     transform: scale(1.5);
 }
 
-.main-profile {
+.mainProfile {
     height: 50%;
     width: auto;
 }
 
-.card-profile-title {
+.cardProfileTitle {
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
     font-size: larger;
 }
 
-.main-profile-footer {
+.mainProfileFooter {
     border-top: none !important;
 }
 
-.card-votes {
+.cardVotes {
     height: 440px;
     width: auto;
 }
 
-.card-empty {
+.cardEmpty {
     height: 440px;
     width: auto;
 }
 
-.card-trending {
+.cardTrending {
     height: 440px;
     width: auto;
 }
 
-.card_dashboard {
+.cardDashboard {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 
-.max-weight-name {
+.maxWeightName {
     max-width: 70%;
 }
 
@@ -49,7 +49,7 @@
     max-width: 66%;
 }
 
-.lower-text {
+.lowerText {
     max-width: 60%;
 }
 
@@ -66,12 +66,12 @@ li.skills {
     max-width: 100%;
 } */
 
-.card-hf-color-dasboard {
+.cardHfColorDasboard {
     background-color: white !important;
     border-top: none !important;
 }
 
-.header-custom {
+.headerCustom {
     background-color: white !important;
     border-top: none !important;
     border-bottom: none !important;
@@ -85,7 +85,7 @@ li.skills {
     font-size: x-large;
 }
 
-.card-text-lol {
+.cardTextLol {
     font-size: 1.8rem;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -101,7 +101,7 @@ li.skills {
     opacity:0;
     }
 
-.display-pic:hover .text{
+.displayPic:hover .text{
     opacity:0.6;
     text-align:center;
     color:#18216d;

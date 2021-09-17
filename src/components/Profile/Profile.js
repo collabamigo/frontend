@@ -1,8 +1,7 @@
 import React from 'react'
-import "./Profile.css";
+import {cardHfColor, lowwl} from './Profile.module.css';
 import axios from "utils/axios";
 import backend from "../../env";
-import './Profile.css';
 import Card from 'react-bootstrap/Card';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import {Popover} from 'react-bootstrap';
@@ -180,7 +179,7 @@ class Profile extends React.Component{
             return <Loading />
         else
             return (
-                <section className="container-fluid lowwl mt-0">
+                <section className={'container-fluid mt-0' + ' ' + lowwl}>
                     <div className="row" >
                         {isMobile?null:(
                             <div className="col container">
@@ -202,7 +201,7 @@ class Profile extends React.Component{
                         <div className="col container" >
                             <Card className="card ml-5 rounded-4 container mb-5">
 
-                                <Card.Header className="card-hf-color card-header">
+                                <Card.Header className={'card-header' + ' ' + cardHfColor}>
                                     <h1>
                                         Profile
                                     </h1>

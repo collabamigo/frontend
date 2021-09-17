@@ -8,7 +8,10 @@ import {Fade} from "react-awesome-reveal";
 import {isMobile} from "react-device-detect";
 import ClubDashboard from "../components/ClubDasboard";
 import {SvgIcon} from "common/SvgIcon";
+
+// DO NOT MODULARISE CSS IN THIS FILE
 import "./index.css";
+
 import {checkLoginStatus} from "../utils/auth";
 import Layout from "../components/Layout";
 

@@ -1,6 +1,6 @@
 
 import React from "react";
-import './index.css';
+import {card, cardSkillSearch} from './index.module.css';
 import axios from "utils/axios";
 import backend from "../../env";
 import { Card } from "react-bootstrap";
@@ -85,7 +85,7 @@ class ConnectionHistory extends React.Component {
         else
             return (
                 <div className="container-fluid">
-                    <Card className="card card_skillSearch">
+                    <Card className={card + ' ' + cardSkillSearch}>
                         <Card.Title>
                             <h1 className="col-sm-5 col-md-5">
                                 {" "}
