@@ -47,6 +47,7 @@ class App extends React.Component{
                   path="/app/club"
               />
 
+
               <EventPage path="/app/event" />
 
 
