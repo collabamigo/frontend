@@ -8,6 +8,10 @@ import Carousel from 'react-bootstrap/Carousel'
 import {logo, clubName} from './club.module.css';
 import Layout from "../components/Layout";
 
+function useQuery() {
+    return new URLSearchParams(window.location.search);
+}
+
 class ClubHomePage extends Component {
     static propTypes = {
         clubName : PropTypes.string.isRequired,
@@ -15,6 +19,10 @@ class ClubHomePage extends Component {
 
     constructor(props) {
         super(props)
+
+        this.query = useQuery()
+
+        this.name = this.query.get("name")
 
         this.state={
             basicInformation : {
@@ -32,6 +40,8 @@ class ClubHomePage extends Component {
                 clubBanners:["https://via.placeholder.com/1280X480","https://via.placeholder.com/1280X480","https://via.placeholder.com/1280X480"]
             }
         }
+
+
     }
 
     componentDidMount() {
@@ -84,7 +94,7 @@ class ClubHomePage extends Component {
                                     style={{ width: '18rem' }}
                                 >
                                     <Card.Body>
-                                        
+
                                         <Card.Text>
                                             {this.state.basicInformation.description}
                                         </Card.Text>
@@ -107,7 +117,7 @@ class ClubHomePage extends Component {
                                     </Card.Body>
 
                                     <Card.Footer className=" cardFooter d-flex justify-content-end">
-                                        here since 
+                                        here since
                                         {' '}
 
                                         {this.state.basicInformation.joinDate}
@@ -119,7 +129,7 @@ class ClubHomePage extends Component {
                                     style={{ width: '18rem' }}
                                 >
                                     <Card.Body>
-                                        
+
                                         <Card.Title>
                                             Top Events
                                         </Card.Title>
@@ -136,7 +146,7 @@ class ClubHomePage extends Component {
 
                                 </Card>
                             </div>
-                            
+
                             <hr />
 
                             <Carousel className="container-fluid w-50 mb-4">
@@ -194,7 +204,7 @@ class ClubHomePage extends Component {
                                     </Carousel.Caption>
                                 </Carousel.Item>
                             </Carousel>
-                            
+
                             <hr />
 
 
