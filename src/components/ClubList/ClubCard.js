@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Image from 'react-bootstrap/Image';
+import {logo} from "./ClubCard.module.css";
 
 export default class ClubCard extends Component {
     static propTypes = {
