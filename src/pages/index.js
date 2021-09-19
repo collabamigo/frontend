@@ -6,7 +6,7 @@ import axios from "utils/axios";
 import backend from "env";
 import {Fade} from "react-awesome-reveal";
 import {isMobile} from "react-device-detect";
-import ClubDashboard from "../components/ClubDasboard";
+// import ClubDashboard from "../components/ClubDasboard";
 import {SvgIcon} from "common/SvgIcon";
 
 // DO NOT MODULARISE CSS IN THIS FILE
@@ -158,7 +158,7 @@ class AuthenticatedHome extends React.Component {
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Card.Footer className="footer-custom pb-4">
+                                {/* <Card.Footer className="footer-custom pb-4">
                                     <Link
                                         className="col-auto btn btn-primary"
                                         to="/app/project"
@@ -167,7 +167,7 @@ class AuthenticatedHome extends React.Component {
                                     </Link>
 
                                     <ClubDashboard />
-                                </Card.Footer>
+                                </Card.Footer> */}
                             </Card>
                         </Fade>
                     </div>
