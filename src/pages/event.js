@@ -14,7 +14,7 @@ export default class Event extends React.Component{
                 logoLink: "https://via.placeholder.com/60X60",
                 poster: "https://via.placeholder.com/640X640",
                 description: "bleh bleh bleh",
-                clubName: " Club Name"
+                clubName: "Club Name"
             }
         }
     }

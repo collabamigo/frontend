@@ -5,7 +5,7 @@ import Image from 'react-bootstrap/Image'
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
-import {logo, clubName} from './ClubHomePage.module.css';
+import {logo, clubName} from './club.module.css';
 
 class ClubHomePage extends Component {
     static propTypes = {

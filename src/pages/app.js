@@ -3,8 +3,6 @@ import {Router} from "@reach/router"
 import Layout from "../components/Layout"
 import {isLoggedIn} from "../utils/auth"
 import Help from "../components/Help/Help";
-import ClubHomePage from "../components/ClubHomePage/ClubHomePage";
-import EventPage from "../components/EventPage/Eventpage";
 import Project from "../components/project/project";
 import Demo from "../components/Demo/Demo";
 import Rickroll from "../components/Rickroll";
@@ -41,14 +39,6 @@ class App extends React.Component{
               <Help path="/app/help" />
 
               <Profile path="/app/profile" />
-
-              <ClubHomePage
-                  clubName="Demo_Club"
-                  path="/app/club"
-              />
-
-
-              <EventPage path="/app/event" />
 
 
               <Project path="/app/project" />
