@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Image from 'react-bootstrap/Image';
 
-
 export default class ClubCard extends Component {
     static propTypes = {
         element: PropTypes.objectOf(PropTypes.string).isRequired,
