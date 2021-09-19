@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Image from 'react-bootstrap/Image';
+import {logo} from "./ClubCard.module.css";
+// import {no_suggestions, suggestion_active, suggestions, input} from './Autocomplete.module.css';
+
 
 export default class ClubCard extends Component {
     static propTypes = {
@@ -44,7 +47,7 @@ export default class ClubCard extends Component {
                     <div className="">
 
                         <Image
-                            className="logo"
+                            className={logo}
                             fluid
                             src={this.props.element.logo}
                         />
