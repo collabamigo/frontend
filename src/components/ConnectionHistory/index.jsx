@@ -97,7 +97,7 @@ class ConnectionHistory extends React.Component {
 
                         <Card.Body>
                             <div className="row-auto pt-5">
-                                <div className="col-auto pl-lg-5">
+                                <div className="col-auto ps-lg-5">
                                     {this.caller()}
                                 </div>
                             </div>

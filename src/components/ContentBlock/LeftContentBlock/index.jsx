@@ -50,7 +50,7 @@ function LeftContentBlock({
                             {(stage === "button") ? (title) : (alt_title)}
                         </h6>
 
-                        <Content className={"text-left " + ((stage === "form") ? "h1 font-weight-bold" : null)}>
+                        <Content className={"text-left " + ((stage === "form") ? "h1 fw-bold" : null)}>
                             {(stage === "button") ? (content) : (alt_content)}
                         </Content>
 

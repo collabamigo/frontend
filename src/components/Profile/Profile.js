@@ -199,7 +199,7 @@ class Profile extends React.Component{
                             </div>)}
 
                         <div className="col container" >
-                            <Card className="card ml-5 rounded-4 container mb-5">
+                            <Card className="card ms-5 rounded-4 container mb-5">
 
                                 <Card.Header className={'card-header' + ' ' + cardHfColor}>
                                     <h1>
@@ -399,7 +399,7 @@ class Profile extends React.Component{
                                                 </select>
                                             </div>
 
-                                            <div className="col-auto col-form-label ml-1 required">
+                                            <div className="col-auto col-form-label ms-1 required">
                                                 <label>
                                                     Course:
                                                 </label>

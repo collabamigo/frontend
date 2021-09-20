@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Image from 'react-bootstrap/Image';
 import {logo} from "./ClubCard.module.css";
-import {Link} from "gatsby";
+import Link from "common/Link";
 import Button from "react-bootstrap/Button";
 
 export default class ClubCard extends Component {

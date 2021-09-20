@@ -1,5 +1,6 @@
+// import {useRouter} from 'next/router'
 
-import { navigate } from "gatsby"
+// const router = useRouter()
 
 export const isBrowser = () => typeof window !== "undefined"
 
@@ -18,13 +19,6 @@ export const setLoggedIn = () => {
 export const setLoggedOut = () => {
     if (isBrowser())
         localStorage.clear()
-}
-
-export const reload = (path) => {
-    if (path)
-        navigate(path)
-    else
-        navigate(location.pathname)
 }
 
 export const checkLoginStatus = async () => {

@@ -5,11 +5,12 @@ import FormSignIn from "./FormSignIn/FormSignIn";
 import axios from "utils/axios";
 import backend from "../env";
 import jws from "jsonwebtoken";
-import {setLoggedIn, reload} from "../utils/auth"
+import {setLoggedIn} from "../utils/auth"
 import {setToken} from "../utils/axios";
-
+import {useRouter} from 'next/router';
 
 function GoogleSignIn (props) {
+    const router = useRouter();
     async function profileExists (googleUser) {
         if (props.stage==="button")
             return {
@@ -43,7 +44,7 @@ function GoogleSignIn (props) {
 
 
             setLoggedIn()
-            reload("/")
+            await router.push("/")
 
         }
         if (!googleUserState)

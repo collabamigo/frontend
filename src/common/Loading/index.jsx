@@ -26,7 +26,7 @@ function Loading () {
                     <div />
                 </div>
 
-                <h4 className="text-uppercase font-weight-bold">
+                <h4 className="text-uppercase fw-bold">
                     Loading...
                 </h4>
             </div>
