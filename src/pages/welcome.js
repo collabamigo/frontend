@@ -8,6 +8,7 @@ import PostIntroContent from "content/PostIntroContent.json";
 import Layout from "../components/Layout";
 
 function UnauthenticatedHome() {
+    console.log("CALL")
     return (
         <Layout>
 

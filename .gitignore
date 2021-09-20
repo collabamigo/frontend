@@ -32,3 +32,6 @@ src/env.js
 /static/render-page.js.map
 /static/render-page.js
 .next
+
+.vercel
+out

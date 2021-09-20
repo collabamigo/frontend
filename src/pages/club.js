@@ -7,9 +7,12 @@ import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {logo, clubName} from './club.module.css';
 import Layout from "../components/Layout";
+import {isBrowser} from "../utils/auth";
 
 function useQuery() {
-    return new URLSearchParams(window.location.search);
+    if (isBrowser())
+        return new URLSearchParams(window.location.search);
+    return null
 }
 
 class ClubHomePage extends Component {
@@ -22,7 +25,8 @@ class ClubHomePage extends Component {
 
         this.query = useQuery()
 
-        this.name = this.query.get("name")
+        if (this.query)
+            this.name = this.query.get("name")
 
         this.state={
             basicInformation : {
