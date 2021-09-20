@@ -7,7 +7,7 @@ export const isBrowser = () => typeof window !== "undefined"
 let loginStatus = false
 
 export const isLoggedIn = () => {
-    return loginStatus
+    return loginStatus || (isBrowser() && sessionStorage.getItem("loginFlag"))
     // return isBrowser()?!!sessionStorage.getItem("loginFlag"):false;
 }
 
@@ -17,8 +17,10 @@ export const setLoggedIn = () => {
 }
 
 export const setLoggedOut = () => {
-    if (isBrowser())
+    if (isBrowser()) {
         localStorage.clear()
+        sessionStorage.clear()
+    }
 }
 
 export const checkLoginStatus = async () => {
