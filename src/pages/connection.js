@@ -2,11 +2,15 @@
 import React from 'react'
 // import {Button, Form} from "react-bootstrap";
 import axios from "utils/axios";
-import backend from "../../env";
+import backend from "../env";
+import {isBrowser} from "../utils/auth";
 
 function useQuery() {
-  return new URLSearchParams(window.location.search);
+    if (isBrowser())
+        return new URLSearchParams(window.location.search);
+    return null
 }
+
 class ConnectionRequest extends React.Component{
 
     constructor(props) {
