@@ -5,13 +5,12 @@ import PropTypes from "prop-types";
 export default function LinkMod (props) {
     return(
 
-        <Link
+        <a
+            className={props.className}
             href={props.to}
         >
-            <a className={props.className}>
-                {props.children}
-            </a>
-        </Link>
+            {props.children}
+        </a>
     )
 }
 
