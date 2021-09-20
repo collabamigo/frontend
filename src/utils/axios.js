@@ -1,13 +1,13 @@
 
 import axios_base from "axios";
 import backend from "../env";
-import {setLoggedOut} from "./auth";
+import {isBrowser, setLoggedOut} from "./auth";
 
 const axios = axios_base.create({
     baseURL: backend
 })
 
-if (sessionStorage.getItem("token"))
+if (isBrowser() && sessionStorage.getItem("token"))
     axios.defaults.headers.common['Authorization'] = "Token " + sessionStorage.getItem("token");
 
 export const setToken = (access_token) => {
