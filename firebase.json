@@ -3,6 +3,7 @@
     {
       "target": "production",
       "public": "out",
+      "cleanUrls": true,
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -12,6 +13,7 @@
     {
       "target": "testing",
       "public": "out",
+      "cleanUrls": true,
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -21,6 +23,7 @@
     {
       "target": "preview",
       "public": "out",
+      "cleanUrls": true,
       "ignore": [
         "firebase.json",
         "**/.*",
