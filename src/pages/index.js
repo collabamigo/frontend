@@ -93,7 +93,7 @@ export default class AuthenticatedHome extends React.Component {
                                 <Card.Footer className="footer-custom pb-4">
                                     <Link
                                         className="col-auto btn btn-primary"
-                                        to="/app/help"
+                                        to="/help"
                                     >
                                         {this.state.second}
                                     </Link>
