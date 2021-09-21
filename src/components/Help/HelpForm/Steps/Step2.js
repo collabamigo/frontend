@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Autocomplete from "../../../Autocomplete";
 import TagsInput from 'react-tagsinput';
 import Card from 'react-bootstrap/Card';
-import './tag.css'
 
 class Step2 extends React.Component {
 
@@ -133,7 +132,7 @@ class Step2 extends React.Component {
                                 <div className="row justify-content-center">
                                     {this.previousButton()}
 
-                                    <div className="pl-2">
+                                    <div className="ps-2">
 
                                         <button
                                             className="btn btn-primary"

@@ -2,13 +2,13 @@ import React from "react";
 import Chart from "react-google-charts";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
-import './DashBoard.css'
 import {SvgIcon} from "../../../common/SvgIcon";
 import { Doughnut } from "react-chartjs-2";
 import backend from "../../../env";
 import axios from "utils/axios";
 import Odal from "./modaldelete";
 import Oadd from "./modaladd";
+import {displayPic, pieChart, iconDashboard, cardDashboard, mainProfile, cardVotes, cardTrending, loql, headerCustom, fsxxl, fssm, lool} from './DashBoard.module.css';
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -166,25 +166,25 @@ class DashBoard extends React.Component {
         return (
             <div className="">
                 <h1 className="font-weight-light display-4">
-                    <span className="material-icons icon-dashboard pr-2">
+                    <span className={'material-icons pe-2' + ' ' + iconDashboard}>
                         dashboard
                     </span>
                     Dashboard
                 </h1>
 
-                <div className="container-fluid loql">
+                <div className={'container-fluid' + ' ' + loql}>
                     <div>
                         <div>
-                            <Card className="mb-5 upper-text main-profile">
+                            <Card className={'mb-5 upper-text' + ' ' + mainProfile}>
                                 <Card.Body className="row">
                                     <div className="col-md-8 float-center">
-                                        <div className="card-title mt-3 ml-3 row h1">
+                                        <div className="card-title mt-3 ms-3 row h1">
                                             {this.props.name}
                                         </div>
 
                                         <div className="card-text col-auto row mt-3 float-left">
 
-                                            <blockquote className="blockquote text-center pl-5">
+                                            <blockquote className="blockquote text-center ps-5">
                                                 <p className="mb-0">
                                                     “I think goals should never be easy, they should force you to work, even if they are uncomfortable at the time.”  
                                                 </p>
@@ -198,7 +198,7 @@ class DashBoard extends React.Component {
                                         </div>                                     
                                     </div>
 
-                                    <div className="col-md-4 pt-4 display-pic">
+                                    <div className={'col-md-4 pt-4' + ' ' + displayPic}>
                                         <a title="Profile picture taken from Google">
                                             <img
                                                 alt="profile_pic"
@@ -213,7 +213,7 @@ class DashBoard extends React.Component {
 
                                 <Card.Footer className="mb-0 mt-3 pb-3 card-hf-color-dasboard">
                                     <Card.Link
-                                        className="float-left ml-2 mb-0"
+                                        className="float-left ms-2 mb-0"
                                         href={"https://www.linkedin.com/in/"+ this.props.linkedin}
                                         target="_blank"
                                     >
@@ -258,7 +258,7 @@ class DashBoard extends React.Component {
                     <div className="pb-5">
                         <div className="row">
                             <div className="col">
-                                <div className="pieChart">
+                                <div className={pieChart}>
                                     <br />
 
                                     <h2>
@@ -271,8 +271,8 @@ class DashBoard extends React.Component {
                             </div>
 
                             <div className="col">
-                                <Card className="card_dashboard m-2 card card-trending">
-                                    <Card.Header className="h2 header-custom">
+                                <Card className={'m-2 card' + ' ' + cardTrending + ' ' + cardDashboard}>
+                                    <Card.Header className={'h2' + ' ' + headerCustom}>
                                         Trending Skills
                                     </Card.Header>
 
@@ -281,16 +281,16 @@ class DashBoard extends React.Component {
 
                                         {this.state.trendingSkills.map(item => (
                                             <div
-                                                className="col-auto container-fluid lool"
+                                                className={'col-auto container-fluid' + ' ' + lool}
                                                 key={item}
                                             >
                                                 <ol 
                                                     className="list-group mt-1"
                                                     key={item}
                                                 >
-                                                    <li className="d-flex justify-content-between align-items-start fsxxl container-fluid">
+                                                    <li className={'d-flex justify-content-between align-items-start container-fluid' + ' ' + fsxxl}>
                                                         <div className="ms-2 me-auto">
-                                                            <div className="fssm">
+                                                            <div className={fssm}>
                                                                 {capitalizeFirstLetter(item["name"])}
                                                             </div>
                                                         </div>
@@ -318,8 +318,8 @@ class DashBoard extends React.Component {
 
                         <div className="row">
                             <div className="col">
-                                <Card className="card_dashboard m-2 card card-trending">
-                                    <Card.Header className="h2 header-custom">
+                                <Card className={'m-2 card' + ' ' + cardTrending + ' ' + cardDashboard}>
+                                    <Card.Header className={'h2' + ' ' + headerCustom}>
                                         Skill Bar
                                         <Oadd
                                             onCreate={this.props.onCreate}
@@ -333,7 +333,7 @@ class DashBoard extends React.Component {
 
                                         {this.props.skills.map(item => (
                                             <div
-                                                className="container-fluid lool"
+                                                className={'container-fluid' + ' ' + lool}
                                                 key={item}
                                             >
 
@@ -343,7 +343,7 @@ class DashBoard extends React.Component {
                                                 >
                                                     <li className="d-flex justify-content-between flex-lg-row pb-3">
                                                         <div className="ms-2 me-auto">
-                                                            <div className="fsxxl">
+                                                            <div className={fsxxl}>
                                                                 {capitalizeFirstLetter(item)}
                                                             </div>
                                                         </div>
@@ -365,7 +365,7 @@ class DashBoard extends React.Component {
                             </div>
 
                             <div className="col">
-                                <Card className="card_dashboard m-2 card card-votes">
+                                <Card className={'m-2 card' + ' ' + cardVotes + ' ' + cardDashboard}>
                                     <Card.Body className="container col-md-12 ">
 
                                         {this.handleDoughnut()}

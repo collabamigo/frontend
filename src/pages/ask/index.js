@@ -1,6 +1,5 @@
 
 import React from "react";
-import "./Ask.css";
 import Autocomplete from "../../components/Autocomplete";
 import axios from "utils/axios";
 import backend from "../../env";

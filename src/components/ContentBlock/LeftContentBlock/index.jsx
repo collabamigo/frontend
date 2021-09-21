@@ -1,8 +1,8 @@
+/*  eslint-disable react/prop-types */
 
 import React, { useState } from 'react';
 import { Row, Col } from "react-bootstrap";
 import { SvgIcon } from "common/SvgIcon";
-import { ContentBlockProps } from "../types";
 import {
     LeftContentSection,
     Content,
@@ -13,6 +13,7 @@ import {
 } from "./styles";
 import GoogleSignIn from "components/GoogleSignIn";
 
+
 function LeftContentBlock({
     alt_content,
     alt_title,
@@ -22,7 +23,7 @@ function LeftContentBlock({
     section,
     t,
     id,
-}: ContentBlockProps) {
+}) {
     const [stage, setStage] = useState("button");
 
     return (
@@ -50,14 +51,14 @@ function LeftContentBlock({
                             {(stage === "button") ? (title) : (alt_title)}
                         </h6>
 
-                        <Content className={"text-left " + ((stage === "form") ? "h1 font-weight-bold" : null)}>
+                        <Content className={"text-left " + ((stage === "form") ? "h1 fw-bold" : null)}>
                             {(stage === "button") ? (content) : (alt_content)}
                         </Content>
 
                         <ServiceWrapper>
                             <Row justify="space-between">
                                 {typeof section === "object" &&
-                                        section.map((item: any, id: number) => {
+                                        section.map((item, id) => {
                                             return (
                                                 <Col
                                                     key={id.toString()}

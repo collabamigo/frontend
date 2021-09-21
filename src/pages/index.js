@@ -1,4 +1,4 @@
-import {Link} from "gatsby";
+import Link from "common/Link";
 import Card from "react-bootstrap/Card";
 import ClubList from 'components/ClubList/ClubList.js';
 import React from "react";
@@ -6,13 +6,14 @@ import axios from "utils/axios";
 import backend from "env";
 import {Fade} from "react-awesome-reveal";
 import {isMobile} from "react-device-detect";
-
+// import ClubDashboard from "../components/ClubDasboard";
 import {SvgIcon} from "common/SvgIcon";
-import "./index.css";
+
+
 import {checkLoginStatus} from "../utils/auth";
 import Layout from "../components/Layout";
 
-class AuthenticatedHome extends React.Component {
+export default class AuthenticatedHome extends React.Component {
     constructor(props) {
         super(props);
 
@@ -77,7 +78,7 @@ class AuthenticatedHome extends React.Component {
                             direction={isMobile ? "left" : "up"}
                             triggerOnce
                         >
-                            <Card className="h-auto card ml-4 mr-1 zoom-my-card min-vh-80 justify-content-center mb-3">
+                            <Card className="h-auto card ms-4 mr-1 zoom-my-card min-vh-80 justify-content-center mb-3">
                                 <div className="justify-content-center">
                                     <SvgIcon
                                         src="help_others.svg"
@@ -86,7 +87,7 @@ class AuthenticatedHome extends React.Component {
                                 </div>
 
                                 <Card.Body className="mt-3">
-                                    <Card.Title className="font-weight-bold header-color">
+                                    <Card.Title className="fw-bold header-color">
                                         {this.state.first}
                                     </Card.Title>
 
@@ -100,7 +101,7 @@ class AuthenticatedHome extends React.Component {
                                 <Card.Footer className="footer-custom pb-4">
                                     <Link
                                         className="col-auto btn btn-primary"
-                                        to="/app/help"
+                                        to="/help"
                                     >
                                         {this.state.second}
                                     </Link>
@@ -115,7 +116,7 @@ class AuthenticatedHome extends React.Component {
                                 />
 
                                 <Card.Body className="mt-3">
-                                    <Card.Title className="font-weight-bold header-color">
+                                    <Card.Title className="fw-bold header-color">
                                         GET SOLUTIONS
                                     </Card.Title>
 
@@ -150,7 +151,7 @@ class AuthenticatedHome extends React.Component {
                                 />
 
                                 <Card.Body className="mt-3">
-                                    <Card.Title className="card-title font-weight-bold header-color">
+                                    <Card.Title className="card-title fw-bold header-color">
                                         LET&apos;S COLLABORATE
                                     </Card.Title>
 
@@ -166,9 +167,9 @@ class AuthenticatedHome extends React.Component {
                                 <Card.Footer className="footer-custom pb-4">
                                     <Link
                                         className="col-auto btn btn-primary"
-                                        to="/app/project"
+                                        to="/event"
                                     >
-                                        Project
+                                        Event Page
                                     </Link>
                                 </Card.Footer>
                             </Card>
@@ -184,7 +185,7 @@ class AuthenticatedHome extends React.Component {
                             <Card className="card h-auto mx-2 zoom-my-card mb-3">
 
                                 <Card.Body className="mt-3">
-                                    <Card.Title className="card-title font-weight-bold header-color text-left">
+                                    <Card.Title className="card-title fw-bold header-color text-left">
                                         Associated Clubs
                                     </Card.Title>
 
@@ -216,5 +217,4 @@ class AuthenticatedHome extends React.Component {
     }
 }
 
-export default AuthenticatedHome;
 // TODO: Attribution to freepik.com pending

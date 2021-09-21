@@ -1,19 +1,14 @@
 
 import React, {useState} from 'react'
 import { SvgIcon } from "../../../common/SvgIcon";
-import {
-    HeaderSection,
-    NotHidden,
-    Outline,
-    Burger,
-    Label
-} from "./styles";
+import {NotHidden, Burger, Label} from "./Header.module.css";
 import PropTypes from "prop-types";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
 import { Drawer, Menu } from "antd";
-import {Link} from "gatsby";
+import Link from "common/Link";
+import {MenuOutlined} from "@ant-design/icons";
 
-function Header({ isAuthenticated }) {
+export default function Header({ isAuthenticated }) {
     const [visible, setVisibility] = useState(false);
 
     const showDrawer = () => {
@@ -26,10 +21,10 @@ function Header({ isAuthenticated }) {
 
 
     return (
-        <HeaderSection className="mt-3 mr-2 mb-3 ml-2">
+        <div className="mt-3 me-2 mb-3 ms-2">
             <div className="container-fluid">
                 <div className=" row justify-content-center">
-                    <div className="col-auto ml-5">
+                    <div className="col-auto ms-5">
                         <Link
                             aria-label="homepage"
                             className='col-auto'
@@ -43,15 +38,18 @@ function Header({ isAuthenticated }) {
                         </Link>
                     </div>
 
-                    <div className="col" />
+                    <div className="col-auto" />
 
-                    <NotHidden>
+                    <div className={NotHidden+" col align-content-end text-end"}>
                         <DropdownMenu isAuthenticated={isAuthenticated} />
-                    </NotHidden>
+                    </div>
 
-                    <Burger onClick={showDrawer}>
-                        <Outline />
-                    </Burger>
+                    <div
+                        className={Burger}
+                        onClick={showDrawer}
+                    >
+                        <MenuOutlined />
+                    </div>
 
                     <Drawer
                         closable={false}
@@ -61,7 +59,10 @@ function Header({ isAuthenticated }) {
                         <div
                             className="col mb-4"
                         >
-                            <Label onClick={onClose}>
+                            <span
+                                className={Label}
+                                onClick={onClose}
+                            >
                                 <div className="col">
                                     <Menu>
                                         Menu
@@ -69,16 +70,16 @@ function Header({ isAuthenticated }) {
                                 </div>
 
                                 <div className="col">
-                                    <Outline />
+                                    <MenuOutlined />
                                 </div>
-                            </Label>
+                            </span>
                         </div>
 
                         <DropdownMenu isAuthenticated={isAuthenticated} />
                     </Drawer>
                 </div>
             </div>
-        </HeaderSection >
+        </div >
     );
 }
 
@@ -86,4 +87,3 @@ Header.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired
 }
 
-export default Header;

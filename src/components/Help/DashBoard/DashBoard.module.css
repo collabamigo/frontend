@@ -1,0 +1,111 @@
+.pieChart {
+    width: auto;
+    height: 440px;
+}
+
+.iconDashboard {
+    transform: scale(1.5);
+}
+
+.mainProfile {
+    height: 50%;
+    width: auto;
+}
+
+.cardProfileTitle {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: larger;
+}
+
+.mainProfileFooter {
+    border-top: none !important;
+}
+
+.cardVotes {
+    height: 440px;
+    width: auto;
+}
+
+.cardEmpty {
+    height: 440px;
+    width: auto;
+}
+
+.cardTrending {
+    height: 440px;
+    width: auto;
+}
+
+.cardDashboard {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.maxWeightName {
+    max-width: 70%;
+}
+
+.loql {
+    max-width: 66%;
+}
+
+.lowerText {
+    max-width: 60%;
+}
+
+li.trending {
+    list-style-type: none;
+}
+
+li.skills {
+    list-style-type: none;
+    overflow: auto;
+}
+
+/* .upper-text {
+    max-width: 100%;
+} */
+
+.cardHfColorDasboard {
+    background-color: white !important;
+    border-top: none !important;
+}
+
+.headerCustom {
+    background-color: white !important;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+.fsxxl {
+    font-size: x-large;
+}
+
+.fssm {
+    font-size: x-large;
+}
+
+.cardTextLol {
+    font-size: 1.8rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.lool {
+    max-width: 70%;
+}
+
+.text{
+    color:#18216d;
+    opacity:0;
+    }
+
+.displayPic:hover .text{
+    opacity:0.6;
+    text-align:center;
+    color:#18216d;
+    font-size:16px;
+    font-weight:700;
+    font-family:"Times New Roman", Times, serif;
+}

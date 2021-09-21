@@ -1,6 +1,6 @@
 import React from "react";
-import './index.css'
 import Layout from "../../components/Layout";
+import {contents_heeman, subtitle, instagram, github, linkedin} from "./index.module.css"
 
 class AboutUs extends React.Component {
     // Noinspection JSCheckFunctionSignatures
@@ -21,7 +21,7 @@ class AboutUs extends React.Component {
     render() {
         return (
             <Layout>
-                <div className="contents-heeman">
+                <div className={contents_heeman}>
                     <div className="container">
                         <div className="row justify-content-center mb-4">
                             <div className="col-md-9 text-center">
@@ -54,7 +54,7 @@ class AboutUs extends React.Component {
                                                 Aditya Pratap Singh
                                             </h4>
 
-                                            <h5 className="subtitle pt-2">
+                                            <h5 className={subtitle + " pt-2"}>
                                                 Co - Founder
                                             </h5>
 
@@ -65,7 +65,7 @@ class AboutUs extends React.Component {
                                             <ul className="list-inline mt-4">
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1 linkedin"
+                                                        className={"text-decoration-none d-block px-1 " + linkedin}
                                                         href="https://www.linkedin.com/in/devmrfitz/"
                                                         rel="noreferrer"
                                                         target="_blank"
@@ -87,7 +87,7 @@ class AboutUs extends React.Component {
 
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1 github"
+                                                        className={"text-decoration-none d-block px-1 " + github}
                                                         href="https://github.com/devmrfitz"
                                                         rel="noopener noreferrer"
                                                         target="_blank"
@@ -109,7 +109,7 @@ class AboutUs extends React.Component {
 
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1 instagram"
+                                                        className={"text-decoration-none d-block px-1 " + instagram}
                                                         href="https://www.instagram.com/apsaditya51/"
                                                         rel="noreferrer"
                                                         target="_blank"
@@ -184,7 +184,7 @@ class AboutUs extends React.Component {
 
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1 github"
+                                                        className={"text-decoration-none d-block px-1 " + github}
                                                         href="https://github.com/heemankv"
                                                         rel="noopener noreferrer"
                                                         target="_blank"
@@ -206,7 +206,7 @@ class AboutUs extends React.Component {
 
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1 instagram"
+                                                        className={"text-decoration-none d-block px-1 " + instagram}
                                                         href="https://www.instagram.com/heemank_v/"
                                                         rel="noreferrer"
                                                         target="_blank"
@@ -257,7 +257,7 @@ class AboutUs extends React.Component {
                                             <ul className="list-inline mt-4">
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1 linkedin"
+                                                        className={"text-decoration-none d-block px-1 " + linkedin}
                                                         href="https://www.linkedin.com/in/shikhar-sharma-007/"
                                                         rel="noreferrer"
                                                         target="_blank"
@@ -280,7 +280,7 @@ class AboutUs extends React.Component {
 
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1 github"
+                                                        className={"text-decoration-none d-block px-1 " + github}
                                                         href="https://github.com/Shikharhacks007 "
                                                         rel="noopener noreferrer"
                                                         target="_blank"
@@ -302,7 +302,7 @@ class AboutUs extends React.Component {
 
                                                 <li className="list-inline-item">
                                                     <a
-                                                        className="text-decoration-none d-block px-1 instagram"
+                                                        className={"text-decoration-none d-block px-1 " + instagram}
                                                         href="https://www.instagram.com/shikhar_s_/"
                                                         rel="noreferrer"
                                                         target="_blank"

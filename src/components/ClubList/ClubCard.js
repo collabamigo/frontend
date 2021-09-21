@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Image from 'react-bootstrap/Image';
-
+import {logo} from "./ClubCard.module.css";
+import Link from "common/Link";
+import Button from "react-bootstrap/Button";
 
 export default class ClubCard extends Component {
     static propTypes = {
@@ -40,20 +42,24 @@ export default class ClubCard extends Component {
         return (
             <div className="col-sm-6 col-lg-4 mb-3">
                 <div className=" mb-3 h-100">
-
-                    <div className="">
+                    <Link to="/club">
+                        <Button
+                            className="btn"
+                            type="button"
+                        >
 
                         <Image
-                            className="logo"
+                            className={logo}
                             fluid
                             src={this.props.element.picture}
                         />
 
-                        <h5 className="">
-                            {this.props.element.name}
-                        </h5>
+                            <h5 className="">
+                                {this.props.element.name}
+                            </h5>
 
-                    </div>
+                        </Button>
+                    </Link>
                 </div>
             </div>
             )

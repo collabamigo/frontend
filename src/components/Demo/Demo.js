@@ -1,5 +1,5 @@
 import React from "react";
-import './Demo.css'
+import {videoAdjustments} from './Demo.module.css';
 
 class Demo extends React.Component {
     // Noinspection JSCheckFunctionSignatures
@@ -25,7 +25,7 @@ class Demo extends React.Component {
                             <iframe
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
-                                className="video-adjustments"
+                                className={videoAdjustments}
                                 frameBorder="0"
                                 src="https://www.youtube.com/embed/SHniGbz4I_4?controls=0"
                                 title="YouTube video player"

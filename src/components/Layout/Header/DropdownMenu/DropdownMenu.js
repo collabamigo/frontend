@@ -1,67 +1,63 @@
 
 import React from "react";
-import "./DropdownMenu.css";
+import {magicSpan, CustomNavLink} from './DropdownMenu.module.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Link} from "@reach/router";
+import Link from "common/Link";
 
 function signOut() {
         localStorage.clear();
         window.location.href = "/";
 }
 
-import {
-    CustomNavLinkSmall,
-} from "../styles";
-
 import { isMobile } from "react-device-detect";
 import PropTypes from "prop-types";
 
 function DropdownMenu({ isAuthenticated }) {
     return (
-        <div className="row pt-3">
+        <div className="pt-3">
 
             {isAuthenticated ?
                 <>
-                    <CustomNavLinkSmall className="btn">
+                    <div className={CustomNavLink+ " btn"}>
                         <Link
-                            className="magic_span"
-                            to="/app/history"
+                            className={magicSpan}
+                            to="/history"
                         >
                             Connections
                         </Link>
-                    </CustomNavLinkSmall>
+                    </div>
 
-                    <CustomNavLinkSmall className="btn">
+                    <div className={CustomNavLink + " btn"}>
                         <Link
-                            className="magic_span"
-                            to="/app/profile"
+                            className={magicSpan}
+                            to="/profile"
                         >
                             Profile
                         </Link>
-                    </CustomNavLinkSmall>
+                    </div>
                 </> :
-                <CustomNavLinkSmall className="btn">
+                <div className={CustomNavLink + " btn"}>
                     <Link
-                        className="magic_span"
+                        className={magicSpan}
                         to="/app/Demo"
                     >
                         Demo
                     </Link>
-                </CustomNavLinkSmall>}
+                </div>}
 
 
 
-            <CustomNavLinkSmall className="btn">
+            <div className={CustomNavLink + " btn"}>
                 <Link
-                    className="magic_span"
+                    className={magicSpan}
                     to="/about"
                 >
                     About Us
                 </Link>
-            </CustomNavLinkSmall>
+            </div>
 
             {isAuthenticated ?
-                <CustomNavLinkSmall>
+                <div className={CustomNavLink}>
                     <a
                         className="btn"
                         onClick={signOut}
@@ -70,7 +66,7 @@ function DropdownMenu({ isAuthenticated }) {
                         {isMobile ? "Sign Out" : null}
 
                         <svg
-                            className="bi bi-box-arrow-right magic_span"
+                            className={'bi bi-box-arrow-right' + ' ' + magicSpan}
                             fill="currentColor"
                             height="24"
                             viewBox="0 0 16 16"
@@ -88,7 +84,7 @@ function DropdownMenu({ isAuthenticated }) {
                             />
                         </svg>
                     </a>
-                </CustomNavLinkSmall> : null}
+                </div> : null}
         </div>
     );
 }

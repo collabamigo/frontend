@@ -1,11 +1,10 @@
-
 import React from "react";
 import PropTypes from "prop-types";
-import "./Autocomplete.css";
+import {no_suggestions, suggestion_active, suggestions, input} from './Autocomplete.module.css';
 import backend from "../../env";
 import axios from "utils/axios";
 
-class Index extends React.Component {
+class Autocomplete extends React.Component {
 
     static propTypes = {
         integrated: PropTypes.bool,
@@ -99,14 +98,13 @@ class Index extends React.Component {
 
                   suggestionsListComponent =
                       (
-                          <ul className={"suggestions "+((!this.props.integrated)?" col-9":" col-auto")}>
+                          <ul className={suggestions +((!this.props.integrated)?" col-9":" col-auto")}>
                               {this.state.suggestions.map((suggestion, index) => {
 
                       let className;
 
                       if (index === this.state.activeSuggestion) {
-
-                          className = "suggestion-active";
+                          className = suggestion_active;
                       }
                       return (
                           <li
@@ -124,7 +122,7 @@ class Index extends React.Component {
 
                   suggestionsListComponent =
                       (
-                          <div className="no-suggestions">
+                          <div className={no_suggestions}>
                               <em>
                                   Be patient while we take your patience
                               </em>
@@ -138,7 +136,7 @@ class Index extends React.Component {
                   <div className={"row mx-5 "+((!this.props.integrated)?"justify-content-center":null)}>
 
                       <input
-                          className={((!this.props.integrated)?"col-9":"col-auto")}
+                          className={((!this.props.integrated)?"col-9 ":"col-auto ") + input}
                           onChange={this.handleChange.bind(this)}
                           onKeyDown={this.handleKeyDown.bind(this)}
                           type="text"
@@ -157,4 +155,4 @@ class Index extends React.Component {
 
 }
 
-export default Index;
+export default Autocomplete;

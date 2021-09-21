@@ -1,6 +1,6 @@
 
 import React from "react";
-import "./Step1.css";
+import {cardHfColor, lowwl} from './Step1.module.css';
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card';
 import {isMobile} from "react-device-detect";
@@ -43,12 +43,12 @@ class Step1 extends React.Component {
             return null
         else
             return (
-                <section className="container-fluid lowwl mt-0">
+                <section className={'container-fluid mt-0' + ' ' + lowwl}>
                     <div className="row" >
                         <div className="col container" >
                             <Card className="card profilecard container">
 
-                                <Card.Header className="card-hf-color">
+                                <Card.Header className={cardHfColor}>
                                     <h2>
                                         Hey, We see you are eager to help others !
                                     </h2>
