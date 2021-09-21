@@ -1,13 +1,13 @@
 import React from 'react'
 import {cardHfColor, lowwl} from './Profile.module.css';
 import axios from "utils/axios";
-import backend from "../../env";
+import backend from "env";
 import Card from 'react-bootstrap/Card';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import {Popover} from 'react-bootstrap';
-import SvgIcon from "../../common/SvgIcon";
+import SvgIcon from "common/SvgIcon";
 import {isMobile} from "react-device-detect";
-import Loading from "../../common/Loading";
+import Loading from "common/Loading";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 
@@ -25,11 +25,11 @@ const popoverRight = (
         <Popover.Content>
             Your name was authenticated from your google account.
             {' '}
-            Contact us at our email  
-            
+            Contact us at our email
+
             {' '}
 
-            <strong>                
+            <strong>
                 <a
                     href="mailto:watsonhex@gmail.com ?subject=My Name is not correct"
                     onClick="window.open(this.href)"
@@ -117,7 +117,7 @@ class Profile extends React.Component{
     handleChangeLinkedIn(e) {
         this.setState({ linkedIn: e.target.value })
     }
-    
+
     handleChangeCourse(e) {
         this.setState({ course: e.target.value })
     }
@@ -199,7 +199,7 @@ class Profile extends React.Component{
                             </div>)}
 
                         <div className="col container" >
-                            <Card className="card ml-5 rounded-4 container mb-5">
+                            <Card className="card ms-5 rounded-4 container mb-5">
 
                                 <Card.Header className={'card-header' + ' ' + cardHfColor}>
                                     <h1>
@@ -363,12 +363,12 @@ class Profile extends React.Component{
                                                             onChange={this.handleChangeContact}
                                                             placeholder="Mobile Number"
                                                             value={this.state.contact}
-                                                        />                                                    
+                                                        />
 
                                                     </div>
                                                 </div>
                                             </div>:null}
-                                        
+
                                         <div className="row form-group justify-content-center">
                                             <div className="col-form-label required">
                                                 <label>
@@ -384,7 +384,7 @@ class Profile extends React.Component{
                                                     <option value="M" >
                                                         M-Tech
                                                     </option>
-    
+
                                                     <option value="B">
                                                         B-Tech
                                                     </option>
@@ -399,7 +399,7 @@ class Profile extends React.Component{
                                                 </select>
                                             </div>
 
-                                            <div className="col-auto col-form-label ml-1 required">
+                                            <div className="col-auto col-form-label ms-1 required">
                                                 <label>
                                                     Course:
                                                 </label>

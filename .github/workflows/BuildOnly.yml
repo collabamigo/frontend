@@ -3,7 +3,7 @@ name: Build project
 on:
   push:
     branches:
-      - 'testing-*'
+      - 'testing*'
 
 jobs:
   build:

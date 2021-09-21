@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { StyledContainer } from "./styles";
-import { ContainerProps } from "../types";
 
-function Container({ border, children }: ContainerProps) {
+// eslint-disable-next-line react/prop-types
+function Container({ border, children }) {
   return (
       <StyledContainer border={border}>
           {children}

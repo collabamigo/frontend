@@ -1,0 +1,25 @@
+.Burger {
+    display: none;
+
+}
+.Burger svg {
+    fill: #2e186a;
+}
+@media only screen and (max-width: 890px) {
+    .NotHidden{
+        display: none;
+    }
+
+    .Burger {
+        display: block;
+    }
+}
+
+.Label {
+    font-weight: 500;
+    color: #404041;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}

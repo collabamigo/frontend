@@ -13,7 +13,7 @@ class Footer extends React.Component {
         return (
             <footer className={'d-flex flex-row' + ' ' + footer}>
                 <div className={'col-md-7' + ' ' + linkFooter}>
-                    <b className="float-right pr-5">
+                    <b className="float-right pe-5">
                         {/*eslint-disable-next-line*/}
                         <a
                             className={linkFooter}

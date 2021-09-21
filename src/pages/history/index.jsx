@@ -1,10 +1,10 @@
 
 import React from "react";
-import {card, cardSkillSearch} from './index.module.css';
+import {cardSkillSearch} from './index.module.css';
 import axios from "utils/axios";
 import backend from "../../env";
 import { Card } from "react-bootstrap";
-import CardExplorer from "../CardExplorer";
+import CardExplorer from "../../components/CardExplorer";
 
 
 class ConnectionHistory extends React.Component {
@@ -85,7 +85,7 @@ class ConnectionHistory extends React.Component {
         else
             return (
                 <div className="container-fluid">
-                    <Card className={card + ' ' + cardSkillSearch}>
+                    <Card className={cardSkillSearch}>
                         <Card.Title>
                             <h1 className="col-sm-5 col-md-5">
                                 {" "}
@@ -97,7 +97,7 @@ class ConnectionHistory extends React.Component {
 
                         <Card.Body>
                             <div className="row-auto pt-5">
-                                <div className="col-auto pl-lg-5">
+                                <div className="col-auto ps-lg-5">
                                     {this.caller()}
                                 </div>
                             </div>

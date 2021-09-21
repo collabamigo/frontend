@@ -132,7 +132,7 @@ class Step2 extends React.Component {
                                 <div className="row justify-content-center">
                                     {this.previousButton()}
 
-                                    <div className="pl-2">
+                                    <div className="ps-2">
 
                                         <button
                                             className="btn btn-primary"

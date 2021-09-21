@@ -2,47 +2,32 @@
   "hosting": [
     {
       "target": "production",
-      "public": "public",
+      "public": "out",
+      "cleanUrls": true,
       "ignore": [
         "firebase.json",
         "**/.*",
         "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
       ]
     },
     {
       "target": "testing",
-      "public": "public",
+      "public": "out",
+      "cleanUrls": true,
       "ignore": [
         "firebase.json",
         "**/.*",
         "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
       ]
     },
     {
       "target": "preview",
-      "public": "public",
+      "public": "out",
+      "cleanUrls": true,
       "ignore": [
         "firebase.json",
         "**/.*",
         "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
       ]
     }
   ]

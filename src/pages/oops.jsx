@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-function Rickroll() {
+function Oops() {
     return (
         <iframe
             allow='autoplay; encrypted-media'
@@ -14,4 +14,4 @@ function Rickroll() {
         />
     )
 }
-export default Rickroll
+export default Oops

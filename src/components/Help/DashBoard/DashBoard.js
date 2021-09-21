@@ -166,7 +166,7 @@ class DashBoard extends React.Component {
         return (
             <div className="">
                 <h1 className="font-weight-light display-4">
-                    <span className={'material-icons pr-2' + ' ' + iconDashboard}>
+                    <span className={'material-icons pe-2' + ' ' + iconDashboard}>
                         dashboard
                     </span>
                     Dashboard
@@ -178,13 +178,13 @@ class DashBoard extends React.Component {
                             <Card className={'mb-5 upper-text' + ' ' + mainProfile}>
                                 <Card.Body className="row">
                                     <div className="col-md-8 float-center">
-                                        <div className="card-title mt-3 ml-3 row h1">
+                                        <div className="card-title mt-3 ms-3 row h1">
                                             {this.props.name}
                                         </div>
 
                                         <div className="card-text col-auto row mt-3 float-left">
 
-                                            <blockquote className="blockquote text-center pl-5">
+                                            <blockquote className="blockquote text-center ps-5">
                                                 <p className="mb-0">
                                                     “I think goals should never be easy, they should force you to work, even if they are uncomfortable at the time.”  
                                                 </p>
@@ -213,7 +213,7 @@ class DashBoard extends React.Component {
 
                                 <Card.Footer className="mb-0 mt-3 pb-3 card-hf-color-dasboard">
                                     <Card.Link
-                                        className="float-left ml-2 mb-0"
+                                        className="float-left ms-2 mb-0"
                                         href={"https://www.linkedin.com/in/"+ this.props.linkedin}
                                         target="_blank"
                                     >

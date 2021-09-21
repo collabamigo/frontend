@@ -1,6 +1,6 @@
 
 import React from "react";
-import {Link} from "gatsby";
+import Link from "common/Link";
 
 export default function NavLink(props) {
   return (
