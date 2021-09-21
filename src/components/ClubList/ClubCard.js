@@ -35,6 +35,7 @@ export default class ClubCard extends Component {
     }
 
     render() {
+        var clublink = "/club?name=" + this.props.element.name
         console.log(this.props.element, " hiiii")
         if(this.props.element === undefined) {
             return null;
@@ -43,7 +44,7 @@ export default class ClubCard extends Component {
         return (
             <div className="col-sm-6 col-lg-4 mb-3">
                 <div className=" mb-3 h-100">
-                    <Link to="/club">
+                    <Link to={clublink}>
                         <Button 
                             className="btn"
                             type="button"
