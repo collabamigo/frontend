@@ -9,7 +9,7 @@ This repository contains the code for the frontend.
 
 
 ## Technologies used
-<li>React</li>
+<li>NextJS</li>
 <li>Bootstrap</li>
 <li>Axios (for AJAX)</li>
 <li>REST API</li>
