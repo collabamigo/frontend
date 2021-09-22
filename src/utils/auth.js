@@ -7,7 +7,7 @@ export const isBrowser = () => typeof window !== "undefined"
 let loginStatus = false
 
 export const isLoggedIn = () => {
-    return loginStatus || (isBrowser() && sessionStorage.getItem("loginFlag"))
+    return (loginStatus || (isBrowser() && sessionStorage.getItem("loginFlag") != null))
     // return isBrowser()?!!sessionStorage.getItem("loginFlag"):false;
 }
 
