@@ -79,8 +79,8 @@ class Profile extends React.Component{
     }
 
     componentDidMount() {
-        axios.get(backend+"connect/profile/?format=json")
-            .then(res => axios.get(backend+"connect/teacher/").then((res2) => {
+        axios.get("connect/profile/?format=json")
+            .then(res => axios.get("connect/teacher/").then((res2) => {
 
                 if (res2.data.length){
                     this.setState({

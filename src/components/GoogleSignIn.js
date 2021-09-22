@@ -14,7 +14,7 @@ function GoogleSignIn (props) {
     async function profileExists (googleUser) {
         if (props.stage==="button")
             return {
-                res:await axios.get(backend+"connect/profile/?format=json"),
+                res:await axios.get("connect/profile/?format=json"),
                 googleUser: googleUser
             }
         else

@@ -2,7 +2,6 @@
 import React from "react";
 import Autocomplete from "../../components/Autocomplete";
 import axios from "utils/axios";
-import backend from "../../env";
 import CardExplorer from "../../components/CardExplorer";
 import {checkLoginStatus} from "../../utils/auth";
 
@@ -41,7 +40,7 @@ class Ask extends React.Component {
     }
 
     handleConnect = (message, teacher_id) => {
-        axios.post(backend+"connect/request/", {
+        axios.post("connect/request/", {
             teacher_id: teacher_id,
             message: message,
             skills: [this.state.searchTerm]
@@ -72,13 +71,13 @@ class Ask extends React.Component {
         this.setState({
             loading: true
         })
-        axios.get(backend+"connect/approvals/" ,{
+        axios.get("connect/approvals/" ,{
             params: {
                 format: "json",
             }
               })
             .then((res) =>
-            axios.get(backend+"connect/skill/"+ searchTerm ,)
+            axios.get("connect/skill/"+ searchTerm ,)
                 .then((res2) =>
                     this.setState({list:res2.data["Teacher_set"],
                         voteAllowedList: res.data,

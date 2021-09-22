@@ -56,7 +56,7 @@ class ClubHomePage extends Component {
             caller = this.query.get("name");
         }
         console.log(caller,"hellooo")
-        // axios.get(backend+"/club/" + caller)
+        // axios.get("/club/" + caller)
         //     .then((res) => {
         //         console.log("axios call executed")
         //         console.log(res)

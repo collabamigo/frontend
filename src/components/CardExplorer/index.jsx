@@ -72,7 +72,7 @@ class CardExplorer extends React.Component{
                 [teacherId]: vote
             }
         }))
-        axios.post(backend+"rating/", {
+        axios.post("rating/", {
             teacher: teacherId,
             vote: vote,
         })
