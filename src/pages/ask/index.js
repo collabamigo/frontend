@@ -4,7 +4,6 @@ import Autocomplete from "../../components/Autocomplete";
 import axios from "utils/axios";
 import backend from "../../env";
 import CardExplorer from "../../components/CardExplorer";
-import Layout from "../../components/Layout";
 import {checkLoginStatus} from "../../utils/auth";
 
 
@@ -110,39 +109,37 @@ class Ask extends React.Component {
 
     render () {
           return (
-              <>
-                  <div className="row m-2">
-                      <div className="col-lg-6 col-md-auto col-sm-auto col-xl-6">
-                          <h2>
-                              Skill Search
-                          </h2>
+              <div className="row m-2">
+                  <div className="col-lg-6 col-md-auto col-sm-auto col-xl-6">
+                      <h2>
+                          Skill Search
+                      </h2>
 
-                          <Autocomplete
-                              onChange={this.handleChange}
-                              onMatch={this.handleMatch}
-                          />
+                      <Autocomplete
+                          onChange={this.handleChange}
+                          onMatch={this.handleMatch}
+                      />
 
-                          {this.state.searchTerm && !this.state.found_match?
-                              <div className="text-muted">
-                                  Skill not found ? Email us at
-                                  {" "}
+                      {this.state.searchTerm && !this.state.found_match?
+                          <div className="text-muted">
+                              Skill not found ? Email us at
+                              {" "}
 
-                                  <a
-                                      href={"mailto:watsonhex@gmail.com?subject=Skill Not found&body=Skill: " + this.state.searchTerm}
-                                      rel="noreferrer"
-                                      target="_blank"
-                                  >
-                                      watsonhex@gmail.com
-                                  </a>
-                              </div>:null}
+                              <a
+                                  href={"mailto:watsonhex@gmail.com?subject=Skill Not found&body=Skill: " + this.state.searchTerm}
+                                  rel="noreferrer"
+                                  target="_blank"
+                              >
+                                  watsonhex@gmail.com
+                              </a>
+                          </div>:null}
 
-                      </div>
-
-                      <div className="pt-5 col-lg-6 col-md-auto col-sm-auto col-xl-6 justify-content-center">
-                          {this.renderCardsIfNeeded()}
-                      </div>
                   </div>
-              </>
+
+                  <div className="pt-5 col-lg-6 col-md-auto col-sm-auto col-xl-6 justify-content-center">
+                      {this.renderCardsIfNeeded()}
+                  </div>
+              </div>
           );
     }
 }

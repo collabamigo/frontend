@@ -1,5 +1,4 @@
 import React from "react";
-import Layout from "../../components/Layout";
 import {contents_heeman, subtitle, instagram, github, linkedin} from "./index.module.css"
 
 class AboutUs extends React.Component {

@@ -74,156 +74,153 @@ class ClubHomePage extends Component {
 
 
         return (
-            <>
-                <div>
-                    <hr />
+            <div>
+                <hr />
 
-                    <section className="clubDetails">
-                        <div>
-                            <div className="clubHeader row">
-                                <div className="col-4 offset-0">
-                                    <Image
-                                        className={logo}
-                                        fluid
-                                        src={this.state.basicInformation.logoLink}
-                                    />
+                <section className="clubDetails">
+                    <div>
+                        <div className="clubHeader row">
+                            <div className="col-4 offset-0">
+                                <Image
+                                    className={logo}
+                                    fluid
+                                    src={this.state.basicInformation.logoLink}
+                                />
 
-                                    <span className={clubName + ' ' + 'offset-1'}>
-                                        {this.state.basicInformation.Name}
-                                    </span>
-                                </div>
-
-                                <div className="row my-custom-row justify-content-start align-content-end">
-                                    {this.state.basicInformation.tagline}
-                                </div>
+                                <span className={clubName + ' ' + 'offset-1'}>
+                                    {this.state.basicInformation.Name}
+                                </span>
                             </div>
 
-                            <div className="row p-3">
-                                <Card
-                                    className="card1 col-4 offset-1"
-                                    style={{ width: '18rem' }}
-                                >
-                                    <Card.Body>
+                            <div className="row my-custom-row justify-content-start align-content-end">
+                                {this.state.basicInformation.tagline}
+                            </div>
+                        </div>
 
-                                        <Card.Text>
-                                            {this.state.basicInformation.description}
-                                        </Card.Text>
+                        <div className="row p-3">
+                            <Card
+                                className="card1 col-4 offset-1"
+                                style={{ width: '18rem' }}
+                            >
+                                <Card.Body>
 
-                                        <Card.Link href="#">
-                                            W
-                                        </Card.Link>
+                                    <Card.Text>
+                                        {this.state.basicInformation.description}
+                                    </Card.Text>
 
-                                        <Card.Link href="#">
-                                            I
-                                        </Card.Link>
+                                    <Card.Link href="#">
+                                        W
+                                    </Card.Link>
 
-                                        <Card.Link href="#">
-                                            F
-                                        </Card.Link>
+                                    <Card.Link href="#">
+                                        I
+                                    </Card.Link>
 
-                                        <Card.Link href="#">
-                                            L
-                                        </Card.Link>
-                                    </Card.Body>
+                                    <Card.Link href="#">
+                                        F
+                                    </Card.Link>
 
-                                    <Card.Footer className=" cardFooter d-flex justify-content-end">
-                                        here since
-                                        {' '}
+                                    <Card.Link href="#">
+                                        L
+                                    </Card.Link>
+                                </Card.Body>
 
-                                        {this.state.basicInformation.joinDate}
-                                    </Card.Footer>
-                                </Card>
+                                <Card.Footer className=" cardFooter d-flex justify-content-end">
+                                    here since
+                                    {' '}
 
-                                <Card
-                                    className="card2 col-4 offset-2"
-                                    style={{ width: '18rem' }}
-                                >
-                                    <Card.Body>
+                                    {this.state.basicInformation.joinDate}
+                                </Card.Footer>
+                            </Card>
 
-                                        <Card.Title>
-                                            Top Events
-                                        </Card.Title>
+                            <Card
+                                className="card2 col-4 offset-2"
+                                style={{ width: '18rem' }}
+                            >
+                                <Card.Body>
+
+                                    <Card.Title>
+                                        Top Events
+                                    </Card.Title>
 
 
-                                        {/* Implement mapping function */}
+                                    {/* Implement mapping function */}
 
-                                        {/* <Card.Text>
+                                    {/* <Card.Text>
                                             {this.state.basicInformation.description}
                                         </Card.Text> */}
 
-                                        {/*  */}
-                                    </Card.Body>
+                                    {/*  */}
+                                </Card.Body>
 
-                                </Card>
-                            </div>
-
-                            <hr />
-
-                            <Carousel className="container-fluid w-50 mb-4">
-                                <Carousel.Item>
-                                    <img
-                                        alt="First slide"
-                                        className="d-block w-100"
-                                        src="https://via.placeholder.com/720X480"
-                                    />
-
-                                    <Carousel.Caption>
-                                        <h3>
-                                            First slide label
-                                        </h3>
-
-                                        <p>
-                                            Nulla vitae elit libero, a pharetra augue mollis interdum.
-                                        </p>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-
-                                <Carousel.Item>
-                                    <img
-                                        alt="Second slide"
-                                        className="d-block w-100"
-                                        src="https://via.placeholder.com/720X480"
-                                    />
-
-                                    <Carousel.Caption>
-                                        <h3>
-                                            Second slide label
-                                        </h3>
-
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        </p>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-
-                                <Carousel.Item>
-                                    <img
-                                        alt="Third slide"
-                                        className="d-block w-100"
-                                        src="https://via.placeholder.com/720X480"
-                                    />
-
-                                    <Carousel.Caption>
-                                        <h3>
-                                            Third slide label
-                                        </h3>
-
-                                        <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                                        </p>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                            </Carousel>
-
-                            <hr />
-
-
+                            </Card>
                         </div>
 
-                    </section>
-                </div>
-            </>
+                        <hr />
 
+                        <Carousel className="container-fluid w-50 mb-4">
+                            <Carousel.Item>
+                                <img
+                                    alt="First slide"
+                                    className="d-block w-100"
+                                    src="https://via.placeholder.com/720X480"
+                                />
+
+                                <Carousel.Caption>
+                                    <h3>
+                                        First slide label
+                                    </h3>
+
+                                    <p>
+                                        Nulla vitae elit libero, a pharetra augue mollis interdum.
+                                    </p>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+
+                            <Carousel.Item>
+                                <img
+                                    alt="Second slide"
+                                    className="d-block w-100"
+                                    src="https://via.placeholder.com/720X480"
+                                />
+
+                                <Carousel.Caption>
+                                    <h3>
+                                        Second slide label
+                                    </h3>
+
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    </p>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+
+                            <Carousel.Item>
+                                <img
+                                    alt="Third slide"
+                                    className="d-block w-100"
+                                    src="https://via.placeholder.com/720X480"
+                                />
+
+                                <Carousel.Caption>
+                                    <h3>
+                                        Third slide label
+                                    </h3>
+
+                                    <p>
+                                        Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                                    </p>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                        </Carousel>
+
+                        <hr />
+
+
+                    </div>
+
+                </section>
+            </div>
         );
     }
 }
