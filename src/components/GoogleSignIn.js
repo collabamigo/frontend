@@ -44,7 +44,6 @@ function GoogleSignIn (props) {
 
 
             setLoggedIn()
-            console.log("PUSHING")
             await router.push("/")
 
         }

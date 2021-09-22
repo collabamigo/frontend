@@ -20,7 +20,7 @@ class AboutUs extends React.Component {
 
     render() {
         return (
-            <Layout>
+            <>
                 <div className={contents_heeman}>
                     <div className="container">
                         <div className="row justify-content-center mb-4">
@@ -335,7 +335,7 @@ class AboutUs extends React.Component {
                         this.messagesEnd = el;
                     }}
                 />
-            </Layout>
+            </>
         );
 
     }

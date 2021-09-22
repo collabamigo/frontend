@@ -110,7 +110,7 @@ class Ask extends React.Component {
 
     render () {
           return (
-              <Layout>
+              <>
                   <div className="row m-2">
                       <div className="col-lg-6 col-md-auto col-sm-auto col-xl-6">
                           <h2>
@@ -142,7 +142,7 @@ class Ask extends React.Component {
                           {this.renderCardsIfNeeded()}
                       </div>
                   </div>
-              </Layout>
+              </>
           );
     }
 }

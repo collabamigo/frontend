@@ -61,7 +61,7 @@ export default class AuthenticatedHome extends React.Component {
 
     render() {
         return (
-            <Layout>
+            <>
 
                 <div className=" h-75 w-100 justify-content-center card-group ">
                     <div className="row ">
@@ -204,7 +204,7 @@ export default class AuthenticatedHome extends React.Component {
 
                     </div>
                 </div>
-            </Layout>
+            </>
         );
     }
 }

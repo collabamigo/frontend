@@ -26,7 +26,7 @@ export default class Event extends React.Component{
 
     render() {
         return (
-            <Layout>
+            <>
                 <div>
                     <hr />
 
@@ -146,7 +146,7 @@ export default class Event extends React.Component{
                     </section>
 
                 </div>
-            </Layout>
+            </>
     )
     }
 }

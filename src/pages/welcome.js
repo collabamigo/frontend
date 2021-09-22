@@ -10,7 +10,7 @@ import Layout from "../components/Layout";
 function UnauthenticatedHome() {
     console.log("CALL")
     return (
-        <Layout>
+        <>
 
 
             <Container>
@@ -25,7 +25,7 @@ function UnauthenticatedHome() {
                     type="left"
                 />
             </Container>
-        </Layout>
+        </>
     )
 }
 

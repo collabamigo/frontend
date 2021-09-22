@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {logo, clubName} from './club.module.css';
-import Layout from "../components/Layout";
 import {isBrowser} from "../utils/auth";
 
 function useQuery() {
@@ -75,7 +74,7 @@ class ClubHomePage extends Component {
 
 
         return (
-            <Layout>
+            <>
                 <div>
                     <hr />
 
@@ -223,7 +222,7 @@ class ClubHomePage extends Component {
 
                     </section>
                 </div>
-            </Layout>
+            </>
 
         );
     }

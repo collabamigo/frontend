@@ -4,9 +4,9 @@ import ClubChooser from "../components/ClubChooser";
 
 function temp() {
     return (
-        <Layout>
+        <>
             <ClubChooser />
-        </Layout>)
+        </>)
 }
 
 export default temp
