@@ -32,6 +32,7 @@ function DropdownMenu({ isAuthenticated }) {
                         <div className={CustomNavLink + " btn"}>
                             <Link
                                 className={magicSpan}
+                                internal
                                 to="/profile"
                             >
                                 Profile
