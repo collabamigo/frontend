@@ -1,7 +1,7 @@
 import * as React from "react"
-import copyClipBoard from "./utils/copyClipBoard"
+// import copyClipBoard from "./utils/copyClipBoard"
 import { useStateMachine } from "little-state-machine"
-import generic from "../data/generic"
+// import generic from "./FormBuilder/data/generic"
 import Prism from "prismjs"
 import * as styles from "./CodeArea.module.css"
 
@@ -10,12 +10,7 @@ export const CodeSandBoxLink = ({
   isJS,
   style,
   isExpo,
-}: {
-  url: string
-  style?: any
-  isExpo?: boolean
-  isJS?: boolean
-}) => (
+},) => (
   <a
     className={`${styles.button} ${styles.linkToSandBox}`}
     style={style}
@@ -51,7 +46,7 @@ const ToggleTypes = {
   js: "JS",
   ts: "TS",
   types: "TYPES",
-} as const
+}
 
 export default function CodeArea({
   rawData,
@@ -62,16 +57,7 @@ export default function CodeArea({
   withOutCopy,
   isExpo,
   style,
-}: {
-  rawData?: string
-  tsRawData?: string
-  rawTypes?: string
-  url?: string
-  tsUrl?: string
-  withOutCopy?: boolean
-  isExpo?: boolean
-  style?: any
-}) {
+},) {
   const {
     state: { language },
   } = useStateMachine()
@@ -144,7 +130,7 @@ export default function CodeArea({
             Types
           </button>
         )}
-        {!withOutCopy && (
+        {/* {!withOutCopy && (
           <button
             className={`${styles.button} ${styles.copyButton}`}
             onClick={() => {
@@ -155,7 +141,7 @@ export default function CodeArea({
           >
             {generic.copy[currentLanguage]}
           </button>
-        )}
+        )} */}
 
         {((url && currentType === ToggleTypes.js) ||
           (tsUrl && currentType === ToggleTypes.ts) ||
@@ -195,4 +181,22 @@ export default function CodeArea({
       </div>
     </section>
   )
+}
+
+CodeSandBoxLink.propTypes = {
+  isExpo: PropTypes.bool,
+  isJS: PropTypes.bool,
+  url: PropTypes.string,
+  style: PropTypes.object,
+}
+
+CodeArea.propTypes = {
+  rawData: PropTypes.string,
+  tsRawData: PropTypes.string,
+  rawTypes: PropTypes.string,
+  url: PropTypes.string,
+  tsUrl: PropTypes.string,
+  withOutCopy: PropTypes.bool,
+  isExpo: PropTypes.bool,
+  style: PropTypes.object,
 }

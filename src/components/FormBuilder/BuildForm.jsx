@@ -5,19 +5,19 @@ import { useForm } from "react-hook-form"
 import SortableContainer from "./SortableContainer"
 import { useStateMachine } from "little-state-machine"
 // import { navigate } from "@reach/router"
-// import colors from "../styles/colors"
+import colors from "../styles/colors"
 import generateCode from "./logic/generateCode"
 // import copyClipBoard from "./utils/copyClipBoard"
 // import Footer from "./Footer"
 import Popup from "./Popup"
 // import LearnMore from "./learnMore"
 // import goToBuilder from "./utils/goToBuilder"
-// import builder from "../data/builder"
+import builder from "./data/builder"
 // import generic from "../data/generic"
 // import translateLink from "./logic/translateLink"
 // import * as buttonStyles from "../styles/button.module.css"
 // import * as containerStyles from "../styles/container.module.css"
-// import * as typographyStyles from "../styles/typography.module.css"
+import * as typographyStyles from "../styles/typography.module.css"
 import * as styles from "./BuildForm.module.css"
 import CodeArea from "./CodeArea"
 
@@ -30,10 +30,10 @@ const updateStore = (state, payload) => {
   }
 }
 
-const errorStyle = {
-  border: `1px solid ${colors.secondary}`,
-  background: colors.errorPink,
-}
+// const errorStyle = {
+//   border: `1px solid ${colors.secondary}`,
+//   background: colors.errorPink,
+// }
 
 const defaultValue = {
   max: undefined,
@@ -555,12 +555,20 @@ function BuildForm({
   )
 }
 
+BuildForm.defaultProps = {
+  HomeRef: [],
+  defaultLang: "en",
+  isStatic: false,
+  showBuilder: false,
+  toggleBuilder: () => {},
+}
+
 BuildForm.propTypes = {
+  HomeRef: PropTypes.arrayOf,
+  defaultLang: PropTypes.string,
+  isStatic: PropTypes.bool,
   showBuilder: PropTypes.bool,
   toggleBuilder: PropTypes.func,
-  HomeRef: PropTypes.object,
-  isStatic: PropTypes.bool,
-  defaultLang: PropTypes.string,
 }
 
 export default React.memo(BuildForm)
