@@ -28,6 +28,7 @@ class ClubHomePage extends Component {
         if (this.query)
             this.name = this.query.get("name")
 
+
         this.state={
             basicInformation : {
                 Name: "Demo Club",
@@ -50,7 +51,13 @@ class ClubHomePage extends Component {
 
     componentDidMount() {
         console.log(this.props.clubName)
-        // axios.get(backend+"/club/" + this.props.clubName)
+        var caller = null;
+        if(isBrowser())
+        {
+            caller = this.query.get("name");
+        }
+        console.log(caller,"hellooo")
+        // axios.get(backend+"/club/" + caller)
         //     .then((res) => {
         //         console.log("axios call executed")
         //         console.log(res)
