@@ -1,5 +1,6 @@
 import React from "react";
 // import './loading.css';
+import {loa} from './loading.module.css';
 
 function Loading () {
     return (
