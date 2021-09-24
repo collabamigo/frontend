@@ -132,6 +132,7 @@ export default function SortableContainer({
                                                       }
                                                     : null),
                                             }}
+                                            type="button"
                                         >
                                             {editIndex === index
                                                 ? generic.cancelEdit[
@@ -174,6 +175,7 @@ export default function SortableContainer({
                                                     }
                                                 }
                                             }}
+                                            type="button"
                                         >
                                             {generic.delete[currentLanguage]}
                                         </button>
@@ -203,6 +205,7 @@ export default function SortableContainer({
                         style={{
                             marginRight: 15,
                         }}
+                        type="button"
                     >
                         {generic.deleteAll[currentLanguage]}
                     </button>

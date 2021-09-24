@@ -18,10 +18,11 @@ function Popup({ message, top, iconOnly }) {
             <button
                 className={styles.button}
                 onClick={() => setTipShow(!tipShow)}
+                type="button"
             >
                 !
             </button>
-          
+
             <span>
                 <Animate
                     end={{
