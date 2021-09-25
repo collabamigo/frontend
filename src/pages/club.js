@@ -36,7 +36,7 @@ class ClubHomePage extends Component {
                 Name: "Tasveer",
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 tagline: "The Photography Society of IIITD",
-                description: "bleh bleh bleh * 2",
+                description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                 coordinators:[
                     {
                         name:"Tushar Singh",
@@ -55,7 +55,7 @@ class ClubHomePage extends Component {
                     website : "https://www.collabconnect.com/404",
                 },
                 joinDate:"26122020",
-                clubBanners:["https://via.placeholder.com/1280X480","https://via.placeholder.com/1280X480","https://via.placeholder.com/1280X480"]
+                clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"]
             }
         }
 
@@ -236,9 +236,6 @@ class ClubHomePage extends Component {
                                         />
 
                                         <Carousel.Caption>
-                                            <h6>
-                                                First slide label
-                                            </h6>
 
                                             <p>
                                                 Nulla vitae elit libero, a pharetra augue mollis interdum.
@@ -254,9 +251,6 @@ class ClubHomePage extends Component {
                                         />
 
                                         <Carousel.Caption>
-                                            <h6>
-                                                Second slide label
-                                            </h6>
 
                                             <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -272,9 +266,6 @@ class ClubHomePage extends Component {
                                         />
 
                                         <Carousel.Caption>
-                                            <h3>
-                                                Third slide label
-                                            </h3>
 
                                             <p>
                                                 Praesent commodo cursus magna, vel scelerisque nisl consectetur.
@@ -283,24 +274,53 @@ class ClubHomePage extends Component {
                                     </Carousel.Item>
                                 </Carousel>
 
+                                <br />
+
                                 <hr />
 
                                 <div className="d-flex">
-                                    <div className="col-4">
-                                        hello
+                                    <div className="col-5">
+                                        <div className="text-start h2">
+                                            Description
+                                        </div>
+
+                                        <p className="text-start h6">
+                                            {this.state.basicInformation.description}
+                                        </p>
 
                                     </div>
                                     
-                                    <div className="col-8">
-                                        hello
+                                    <div className="col-7">
+                                        <div className=" h2">
+                                            Updates
+                                        </div>
+
+                                        <div className="">
+                                            <ul className="">
+                                                <li >
+                                                    <span>
+                                                        hellloooo
+                                                    </span>
+                                                </li>
+
+                                                <li>
+                                                    <span>
+                                                        hellloooo
+                                                    </span>
+                                                </li>
+
+                                                <li>
+                                                    <span>
+                                                        hellloooo
+                                                    </span>
+                                                </li>
+                                            </ul>
+
+                                        </div>
                                     </div>
                                 </div>
 
-
-
-
                             </div>
-
                            
                         </Card.Body>
                     </Card>
