@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 // import axios from "utils/axios";
 // import backend from "../../env";
-import Image from 'react-bootstrap/Image'
+// import Image from 'react-bootstrap/Image'
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
-import {logo, clubName} from './club.module.css';
+// import {logo, clubName} from './club.module.css';
 import {isBrowser} from "../utils/auth";
 import {SvgIcon} from "../common/SvgIcon";
+// import Figure from 'react-bootstrap/Figure';
 
 
 function useQuery() {
@@ -103,7 +104,7 @@ class ClubHomePage extends Component {
                                     </Card.Title>
                                     
 
-                                    <Card.Subtitle className="pb-2">
+                                    <Card.Subtitle className=" text-start pb-2">
                                         {this.state.basicInformation.tagline}
                                     </Card.Subtitle>
 
@@ -162,7 +163,7 @@ class ClubHomePage extends Component {
                                         Coordinators :
                                     </Card.Title>
 
-                                    <ul>
+                                    <ul className="">
                                         <li className="text-start list-inline-item">
                                             <span>
                                                 {this.state.basicInformation.coordinators[0].name}
@@ -220,117 +221,87 @@ class ClubHomePage extends Component {
 
                 <div className="col-9">
                     <Card>
-                        <Card.Header>
-                            Quote
+                        <Card.Header className="text-start">
+                            About the Club
                         </Card.Header>
 
                         <Card.Body>
-                            <blockquote className="blockquote mb-0">
-                                <p>
-                                    {' '}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                            <div className="">
+                                <Carousel>
+                                    <Carousel.Item>
+                                        <img
+                                            alt="First slide"
+                                            className="d-block w-100"
+                                            src={this.state.basicInformation.clubBanners[0]}
+                                        />
 
-                                    erat a ante.
-                                    {' '}
-                                </p>
+                                        <Carousel.Caption>
+                                            <h6>
+                                                First slide label
+                                            </h6>
 
-                                <p>
-                                    {' '}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                                            <p>
+                                                Nulla vitae elit libero, a pharetra augue mollis interdum.
+                                            </p>
+                                        </Carousel.Caption>
+                                    </Carousel.Item>
 
-                                    erat a ante.
-                                    {' '}
-                                </p>
+                                    <Carousel.Item>
+                                        <img
+                                            alt="Second slide"
+                                            className="d-block w-100"
+                                            src={this.state.basicInformation.clubBanners[1]}
+                                        />
 
-                                <p>
-                                    {' '}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                                        <Carousel.Caption>
+                                            <h6>
+                                                Second slide label
+                                            </h6>
 
-                                    erat a ante.
-                                    {' '}
-                                </p>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                            </p>
+                                        </Carousel.Caption>
+                                    </Carousel.Item>
 
-                                <p>
-                                    {' '}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                                    <Carousel.Item>
+                                        <img
+                                            alt="Third slide"
+                                            className="d-block w-100"
+                                            src={this.state.basicInformation.clubBanners[2]}
+                                        />
 
-                                    erat a ante.
-                                    {' '}
-                                </p>
+                                        <Carousel.Caption>
+                                            <h3>
+                                                Third slide label
+                                            </h3>
 
-                                <p>
-                                    {' '}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                                            <p>
+                                                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                                            </p>
+                                        </Carousel.Caption>
+                                    </Carousel.Item>
+                                </Carousel>
 
-                                    erat a ante.
-                                    {' '}
-                                </p>
+                                <hr />
 
-                                <p>
-                                    {' '}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                                <div className="d-flex">
+                                    <div className="col-4">
+                                        hello
 
-                                    erat a ante.
-                                    {' '}
-                                </p>
+                                    </div>
+                                    
+                                    <div className="col-8">
+                                        hello
+                                    </div>
+                                </div>
 
-                                <p>
-                                    {' '}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
 
-                                    erat a ante.
-                                    {' '}
-                                </p>
 
-                                <p>
-                                    {' '}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
 
-                                    erat a ante.
-                                    {' '}
-                                </p>
+                            </div>
 
-                                <p>
-                                    {' '}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
-
-                                    erat a ante.
-                                    {' '}
-                                </p>
-
-                                <p>
-                                    {' '}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
-
-                                    erat a ante.
-                                    {' '}
-                                </p>
-
-                                <p>
-                                    {' '}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
-
-                                    erat a ante.
-                                    {' '}
-                                </p>
-
-                                <p>
-                                    {' '}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
-
-                                    erat a ante.
-                                    {' '}
-                                </p>
-
-                                <footer className="blockquote-footer">
-                                    Someone famous in 
-                                    {' '}
-
-                                    <cite title="Source Title">
-                                        Source Title
-                                    </cite>
-                                </footer>
-                            </blockquote>
+                           
                         </Card.Body>
                     </Card>
                 </div>
