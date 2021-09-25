@@ -32,10 +32,21 @@ class ClubHomePage extends Component {
 
         this.state={
             basicInformation : {
-                Name: "Demo Club",
-                logoLink: "https://via.placeholder.com/60X60",
-                tagline: "bleh bleh bleh",
+                Name: "Tasveer",
+                logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
+                tagline: "The Photography Society of IIITD",
                 description: "bleh bleh bleh * 2",
+                coordinators:[
+                    {
+                        name:"Tushar Singh",
+                        email:"heemankv@gmail.com",
+                    },
+                    {
+                        name:"Prutyuy Singh",
+                        email:"heemankv@gmail.com",
+                    },
+                ],
+                memberSize: 10,
                 socialmediaLink: {
                     instagram : "https://www.instagram.com/heemank_v",
                     linkedin : "https://www.linkedin.com/heemank_v",
@@ -82,7 +93,7 @@ class ClubHomePage extends Component {
                         <div className="row">
                             <Card style={{ width: '18rem' }}>
                                 <Card.Img
-                                    src="https://via.placeholder.com/400X400"
+                                    src={this.state.basicInformation.logoLink}
                                     variant="top"
                                 />
 
@@ -95,6 +106,8 @@ class ClubHomePage extends Component {
                                     <Card.Subtitle className="pb-2">
                                         {this.state.basicInformation.tagline}
                                     </Card.Subtitle>
+
+                                    <br />
 
                                     <div className="col">
                                         <Card.Link
@@ -145,26 +158,60 @@ class ClubHomePage extends Component {
                         <div className="row">
                             <Card style={{ width: '18rem' }}>
                                 <Card.Body>
-                                    <Card.Title>
-                                        Card Title
+                                    <Card.Title className="text-start h1 pb-2">
+                                        Coordinators :
                                     </Card.Title>
 
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                        Card Subtitle
-                                    </Card.Subtitle>
+                                    <ul>
+                                        <li className="text-start list-inline-item">
+                                            <span>
+                                                {this.state.basicInformation.coordinators[0].name}
 
-                                    <Card.Text>
-                                        Some quick example text to build on the card title and make up the bulk of
-                                        the cards content.
+                                                {" "}
+
+                                                <SvgIcon
+                                                    height="20px"
+                                                    src="github.svg"
+                                                    width="20px"
+                                                />
+
+
+                                            </span>
+                                        </li>
+
+                                        <li className="text-start list-inline-item">
+                                            <span>
+                                                {this.state.basicInformation.coordinators[1].name}
+                                                
+                                                {" "}
+
+                                                <SvgIcon
+                                                    height="20px"
+                                                    src="github.svg"
+                                                    width="20px"
+                                                />
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    {/* <Card.Subtitle className="mb-2 text-muted">
+                                        Card Subtitle
+                                    </Card.Subtitle> */}
+
+                                    <Card.Text className="text-start h6">
+                                        Member Size : 
+                                        {' '}
+
+                                        {this.state.basicInformation.memberSize}
                                     </Card.Text>
 
-                                    <Card.Link href="#">
+                                    {/* <Card.Link href="#">
                                         Card Link
                                     </Card.Link>
 
                                     <Card.Link href="#">
                                         Another Link
-                                    </Card.Link>
+                                    </Card.Link> */}
                                 </Card.Body>
                             </Card>
                         </div>
