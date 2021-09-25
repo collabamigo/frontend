@@ -9,7 +9,6 @@ import {isMobile} from "react-device-detect";
 // import ClubDashboard from "../components/ClubDasboard";
 import {SvgIcon} from "common/SvgIcon";
 
-
 import {checkLoginStatus} from "../utils/auth";
 
 export default class AuthenticatedHome extends React.Component {

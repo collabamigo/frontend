@@ -10,7 +10,6 @@ export default class Clublist extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            
             next:3,
             arrayForHoldingboxes : [],
             boxesPerPage: 3
@@ -32,20 +31,15 @@ export default class Clublist extends Component {
             arrayForHoldingboxes: prevState.arrayForHoldingboxes.concat(this.props.clubList.slice(start, end)) }))
         
         // this.setState((prevState) => ({ boxesToShow: prevState.arrayForHoldingboxes }))
-
         // this.setState({arrayForHoldingboxes:this.state.arrayForHoldingboxes.concat(this.props.clubList.slice(start, end))})
         // this.setState({boxesToShow:this.state.arrayForHoldingboxes})
       }
 
-
     handleShowMoreboxes(){
         this.setState((prevState) => ({ next: prevState.next + prevState.boxesPerPage }))
-
         this.loopWithSlice(this.state.next, this.state.next + this.state.boxesPerPage);
         // this.setState({next:this.state.next + this.state.boxesPerPage});
     }
-
-
     render() {
         console.log(this.props.clubList, "ewww")
         return (
