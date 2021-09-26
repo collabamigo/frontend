@@ -1,6 +1,6 @@
 import React  from 'react';
 
-export function Pathfinders() {
+export default function Pathfinders() {
         return (
             <div />
         )
