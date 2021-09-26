@@ -45,7 +45,7 @@ export default class ClubCard extends Component {
             <div className="col-sm-6 col-lg-4 mb-3">
                 <div className=" mb-3 h-100">
                     <Link to={clublink}>
-                        <Button 
+                        <Button
                             className="btn"
                             type="button"
                         >
@@ -53,7 +53,7 @@ export default class ClubCard extends Component {
                             <Image
                                 className={logo}
                                 fluid
-                                src={this.props.element.logo}
+                                src={this.props.element.picture}
                             />
 
                             <h5 className="">

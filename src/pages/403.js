@@ -1,10 +1,9 @@
 
 import React from "react";
-import Layout from "../components/Layout";
 
 export default function Unauthorized() {
     return (
-        <Layout>
+        <>
             <h6 className="row justify-content-center m-2">
                 ERROR: This page is not meant to be directly accessed.
             </h6>
@@ -24,6 +23,6 @@ export default function Unauthorized() {
                     Sign in to continue
                 </a>
             </div>
-        </Layout>
+        </>
     )
 }
