@@ -39,41 +39,41 @@ export default class Event extends React.Component{
 
                         <div className="col d-flex flex-column">
                             <div className="">
-                                <Card.Title className="flex-column">
-                                    <div className="d-flex justify-content-between">
+                                <Card.Title className="">
+                                    <div className="">
                                         <h1 className="">
                                             Title
                                             {' '}
                                         </h1>
                                     
 
-                                    <div>
-                                        <span>
-                                            Date & Time 
-                                            {" "}
-                                        </span>
+                                        <div>
+                                            <span>
+                                                Date & Time 
+                                                {" "}
+                                            </span>
 
-                                        <span>
-                                            Location 
-                                        </span>
-                                    </div>
+                                            <span>
+                                                Location 
+                                            </span>
+                                        </div>
                                     </div>
                                 </Card.Title>
 
-                                <div className="d-flex flex-grow-1">
-                                    <div className="col-8">
-                                        <div className="text-start h2">
+                                <div className="">
+                                    <div className="">
+                                        <div className="">
                                             Description
                                         </div>
 
-                                        <p className="text-start h6">
+                                        <p className="">
                                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                                         </p>
 
                                     </div>
                                     
-                                    <div className="col-4">
-                                        <div className=" h2">
+                                    <div className="">
+                                        <div className="">
                                             TL;DR
                                         </div>
 
@@ -103,23 +103,23 @@ export default class Event extends React.Component{
                                 </div>
 
                                 
-                                <div className="d-flex justify-content-around ">
+                                <div className="">
                                     <Link
-                                        className="col-2 btn btn-primary"
+                                        className=""
                                         to="/help"
                                     >
                                         Hmm
                                     </Link>
 
                                     <Link
-                                        className="col-6 btn btn-primary"
+                                        className=""
                                         to="/help"
                                     >
                                         Participate
                                     </Link>
 
                                     <Link
-                                        className="col-2 btn btn-primary"
+                                        className=""
                                         to="/help"
                                     >
                                         FaQ
