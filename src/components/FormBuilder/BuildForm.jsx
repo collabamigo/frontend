@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import SortableContainer from "./SortableContainer";
 import { useStateMachine } from "little-state-machine";
 // import { navigate } from "@reach/router"
-import colors from "../styles/colors";
-import generateCode from "./logic/generateCode";
+import colors from "../../styles/colors";
+import generateCode from "../LogicFormBuilder/GenerateCode";
 // import copyClipBoard from "./utils/copyClipBoard"
 // import Footer from "./Footer"
 import Popup from "./Popup";
@@ -15,9 +15,9 @@ import Popup from "./Popup";
 import builder from "./data/builder";
 import generic from "./data/generic"
 // import translateLink from "../LogicFormBuilder/translateLink"
-import * as buttonStyles from "../styles/button.module.css"
-import * as containerStyles from "../styles/container.module.css"
-import * as typographyStyles from "../styles/typography.module.css";
+import * as buttonStyles from "../../styles/button.module.css"
+import * as containerStyles from "../../styles/container.module.css"
+import * as typographyStyles from "../../styles/typography.module.css";
 import * as styles from "./BuildForm.module.css";
 import CodeArea from "./CodeArea";
 

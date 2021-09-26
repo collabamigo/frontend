@@ -2,7 +2,7 @@ import * as React from "react"
 // import copyClipBoard from "./utils/copyClipBoard"
 import { useStateMachine } from "little-state-machine"
 // import generic from "./FormBuilder/data/generic"
-import Prism from "prismjs"
+// import Prism from "prismjs"
 import * as styles from "./CodeArea.module.css"
 import PropTypes from "prop-types";
 
@@ -93,14 +93,14 @@ export default function CodeArea({
   const { currentLanguage } =
     language && language.currentLanguage ? language : { currentLanguage: "en" }
 
-  React.useEffect(() => {
-    const highlight = async () => {
-      if (codeAreaRef.current) {
-        Prism.highlightAllUnder(codeAreaRef.current)
-      }
-    }
-    highlight()
-  }, [])
+  // React.useEffect(() => {
+  //   const highlight = async () => {
+  //     if (codeAreaRef.current) {
+  //       Prism.highlightAllUnder(codeAreaRef.current)
+  //     }
+  //   }
+  //   highlight()
+  // }, [])
 
   return (
       <section

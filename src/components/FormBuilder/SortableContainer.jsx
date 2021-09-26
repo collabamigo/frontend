@@ -2,8 +2,8 @@ import * as React from "react";
 import Sortable from "react-sortablejs";
 import { Animate } from "react-simple-animate";
 import PropTypes from "prop-types";
-import colors from "../styles/colors";
-import generic from "../data/generic";
+import colors from "../../styles/colors";
+import generic from "./data/generic";
 import {
     editPanel,
     list,
