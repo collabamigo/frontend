@@ -2,21 +2,22 @@
 import React from "react"
 import Card from "react-bootstrap/Card";
 import "./event.module.css";
+import Link from "common/Link";
 
 
 export default class Event extends React.Component{
     constructor(props) {
         super(props)
 
-        this.state={
-            basicInformation : {
-                Name: "Event Name",
-                logoLink: "https://via.placeholder.com/60X60",
-                poster: "https://via.placeholder.com/640X640",
-                description: "bleh bleh bleh",
-                clubName: "Club Name"
-            }
-        }
+        // this.state={
+        //     basicInformation : {
+        //         Name: "Event Name",
+        //         logoLink: "https://via.placeholder.com/60X60",
+        //         poster: "https://via.placeholder.com/640X640",
+        //         description: "bleh bleh bleh",
+        //         clubName: "Club Name"
+        //     }
+        // }
     }
 
     shouldComponentUpdate() {
@@ -26,6 +27,120 @@ export default class Event extends React.Component{
     render() {
         return (
             <div className="container-fluid">
+                <Card>
+                    <div className="row no-gutters">
+                        <div className="col-auto">
+                            <img
+                                alt=""
+                                className="img-fluid"
+                                src="//placehold.it/500"
+                            />
+                        </div>
+
+                        <div className="col d-flex flex-column">
+                            <div className="">
+                                <Card.Title className="flex-column">
+                                    <div className="d-flex justify-content-between">
+                                        <h1 className="">
+                                            Title
+                                            {' '}
+                                        </h1>
+                                    
+
+                                    <div>
+                                        <span>
+                                            Date & Time 
+                                            {" "}
+                                        </span>
+
+                                        <span>
+                                            Location 
+                                        </span>
+                                    </div>
+                                    </div>
+                                </Card.Title>
+
+                                <div className="d-flex flex-grow-1">
+                                    <div className="col-8">
+                                        <div className="text-start h2">
+                                            Description
+                                        </div>
+
+                                        <p className="text-start h6">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                                        </p>
+
+                                    </div>
+                                    
+                                    <div className="col-4">
+                                        <div className=" h2">
+                                            TL;DR
+                                        </div>
+
+                                        <div className="">
+                                            <ul className="">
+                                                <li >
+                                                    <span>
+                                                        hellloooo
+                                                    </span>
+                                                </li>
+
+                                                <li>
+                                                    <span>
+                                                        hellloooo
+                                                    </span>
+                                                </li>
+
+                                                <li>
+                                                    <span>
+                                                        hellloooo
+                                                    </span>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <div className="d-flex justify-content-around ">
+                                    <Link
+                                        className="col-2 btn btn-primary"
+                                        to="/help"
+                                    >
+                                        Hmm
+                                    </Link>
+
+                                    <Link
+                                        className="col-6 btn btn-primary"
+                                        to="/help"
+                                    >
+                                        Participate
+                                    </Link>
+
+                                    <Link
+                                        className="col-2 btn btn-primary"
+                                        to="/help"
+                                    >
+                                        FaQ
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* <div className="card-footer w-100 text-muted">
+                        Footer stating cats are CUTE little animals
+                    </div> */}
+                </Card>
+
+            </div>
+            
+    )
+    }
+}
+
+{/* <div className="container-fluid">
                 <hr />
 
                 <Card>
@@ -143,7 +258,4 @@ export default class Event extends React.Component{
                     </div>
                 </Card>
 
-            </div>
-    )
-    }
-}
+            </div> */}

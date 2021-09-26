@@ -292,7 +292,7 @@ class ClubHomePage extends Component {
                                     
                                     <div className="col-7">
                                         <div className=" h2">
-                                            Updates
+                                            Announcements
                                         </div>
 
                                         <div className="">
