@@ -25,10 +25,10 @@ export default class Event extends React.Component{
 
     render() {
         return (
-            <div>
+            <div className="container-fluid">
                 <hr />
 
-                <section>
+                <Card>
                     <div>
                         <div className="d-flex justify-content-around flex-wrap">
                             <div>
@@ -141,7 +141,7 @@ export default class Event extends React.Component{
 
                         <br />
                     </div>
-                </section>
+                </Card>
 
             </div>
     )
