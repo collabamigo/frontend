@@ -1,16 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React  from 'react';
 
-export default class Pathfinders extends Component {
-    static propTypes = {
-        prop: PropTypes
-    }
-
-    render() {
+export function Pathfinders() {
         return (
-            <div>
-                
-            </div>
+            <div />
         )
-    }
 }
