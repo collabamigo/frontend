@@ -29,7 +29,7 @@ class HelpForm extends React.Component{
     }
 
     componentDidMount() {
-        axios.get(backend+"connect/profile/").then(
+        axios.get("connect/profile/").then(
             (res) => this.setState({
                 handle: res.data[0].handle
             })
@@ -83,7 +83,7 @@ class HelpForm extends React.Component{
         this.setState({
             isLoading: true
         })
-        axios.post(backend+"connect/teacher/",{
+        axios.post("connect/teacher/",{
             Contact: (this.state.Contact === undefined)?0:parseInt(this.state.Contact.slice(1)),
             Gitname: this.state.Github,
             Linkedin: this.state.Linkedin,

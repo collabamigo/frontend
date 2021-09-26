@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
 import {SvgIcon} from "../../../common/SvgIcon";
 import { Doughnut } from "react-chartjs-2";
-import backend from "../../../env";
 import axios from "utils/axios";
 import Odal from "./modaldelete";
 import Oadd from "./modaladd";
@@ -85,7 +84,7 @@ class DashBoard extends React.Component {
     }
 
     handleGet() {
-        axios.get(backend+"connect/statistics/skills")
+        axios.get("connect/statistics/skills")
             .then((res) => {
                 this.setState({trendingSkills:res.data})}
             )
@@ -103,7 +102,7 @@ class DashBoard extends React.Component {
     handleDoughnut () {
         if (this.props.upvote > 0 || this.props.downvote>0){
             return(
-                <Doughnut 
+                <Doughnut
                     cutoutPercentage={50}
                     data={this.state.dataDoughnut}
                     options={{ responsive: true, maintainAspectRatio: false}}
@@ -120,7 +119,7 @@ class DashBoard extends React.Component {
             )
         }
     }
-    
+
     handlePieChart(){
         if (this.props.help_history.length > 0) {
             return(
@@ -186,7 +185,7 @@ class DashBoard extends React.Component {
 
                                             <blockquote className="blockquote text-center ps-5">
                                                 <p className="mb-0">
-                                                    “I think goals should never be easy, they should force you to work, even if they are uncomfortable at the time.”  
+                                                    “I think goals should never be easy, they should force you to work, even if they are uncomfortable at the time.”
                                                 </p>
 
                                                 <footer className="blockquote-footer">
@@ -195,7 +194,7 @@ class DashBoard extends React.Component {
                                                     </cite>
                                                 </footer>
                                             </blockquote>
-                                        </div>                                     
+                                        </div>
                                     </div>
 
                                     <div className={'col-md-4 pt-4' + ' ' + displayPic}>
@@ -249,7 +248,7 @@ class DashBoard extends React.Component {
                                             {this.props.created.slice(0,4)}
 
                                         </small>
-                                    </h4>   
+                                    </h4>
                                 </Card.Footer>
                             </Card>
                         </div>
@@ -277,14 +276,14 @@ class DashBoard extends React.Component {
                                     </Card.Header>
 
                                     <Card.Body className="card-body col-md-12 mt-4 overflow-auto">
-                                    
+
 
                                         {this.state.trendingSkills.map(item => (
                                             <div
                                                 className={'col-auto container-fluid' + ' ' + lool}
                                                 key={item}
                                             >
-                                                <ol 
+                                                <ol
                                                     className="list-group mt-1"
                                                     key={item}
                                                 >
@@ -329,7 +328,7 @@ class DashBoard extends React.Component {
                                     </Card.Header>
 
                                     <Card.Body className="overflow-auto">
-                                    
+
 
                                         {this.props.skills.map(item => (
                                             <div
@@ -357,7 +356,7 @@ class DashBoard extends React.Component {
                                             </div>
                                         ))}
 
-                                    
+
                                     </Card.Body>
                                 </Card>
 
