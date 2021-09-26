@@ -1,6 +1,6 @@
 import * as React from "react"
 import CodeArea from "../../components/CodeArea"
-import { Link as PageLink } from "gatsby"
+import PageLink from "common/Link"
 import accessibleCodeBase from "../../components/codeExamples/accessibleCodeBase"
 import accessibleCodeFinal from "../../components/codeExamples/accessibleCodeFinal"
 import { step1, step2, step3 } from "../../components/codeExamples/formWizard"

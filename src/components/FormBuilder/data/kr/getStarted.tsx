@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link } from "gatsby"
+import Link from "common/Link"
 import translateLink from "../../components/logic/translateLink"
 
 import * as typographyStyles from "../../styles/typography.module.css"

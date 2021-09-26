@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link } from "gatsby"
+import Link from "common/Link"
 import colors from "../../../styles/colors"
 import Popup from "../../../components/Popup"
 import CodeArea from "../../../components/CodeArea"
