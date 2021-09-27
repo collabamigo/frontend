@@ -347,16 +347,14 @@ class ClubHomePage extends Component {
                     <Card className="">
                         <Card.Body className="mt-3">
                             <Card.Title className="card-title fw-bold header-color text-left">
-                                Associated Clubs
+                                Events
                             </Card.Title>
 
                             <br />
 
                             <Card.Text className="card-text h5 text-muted">
                                 <div>
-                                    Find new projects to work. Apply for teams
-                                    and Collaborations. Lets keep the learning
-                                    and helping community alive.ggffyyfyt
+                                    skdjnljknsdnLVNlnSDVNLSDVlNSDVNkjNKDSL alive.ggffyyfyt
                                 </div>
 
                                 <br />
