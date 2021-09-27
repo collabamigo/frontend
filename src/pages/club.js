@@ -315,12 +315,20 @@ class ClubHomePage extends Component {
                                         <div className="">
                                             <ul className="">
                                                 <li >
+                                                    <span className="material-icons-outlined">
+                                                        notifications
+                                                    </span>
+
                                                     <span>
                                                         hellloooo
                                                     </span>
                                                 </li>
 
                                                 <li>
+                                                    <span className="material-icons-outlined">
+                                                        last_page
+                                                    </span>
+
                                                     <span>
                                                         hellloooo
                                                     </span>
