@@ -104,7 +104,7 @@ class ClubHomePage extends Component {
 
 
         return (
-            <div className="row">
+            <div className="row m-1">
                 <div className="col-3 d-flex justify-content-around">
                     <div className="position-fixed">
                         <div className="row">
