@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button';
 import Boxes from './Boxes.js';
 
-export default class Clublist extends Component {
+export default class ItemList extends Component {
     static propTypes = {
-        clubList: PropTypes.arrayOf(PropTypes.string).isRequired,
+        ItemList: PropTypes.arrayOf(PropTypes.string).isRequired,
+        Type: PropTypes.string.isRequired,
     }
     constructor(props) {
         super(props)
@@ -28,10 +29,10 @@ export default class Clublist extends Component {
     loopWithSlice(start, end){
 
         this.setState((prevState) => ({ 
-            arrayForHoldingboxes: prevState.arrayForHoldingboxes.concat(this.props.clubList.slice(start, end)) }))
+            arrayForHoldingboxes: prevState.arrayForHoldingboxes.concat(this.props.ItemList.slice(start, end)) }))
         
         // this.setState((prevState) => ({ boxesToShow: prevState.arrayForHoldingboxes }))
-        // this.setState({arrayForHoldingboxes:this.state.arrayForHoldingboxes.concat(this.props.clubList.slice(start, end))})
+        // this.setState({arrayForHoldingboxes:this.state.arrayForHoldingboxes.concat(this.props.ItemList.slice(start, end))})
         // this.setState({boxesToShow:this.state.arrayForHoldingboxes})
       }
 
@@ -41,11 +42,14 @@ export default class Clublist extends Component {
         // this.setState({next:this.state.next + this.state.boxesPerPage});
     }
     render() {
-        console.log(this.props.clubList, "ewww")
+        console.log(this.props.ItemList, "ewww")
         return (
             <div>
-                {this.props.clubList.length>0 ?
-                    <Boxes boxesToRender={this.state.arrayForHoldingboxes} />
+                {this.props.ItemList.length>0 ?
+                    <Boxes
+                        Type={this.props.Type}
+                        boxesToRender={this.state.arrayForHoldingboxes}
+                    />
                     : null}
 
                 <Button onClick={this.handleShowMoreboxes}>

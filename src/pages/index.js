@@ -191,7 +191,10 @@ export default class AuthenticatedHome extends React.Component {
                                     <br />
 
                                     <div>
-                                        <Clublist clubList={this.state.clubList} />
+                                        <Clublist 
+                                            ItemList={this.state.clubList} 
+                                            Type="Club"    
+                                        />
                                     </div>
                                 </Card.Text>
                             </Card.Body>

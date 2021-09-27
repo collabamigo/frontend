@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 export default class Boxes extends Component {
     static propTypes = {
+        Type: PropTypes.string.isRequired,
         boxesToRender : PropTypes.arrayOf(PropTypes.string).isRequired,
     }
 
@@ -19,6 +20,7 @@ export default class Boxes extends Component {
                     <div className="row">
                         {this.props.boxesToRender.map((boxdata) => (
                             <ClubCard
+                                Type={this.props.Type}
                                 element={boxdata}
                                 key={boxdata}
                             />
