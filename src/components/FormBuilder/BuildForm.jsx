@@ -565,7 +565,8 @@ BuildForm.defaultProps = {
 };
 
 BuildForm.propTypes = {
-    HomeRef: PropTypes.arrayOf,
+    // eslint-disable-next-line react/forbid-prop-types
+    HomeRef: PropTypes.array,
     defaultLang: PropTypes.string,
     isStatic: PropTypes.bool,
     showBuilder: PropTypes.bool,
