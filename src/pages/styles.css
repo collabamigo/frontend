@@ -14,10 +14,6 @@ code {
   monospace;
 }
 
-@font-face {
-  font-display: swap;
-}
-
 
 #root {
   height: 100%;
