@@ -21,7 +21,7 @@ export default function Header({ isAuthenticated }) {
 
 
     return (
-        <div className="mt-3 me-2 mb-3 ms-2 sticky-top bg-white">
+        <div className="mt-3 me-2 mb-3 ms-2 sticky-top bg-white w-100">
             <div className="container-fluid">
                 <div className=" row justify-content-center">
                     <div className="col-auto ms-5">
