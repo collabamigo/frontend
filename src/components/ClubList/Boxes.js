@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 export default class Boxes extends Component {
     static propTypes = {
         Type: PropTypes.string.isRequired,
-        boxesToRender : PropTypes.arrayOf(PropTypes.string).isRequired,
+        boxesToRender : PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
     }
 
-    shouldComponentUpdate () 
+    shouldComponentUpdate ()
     {return true;}
 
     render() {
