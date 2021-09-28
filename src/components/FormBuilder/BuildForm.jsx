@@ -30,10 +30,10 @@ const updateStore = (state, payload) => {
     };
 };
 
-// const errorStyle = {
-//   border: `1px solid ${colors.secondary}`,
-//   background: colors.errorPink,
-// }
+const errorStyle = {
+  border: `1px solid ${colors.secondary}`,
+  background: colors.errorPink,
+}
 
 const defaultValue = {
     max: undefined,
@@ -49,7 +49,6 @@ const defaultValue = {
 
 function BuildForm({
     showBuilder,
-    toggleBuilder,
     isStatic,
     defaultLang,
 }) {

@@ -28,7 +28,7 @@ export default class Clublist extends Component {
     {return true;}
 
     componentDidUpdate() {
-        if (this.props.clubList.length != 0 && this.state.initial) {
+        if (this.props.ItemList.length !== 0 && this.state.initial) {
             this.loopWithSlice(0, this.state.boxesPerPage);
         }
     }

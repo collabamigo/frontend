@@ -1,6 +1,5 @@
 import * as React from "react"
 // import copyClipBoard from "./utils/copyClipBoard"
-import { useStateMachine } from "little-state-machine"
 // import generic from "./FormBuilder/data/generic"
 // import Prism from "prismjs"
 import * as styles from "./CodeArea.module.css"
@@ -69,9 +68,6 @@ export default function CodeArea({
   isExpo,
   style,
 }) {
-  const {
-    state: { language },
-  } = useStateMachine()
   const [currentType, setType] = React.useState(
     (rawData && ToggleTypes.js) ||
       (tsRawData && ToggleTypes.ts) ||
@@ -90,9 +86,6 @@ export default function CodeArea({
         return rawTypes
     }
   }
-
-  const { currentLanguage } =
-    language && language.currentLanguage ? language : { currentLanguage: "en" }
 
   // React.useEffect(() => {
   //   const highlight = async () => {

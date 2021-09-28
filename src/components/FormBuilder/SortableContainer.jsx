@@ -218,7 +218,6 @@ export default function SortableContainer({
 SortableContainer.defaultProps = {
     currentLanguage: "en",
     editIndex: -1,
-    formData: null,
     reset: () => { },
     setEditIndex: () => { },
     setFormData: () => { },
