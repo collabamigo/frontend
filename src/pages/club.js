@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import axios from "utils/axios";
 // import backend from "../../env";
 // import Image from 'react-bootstrap/Image'
+import Clublist from 'components/ClubList/ClubList.js';
+
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
@@ -55,7 +57,21 @@ class ClubHomePage extends Component {
                     website : "https://www.collabconnect.com/404",
                 },
                 joinDate:"26122020",
-                clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"]
+                clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"],
+                eventList: [
+                    {name: "Event1", logo: "https://via.placeholder.com/70X70"},
+                    {name: "Event2", logo: "https://via.placeholder.com/70X70"},
+                    {name: "Event3", logo: "https://via.placeholder.com/70X70"},
+                    {name: "Event3", logo: "https://via.placeholder.com/70X70"},
+                    {name: "Event4", logo: "https://via.placeholder.com/70X70"},
+                    {name: "Event5", logo: "https://via.placeholder.com/70X70"},
+                    {name: "Event6", logo: "https://via.placeholder.com/70X70"},
+                    {name: "Event7", logo: "https://via.placeholder.com/70X70"},
+                    {name: "Event8", logo: "https://via.placeholder.com/70X70"},
+                    {name: "Event9", logo: "https://via.placeholder.com/70X70"},
+                    {name: "Event10", logo: "https://via.placeholder.com/70X70"},
+                    {name: "Event11", logo: "https://via.placeholder.com/70X70"},
+                ],
             }
         }
 
@@ -88,9 +104,9 @@ class ClubHomePage extends Component {
 
 
         return (
-            <div className="row">
+            <div className="row m-1">
                 <div className="col-3 d-flex justify-content-around">
-                    <div className="">
+                    <div className="position-fixed">
                         <div className="row">
                             <Card style={{ width: '18rem' }}>
                                 <Card.Img
@@ -221,6 +237,7 @@ class ClubHomePage extends Component {
 
                 <div className="col-9">
                     <Card>
+
                         <Card.Header className="text-start">
                             About the Club
                         </Card.Header>
@@ -298,12 +315,20 @@ class ClubHomePage extends Component {
                                         <div className="">
                                             <ul className="">
                                                 <li >
+                                                    <span className="material-icons-outlined">
+                                                        notifications
+                                                    </span>
+
                                                     <span>
                                                         hellloooo
                                                     </span>
                                                 </li>
 
                                                 <li>
+                                                    <span className="material-icons-outlined">
+                                                        last_page
+                                                    </span>
+
                                                     <span>
                                                         hellloooo
                                                     </span>
@@ -324,8 +349,43 @@ class ClubHomePage extends Component {
                            
                         </Card.Body>
                     </Card>
-                </div>
+                                    
+                    <br />
 
+                    <Card className="">
+                        <Card.Body className="mt-3">
+                            <Card.Title className="card-title fw-bold header-color text-left">
+                                Events
+                            </Card.Title>
+
+                            <br />
+
+                            <Card.Text className="card-text h5 text-muted">
+                                <div>
+                                    skdjnljknsdnLVNlnSDVNLSDVlNSDVNkjNKDSL alive.ggffyyfyt
+                                </div>
+
+                                <br />
+
+                                <br />
+
+                                <div>
+                                    <Clublist 
+                                        ItemList={this.state.basicInformation.eventList}
+                                        Type="Event"
+                                    />
+                                </div>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+
+                    <br />
+
+                    <br />
+
+                    <br />
+
+                </div>
 
             </div>
             

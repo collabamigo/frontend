@@ -1,8 +1,9 @@
 import Link from "common/Link";
 import Card from "react-bootstrap/Card";
-import Clublist from 'components/ClubList/ClubList.js';
+import ClubList from 'components/ClubList/ClubList.js';
 import React from "react";
 import axios from "utils/axios";
+import FormBuilder from "components/FormBuilder/BuildForm";
 import backend from "env";
 import {Fade} from "react-awesome-reveal";
 import {isMobile} from "react-device-detect";
@@ -22,24 +23,31 @@ export default class AuthenticatedHome extends React.Component {
                 "Solve other's doubts and be the mentor you always wanted.\n" +
                 "Using our platform you can reach a larger community.",
             clubList: [
-                {name: "Tasveer", logo: "https://via.placeholder.com/70X70"},
-                {name: "MicDrop", logo: "https://via.placeholder.com/70X70"},
-                {name: "Byld", logo: "https://via.placeholder.com/70X70"},
-                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
-                {name: "Litsoc", logo: "https://via.placeholder.com/70X70"},
-                {name: "Meraki", logo: "https://via.placeholder.com/70X70"},
-                {name: "MUSE", logo: "https://via.placeholder.com/70X70"},
-                {name: "Philsoc", logo: "https://via.placeholder.com/70X70"},
-                {name: "Electroholics", logo: "https://via.placeholder.com/70X70"},
-                {name: "Cyborg", logo: "https://via.placeholder.com/70X70"},
-                {name: "Astronuts", logo: "https://via.placeholder.com/70X70"},
-                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
+                // {name: "Tasveer", logo: "https://via.placeholder.com/70X70"},
+                // {name: "MicDrop", logo: "https://via.placeholder.com/70X70"},
+                // {name: "Byld", logo: "https://via.placeholder.com/70X70"},
+                // {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
+                // {name: "Litsoc", logo: "https://via.placeholder.com/70X70"},
+                // {name: "Meraki", logo: "https://via.placeholder.com/70X70"},
+                // {name: "MUSE", logo: "https://via.placeholder.com/70X70"},
+                // {name: "Philsoc", logo: "https://via.placeholder.com/70X70"},
+                // {name: "Electroholics", logo: "https://via.placeholder.com/70X70"},
+                // {name: "Cyborg", logo: "https://via.placeholder.com/70X70"},
+                // {name: "Astronuts", logo: "https://via.placeholder.com/70X70"},
+                // {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
             ],
         };
     }
 
     async componentDidMount() {
         if (await checkLoginStatus())
+        axios.get(backend + "club/club").then((res) => {
+            let clubLists = [];
+            for (let i = 0; i < res.data.length; i++) {
+                clubLists.push(res.data[i]);
+            }
+            this.setState({clubList: clubLists});
+        });
         axios.get(backend + "connect/teacher?format=json").then((res) => {
             if (res.data.length)
                 this.setState({
@@ -191,13 +199,20 @@ export default class AuthenticatedHome extends React.Component {
                                     <br />
 
                                     <div>
-                                        <Clublist clubList={this.state.clubList} />
+                                        <ClubList
+                                            ItemList={this.state.clubList}
+                                            Type="Club"
+                                        />
                                     </div>
                                 </Card.Text>
                             </Card.Body>
                         </Card>
                     </Fade>
 
+                </div>
+
+                <div>
+                    <FormBuilder />
                 </div>
             </div>
         );
