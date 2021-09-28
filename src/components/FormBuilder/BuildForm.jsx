@@ -50,7 +50,6 @@ const defaultValue = {
 function BuildForm({
     showBuilder,
     toggleBuilder,
-    HomeRef,
     isStatic,
     defaultLang,
 }) {
@@ -72,6 +71,12 @@ function BuildForm({
         setValue,
         reset,
     } = useForm();
+    console.log("bigtest",register,
+        handleSubmit,
+        errors,
+        watch,
+        setValue,
+        reset,)
     const [editIndex, setEditIndex] = useState(-1);
     const copyFormData = useRef([]);
     const closeButton = useRef(null);
@@ -557,7 +562,6 @@ function BuildForm({
 }
 
 BuildForm.defaultProps = {
-    HomeRef: [],
     defaultLang: "en",
     isStatic: false,
     showBuilder: false,
@@ -565,8 +569,6 @@ BuildForm.defaultProps = {
 };
 
 BuildForm.propTypes = {
-    // eslint-disable-next-line react/forbid-prop-types
-    HomeRef: PropTypes.array,
     defaultLang: PropTypes.string,
     isStatic: PropTypes.bool,
     showBuilder: PropTypes.bool,

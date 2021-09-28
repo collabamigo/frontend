@@ -5,6 +5,7 @@ import { useStateMachine } from "little-state-machine"
 // import Prism from "prismjs"
 import * as styles from "./CodeArea.module.css"
 import PropTypes from "prop-types";
+import {useRef} from "react";
 
 export function CodeSandBoxLink({
   url,
@@ -76,7 +77,7 @@ export default function CodeArea({
       (tsRawData && ToggleTypes.ts) ||
       ToggleTypes.types
   )
-  const codeAreaRef = React.useRef<HTMLDivElement | null>(null)
+  const codeAreaRef = useRef(null)
 
   // eslint-disable-next-line no-unused-vars
   const getData = () => {

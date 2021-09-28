@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Sortable from "react-sortablejs";
 import { Animate } from "react-simple-animate";
 import PropTypes from "prop-types";
@@ -228,7 +228,7 @@ SortableContainer.defaultProps = {
 SortableContainer.propTypes = {
   currentLanguage: PropTypes.string,
   editIndex: PropTypes.number,
-  formData: PropTypes.arrayOf,
+  formData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool]))).isRequired,
   reset: PropTypes.func,
   setEditIndex: PropTypes.func,
   setFormData: PropTypes.func,
