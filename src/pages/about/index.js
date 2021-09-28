@@ -53,7 +53,7 @@ class AboutUs extends React.Component {
                                                 Aditya Pratap Singh
                                             </h4>
 
-                                            <h5 className={subtitle + " pt-2"}>
+                                            <h5 className={subtitle + ' ' + 'pt-2'}>
                                                 Co - Founder
                                             </h5>
 
@@ -150,7 +150,7 @@ class AboutUs extends React.Component {
                                                 Heemank Verma
                                             </h4>
 
-                                            <h5 className="subtitle pt-2">
+                                            <h5 className={subtitle + ' ' + 'pt-2'}>
                                                 Co - Founder
                                             </h5>
 
@@ -245,7 +245,7 @@ class AboutUs extends React.Component {
                                                 Shikhar Sharma
                                             </h4>
 
-                                            <h5 className="subtitle pt-2">
+                                            <h5 className={subtitle + ' ' +  'pt-2'}>
                                                 Co - Founder
                                             </h5>
 

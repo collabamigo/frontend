@@ -1,7 +1,6 @@
-
 import React from "react"
 import Card from "react-bootstrap/Card";
-import "./event.module.css";
+import {eventName, logo, poster} from './event.module.css';
 import Link from "common/Link";
 
 
@@ -103,23 +102,23 @@ export default class Event extends React.Component{
                                 </div>
 
                                 
-                                <div className="">
+                                <div className="d-flex justify-content-around ">
                                     <Link
-                                        className=""
+                                        className="col-2 btn btn-primary"
                                         to="/help"
                                     >
                                         Hmm
                                     </Link>
 
                                     <Link
-                                        className=""
+                                        className="col-6 btn btn-primary"
                                         to="/help"
                                     >
                                         Participate
                                     </Link>
 
                                     <Link
-                                        className=""
+                                        className="col-2 btn btn-primary"
                                         to="/help"
                                     >
                                         FaQ
@@ -151,7 +150,7 @@ export default class Event extends React.Component{
 
                                 <img
                                     alt="Club logo"
-                                    className="logo img-fluid col-auto"
+                                    className={logo + ' ' + 'img-fluid' + ' ' + 'col-auto'}
                                     src={this.state.basicInformation.logoLink}
                                 />
 
@@ -160,7 +159,7 @@ export default class Event extends React.Component{
                             <div>
                                 <br />
 
-                                <span className="eventName">
+                                <span className={eventName}>
                                     {this.state.basicInformation.Name}
                                 </span>
                             </div>
@@ -216,7 +215,7 @@ export default class Event extends React.Component{
                             </Card>
 
                             <Card
-                                className="poster col-3"
+                                className={poster + ' ' + 'col-3'}
                                 style={{ width: '18rem' }}
                             >
                                 <Card.Img

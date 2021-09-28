@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
-// import {logo, clubName} from './club.module.css';
+// import {clubName, logo} from './club.module.css';
 import {isBrowser} from "../utils/auth";
 import {SvgIcon} from "../common/SvgIcon";
 // import Figure from 'react-bootstrap/Figure';
@@ -99,12 +99,12 @@ class ClubHomePage extends Component {
                                 />
 
                                 <Card.Body>
-                                    <Card.Title className="text-start h1 pb-2">
+                                    <Card.Title className="text-start fs-2 pb-2 fw-bold">
                                         {this.state.basicInformation.Name}
                                     </Card.Title>
                                     
 
-                                    <Card.Subtitle className=" text-start pb-2">
+                                    <Card.Subtitle className="text-start pb-2">
                                         {this.state.basicInformation.tagline}
                                     </Card.Subtitle>
 

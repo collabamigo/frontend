@@ -1,14 +1,14 @@
 import React from "react";
-// import './loading.css';
+import {loader, loaderInner, ldsRoller} from './loading.module.css';
 
 function Loading () {
     return (
-        <div className="loader text-centre">
+        <div className= {'text-centre' + ' ' + loader}>
             <div
-                className="loader-inner"
+                className={loaderInner}
                 role="status"
             >
-                <div className="lds-roller">
+                <div className={ldsRoller}>
                     <div />
 
                     <div />
