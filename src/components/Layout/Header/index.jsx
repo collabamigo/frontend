@@ -21,63 +21,61 @@ export default function Header({ isAuthenticated }) {
 
 
     return (
-        <div className="mt-3 me-2 mb-3 ms-2">
-            <div className="container-fluid">
-                <div className=" row justify-content-center">
-                    <div className="col-auto ms-5">
-                        <Link
-                            aria-label="homepage"
-                            className='col-auto'
-                            to="/"
-                        >
-                            <SvgIcon
-                                height="78px"
-                                src="logo.svg"
-                                width="300px"
-                            />
-                        </Link>
-                    </div>
-
-                    <div className="col-auto" />
-
-                    <div className={NotHidden+" col align-content-end text-end"}>
-                        <DropdownMenu isAuthenticated={isAuthenticated} />
-                    </div>
-
-                    <div
-                        className={Burger}
-                        onClick={showDrawer}
+        <div className="mb-3 sticky-top bg-white w-100">
+            <div className=" row justify-content-center">
+                <div className="col-auto ms-5">
+                    <Link
+                        aria-label="homepage"
+                        className='col-auto'
+                        to="/"
                     >
-                        <MenuOutlined />
-                    </div>
-
-                    <Drawer
-                        closable={false}
-                        onClose={onClose}
-                        visible={visible}
-                    >
-                        <div
-                            className="col mb-4"
-                        >
-                            <span
-                                className={Label}
-                                onClick={onClose}
-                            >
-                                <div className="col">
-                                    <Menu>
-                                        Menu
-                                    </Menu>
-                                </div>
-
-                                <div className="col">
-                                    <MenuOutlined />
-                                </div>
-                            </span>
-                        </div>
-
-                        <DropdownMenu isAuthenticated={isAuthenticated} />
-                    </Drawer>
+                        <SvgIcon
+                            height="78px"
+                            src="logo.svg"
+                            width="300px"
+                        />
+                    </Link>
                 </div>
+
+                <div className="col-auto" />
+
+                <div className={NotHidden+" col align-content-end text-end"}>
+                    <DropdownMenu isAuthenticated={isAuthenticated} />
+                </div>
+
+                <div
+                    className={Burger}
+                    onClick={showDrawer}
+                >
+                    <MenuOutlined />
+                </div>
+
+                <Drawer
+                    closable={false}
+                    onClose={onClose}
+                    visible={visible}
+                >
+                    <div
+                        className="col mb-4"
+                    >
+                        <span
+                            className={Label}
+                            onClick={onClose}
+                        >
+                            <div className="col">
+                                <Menu>
+                                    Menu
+                                </Menu>
+                            </div>
+
+                            <div className="col">
+                                <MenuOutlined />
+                            </div>
+                        </span>
+                    </div>
+
+                    <DropdownMenu isAuthenticated={isAuthenticated} />
+                </Drawer>
             </div>
         </div >
     );
