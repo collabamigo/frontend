@@ -39,7 +39,7 @@ const defaultValue = {
     options: [],
 };
 
-function BuildForm({
+export default function FormBuilder({
     showBuilder,
     isStatic,
 }) {
@@ -562,18 +562,17 @@ function BuildForm({
     );
 }
 
-BuildForm.defaultProps = {
+FormBuilder.defaultProps = {
     defaultLang: "en",
     isStatic: false,
     showBuilder: true,
     toggleBuilder: () => {},
 };
 
-BuildForm.propTypes = {
+FormBuilder.propTypes = {
     defaultLang: PropTypes.string,
     isStatic: PropTypes.bool,
     showBuilder: PropTypes.bool,
     toggleBuilder: PropTypes.func,
 };
 
-export default React.memo(BuildForm);
