@@ -1,4 +1,4 @@
-import * as React from "react"
+import React from "react"
 
 export default {
   copy: {
@@ -338,46 +338,20 @@ export default {
   },
   control: {
     en: (
-      <>
-        <code>control</code> object provided by <code>useForm</code>. It's
-        optional if you are using FormContext.
-      </>
-    ),
-    es: (
-      <>
-        El objeto <code>control</code> es obtenido al invocar{" "}
-        <code>useForm</code>.
-      </>
-    ),
-    pt: (
-      <>
-        <code>control</code> objeto é invocado do <code>useForm</code>. é
-        opcional, se estiver usando o FormContext.
-      </>
-    ),
-    kr: (
-      <>
-        <code>control</code> 객체는 <code>useForm</code> 을 호출하여 나온 것을
-        넣어주면 됩니다. FormContext 를 사용하고 있다면 필수는 아닙니다.
-      </>
-    ),
-    jp: (
-      <>
-        <code>control</code> オブジェクトは <code>useForm</code>{" "}
-        から呼び出されます。 ただし、 FormContext
-        を使用している場合は省略できます。
-      </>
-    ),
-    zh: (
-      <>
-        通过调用<code>useForm</code>得到的对象。使用FormContext时可选。
-      </>
-    ),
-    ru: (
-      <>
-        <code>control</code> объект - это вызов формой <code>useForm</code>. Это
-        необязательно, если вы используете FormContext.
-      </>
+        <>
+            <code>
+                control
+            </code>
+
+            {' '}
+
+            object provided by
+            <code>
+                useForm
+            </code>
+            . It&apos;s
+            optional if you are using FormContext.
+        </>
     ),
   },
 }
