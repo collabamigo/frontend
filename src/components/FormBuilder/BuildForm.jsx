@@ -51,7 +51,6 @@ function BuildForm({
     })
 
     const updateFormData = (payload) => {
-        console.log("call")
         setState({
             1:payload,
             2:state[2]}
@@ -74,18 +73,11 @@ function BuildForm({
         setValue,
         reset,
     } = useForm();
-    console.log("here", register,
-        handleSubmit,
-        errors,
-        watch,
-        setValue,
-        reset,)
     const [editIndex, setEditIndex] = useState(-1);
     const copyFormData = useRef([]);
     const closeButton = useRef(null);
     const [showValidation, toggleValidation] = useState(false);
     const onSubmit = (data) => {
-        console.log("CALL")
         if (editIndex >= 0) {
             formData[editIndex] = data;
             updateFormData([...formData]);
