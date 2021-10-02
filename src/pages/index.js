@@ -3,7 +3,6 @@ import Card from "react-bootstrap/Card";
 import ClubList from 'components/ClubList/ClubList.js';
 import React from "react";
 import axios from "utils/axios";
-import FormBuilder from "components/FormBuilder/BuildForm";
 import backend from "env";
 import {Fade} from "react-awesome-reveal";
 import {isMobile} from "react-device-detect";
@@ -211,9 +210,7 @@ export default class AuthenticatedHome extends React.Component {
 
                 </div>
 
-                <div>
-                    <FormBuilder />
-                </div>
+
             </div>
         );
     }

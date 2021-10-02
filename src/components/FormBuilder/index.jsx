@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Animate } from "react-simple-animate";
 import { useForm } from "react-hook-form";
 import SortableContainer from "./SortableContainer";
-import { useStateMachine } from "little-state-machine";
 // import { navigate } from "@reach/router"
 import colors from "../../styles/colors";
 import generateCode from "../LogicFormBuilder/GenerateCode";
@@ -23,13 +22,6 @@ import CodeArea from "./CodeArea";
 
 const { useState, useRef, useEffect } = React;
 
-const updateStore = (state, payload) => {
-    return {
-        ...state,
-        formData: [...payload],
-    };
-};
-
 const errorStyle = {
   border: `1px solid ${colors.secondary}`,
   background: colors.errorPink,
@@ -47,21 +39,31 @@ const defaultValue = {
     options: [],
 };
 
-function BuildForm({
+export default function FormBuilder({
     showBuilder,
     isStatic,
-    defaultLang,
 }) {
-    const {
-        state: { formData = [], language, setting = {} },
-        actions: { updateFormData },
-    } = useStateMachine({ updateFormData: updateStore });
-    const isV7 = setting.version === 7;
-    const { currentLanguage } =
-        language && language.currentLanguage
-            ? language
-            : { currentLanguage: defaultLang };
-    const [editFormData, setFormData] = useState(defaultValue);
+    const isV7 = false;
+    const [state, setState] = useState({
+        1: [],
+        2: defaultValue
+    })
+
+    const updateFormData = (payload) => {
+        setState({
+            1:payload,
+            2:state[2]}
+        )
+    }
+    const formData = state[1];
+
+    const editFormData = state[2];
+    const setFormData = (payload) => {
+        setState({
+            1: state[1],
+            2: payload
+        })
+    }
     const {
         register,
         handleSubmit,
@@ -70,12 +72,6 @@ function BuildForm({
         setValue,
         reset,
     } = useForm();
-    console.log("bigtest",register,
-        handleSubmit,
-        errors,
-        watch,
-        setValue,
-        reset,)
     const [editIndex, setEditIndex] = useState(-1);
     const copyFormData = useRef([]);
     const closeButton = useRef(null);
@@ -136,23 +132,23 @@ function BuildForm({
                 className={typographyStyles.headingWithTopMargin}
                 id="main"
             >
-                {builder.builder[currentLanguage].title}
+                {builder.builder["en"].title}
             </h1>
 
             <p className={typographyStyles.subHeading}>
-                {builder.builder[currentLanguage].description}
+                {builder.builder["en"].description}
             </p>
 
             <div className={styles.pageWrapper}>
                 <section>
                     <h2 className={typographyStyles.title}>
-                        {builder.layout[currentLanguage].title}
+                        {builder.layout["en"].title}
                     </h2>
 
                     <p style={{ fontSize: 14 }}>
                         <Popup iconOnly />
 
-                        {builder.layout[currentLanguage].message}
+                        {builder.layout["en"].message}
                     </p>
 
                     <SortableContainer
@@ -164,10 +160,11 @@ function BuildForm({
                             setFormData,
                             editFormData,
                             reset,
-                            currentLanguage,
                         }}
+                        currentLanguage="en"
                     />
                 </section>
+
 
                 <form
                     className={styles.form}
@@ -177,17 +174,17 @@ function BuildForm({
                         className={typographyStyles.title}
                         ref={form}
                     >
-                        {builder.inputCreator[currentLanguage].title}
+                        {builder.inputCreator["en"].title}
                     </h2>
 
-                    <p style={{ fontSize: 14 }}>
+                    <p style={{fontSize: 14}}>
                         <Popup iconOnly />
 
-                        {builder.inputCreator[currentLanguage].description}
+                        {builder.inputCreator["en"].description}
                     </p>
 
                     <label>
-                        {generic.name[currentLanguage]}
+                        {generic.name["en"]}
                         :
 
                         {' '}
@@ -210,7 +207,7 @@ function BuildForm({
 
                     <Animate
                         duration={0.6}
-                        end={{ maxHeight: 20 }}
+                        end={{maxHeight: 20}}
                         play={!!errors["name"]}
                         start={{
                             maxHeight: 0,
@@ -230,7 +227,7 @@ function BuildForm({
                     </Animate>
 
                     <label>
-                        {generic.type[currentLanguage]}
+                        {generic.type["en"]}
                         :
 
                         {' '}
@@ -320,7 +317,7 @@ function BuildForm({
                         editFormData.type === "radio") && (
                         <>
                             <label>
-                                {builder.inputCreator[currentLanguage].options}
+                                {builder.inputCreator["en"].options}
                                 :
                             </label>
 
@@ -343,7 +340,7 @@ function BuildForm({
                             type="checkbox"
                         />
 
-                        {builder.inputCreator[currentLanguage].validation}
+                        {builder.inputCreator["en"].validation}
                     </label>
 
                     <Animate
@@ -430,15 +427,11 @@ function BuildForm({
                     </Animate>
 
                     <button
-                        className={buttonStyles.pinkButton}
-                        onClick={() => {
-                            form.current.scrollIntoView({ behavior: "smooth" });
-                        }}
-                        type="button"
+                        type="submit"
                     >
                         {editIndex >= 0
-                            ? generic.update[currentLanguage]
-                            : generic.create[currentLanguage]}
+                            ? generic.update["en"]
+                            : generic.create["en"]}
                     </button>
 
                     {formData.length > 0 && (
@@ -460,6 +453,15 @@ function BuildForm({
                             pointerEvents: "auto",
                         }}
                         play={(formData || []).length > 0}
+                        render={({style}) => (
+                            <button
+                                className={buttonStyles.darkButton}
+                                style={style}
+                                type="button"
+                            >
+                                {builder.inputCreator["en"].generate}
+                            </button>
+                        )}
                         start={{
                             opacity: 0,
                             pointerEvents: "none",
@@ -474,13 +476,13 @@ function BuildForm({
                     }}
                 >
                     <h2 className={typographyStyles.title}>
-                        {builder.code[currentLanguage].title}
+                        {builder.code["en"].title}
                     </h2>
 
                     <p style={{ fontSize: 14 }}>
                         <Popup iconOnly />
 
-                        {builder.code[currentLanguage].description}
+                        {builder.code["en"].description}
                     </p>
 
                     <section
@@ -493,11 +495,11 @@ function BuildForm({
                 className={`${styles.button} ${styles.copyButton}`}
                 onClick={() => {
                   copyClipBoard(generateCode(formData, isV7))
-                  alert(generic.copied[currentLanguage])
+                  alert(generic.copied["en"])
                 }}
-                aria-label={generic.copied[currentLanguage]}
+                aria-label={generic.copied["en"]}
               >
-                {generic.copy[currentLanguage]}
+                {generic.copy["en"]}
               </button>
             </div> */}
 
@@ -507,9 +509,9 @@ function BuildForm({
             </div>
 
             {/* <div style={{ margin: "0 20px" }}>
-        <LearnMore currentLanguage={currentLanguage} />
+        <LearnMore "en"={"en"} />
 
-        <Footer currentLanguage={currentLanguage} />
+        <Footer "en"={"en"} />
       </div> */}
         </div>
     );
@@ -560,18 +562,17 @@ function BuildForm({
     );
 }
 
-BuildForm.defaultProps = {
+FormBuilder.defaultProps = {
     defaultLang: "en",
     isStatic: false,
-    showBuilder: false,
+    showBuilder: true,
     toggleBuilder: () => {},
 };
 
-BuildForm.propTypes = {
+FormBuilder.propTypes = {
     defaultLang: PropTypes.string,
     isStatic: PropTypes.bool,
     showBuilder: PropTypes.bool,
     toggleBuilder: PropTypes.func,
 };
 
-export default React.memo(BuildForm);

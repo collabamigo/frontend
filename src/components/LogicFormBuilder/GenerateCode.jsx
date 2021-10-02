@@ -1,4 +1,4 @@
-export default (formData: any, isV7: boolean) => {
+export default (formData, isV7) => {
     return `import React from 'react';
   import { useForm } from 'react-hook-form';
   
@@ -136,4 +136,3 @@ export default (formData: any, isV7: boolean) => {
     );
   }`
   }
-  
