@@ -11,7 +11,6 @@ import DashboardHeader from "./DashboardHeader";
 
 function Layout({children}) {
     const router = useRouter();
-    console.log(router.pathname)
     return (
         <div className="App h-100 w-100">
             <Helmet>
