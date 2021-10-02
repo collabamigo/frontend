@@ -23,13 +23,6 @@ import CodeArea from "./CodeArea";
 
 const { useState, useRef, useEffect } = React;
 
-const updateStore = (state, payload) => {
-    return {
-        ...state,
-        formData: [...payload],
-    };
-};
-
 const errorStyle = {
   border: `1px solid ${colors.secondary}`,
   background: colors.errorPink,
@@ -50,18 +43,29 @@ const defaultValue = {
 function BuildForm({
     showBuilder,
     isStatic,
-    defaultLang,
 }) {
-    const {
-        state: { formData = [], language, setting = {} },
-        actions: { updateFormData },
-    } = useStateMachine({ updateFormData: updateStore });
-    const isV7 = setting.version === 7;
-    const { currentLanguage } =
-        language && language.currentLanguage
-            ? language
-            : { currentLanguage: defaultLang };
-    const [editFormData, setFormData] = useState(defaultValue);
+    const isV7 = false;
+    const [state, setState] = useState({
+        1: [],
+        2: defaultValue
+    })
+
+    const updateFormData = (payload) => {
+        console.log("call")
+        setState({
+            1:payload,
+            2:state[2]}
+        )
+    }
+    const formData = state[1];
+
+    const editFormData = state[2];
+    const setFormData = (payload) => {
+        setState({
+            1: state[1],
+            2: payload
+        })
+    }
     const {
         register,
         handleSubmit,
@@ -70,7 +74,7 @@ function BuildForm({
         setValue,
         reset,
     } = useForm();
-    console.log("bigtest",register,
+    console.log("here", register,
         handleSubmit,
         errors,
         watch,
@@ -81,6 +85,7 @@ function BuildForm({
     const closeButton = useRef(null);
     const [showValidation, toggleValidation] = useState(false);
     const onSubmit = (data) => {
+        console.log("CALL")
         if (editIndex >= 0) {
             formData[editIndex] = data;
             updateFormData([...formData]);
@@ -136,23 +141,23 @@ function BuildForm({
                 className={typographyStyles.headingWithTopMargin}
                 id="main"
             >
-                {builder.builder[currentLanguage].title}
+                {builder.builder["en"].title}
             </h1>
 
             <p className={typographyStyles.subHeading}>
-                {builder.builder[currentLanguage].description}
+                {builder.builder["en"].description}
             </p>
 
             <div className={styles.pageWrapper}>
                 <section>
                     <h2 className={typographyStyles.title}>
-                        {builder.layout[currentLanguage].title}
+                        {builder.layout["en"].title}
                     </h2>
 
                     <p style={{ fontSize: 14 }}>
                         <Popup iconOnly />
 
-                        {builder.layout[currentLanguage].message}
+                        {builder.layout["en"].message}
                     </p>
 
                     <SortableContainer
@@ -164,64 +169,48 @@ function BuildForm({
                             setFormData,
                             editFormData,
                             reset,
-                            currentLanguage,
                         }}
+                        currentLanguage="en"
                     />
                 </section>
 
-                <form
-                    className={styles.form}
-                    onSubmit={handleSubmit(onSubmit)}
-                >
-                    <h2
-                        className={typographyStyles.title}
-                        ref={form}
-                    >
-                        {builder.inputCreator[currentLanguage].title}
+
+                <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                    <h2 className={typographyStyles.title} ref={form}>
+                        {builder.inputCreator["en"].title}
                     </h2>
 
-                    <p style={{ fontSize: 14 }}>
-                        <Popup iconOnly />
-
-                        {builder.inputCreator[currentLanguage].description}
+                    <p style={{fontSize: 14}}>
+                        <Popup iconOnly/>
+                        {builder.inputCreator["en"].description}
                     </p>
 
-                    <label>
-                        {generic.name[currentLanguage]}
-                        :
-
-                        {' '}
-                    </label>
-
+                    <label>{generic.name["en"]}: </label>
                     <input
-                        aria-invalid={errors["name"] ? "true" : "false"}
-                        aria-label="name"
                         autoComplete="off"
                         defaultValue={editFormData.name}
+                        aria-label="name"
+                        aria-invalid={errors["name"] ? "true" : "false"}
                         name="name"
+                        style={{
+                            ...(errors["name"] ? errorStyle : null),
+                        }}
                         ref={register({
                             required: true,
                             validate,
                         })}
-                        style={{
-                            ...(errors["name"] ? errorStyle : null),
-                        }}
                     />
-
                     <Animate
-                        duration={0.6}
-                        end={{ maxHeight: 20 }}
                         play={!!errors["name"]}
+                        duration={0.6}
                         start={{
                             maxHeight: 0,
                         }}
+                        end={{maxHeight: 20}}
                     >
                         {errors.name && errors.name["type"] === "required" && (
-                            <p className={typographyStyles.error}>
-                                This is required.
-                            </p>
+                            <p className={typographyStyles.error}>This is required.</p>
                         )}
-
                         {errors.name && errors.name["type"] === "validate" && (
                             <p className={typographyStyles.error}>
                                 Name required to be unique.
@@ -229,87 +218,30 @@ function BuildForm({
                         )}
                     </Animate>
 
-                    <label>
-                        {generic.type[currentLanguage]}
-                        :
-
-                        {' '}
-                    </label>
-
+                    <label>{generic.type["en"]}: </label>
                     <select
                         aria-label="Select type"
-                        defaultValue={editFormData.type}
                         name="type"
                         ref={register}
+                        defaultValue={editFormData.type}
                     >
-                        <option value="text">
-                            Text
-                        </option>
-
-                        <option value="select">
-                            Select
-                        </option>
-
-                        <option value="checkbox">
-                            Checkbox
-                        </option>
-
-                        <option value="radio">
-                            Radio
-                        </option>
-
-                        <option value="number">
-                            Number
-                        </option>
-
-                        <option value="textarea">
-                            Textarea
-                        </option>
-
-                        <option value="email">
-                            Email
-                        </option>
-
-                        <option value="range">
-                            Range
-                        </option>
-
-                        <option value="search">
-                            Search
-                        </option>
-
-                        <option value="tel">
-                            Tel
-                        </option>
-
-                        <option value="url">
-                            url
-                        </option>
-
-                        <option value="time">
-                            Time
-                        </option>
-
-                        <option value="datetime">
-                            datetime
-                        </option>
-
-                        <option value="datetime-local">
-                            datetime-local
-                        </option>
-
-                        <option value="week">
-                            week
-                        </option>
-
-                        <option value="month">
-                            month
-                        </option>
-
-                        <option
-                            disabled
-                            value="validate"
-                        >
+                        <option value="text">Text</option>
+                        <option value="select">Select</option>
+                        <option value="checkbox">Checkbox</option>
+                        <option value="radio">Radio</option>
+                        <option value="number">Number</option>
+                        <option value="textarea">Textarea</option>
+                        <option value="email">Email</option>
+                        <option value="range">Range</option>
+                        <option value="search">Search</option>
+                        <option value="tel">Tel</option>
+                        <option value="url">url</option>
+                        <option value="time">Time</option>
+                        <option value="datetime">datetime</option>
+                        <option value="datetime-local">datetime-local</option>
+                        <option value="week">week</option>
+                        <option value="month">month</option>
+                        <option value="validate" disabled>
                             validate
                         </option>
                     </select>
@@ -319,43 +251,38 @@ function BuildForm({
                         editFormData.type === "select" ||
                         editFormData.type === "radio") && (
                         <>
-                            <label>
-                                {builder.inputCreator[currentLanguage].options}
-                                :
-                            </label>
-
+                            <label>{builder.inputCreator["en"].options}:</label>
                             <input
-                                defaultValue={editFormData.options}
                                 key={editFormData.name}
+                                defaultValue={editFormData.options}
+                                type="text"
                                 name="options"
                                 placeholder="Enter options separate by ;"
                                 ref={register}
-                                type="text"
                             />
                         </>
                     )}
 
                     <label>
                         <input
-                            name="toggle"
-                            onClick={() => toggleValidation(!showValidation)}
-                            ref={register}
                             type="checkbox"
+                            name="toggle"
+                            ref={register}
+                            onClick={() => toggleValidation(!showValidation)}
                         />
-
-                        {builder.inputCreator[currentLanguage].validation}
+                        {builder.inputCreator["en"].validation}
                     </label>
 
                     <Animate
-                        end={{
-                            maxHeight: 800,
-                            overflow: "hidden",
-                            marginBottom: 20,
-                        }}
                         play={shouldToggleOn || showValidation}
                         start={{
                             maxHeight: 0,
                             overflow: "hidden",
+                        }}
+                        end={{
+                            maxHeight: 800,
+                            overflow: "hidden",
+                            marginBottom: 20,
                         }}
                     >
                         <fieldset>
@@ -364,81 +291,60 @@ function BuildForm({
                                     marginTop: 0,
                                 }}
                             >
-                                <input
-                                    name="required"
-                                    ref={register}
-                                    type="checkbox"
-                                />
+                                <input type="checkbox" name="required" ref={register}/>
                                 Required
                             </label>
-
-                            <label htmlFor="max">
-                                Max
-                            </label>
-
+                            <label htmlFor="max">Max</label>
                             <input
+                                defaultValue={editFormData.max}
                                 aria-label="max"
                                 autoComplete="false"
-                                defaultValue={editFormData.max}
                                 name="max"
-                                ref={register}
                                 type="number"
+                                ref={register}
                             />
-
-                            <label htmlFor="min">
-                                Min
-                            </label>
-
+                            <label htmlFor="min">Min</label>
                             <input
-                                aria-label="min"
-                                autoComplete="false"
                                 defaultValue={editFormData.min}
-                                name="min"
-                                ref={register}
-                                type="number"
-                            />
-
-                            <label htmlFor="maxLength">
-                                MaxLength
-                            </label>
-
-                            <input
-                                aria-label="max length"
                                 autoComplete="false"
-                                defaultValue={editFormData.maxLength}
-                                name="maxLength"
-                                ref={register}
+                                aria-label="min"
+                                name="min"
                                 type="number"
+                                ref={register}
                             />
-
-                            <label htmlFor="pattern">
-                                Pattern
-                            </label>
-
+                            <label htmlFor="maxLength">MaxLength</label>
                             <input
-                                aria-label="pattern"
+                                defaultValue={editFormData.maxLength}
+                                autoComplete="false"
+                                aria-label="max length"
+                                name="maxLength"
+                                type="number"
+                                ref={register}
+                            />
+                            <label htmlFor="pattern">Pattern</label>
+                            <input
                                 autoComplete="false"
                                 defaultValue={editFormData.pattern}
-                                name="pattern"
-                                ref={register}
                                 style={{
                                     marginBottom: "20px",
                                 }}
+                                aria-label="pattern"
+                                name="pattern"
                                 type="text"
+                                ref={register}
                             />
                         </fieldset>
                     </Animate>
 
                     <button
-                        className={buttonStyles.pinkButton}
-                        onClick={() => {
-                            form.current.scrollIntoView({ behavior: "smooth" });
-                        }}
-                        type="button"
+                        // className={buttonStyles.pinkButton}
+                        // onClick={() => {
+                        //     form.current.scrollIntoView({behavior: "smooth"})
+                        // }}
                     >
                         {editIndex >= 0
-                            ? generic.update[currentLanguage]
-                            : generic.create[currentLanguage]}
+                            ? generic.update["en"]
+                            : generic.create["en"]}
                     </button>
 
                     {formData.length > 0 && (
@@ -455,15 +361,35 @@ function BuildForm({
                     )}
 
                     <Animate
-                        end={{
-                            opacity: 1,
-                            pointerEvents: "auto",
-                        }}
                         play={(formData || []).length > 0}
                         start={{
                             opacity: 0,
                             pointerEvents: "none",
                         }}
+                        end={{
+                            opacity: 1,
+                            pointerEvents: "auto",
+                        }}
+                        render={({style}) => (
+                            <button
+                                className={buttonStyles.darkButton}
+                                style={style}
+                                type="button"
+                                onClick={() => {
+                                    if (toggleBuilder) {
+                                        toggleBuilder(false)
+                                        document.body.style.overflow = "auto"
+                                        HomeRef.current.scrollIntoView({behavior: "smooth"})
+                                    } else {
+                                        navigate(
+                                            translateLink("/?goToDemo&updated=true", "en")
+                                        )
+                                    }
+                                }}
+                            >
+                                {builder.inputCreator["en"].generate}
+                            </button>
+                        )}
                     />
                 </form>
 
@@ -474,13 +400,13 @@ function BuildForm({
                     }}
                 >
                     <h2 className={typographyStyles.title}>
-                        {builder.code[currentLanguage].title}
+                        {builder.code["en"].title}
                     </h2>
 
                     <p style={{ fontSize: 14 }}>
                         <Popup iconOnly />
 
-                        {builder.code[currentLanguage].description}
+                        {builder.code["en"].description}
                     </p>
 
                     <section
@@ -493,11 +419,11 @@ function BuildForm({
                 className={`${styles.button} ${styles.copyButton}`}
                 onClick={() => {
                   copyClipBoard(generateCode(formData, isV7))
-                  alert(generic.copied[currentLanguage])
+                  alert(generic.copied["en"])
                 }}
-                aria-label={generic.copied[currentLanguage]}
+                aria-label={generic.copied["en"]}
               >
-                {generic.copy[currentLanguage]}
+                {generic.copy["en"]}
               </button>
             </div> */}
 
@@ -507,9 +433,9 @@ function BuildForm({
             </div>
 
             {/* <div style={{ margin: "0 20px" }}>
-        <LearnMore currentLanguage={currentLanguage} />
+        <LearnMore "en"={"en"} />
 
-        <Footer currentLanguage={currentLanguage} />
+        <Footer "en"={"en"} />
       </div> */}
         </div>
     );
@@ -563,7 +489,7 @@ function BuildForm({
 BuildForm.defaultProps = {
     defaultLang: "en",
     isStatic: false,
-    showBuilder: false,
+    showBuilder: true,
     toggleBuilder: () => {},
 };
 
