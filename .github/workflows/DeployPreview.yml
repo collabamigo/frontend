@@ -1,10 +1,9 @@
 name: Deploy to Preview Channel
 
 on:
-  push:
-    branches: [ main, testing, testing-pragyan ]
   pull_request:
-    branches: [ main, testing ]
+    branches:
+      - testing
 
 jobs:
   build_and_preview:
@@ -12,9 +11,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: npm ci && npx eslint src && npm run build
+      - name: Installing dependencies
+        run: npm ci
+
+      - name: ESLinting .js and .jsx files
+        run: npx eslint src --ext .js,.jsx
+
+      - name: Building
+        run: npm run build
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          target: preview
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COLLABAMIGO_PREVIEW }}'
           expires: 30d

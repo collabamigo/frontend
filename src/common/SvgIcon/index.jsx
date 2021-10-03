@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { SvgIconProps } from "../types";
 
-export function SvgIcon({ src, width, height }: SvgIconProps) {
+// eslint-disable-next-line react/prop-types
+export function SvgIcon({ src, width, height }) {
   return (<img
       alt={src}
       height={height}

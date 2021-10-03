@@ -1,0 +1,20 @@
+.eventName {
+    font-size: 225%;
+    font-weight: bold;
+}
+.logo {
+    border-radius: 100%;
+}
+.poster {
+    objectFit: 'cover';
+    width: 100%;
+}
+
+/* #cuco {
+    height: 100%;
+    border-collapse: collapse;
+}
+#cudiv {
+    position: absolute;
+    bottom: 0;
+} */

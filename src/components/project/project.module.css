@@ -1,0 +1,29 @@
+.carouselImageSize {
+  width: 60%;
+  height: 100%;
+}
+.textBackground {
+  background-color: rgb(245, 245, 245) !important;
+  width: 90% !important;
+}
+
+.zoomMyCard {
+  transition: transform 0.2s;
+}
+
+.zoomMyCard:hover {
+  transform: scale(1.06);
+}
+
+.footerCustom {
+  background-color: white !important;
+  border-top: 0 none !important;
+}
+
+.headerColor {
+  color: rgb(100, 98, 98);
+}
+
+.cardMinSize {
+  min-width: 20rem !important;
+}

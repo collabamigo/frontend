@@ -29,3 +29,9 @@ firebase-debug.log
 src/env.js
 /src/react-app-env.d.ts
 .firebase/*.cache
+/static/render-page.js.map
+/static/render-page.js
+.next
+
+.vercel
+out

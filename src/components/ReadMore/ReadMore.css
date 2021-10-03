@@ -1,0 +1,11 @@
+.club-list {
+    width: 70px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+}
+
+.club-logo {
+    width: 70px;
+    height: 70px;
+}

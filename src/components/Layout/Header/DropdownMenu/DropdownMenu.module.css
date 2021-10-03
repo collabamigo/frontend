@@ -1,0 +1,45 @@
+.magicSpan {
+    transition: all 0.3s ease-in-out;
+    color: #18216d;
+    font-size: 21px;
+    line-height: 1.41;
+}
+
+.magicSpan:hover {
+    color: rgb(255, 130, 92);
+    text-underline-position: under;
+    text-decoration: rgb(255, 130, 92) underline;
+}
+
+.magicSpan:active {
+    color: rgb(255, 130, 92);
+    text-underline-position: under;
+    text-decoration: rgb(255, 130, 92) underline;
+}
+
+.magicSpan:focus {
+    color: rgb(255, 130, 92);
+    text-underline-position: under;
+    text-decoration: rgb(255, 130, 92) underline;
+}
+
+.lowwl {
+    max-width: 80%;
+}
+
+.CustomNavLink {
+    display: inline-block;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #18216d;
+    transition: color 0.2s ease-in;
+    margin: 0.5rem 1.5rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .CustomNavLink {
+
+        margin: 1.25rem 2rem;
+    }
+
+}

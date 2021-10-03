@@ -1,0 +1,13 @@
+
+name: Build project
+on:
+  push:
+    branches:
+      - 'testing*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm ci && npx eslint src && npm run build

@@ -1,0 +1,99 @@
+@import '~antd/dist/antd.css';
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+
+#root {
+  height: 100%;
+}
+
+.App {
+  background-color: var(--background-color);
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+:root {
+  --gray: rgb(128, 128, 128);
+  --blue: rgb(2, 117, 216);
+  --black:rgb(41, 43, 44);
+
+  --gray_jumbotron_light: rgb(238,238,238);
+  --text-jumbotron:rgb(0,0,0)
+}
+
+body.light {
+  --background-color: var(--white);
+  --background-color-jumbotron: var(--gray_jumbotron_light);
+  --text-color-jumbotron: var(--gray);
+  --text-color: var(--gray);
+  --font-weight: 400;
+}
+
+body.dark {
+  --background-color-jumbotron: var(--background-color-jumbotron);
+  --text-color-jumbotron: var(--white);
+  --background-color: var(--black);
+  --text-color: var(--blue);
+  --font-weight: 500;
+}
+
+body {
+  background: var(--background-color);
+  color: var(--text-color);
+  font-weight: var(--font-weight);
+  transition: background 0.3s ease-in-out, color 0.6s ease-in-out;
+}
+
+.jumbotron{
+  color: var(--text-color-jumbotron);
+  background-color: var(--background-color-jumbotron) !important;
+}
+
+
+.required label:after {
+    color: #dc3545;
+    content: ' *';
+    display:inline;
+}
+
+
+@font-face {
+  font-family: "Motiva Sans Light";
+  src: url("/fonts/Motiva-Sans-Light.ttf") format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Motiva Sans Bold";
+  src: url("/fonts/Motiva-Sans-Bold.ttf") format("truetype");
+  font-style: normal;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}

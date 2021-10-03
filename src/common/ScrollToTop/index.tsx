@@ -21,7 +21,6 @@ const ScrollToTop = () => {
     return () => {
       window.removeEventListener("scroll", checkScrollTop);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const scrollUp = () => {
