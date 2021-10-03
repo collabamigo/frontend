@@ -42,9 +42,13 @@ function GoogleSignIn (props) {
             })
             setToken(res_temp.data['access_token'])
 
+            if (!googleUserState)
+                setGoogleUserState(jws.decode(googleUser.credential));
+            // props.setStage("form")
 
-            setLoggedIn()
-            await router.push("/")
+
+            // setLoggedIn()
+            // await router.push("/")
 
         }
         if (!googleUserState)
@@ -53,25 +57,15 @@ function GoogleSignIn (props) {
         profileExists(googleUser).then((res) => {
             if (!res.res.data.length) {
                 if (!googleUserState)
-                    setGoogleUserState(res.googleUser);
+                    setGoogleUserState(jws.decode(googleUser.credential));
                 props.setStage("form");
             } else {
-                if (res.res.data[0].id)
-                    localStorage.setItem("id", res.res.data[0].id)
-                if (googleUserState) {
-                    localStorage.setItem(
-                        "userName",
-                        googleUserState.name
-                    );
-                } else {
-                    localStorage.setItem(
-                        "userName",
-                        jws.decode(res.googleUser.credential).name
-                    );
-                }
+                setLoggedIn()
+                router.push("/")
             }
         })
     }
+
 
     let loggedIn=false;
     if (typeof window !== "undefined") {
@@ -104,7 +98,8 @@ function GoogleSignIn (props) {
                         data-type="standard"
                     />
                 </>);
-        else if (props.stage==="form")
+        else if (props.stage==="form") {
+            console.log(googleUserState)
             return (
                 <FormSignIn
                     emailId={googleUserState.email}
@@ -113,6 +108,7 @@ function GoogleSignIn (props) {
                     onSubmit={onSignIn}
                 />
             )
+        }
 
     }
     return null;
