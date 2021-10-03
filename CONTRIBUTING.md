@@ -89,11 +89,11 @@ This site can be developed on Windows, however a few potential gotchas need to b
 2. Paths: Windows systems use `\` for the path separator, which would be returned by `path.join` and others. You could
    use `path.posix`, `path.posix.join` etc and the [slash](https://ghub.io/slash) module, if you need forward slashes -
    like for constructing URLs - or ensure your code works with either.
-3Filename too long error: There is a 260 character limit for a filename when Git is compiled with `msys`. While the
+3. Filename too long error: There is a 260 character limit for a filename when Git is compiled with `msys`. While the
    suggestions below are not guaranteed to work and could possibly cause other issues, a few workarounds include:
     - Update Git configuration: `git config --system core.longpaths true`
     - Consider using a different Git client on Windows
-4The `Fast Refresh` feature of NextJS is known to cause issues on Windows. While the suggestions below are not
+4. The `Fast Refresh` feature of NextJS is known to cause issues on Windows. While the suggestions below are not
    guaranteed to work and could possibly cause other issues, a workaround that worked for us is:
     - Set up a WSL environment and clone your project into it. Most popular IDEs ([VSCode](https://code.visualstudio.com/docs/remote/wsl), 
    [PyCharm](https://www.jetbrains.com/help/idea/how-to-use-wsl-development-environment-in-product.html)) support development through WSL.
