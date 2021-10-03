@@ -1,4 +1,4 @@
-# Welcome to GitHub docs contributing guide <!-- omit in toc -->
+# Welcome to CollabAmigo contributing guide <!-- omit in toc -->
 
 Thank you for investing your time in contributing to our project! Any contribution you make will be reflected
 on [collabamigo.com](https://collabamigo.com/en) :sparkles:.
