@@ -8,10 +8,6 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 export default class ClubCard extends Component {
-    static propTypes = {
-        Type: PropTypes.string.isRequired,
-        element: PropTypes.objectOf(PropTypes.string).isRequired,
-    }
 
     constructor(props) {
         super(props);
@@ -124,4 +120,9 @@ export default class ClubCard extends Component {
             }
         }
     }
+}
+
+ClubCard.propTypes = {
+    Type: PropTypes.string.isRequired,
+    element: PropTypes.objectOf(PropTypes.string).isRequired,
 }

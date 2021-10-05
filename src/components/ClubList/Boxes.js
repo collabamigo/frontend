@@ -3,10 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Boxes extends Component {
-    static propTypes = {
-        Type: PropTypes.string.isRequired,
-        boxesToRender : PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-    }
+    
 
     shouldComponentUpdate ()
     {return true;}
@@ -30,4 +27,9 @@ export default class Boxes extends Component {
                 );
             }
     }
+}
+
+Boxes.propTypes = {
+    Type: PropTypes.string.isRequired,
+    boxesToRender : PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
 }
