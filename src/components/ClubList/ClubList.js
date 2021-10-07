@@ -1,9 +1,13 @@
-import React, { Component } from 'react'
+import React  from 'react'
 import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button';
-import Boxes from './Boxes.js';
+import Boxes from './Boxes';
 
-export default class Clublist extends Component {
+export default class Clublist extends React.Component {
+    static propTypes = {
+        ItemList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+        Type: PropTypes.string.isRequired,
+    }
     constructor(props) {
         super(props)
         this.state = {
@@ -60,9 +64,4 @@ export default class Clublist extends Component {
             </div>
         )
     }
-}
-
-Clublist.propTypes = {
-    ItemList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-    Type: PropTypes.string.isRequired,
 }

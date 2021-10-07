@@ -9,6 +9,11 @@ import Button from "react-bootstrap/Button";
 
 export default class ClubCard extends Component {
 
+    static propTypes = {
+        Type: PropTypes.string.isRequired,
+        element: PropTypes.objectOf(PropTypes.string).isRequired,
+    }
+
     constructor(props) {
         super(props);
         this.handler = this.handler.bind(this);
@@ -83,7 +88,7 @@ export default class ClubCard extends Component {
 
                                             {" "}
 
-                                    
+
 
                                         </span>
                                     </li>
@@ -91,7 +96,7 @@ export default class ClubCard extends Component {
                                     <li className="text-start list-inline-item">
                                         <span>
                                             {/* {this.state.basicInformation.coordinators[1].name} */}
-                                                
+
                                             {" "}
 
                                         </span>
@@ -120,9 +125,4 @@ export default class ClubCard extends Component {
             }
         }
     }
-}
-
-ClubCard.propTypes = {
-    Type: PropTypes.string.isRequired,
-    element: PropTypes.objectOf(PropTypes.string).isRequired,
 }

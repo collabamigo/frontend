@@ -1,9 +1,13 @@
 import ClubCard from './ClubCard.js';
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class Boxes extends Component {
-    
+export default class Boxes extends React.Component {
+
+    static propTypes = {
+        Type: PropTypes.string.isRequired,
+        boxesToRender: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+    }
 
     shouldComponentUpdate ()
     {return true;}
@@ -27,9 +31,4 @@ export default class Boxes extends Component {
                 );
             }
     }
-}
-
-Boxes.propTypes = {
-    Type: PropTypes.string.isRequired,
-    boxesToRender : PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
 }
