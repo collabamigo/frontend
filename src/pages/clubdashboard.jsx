@@ -1,10 +1,15 @@
 
 import React from "react";
 
+import DashboardLayout from "../components/Layout/DashboardLayout.js";
+
+
 export default function ClubDashBoard() {
     return (
         <div>
-            Something...
+            hello
         </div>
     )
 }
+
+ClubDashBoard.Layout = DashboardLayout;
