@@ -5,3 +5,9 @@
 .logo {
     border-radius: 100%;
 }
+
+.coordinatorList, .announcements {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
