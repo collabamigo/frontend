@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import backend from "../../env";
 // import Image from 'react-bootstrap/Image'
 import Clublist from 'components/ClubList/ClubList.js';
-
+import {clubDetails, carouselControlNextIcon, carouselControlPrevIcon} from "./club.module.css"
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
@@ -126,7 +126,7 @@ class ClubHomePage extends Component {
 
                                     <br />
 
-                                    <div className="col">
+                                    <div className="col text-center">
                                         <Card.Link
                                             className=""
                                             href="https://www.linkedin.com/in/"
@@ -210,17 +210,11 @@ class ClubHomePage extends Component {
                                                 width="20px"
                                             />
                                         </Card.Link>
-                                    </div>
-
-                                    {/* <Button variant="primary">
-                                    Go somewhere
-                                </Button> */}
-                                </Card.Body>
-                            </Card>
-                        </div>
 
                         <br />
                     </div>
+                                </Card.Body>
+                            </Card>
                 </div>
 
                 <div className="col-9">
@@ -296,11 +290,19 @@ class ClubHomePage extends Component {
                                      </div>
                         </div>
 
+                                <div className={clubDetails}>
+                                    <div>
+                                        Coordinators: {this.state.basicInformation.coordinators[0].name}, {this.state.basicInformation.coordinators[1].name}
+                                    </div>
+                                    <div>
+                                        Member Size: {this.state.basicInformation.memberSize}
+                                    </div>
+                                </div>
                                 <hr />
 
                                 <div className="d-flex">
                                     <div className="col-5">
-                                        <div className="text-start h2">
+                                        <div className="text-center h2">
                                             Description
                                         </div>
 
@@ -355,23 +357,14 @@ class ClubHomePage extends Component {
                                     
                     <br />
 
-                    <Card className="">
+                    <Card className="row">
                         <Card.Body className="mt-3">
-                            <Card.Title className="card-title fw-bold header-color text-left">
+                            <Card.Title className="card-title fs-3 header-color text-left">
                                 Events
                             </Card.Title>
 
                             <br />
-
-                            <Card.Text className="card-text h5 text-muted">
-                                <div>
-                                    skdjnljknsdnLVNlnSDVNLSDVlNSDVNkjNKDSL alive.ggffyyfyt
-                                </div>
-
-                                <br />
-
-                                <br />
-
+                            <Card.Text className="card-text h5 text-muted col-12">
                                 <div>
                                     <Clublist 
                                         ItemList={this.state.basicInformation.eventList}
@@ -392,7 +385,7 @@ class ClubHomePage extends Component {
 
             </div>
             
-        );
+        ));
     }
 }
 
