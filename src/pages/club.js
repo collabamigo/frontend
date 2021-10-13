@@ -384,8 +384,10 @@ class ClubHomePage extends Component {
                 </div>
 
             </div>
+                </div>
+            </div>
             
-        ));
+        );
     }
 }
 
