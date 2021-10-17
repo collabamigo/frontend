@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import backend from "../../env";
 // import Image from 'react-bootstrap/Image'
 import Clublist from 'components/ClubList/ClubList.js';
-import {clubDetails, carouselControlNextIcon, carouselControlPrevIcon} from "./club.module.css"
+import {clubDetails} from "./club.module.css"
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
@@ -254,12 +254,25 @@ class ClubHomePage extends Component {
 
                                 <div className={clubDetails}>
                                     <div>
-                                        Coordinators: {this.state.basicInformation.coordinators[0].name}, {this.state.basicInformation.coordinators[1].name}
+                                        Coordinators:
+                                        {' '}
+
+                                        {this.state.basicInformation.coordinators[0].name}
+                                        ,
+
+                                        {' '}
+
+                                        {this.state.basicInformation.coordinators[1].name}
                                     </div>
+
                                     <div>
-                                        Member Size: {this.state.basicInformation.memberSize}
+                                        Member Size:
+                                        {' '}
+
+                                        {this.state.basicInformation.memberSize}
                                     </div>
                                 </div>
+
                                 <hr />
 
                                 <div className="d-flex">
@@ -326,6 +339,7 @@ class ClubHomePage extends Component {
                             </Card.Title>
 
                             <br />
+
                             <Card.Text className="card-text h5 text-muted col-12">
                                 <div>
                                     <Clublist
@@ -346,7 +360,7 @@ class ClubHomePage extends Component {
                 </div>
 
             </div>
-            
+
         );
     }
 }
