@@ -3,11 +3,10 @@ import React, { Component } from 'react';
 // import backend from "../../env";
 // import Image from 'react-bootstrap/Image'
 import Clublist from 'components/ClubList/ClubList.js';
-
+import {clubDetails} from "./club.module.css"
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
-// import {logo, clubName} from './club.module.css';
 import {isBrowser} from "../utils/auth";
 import {SvgIcon} from "../common/SvgIcon";
 // import Figure from 'react-bootstrap/Figure';
@@ -35,7 +34,7 @@ class ClubHomePage extends Component {
 
         this.state={
             basicInformation : {
-                Name: "Tasveer",
+                Name: "Salt & Pepper",
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 tagline: "The Photography Society of IIITD",
                 description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
@@ -115,10 +114,10 @@ class ClubHomePage extends Component {
                                 />
 
                                 <Card.Body>
-                                    <Card.Title className="text-start h1 pb-2">
+                                    <Card.Title className='fs-2 fw-bold text-start pb-2'>
                                         {this.state.basicInformation.Name}
                                     </Card.Title>
-                                    
+
 
                                     <Card.Subtitle className=" text-start pb-2">
                                         {this.state.basicInformation.tagline}
@@ -126,16 +125,16 @@ class ClubHomePage extends Component {
 
                                     <br />
 
-                                    <div className="col">
+                                    <div className="col text-center">
                                         <Card.Link
                                             className=""
                                             href="https://www.linkedin.com/in/"
                                             target="_blank"
                                         >
                                             <SvgIcon
-                                                height="24px"
+                                                height="20px"
                                                 src="linkedin.svg"
-                                                width="24px"
+                                                width="20px"
                                             />
                                         </Card.Link>
 
@@ -145,9 +144,9 @@ class ClubHomePage extends Component {
                                             target="_blank"
                                         >
                                             <SvgIcon
-                                                height="24px"
+                                                height="20px"
                                                 src="linkedin.svg"
-                                                width="24px"
+                                                width="20px"
                                             />
                                         </Card.Link>
 
@@ -156,9 +155,32 @@ class ClubHomePage extends Component {
                                             target="_blank"
                                         >
                                             <SvgIcon
-                                                height="30px"
+                                                height="25px"
                                                 src="github.svg"
-                                                width="30px"
+                                                width="25px"
+                                            />
+                                        </Card.Link>
+
+                                        <Card.Link
+                                            className=""
+                                            href="https://www.linkedin.com/in/"
+                                            target="_blank"
+                                        >
+                                            <SvgIcon
+                                                height="20px"
+                                                src="linkedin.svg"
+                                                width="20px"
+                                            />
+                                        </Card.Link>
+
+                                        <Card.Link
+                                            href="https://www.github.com/"
+                                            target="_blank"
+                                        >
+                                            <SvgIcon
+                                                height="25px"
+                                                src="github.svg"
+                                                width="25px"
                                             />
                                         </Card.Link>
                                     </div>
@@ -166,69 +188,6 @@ class ClubHomePage extends Component {
                                     {/* <Button variant="primary">
                                     Go somewhere
                                 </Button> */}
-                                </Card.Body>
-                            </Card>
-                        </div>
-
-                        <br />
-
-                        <div className="row">
-                            <Card style={{ width: '18rem' }}>
-                                <Card.Body>
-                                    <Card.Title className="text-start h1 pb-2">
-                                        Coordinators :
-                                    </Card.Title>
-
-                                    <ul className="">
-                                        <li className="text-start list-inline-item">
-                                            <span>
-                                                {this.state.basicInformation.coordinators[0].name}
-
-                                                {" "}
-
-                                                <SvgIcon
-                                                    height="20px"
-                                                    src="github.svg"
-                                                    width="20px"
-                                                />
-
-
-                                            </span>
-                                        </li>
-
-                                        <li className="text-start list-inline-item">
-                                            <span>
-                                                {this.state.basicInformation.coordinators[1].name}
-                                                
-                                                {" "}
-
-                                                <SvgIcon
-                                                    height="20px"
-                                                    src="github.svg"
-                                                    width="20px"
-                                                />
-                                            </span>
-                                        </li>
-                                    </ul>
-
-                                    {/* <Card.Subtitle className="mb-2 text-muted">
-                                        Card Subtitle
-                                    </Card.Subtitle> */}
-
-                                    <Card.Text className="text-start h6">
-                                        Member Size : 
-                                        {' '}
-
-                                        {this.state.basicInformation.memberSize}
-                                    </Card.Text>
-
-                                    {/* <Card.Link href="#">
-                                        Card Link
-                                    </Card.Link>
-
-                                    <Card.Link href="#">
-                                        Another Link
-                                    </Card.Link> */}
                                 </Card.Body>
                             </Card>
                         </div>
@@ -293,11 +252,32 @@ class ClubHomePage extends Component {
 
                                 <br />
 
+                                <div className={clubDetails}>
+                                    <div>
+                                        Coordinators:
+                                        {' '}
+
+                                        {this.state.basicInformation.coordinators[0].name}
+                                        ,
+
+                                        {' '}
+
+                                        {this.state.basicInformation.coordinators[1].name}
+                                    </div>
+
+                                    <div>
+                                        Member Size:
+                                        {' '}
+
+                                        {this.state.basicInformation.memberSize}
+                                    </div>
+                                </div>
+
                                 <hr />
 
                                 <div className="d-flex">
                                     <div className="col-5">
-                                        <div className="text-start h2">
+                                        <div className="text-center h2">
                                             Description
                                         </div>
 
@@ -306,14 +286,14 @@ class ClubHomePage extends Component {
                                         </p>
 
                                     </div>
-                                    
-                                    <div className="col-7">
-                                        <div className=" h2">
+
+                                    <div className="offset-2 col-5">
+                                        <div className="text-center h2">
                                             Announcements
                                         </div>
 
                                         <div className="">
-                                            <ul className="">
+                                            <ul className="list-unstyled">
                                                 <li >
                                                     <span className="material-icons-outlined">
                                                         notifications
@@ -346,31 +326,23 @@ class ClubHomePage extends Component {
                                 </div>
 
                             </div>
-                           
+
                         </Card.Body>
                     </Card>
-                                    
+
                     <br />
 
-                    <Card className="">
+                    <Card className="row">
                         <Card.Body className="mt-3">
-                            <Card.Title className="card-title fw-bold header-color text-left">
+                            <Card.Title className="card-title fs-3 header-color text-left">
                                 Events
                             </Card.Title>
 
                             <br />
 
-                            <Card.Text className="card-text h5 text-muted">
+                            <Card.Text className="card-text h5 text-muted col-12">
                                 <div>
-                                    skdjnljknsdnLVNlnSDVNLSDVlNSDVNkjNKDSL alive.ggffyyfyt
-                                </div>
-
-                                <br />
-
-                                <br />
-
-                                <div>
-                                    <Clublist 
+                                    <Clublist
                                         ItemList={this.state.basicInformation.eventList}
                                         Type="Event"
                                     />
@@ -388,7 +360,7 @@ class ClubHomePage extends Component {
                 </div>
 
             </div>
-            
+
         );
     }
 }

@@ -9,16 +9,15 @@ export default class Event extends React.Component{
     constructor(props) {
         super(props)
 
-        this.state={
-            basicInformation : {
-                Name: "Event Name",
-                logoLink: "https://via.placeholder.com/60X60",
-                poster: "https://via.placeholder.com/640X640",
-                description: "bleh bleh bleh",
-                clubName: "Club Name",
-                link: "https://via.placeholder.com"
-            }
-        }
+        // this.state={
+        //     basicInformation : {
+        //         Name: "Event Name",
+        //         logoLink: "https://via.placeholder.com/60X60",
+        //         poster: "https://via.placeholder.com/640X640",
+        //         description: "bleh bleh bleh",
+        //         clubName: "Club Name"
+        //     }
+        // }
     }
 
     shouldComponentUpdate() {
@@ -30,7 +29,7 @@ export default class Event extends React.Component{
             <div className="container-fluid">
                 <Card>
                     <div className="row no-gutters">
-                        <div className="col-auto ">
+                        <div className="col-auto">
                             <img
                                 alt=""
                                 className="img-fluid"
@@ -41,41 +40,29 @@ export default class Event extends React.Component{
                         <div className="col d-flex flex-column">
                             <div className="">
                                 <Card.Title className="">
-                                    <div className="d-flex justify-content-between">
-                                        <h1 className="col-9">
-                                            {this.state.basicInformation.Name}
-                                        </h1>          
+                                    <div className="">
+                                        <h1 className="">
+                                            Title
+                                            {' '}
+                                        </h1>
+                                    
 
-                                        <div className="col-3">
-                                            <div className="d-flex">
-                                                <span className="material-icons-outlined">
-                                                    date_range
-                                                </span>
+                                        <div>
+                                            <span>
+                                                Date & Time 
+                                                {" "}
+                                            </span>
 
-                                                <span>
-                                                    date and time
-                                                </span>
-                                            </div>
-
-                                            <div className="d-flex">
-                                                <span className="material-icons-outlined">
-                                                    location_on
-                                                </span>
-
-                                                <a href={this.state.basicInformation.link}>
-                                                    Zoom Link
-                                                </a>
-                                            </div>
+                                            <span>
+                                                Location 
+                                            </span>
                                         </div>
-
                                     </div>
-
-                                    <hr />
                                 </Card.Title>
 
-                                <Card.Body className="">
+                                <div className="">
                                     <div className="">
-                                        <div className="h2">
+                                        <div className="">
                                             Description
                                         </div>
 
@@ -84,20 +71,55 @@ export default class Event extends React.Component{
                                         </p>
 
                                     </div>
-                                </Card.Body>
+                                    
+                                    <div className="">
+                                        <div className="">
+                                            TL;DR
+                                        </div>
+
+                                        <div className="">
+                                            <ul className="">
+                                                <li >
+                                                    <span>
+                                                        hellloooo
+                                                    </span>
+                                                </li>
+
+                                                <li>
+                                                    <span>
+                                                        hellloooo
+                                                    </span>
+                                                </li>
+
+                                                <li>
+                                                    <span>
+                                                        hellloooo
+                                                    </span>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
 
                                 
                                 <div className="">
+                                    <Link
+                                        className=""
+                                        to="/help"
+                                    >
+                                        Hmm
+                                    </Link>
 
                                     <Link
-                                        className="btn-primary btn"
+                                        className=""
                                         to="/help"
                                     >
                                         Participate
                                     </Link>
 
                                     <Link
-                                        className="btn-primary btn"
+                                        className=""
                                         to="/help"
                                     >
                                         FaQ
