@@ -8,6 +8,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 export default class ClubCard extends Component {
+
     static propTypes = {
         Type: PropTypes.string.isRequired,
         element: PropTypes.objectOf(PropTypes.string).isRequired,
@@ -87,7 +88,7 @@ export default class ClubCard extends Component {
 
                                             {" "}
 
-                                    
+
 
                                         </span>
                                     </li>
@@ -95,7 +96,7 @@ export default class ClubCard extends Component {
                                     <li className="text-start list-inline-item">
                                         <span>
                                             {/* {this.state.basicInformation.coordinators[1].name} */}
-                                                
+
                                             {" "}
 
                                         </span>
