@@ -86,7 +86,7 @@ export default class AuthenticatedHome extends React.Component {
                                     {this.state.first}
                                 </Card.Title>
 
-                                <br/>
+                                <br />
 
                                 <Card.Text className="card-text text-muted h5">
                                     {this.state.third}
@@ -115,7 +115,7 @@ export default class AuthenticatedHome extends React.Component {
                                     GET SOLUTIONS
                                 </Card.Title>
 
-                                <br/>
+                                <br />
 
                                 <Card.Text className="card-text h5 text-muted ">
                                     <span>
@@ -123,7 +123,7 @@ export default class AuthenticatedHome extends React.Component {
                                     </span>
                                     Answer not found,
 
-                                    <br/>
+                                    <br />
                                     The button below can solve it.
                                 </Card.Text>
                             </Card.Body>
@@ -150,7 +150,7 @@ export default class AuthenticatedHome extends React.Component {
                                     LET&apos;S COLLABORATE
                                 </Card.Title>
 
-                                <br/>
+                                <br />
 
                                 <Card.Text className="card-text h5 text-muted">
                                     Find new projects to work. Apply for teams
@@ -184,7 +184,7 @@ export default class AuthenticatedHome extends React.Component {
                                     Associated Clubs
                                 </Card.Title>
 
-                                <br/>
+                                <br />
 
                                 <Card.Text className="card-text h5 text-muted">
                                     <div>
@@ -193,9 +193,9 @@ export default class AuthenticatedHome extends React.Component {
                                         and helping community alive.ggffyyfyt
                                     </div>
 
-                                    <br/>
+                                    <br />
 
-                                    <br/>
+                                    <br />
 
                                     <div>
                                         <ClubList
