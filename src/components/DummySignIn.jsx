@@ -1,23 +1,27 @@
 import React from "react";
+import {setToken} from "../utils/axios";
+import {setLoggedIn} from "../utils/auth";
+import {useRouter} from "next/router";
 
-class DummySignIn extends React.Component{
-    shouldComponentUpdate(){
-        return true;
+export default function DummySignIn() {
+    const router = useRouter();
+
+    const handleClick = () => {
+        setToken("00000.dummy.00000")
+        setLoggedIn()
+        router.push("/")
     }
 
-    render() {
         return (
             <div>
                 <button
                     className="btn btn-primary rounded"
-                    onClick={() => window.alert("hello")}
+                    onClick={handleClick}
                     type="button"
                 >
                     Continue without SignIn
                 </button>
             </div>
         )
-    }
 }
 
-export default DummySignIn;
