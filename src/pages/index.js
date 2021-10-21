@@ -120,8 +120,11 @@ export default class AuthenticatedHome extends React.Component {
                                     <br />
 
                                     <Card.Text className="card-text h5 text-muted ">
-                                        <span>Stack Overflow:404!</span>
+                                        <span>
+                                            Stack Overflow:404!
+                                        </span>
                                         Answer not found,
+
                                         <br />
                                         The button below can solve it.
                                     </Card.Text>
