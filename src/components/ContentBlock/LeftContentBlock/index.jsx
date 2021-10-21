@@ -12,6 +12,7 @@ import {
     MinPara,
 } from "./styles";
 import GoogleSignIn from "components/GoogleSignIn";
+import DummySignIn from "../../DummySignIn";
 
 
 function LeftContentBlock({
@@ -89,6 +90,11 @@ function LeftContentBlock({
                         stage={stage}
                         visibility
                     />
+
+                    <br />
+
+                    <DummySignIn />
+
                 </div>
             </div>
         </LeftContentSection >
