@@ -11,6 +11,7 @@ merging the PR.
 Use the table of contents icon <img src="https://raw.githubusercontent.com/github/docs/main/assets/images/table-of-contents.png" width="25" height="25" /> on the top
 left corner of the this document to get to a specific section of this guide quickly.
 
+NOTE: Any code contributed to this repository is the sole property of CollabAmigo.
 ## New contributor guide
 
 See the [README](README.md) to get an overview of the project. Here are some helpful resources to get you comfortable
