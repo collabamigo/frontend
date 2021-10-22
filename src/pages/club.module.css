@@ -1,28 +1,6 @@
 .clubDetails {
-    font-size: 1.1em;
-    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-}
-
-
-.carouselControlPrevIcon,
-.carouselControlNextIcon {
-  height: 100px;
-  width: 100px;
-  outline: black;
-  background-size: 100%, 100%;
-
-  background-image: none;
-}
-
-.carouselControlNextIcon:after
-{
-  content: '>';
-  font-size: 55px;
-  color: blue;
-}
-
-.carouselControlPrevIcon:after {
-  content: '<';
-  font-size: 55px;
-  color:blue;
+  font-size: 1.1em;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }

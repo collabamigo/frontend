@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import backend from "../../env";
 // import Image from 'react-bootstrap/Image'
 import Clublist from 'components/ClubList/ClubList.js';
-import {clubDetails,carouselControlNextIcon,carouselControlPrevIcon} from "./club.module.css"
+import {clubDetails} from "./club.module.css"
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
@@ -205,10 +205,23 @@ class ClubHomePage extends Component {
                             <div className="">
                                 <Carousel
                                     nextIcon={
-                                        <span className={carouselControlNextIcon} />
+                                        <span 
+                                            aria-hidden="true"
+                                            className="carousel-control-next-icon"
+                                            style={{
+                                                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")`,
+                                            }}
+
+                                        />
                                     }
                                     prevIcon={
-                                        <span className={carouselControlPrevIcon} />
+                                        <span 
+                                            aria-hidden="true"
+                                            className="carousel-control-prev-icon "
+                                            style={{
+                                                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e")`,
+                                            }}
+                                        />
                                     }
                                 >
                                     <Carousel.Item>
