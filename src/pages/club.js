@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import backend from "../../env";
 // import Image from 'react-bootstrap/Image'
 import Clublist from 'components/ClubList/ClubList.js';
-import {clubDetails} from "./club.module.css"
+import {clubDetails,carouselControlNextIcon,carouselControlPrevIcon} from "./club.module.css"
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
@@ -203,7 +203,14 @@ class ClubHomePage extends Component {
 
                         <Card.Body>
                             <div className="">
-                                <Carousel>
+                                <Carousel
+                                    nextIcon={
+                                        <span className={carouselControlNextIcon} />
+                                    }
+                                    prevIcon={
+                                        <span className={carouselControlPrevIcon} />
+                                    }
+                                >
                                     <Carousel.Item>
                                         <img
                                             alt="First slide"
