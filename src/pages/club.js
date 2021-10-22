@@ -378,9 +378,9 @@ class ClubHomePage extends Component {
 
                     <br />
 
-                </div>
+                    <Faq />
 
-                <Faq />
+                </div>
             </div>
 
         );

@@ -21,7 +21,8 @@ class Faq extends React.Component{
     render() {
         return (
             <div>
-                credits to Nintendo Switch Online Service FAQ for these dummy questions and answers
+                Credits to Nintendo Switch Online Service FAQ for these dummy questions and answers printed in console log
+                for testing
                 {console.log(this.temp)}
             </div>
         );
