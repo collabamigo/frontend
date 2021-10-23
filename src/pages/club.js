@@ -9,6 +9,7 @@ import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {isBrowser} from "../utils/auth";
 import {SvgIcon} from "../common/SvgIcon";
+import Faq from "./faq";
 // import Figure from 'react-bootstrap/Figure';
 
 
@@ -377,8 +378,9 @@ class ClubHomePage extends Component {
 
                     <br />
 
-                </div>
+                    <Faq />
 
+                </div>
             </div>
 
         );
