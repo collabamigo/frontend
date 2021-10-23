@@ -9,6 +9,7 @@ import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {isBrowser} from "../utils/auth";
 import {SvgIcon} from "../common/SvgIcon";
+import Faq from "./faq";
 // import Figure from 'react-bootstrap/Figure';
 
 
@@ -203,7 +204,27 @@ class ClubHomePage extends Component {
 
                         <Card.Body>
                             <div className="">
-                                <Carousel>
+                                <Carousel
+                                    nextIcon={
+                                        <span 
+                                            aria-hidden="true"
+                                            className="carousel-control-next-icon"
+                                            style={{
+                                                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")`,
+                                            }}
+
+                                        />
+                                    }
+                                    prevIcon={
+                                        <span 
+                                            aria-hidden="true"
+                                            className="carousel-control-prev-icon "
+                                            style={{
+                                                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e")`,
+                                            }}
+                                        />
+                                    }
+                                >
                                     <Carousel.Item>
                                         <img
                                             alt="First slide"
@@ -357,8 +378,9 @@ class ClubHomePage extends Component {
 
                     <br />
 
-                </div>
+                    <Faq />
 
+                </div>
             </div>
 
         );
