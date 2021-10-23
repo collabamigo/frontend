@@ -1,7 +1,8 @@
 
 import React from "react"
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import "./event.module.css";
+import Link from "common/Link";
 
 
 export default class Event extends React.Component{
@@ -36,57 +37,93 @@ export default class Event extends React.Component{
                             />
                         </div>
 
-                        <div className="col">
-                            <div className="p-2">
-                                <Card.Title className="row">
-                                    <div className="col d-flex">
+                        <div className="col d-flex flex-column">
+                            <div className="">
+                                <Card.Title className="">
+                                    <div className="">
                                         <h1 className="">
                                             Title
                                             {' '}
                                         </h1>
+                                    
 
+                                        <div>
+                                            <span>
+                                                Date & Time 
+                                                {" "}
+                                            </span>
 
-                                        <div className="col d-flex fs-6 justify-content-end p-2">
-                                            <div>
-                                                Date: Sunday, 25th Nov
-                                                <br />
-                                                Time: 4 p.m.
-
-                                                <br />
-                                                Location: Meet LInk
-                                            </div>
+                                            <span>
+                                                Location 
+                                            </span>
                                         </div>
                                     </div>
                                 </Card.Title>
 
                                 <div className="">
                                     <div className="">
-                                        <div className="fs-2 text-start">
-
+                                        <div className="">
                                             Description
                                         </div>
 
-                                        <p className="fs-5 text-start">
+                                        <p className="">
                                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                                         </p>
 
                                     </div>
+                                    
+                                    <div className="">
+                                        <div className="">
+                                            TL;DR
+                                        </div>
+
+                                        <div className="">
+                                            <ul className="">
+                                                <li >
+                                                    <span>
+                                                        hellloooo
+                                                    </span>
+                                                </li>
+
+                                                <li>
+                                                    <span>
+                                                        hellloooo
+                                                    </span>
+                                                </li>
+
+                                                <li>
+                                                    <span>
+                                                        hellloooo
+                                                    </span>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div className="buttons row justify-content-around pt-1">
-                                    <Button
-                                        className="col-8"
-                                        variant="primary"
+                                
+                                <div className="">
+                                    <Link
+                                        className=""
+                                        to="/help"
+                                    >
+                                        Hmm
+                                    </Link>
+
+                                    <Link
+                                        className=""
+                                        to="/help"
                                     >
                                         Participate
-                                    </Button>
+                                    </Link>
 
-                                    <Button
-                                        className="col-2 offset-1"
-                                        variant="primary"
+                                    <Link
+                                        className=""
+                                        to="/help"
                                     >
                                         FaQ
-                                    </Button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +135,7 @@ export default class Event extends React.Component{
                 </Card>
 
             </div>
-
+            
     )
     }
 }
