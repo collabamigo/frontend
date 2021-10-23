@@ -1,4 +1,4 @@
-/* eslint-disable react/require-default-props */
+
 import React from "react";
 import "react-bootstrap";
 import EventCard from "./eventCard";
@@ -80,5 +80,5 @@ export default function EventAdmin() {
 
 
 EventAdmin.propTypes = {
-    eventList: PropTypes.objectOf(PropTypes.string)
+    eventList: PropTypes.objectOf(PropTypes.string).isRequired
 };
