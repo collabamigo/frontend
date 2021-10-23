@@ -1,7 +1,7 @@
 /* eslint-disable react/require-default-props */
 import React from "react";
 import "react-bootstrap";
-import Card from "react-bootstrap/Card";
+import EventCard from "./eventCard";
 import PropTypes from "prop-types";
 
 const eventList = [
@@ -66,39 +66,12 @@ export default function EventAdmin() {
                 </div>
 
                 <div className="d-flex flex-row justify-content-center">
-                    <Card
-                        className="m-3"
-                        style={{ width: "20rem" }}
-                    >
-                        <Card.Img
-                            src="https://via.placeholder.com/200x100"
-                            variant="top"
+                    {props.map((event) => (
+                        <EventCard
+                            key={event}
+                            props={event}
                         />
-
-                        <Card.Body>
-                            <Card.Title className="d-flex justify-content-between">
-                                {props.name}
-
-                                <p className="fs-6 text-black-50">
-                                    {props.timestamp}
-                                </p>
-                            </Card.Title>
-
-                            <Card.Text>
-                                {props.description}
-                            </Card.Text>
-                        </Card.Body>
-
-                        <div className="d-flex flex-row justify-content-between text-xs px-3">
-                            <p className="fs-6">
-                                {props.clubName}
-                            </p>
-
-                            <p className="fs-6">
-                                Explore
-                            </p>
-                        </div>
-                    </Card>
+                    ))}
                 </div>
             </div>
         );
