@@ -1,7 +1,6 @@
 
 import React from "react"
 import Card from "react-bootstrap/Card";
-import Link from "common/Link";
 import Button from "react-bootstrap/Button";
 
 
@@ -45,13 +44,14 @@ export default class Event extends React.Component{
                                             Title
                                             {' '}
                                         </h1>
-                                    
+
 
                                         <div className="col d-flex fs-6 justify-content-end p-2">
                                             <div>
                                                 Date: Sunday, 25th Nov
                                                 <br />
                                                 Time: 4 p.m.
+
                                                 <br />
                                                 Location: Meet LInk
                                             </div>
@@ -75,14 +75,16 @@ export default class Event extends React.Component{
 
                                 <div className="buttons row justify-content-around pt-1">
                                     <Button
+                                        className="col-8"
                                         variant="primary"
-                                        className= "col-8">
+                                    >
                                         Participate
                                     </Button>
 
                                     <Button
+                                        className="col-2 offset-1"
                                         variant="primary"
-                                        className= "col-2 offset-1">
+                                    >
                                         FaQ
                                     </Button>
                                 </div>
@@ -96,7 +98,7 @@ export default class Event extends React.Component{
                 </Card>
 
             </div>
-            
+
     )
     }
 }
