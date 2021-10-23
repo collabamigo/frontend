@@ -1,7 +1,6 @@
 
 import React from "react"
 import Card from "react-bootstrap/Card";
-import {buttons, eventName, logo, poster} from "./event.module.css";
 import Link from "common/Link";
 import Button from "react-bootstrap/Button";
 
@@ -75,9 +74,17 @@ export default class Event extends React.Component{
                                 </div>
 
                                 <div className="buttons row justify-content-around pt-1">
-                                    <Button variant="primary" className = "col-8"> Participate </Button>
+                                    <Button
+                                        variant="primary"
+                                        className= "col-8">
+                                        Participate
+                                    </Button>
 
-                                    <Button variant="primary" className = "col-2 offset-1">  FaQ </Button>
+                                    <Button
+                                        variant="primary"
+                                        className= "col-2 offset-1">
+                                        FaQ
+                                    </Button>
                                 </div>
                             </div>
                         </div>
