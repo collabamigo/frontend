@@ -1,12 +1,8 @@
 import React from 'react';
 import Card from "react-bootstrap/Card";
 
-export default class eventCard {
-    constructor(props) {
-        this.props = props;
-    }
-
-    render() {
+export default function eventCard(props) {
+    return (
         <Card
             className="m-3"
             style={{ width: "20rem" }}
@@ -18,21 +14,21 @@ export default class eventCard {
 
             <Card.Body>
                 <Card.Title className="d-flex justify-content-between">
-                    {this.props.name}
+                    {props.name}
 
                     <p className="fs-6 text-black-50">
-                        {this.props.timestamp}
+                        {props.timestamp}
                     </p>
                 </Card.Title>
 
                 <Card.Text>
-                    {this.props.description}
+                    {props.description}
                 </Card.Text>
             </Card.Body>
 
             <div className="d-flex flex-row justify-content-between text-xs px-3">
                 <p className="fs-6">
-                    {this.props.clubName}
+                    {props.clubName}
                 </p>
 
                 <p className="fs-6">
@@ -40,5 +36,5 @@ export default class eventCard {
                 </p>
             </div>
         </Card>
-    }
+    )
 }
