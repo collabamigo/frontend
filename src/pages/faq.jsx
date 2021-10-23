@@ -6,7 +6,7 @@ class Faq extends React.Component{
         super(props);
     }
 
-    shouldComponentUpdate(): boolean {
+    shouldComponentUpdate(){
         return true
     }
 
