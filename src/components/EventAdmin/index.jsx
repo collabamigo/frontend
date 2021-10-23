@@ -66,7 +66,7 @@ export default function EventAdmin() {
                 </div>
 
                 <div className="d-flex flex-row justify-content-center">
-                    {props.map((event) => (
+                    {props.eventList.map((event) => (
                         <EventCard
                             key={event}
                             props={event}
@@ -77,11 +77,8 @@ export default function EventAdmin() {
         );
     // }
 }
-    
+
 
 EventAdmin.propTypes = {
-    clubName: PropTypes.string,
-    description: PropTypes.string,
-    name: PropTypes.string,
-    timestamp: PropTypes.string,
+    eventList: PropTypes.objectOf(PropTypes.string)
 };
