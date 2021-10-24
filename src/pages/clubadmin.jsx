@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 // import axios from "utils/axios";
 // import backend from "../../env";
 // import Image from 'react-bootstrap/Image'
@@ -19,7 +19,7 @@ function useQuery() {
     return null
 }
 
-class ClubHomePage extends Component {
+class ClubAdminPage extends Component {
     static propTypes = {
         clubName : PropTypes.string.isRequired,
     }
@@ -42,18 +42,18 @@ class ClubHomePage extends Component {
                 coordinators:[
                     {
                         name:"Tushar Singh",
-                        email:"heemankv@gmail.com",
+                        email:"shikhar@gmail.com",
                     },
                     {
                         name:"Prutyuy Singh",
-                        email:"heemankv@gmail.com",
+                        email:"shikhar@gmail.com",
                     },
                 ],
                 memberSize: 10,
                 socialmediaLink: {
-                    instagram : "https://www.instagram.com/heemank_v",
-                    linkedin : "https://www.linkedin.com/heemank_v",
-                    facebook : "https://www.facebook.com/heemank_v",
+                    instagram : "https://www.instagram.com/shikhar",
+                    linkedin : "https://www.linkedin.com/shikhar",
+                    facebook : "https://www.facebook.com/shikhar",
                     website : "https://www.collabconnect.com/404",
                 },
                 joinDate:"26122020",
@@ -80,7 +80,7 @@ class ClubHomePage extends Component {
 
     componentDidMount() {
         console.log(this.props.clubName)
-        var caller = null;
+        let caller = null;
         if(isBrowser())
         {
             caller = this.query.get("name");
@@ -98,6 +98,19 @@ class ClubHomePage extends Component {
         return true;
     }
 
+    handleEditMain() {
+        console.log("description")
+    }
+
+    handleEditEvents() {
+        console.log("events")
+    }
+
+    handleEditPanel(){
+        console.log("panel")
+    }
+
+
     render(){
         console.log(this.state.basicInformation)
         console.log(this.props.clubName)
@@ -109,6 +122,15 @@ class ClubHomePage extends Component {
                     <div className="position-fixed">
                         <div className="row">
                             <Card style={{ width: '18rem' }}>
+                                
+                                <span
+                                    className="material-icons pt-3"
+                                    onClick={this.handleEditPanel}
+                                    type="button"
+                                >
+                                    edit
+                                </span>
+                                
                                 <Card.Img
                                     src={this.state.basicInformation.logoLink}
                                     variant="top"
@@ -186,9 +208,6 @@ class ClubHomePage extends Component {
                                         </Card.Link>
                                     </div>
 
-                                    {/* <Button variant="primary">
-                                    Go somewhere
-                                </Button> */}
                                 </Card.Body>
                             </Card>
                         </div>
@@ -201,17 +220,16 @@ class ClubHomePage extends Component {
                             <div className="">
                                 <Carousel
                                     nextIcon={
-                                        <span 
+                                        <span
                                             aria-hidden="true"
                                             className="carousel-control-next-icon"
                                             style={{
                                                 backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")`,
                                             }}
-
                                         />
                                     }
                                     prevIcon={
-                                        <span 
+                                        <span
                                             aria-hidden="true"
                                             className="carousel-control-prev-icon "
                                             style={{
@@ -219,7 +237,7 @@ class ClubHomePage extends Component {
                                             }}
                                         />
                                     }
-                                >
+                                >                                    
                                     <Carousel.Item>
                                         <img
                                             alt="First slide"
@@ -269,6 +287,14 @@ class ClubHomePage extends Component {
                                 <br />
 
                                 <div className={clubDetails}>
+                                    <span
+                                        className="material-icons pt-3 btn-warning"
+                                        onClick={this.handleEditMain}
+                                        type="button"
+                                    >
+                                        edit
+                                    </span>
+
                                     <div>
                                         Coordinators:
                                         {' '}
@@ -316,7 +342,7 @@ class ClubHomePage extends Component {
                                                     </span>
 
                                                     <span>
-                                                        hellloooo
+                                                        halloo
                                                     </span>
                                                 </li>
 
@@ -352,7 +378,18 @@ class ClubHomePage extends Component {
                         <Card.Body className="mt-3">
                             <Card.Title className="card-title fs-3 header-color text-left">
                                 Events
+                                {" "}
+
+                                <span
+                                    className="material-icons pt-3"
+                                    onClick={this.handleEditEvents}
+                                    type="button"
+                                >
+                                    edit
+                                </span>
                             </Card.Title>
+
+
 
                             <br />
 
@@ -382,4 +419,4 @@ class ClubHomePage extends Component {
     }
 }
 
-export default ClubHomePage;
+export default ClubAdminPage;
