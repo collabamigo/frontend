@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import Clublist from 'components/ClubList/ClubList.js';
+import {edit_button} from "./clubadmin.module.css";
 import {clubDetails} from "./club.module.css"
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
-import {isBrowser} from "../utils/auth";
 import {SvgIcon} from "../common/SvgIcon";
 import Faq from "./faq";
 
@@ -66,10 +66,6 @@ class ClubAdminPage extends Component {
     componentDidMount() {
         console.log(this.state.modalState)
         let caller = null;
-        if(isBrowser())
-        {
-            caller = this.query.get("name");
-        }
         console.log(caller,"hellooo")
         // axios.get("/club/" + caller)
         //     .then((res) => {
@@ -280,7 +276,7 @@ class ClubAdminPage extends Component {
 
                                 <div className={clubDetails}>
                                     <span
-                                        className="material-icons pt-3 btn-warning"
+                                        className={"material-icons pt-3 btn-warning " + edit_button}
                                         onClick={this.handleEditMain}
                                         type="button"
                                     >
