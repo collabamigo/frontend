@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-// import axios from "utils/axios";
-// import backend from "../../env";
-// import Image from 'react-bootstrap/Image'
 import Clublist from 'components/ClubList/ClubList.js';
 import {clubDetails} from "./club.module.css"
 import PropTypes from "prop-types";
@@ -10,14 +7,6 @@ import Carousel from 'react-bootstrap/Carousel'
 import {isBrowser} from "../utils/auth";
 import {SvgIcon} from "../common/SvgIcon";
 import Faq from "./faq";
-// import Figure from 'react-bootstrap/Figure';
-
-
-function useQuery() {
-    if (isBrowser())
-        return new URLSearchParams(window.location.search);
-    return null
-}
 
 class ClubAdminPage extends Component {
     static propTypes = {
@@ -27,13 +16,8 @@ class ClubAdminPage extends Component {
     constructor(props) {
         super(props)
 
-        this.query = useQuery()
 
-        if (this.query)
-            this.name = this.query.get("name")
-
-
-        this.state={
+        this.state = {
             basicInformation : {
                 Name: "Salt & Pepper",
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
@@ -72,14 +56,14 @@ class ClubAdminPage extends Component {
                     {name: "Event10", logo: "https://via.placeholder.com/70X70"},
                     {name: "Event11", logo: "https://via.placeholder.com/70X70"},
                 ],
-            }
+            },
+            modalState: false
         }
-
-
     }
 
+
     componentDidMount() {
-        console.log(this.props.clubName)
+        console.log(this.state.modalState)
         let caller = null;
         if(isBrowser())
         {
@@ -96,6 +80,13 @@ class ClubAdminPage extends Component {
 
     shouldComponentUpdate () {
         return true;
+    }
+
+
+    setModalState(value) {
+        this.setState({
+            modalState: value
+        })
     }
 
     handleEditMain() {
@@ -122,7 +113,7 @@ class ClubAdminPage extends Component {
                     <div className="position-fixed">
                         <div className="row">
                             <Card style={{ width: '18rem' }}>
-                                
+
                                 <span
                                     className="material-icons pt-3"
                                     onClick={this.handleEditPanel}
@@ -130,7 +121,7 @@ class ClubAdminPage extends Component {
                                 >
                                     edit
                                 </span>
-                                
+
                                 <Card.Img
                                     src={this.state.basicInformation.logoLink}
                                     variant="top"
@@ -237,7 +228,7 @@ class ClubAdminPage extends Component {
                                             }}
                                         />
                                     }
-                                >                                    
+                                >
                                     <Carousel.Item>
                                         <img
                                             alt="First slide"
