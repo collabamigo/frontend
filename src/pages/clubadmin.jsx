@@ -59,6 +59,7 @@ class ClubAdminPage extends Component {
             },
             modalState: false
         }
+        this.setModalState = this.setModalState.bind(this)
     }
 
 
