@@ -22,7 +22,7 @@ export default class landingPage extends Component {
 
     render() {
         return (
-            <div className="row mt-5">
+            <div className=" row mt-5">
                 <div className={dynamic_left + " col-md-8"} >
                     <div className="row m-2">
                         <div className="col-md-10">

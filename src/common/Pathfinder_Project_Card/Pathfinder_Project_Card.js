@@ -13,19 +13,31 @@ function Pathfinder_Project_Card (props) {
     //         props.onVote(props.key_value, 1)
     // }
 
-    // function handleDownVote(){
-    //     if (props.voteValue === -1)
-    //         props.onVote(props.key_value, 0)
-    //     else
-    //         props.onVote(props.key_value, -1)
-    // }
+    var x;
+    if(props.Is_Bookmarked){
+        x = "bookmark";
+    }
+    else{
+        x = "bookmark_border";
+    }
+
+    const [bookmark, setbookmark] = useState(x);
+
+    function handleBookmark(){
+        if(bookmark === "bookmark"){
+            setbookmark("bookmark_border");
+        }
+        else{
+            setbookmark("bookmark");
+        }        
+    }
 
     // function handleSubmit(e, message, teacher_id){
     //     props.onConnect(message, teacher_id)
     //     e.preventDefault()
     // }
 
-    // const [message, setMessage] = useState("");
+    
 
     // const connectPopover = (
     //     <Popover id="popover-basic">
@@ -186,12 +198,16 @@ function Pathfinder_Project_Card (props) {
                 <Card.Title>
                     <div className="row">
                         <div className="col-9">
-                            Project Name
+                            {props.Project_Name}
                         </div>
 
                         <div className="col-3">
-                            <span className="material-icons">
-                                bookmark_border
+                            <span
+                                className="material-icons"
+                                onClick={handleBookmark}
+                                type="button"
+                            >
+                                {bookmark}
                             </span>
                         </div>
                     </div>
@@ -201,9 +217,7 @@ function Pathfinder_Project_Card (props) {
                 <Card.Body>
                     <div className="row">
                         <Card.Text className="col-md-8">
-                            This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This card has even longer content than the first to
-                            show that equal height action.
+                            {props.Basic_Description}
                         </Card.Text>
 
                         <div className="col-md-4">
@@ -213,6 +227,9 @@ function Pathfinder_Project_Card (props) {
 
                             <div>
                                 Contact
+                                {props.Ongoing}
+
+                                {props.Contact}
                             </div>
                         </div>
 
@@ -224,7 +241,10 @@ function Pathfinder_Project_Card (props) {
 
             <Card.Footer>
                 <small className="text-muted">
-                    Submitted on: 3rd October 2021
+                    Submitted on: 
+                    {' '}
+
+                    {props.Submitted}
                 </small>
             </Card.Footer>
         </Card>
@@ -234,28 +254,19 @@ function Pathfinder_Project_Card (props) {
 }
 
 Pathfinder_Project_Card.propTypes = {
-    Git:PropTypes.string.isRequired,
-    batch:PropTypes.string.isRequired,
-    className: PropTypes.string,
-    course:PropTypes.string.isRequired,
-    key_value: PropTypes.string.isRequired,
-    linked:PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    onConnect: PropTypes.func,
-    onVote: PropTypes.func,
-    showConnect: PropTypes.bool,
-    showVoting: PropTypes.bool,
-    voteValue: PropTypes.number,
-
+    Basic_Description: PropTypes.string,
+    Contact: PropTypes.string.isRequired,
+    Is_Bookmarked: PropTypes.bool,
+    Ongoing: PropTypes.bool,
+    Project_Name : PropTypes.string,
+    Submitted: PropTypes.string.isRequired,
 }
 
 Pathfinder_Project_Card.defaultProps = {
-    className: "",
-    onConnect: () => {},
-    onVote: () => {},
-    showConnect: false,
-    showVoting: false,
-    voteValue: 0,
+    Basic_Description: "Lorem Ipsum",
+    Is_Bookmarked: false,
+    Ongoing: true,
+    Project_Name: "Project Name",
 }
 
 export default Pathfinder_Project_Card;
