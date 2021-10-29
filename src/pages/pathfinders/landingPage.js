@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
-import Card from 'react-bootstrap/Card'
-import PropTypes from 'prop-types'
+// import Card from 'react-bootstrap/Card'
+// import PropTypes from 'prop-types'
 import {dynamic_left} from "./landingPage.module.css";
 import {static_right} from "./landingPage.module.css";
-import Link from "common/Link";
+// import Link from "common/Link";
 import Button from 'react-bootstrap/Button'
 import CustomCard from "../../common/Pathfinder_Project_Card/Pathfinder_Project_Card.js";
 import CardGroup from 'react-bootstrap/CardGroup'
 import InputGroup from 'react-bootstrap/InputGroup';
-import SplitButton from 'react-bootstrap/SplitButton';
-import Dropdown from 'react-bootstrap/Dropdown';
+// import SplitButton from 'react-bootstrap/SplitButton';
+// import Dropdown from 'react-bootstrap/Dropdown';
 import FormControl from 'react-bootstrap/FormControl';
 
 export default class landingPage extends Component {
-    static propTypes = {
-        prop: PropTypes
-    }
+    // static propTypes = {
+    //     prop: PropTypes
+    // }
     shouldComponentUpdate(){
         return true;
     }
@@ -30,8 +30,8 @@ export default class landingPage extends Component {
                             <InputGroup className="">
                                 <FormControl
                                     aria-describedby="basic-addon2"
-                                    aria-label="Recipient's username"
-                                    placeholder="Recipient's username"
+                                    aria-label="Project Name"
+                                    placeholder="Search Project via Name"
                                 />
                                 
                                 <Button
@@ -96,7 +96,7 @@ export default class landingPage extends Component {
                         </div>
 
                         <div>
-                            <span className="h1">
+                            <span className="h4">
                                 Guidelines and details
                             </span>
 
@@ -106,7 +106,7 @@ export default class landingPage extends Component {
                         </div>
 
                         <div>
-                            <span className="h1">
+                            <span className="h4">
                                 Guidelines and details
                             </span>
 
@@ -120,8 +120,10 @@ export default class landingPage extends Component {
                                 className="col-md-8 btn btn-primary mt-2 ml-1"
                                 onClick={() => console.log("hello")}
                                 type="button"
-                            >
-                                Send
+                            >   
+                                <span className="h4">
+                                    Submit and Secure
+                                </span>
                             </button>
 
                             <button
@@ -129,7 +131,9 @@ export default class landingPage extends Component {
                                 onClick={() => console.log("hello")}
                                 type="button"
                             >
-                                Send
+                                <span className="material-icons">
+                                    help_outline
+                                </span>
                             </button>
                         </div>
                     </div>
