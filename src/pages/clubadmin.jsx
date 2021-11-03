@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import Clublist from 'components/ClubList/ClubList.js';
-import {edit_button} from "./clubadmin.module.css";
+// import {edit_button} from "./clubadmin.module.css";
 import {clubDetails} from "./club.module.css"
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "../common/SvgIcon";
 import Faq from "./faq";
+import Button from "react-bootstrap/Button";
+import {Modal} from "react-bootstrap";
+
+
 
 class ClubAdminPage extends Component {
     static propTypes = {
@@ -15,9 +19,11 @@ class ClubAdminPage extends Component {
 
     constructor(props) {
         super(props)
-
+        this.handleShow = this.handleShow.bind(this);
+		this.handleClose = this.handleClose.bind(this);
 
         this.state = {
+            show: false,
             basicInformation : {
                 Name: "Salt & Pepper",
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
@@ -57,14 +63,12 @@ class ClubAdminPage extends Component {
                     {name: "Event11", logo: "https://via.placeholder.com/70X70"},
                 ],
             },
-            modalState: false
+
         }
-        this.setModalState = this.setModalState.bind(this)
     }
 
-
     componentDidMount() {
-        console.log(this.state.modalState)
+        console.log(this.state.handleModalState)
         let caller = null;
         console.log(caller,"hellooo")
         // axios.get("/club/" + caller)
@@ -79,15 +83,58 @@ class ClubAdminPage extends Component {
         return true;
     }
 
+    handleClose (){
+		this.setState({ show: false });
+	}
 
-    setModalState(value) {
-        this.setState({
-            modalState: value
-        })
-    }
+	handleShow () {
+		this.setState({ show: true });
+	}
+
 
     handleEditMain() {
         console.log("description")
+        return (
+            <>
+                <Button
+                    onClick={() => this.handleShow}
+                    variant="primary"
+                >
+                    Launch static backdrop modal
+                </Button>
+
+                <Modal
+                    backdrop="static"
+                    keyboard={false}
+                    onHide={() => this.handleClose}
+                    show={() => this.state.show}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Modal title
+                        </Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        I will not close if you click outside me.even try to press
+                        escape key.
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button
+                            onClick={() => this.handleClose}
+                            variant="secondary"
+                        >
+                            Close
+                        </Button>
+
+                        <Button variant="primary">
+                            Understood
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
+  );
     }
 
     handleEditEvents() {
@@ -95,6 +142,7 @@ class ClubAdminPage extends Component {
     }
 
     handleEditPanel(){
+
         console.log("panel")
     }
 
@@ -111,13 +159,17 @@ class ClubAdminPage extends Component {
                         <div className="row">
                             <Card style={{ width: '18rem' }}>
 
-                                <span
-                                    className="material-icons pt-3"
+                                <button
+                                    className="btn btn-outline-warning col-2 "
                                     onClick={this.handleEditPanel}
                                     type="button"
                                 >
-                                    edit
-                                </span>
+                                    <span
+                                        className="material-icons"
+                                    >
+                                        edit
+                                    </span>
+                                </button>
 
                                 <Card.Img
                                     src={this.state.basicInformation.logoLink}
@@ -275,13 +327,18 @@ class ClubAdminPage extends Component {
                                 <br />
 
                                 <div className={clubDetails}>
-                                    <span
-                                        className={"material-icons pt-3 btn-warning " + edit_button}
+                                    <button
+                                        className="btn btn-outline-warning"
                                         onClick={this.handleEditMain}
                                         type="button"
                                     >
-                                        edit
-                                    </span>
+                                        <span
+                                            className="material-icons"
+                                        >
+                                            edit
+                                        </span>
+                                    </button>
+                                    
 
                                     <div>
                                         Coordinators:
