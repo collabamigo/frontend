@@ -68,7 +68,6 @@ class ClubAdminPage extends Component {
     }
 
     componentDidMount() {
-        console.log(this.state.handleModalState)
         let caller = null;
         console.log(caller,"hellooo")
         // axios.get("/club/" + caller)
