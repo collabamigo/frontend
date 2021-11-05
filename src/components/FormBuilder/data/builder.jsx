@@ -24,12 +24,12 @@ export default {
       message: "You can start adding fields with Input Creator.",
       options: "Options",
       validation: "Show validation",
-      generate: "Generate Form",
+      // generate: "Generate Form",
     },
   },
   code: {
     en: {
-      title: "Code",
+      title: "Preview",
       description: `As you are making changes over the form, the code section will be updated and you can copy the code as well.`,
     },
   },

@@ -8,7 +8,7 @@ import colors from "../../styles/colors";
 import generateCode from "../LogicFormBuilder/GenerateCode";
 // import copyClipBoard from "./utils/copyClipBoard"
 // import Footer from "./Footer"
-import Popup from "./Popup";
+// import Popup from "./Popup";
 // import LearnMore from "./learnMore"
 // import goToBuilder from "./utils/goToBuilder"
 import builder from "./data/builder";
@@ -19,6 +19,7 @@ import * as containerStyles from "../../styles/container.module.css"
 import * as typographyStyles from "../../styles/typography.module.css";
 import * as styles from "./BuildForm.module.css";
 import CodeArea from "./CodeArea";
+import {LiveEditor, LiveError, LivePreview, LiveProvider} from "react-live";
 
 const { useState, useRef, useEffect } = React;
 
@@ -146,7 +147,8 @@ export default function FormBuilder({
                     </h2>
 
                     <p style={{ fontSize: 14 }}>
-                        <Popup iconOnly />
+                        {/*fffffffffffffff*/}
+                        {/*<Popup iconOnly />*/}
 
                         {builder.layout["en"].message}
                     </p>
@@ -178,7 +180,7 @@ export default function FormBuilder({
                     </h2>
 
                     <p style={{fontSize: 14}}>
-                        <Popup iconOnly />
+                        {/*<Popup iconOnly />*/}
 
                         {builder.inputCreator["en"].description}
                     </p>
@@ -480,7 +482,7 @@ export default function FormBuilder({
                     </h2>
 
                     <p style={{ fontSize: 14 }}>
-                        <Popup iconOnly />
+                        {/*<Popup iconOnly />*/}
 
                         {builder.code["en"].description}
                     </p>
@@ -504,6 +506,10 @@ export default function FormBuilder({
             </div> */}
 
                         <CodeArea rawData={generateCode(formData, isV7)} />
+
+                        <LiveProvider code={generateCode(formData, isV7)}>
+                            <LivePreview />
+                        </LiveProvider>
                     </section>
                 </section>
             </div>

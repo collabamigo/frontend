@@ -1,14 +1,9 @@
 export default (formData, isV7) => {
-    return `import React from 'react';
-  import { useForm } from 'react-hook-form';
-  
-  export default function App() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-    console.log(errors);
+    return (`
+  () => {
     
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form>
   ${
     Array.isArray(formData)
       ? formData.reduce(
@@ -115,7 +110,7 @@ export default (formData, isV7) => {
   
             const register = isV7
               ? `{...register${attributes}}`
-              : `name="${name}" ref={register${attributes}`
+              : `name="${name}"`
   
             if (type === "textarea") {
               const select = `      <textarea ${register} />\n`
@@ -134,5 +129,5 @@ export default (formData, isV7) => {
         <input type="submit" />
       </form>
     );
-  }`
+  }`)
   }
