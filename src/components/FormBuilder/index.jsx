@@ -19,7 +19,7 @@ import * as containerStyles from "../../styles/container.module.css"
 import * as typographyStyles from "../../styles/typography.module.css";
 import * as styles from "./BuildForm.module.css";
 import CodeArea from "./CodeArea";
-import {LiveEditor, LiveError, LivePreview, LiveProvider} from "react-live";
+import {LivePreview, LiveProvider} from "react-live";
 
 const { useState, useRef, useEffect } = React;
 
@@ -147,8 +147,6 @@ export default function FormBuilder({
                     </h2>
 
                     <p style={{ fontSize: 14 }}>
-                        {/*fffffffffffffff*/}
-                        {/*<Popup iconOnly />*/}
 
                         {builder.layout["en"].message}
                     </p>
@@ -505,11 +503,13 @@ export default function FormBuilder({
               </button>
             </div> */}
 
-                        <CodeArea rawData={generateCode(formData, isV7)} />
+
 
                         <LiveProvider code={generateCode(formData, isV7)}>
                             <LivePreview />
                         </LiveProvider>
+
+                        <CodeArea rawData={generateCode(formData, isV7)} />
                     </section>
                 </section>
             </div>
