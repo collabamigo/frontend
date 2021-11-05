@@ -9,6 +9,7 @@ import {SvgIcon} from "../common/SvgIcon";
 import Faq from "./faq";
 import Button from "react-bootstrap/Button";
 import {Modal} from "react-bootstrap";
+// import ClubDescriptionModal from "../components/Modals/clubDescription";
 
 
 
@@ -21,7 +22,7 @@ class ClubAdminPage extends Component {
         super(props)
         this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
-
+        this.handleEditMain = this.handleEditMain.bind(this)
         this.state = {
             show: false,
             basicInformation : {
@@ -91,49 +92,9 @@ class ClubAdminPage extends Component {
 	}
 
 
-    handleEditMain() {
+    handleEditMain(e) {
         console.log("description")
-        return (
-            <>
-                <Button
-                    onClick={() => this.handleShow}
-                    variant="primary"
-                >
-                    Launch static backdrop modal
-                </Button>
-
-                <Modal
-                    backdrop="static"
-                    keyboard={false}
-                    onHide={() => this.handleClose}
-                    show={() => this.state.show}
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            Modal title
-                        </Modal.Title>
-                    </Modal.Header>
-
-                    <Modal.Body>
-                        I will not close if you click outside me.even try to press
-                        escape key.
-                    </Modal.Body>
-
-                    <Modal.Footer>
-                        <Button
-                            onClick={() => this.handleClose}
-                            variant="secondary"
-                        >
-                            Close
-                        </Button>
-
-                        <Button variant="primary">
-                            Understood
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            </>
-  );
+        this.setState({basicInformation: e.target.value })
     }
 
     handleEditEvents() {
@@ -311,7 +272,7 @@ class ClubAdminPage extends Component {
                                         <img
                                             alt="Third slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformation.clubBanners[2]}
+                                            src={this.state.basicInformation.clubBanners    [2]}
                                         />
 
                                         <Carousel.Caption>
@@ -328,7 +289,7 @@ class ClubAdminPage extends Component {
                                 <div className={clubDetails}>
                                     <button
                                         className="btn btn-outline-warning"
-                                        onClick={this.handleEditMain}
+                                        onClick={this.handleShow}
                                         type="button"
                                     >
                                         <span
@@ -337,7 +298,50 @@ class ClubAdminPage extends Component {
                                             edit
                                         </span>
                                     </button>
-                                    
+
+                                    <Modal
+                                        backdrop="static"
+                                        keyboard={false}
+                                        onHide={this.handleClose}
+                                        show={this.state.show}
+                                    >
+                                        <Modal.Header>
+                                            <Modal.Title>
+                                                Edit Description
+                                            </Modal.Title>
+                                        </Modal.Header>
+
+                                        <Modal.Body>
+                                            <textarea
+                                                className="form-control fluid"
+                                                onChange={this.handleEditMain}
+                                                placeholder={this.state.basicInformation.description}
+                                                type='text'
+                                                value={this.state.basicInformation.description}
+                                            />
+
+                                            Current data:
+                                            <br />
+
+                                            {this.state.basicInformation.description}
+                                        </Modal.Body>
+
+                                        <Modal.Footer>
+                                            <Button
+                                                onClick={this.handleClose}
+                                                variant="secondary"
+                                            >
+                                                Close
+                                            </Button>
+
+                                            <Button
+                                                onClick={this.handleEditMain}
+                                                variant="primary"
+                                            >
+                                                Save Changes
+                                            </Button>
+                                        </Modal.Footer>
+                                    </Modal>
 
                                     <div>
                                         Coordinators:
