@@ -79,7 +79,8 @@ ClubAdminModal.defaultProps = {
 
 ClubAdminModal.propTypes = {
     handleClose: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
     initialValues: PropTypes.arrayOf(PropTypes.string).isRequired,
+    labels: PropTypes.arrayOf(PropTypes.string).isRequired,
     show: PropTypes.bool.isRequired,
-    labels: PropTypes.arrayOf(PropTypes.string).isRequired
 };
