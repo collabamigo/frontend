@@ -94,7 +94,16 @@ class ClubAdminPage extends Component {
 
     handleEditMain(e) {
         console.log("description")
-        this.setState({basicInformation: e.target.value })
+        this.setState((prevState) => {
+            const z=(
+            {
+                ...prevState,
+                basicInformation: {...(prevState.basicInformation),
+                    description: e.target.value}
+            })
+            console.log("zzzzzzzzzzz", z, prevState)
+            return z
+        })
     }
 
     handleEditEvents() {
@@ -320,10 +329,6 @@ class ClubAdminPage extends Component {
                                                 value={this.state.basicInformation.description}
                                             />
 
-                                            Current data:
-                                            <br />
-
-                                            {this.state.basicInformation.description}
                                         </Modal.Body>
 
                                         <Modal.Footer>
