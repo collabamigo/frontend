@@ -1,41 +1,41 @@
 import {Modal} from "react-bootstrap";
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import Button from "react-bootstrap/Button";
+import {Formik} from "formik";
+import PropTypes from "prop-types";
 
-class ClubAdminModal extends Component{
-    constructor(props) {
-        super(props)
-    }
-    componentDidMount() {
-        return true
-    }
+export default function ClubAdminModal({show, handleClose, titles, initialValues}) {
 
-    shouldComponentUpdate () {
-        return true;
-    }
-
-    render(){
         return(
             <Modal
                 backdrop="static"
                 keyboard={false}
-                onHide={this.handleClose}
-                show={this.state.show}
+                onHide={handleClose}
+                show={show}
             >
                 <Modal.Header>
                     <Modal.Title>
-                        Edit Description
+                        Generic title
                     </Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <textarea
-                        className="form-control fluid"
-                        onChange={this.handleEditMain}
-                        placeholder={this.state.basicInformation.description}
-                        type='text'
-                        value={this.state.basicInformation.description}
-                    />
+                    <Formik
+                        initialValues={{ ... initialValues
+                     }}
+                     onSubmit={() => {
+                         handleSubmit
+                     }}>
+
+                        <textarea
+                            className="form-control fluid"
+                            onChange={this.handleEditMain}
+                            placeholder={this.state.basicInformation.description}
+                            type='text'
+                            value={this.state.basicInformation.description}
+                        />
+                        
+                    </Formik>
 
                 </Modal.Body>
 
@@ -56,9 +56,17 @@ class ClubAdminModal extends Component{
                 </Modal.Footer>
             </Modal>
 
-            
+
         )
-    }
 }
 
-export default ClubAdminModal;
+ClubAdminModal.defaultProps = {
+
+};
+
+ClubAdminModal.propTypes = {
+    handleClose: PropTypes.func.isRequired,
+    initialValues: PropTypes.arrayOf(PropTypes.string).isRequired,
+    show: PropTypes.bool.isRequired,
+    titles: PropTypes.arrayOf(PropTypes.string).isRequired
+};

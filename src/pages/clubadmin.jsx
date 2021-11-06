@@ -9,7 +9,7 @@ import {SvgIcon} from "../common/SvgIcon";
 import Faq from "./faq";
 import Button from "react-bootstrap/Button";
 import {Modal} from "react-bootstrap";
-import ClubAdminModal from "../components/ClubAdmin/modal";
+import ClubAdminModal from "components/ClubAdmin/modal";
 // import ClubDescriptionModal from "../components/Modals/clubDescription";
 
 
