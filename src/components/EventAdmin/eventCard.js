@@ -8,13 +8,12 @@ export default function eventCard(props) {
             style={{ width: "20rem" }}
         >
             <Card.Img
-                src="https://via.placeholder.com/200x100"
+                src={props.link}
                 variant="top"
             />
 
             <Card.Body>
                 <Card.Title className="d-flex justify-content-between">
-                    {props.name}
 
                     <p className="fs-6 text-black-50">
                         {props.timestamp}

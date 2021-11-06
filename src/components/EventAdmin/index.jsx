@@ -6,29 +6,29 @@ import PropTypes from "prop-types";
 
 const eventList = [
     {
+        link: "https://via.placeholder.com/200x100",
         timestamp: "1634640509",
-        name: "Super magical Hackathon",
         clubName: "Byld",
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
     },
     {
+        link: "https://via.placeholder.com/200x100",
         timestamp: "1634640509",
-        name: "Super magical Hackathon",
         clubName: "GoogleDSC",
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
     },
     {
+        link: "https://via.placeholder.com/200x100",
         timestamp: "1634640509",
-        name: "Super magical Hackathon",
         clubName: "Byld",
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
     },
     {
+        link: "https://via.placeholder.com/200x100",
         timestamp: "1634640509",
-        name: "Super magical Hackathon",
         clubName: "GoogleDSC",
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
@@ -51,6 +51,7 @@ export default function EventAdmin() {
                             className="rounded"
                             id=""
                             name=""
+                            placeholder="Search"
                             type="search"
                         />
                     </div>
