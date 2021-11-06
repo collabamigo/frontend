@@ -1,11 +1,12 @@
 import {Modal} from "react-bootstrap";
-import React, {useState} from 'react';
+import React from 'react';
 import Button from "react-bootstrap/Button";
-import {Formik} from "formik";
+import {Form, Formik} from "formik";
 import PropTypes from "prop-types";
+import TextInput from "common/TextInput";
 
-export default function ClubAdminModal({show, handleClose, titles, initialValues}) {
 
+export default function ClubAdminModal({show, handleClose, labels, initialValues, handleSubmit}) {
         return(
             <Modal
                 backdrop="static"
@@ -19,41 +20,53 @@ export default function ClubAdminModal({show, handleClose, titles, initialValues
                     </Modal.Title>
                 </Modal.Header>
 
-                <Modal.Body>
-                    <Formik
-                        initialValues={{ ... initialValues
-                     }}
-                     onSubmit={() => {
-                         handleSubmit
-                     }}>
+                <Formik
+                    initialValues={{
+                        ...initialValues
+                    }}
+                    onSubmit={(values) => {
+                        handleSubmit(values)
+                    }}
+                >
+                    <Form>
+                        <Modal.Body>
 
-                        <textarea
-                            className="form-control fluid"
-                            onChange={this.handleEditMain}
-                            placeholder={this.state.basicInformation.description}
-                            type='text'
-                            value={this.state.basicInformation.description}
-                        />
-                        
-                    </Formik>
 
-                </Modal.Body>
+                            {
+                            Array.from({length: initialValues.length}, (v, k) => k).map(k => {
+                                return (
+                                    <TextInput
+                                        id={k}
+                                        key={k}
+                                        label={labels[k]}
+                                        name={k}
+                                        placeholder={labels[k]}
+                                        type="text"
+                                    />
+                                )
+                            })
+                        }
 
-                <Modal.Footer>
-                    <Button
-                        onClick={this.handleClose}
-                        variant="secondary"
-                    >
-                        Close
-                    </Button>
 
-                    <Button
-                        onClick={this.handleEditMain}
-                        variant="primary"
-                    >
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                            <Button
+                                onClick={handleClose}
+                                variant="secondary"
+                            >
+                                Close
+                            </Button>
+
+                            <Button
+                                type="submit"
+                                variant="primary"
+                            >
+                                Save Changes
+                            </Button>
+                        </Modal.Footer>
+                    </Form>
+                </Formik>
             </Modal>
 
 
@@ -68,5 +81,5 @@ ClubAdminModal.propTypes = {
     handleClose: PropTypes.func.isRequired,
     initialValues: PropTypes.arrayOf(PropTypes.string).isRequired,
     show: PropTypes.bool.isRequired,
-    titles: PropTypes.arrayOf(PropTypes.string).isRequired
+    labels: PropTypes.arrayOf(PropTypes.string).isRequired
 };

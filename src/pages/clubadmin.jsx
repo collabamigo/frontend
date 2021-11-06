@@ -26,6 +26,7 @@ class ClubAdminPage extends Component {
         this.handleEditMain = this.handleEditMain.bind(this)
         this.state = {
             show: false,
+            currentModal: "description",
             basicInformation : {
                 Name: "Salt & Pepper",
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
@@ -69,6 +70,10 @@ class ClubAdminPage extends Component {
         }
     }
 
+
+
+
+
     componentDidMount() {
         let caller = null;
         console.log(caller,"hellooo")
@@ -82,6 +87,21 @@ class ClubAdminPage extends Component {
 
     shouldComponentUpdate () {
         return true;
+    }
+
+    handleSubmitDescription(values) {
+        const description = values[0]
+        this.setState((prevState) => {
+            return (
+                {
+                    ...prevState,
+                    basicInformation: {
+                        ...(prevState.basicInformation),
+                        description: description
+                    }
+                })
+        })
+        this.handleCloseModal()
     }
 
     handleClose (){
@@ -114,6 +134,12 @@ class ClubAdminPage extends Component {
     handleEditPanel(){
 
         console.log("panel")
+    }
+
+    handleCloseModal() {
+        this.setState({
+            currentModal: null,
+        })
     }
 
 
@@ -309,7 +335,13 @@ class ClubAdminPage extends Component {
                                         </span>
                                     </button>
 
-                                    <ClubAdminModal />
+                                    <ClubAdminModal
+                                        handleClose={this.handleCloseModal.bind(this)}
+                                        handleSubmit={this.handleSubmitDescription.bind(this)}
+                                        initialValues={[this.state.basicInformation.description]}
+                                        labels={['Description']}
+                                        show={this.state.currentModal === 'description'}
+                                    />
 
                                     <div>
                                         Coordinators:
