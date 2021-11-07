@@ -6,9 +6,8 @@ import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "../common/SvgIcon";
-import Faq from "./faq";
 import ClubAdminModal from "components/ClubAdmin/modal";
-// import ClubDescriptionModal from "../components/Modals/clubDescription";
+import {CardBody} from "reactstrap";
 
 
 
@@ -64,10 +63,6 @@ class ClubAdminPage extends Component {
         }
     }
 
-
-
-
-
     componentDidMount() {
         let caller = null;
         console.log(caller,"hellooo")
@@ -98,11 +93,23 @@ class ClubAdminPage extends Component {
         this.handleCloseModal()
     }
 
-    handleEditEvents() {
+    handleSubmitEvent() {
         console.log("events")
     }
 
-    handleEditPanel(){
+    handleEditPanel(values){
+        const panel = values[0]
+        this.setState((prevState) => {
+            return (
+                {
+                    ...prevState,
+                    basicInformation: {
+                        ...(prevState.basicInformation),
+                        description: panel
+                    }
+                })
+        })
+        this.handleCloseModal()
         console.log("panel")
     }
 
@@ -217,10 +224,78 @@ class ClubAdminPage extends Component {
                                 </Card.Body>
                             </Card>
                         </div>
+
+                        {/*<div className="row">*/}
+
+                        {/*    <Card>*/}
+
+                        {/*        <button*/}
+
+                        {/*            className="btn btn-outline-warning col-2 pt-2"*/}
+
+                        {/*            onClick={this.handleEditPanel}*/}
+
+                        {/*            type="button"*/}
+
+                        {/*        >*/}
+
+                        {/*            <span*/}
+
+                        {/*                className="material-icons"*/}
+
+                        {/*            >*/}
+
+                        {/*                edit*/}
+
+                        {/*            </span>*/}
+
+                        {/*        </button>*/}
+                        
+                        {/*        <Card.Title className='fs-2 text-start'>*/}
+
+                        {/*            Coordinators:*/}
+
+                        {/*        </Card.Title>*/}
+                        
+                        {/*        <CardBody>*/}
+
+                        {/*            <div>*/}
+
+                        {/*                <ul>*/}
+
+                        {/*                    <li>*/}
+
+                        {/*                        {this.state.basicInformation.coordinators[0].name}*/}
+
+                        {/*                    </li>*/}
+                        
+                        {/*                    <li>*/}
+
+                        {/*                        {this.state.basicInformation.coordinators[1].name}*/}
+
+                        {/*                    </li>*/}
+
+                        {/*                </ul>*/}
+                        
+                        {/*                <br />*/}
+                        
+                        {/*                Member Size:*/}
+                        
+                        {/*                {" "}*/}
+                        
+                        {/*                {this.state.basicInformation.memberSize}*/}
+
+                        {/*            </div>*/}
+
+                        {/*        </CardBody>*/}
+
+                        {/*    </Card>*/}
+
+                        {/*</div>*/}
                     </div>
                 </div>
 
-                <div className="col-9">
+                <div className="col-9 justify-content-around">
                     <Card>
                         <Card.Body>
                             <div className="">
@@ -425,10 +500,6 @@ class ClubAdminPage extends Component {
                             </Card.Text>
                         </Card.Body>
                     </Card>
-
-                    <br />
-
-                    <br />
 
                     <br />
                 </div>
