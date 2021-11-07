@@ -30,6 +30,8 @@ $red: #f56565;
 $text-decoration-color: var($gray-400);
 $text-color: var($gray-800);
 $focus-ring-color: var($blue-500);
+
+$secondary: $gray-800;
 @import "~bootstrap/scss/_functions";
 @import "~bootstrap/scss/_variables";
 
@@ -37,8 +39,6 @@ $focus-ring-color: var($blue-500);
 
 
 
-$primary: pink;
-$dark: pink;
 @import "~bootstrap/scss/_mixins";
 @import "~bootstrap/scss/_root";
 /* import bootstrap to set changes */

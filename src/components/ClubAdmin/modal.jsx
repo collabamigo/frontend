@@ -13,7 +13,7 @@ export default function ClubAdminModal({show, handleClose, labels, initialValues
                 onHide={handleClose}
                 show={show}
             >
-                <div className="bg-dark  text-white">
+                <div className="bg-dark  text-white rounded-3">
                     <Modal.Header>
                         <Modal.Title>
                             Generic title
@@ -46,17 +46,17 @@ export default function ClubAdminModal({show, handleClose, labels, initialValues
                         }
                             </Modal.Body>
 
-                            <Modal.Footer>
+                            <Modal.Footer className="border-0">
                                 <Button
                                     onClick={handleClose}
-                                    variant="light"
+                                    variant="outline-light"
                                 >
                                     Close
                                 </Button>
 
                                 <Button
                                     type="submit"
-                                    variant="outline-light"
+                                    variant="light"
                                 >
                                     Save Changes
                                 </Button>

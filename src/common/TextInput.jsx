@@ -8,12 +8,17 @@ export default function TextInput ({label, ...props}){
     const [field, meta] = useField(props);
     return (
         <>
-            <label htmlFor={props.id || props.name}>
+            <label
+                className="fw-bold pb-2"
+                htmlFor={props.id || props.name}
+            >
                 {label}
             </label>
 
+            <br />
+
             <textarea
-                className="text-input"
+                className="text-input w-100 bg-secondary text-white border-secondary"
                 {...field}
                 {...props}
             />
