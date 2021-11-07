@@ -109,7 +109,7 @@ class ClubAdminPage extends Component {
                             facebook: values[0],
                             instagram: values[1],
                             linkedin: values[2],
-                            other: values[3]
+                            website: values[3],
                         }
                     }
                 })
