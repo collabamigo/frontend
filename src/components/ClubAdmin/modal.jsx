@@ -1,6 +1,5 @@
-import {Modal} from "react-bootstrap";
+import {Modal, Button} from "react-bootstrap";
 import React from 'react';
-import Button from "react-bootstrap/Button";
 import {Form, Formik} from "formik";
 import PropTypes from "prop-types";
 import TextInput from "common/TextInput";
@@ -14,23 +13,24 @@ export default function ClubAdminModal({show, handleClose, labels, initialValues
                 onHide={handleClose}
                 show={show}
             >
-                <Modal.Header>
-                    <Modal.Title>
-                        Generic title
-                    </Modal.Title>
-                </Modal.Header>
+                <div className="bg-dark  text-white">
+                    <Modal.Header>
+                        <Modal.Title>
+                            Generic title
+                        </Modal.Title>
+                    </Modal.Header>
 
-                <Formik
-                    initialValues={{
+                    <Formik
+                        initialValues={{
                         ...initialValues
                     }}
-                    onSubmit={(values) => {
+                        onSubmit={(values) => {
                         handleSubmit(values)
                     }}
-                >
-                    <Form>
-                        <Modal.Body>
-                            {
+                    >
+                        <Form>
+                            <Modal.Body>
+                                {
                             Array.from({length: initialValues.length}, (v, k) => k).map(k => {
                                 return (
                                     <TextInput
@@ -44,25 +44,26 @@ export default function ClubAdminModal({show, handleClose, labels, initialValues
                                 )
                             })
                         }
-                        </Modal.Body>
+                            </Modal.Body>
 
-                        <Modal.Footer>
-                            <Button
-                                onClick={handleClose}
-                                variant="secondary"
-                            >
-                                Close
-                            </Button>
+                            <Modal.Footer>
+                                <Button
+                                    onClick={handleClose}
+                                    variant="light"
+                                >
+                                    Close
+                                </Button>
 
-                            <Button
-                                type="submit"
-                                variant="primary"
-                            >
-                                Save Changes
-                            </Button>
-                        </Modal.Footer>
-                    </Form>
-                </Formik>
+                                <Button
+                                    type="submit"
+                                    variant="outline-light"
+                                >
+                                    Save Changes
+                                </Button>
+                            </Modal.Footer>
+                        </Form>
+                    </Formik>
+                </div>
             </Modal>
         )
 }
