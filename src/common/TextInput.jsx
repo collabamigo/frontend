@@ -18,10 +18,12 @@ export default function TextInput ({label, ...props}){
             <br />
 
             <textarea
-                className="text-input w-100 bg-secondary text-white border-secondary"
+                className="text-input w-100 bg-secondary text-white border-secondary pb-4"
                 {...field}
                 {...props}
             />
+
+            <br />
 
             {meta.touched && meta.error ? (
                 <div className="error">
