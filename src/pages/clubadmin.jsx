@@ -24,7 +24,7 @@ class ClubAdminPage extends Component {
         this.handleEditMain = this.handleEditMain.bind(this)
         this.state = {
             show: false,
-            currentModal: "description",
+            currentModal: null,
             basicInformation : {
                 Name: "Salt & Pepper",
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
@@ -323,7 +323,11 @@ class ClubAdminPage extends Component {
                                 <div className={clubDetails}>
                                     <button
                                         className="btn btn-outline-warning"
-                                        onClick={this.handleShow}
+                                        onClick={() => {
+                                            this.setState({
+                                                currentModal: "description",
+                                            });
+                                        }}
                                         type="button"
                                     >
                                         <span
