@@ -1,7 +1,6 @@
 
 import React from "react";
 import {magicSpan, CustomNavLink} from './DropdownMenu.module.css';
-import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "common/Link";
 import { isMobile } from "react-device-detect";
 import PropTypes from "prop-types";
