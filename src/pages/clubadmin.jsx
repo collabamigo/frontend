@@ -19,11 +19,7 @@ class ClubAdminPage extends Component {
 
     constructor(props) {
         super(props)
-        this.handleShow = this.handleShow.bind(this);
-		this.handleClose = this.handleClose.bind(this);
-        this.handleEditMain = this.handleEditMain.bind(this)
         this.state = {
-            show: false,
             currentModal: null,
             basicInformation : {
                 Name: "Salt & Pepper",
@@ -102,35 +98,11 @@ class ClubAdminPage extends Component {
         this.handleCloseModal()
     }
 
-    handleClose (){
-		this.setState({ show: false });
-	}
-
-	handleShow () {
-		this.setState({ show: true });
-	}
-
-
-    handleEditMain(e) {
-        console.log("description")
-        this.setState((prevState) => {
-            const z=(
-            {
-                ...prevState,
-                basicInformation: {...(prevState.basicInformation),
-                    description: e.target.value}
-            })
-            console.log("zzzzzzzzzzz", z, prevState)
-            return z
-        })
-    }
-
     handleEditEvents() {
         console.log("events")
     }
 
     handleEditPanel(){
-
         console.log("panel")
     }
 
@@ -341,7 +313,7 @@ class ClubAdminPage extends Component {
                                         handleClose={this.handleCloseModal.bind(this)}
                                         handleSubmit={this.handleSubmitDescription.bind(this)}
                                         initialValues={[this.state.basicInformation.description]}
-                                        labels={['Description']}
+                                        labels={['Description','Announcements']}
                                         show={this.state.currentModal === 'description'}
                                     />
 
@@ -459,9 +431,6 @@ class ClubAdminPage extends Component {
                     <br />
 
                     <br />
-
-                    <Faq />
-
                 </div>
             </div>
 

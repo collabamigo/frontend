@@ -30,8 +30,6 @@ export default function ClubAdminModal({show, handleClose, labels, initialValues
                 >
                     <Form>
                         <Modal.Body>
-
-
                             {
                             Array.from({length: initialValues.length}, (v, k) => k).map(k => {
                                 return (
@@ -46,8 +44,6 @@ export default function ClubAdminModal({show, handleClose, labels, initialValues
                                 )
                             })
                         }
-
-
                         </Modal.Body>
 
                         <Modal.Footer>
@@ -68,8 +64,6 @@ export default function ClubAdminModal({show, handleClose, labels, initialValues
                     </Form>
                 </Formik>
             </Modal>
-
-
         )
 }
 
