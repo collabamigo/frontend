@@ -12,7 +12,7 @@ export default function TextInput ({label, ...props}){
                 {label}
             </label>
 
-            <input
+            <textarea
                 className="text-input"
                 {...field}
                 {...props}
