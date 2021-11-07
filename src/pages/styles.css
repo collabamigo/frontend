@@ -68,10 +68,10 @@ body {
   transition: background 0.3s ease-in-out, color 0.6s ease-in-out;
 }
 
-.jumbotron{
-  color: var(--text-color-jumbotron);
-  background-color: var(--background-color-jumbotron) !important;
-}
+/*.jumbotron{*/
+/*  color: var(--text-color-jumbotron);*/
+/*  background-color: var(--background-color-jumbotron) !important;*/
+/*}*/
 
 
 .required label:after {
