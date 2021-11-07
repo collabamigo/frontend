@@ -57,6 +57,7 @@
     "react-sortablejs": "^1.5.1",
     "react-tagsinput": "^3.19.0",
     "reactstrap": "^8.10.0",
+    "sass": "^1.43.4",
     "sortablejs": "^1.14.0",
     "stream": "^0.0.2",
     "styled-components": "^5.3.1",
