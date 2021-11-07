@@ -98,14 +98,19 @@ class ClubAdminPage extends Component {
     }
 
     handleSubmitPanel(values){
-        const panel = values[0]
+        // const panel = values[0]
         this.setState((prevState) => {
             return (
                 {
                     ...prevState,
                     basicInformation: {
                         ...(prevState.basicInformation),
-                        socialmediaLink: panel
+                        socialmediaLink: {
+                            facebook: values[0],
+                            instagram: values[1],
+                            linkedin: values[2],
+                            other: values[3]
+                        }
                     }
                 })
         })
@@ -221,17 +226,6 @@ class ClubAdminPage extends Component {
                                                 height="20px"
                                                 src="linkedin.svg"
                                                 width="20px"
-                                            />
-                                        </Card.Link>
-
-                                        <Card.Link
-                                            href="https://www.github.com/"
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="25px"
-                                                src="github.svg"
-                                                width="25px"
                                             />
                                         </Card.Link>
                                     </div>
