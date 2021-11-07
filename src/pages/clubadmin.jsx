@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "../common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
-import {CardBody} from "reactstrap";
+// import {CardBody} from "reactstrap";
 
 
 
@@ -97,7 +97,7 @@ class ClubAdminPage extends Component {
         console.log("events")
     }
 
-    handleEditPanel(values){
+    handleSubmitPanel(values){
         const panel = values[0]
         this.setState((prevState) => {
             return (
@@ -105,7 +105,7 @@ class ClubAdminPage extends Component {
                     ...prevState,
                     basicInformation: {
                         ...(prevState.basicInformation),
-                        description: panel
+                        socialmediaLink: panel
                     }
                 })
         })
@@ -133,8 +133,12 @@ class ClubAdminPage extends Component {
                             <Card style={{ width: '18rem' }}>
 
                                 <button
-                                    className="btn btn-outline-warning col-2 "
-                                    onClick={this.handleEditPanel}
+                                    className="btn btn-outline-warning col-2"
+                                    onClick={() => {
+                                            this.setState({
+                                                currentModal: "panel",
+                                            });
+                                        }}
                                     type="button"
                                 >
                                     <span
@@ -143,6 +147,17 @@ class ClubAdminPage extends Component {
                                         edit
                                     </span>
                                 </button>
+                                
+                                <ClubAdminModal
+                                    handleClose={this.handleCloseModal.bind(this)}
+                                    handleSubmit={this.handleSubmitPanel.bind(this)}
+                                    initialValues={[this.state.basicInformation.socialmediaLink.facebook,
+                                    this.state.basicInformation.socialmediaLink.instagram,
+                                    this.state.basicInformation.socialmediaLink.linkedin,
+                                    this.state.basicInformation.socialmediaLink.website]}
+                                    labels={['Facebook','Instagram','LinkedIn','other']}
+                                    show={this.state.currentModal === 'panel'}
+                                />
 
                                 <Card.Img
                                     src={this.state.basicInformation.logoLink}
@@ -164,7 +179,7 @@ class ClubAdminPage extends Component {
                                     <div className="col text-center">
                                         <Card.Link
                                             className=""
-                                            href="https://www.linkedin.com/in/"
+                                            href={this.state.basicInformation.socialmediaLink.facebook}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -176,7 +191,7 @@ class ClubAdminPage extends Component {
 
                                         <Card.Link
                                             className=""
-                                            href="https://www.linkedin.com/in/"
+                                            href={this.state.basicInformation.socialmediaLink.instagram}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -187,7 +202,7 @@ class ClubAdminPage extends Component {
                                         </Card.Link>
 
                                         <Card.Link
-                                            href="https://www.github.com/"
+                                            href={this.state.basicInformation.socialmediaLink.linkedin}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -199,7 +214,7 @@ class ClubAdminPage extends Component {
 
                                         <Card.Link
                                             className=""
-                                            href="https://www.linkedin.com/in/"
+                                            href={this.state.basicInformation.socialmediaLink.website}
                                             target="_blank"
                                         >
                                             <SvgIcon
