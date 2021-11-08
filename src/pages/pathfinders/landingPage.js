@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 import {dynamic_left} from "./landingPage.module.css";
 import {static_right} from "./landingPage.module.css";
+import {box} from "./landingPage.module.css";
+
 // import Link from "common/Link";
 import Button from 'react-bootstrap/Button'
 import CustomCard from "../../common/Pathfinder_Project_Card/Pathfinder_Project_Card.js";
@@ -22,8 +24,8 @@ export default class landingPage extends Component {
 
     render() {
         return (
-            <div className=" row mt-5">
-                <div className={dynamic_left + " col-md-8"} >
+            <div className={box +" row mt-5"}>
+                <div className={dynamic_left + " col-md-8 "} >
                     <div className="row m-2">
                         <div className="col-md-10">
                             
