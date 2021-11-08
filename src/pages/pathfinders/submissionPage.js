@@ -53,16 +53,25 @@ export default class submissionPage extends Component {
 
                         <div className={dynamic_right + " col-sm-4 sidenav"}>
                             <div className="well">
-                                <span className="h1">
+                                <span className="h2">
                                     Guidlines to keep in mind
                                 </span>
                             </div>
 
+                            <br />
+
+                            <br />
+
+
                             <div className="well bg-danger">
+
+                                <br />
+
+                                <br />
+
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                 </p>
-                                
                                 
                             </div>
                         </div>
