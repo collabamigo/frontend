@@ -27,7 +27,7 @@ export default class submissionPage extends Component {
                 <br />
 
                 
-                <Card className={center + " bg-white container text-center m-5 "}>    
+                <Card className={center + " bg-white container text-center  "}>    
                     <div className="row content">
 
                         <div className={static_left +"  col-sm-8 text-left "}> 
