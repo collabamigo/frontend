@@ -40,13 +40,13 @@ export default class AuthenticatedHome extends React.Component {
 
     async componentDidMount() {
         if (await checkLoginStatus())
-        axios.get(backend + "club/club").then((res) => {
-            let clubLists = [];
-            for (let i = 0; i < res.data.length; i++) {
-                clubLists.push(res.data[i]);
-            }
-            this.setState({clubList: clubLists});
-        });
+            axios.get(backend + "club/club").then((res) => {
+                let clubLists = [];
+                for (let i = 0; i < res.data.length; i++) {
+                    clubLists.push(res.data[i]);
+                }
+                this.setState({clubList: clubLists});
+            });
         axios.get(backend + "connect/teacher?format=json").then((res) => {
             if (res.data.length)
                 this.setState({
