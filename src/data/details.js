@@ -1,7 +1,7 @@
 const details = [
     {
         id: 1,
-        link: "https://via.placeholder.com/200x100",
+        link: "https://via.placeholder.com/200x120",
         timestamp: "1634640509",
         name: "Git tutorial",
         clubName: "Byld",
@@ -10,7 +10,7 @@ const details = [
     },
     {
         id: 2,
-        link: "https://via.placeholder.com/200x100",
+        link: "https://via.placeholder.com/200x120",
         timestamp: "1634640509",
         name: "GCP event",
         clubName: "GoogleDSC",
@@ -19,7 +19,7 @@ const details = [
     },
     {
         id: 3,
-        link: "https://via.placeholder.com/200x100",
+        link: "https://via.placeholder.com/200x120",
         timestamp: "1634640509",
         name: "React Event",
         clubName: "Byld",
@@ -28,7 +28,7 @@ const details = [
     },
     {
         id: 4,
-        link: "https://via.placeholder.com/200x100",
+        link: "https://via.placeholder.com/200x120",
         timestamp: "1634640509",
         name: "AWS tutorial",
         clubName: "GoogleDSC",

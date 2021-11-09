@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import EventList from './evenList';
 import "react-bootstrap";
 import PropTypes from "prop-types";
+import * as styles from './eventadmin.module.css';
 
 export default function Search({ details }) {
     const [searchField, setSearchField] = useState("");
@@ -41,24 +42,26 @@ export default function Search({ details }) {
                 Events
             </h1>
 
-            <div className="w-100 d-flex flex-row my-4">
+            <div className="w-100 d-flex flex-md-row flex-column my-4">
                 <div className="w-75">
+
                     <input
-                        className="rounded"
+                        className=""
                         id=""
                         name=""
                         onChange={handleChange}
                         placeholder="Search"
+                        style={{ borderRadius: "15px"}}
                         type="search"
                     />
                 </div>
 
-                <div className="w-25 d-flex justify-content-center">
+                <div className="w-25 d-flex justify-content-center mt-md-0 mt-3">
                     <button
-                        className="p-3 border border-0 rounded"
+                        className={styles.createEventButton}
                         type="button"
                     >
-                        Create Event
+                        Create New Event
                     </button>
                 </div>
             </div>

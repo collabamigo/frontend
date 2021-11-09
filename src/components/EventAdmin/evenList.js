@@ -11,7 +11,7 @@ export default function EventList({ filteredEvents }) {
     })
 
     return (
-        <div className="d-flex flex-wrap justify-content-center">
+        <div className="d-flex flex-wrap">
             {filtered}
         </div>
     );
