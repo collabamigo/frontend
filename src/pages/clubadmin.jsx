@@ -1,59 +1,46 @@
-import React, { Component } from 'react';
-// import axios from "utils/axios";
-// import backend from "../../env";
-// import Image from 'react-bootstrap/Image'
+import React, {Component} from 'react';
 import Clublist from 'components/ClubList/ClubList.js';
+// import {edit_button} from "./clubadmin.module.css";
 import {clubDetails} from "./club.module.css"
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
-import {isBrowser} from "../utils/auth";
 import {SvgIcon} from "../common/SvgIcon";
-import Faq from "./faq";
-// import Figure from 'react-bootstrap/Figure';
+import ClubAdminModal from "components/ClubAdmin/modal";
+// import {CardBody} from "reactstrap";
 
 
-function useQuery() {
-    if (isBrowser())
-        return new URLSearchParams(window.location.search);
-    return null
-}
 
-class ClubHomePage extends Component {
+class ClubAdminPage extends Component {
     static propTypes = {
         clubName : PropTypes.string.isRequired,
     }
 
     constructor(props) {
         super(props)
-
-        this.query = useQuery()
-
-        if (this.query)
-            this.name = this.query.get("name")
-
-
-        this.state={
+        this.state = {
+            currentModal: null,
             basicInformation : {
-                Name: "Salt & Pepper",
+                name: "Salt & Pepper",
+                announcements: [{id: "1", content:"Welcome"}],
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 tagline: "The Photography Society of IIITD",
                 description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                 coordinators:[
                     {
                         name:"Tushar Singh",
-                        email:"heemankv@gmail.com",
+                        email:"shikhar@gmail.com",
                     },
                     {
                         name:"Prutyuy Singh",
-                        email:"heemankv@gmail.com",
+                        email:"shikhar@gmail.com",
                     },
                 ],
                 memberSize: 10,
                 socialmediaLink: {
-                    instagram : "https://www.instagram.com/heemank_v",
-                    linkedin : "https://www.linkedin.com/heemank_v",
-                    facebook : "https://www.facebook.com/heemank_v",
+                    instagram : "https://www.instagram.com/shikhar",
+                    linkedin : "https://www.linkedin.com/shikhar",
+                    facebook : "https://www.facebook.com/shikhar",
                     website : "https://www.collabconnect.com/404",
                 },
                 joinDate:"26122020",
@@ -72,19 +59,13 @@ class ClubHomePage extends Component {
                     {name: "Event10", logo: "https://via.placeholder.com/70X70"},
                     {name: "Event11", logo: "https://via.placeholder.com/70X70"},
                 ],
-            }
+            },
+
         }
-
-
     }
 
     componentDidMount() {
-        console.log(this.props.clubName)
-        var caller = null;
-        if(isBrowser())
-        {
-            caller = this.query.get("name");
-        }
+        let caller = null;
         console.log(caller,"hellooo")
         // axios.get("/club/" + caller)
         //     .then((res) => {
@@ -98,6 +79,64 @@ class ClubHomePage extends Component {
         return true;
     }
 
+    handleSubmitDescription(values) {
+        const description = values[0]
+        this.setState((prevState) => {
+            return (
+                {
+                    ...prevState,
+                    basicInformation: {
+                        ...(prevState.basicInformation),
+                        description: description
+                    }
+                })
+        })
+        this.handleCloseModal()
+    }
+
+    handleSubmitAnnouncements(values){
+        const announcement_id=-1;
+        //axios
+        this.setState((prevState) => {
+            return (
+                {
+                    ...prevState,
+                    basicInformation: {
+                        ...(prevState.basicInformation),
+                        announcements: [...(prevState.basicInformation.announcements) , {id:announcement_id, content:values[0]}]
+                    }
+                })
+        })
+        this.handleCloseModal()
+    }
+
+    handleSubmitPanel(values){
+        this.setState((prevState) => {
+            return (
+                {
+                    ...prevState,
+                    basicInformation: {
+                        ...(prevState.basicInformation),
+                        socialmediaLink: {
+                            facebook: values[0],
+                            instagram: values[1],
+                            linkedin: values[2],
+                            website: values[3],
+                        },
+                        tagline: values[4]
+                    }
+                })
+        })
+        this.handleCloseModal()
+    }
+
+    handleCloseModal() {
+        this.setState({
+            currentModal: null,
+        })
+    }
+
+
     render(){
         console.log(this.state.basicInformation)
         console.log(this.props.clubName)
@@ -108,7 +147,35 @@ class ClubHomePage extends Component {
                 <div className="col-3 d-flex justify-content-around">
                     <div className="position-fixed">
                         <div className="row">
-                            <Card style={{ width: '18rem' }}>
+                            <Card
+                                className="pt-2"
+                                style={{ width: '18rem' }}
+                            >
+
+                                <button
+                                    className="btn btn-outline-warning col-2 material-icons"
+                                    onClick={() => {
+                                            this.setState({
+                                                currentModal: "panel",
+                                            });
+                                        }}
+                                    type="button"
+                                >
+                                    edit
+                                </button>
+                                
+                                <ClubAdminModal
+                                    handleClose={this.handleCloseModal.bind(this)}
+                                    handleSubmit={this.handleSubmitPanel.bind(this)}
+                                    initialValues={[this.state.basicInformation.socialmediaLink.facebook,
+                                    this.state.basicInformation.socialmediaLink.instagram,
+                                    this.state.basicInformation.socialmediaLink.linkedin,
+                                    this.state.basicInformation.socialmediaLink.website,
+                                    this.state.basicInformation.tagline]}
+                                    labels={['Facebook','Instagram','LinkedIn','Other website','Enter Your Clubs Catchphrase ']}
+                                    show={this.state.currentModal === 'panel'}
+                                />
+
                                 <Card.Img
                                     src={this.state.basicInformation.logoLink}
                                     variant="top"
@@ -129,7 +196,7 @@ class ClubHomePage extends Component {
                                     <div className="col text-center">
                                         <Card.Link
                                             className=""
-                                            href="https://www.linkedin.com/in/"
+                                            href={this.state.basicInformation.socialmediaLink.facebook}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -141,7 +208,7 @@ class ClubHomePage extends Component {
 
                                         <Card.Link
                                             className=""
-                                            href="https://www.linkedin.com/in/"
+                                            href={this.state.basicInformation.socialmediaLink.instagram}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -152,7 +219,7 @@ class ClubHomePage extends Component {
                                         </Card.Link>
 
                                         <Card.Link
-                                            href="https://www.github.com/"
+                                            href={this.state.basicInformation.socialmediaLink.linkedin}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -164,54 +231,107 @@ class ClubHomePage extends Component {
 
                                         <Card.Link
                                             className=""
-                                            href="https://www.linkedin.com/in/"
+                                            href={this.state.basicInformation.socialmediaLink.website}
                                             target="_blank"
                                         >
                                             <SvgIcon
                                                 height="20px"
                                                 src="linkedin.svg"
                                                 width="20px"
-                                            />
-                                        </Card.Link>
-
-                                        <Card.Link
-                                            href="https://www.github.com/"
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="25px"
-                                                src="github.svg"
-                                                width="25px"
                                             />
                                         </Card.Link>
                                     </div>
 
-                                    {/* <Button variant="primary">
-                                    Go somewhere
-                                </Button> */}
                                 </Card.Body>
                             </Card>
                         </div>
+
+                        {/*<div className="row">*/}
+
+                        {/*    <Card>*/}
+
+                        {/*        <button*/}
+
+                        {/*            className="btn btn-outline-warning col-2 pt-2"*/}
+
+                        {/*            onClick={this.handleEditPanel}*/}
+
+                        {/*            type="button"*/}
+
+                        {/*        >*/}
+
+                        {/*            <span*/}
+
+                        {/*                className="material-icons"*/}
+
+                        {/*            >*/}
+
+                        {/*                edit*/}
+
+                        {/*            </span>*/}
+
+                        {/*        </button>*/}
+                        
+                        {/*        <Card.Title className='fs-2 text-start'>*/}
+
+                        {/*            Coordinators:*/}
+
+                        {/*        </Card.Title>*/}
+                        
+                        {/*        <CardBody>*/}
+
+                        {/*            <div>*/}
+
+                        {/*                <ul>*/}
+
+                        {/*                    <li>*/}
+
+                        {/*                        {this.state.basicInformation.coordinators[0].name}*/}
+
+                        {/*                    </li>*/}
+                        
+                        {/*                    <li>*/}
+
+                        {/*                        {this.state.basicInformation.coordinators[1].name}*/}
+
+                        {/*                    </li>*/}
+
+                        {/*                </ul>*/}
+                        
+                        {/*                <br />*/}
+                        
+                        {/*                Member Size:*/}
+                        
+                        {/*                {" "}*/}
+                        
+                        {/*                {this.state.basicInformation.memberSize}*/}
+
+                        {/*            </div>*/}
+
+                        {/*        </CardBody>*/}
+
+                        {/*    </Card>*/}
+
+                        {/*</div>*/}
                     </div>
                 </div>
 
-                <div className="col-9">
+                <div className="col-9 justify-content-around">
                     <Card>
                         <Card.Body>
                             <div className="">
                                 <Carousel
                                     nextIcon={
-                                        <span 
+                                        <span
                                             aria-hidden="true"
                                             className="carousel-control-next-icon"
                                             style={{
                                                 backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")`,
                                             }}
-
                                         />
                                     }
                                     prevIcon={
-                                        <span 
+                                        <span
                                             aria-hidden="true"
                                             className="carousel-control-prev-icon "
                                             style={{
@@ -254,7 +374,7 @@ class ClubHomePage extends Component {
                                         <img
                                             alt="Third slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformation.clubBanners[2]}
+                                            src={this.state.basicInformation.clubBanners    [2]}
                                         />
 
                                         <Carousel.Caption>
@@ -269,6 +389,26 @@ class ClubHomePage extends Component {
                                 <br />
 
                                 <div className={clubDetails}>
+                                    <button
+                                        className="btn btn-outline-warning material-icons"
+                                        onClick={() => {
+                                            this.setState({
+                                                currentModal: "description",
+                                            });
+                                        }}
+                                        type="button"
+                                    >
+                                        edit
+                                    </button>
+
+                                    <ClubAdminModal
+                                        handleClose={this.handleCloseModal.bind(this)}
+                                        handleSubmit={this.handleSubmitDescription.bind(this)}
+                                        initialValues={[this.state.basicInformation.description]}
+                                        labels={['Description']}
+                                        show={this.state.currentModal === 'description'}
+                                    />
+
                                     <div>
                                         Coordinators:
                                         {' '}
@@ -306,35 +446,41 @@ class ClubHomePage extends Component {
                                     <div className="offset-2 col-5">
                                         <div className="text-center h2">
                                             Announcements
+                                            {" "}
+
+                                            <button
+                                                className="btn btn-outline-success material-icons"
+                                                onClick={() => {
+                                                    this.setState({
+                                                        currentModal: "Announcements",
+                                                    });
+                                                }}
+                                                type="button"
+                                            >
+                                                add_circle
+                                            </button>
+
+                                            <ClubAdminModal
+                                                handleClose={this.handleCloseModal.bind(this)}
+                                                handleSubmit={this.handleSubmitAnnouncements.bind(this)}
+                                                initialValues={["Add here"]}
+                                                labels={['Add Announcements']}
+                                                show={this.state.currentModal === 'Announcements'}
+                                            />
                                         </div>
 
                                         <div className="">
-                                            <ul className="list-unstyled">
-                                                <li >
-                                                    <span className="material-icons-outlined">
-                                                        notifications
-                                                    </span>
+                                            <ul className="list">
+                                                {this.state.basicInformation.announcements.map(item => (
+                                                    <ul key={item}>
+                                                        <span className="material-icons-outlined">
+                                                            notifications
+                                                        </span>
 
-                                                    <span>
-                                                        hellloooo
-                                                    </span>
-                                                </li>
+                                                        {item["content"]}
+                                                    </ul>
+                                                ))}
 
-                                                <li>
-                                                    <span className="material-icons-outlined">
-                                                        last_page
-                                                    </span>
-
-                                                    <span>
-                                                        hellloooo
-                                                    </span>
-                                                </li>
-
-                                                <li>
-                                                    <span>
-                                                        hellloooo
-                                                    </span>
-                                                </li>
                                             </ul>
 
                                         </div>
@@ -352,7 +498,10 @@ class ClubHomePage extends Component {
                         <Card.Body className="mt-3">
                             <Card.Title className="card-title fs-3 header-color text-left">
                                 Events
+                                {" "}
                             </Card.Title>
+
+
 
                             <br />
 
@@ -368,13 +517,6 @@ class ClubHomePage extends Component {
                     </Card>
 
                     <br />
-
-                    <br />
-
-                    <br />
-
-                    <Faq />
-
                 </div>
             </div>
 
@@ -382,4 +524,4 @@ class ClubHomePage extends Component {
     }
 }
 
-export default ClubHomePage;
+export default ClubAdminPage;

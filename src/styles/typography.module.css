@@ -42,7 +42,7 @@
 
 .title:before,
 .title:after {
-  background-color: var(--color-light-blue);
+  background-color: rgb(81, 99, 145);
   content: "";
   display: inline-block;
   height: 1px;
