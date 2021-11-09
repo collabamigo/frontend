@@ -1,8 +1,11 @@
+/* eslint-disable react/jsx-sort-props */
+/* eslint-disable react/jsx-props-no-multi-spaces */
 // import {navbar} from "./submissionPage.module.css";
 import {static_left} from "./submissionPage.module.css";
 import {box, } from "./submissionPage.module.css";
 import {center, center2} from "./submissionPage.module.css";
 
+import Tabs from "../../common/Pathfinder_Project_Form";
 import {dynamic_right} from "./submissionPage.module.css";
 
 
@@ -14,6 +17,27 @@ export default class submissionPage extends Component {
     // static propTypes = {
     //     prop: PropTypes
     // }
+
+    
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            name: "",
+            batch:"",
+            course:"",
+
+            project_name: "",
+            project_description:"",
+            project_tags:[],
+            
+            team_size: 0,
+            team_member_names: [],
+            team_member_emails: [],
+            date_of_est:""
+    
+        }
+    }
 
     shouldComponentUpdate(){
         return true;
@@ -33,17 +57,27 @@ export default class submissionPage extends Component {
                             </h1>
 
                             <div className="bg-white m-3 ">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
 
-                                <br />
+                                <h4 className="d-flex">
+                                    Form Fill-up
+                                </h4>
 
-                                <br />
+                                <Tabs
+                                    name={this.state.name}
+                                    batch={this.state.batch}
+                                    course={this.state.course}
 
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
+                                    project_name={this.state.project_name}
+                                    project_description={this.state.project_description}
+                                    project_tags={this.state.project_tags}
+
+                                    team_size={this.state.team_size}
+                                    team_member_names={this.state.team_member_names}
+                                    team_member_emails={this.state.team_member_emails}
+                                    
+                                    date_of_est={this.state.date_of_est}
+
+                                />
 
                             </div>
                         </div>

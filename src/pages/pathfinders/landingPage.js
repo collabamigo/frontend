@@ -6,7 +6,7 @@ import {static_right} from "./landingPage.module.css";
 import {box} from "./landingPage.module.css";
 
 // import Link from "common/Link";
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 import CustomCard from "../../common/Pathfinder_Project_Card/Pathfinder_Project_Card.js";
 import CardGroup from 'react-bootstrap/CardGroup'
 import InputGroup from 'react-bootstrap/InputGroup';
