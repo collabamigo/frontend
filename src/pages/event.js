@@ -32,7 +32,7 @@ export default class Event extends React.Component{
                             <img
                                 alt=""
                                 className="img-fluid"
-                                src="//placehold.it/500"
+                                src="/img/placeholder-500.png"
                             />
                         </div>
 

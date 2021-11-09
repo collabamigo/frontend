@@ -52,7 +52,10 @@ export default function SortableContainer({
                                     data-id={field.name}
                                     style={style}
                                 >
-                                    <svg viewBox="0 0 1024 1280">
+                                    <svg
+                                        fill="#ffc107"
+                                        viewBox="0 0 1024 1280"
+                                    >
                                         <circle
                                             cx="319.5"
                                             cy="155.5"
