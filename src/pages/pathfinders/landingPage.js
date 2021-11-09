@@ -56,9 +56,6 @@ export default class landingPage extends Component {
                         </div>
                     </div>
 
-                    <div className="filters text-center">
-                        filters and clear all
-                    </div>
 
                     <div className="filters text-center">
                         Space for bookmarks and dialoguebox and sort by
