@@ -13,7 +13,7 @@ import * as typographyStyles from "../../styles/typography.module.css";
 import * as styles from "./BuildForm.module.css";
 import {LivePreview, LiveProvider} from "react-live";
 import {Modal} from "react-bootstrap";
-// import CodeArea from "./CodeArea";
+import CodeArea from "./CodeArea";
 
 const { useState, useRef, useEffect } = React;
 
@@ -240,7 +240,7 @@ export default function FormBuilder({
                         </option>
 
                         <option value="select">
-                            Select
+                            Dropdown
                         </option>
 
                         <option value="checkbox">
@@ -309,8 +309,11 @@ export default function FormBuilder({
 
                     {(type === "select" ||
                         type === "radio" ||
+                        type === "checkbox" ||
                         editFormData.type === "select" ||
-                        editFormData.type === "radio") && (
+                        editFormData.type === "radio" ||
+                        editFormData.type === "checkbox"
+                    ) && (
                         <>
                             <label>
                                 {builder.inputCreator["en"].options}
@@ -495,7 +498,7 @@ export default function FormBuilder({
                             <LivePreview />
                         </LiveProvider>
 
-                        {/*<CodeArea rawData={generateCode(formData, isV7)} />*/}
+                        <CodeArea rawData={generateCode(formData, isV7)} />
                     </section>
                 </section>
             </div>
