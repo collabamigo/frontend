@@ -32,7 +32,7 @@ export default (formData, isV7) => {
               return previous + select
             }
   
-            if (type === "radio") {
+            if (type === "radio" || type === "checkbox") {
               const select = `<label className="fw-bold mt-3 mb-2">${name}</label><br/>${options
                 .split(";")
                 .filter(Boolean)
@@ -56,7 +56,7 @@ export default (formData, isV7) => {
   
             return (
               previous +
-              `     <label className="fw-bold mt-3"> ${name}<br/><input className="mt-2 mb-4" type="${type}" /></label>\n`
+              `     <label className="fw-bold mt-3"> ${name}<br/><input className="mt-2 mb-4" type="${type}" /></label><br/>\n`
             )
           },
           ""
