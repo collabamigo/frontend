@@ -4,7 +4,7 @@
 import {static_left} from "./submissionPage.module.css";
 import {box, } from "./submissionPage.module.css";
 import {center, center2} from "./submissionPage.module.css";
-
+import UserForm from "../../common/UserForm/UserForm.js";
 import Tabs from "../../common/Pathfinder_Project_Form";
 import {dynamic_right} from "./submissionPage.module.css";
 
@@ -62,7 +62,7 @@ export default class submissionPage extends Component {
                                     Form Fill-up
                                 </h4>
 
-                                <Tabs
+                                {/* <Tabs
                                     name={this.state.name}
                                     batch={this.state.batch}
                                     course={this.state.course}
@@ -77,7 +77,9 @@ export default class submissionPage extends Component {
                                     
                                     date_of_est={this.state.date_of_est}
 
-                                />
+                                /> */}
+
+                                <UserForm />
 
                             </div>
                         </div>
