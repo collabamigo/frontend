@@ -66,7 +66,7 @@ export default (formData, isV7) => {
                 .reduce((temp, option) => {
                   return (
                     temp +
-                    `      <input ${
+                    `<input ${
                       isV7 ? "" : `name="${name}"`
                     }${ref} type="${type}" value="${option}" />\n`
                   )
@@ -119,14 +119,13 @@ export default (formData, isV7) => {
   
             return (
               previous +
-              `      <input type="${type}" placeholder="${name}" ${register} />\n`
+              `     <label className="fw-bold"> ${name}<br/><input className="mt-2 mb-4" type="${type}" ${register} /></label>\n`
             )
           },
           ""
         )
       : ""
   }
-        <input type="submit" />
       </form>
     );
   }`)

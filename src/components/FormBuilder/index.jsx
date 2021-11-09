@@ -3,23 +3,16 @@ import PropTypes from "prop-types";
 import { Animate } from "react-simple-animate";
 import { useForm } from "react-hook-form";
 import SortableContainer from "./SortableContainer";
-// import { navigate } from "@reach/router"
 import colors from "../../styles/colors";
 import generateCode from "../LogicFormBuilder/GenerateCode";
-// import copyClipBoard from "./utils/copyClipBoard"
-// import Footer from "./Footer"
-// import Popup from "./Popup";
-// import LearnMore from "./learnMore"
-// import goToBuilder from "./utils/goToBuilder"
 import builder from "./data/builder";
 import generic from "./data/generic"
-// import translateLink from "../LogicFormBuilder/translateLink"
 import * as buttonStyles from "../../styles/button.module.css"
 import * as containerStyles from "../../styles/container.module.css"
 import * as typographyStyles from "../../styles/typography.module.css";
 import * as styles from "./BuildForm.module.css";
-import CodeArea from "./CodeArea";
 import {LivePreview, LiveProvider} from "react-live";
+import {Modal} from "react-bootstrap";
 
 const { useState, useRef, useEffect } = React;
 
@@ -76,7 +69,9 @@ export default function FormBuilder({
     const [editIndex, setEditIndex] = useState(-1);
     const copyFormData = useRef([]);
     const closeButton = useRef(null);
-    const [showValidation, toggleValidation] = useState(false);
+    // const [showValidation, toggleValidation] = useState(false);
+    const showValidation = false
+
     const onSubmit = (data) => {
         if (editIndex >= 0) {
             formData[editIndex] = data;
@@ -130,13 +125,13 @@ export default function FormBuilder({
     const child = (
         <div className={containerStyles.container}>
             <h1
-                className={typographyStyles.headingWithTopMargin}
+                className={typographyStyles.headingWithTopMargin + " fw-bold"}
                 id="main"
             >
                 {builder.builder["en"].title}
             </h1>
 
-            <p className={typographyStyles.subHeading}>
+            <p className={typographyStyles.subHeading + " text-warning"}>
                 {builder.builder["en"].description}
             </p>
 
@@ -332,16 +327,16 @@ export default function FormBuilder({
                         </>
                     )}
 
-                    <label>
-                        <input
-                            name="toggle"
-                            onClick={() => toggleValidation(!showValidation)}
-                            ref={register}
-                            type="checkbox"
-                        />
+                    {/*<label>*/}
+                    {/*    <input*/}
+                    {/*        name="toggle"*/}
+                    {/*        onClick={() => toggleValidation(!showValidation)}*/}
+                    {/*        ref={register}*/}
+                    {/*        type="checkbox"*/}
+                    {/*    />*/}
 
-                        {builder.inputCreator["en"].validation}
-                    </label>
+                    {/*    {builder.inputCreator["en"].validation}*/}
+                    {/*</label>*/}
 
                     <Animate
                         end={{
@@ -427,6 +422,7 @@ export default function FormBuilder({
                     </Animate>
 
                     <button
+                        className="btn btn-warning text-white align-self-center"
                         type="submit"
                     >
                         {editIndex >= 0
@@ -509,7 +505,7 @@ export default function FormBuilder({
                             <LivePreview />
                         </LiveProvider>
 
-                        <CodeArea rawData={generateCode(formData, isV7)} />
+                        {/*<CodeArea rawData={generateCode(formData, isV7)} />*/}
                     </section>
                 </section>
             </div>
@@ -525,46 +521,22 @@ export default function FormBuilder({
     if (isStatic) return child;
 
     return (
-        <Animate
-            duration={0.5}
-            easeType="ease-in"
-            end={{
-                transform: "translateY(0)",
-            }}
-            play={showBuilder || isStatic}
-            render={({ style }) => (
-                <main
-                    className={styles.root}
-                    style={style}
-                >
-                    <div
-                        id="builder"
-                        style={{
-                            overflow: "auto",
-                            height: "100vh",
-                            background: colors.primary,
-                        }}
-                    >
-                        {/* <button
-              className={styles.closeButton}
-              aria-label="close builder"
-              ref={closeButton}
-              onClick={() => {
-                toggleBuilder(false)
-                goToBuilder(false)
-              }}
+        <Modal.Dialog
+            className="modal-dialog w-75 mw-100 border-0"
+            contentClassName="border-0"
+        >
+            <div
+                className="bg-dark text-white rounded-4"
             >
-              &#10005;
-            </button> */}
+                <div
+                    id="builder"
+                >
 
-                        {child}
-                    </div>
-                </main>
-            )}
-            start={{
-                transform: "translateY(100vh)",
-            }}
-        />
+                    {child}
+                </div>
+            </div>
+        </Modal.Dialog>
+
     );
 }
 

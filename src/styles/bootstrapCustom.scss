@@ -25,6 +25,7 @@ $blue-600: #3182ce;
 $blue-700: #2b6cb0;
 $blue-800: #2c5282;
 $blue-900: #2a4365;
+$orange: #fe7624;
 $white: white;
 $red: #f56565;
 $text-decoration-color: var($gray-400);
@@ -32,6 +33,7 @@ $text-color: var($gray-800);
 $focus-ring-color: var($blue-500);
 
 $secondary: $gray-800;
+$warning: $orange;
 @import "~bootstrap/scss/_functions";
 @import "~bootstrap/scss/_variables";
 

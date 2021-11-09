@@ -7,8 +7,8 @@ export default {
   },
   builder: {
     en: {
-      title: "Builder",
-      description: "Build your form with code and example.",
+      title: "Event form builder",
+      description: "Create a registration form for your amazing event",
     },
   },
   layout: {
@@ -20,17 +20,17 @@ export default {
   inputCreator: {
     en: {
       title: "Input Creator",
-      description: `This form allows you to create and update inputs. The Generate Form button will create a new form with the updates.`,
+      description: `This form allows you to create and update inputs. After you are done, click on Save Event`,
       message: "You can start adding fields with Input Creator.",
       options: "Options",
       validation: "Show validation",
-      // generate: "Generate Form",
+      generate: "Save Event",
     },
   },
   code: {
     en: {
       title: "Preview",
-      description: `As you are making changes over the form, the code section will be updated and you can copy the code as well.`,
+      description: ``,
     },
   },
 }

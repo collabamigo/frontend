@@ -1,5 +1,5 @@
 .list {
-    border: 1px solid #18216d;
+    border: 1px solid rgb(81, 99, 145);
     padding: 14px 14px 14px 50px;
     border-radius: 4px;
     margin-bottom: 10px;
@@ -30,7 +30,7 @@
     font-size: 14px;
     cursor: pointer;
     padding: 1px 8px;
-    background: #18216d;
+    background: #fe7624;
     border: 1px solid transparent;
     text-transform: uppercase;
     letter-spacing: 1px;
