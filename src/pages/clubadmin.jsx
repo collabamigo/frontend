@@ -21,7 +21,8 @@ class ClubAdminPage extends Component {
         this.state = {
             currentModal: null,
             basicInformation : {
-                Name: "Salt & Pepper",
+                name: "Salt & Pepper",
+                announcements: [{id: "1", content:"Welcome"}],
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 tagline: "The Photography Society of IIITD",
                 description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
@@ -93,12 +94,23 @@ class ClubAdminPage extends Component {
         this.handleCloseModal()
     }
 
-    handleSubmitEvent() {
-        console.log("events")
+    handleSubmitAnnouncements(values){
+        const announcement_id=-1;
+        //axios
+        this.setState((prevState) => {
+            return (
+                {
+                    ...prevState,
+                    basicInformation: {
+                        ...(prevState.basicInformation),
+                        announcements: [...(prevState.basicInformation.announcements) , {id:announcement_id, content:values[0]}]
+                    }
+                })
+        })
+        this.handleCloseModal()
     }
 
     handleSubmitPanel(values){
-        // const panel = values[0]
         this.setState((prevState) => {
             return (
                 {
@@ -110,12 +122,12 @@ class ClubAdminPage extends Component {
                             instagram: values[1],
                             linkedin: values[2],
                             website: values[3],
-                        }
+                        },
+                        tagline: values[4]
                     }
                 })
         })
         this.handleCloseModal()
-        console.log("panel")
     }
 
     handleCloseModal() {
@@ -135,10 +147,13 @@ class ClubAdminPage extends Component {
                 <div className="col-3 d-flex justify-content-around">
                     <div className="position-fixed">
                         <div className="row">
-                            <Card style={{ width: '18rem' }}>
+                            <Card
+                                className="pt-2"
+                                style={{ width: '18rem' }}
+                            >
 
                                 <button
-                                    className="btn btn-outline-warning col-2"
+                                    className="btn btn-outline-warning col-2 material-icons"
                                     onClick={() => {
                                             this.setState({
                                                 currentModal: "panel",
@@ -146,11 +161,7 @@ class ClubAdminPage extends Component {
                                         }}
                                     type="button"
                                 >
-                                    <span
-                                        className="material-icons"
-                                    >
-                                        edit
-                                    </span>
+                                    edit
                                 </button>
                                 
                                 <ClubAdminModal
@@ -159,8 +170,9 @@ class ClubAdminPage extends Component {
                                     initialValues={[this.state.basicInformation.socialmediaLink.facebook,
                                     this.state.basicInformation.socialmediaLink.instagram,
                                     this.state.basicInformation.socialmediaLink.linkedin,
-                                    this.state.basicInformation.socialmediaLink.website]}
-                                    labels={['Facebook','Instagram','LinkedIn','other']}
+                                    this.state.basicInformation.socialmediaLink.website,
+                                    this.state.basicInformation.tagline]}
+                                    labels={['Facebook','Instagram','LinkedIn','Other website','Enter Your Clubs Catchphrase ']}
                                     show={this.state.currentModal === 'panel'}
                                 />
 
@@ -171,7 +183,7 @@ class ClubAdminPage extends Component {
 
                                 <Card.Body>
                                     <Card.Title className='fs-2 fw-bold text-start pb-2'>
-                                        {this.state.basicInformation.Name}
+                                        {this.state.basicInformation.name}
                                     </Card.Title>
 
 
@@ -378,7 +390,7 @@ class ClubAdminPage extends Component {
 
                                 <div className={clubDetails}>
                                     <button
-                                        className="btn btn-outline-warning"
+                                        className="btn btn-outline-warning material-icons"
                                         onClick={() => {
                                             this.setState({
                                                 currentModal: "description",
@@ -386,18 +398,14 @@ class ClubAdminPage extends Component {
                                         }}
                                         type="button"
                                     >
-                                        <span
-                                            className="material-icons"
-                                        >
-                                            edit
-                                        </span>
+                                        edit
                                     </button>
 
                                     <ClubAdminModal
                                         handleClose={this.handleCloseModal.bind(this)}
                                         handleSubmit={this.handleSubmitDescription.bind(this)}
                                         initialValues={[this.state.basicInformation.description]}
-                                        labels={['Description','Announcements']}
+                                        labels={['Description']}
                                         show={this.state.currentModal === 'description'}
                                     />
 
@@ -438,35 +446,41 @@ class ClubAdminPage extends Component {
                                     <div className="offset-2 col-5">
                                         <div className="text-center h2">
                                             Announcements
+                                            {" "}
+
+                                            <button
+                                                className="btn btn-outline-success material-icons"
+                                                onClick={() => {
+                                                    this.setState({
+                                                        currentModal: "Announcements",
+                                                    });
+                                                }}
+                                                type="button"
+                                            >
+                                                add_circle
+                                            </button>
+
+                                            <ClubAdminModal
+                                                handleClose={this.handleCloseModal.bind(this)}
+                                                handleSubmit={this.handleSubmitAnnouncements.bind(this)}
+                                                initialValues={["Add here"]}
+                                                labels={['Add Announcements']}
+                                                show={this.state.currentModal === 'Announcements'}
+                                            />
                                         </div>
 
                                         <div className="">
-                                            <ul className="list-unstyled">
-                                                <li >
-                                                    <span className="material-icons-outlined">
-                                                        notifications
-                                                    </span>
+                                            <ul className="list">
+                                                {this.state.basicInformation.announcements.map(item => (
+                                                    <ul key={item}>
+                                                        <span className="material-icons-outlined">
+                                                            notifications
+                                                        </span>
 
-                                                    <span>
-                                                        halloo
-                                                    </span>
-                                                </li>
+                                                        {item["content"]}
+                                                    </ul>
+                                                ))}
 
-                                                <li>
-                                                    <span className="material-icons-outlined">
-                                                        last_page
-                                                    </span>
-
-                                                    <span>
-                                                        hellloooo
-                                                    </span>
-                                                </li>
-
-                                                <li>
-                                                    <span>
-                                                        hellloooo
-                                                    </span>
-                                                </li>
                                             </ul>
 
                                         </div>
@@ -485,14 +499,6 @@ class ClubAdminPage extends Component {
                             <Card.Title className="card-title fs-3 header-color text-left">
                                 Events
                                 {" "}
-
-                                <span
-                                    className="material-icons pt-3"
-                                    onClick={this.handleEditEvents}
-                                    type="button"
-                                >
-                                    edit
-                                </span>
                             </Card.Title>
 
 

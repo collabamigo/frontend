@@ -116,7 +116,7 @@ class ClubHomePage extends Component {
 
                                 <Card.Body>
                                     <Card.Title className='fs-2 fw-bold text-start pb-2'>
-                                        {this.state.basicInformation.Name}
+                                        {this.state.basicInformation.name}
                                     </Card.Title>
 
 
