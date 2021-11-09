@@ -2,8 +2,6 @@ import React from "react";
 import {contents_heeman, subtitle, instagram, github, linkedin} from "./index.module.css"
 
 class AboutUs extends React.Component {
-    // Noinspection JSCheckFunctionSignatures
-
 
     componentDidMount() {
         this.scrollToBottom();
