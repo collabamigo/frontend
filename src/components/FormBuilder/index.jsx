@@ -327,17 +327,6 @@ export default function FormBuilder({
                         </>
                     )}
 
-                    {/*<label>*/}
-                    {/*    <input*/}
-                    {/*        name="toggle"*/}
-                    {/*        onClick={() => toggleValidation(!showValidation)}*/}
-                    {/*        ref={register}*/}
-                    {/*        type="checkbox"*/}
-                    {/*    />*/}
-
-                    {/*    {builder.inputCreator["en"].validation}*/}
-                    {/*</label>*/}
-
                     <Animate
                         end={{
                             maxHeight: 800,
