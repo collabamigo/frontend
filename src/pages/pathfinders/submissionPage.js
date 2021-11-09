@@ -7,6 +7,7 @@ import {center, center2} from "./submissionPage.module.css";
 import UserForm from "../../common/UserForm/UserForm.js";
 import Tabs from "../../common/Pathfinder_Project_Form";
 import {dynamic_right} from "./submissionPage.module.css";
+import Carousel from 'react-bootstrap/Carousel'
 
 
 import React, { Component } from 'react'
@@ -100,11 +101,63 @@ export default class submissionPage extends Component {
 
                                 <br />
 
-                                <br />
+                                <Carousel>
+                                    <Carousel.Item>
+                                        <img
+                                            className="d-block w-100"
+                                            src="holder.js/800x400?text=First slide&bg=373940"
+                                            alt="First slide"
+                                        />
 
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
+                                        <Carousel.Caption>
+                                            <h3>
+                                                First slide label
+                                            </h3>
+
+                                            <p>
+                                                Nulla vitae elit libero, a pharetra augue mollis interdum.
+                                            </p>
+                                        </Carousel.Caption>
+                                    </Carousel.Item>
+
+                                    <Carousel.Item>
+                                        <img
+                                            className="d-block w-100"
+                                            src="holder.js/800x400?text=Second slide&bg=282c34"
+                                            alt="Second slide"
+                                        />
+
+                                        <Carousel.Caption>
+                                            <h3>
+                                                Second slide label
+                                            </h3>
+
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                            </p>
+                                        </Carousel.Caption>
+                                    </Carousel.Item>
+
+                                    <Carousel.Item>
+                                        <img
+                                            className="d-block w-100"
+                                            src="holder.js/800x400?text=Third slide&bg=20232a"
+                                            alt="Third slide"
+                                        />
+
+                                        <Carousel.Caption>
+                                            <h3>
+                                                Third slide label
+                                            </h3>
+
+                                            <p>
+                                                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                                            </p>
+                                        </Carousel.Caption>
+                                    </Carousel.Item>
+                                </Carousel>
+                                
+                                
                                 
                             </div>
                         </div>
