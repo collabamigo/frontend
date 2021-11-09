@@ -13,6 +13,7 @@ import * as typographyStyles from "../../styles/typography.module.css";
 import * as styles from "./BuildForm.module.css";
 import {LivePreview, LiveProvider} from "react-live";
 import {Modal} from "react-bootstrap";
+// import CodeArea from "./CodeArea";
 
 const { useState, useRef, useEffect } = React;
 
@@ -411,7 +412,7 @@ export default function FormBuilder({
                     </Animate>
 
                     <button
-                        className="btn btn-warning text-white align-self-center"
+                        className="btn btn-warning align-self-center"
                         type="submit"
                     >
                         {editIndex >= 0

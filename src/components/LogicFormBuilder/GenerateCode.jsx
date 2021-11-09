@@ -12,41 +12,14 @@ export default (formData, isV7) => {
             {
               type,
               name,
-              required,
-              max,
-              min,
-              maxLength,
-              minLength,
-              pattern,
               options,
             }
           ) => {
-            const anyAttribute = [
-              required,
-              max,
-              min,
-              maxLength,
-              minLength,
-              pattern,
-            ].some((value) => {
-              const isBooleanValue = typeof value === "boolean"
-  
-              if (isBooleanValue) {
-                return value !== undefined
-              }
-  
-              return Boolean(value)
-            })
-            const ref = isV7
-              ? `{...register${
-                  required ? `("${name}", { required: true })` : ""
-                }}`
-              : ` ref={register${required ? "({ required: true })" : ""}}`
   
             if (type === "select") {
               const select = `      <select ${
                 isV7 ? "" : `name="${name}"`
-              }${ref}>\n${options
+              }>\n${options
                 .split(";")
                 .filter(Boolean)
                 .reduce((temp, option) => {
@@ -60,7 +33,7 @@ export default (formData, isV7) => {
             }
   
             if (type === "radio") {
-              const select = `\n${options
+              const select = `<label className="fw-bold mt-3 mb-2">${name}</label><br/>${options
                 .split(";")
                 .filter(Boolean)
                 .reduce((temp, option) => {
@@ -68,58 +41,22 @@ export default (formData, isV7) => {
                     temp +
                     `<input ${
                       isV7 ? "" : `name="${name}"`
-                    }${ref} type="${type}" value="${option}" />\n`
+                    } type="${type}" value="${option}" /> <label for="${option}">${option}</label><br/>`
                   )
                 }, "")}`
   
               return previous + select
             }
-  
-            let attributes = ""
-  
-            if (anyAttribute) {
-              attributes += isV7 ? `("${name}", {` : "({"
-  
-              if (required) {
-                attributes += "required: true"
-              }
-              if (max) {
-                attributes += `${attributes === "({" ? "" : ", "}max: ${max}`
-              }
-              if (min) {
-                attributes += `${attributes === "({" ? "" : ", "}min: ${min}`
-              }
-              if (minLength) {
-                attributes += `${
-                  attributes === "({" ? "" : ", "
-                }minLength: ${minLength}`
-              }
-              if (maxLength) {
-                attributes += `${
-                  attributes === "({" ? "" : ", "
-                }maxLength: ${maxLength}`
-              }
-              if (pattern) {
-                attributes += `${
-                  attributes === "({" ? "" : ", "
-                }pattern: /${pattern}/i`
-              }
-  
-              attributes += "})"
-            }
-  
-            const register = isV7
-              ? `{...register${attributes}}`
-              : `name="${name}"`
+            
   
             if (type === "textarea") {
-              const select = `      <textarea ${register} />\n`
+              const select = `      <textarea />\n`
               return previous + select
             }
   
             return (
               previous +
-              `     <label className="fw-bold"> ${name}<br/><input className="mt-2 mb-4" type="${type}" ${register} /></label>\n`
+              `     <label className="fw-bold mt-3"> ${name}<br/><input className="mt-2 mb-4" type="${type}" /></label>\n`
             )
           },
           ""
