@@ -1,7 +1,7 @@
 // import {navbar} from "./submissionPage.module.css";
 import {static_left} from "./submissionPage.module.css";
-import {box} from "./submissionPage.module.css";
-import {center} from "./submissionPage.module.css";
+import {box, } from "./submissionPage.module.css";
+import {center, center2} from "./submissionPage.module.css";
 
 import {dynamic_right} from "./submissionPage.module.css";
 
@@ -20,22 +20,19 @@ export default class submissionPage extends Component {
     }
     render() {
         return (
-            <section className={box + " "}>
+            <section className={box}>
 
                 <br />
-
-                <br />
-
                 
-                <Card className={center + " bg-white container text-center  "}>    
-                    <div className="row content">
+                <Card className={center + " container text-center  "}>    
+                    <div className={center2 + " row content"}>
 
-                        <div className={static_left +"  col-sm-8 text-left "}> 
+                        <div className={static_left +"  col-sm-8 text-left  "}> 
                             <h1>
                                 Register and Feel safe
                             </h1>
 
-                            <div className="bg-white ">
+                            <div className="bg-white m-3 ">
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                 </p>
@@ -52,7 +49,7 @@ export default class submissionPage extends Component {
                         </div>
 
                         <div className={dynamic_right + " col-sm-4 sidenav"}>
-                            <div className="well">
+                            <div className="well mt-2">
                                 <span className="h2">
                                     Guidlines to keep in mind
                                 </span>
@@ -63,7 +60,7 @@ export default class submissionPage extends Component {
                             <br />
 
 
-                            <div className="well bg-danger">
+                            <div className="well bg-white">
 
                                 <br />
 
