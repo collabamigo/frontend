@@ -71,7 +71,6 @@ export default function FormBuilder({
     const copyFormData = useRef([]);
     const closeButton = useRef(null);
     // const [showValidation, toggleValidation] = useState(false);
-    const showValidation = false
 
     const onSubmit = (data) => {
         if (editIndex >= 0) {
