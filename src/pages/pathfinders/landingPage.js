@@ -12,6 +12,8 @@ import Button from 'react-bootstrap/Button';
 import CustomCard from "../../common/Pathfinder_Project_Card/Pathfinder_Project_Card.js";
 import CardGroup from 'react-bootstrap/CardGroup'
 import InputGroup from 'react-bootstrap/InputGroup';
+
+import Helpmodal from "../../common/Help_modal";
 // import SplitButton from 'react-bootstrap/SplitButton';
 // import Dropdown from 'react-bootstrap/Dropdown';
 import FormControl from 'react-bootstrap/FormControl';
@@ -20,9 +22,28 @@ export default class landingPage extends Component {
     // static propTypes = {
     //     prop: PropTypes
     // }
+    
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            modalShow: false,
+        }
+
+        this.handleModalChange = this.handleModalChange.bind(this);
+    }
+
+    
     shouldComponentUpdate(){
         return true;
     }
+
+
+    handleModalChange() {
+        this.setState((prevState) => ({ modalShow: !prevState.modalShow }))
+    }
+
+
 
     render() {
         return (
@@ -139,13 +160,20 @@ export default class landingPage extends Component {
 
                             <button
                                 className="col-md-4 btn btn-primary mt-2 ml-1"
-                                onClick={() => console.log("hello")}
+                                onClick={this.handleModalChange}
                                 type="button"
                             >
                                 <span className="material-icons">
                                     help_outline
                                 </span>
                             </button>
+
+                            <Helpmodal
+                                onHide={this.handleModalChange}
+                                show={this.state.modalShow}
+                            />
+
+
                         </div>
                     </div>
                 </div>
