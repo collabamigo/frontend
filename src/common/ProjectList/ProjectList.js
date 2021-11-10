@@ -57,7 +57,7 @@ class ProjectList extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="container-fluid">
                 {this.props.ItemList.length>0 ?
                     <Boxes
                         boxesToRender={this.state.arrayForHoldingboxes}

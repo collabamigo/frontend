@@ -16,8 +16,8 @@ export default class Boxes extends React.Component {
         else if(this.props.boxesToRender.length === 0){return null;}
         else{
             return (
-                <div className="container-fluid">
-                    <div className="row">
+                <div className="">
+                    <div className="row hello">
                         {this.props.boxesToRender.map((boxdata) => (
                             <ProjectCard
                                 element={boxdata}
