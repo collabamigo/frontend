@@ -6,10 +6,9 @@ import Link from "common/Link";
 import {dynamic_left} from "./landingPage.module.css";
 import {static_right} from "./landingPage.module.css";
 import {box} from "./landingPage.module.css";
-
+import ProjectList from "../../common/ProjectList/ProjectList.js";
 // import Link from "common/Link";
 import Button from 'react-bootstrap/Button';
-import CustomCard from "../../common/Pathfinder_Project_Card/Pathfinder_Project_Card.js";
 import CardGroup from 'react-bootstrap/CardGroup'
 import InputGroup from 'react-bootstrap/InputGroup';
 
@@ -28,6 +27,20 @@ export default class landingPage extends Component {
 
         this.state = {
             modalShow: false,
+
+            itemlist: [
+                {name: "Tasveer", logo: "https://via.placeholder.com/70X70"},
+                {name: "MicDrop", logo: "https://via.placeholder.com/70X70"},
+                {name: "Byld", logo: "https://via.placeholder.com/70X70"},
+                {name: "Litsoc", logo: "https://via.placeholder.com/70X70"},
+                {name: "Meraki", logo: "https://via.placeholder.com/70X70"},
+                {name: "MUSE", logo: "https://via.placeholder.com/70X70"},
+                {name: "Philsoc", logo: "https://via.placeholder.com/70X70"},
+                {name: "Electroholics", logo: "https://via.placeholder.com/70X70"},
+                {name: "Cyborg", logo: "https://via.placeholder.com/70X70"},
+                {name: "Astronuts", logo: "https://via.placeholder.com/70X70"},
+                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
+            ],
         }
 
         this.handleModalChange = this.handleModalChange.bind(this);
@@ -87,19 +100,11 @@ export default class landingPage extends Component {
 
                     <div className="bg-white mt-3">
                         <CardGroup>
-                            
-
-                            <CustomCard />
-
-                            <CustomCard />
 
 
-                            <CustomCard />
-
-
-                            <CustomCard />
-
-
+                            <ProjectList
+                                ItemList={this.state.itemlist}
+                            />
                             
                         </CardGroup>
                     </div>

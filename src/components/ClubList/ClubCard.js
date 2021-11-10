@@ -40,7 +40,7 @@ export default class ClubCard extends Component {
 
     render() {
         var clublink = "/club?name=" + this.props.element.name
-        console.log(this.props.element, " hiiii")
+        // console.log(this.props.element, " hiiii")
         if(this.props.element === undefined) {
             return null;
         }

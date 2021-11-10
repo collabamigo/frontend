@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button';
 import Boxes from './Boxes';
 
-class Clublist extends React.Component {
+class ProjectList extends React.Component {
     static propTypes = {
         ItemList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-        Type: PropTypes.string.isRequired,
     }
     constructor(props) {
         super(props)
@@ -61,7 +60,6 @@ class Clublist extends React.Component {
             <div>
                 {this.props.ItemList.length>0 ?
                     <Boxes
-                        Type={this.props.Type}
                         boxesToRender={this.state.arrayForHoldingboxes}
                     />
                     
@@ -75,4 +73,4 @@ class Clublist extends React.Component {
     }
 }
 
-export default Clublist
+export default ProjectList;
