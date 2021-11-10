@@ -1,0 +1,17 @@
+.createEventButton {
+    padding: 10px;
+    border: 1px solid #29cc97;
+    border-radius: 10px;
+    background-color: #29cc97;
+    text-transform: uppercase;
+}
+
+.eventCard {
+    margin: 30px;
+    border-radius: 20px;
+    width: 25rem;
+}
+
+.eventImage {
+    border-radius: 6% 6% 0 0;
+}
