@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 // import Card from 'react-bootstrap/Card'
+import Link from "common/Link";
+
 // import PropTypes from 'prop-types'
 import {dynamic_left} from "./landingPage.module.css";
 import {static_right} from "./landingPage.module.css";
@@ -115,7 +117,7 @@ export default class landingPage extends Component {
                         </div>
 
                         <div>
-                            <button
+                            {/* <button
                                 className="col-md-8 btn btn-primary mt-2 ml-1"
                                 onClick={() => console.log("hello")}
                                 type="button"
@@ -123,7 +125,17 @@ export default class landingPage extends Component {
                                 <span className="h4">
                                     Submit and Secure
                                 </span>
-                            </button>
+                            </button> */}
+
+                            <Link
+                                className="col-md-8 btn btn-primary mt-2 ml-1 "
+                                to="/pathfinders/submissionPage"
+                                type="button"
+                            >
+                                <span className="h4">
+                                    Submit and Secure
+                                </span>
+                            </Link>
 
                             <button
                                 className="col-md-4 btn btn-primary mt-2 ml-1"
