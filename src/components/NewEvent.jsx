@@ -14,7 +14,7 @@ export default class NewEvent extends React.Component {
     }
 
 
-    shouldComponentUpdate(): boolean {
+    shouldComponentUpdate(){
         return true;
     }
 
