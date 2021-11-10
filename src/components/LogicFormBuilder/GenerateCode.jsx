@@ -17,17 +17,17 @@ export default (formData, isV7) => {
           ) => {
   
             if (type === "select") {
-              const select = `      <select ${
+              const select = `     <label className="fw-bold mt-3 mb-2">${name} </label> <br/> <select ${
                 isV7 ? "" : `name="${name}"`
-              }>\n${options
+              }><br/>${options
                 .split(";")
                 .filter(Boolean)
                 .reduce((temp, option) => {
                   return (
                     temp +
-                    `        <option value="${option}">${option}</option>\n`
+                    `        <option value="${option}">${option}</option><br/>`
                   )
-                }, "")}      </select>\n`
+                }, "")}      </select><br/>`
   
               return previous + select
             }
@@ -50,13 +50,13 @@ export default (formData, isV7) => {
             
   
             if (type === "textarea") {
-              const select = `      <textarea />\n`
+              const select = `      <label className="fw-bold mt-3"> ${name}</label><br/><textarea /><br/>`
               return previous + select
             }
   
             return (
               previous +
-              `     <label className="fw-bold mt-3"> ${name}<br/><input className="mt-2 mb-4" type="${type}" /></label><br/>\n`
+              `     <label className="fw-bold mt-3"> ${name}<br/><input className="mt-2 mb-2" type="${type}" /></label><br/><br/>`
             )
           },
           ""
