@@ -26,4 +26,4 @@ jobs:
           projectId: preview
 
       - name: ESLinting .js and .jsx files
-          run: npx eslint src --ext .js,.jsx
+        run: npx eslint src --ext .js,.jsx
