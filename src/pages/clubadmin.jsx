@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import Clublist from 'components/ClubList/ClubList.js';
-import {edit_button} from "./clubadmin.module.css";
+// import {edit_button} from "./clubadmin.module.css";
 import {clubDetails} from "./club.module.css"
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
-import {SvgIcon} from "../common/SvgIcon";
-import Faq from "./faq";
+import {SvgIcon} from "common/SvgIcon";
+import ClubAdminModal from "components/ClubAdmin/modal";
+
 
 class ClubAdminPage extends Component {
     static propTypes = {
@@ -15,11 +16,11 @@ class ClubAdminPage extends Component {
 
     constructor(props) {
         super(props)
-
-
         this.state = {
+            currentModal: null,
             basicInformation : {
-                Name: "Salt & Pepper",
+                name: "Salt & Pepper",
+                announcements: [{id: "1", content:"Welcome"}],
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 tagline: "The Photography Society of IIITD",
                 description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
@@ -57,14 +58,11 @@ class ClubAdminPage extends Component {
                     {name: "Event11", logo: "https://via.placeholder.com/70X70"},
                 ],
             },
-            modalState: false
+
         }
-        this.setModalState = this.setModalState.bind(this)
     }
 
-
     componentDidMount() {
-        console.log(this.state.modalState)
         let caller = null;
         console.log(caller,"hellooo")
         // axios.get("/club/" + caller)
@@ -79,23 +77,65 @@ class ClubAdminPage extends Component {
         return true;
     }
 
-
-    setModalState(value) {
-        this.setState({
-            modalState: value
+    handleSubmitDescription(values) {
+        const description = values[0]
+        this.setState((prevState) => {
+            return (
+                {
+                    ...prevState,
+                    basicInformation: {
+                        ...(prevState.basicInformation),
+                        description: description
+                    }
+                })
         })
+        this.handleCloseModal()
     }
 
-    handleEditMain() {
-        console.log("description")
+    handleSubmitAnnouncements(values){
+        const announcement_id=-1;
+        // axios.get("connect/profile/").then(
+        //     (res) => this.setState({
+        //         handle: res.data[0].handle
+        //     })
+        // )
+        this.setState((prevState) => {
+            return (
+                {
+                    ...prevState,
+                    basicInformation: {
+                        ...(prevState.basicInformation),
+                        announcements: [...(prevState.basicInformation.announcements) , {id:announcement_id, content:values[0]}]
+                    }
+                })
+        })
+        this.handleCloseModal()
     }
 
-    handleEditEvents() {
-        console.log("events")
+    handleSubmitPanel(values){
+        this.setState((prevState) => {
+            return (
+                {
+                    ...prevState,
+                    basicInformation: {
+                        ...(prevState.basicInformation),
+                        socialmediaLink: {
+                            facebook: values[0],
+                            instagram: values[1],
+                            linkedin: values[2],
+                            website: values[3],
+                        },
+                        tagline: values[4]
+                    }
+                })
+        })
+        this.handleCloseModal()
     }
 
-    handleEditPanel(){
-        console.log("panel")
+    handleCloseModal() {
+        this.setState({
+            currentModal: null,
+        })
     }
 
 
@@ -109,15 +149,34 @@ class ClubAdminPage extends Component {
                 <div className="col-3 d-flex justify-content-around">
                     <div className="position-fixed">
                         <div className="row">
-                            <Card style={{ width: '18rem' }}>
+                            <Card
+                                className="pt-2"
+                                style={{ width: '18rem' }}
+                            >
 
-                                <span
-                                    className="material-icons pt-3"
-                                    onClick={this.handleEditPanel}
+                                <button
+                                    className="align-self-end btn btn-outline-warning col-2 material-icons"
+                                    onClick={() => {
+                                            this.setState({
+                                                currentModal: "panel",
+                                            });
+                                        }}
                                     type="button"
                                 >
                                     edit
-                                </span>
+                                </button>
+                                
+                                <ClubAdminModal
+                                    handleClose={this.handleCloseModal.bind(this)}
+                                    handleSubmit={this.handleSubmitPanel.bind(this)}
+                                    initialValues={[this.state.basicInformation.socialmediaLink.facebook,
+                                    this.state.basicInformation.socialmediaLink.instagram,
+                                    this.state.basicInformation.socialmediaLink.linkedin,
+                                    this.state.basicInformation.socialmediaLink.website,
+                                    this.state.basicInformation.tagline]}
+                                    labels={['Facebook','Instagram','LinkedIn','Other website','Enter Your Clubs Catchphrase ']}
+                                    show={this.state.currentModal === 'panel'}
+                                />
 
                                 <Card.Img
                                     src={this.state.basicInformation.logoLink}
@@ -126,7 +185,7 @@ class ClubAdminPage extends Component {
 
                                 <Card.Body>
                                     <Card.Title className='fs-2 fw-bold text-start pb-2'>
-                                        {this.state.basicInformation.Name}
+                                        {this.state.basicInformation.name}
                                     </Card.Title>
 
 
@@ -139,7 +198,7 @@ class ClubAdminPage extends Component {
                                     <div className="col text-center">
                                         <Card.Link
                                             className=""
-                                            href="https://www.linkedin.com/in/"
+                                            href={this.state.basicInformation.socialmediaLink.facebook}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -151,7 +210,7 @@ class ClubAdminPage extends Component {
 
                                         <Card.Link
                                             className=""
-                                            href="https://www.linkedin.com/in/"
+                                            href={this.state.basicInformation.socialmediaLink.instagram}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -162,7 +221,7 @@ class ClubAdminPage extends Component {
                                         </Card.Link>
 
                                         <Card.Link
-                                            href="https://www.github.com/"
+                                            href={this.state.basicInformation.socialmediaLink.linkedin}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -174,24 +233,13 @@ class ClubAdminPage extends Component {
 
                                         <Card.Link
                                             className=""
-                                            href="https://www.linkedin.com/in/"
+                                            href={this.state.basicInformation.socialmediaLink.website}
                                             target="_blank"
                                         >
                                             <SvgIcon
                                                 height="20px"
                                                 src="linkedin.svg"
                                                 width="20px"
-                                            />
-                                        </Card.Link>
-
-                                        <Card.Link
-                                            href="https://www.github.com/"
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="25px"
-                                                src="github.svg"
-                                                width="25px"
                                             />
                                         </Card.Link>
                                     </div>
@@ -199,10 +247,78 @@ class ClubAdminPage extends Component {
                                 </Card.Body>
                             </Card>
                         </div>
+
+                        {/*<div className="row">*/}
+
+                        {/*    <Card>*/}
+
+                        {/*        <button*/}
+
+                        {/*            className="btn btn-outline-warning col-2 pt-2"*/}
+
+                        {/*            onClick={this.handleEditPanel}*/}
+
+                        {/*            type="button"*/}
+
+                        {/*        >*/}
+
+                        {/*            <span*/}
+
+                        {/*                className="material-icons"*/}
+
+                        {/*            >*/}
+
+                        {/*                edit*/}
+
+                        {/*            </span>*/}
+
+                        {/*        </button>*/}
+                        
+                        {/*        <Card.Title className='fs-2 text-start'>*/}
+
+                        {/*            Coordinators:*/}
+
+                        {/*        </Card.Title>*/}
+                        
+                        {/*        <CardBody>*/}
+
+                        {/*            <div>*/}
+
+                        {/*                <ul>*/}
+
+                        {/*                    <li>*/}
+
+                        {/*                        {this.state.basicInformation.coordinators[0].name}*/}
+
+                        {/*                    </li>*/}
+                        
+                        {/*                    <li>*/}
+
+                        {/*                        {this.state.basicInformation.coordinators[1].name}*/}
+
+                        {/*                    </li>*/}
+
+                        {/*                </ul>*/}
+                        
+                        {/*                <br />*/}
+                        
+                        {/*                Member Size:*/}
+                        
+                        {/*                {" "}*/}
+                        
+                        {/*                {this.state.basicInformation.memberSize}*/}
+
+                        {/*            </div>*/}
+
+                        {/*        </CardBody>*/}
+
+                        {/*    </Card>*/}
+
+                        {/*</div>*/}
                     </div>
                 </div>
 
-                <div className="col-9">
+                <div className="col-9 justify-content-around">
                     <Card>
                         <Card.Body>
                             <div className="">
@@ -260,7 +376,7 @@ class ClubAdminPage extends Component {
                                         <img
                                             alt="Third slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformation.clubBanners[2]}
+                                            src={this.state.basicInformation.clubBanners    [2]}
                                         />
 
                                         <Carousel.Caption>
@@ -275,13 +391,13 @@ class ClubAdminPage extends Component {
                                 <br />
 
                                 <div className={clubDetails}>
-                                    <span
-                                        className={"material-icons pt-3 btn-warning " + edit_button}
-                                        onClick={this.handleEditMain}
-                                        type="button"
-                                    >
-                                        edit
-                                    </span>
+                                    <ClubAdminModal
+                                        handleClose={this.handleCloseModal.bind(this)}
+                                        handleSubmit={this.handleSubmitDescription.bind(this)}
+                                        initialValues={[this.state.basicInformation.description]}
+                                        labels={['Description']}
+                                        show={this.state.currentModal === 'description'}
+                                    />
 
                                     <div>
                                         Coordinators:
@@ -305,10 +421,14 @@ class ClubAdminPage extends Component {
 
                                 <hr />
 
+
                                 <div className="d-flex">
                                     <div className="col-5">
                                         <div className="text-center h2">
                                             Description
+
+                                            {" "}
+
                                         </div>
 
                                         <p className="text-start h6">
@@ -317,38 +437,58 @@ class ClubAdminPage extends Component {
 
                                     </div>
 
-                                    <div className="offset-2 col-5">
+                                    <div className="col-auto">
+                                        <button
+                                            className="btn btn-outline-warning material-icons col-auto"
+                                            onClick={() => {
+                                                    this.setState({
+                                                        currentModal: "description",
+                                                    });
+                                                }}
+                                            type="button"
+                                        >
+                                            edit
+                                        </button>
+                                    </div>
+
+                                    <div className="offset-1 col-5">
                                         <div className="text-center h2">
                                             Announcements
+                                            {" "}
+
+                                            <button
+                                                className="align-self-end  btn btn-outline-success material-icons"
+                                                onClick={() => {
+                                                    this.setState({
+                                                        currentModal: "Announcements",
+                                                    });
+                                                }}
+                                                type="button"
+                                            >
+                                                add_circle
+                                            </button>
+
+                                            <ClubAdminModal
+                                                handleClose={this.handleCloseModal.bind(this)}
+                                                handleSubmit={this.handleSubmitAnnouncements.bind(this)}
+                                                initialValues={["Add here"]}
+                                                labels={['Add Announcements']}
+                                                show={this.state.currentModal === 'Announcements'}
+                                            />
                                         </div>
 
                                         <div className="">
-                                            <ul className="list-unstyled">
-                                                <li >
-                                                    <span className="material-icons-outlined">
-                                                        notifications
-                                                    </span>
+                                            <ul className="list">
+                                                {this.state.basicInformation.announcements.map(item => (
+                                                    <ul key={item}>
+                                                        <span className="material-icons-outlined">
+                                                            notifications
+                                                        </span>
 
-                                                    <span>
-                                                        halloo
-                                                    </span>
-                                                </li>
+                                                        {item["content"]}
+                                                    </ul>
+                                                ))}
 
-                                                <li>
-                                                    <span className="material-icons-outlined">
-                                                        last_page
-                                                    </span>
-
-                                                    <span>
-                                                        hellloooo
-                                                    </span>
-                                                </li>
-
-                                                <li>
-                                                    <span>
-                                                        hellloooo
-                                                    </span>
-                                                </li>
                                             </ul>
 
                                         </div>
@@ -367,14 +507,6 @@ class ClubAdminPage extends Component {
                             <Card.Title className="card-title fs-3 header-color text-left">
                                 Events
                                 {" "}
-
-                                <span
-                                    className="material-icons pt-3"
-                                    onClick={this.handleEditEvents}
-                                    type="button"
-                                >
-                                    edit
-                                </span>
                             </Card.Title>
 
 
@@ -393,13 +525,6 @@ class ClubAdminPage extends Component {
                     </Card>
 
                     <br />
-
-                    <br />
-
-                    <br />
-
-                    <Faq />
-
                 </div>
             </div>
 

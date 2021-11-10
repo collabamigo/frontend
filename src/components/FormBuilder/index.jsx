@@ -3,22 +3,17 @@ import PropTypes from "prop-types";
 import { Animate } from "react-simple-animate";
 import { useForm } from "react-hook-form";
 import SortableContainer from "./SortableContainer";
-// import { navigate } from "@reach/router"
 import colors from "../../styles/colors";
 import generateCode from "../LogicFormBuilder/GenerateCode";
-// import copyClipBoard from "./utils/copyClipBoard"
-// import Footer from "./Footer"
-import Popup from "./Popup";
-// import LearnMore from "./learnMore"
-// import goToBuilder from "./utils/goToBuilder"
 import builder from "./data/builder";
 import generic from "./data/generic"
-// import translateLink from "../LogicFormBuilder/translateLink"
 import * as buttonStyles from "../../styles/button.module.css"
 import * as containerStyles from "../../styles/container.module.css"
 import * as typographyStyles from "../../styles/typography.module.css";
 import * as styles from "./BuildForm.module.css";
-import CodeArea from "./CodeArea";
+import {LivePreview, LiveProvider} from "react-live";
+import {Modal} from "react-bootstrap";
+// import CodeArea from "./CodeArea";
 
 const { useState, useRef, useEffect } = React;
 
@@ -75,7 +70,9 @@ export default function FormBuilder({
     const [editIndex, setEditIndex] = useState(-1);
     const copyFormData = useRef([]);
     const closeButton = useRef(null);
-    const [showValidation, toggleValidation] = useState(false);
+    // const [showValidation, toggleValidation] = useState(false);
+    const showValidation = false
+
     const onSubmit = (data) => {
         if (editIndex >= 0) {
             formData[editIndex] = data;
@@ -129,13 +126,13 @@ export default function FormBuilder({
     const child = (
         <div className={containerStyles.container}>
             <h1
-                className={typographyStyles.headingWithTopMargin}
+                className={typographyStyles.headingWithTopMargin + " fw-bold"}
                 id="main"
             >
                 {builder.builder["en"].title}
             </h1>
 
-            <p className={typographyStyles.subHeading}>
+            <p className={typographyStyles.subHeading + " text-warning"}>
                 {builder.builder["en"].description}
             </p>
 
@@ -146,7 +143,6 @@ export default function FormBuilder({
                     </h2>
 
                     <p style={{ fontSize: 14 }}>
-                        <Popup iconOnly />
 
                         {builder.layout["en"].message}
                     </p>
@@ -178,7 +174,7 @@ export default function FormBuilder({
                     </h2>
 
                     <p style={{fontSize: 14}}>
-                        <Popup iconOnly />
+                        {/*<Popup iconOnly />*/}
 
                         {builder.inputCreator["en"].description}
                     </p>
@@ -244,7 +240,7 @@ export default function FormBuilder({
                         </option>
 
                         <option value="select">
-                            Select
+                            Dropdown
                         </option>
 
                         <option value="checkbox">
@@ -267,54 +263,62 @@ export default function FormBuilder({
                             Email
                         </option>
 
-                        <option value="range">
+                        {/*<option value="range">
                             Range
                         </option>
 
                         <option value="search">
                             Search
-                        </option>
+                        </option>*/}
 
                         <option value="tel">
                             Tel
                         </option>
 
-                        <option value="url">
+                        {/*<option value="url">
                             url
-                        </option>
+                        </option>*/}
 
                         <option value="time">
                             Time
                         </option>
 
-                        <option value="datetime">
+                        {/*<option value="datetime">
                             datetime
-                        </option>
+                        </option>*/}
 
                         <option value="datetime-local">
                             datetime-local
                         </option>
 
-                        <option value="week">
+                        <option value="date">
+                            Date
+                        </option>
+
+                        {/*<option value="week">
                             week
                         </option>
 
                         <option value="month">
                             month
-                        </option>
+                        </option>*/}
 
-                        <option
+                        {/*<option
                             disabled
                             value="validate"
                         >
                             validate
-                        </option>
+                        </option>*/}
+
                     </select>
 
                     {(type === "select" ||
                         type === "radio" ||
+                        type === "checkbox" ||
                         editFormData.type === "select" ||
-                        editFormData.type === "radio") && (
+                        editFormData.type === "radio" ||
+                        editFormData.type === "checkbox"
+                    ) && (
                         <>
                             <label>
                                 {builder.inputCreator["en"].options}
@@ -331,17 +335,6 @@ export default function FormBuilder({
                             />
                         </>
                     )}
-
-                    <label>
-                        <input
-                            name="toggle"
-                            onClick={() => toggleValidation(!showValidation)}
-                            ref={register}
-                            type="checkbox"
-                        />
-
-                        {builder.inputCreator["en"].validation}
-                    </label>
 
                     <Animate
                         end={{
@@ -427,6 +420,7 @@ export default function FormBuilder({
                     </Animate>
 
                     <button
+                        className="btn btn-warning align-self-center"
                         type="submit"
                     >
                         {editIndex >= 0
@@ -480,7 +474,7 @@ export default function FormBuilder({
                     </h2>
 
                     <p style={{ fontSize: 14 }}>
-                        <Popup iconOnly />
+                        {/*<Popup iconOnly />*/}
 
                         {builder.code["en"].description}
                     </p>
@@ -503,7 +497,13 @@ export default function FormBuilder({
               </button>
             </div> */}
 
-                        <CodeArea rawData={generateCode(formData, isV7)} />
+
+
+                        <LiveProvider code={generateCode(formData, isV7)}>
+                            <LivePreview />
+                        </LiveProvider>
+
+                        {/*<CodeArea rawData={generateCode(formData, isV7)} />*/}
                     </section>
                 </section>
             </div>
@@ -519,46 +519,22 @@ export default function FormBuilder({
     if (isStatic) return child;
 
     return (
-        <Animate
-            duration={0.5}
-            easeType="ease-in"
-            end={{
-                transform: "translateY(0)",
-            }}
-            play={showBuilder || isStatic}
-            render={({ style }) => (
-                <main
-                    className={styles.root}
-                    style={style}
-                >
-                    <div
-                        id="builder"
-                        style={{
-                            overflow: "auto",
-                            height: "100vh",
-                            background: colors.primary,
-                        }}
-                    >
-                        {/* <button
-              className={styles.closeButton}
-              aria-label="close builder"
-              ref={closeButton}
-              onClick={() => {
-                toggleBuilder(false)
-                goToBuilder(false)
-              }}
+        <Modal.Dialog
+            className="modal-dialog w-75 mw-100 border-0"
+            contentClassName="border-0"
+        >
+            <div
+                className="bg-dark text-white rounded-4"
             >
-              &#10005;
-            </button> */}
+                <div
+                    id="builder"
+                >
 
-                        {child}
-                    </div>
-                </main>
-            )}
-            start={{
-                transform: "translateY(100vh)",
-            }}
-        />
+                    {child}
+                </div>
+            </div>
+        </Modal.Dialog>
+
     );
 }
 

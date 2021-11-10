@@ -14,9 +14,6 @@ jobs:
       - name: Installing dependencies
         run: npm ci
 
-      - name: ESLinting .js and .jsx files
-        run: npx eslint src --ext .js,.jsx
-
       - name: Building
         run: npm run build
 
@@ -27,3 +24,6 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COLLABAMIGO_PREVIEW }}'
           expires: 30d
           projectId: preview
+
+      - name: ESLinting .js and .jsx files
+        run: npx eslint src --ext .js,.jsx
