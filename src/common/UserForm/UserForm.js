@@ -4,8 +4,29 @@ import FormUserDetails from './FormUserDetails';
 import FormPersonalDetails from './FormPersonalDetails';
 import Confirm from './Confirm';
 import Success from './Success';
+import PropTypes from 'prop-types';
 
 export class UserForm extends Component {
+
+  static propTypes = {
+
+    batch: PropTypes.number.isRequired,
+    course: PropTypes.string.isRequired,
+    fname: PropTypes.string.isRequired,
+    lname: PropTypes.string.isRequired,
+
+    date_of_est: PropTypes.instanceOf(Date).isRequired,
+
+    handleChange: PropTypes.func.isRequired,
+
+    project_description: PropTypes.string.isRequired,
+    project_name: PropTypes.string.isRequired,
+    project_tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+    team_member_emails: PropTypes.arrayOf(PropTypes.string).isRequired,
+    team_member_names: PropTypes.arrayOf(PropTypes.string).isRequired,    
+    team_size : PropTypes.number.isRequired,    
+}
 
 
     constructor(props) {
@@ -13,17 +34,10 @@ export class UserForm extends Component {
 
         this.state = {
             step: 1,
-            firstName: '',
-            lastName: '',
-            email: '',
-            occupation: '',
-            city: '',
-            bio: ''
           };
 
-          this.handleChange = this.handleChange.bind(this);
-          this.nextStep = this.nextStep.bind(this);
-          this.prevStep = this.prevStep.bind(this);
+        this.nextStep = this.nextStep.bind(this);
+        this.prevStep = this.prevStep.bind(this);
     }
   
 
@@ -48,31 +62,36 @@ export class UserForm extends Component {
   };
 
   // Handle fields change
-  handleChange = input => e => {
-    this.setState({ [input]: e.target.value });
-  };
+  
 
   render() {
     const { step } = this.state;
-    const { firstName, lastName, email, occupation, city, bio } = this.state;
-    const values = { firstName, lastName, email, occupation, city, bio };
+    const { fname, lname, batch, course, project_name, project_description, project_tags,
+       team_size, team_member_names, team_member_emails, date_of_est } = this.props;
+
+    const v1 = {fname, lname, batch , course};
+    console.log(v1);
+    console.log("v1");
+
+    const v2 = {project_name, project_description, project_tags};
+    const v3 = {team_size, team_member_names, team_member_emails, date_of_est};
 
     switch (step) {
       case 1:
         return (
             <FormUserDetails
-                handleChange={this.handleChange}
+                handleChange={this.props.handleChange}
                 nextStep={this.nextStep}
-                values={values}
+                values={v1}
             />
         );
       case 2:
         return (
             <FormPersonalDetails
-                handleChange={this.handleChange}
+                handleChange={this.props.handleChange}
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
-                values={values}
+                values={v2}
             />
         );
       case 3:
@@ -80,7 +99,7 @@ export class UserForm extends Component {
             <Confirm
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
-                values={values}
+                values={v3}
             />
         );
       case 4:

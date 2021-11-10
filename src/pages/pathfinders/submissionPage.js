@@ -5,7 +5,6 @@ import {static_left} from "./submissionPage.module.css";
 import {box, } from "./submissionPage.module.css";
 import {center, center2} from "./submissionPage.module.css";
 import UserForm from "../../common/UserForm/UserForm.js";
-import Tabs from "../../common/Pathfinder_Project_Form";
 import {dynamic_right} from "./submissionPage.module.css";
 import Carousel from 'react-bootstrap/Carousel'
 
@@ -24,7 +23,8 @@ export default class submissionPage extends Component {
         super(props);
 
         this.state = {
-            name: "",
+            fname: "",
+            lname:"",
             batch:"",
             course:"",
 
@@ -38,11 +38,20 @@ export default class submissionPage extends Component {
             date_of_est:""
     
         }
+
+        this.handleChange = this.handleChange.bind(this);
     }
 
     shouldComponentUpdate(){
         return true;
     }
+
+
+    handleChange = input => e => {
+        this.setState({ [input]: e.target.value });
+      };
+
+
     render() {
         return (
             <section className={box}>
@@ -63,8 +72,11 @@ export default class submissionPage extends Component {
                                     Form Fill-up
                                 </h4>
 
-                                {/* <Tabs
-                                    name={this.state.name}
+                                <hr />
+
+                                <UserForm
+                                    fname={this.state.fname}
+                                    lname={this.state.lname}
                                     batch={this.state.batch}
                                     course={this.state.course}
 
@@ -78,9 +90,9 @@ export default class submissionPage extends Component {
                                     
                                     date_of_est={this.state.date_of_est}
 
-                                /> */}
-
-                                <UserForm />
+                                    // eslint-disable-next-line react/jsx-handler-names
+                                    handleChange={this.handleChange}
+                                />
 
                             </div>
                         </div>

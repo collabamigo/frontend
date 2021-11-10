@@ -6,7 +6,9 @@ export default class tab1 extends Component {
     static propTypes = {
         batch: PropTypes.number.isRequired,
         course: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
+        fname: PropTypes.string.isRequired,
+        lname: PropTypes.string.isRequired,
+
         
     }
 
