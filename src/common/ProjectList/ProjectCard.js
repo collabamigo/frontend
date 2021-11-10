@@ -26,12 +26,12 @@ function Pathfinder_Project_Card (props) {
 
     return (
 
-        <Card>
+        <Card className="col-auto">
 
             <Card.Body>
                 <Card.Title>
                     <div className="row">
-                        <div className="col-9">
+                        <div className="col-sm">
                             {props.Project_Name}
                         </div>
 
