@@ -2,9 +2,11 @@
 import React from "react"
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import {Col, Row} from "react-bootstrap";
 
 
-export default class Event extends React.Component{
+class Event extends React.Component{
     constructor(props) {
         super(props)
 
@@ -25,200 +27,82 @@ export default class Event extends React.Component{
 
     render() {
         return (
-            <div className="container-fluid">
-                <Card>
-                    <div className="row no-gutters">
-                        <div className="col-auto">
-                            <img
-                                alt=""
-                                className="img-fluid"
-                                src="/img/placeholder-500.png"
-                            />
-                        </div>
+            <div >
+                <Container className="text-lg-center display-4 position-sticky my-3 bg-info text-white">
+                    BYLD CLub
+                </Container>
 
-                        <div className="col">
-                            <div className="p-2">
-                                <Card.Title className="row">
-                                    <div className="col d-flex">
-                                        <h1 className="">
-                                            Title
-                                            {' '}
-                                        </h1>
+                <Container className="pt-3">
+                    <Row>
+                        <Col xs={8}>
+                            <Card bg="light">
+                                <Card.Body>
+                                    <Card.Title className="text-left pt-3 text-center display-6 ">
+                                        Excited Much !!
+                                    </Card.Title>
 
+                                    <Card.Text>
+                                        Check bro
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                        Lorem Ipsum has been the standard dummy text ever since the 1500s,
+                                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                        It has survived not only five centuries, but also the leap into electronic typesetting,
+                                        remaining essentially unchanged. It was popularised in the 1960s with the release
+                                        of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                                        publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
 
-                                        <div className="col d-flex fs-6 justify-content-end p-2">
-                                            <div>
-                                                Date: Sunday, 25th Nov
-                                                <br />
-                                                Time: 4 p.m.
+                        <Col>
+                            <div>
+                                <Card>
+                                    <Card.Body>
+                                        <Card.Header className="text-center">
+                                            Event Details
+                                        </Card.Header>
+                                        Detailed Timeline
+                                        
+                                        <Card.Text>
+                                            <ul className="list-unsettled">
+                                                <li>
+                                                    Registrations & Team Formation Starts on: 25th June 2021
+                                                </li>
 
-                                                <br />
-                                                Location: Meet LInk
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Card.Title>
+                                                <li>
+                                                    Registrations & Team Formation Ends by: 26th July 2021
+                                                </li>
 
-                                <div className="">
-                                    <div className="">
-                                        <div className="fs-2 text-start">
+                                                <li>
+                                                    Orientation Webinar: 31st July - Saturday - 11:30 AM to 1 PM
+                                                    Last Date for Concept Note Submissions: 2nd August 2021
+                                                </li>
+                                            </ul>
 
-                                            Description
-                                        </div>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
 
-                                        <p className="fs-5 text-start">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                                        </p>
+                                <br />
 
-                                    </div>
-                                </div>
+                                <Button className="w-100">
+                                    Participate
+                                </Button>
 
-                                <div className="buttons row justify-content-around pt-1">
-                                    <Button
-                                        className="col-8"
-                                        variant="primary"
-                                    >
-                                        Participate
-                                    </Button>
+                                <br />
 
-                                    <Button
-                                        className="col-2 offset-1"
-                                        variant="primary"
-                                    >
-                                        FaQ
-                                    </Button>
-                                </div>
+                                <br />
+
+                                <Button className="w-100">
+                                    Faq
+                                </Button>
                             </div>
-                        </div>
-                    </div>
-
-                    {/* <div className="card-footer w-100 text-muted">
-                        Footer stating cats are CUTE little animals
-                    </div> */}
-                </Card>
-
+                        </Col>
+                    </Row>
+                </Container>
             </div>
-
-    )
+        )
     }
-}
-
-{/* <div className="container-fluid">
-                <hr />
-
-                <Card>
-                    <div>
-                        <div className="d-flex justify-content-around flex-wrap">
-                            <div>
-                                <br />
-
-                                <img
-                                    alt="Club logo"
-                                    className="logo img-fluid col-auto"
-                                    src={this.state.basicInformation.logoLink}
-                                />
-
-                            </div>
-
-                            <div>
-                                <br />
-
-                                <span className="eventName">
-                                    {this.state.basicInformation.Name}
-                                </span>
-                            </div>
-
-                            <div className="">
-
-                                <br />
-
-                                <br />
-
-                                <span >
-                                    ~ Brought to you by
-                                    {this.state.basicInformation.clubName}
-                                </span>
-                            </div>
-
-                        </div>
-
-                        <br />
-
-                        <div className="intro d-flex justify-content-around">
-                            <Card
-                                className="information col-7"
-                                style={{ width: '18rem' }}
-                            >
-                                <Card.Body>
-                                    <Card.Title>
-                                        INFORMATION
-                                    </Card.Title>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-
-                                </Card.Body>
-                            </Card>
-
-                            <Card
-                                className="poster col-3"
-                                style={{ width: '18rem' }}
-                            >
-                                <Card.Img
-                                    src={this.state.basicInformation.poster}
-                                    variant="bottom"
-                                />
-
-                            </Card>
-                        </div>
-
-                        <br />
-
-                        <div className="description d-flex justify-content-around">
-                            <Card
-                                className="card3 col-11"
-                                style={{ width: '18rem' }}
-                            >
-                                <Card.Body>
-                                    <Card.Title>
-                                        DESCRIPTION
-                                    </Card.Title>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-
-                                    <Card.Text>
-                                        {this.state.basicInformation.description}
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </div>
-
-                        <br />
-                    </div>
-                </Card>
-
-            </div> */}
+} 
+export default Event
