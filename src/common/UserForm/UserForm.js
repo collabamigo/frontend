@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import FormUserDetails from './FormUserDetails';
 import FormPersonalDetails from './FormPersonalDetails';
+import FormTeamDetails from './FormTeamDetails';
+
 import Confirm from './Confirm';
 import Success from './Success';
 import PropTypes from 'prop-types';
@@ -96,13 +98,21 @@ export class UserForm extends Component {
         );
       case 3:
         return (
-            <Confirm
+            <FormTeamDetails
+                handleChange={this.props.handleChange}
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
                 values={v3}
             />
         );
       case 4:
+        return (
+            <Confirm
+                nextStep={this.nextStep}
+                prevStep={this.prevStep}
+            />
+        );
+      case 5:
         return <Success />;
       default:
         (console.log('This is a multi-step form built with React.'))

@@ -9,8 +9,9 @@ import Form from 'react-bootstrap/Form'
 export class FormUserDetails extends Component {
 
     static propTypes = {
-        nextStep: PropTypes.func.isRequired,
         handleChange: PropTypes.func.isRequired,
+        nextStep: PropTypes.func.isRequired,
+        // eslint-disable-next-line react/forbid-prop-types
         values:PropTypes.object.isRequired
 
     }

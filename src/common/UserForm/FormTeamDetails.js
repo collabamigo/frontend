@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form'
 
 
-export class FormPersonalDetails extends Component {
+export class FormTeamDetails extends Component {
 
     static propTypes = {
         handleChange: PropTypes.func.isRequired,
@@ -50,19 +50,19 @@ export class FormPersonalDetails extends Component {
                 <div className='row'>
                     <div className='col'>
                         <Form.Control 
-                            onChange={this.props.handleChange('project_name')}
-                            placeholder="Project name"
+                            onChange={this.props.handleChange('team_size')}
+                            placeholder="Team Size"
                             type="text"
-                            value={this.props.values.project_name}
+                            value={this.props.values.team_size}
                         />
                     </div>
 
                     <div className='col'>
                         <Form.Control 
-                            onChange={this.props.handleChange('project_description')}
-                            placeholder="Project Desciption"
+                            onChange={this.props.handleChange('lname')}
+                            placeholder="Last name"
                             type="text"
-                            value={this.props.values.project_description}
+                            value={this.props.values.lname}
                         />
                     </div>
                 </div>
@@ -72,10 +72,19 @@ export class FormPersonalDetails extends Component {
                 <div className='row'>
                     <div className='col'>
                         <Form.Control 
-                            onChange={this.props.handleChange('project_tags')}
-                            placeholder="Project Tags"
+                            onChange={this.props.handleChange('batch')}
+                            placeholder="Batch"
                             type="text"
-                            value={this.props.values.project_tags}
+                            value={this.props.values.batch}
+                        />
+                    </div>
+
+                    <div className='col'>
+                        <Form.Control 
+                            onChange={this.props.handleChange('course')}
+                            placeholder="Course"
+                            type="text"
+                            value={this.props.values.course}
                         />
                     </div>
                 </div>
@@ -106,4 +115,4 @@ export class FormPersonalDetails extends Component {
   }
 }
 
-export default FormPersonalDetails;
+export default FormTeamDetails;
