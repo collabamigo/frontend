@@ -94,11 +94,11 @@ class ClubAdminPage extends Component {
 
     handleSubmitAnnouncements(values){
         const announcement_id=-1;
-        axios.get("connect/profile/").then(
-            (res) => this.setState({
-                handle: res.data[0].handle
-            })
-        )
+        // axios.get("connect/profile/").then(
+        //     (res) => this.setState({
+        //         handle: res.data[0].handle
+        //     })
+        // )
         this.setState((prevState) => {
             return (
                 {
