@@ -7,9 +7,9 @@ import colors from "../../styles/colors";
 import generateCode from "../LogicFormBuilder/GenerateCode";
 import builder from "./data/builder";
 import generic from "./data/generic"
-import * as buttonStyles from "../../styles/button.module.css"
-import * as containerStyles from "../../styles/container.module.css"
-import * as typographyStyles from "../../styles/typography.module.css";
+import * as buttonStyles from "styles/button.module.css"
+import * as containerStyles from "styles/container.module.css"
+import * as typographyStyles from "styles/typography.module.css";
 import * as styles from "./BuildForm.module.css";
 import {LivePreview, LiveProvider} from "react-live";
 import {Modal} from "react-bootstrap";
@@ -538,7 +538,7 @@ export default function FormBuilder({
             contentClassName="border-0"
         >
             <div
-                className="bg-dark text-white rounded-4"
+                className="bg-dark text-white rounded-5"
             >
                 <div
                     id="builder"
