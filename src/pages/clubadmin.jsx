@@ -165,7 +165,7 @@ class ClubAdminPage extends Component {
                                 >
                                     edit
                                 </button>
-                                
+
                                 <ClubAdminModal
                                     handleClose={this.handleCloseModal.bind(this)}
                                     handleSubmit={this.handleSubmitPanel.bind(this)}
@@ -273,13 +273,13 @@ class ClubAdminPage extends Component {
                         {/*            </span>*/}
 
                         {/*        </button>*/}
-                        
+
                         {/*        <Card.Title className='fs-2 text-start'>*/}
 
                         {/*            Coordinators:*/}
 
                         {/*        </Card.Title>*/}
-                        
+
                         {/*        <CardBody>*/}
 
                         {/*            <div>*/}
@@ -291,7 +291,7 @@ class ClubAdminPage extends Component {
                         {/*                        {this.state.basicInformation.coordinators[0].name}*/}
 
                         {/*                    </li>*/}
-                        
+
                         {/*                    <li>*/}
 
                         {/*                        {this.state.basicInformation.coordinators[1].name}*/}
@@ -299,13 +299,13 @@ class ClubAdminPage extends Component {
                         {/*                    </li>*/}
 
                         {/*                </ul>*/}
-                        
+
                         {/*                <br />*/}
-                        
+
                         {/*                Member Size:*/}
-                        
+
                         {/*                {" "}*/}
-                        
+
                         {/*                {this.state.basicInformation.memberSize}*/}
 
                         {/*            </div>*/}
