@@ -269,13 +269,14 @@ export default function FormBuilder({
 
                         <option value="search">
                             Search
-                        </option>*/}
+                        </option>
 
                         <option value="tel">
                             Tel
                         </option>
 
-                        {/*<option value="url">
+
+                        <option value="url">
                             url
                         </option>*/}
 
@@ -336,7 +337,20 @@ export default function FormBuilder({
                         </>
                     )}
 
-                    <Animate
+                    <label
+                        style={{
+                            marginTop: 0,
+                        }}
+                    >
+                        <input
+                            name="required"
+                            ref={register}
+                            type="checkbox"
+                        />
+                        Required
+                    </label>
+
+                    {/*<Animate
                         end={{
                             maxHeight: 800,
                             overflow: "hidden",
@@ -417,7 +431,7 @@ export default function FormBuilder({
                                 type="text"
                             />
                         </fieldset>
-                    </Animate>
+                    </Animate>*/}
 
                     <button
                         className="btn btn-warning align-self-center"
@@ -518,6 +532,7 @@ export default function FormBuilder({
 
     if (isStatic) return child;
 
+    console.log("formData", formData)
     return (
         <Modal.Dialog
             className="modal-dialog w-75 mw-100 border-0"
