@@ -5,10 +5,8 @@ import {clubDetails} from "./club.module.css"
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
-import {SvgIcon} from "../common/SvgIcon";
+import {SvgIcon} from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
-// import {CardBody} from "reactstrap";
-
 
 
 class ClubAdminPage extends Component {
@@ -96,7 +94,11 @@ class ClubAdminPage extends Component {
 
     handleSubmitAnnouncements(values){
         const announcement_id=-1;
-        //axios
+        // axios.get("connect/profile/").then(
+        //     (res) => this.setState({
+        //         handle: res.data[0].handle
+        //     })
+        // )
         this.setState((prevState) => {
             return (
                 {
@@ -153,7 +155,7 @@ class ClubAdminPage extends Component {
                             >
 
                                 <button
-                                    className="btn btn-outline-warning col-2 material-icons"
+                                    className="align-self-end btn btn-outline-warning col-2 material-icons"
                                     onClick={() => {
                                             this.setState({
                                                 currentModal: "panel",
@@ -389,18 +391,6 @@ class ClubAdminPage extends Component {
                                 <br />
 
                                 <div className={clubDetails}>
-                                    <button
-                                        className="btn btn-outline-warning material-icons"
-                                        onClick={() => {
-                                            this.setState({
-                                                currentModal: "description",
-                                            });
-                                        }}
-                                        type="button"
-                                    >
-                                        edit
-                                    </button>
-
                                     <ClubAdminModal
                                         handleClose={this.handleCloseModal.bind(this)}
                                         handleSubmit={this.handleSubmitDescription.bind(this)}
@@ -431,10 +421,14 @@ class ClubAdminPage extends Component {
 
                                 <hr />
 
+
                                 <div className="d-flex">
                                     <div className="col-5">
                                         <div className="text-center h2">
                                             Description
+
+                                            {" "}
+
                                         </div>
 
                                         <p className="text-start h6">
@@ -443,13 +437,27 @@ class ClubAdminPage extends Component {
 
                                     </div>
 
-                                    <div className="offset-2 col-5">
+                                    <div className="col-auto">
+                                        <button
+                                            className="btn btn-outline-warning material-icons col-auto"
+                                            onClick={() => {
+                                                    this.setState({
+                                                        currentModal: "description",
+                                                    });
+                                                }}
+                                            type="button"
+                                        >
+                                            edit
+                                        </button>
+                                    </div>
+
+                                    <div className="offset-1 col-5">
                                         <div className="text-center h2">
                                             Announcements
                                             {" "}
 
                                             <button
-                                                className="btn btn-outline-success material-icons"
+                                                className="align-self-end  btn btn-outline-success material-icons"
                                                 onClick={() => {
                                                     this.setState({
                                                         currentModal: "Announcements",

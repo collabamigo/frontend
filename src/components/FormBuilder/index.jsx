@@ -13,7 +13,7 @@ import * as typographyStyles from "../../styles/typography.module.css";
 import * as styles from "./BuildForm.module.css";
 import {LivePreview, LiveProvider} from "react-live";
 import {Modal} from "react-bootstrap";
-import CodeArea from "./CodeArea";
+// import CodeArea from "./CodeArea";
 
 const { useState, useRef, useEffect } = React;
 
@@ -263,48 +263,53 @@ export default function FormBuilder({
                             Email
                         </option>
 
-                        <option value="range">
+                        {/*<option value="range">
                             Range
                         </option>
 
                         <option value="search">
                             Search
-                        </option>
+                        </option>*/}
 
                         <option value="tel">
                             Tel
                         </option>
 
-                        <option value="url">
+                        {/*<option value="url">
                             url
-                        </option>
+                        </option>*/}
 
                         <option value="time">
                             Time
                         </option>
 
-                        <option value="datetime">
+                        {/*<option value="datetime">
                             datetime
-                        </option>
+                        </option>*/}
 
                         <option value="datetime-local">
                             datetime-local
                         </option>
 
-                        <option value="week">
+                        <option value="date">
+                            Date
+                        </option>
+
+                        {/*<option value="week">
                             week
                         </option>
 
                         <option value="month">
                             month
-                        </option>
+                        </option>*/}
 
-                        <option
+                        {/*<option
                             disabled
                             value="validate"
                         >
                             validate
-                        </option>
+                        </option>*/}
+
                     </select>
 
                     {(type === "select" ||
@@ -498,7 +503,7 @@ export default function FormBuilder({
                             <LivePreview />
                         </LiveProvider>
 
-                        <CodeArea rawData={generateCode(formData, isV7)} />
+                        {/*<CodeArea rawData={generateCode(formData, isV7)} />*/}
                     </section>
                 </section>
             </div>
