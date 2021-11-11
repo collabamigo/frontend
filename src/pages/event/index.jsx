@@ -26,7 +26,7 @@ export default function Event (){
                 <Container className="pt-3 pb-3">
                     <div className="row flex-lg-row-reverse">
 
-                        <div className="col-lg-3 col-12 mx-sm-2 ">
+                        <div className="col-lg-3 col-12 px-sm-2 ">
                             <Card
                                 className={floating_right_card}
                             >
@@ -56,7 +56,7 @@ export default function Event (){
                             <br />
                         </div>
 
-                        <div className="col-lg-9 col-12 mx-sm-2">
+                        <div className="col-lg-9 col-12 px-sm-2">
                             <Card
                                 bg="light"
                                 className="px-2"
