@@ -111,7 +111,7 @@ class Event extends React.Component {
                             </p>
                         </Card>
 
-                        <div className=" col-3 fs-5 nd-0 ">
+                        <div className="col-3 nd-0 ">
                             <Card
                                 className="position-sticky end-0"
                                 style={{top:"5rem"}}
