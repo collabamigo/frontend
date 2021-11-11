@@ -28,7 +28,7 @@ export default class submissionPage extends Component {
             project_description:"",
             project_tags:["Example Tag"],
             
-            team_size: 0,
+            // team_size: 0,
             team_member_names: [],
             team_member_emails: [],
             date_of_est: new Date(),
@@ -42,6 +42,8 @@ export default class submissionPage extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeTags = this.handleChangeTags.bind(this);
         this.handleChangeDate = this.handleChangeDate.bind(this);
+        // this.handleChangeTS = this.handleChangeTS.bind(this);
+
 
     }
 
@@ -61,6 +63,12 @@ export default class submissionPage extends Component {
         })
     }
 
+    // handleChangeTS(size){
+    //     this.setState({
+    //         team_size: size
+    //     })
+    // }
+
 
     handleChange = input => e => {
 
@@ -74,7 +82,6 @@ export default class submissionPage extends Component {
         return (
             <section className={box}>
 
-                <br />
                 
                 <Card className={center + " container text-center  "}>    
                     <div className={center2 + " row content"}>
@@ -98,7 +105,7 @@ export default class submissionPage extends Component {
                                     project_description={this.state.project_description}
                                     project_tags={this.state.project_tags}
 
-                                    team_size={this.state.team_size}
+                                    // team_size={this.state.team_size}
                                     team_member_names={this.state.team_member_names}
                                     team_member_emails={this.state.team_member_emails}
                                     
@@ -111,6 +118,7 @@ export default class submissionPage extends Component {
                                     handleChange={this.handleChange}
                                     handleChangeTags={this.handleChangeTags}
                                     handleChangeDate={this.handleChangeDate}
+                                    // handleChangeTS={this.handleChangeTS}
                                 />
 
                             </div>
@@ -128,7 +136,27 @@ export default class submissionPage extends Component {
 
                             <div className="well bg-white">
 
-                                <Carousel className="">
+                                <Carousel
+                                    className=""
+                                    nextIcon={
+                                        <span 
+                                            aria-hidden="true"
+                                            className="carousel-control-next-icon"
+                                            style={{
+                                                                                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")`,
+                                                                            }}
+                                        />
+                                                                    }
+                                    prevIcon={
+                                        <span 
+                                            aria-hidden="true"
+                                            className="carousel-control-prev-icon "
+                                            style={{
+                                                                                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e")`,
+                                                                            }}
+                                        />
+                                                                    }
+                                >
                                     <Carousel.Item>
                                         <img
                                             className=" w-100"

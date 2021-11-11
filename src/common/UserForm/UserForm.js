@@ -21,7 +21,8 @@ export class UserForm extends Component {
 
     handleChange: PropTypes.func.isRequired,
     handleChangeTags: PropTypes.func.isRequired,
-    handleChangeDates: PropTypes.func.isRequired,
+    handleChangeDate: PropTypes.func.isRequired,
+    // handleChangeTS: PropTypes.func.isRequired,
 
 
     visible: PropTypes.bool.isRequired,
@@ -34,7 +35,7 @@ export class UserForm extends Component {
 
     team_member_emails: PropTypes.arrayOf(PropTypes.string).isRequired,
     team_member_names: PropTypes.arrayOf(PropTypes.string).isRequired,    
-    team_size : PropTypes.number.isRequired,    
+    // team_size : PropTypes.number.isRequired,    
 }
 
 
@@ -76,7 +77,7 @@ export class UserForm extends Component {
   render() {
     const { step } = this.state;
     const { visible, stage, project_name, project_description, project_tags,
-       team_size, team_member_names, team_member_emails, date_of_est } = this.props;
+       team_member_names, team_member_emails, date_of_est } = this.props;
 
     // console.log(v1);
     // console.log("v1");
@@ -84,15 +85,15 @@ export class UserForm extends Component {
     const v1 = {project_name, project_description, project_tags, date_of_est, stage};
     // const v2 = {fname, lname, batch , course};
 
-    const v2 = {team_size, team_member_names, team_member_emails, visible};
+    const v2 = { team_member_names, team_member_emails, visible};
 
     switch (step) {
       case 1:
         return (
             <FormUserDetails
                 handleChange={this.props.handleChange}
-                handleChangeTags={this.props.handleChangeTags}
                 handleChangeDate={this.props.handleChangeDate}
+                handleChangeTags={this.props.handleChangeTags}
                 nextStep={this.nextStep}
                 values={v1}
             />
@@ -101,6 +102,7 @@ export class UserForm extends Component {
         return (
             <FormPersonalDetails
                 handleChange={this.props.handleChange}
+                // handleChangeTS={this.props.handleChangeTS}
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
                 values={v2}
