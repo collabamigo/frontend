@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Clublist from 'components/ClubList/ClubList.js';
 // import {edit_button} from "./clubadmin.module.css";
 import {clubDetails} from "./club.module.css"
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
@@ -10,9 +10,9 @@ import ClubAdminModal from "components/ClubAdmin/modal";
 
 
 class ClubAdminPage extends Component {
-    static propTypes = {
-        clubName : PropTypes.string.isRequired,
-    }
+    // static propTypes = {
+    //     clubName : PropTypes.string.isRequired,
+    // }
 
     constructor(props) {
         super(props)
@@ -141,9 +141,6 @@ class ClubAdminPage extends Component {
 
     render(){
         console.log(this.state.basicInformation)
-        console.log(this.props.clubName)
-
-
         return (
             <div className="row m-1">
                 <div className="col-3 d-flex justify-content-around">
@@ -504,12 +501,23 @@ class ClubAdminPage extends Component {
 
                     <Card className="row">
                         <Card.Body className="mt-3">
-                            <Card.Title className="card-title fs-3 header-color text-left">
+                            <Card.Title className="card-title fs-2 header-color text-left">
                                 Events
+
                                 {" "}
+
+                                <button
+                                    className="align-self-end  btn btn-outline-success material-icons"
+                                    onClick={() => {
+                                        this.setState({
+                                            currentModal: "Announcements",
+                                        });
+                                    }}
+                                    type="button"
+                                >
+                                    edit
+                                </button>
                             </Card.Title>
-
-
 
                             <br />
 
