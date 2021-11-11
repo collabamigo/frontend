@@ -23,33 +23,40 @@ export default class submissionPage extends Component {
         super(props);
 
         this.state = {
-            fname: "",
-            lname:"",
-            batch:"",
-            course:"",
 
             project_name: "",
             project_description:"",
-            project_tags:[],
+            project_tags:["Example Tag"],
             
             team_size: 0,
             team_member_names: [],
             team_member_emails: [],
-            date_of_est:""
+            date_of_est:"",
+
+            visible: false,
+            stage: ""
+
     
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeTags = this.handleChangeTags.bind(this);
     }
 
     shouldComponentUpdate(){
         return true;
     }
 
+    handleChangeTags(tags){
+        this.setState({
+            project_tags: tags
+        })
+    }
+
 
     handleChange = input => e => {
         this.setState({ [input]: e.target.value });
-      };
+    };
 
 
     render() {
@@ -75,10 +82,6 @@ export default class submissionPage extends Component {
                                 <hr />
 
                                 <UserForm
-                                    fname={this.state.fname}
-                                    lname={this.state.lname}
-                                    batch={this.state.batch}
-                                    course={this.state.course}
 
                                     project_name={this.state.project_name}
                                     project_description={this.state.project_description}
@@ -90,8 +93,12 @@ export default class submissionPage extends Component {
                                     
                                     date_of_est={this.state.date_of_est}
 
+                                    visible={this.state.visible}
+                                    stage={this.state.stage}
+
                                     // eslint-disable-next-line react/jsx-handler-names
                                     handleChange={this.handleChange}
+                                    handleChangeTags={this.handleChangeTags}
                                 />
 
                             </div>

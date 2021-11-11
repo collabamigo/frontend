@@ -3,13 +3,14 @@ import React, { Component } from 'react';
 // import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form'
-
-
+import "@pathofdev/react-tag-input/build/index.css";
+import ReactTagInput from "@pathofdev/react-tag-input";
 
 export class FormUserDetails extends Component {
 
     static propTypes = {
         handleChange: PropTypes.func.isRequired,
+        handleChangeTags: PropTypes.func.isRequired,
         nextStep: PropTypes.func.isRequired,
         // eslint-disable-next-line react/forbid-prop-types
         values:PropTypes.object.isRequired
@@ -19,10 +20,8 @@ export class FormUserDetails extends Component {
 
     constructor(props) {
         super(props);
+
         this.handleContinue = this.handleContinue.bind(this);
-
-        
-
     }
 
     shouldComponentUpdate() {
@@ -34,6 +33,8 @@ export class FormUserDetails extends Component {
     this.props.nextStep();
   };
 
+
+
   render() {
     return (
         <div>
@@ -43,7 +44,51 @@ export class FormUserDetails extends Component {
                 open
             >
                 <Form>
+                    <Form.Group
+                        className="mb-3"
+                        controlId="ProjectDetails"
+                    >
 
+                        <Form.Control 
+                            onChange={this.props.handleChange('project_name')}
+                            placeholder="Project Name"
+                            type="text"
+                            value={this.props.values.project_name}
+                        />
+
+                        <Form.Control 
+                            as="textarea"
+                            onChange={this.props.handleChange('project_description')}
+                            placeholder="Project Description"
+                            type="text"
+                            value={this.props.values.project_name}
+                        />
+
+                        <ReactTagInput 
+                            onChange={(newTags) => this.props.handleChangeTags(newTags)} 
+                            tags={this.props.values.project_tags}
+                        />
+
+
+
+
+                    </Form.Group>
+
+                    <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                    >
+                        <Form.Label>
+                            Example textarea
+                        </Form.Label>
+
+                        <Form.Control
+                            as="textarea"
+                            rows={3}
+                        />
+                    </Form.Group>
+
+                    
                     <div className='row'>
                         <div className='col'>
                             <Form.Control 

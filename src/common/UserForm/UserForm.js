@@ -20,6 +20,11 @@ export class UserForm extends Component {
     date_of_est: PropTypes.instanceOf(Date).isRequired,
 
     handleChange: PropTypes.func.isRequired,
+    handleChangeTags: PropTypes.func.isRequired,
+
+    visible: PropTypes.bool.isRequired,
+
+    stage: PropTypes.string.isRequired,
 
     project_description: PropTypes.string.isRequired,
     project_name: PropTypes.string.isRequired,
@@ -68,21 +73,23 @@ export class UserForm extends Component {
 
   render() {
     const { step } = this.state;
-    const { fname, lname, batch, course, project_name, project_description, project_tags,
+    const { visible, stage, project_name, project_description, project_tags,
        team_size, team_member_names, team_member_emails, date_of_est } = this.props;
 
-    const v1 = {fname, lname, batch , course};
-    console.log(v1);
-    console.log("v1");
+    // console.log(v1);
+    // console.log("v1");
 
-    const v2 = {project_name, project_description, project_tags};
-    const v3 = {team_size, team_member_names, team_member_emails, date_of_est};
+    const v1 = {project_name, project_description, project_tags, date_of_est, stage};
+    // const v2 = {fname, lname, batch , course};
+
+    const v2 = {team_size, team_member_names, team_member_emails, visible};
 
     switch (step) {
       case 1:
         return (
             <FormUserDetails
                 handleChange={this.props.handleChange}
+                handleChangeTags={this.props.handleChangeTags}
                 nextStep={this.nextStep}
                 values={v1}
             />
@@ -96,23 +103,23 @@ export class UserForm extends Component {
                 values={v2}
             />
         );
+      // case 3:
+      //   return (
+      //       <FormTeamDetails
+      //           handleChange={this.props.handleChange}
+      //           nextStep={this.nextStep}
+      //           prevStep={this.prevStep}
+      //           values={v3}
+      //       />
+      //   );
       case 3:
-        return (
-            <FormTeamDetails
-                handleChange={this.props.handleChange}
-                nextStep={this.nextStep}
-                prevStep={this.prevStep}
-                values={v3}
-            />
-        );
-      case 4:
         return (
             <Confirm
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
             />
         );
-      case 5:
+      case 4:
         return <Success />;
       default:
         (console.log('This is a multi-step form built with React.'))
