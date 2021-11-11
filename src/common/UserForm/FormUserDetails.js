@@ -12,8 +12,8 @@ export class FormUserDetails extends Component {
 
     static propTypes = {
         handleChange: PropTypes.func.isRequired,
-        handleChangeTags: PropTypes.func.isRequired,
         handleChangeDate: PropTypes.func.isRequired,
+        handleChangeTags: PropTypes.func.isRequired,
         nextStep: PropTypes.func.isRequired,
         // eslint-disable-next-line react/forbid-prop-types
         values:PropTypes.object.isRequired
@@ -63,21 +63,12 @@ export class FormUserDetails extends Component {
                             as="textarea"
                             onChange={this.props.handleChange('project_description')}
                             placeholder="Project Description"
-                            type="text"
-                            value={this.props.values.project_name}
+                            value={this.props.values.project_description}
                         />
 
                         <ReactTagInput 
                             onChange={(newTags) => this.props.handleChangeTags(newTags)} 
                             tags={this.props.values.project_tags}
-                        />
-
-                        <Form.Control 
-                            as="textarea"
-                            onChange={this.props.handleChange('project_description')}
-                            placeholder="Project Description"
-                            type="text"
-                            value={this.props.values.project_name}
                         />
 
                         <DatePicker
@@ -86,71 +77,44 @@ export class FormUserDetails extends Component {
                         />
 
 
+                        <div className="form-floating">
+                            <select
+                                aria-label="hello"
+                                className="form-select"
+                                id="floatingSelect"
+                                onChange={this.props.handleChange('stage')}
+                            >
 
+                                <option
+                                    selected
+                                    value="Initiation"
+                                >
+                                    Initiation
+                                </option>
 
+                                <option value="Planning">
+                                    Planning
+                                </option>
 
+                                <option value="Execution">
+                                    Execution
+                                </option>
+
+                                <option value="Monitoring and Controlling">
+                                    Monitoring and Controlling
+                                </option>
+
+                                <option value="Concluding">
+                                    Concluding
+                                </option>
+                            </select>
+
+                            <label htmlFor="floatingSelect">
+                                Stage of project
+                            </label>
+                        </div>
 
                     </Form.Group>
-
-                    <Form.Group
-                        className="mb-3"
-                        controlId="exampleForm.ControlTextarea1"
-                    >
-                        <Form.Label>
-                            Example textarea
-                        </Form.Label>
-
-                        <Form.Control
-                            as="textarea"
-                            rows={3}
-                        />
-                    </Form.Group>
-
-                    
-                    <div className='row'>
-                        <div className='col'>
-                            <Form.Control 
-                                onChange={this.props.handleChange('fname')}
-                                placeholder="First name"
-                                type="text"
-                                value={this.props.values.fname}
-
-                            />
-                        </div>
-
-                        <div className='col'>
-                            <Form.Control 
-                                onChange={this.props.handleChange('lname')}
-                                placeholder="Last name"
-                                type="text"
-                                value={this.props.values.lname}
-                            />
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div className='row'>
-                        <div className='col'>
-                            <Form.Control 
-                                onChange={this.props.handleChange('batch')}
-                                placeholder="Batch"
-                                type="text"
-                                value={this.props.values.batch}
-
-                            />
-                        </div>
-
-                        <div className='col'>
-                            <Form.Control 
-                                onChange={this.props.handleChange('course')}
-                                placeholder="Course"
-                                type="text"
-                                value={this.props.values.course}
-
-                            />
-                        </div>
-                    </div>
 
                 </Form>
 
