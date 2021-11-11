@@ -1,20 +1,24 @@
 import {useEffect, useState} from "react";
+import {isBrowser} from "./auth";
 
 export default function useOnScreen(ref) {
 
-    const [isIntersecting, setIntersecting] = useState(false)
+    if (isBrowser()) {
 
-    const observer = new IntersectionObserver(
-        ([entry]) => setIntersecting(entry.isIntersecting)
-    )
+        const [isIntersecting, setIntersecting] = useState(false)
 
-    useEffect(() => {
-        observer.observe(ref.current)
-        // Remove the observer as soon as the component is unmounted
-        return () => {
-            observer.disconnect()
-        }
-    }, [])
+        const observer = new IntersectionObserver(
+            ([entry]) => setIntersecting(entry.isIntersecting)
+        )
 
-    return isIntersecting
+        useEffect(() => {
+            observer.observe(ref.current)
+            // Remove the observer as soon as the component is unmounted
+            return () => {
+                observer.disconnect()
+            }
+        }, [])
+
+        return isIntersecting
+    }
 }

@@ -1,11 +1,16 @@
-import React from "react"
+import React, {useRef} from "react"
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import {floating_right_card} from "./event.module.scss";
+import useOnScreen from "utils/useOnScreen";
+import {BrowserView} from "react-device-detect";
 
 export default function Event() {
+    const ref = useRef()
+    const isParticipateButtonVisible = useOnScreen(ref)
+
 
     const state = {
         basicInformation: {
@@ -25,34 +30,56 @@ export default function Event() {
             <Container className="pt-3 pb-3">
                 <div className="row flex-lg-row-reverse">
 
-                    <div className="col-lg-3 col-12 mx-sm-2 mx-lg-0 px-lg-2">
-                        <Card
+                    <div className="col-lg-3 col-12 mx-sm-2 mx-lg-0 px-lg-2 ">
+                        <div
                             className={floating_right_card}
                         >
-                            <Card.Body>
-                                <Card.Header className="text-center">
-                                    Event Details
-                                </Card.Header>
-                                Detailed Timeline
+                            <Card>
+                                <Card.Body>
+                                    <Card.Header className="text-center">
+                                        Event Details
+                                    </Card.Header>
+                                    Detailed Timeline
 
-                                <ul className="list-unsettled">
-                                    <li>
-                                        Registrations & Team Formation Starts on: 25th June 2021
-                                    </li>
+                                    <ul className="list-unsettled">
+                                        <li>
+                                            Registrations & Team Formation Starts on: 25th June 2021
+                                            {' '}
 
-                                    <li>
-                                        Registrations & Team Formation Ends by: 26th July 2021
-                                    </li>
+                                        </li>
 
-                                    <li>
-                                        Orientation Webinar: 31st July - Saturday - 11:30 AM to 1 PM
-                                        Last Date for Concept Note Submissions: 2nd August 2021
-                                    </li>
-                                </ul>
-                            </Card.Body>
-                        </Card>
+                                        <li>
+                                            Registrations & Team Formation Ends by: 26th July 2021
+                                        </li>
 
-                        <br/>
+                                        <li>
+                                            Orientation Webinar: 31st July - Saturday - 11:30 AM to 1 PM
+                                            Last Date for Concept Note Submissions: 2nd August 2021
+                                        </li>
+                                    </ul>
+                                </Card.Body>
+                            </Card>
+
+                            {isParticipateButtonVisible?null:<BrowserView className="d-flex justify-content-around text-end pt-5">
+
+                                <Button
+                                    className="rounded-4 w-20 fs-4 px-5"
+                                    variant="outline-primary"
+                                >
+                                    FAQ
+                                </Button>
+
+                                <Button
+                                    className="rounded-4 w-20 fs-4 px-3"
+                                >
+                                    Participate
+                                </Button>
+
+
+                            </BrowserView>}
+                        </div>
+
+                        <br />
                     </div>
 
                     <div className="col-lg-9 col-12 mx-sm-2 mx-lg-0 px-lg-2">
@@ -92,7 +119,10 @@ export default function Event() {
                                                 FAQ
                                             </Button>
 
-                                            <Button className="rounded-4 w-20 fs-4 px-3">
+                                            <Button
+                                                className="rounded-4 w-20 fs-4 px-3"
+                                                ref={ref}
+                                            >
                                                 Participate
                                             </Button>
 
@@ -115,6 +145,26 @@ export default function Event() {
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                 Lorem Ipsum has been the standard dummy text ever since the 1500s,
                                 when an unknown printer took a galley of type and scrambled it to make a type specimen
+                                book.
+                                It has survived not only five centuries, but also the leap into electronic typesetting,
+                                remaining essentially unchanged. It was popularised in the 1960s with the release
+                                of Letraset sheets Lorem Ipsum is simply dummy text of the printing and typesetting
+                                industry.
+                                Lorem Ipsum has been the standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen
+                                book.
+                                It has survived not only five centuries, but also the leap into electronic typesetting,
+                                remaining essentially unchanged. It was popularised in the 1960s with the release
+                                of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen
+                                book.
+                                It has survived not only five centuries, but also the leap into electronic typesetting,
+                                remaining essentially unchanged. It was popularised in the 1960s with the release
+                                of Letraset sheets when an unknown printer took a galley of type and scrambled it to
+                                make a type specimen
                                 book.
                                 It has survived not only five centuries, but also the leap into electronic typesetting,
                                 remaining essentially unchanged. It was popularised in the 1960s with the release
