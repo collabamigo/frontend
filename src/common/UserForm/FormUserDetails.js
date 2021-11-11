@@ -5,12 +5,15 @@ import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form'
 import "@pathofdev/react-tag-input/build/index.css";
 import ReactTagInput from "@pathofdev/react-tag-input";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export class FormUserDetails extends Component {
 
     static propTypes = {
         handleChange: PropTypes.func.isRequired,
         handleChangeTags: PropTypes.func.isRequired,
+        handleChangeDate: PropTypes.func.isRequired,
         nextStep: PropTypes.func.isRequired,
         // eslint-disable-next-line react/forbid-prop-types
         values:PropTypes.object.isRequired
@@ -68,6 +71,21 @@ export class FormUserDetails extends Component {
                             onChange={(newTags) => this.props.handleChangeTags(newTags)} 
                             tags={this.props.values.project_tags}
                         />
+
+                        <Form.Control 
+                            as="textarea"
+                            onChange={this.props.handleChange('project_description')}
+                            placeholder="Project Description"
+                            type="text"
+                            value={this.props.values.project_name}
+                        />
+
+                        <DatePicker
+                            onChange={(date) => this.props.handleChangeDate(date)}
+                            selected={this.props.values.date_of_est}
+                        />
+
+
 
 
 

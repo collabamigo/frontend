@@ -21,6 +21,8 @@ export class UserForm extends Component {
 
     handleChange: PropTypes.func.isRequired,
     handleChangeTags: PropTypes.func.isRequired,
+    handleChangeDates: PropTypes.func.isRequired,
+
 
     visible: PropTypes.bool.isRequired,
 
@@ -90,6 +92,7 @@ export class UserForm extends Component {
             <FormUserDetails
                 handleChange={this.props.handleChange}
                 handleChangeTags={this.props.handleChangeTags}
+                handleChangeDate={this.props.handleChangeDate}
                 nextStep={this.nextStep}
                 values={v1}
             />

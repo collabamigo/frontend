@@ -31,7 +31,7 @@ export default class submissionPage extends Component {
             team_size: 0,
             team_member_names: [],
             team_member_emails: [],
-            date_of_est:"",
+            date_of_est: new Date(),
 
             visible: false,
             stage: ""
@@ -41,6 +41,8 @@ export default class submissionPage extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeTags = this.handleChangeTags.bind(this);
+        this.handleChangeDate = this.handleChangeDate.bind(this);
+
     }
 
     shouldComponentUpdate(){
@@ -50,6 +52,12 @@ export default class submissionPage extends Component {
     handleChangeTags(tags){
         this.setState({
             project_tags: tags
+        })
+    }
+
+    handleChangeDate(date){
+        this.setState({
+            date_of_est: date
         })
     }
 
@@ -99,6 +107,7 @@ export default class submissionPage extends Component {
                                     // eslint-disable-next-line react/jsx-handler-names
                                     handleChange={this.handleChange}
                                     handleChangeTags={this.handleChangeTags}
+                                    handleChangeDate={this.handleChangeDate}
                                 />
 
                             </div>
