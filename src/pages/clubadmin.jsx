@@ -7,6 +7,8 @@ import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
+import axios from "../utils/axios";
+import backend from "../env";   // todo reference
 
 
 class ClubAdminPage extends Component {
@@ -18,12 +20,10 @@ class ClubAdminPage extends Component {
         super(props)
         this.state = {
             currentModal: null,
-            basicInformation : {
-                name: "Salt & Pepper",
+            basicInformation: {},
+            basicInformationStatic : {
                 announcements: [{id: "1", content:"Welcome"}],
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
-                tagline: "The Photography Society of IIITD",
-                description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                 coordinators:[
                     {
                         name:"Tushar Singh",
@@ -34,13 +34,6 @@ class ClubAdminPage extends Component {
                         email:"shikhar@gmail.com",
                     },
                 ],
-                memberSize: 10,
-                socialmediaLink: {
-                    instagram : "https://www.instagram.com/shikhar",
-                    linkedin : "https://www.linkedin.com/shikhar",
-                    facebook : "https://www.facebook.com/shikhar",
-                    website : "https://www.collabconnect.com/404",
-                },
                 joinDate:"26122020",
                 clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"],
                 eventList: [
@@ -58,20 +51,17 @@ class ClubAdminPage extends Component {
                     {name: "Event11", logo: "https://via.placeholder.com/70X70"},
                 ],
             },
-
         }
     }
 
     componentDidMount() {
-        let caller = null;
-        console.log(caller,"hellooo")
-        // axios.get("/club/" + caller)
-        //     .then((res) => {
-        //         console.log("axios call executed")
-        //         console.log(res)
-        //         }
-        //     )
-        }
+        axios.get(backend + "club/club/Byld/?format=json").then((res) => {
+            this.setState({basicInformation: res.data});
+        });
+        // axios.get(backend + "club/club/Byld/?format=json").then((res) => {
+        //     this.setState({basicInformation: res.data});
+        // });
+    }
 
     shouldComponentUpdate () {
         return true;
@@ -83,8 +73,8 @@ class ClubAdminPage extends Component {
             return (
                 {
                     ...prevState,
-                    basicInformation: {
-                        ...(prevState.basicInformation),
+                    basicInformationStatic: {
+                        ...(prevState.basicInformationStatic),
                         description: description
                     }
                 })
@@ -103,9 +93,9 @@ class ClubAdminPage extends Component {
             return (
                 {
                     ...prevState,
-                    basicInformation: {
-                        ...(prevState.basicInformation),
-                        announcements: [...(prevState.basicInformation.announcements) , {id:announcement_id, content:values[0]}]
+                    basicInformationStatic: {
+                        ...(prevState.basicInformationStatic),
+                        announcements: [...(prevState.basicInformationStatic.announcements) , {id:announcement_id, content:values[0]}]
                     }
                 })
         })
@@ -119,12 +109,10 @@ class ClubAdminPage extends Component {
                     ...prevState,
                     basicInformation: {
                         ...(prevState.basicInformation),
-                        socialmediaLink: {
-                            facebook: values[0],
-                            instagram: values[1],
-                            linkedin: values[2],
-                            website: values[3],
-                        },
+                        facebook: values[0],
+                        instagram: values[1],
+                        linkedin: values[2],
+                        website: values[3],
                         tagline: values[4]
                     }
                 })
@@ -166,17 +154,17 @@ class ClubAdminPage extends Component {
                                 <ClubAdminModal
                                     handleClose={this.handleCloseModal.bind(this)}
                                     handleSubmit={this.handleSubmitPanel.bind(this)}
-                                    initialValues={[this.state.basicInformation.socialmediaLink.facebook,
-                                    this.state.basicInformation.socialmediaLink.instagram,
-                                    this.state.basicInformation.socialmediaLink.linkedin,
-                                    this.state.basicInformation.socialmediaLink.website,
+                                    initialValues={[this.state.basicInformation.facebook,
+                                    this.state.basicInformation.instagram,
+                                    this.state.basicInformation.linkedin,
+                                    this.state.basicInformation.website,
                                     this.state.basicInformation.tagline]}
                                     labels={['Facebook','Instagram','LinkedIn','Other website','Enter Your Clubs Catchphrase ']}
                                     show={this.state.currentModal === 'panel'}
                                 />
 
                                 <Card.Img
-                                    src={this.state.basicInformation.logoLink}
+                                    src={this.state.basicInformationStatic.logoLink}
                                     variant="top"
                                 />
 
@@ -195,7 +183,7 @@ class ClubAdminPage extends Component {
                                     <div className="col text-center">
                                         <Card.Link
                                             className=""
-                                            href={this.state.basicInformation.socialmediaLink.facebook}
+                                            href={this.state.basicInformation.facebook}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -207,7 +195,7 @@ class ClubAdminPage extends Component {
 
                                         <Card.Link
                                             className=""
-                                            href={this.state.basicInformation.socialmediaLink.instagram}
+                                            href={this.state.basicInformation.instagram}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -218,7 +206,7 @@ class ClubAdminPage extends Component {
                                         </Card.Link>
 
                                         <Card.Link
-                                            href={this.state.basicInformation.socialmediaLink.linkedin}
+                                            href={this.state.basicInformation.linkedin}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -230,7 +218,7 @@ class ClubAdminPage extends Component {
 
                                         <Card.Link
                                             className=""
-                                            href={this.state.basicInformation.socialmediaLink.website}
+                                            href={this.state.basicInformation.website}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -285,13 +273,13 @@ class ClubAdminPage extends Component {
 
                         {/*                    <li>*/}
 
-                        {/*                        {this.state.basicInformation.coordinators[0].name}*/}
+                        {/*                        {this.state.basicInformationStatic.coordinators[0].name}*/}
 
                         {/*                    </li>*/}
 
                         {/*                    <li>*/}
 
-                        {/*                        {this.state.basicInformation.coordinators[1].name}*/}
+                        {/*                        {this.state.basicInformationStatic.coordinators[1].name}*/}
 
                         {/*                    </li>*/}
 
@@ -303,7 +291,7 @@ class ClubAdminPage extends Component {
 
                         {/*                {" "}*/}
 
-                        {/*                {this.state.basicInformation.memberSize}*/}
+                        {/*                {this.state.basicInformationStatic.memberSize}*/}
 
                         {/*            </div>*/}
 
@@ -343,7 +331,7 @@ class ClubAdminPage extends Component {
                                         <img
                                             alt="First slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformation.clubBanners[0]}
+                                            src={this.state.basicInformationStatic.clubBanners[0]}
                                         />
 
                                         <Carousel.Caption>
@@ -358,7 +346,7 @@ class ClubAdminPage extends Component {
                                         <img
                                             alt="Second slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformation.clubBanners[1]}
+                                            src={this.state.basicInformationStatic.clubBanners[1]}
                                         />
 
                                         <Carousel.Caption>
@@ -373,7 +361,7 @@ class ClubAdminPage extends Component {
                                         <img
                                             alt="Third slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformation.clubBanners    [2]}
+                                            src={this.state.basicInformationStatic.clubBanners    [2]}
                                         />
 
                                         <Carousel.Caption>
@@ -400,12 +388,12 @@ class ClubAdminPage extends Component {
                                         Coordinators:
                                         {' '}
 
-                                        {this.state.basicInformation.coordinators[0].name}
+                                        {this.state.basicInformationStatic.coordinators[0].name}
                                         ,
 
                                         {' '}
 
-                                        {this.state.basicInformation.coordinators[1].name}
+                                        {this.state.basicInformationStatic.coordinators[1].name}
                                     </div>
 
                                     <div>
@@ -476,7 +464,7 @@ class ClubAdminPage extends Component {
 
                                         <div className="">
                                             <ul className="list">
-                                                {this.state.basicInformation.announcements.map(item => (
+                                                {this.state.basicInformationStatic.announcements.map(item => (
                                                     <ul key={item}>
                                                         <span className="material-icons-outlined">
                                                             notifications
@@ -524,7 +512,7 @@ class ClubAdminPage extends Component {
                             <Card.Text className="card-text h5 text-muted col-12">
                                 <div>
                                     <Clublist
-                                        ItemList={this.state.basicInformation.eventList}
+                                        ItemList={this.state.basicInformationStatic.eventList}
                                         Type="Event"
                                     />
                                 </div>
