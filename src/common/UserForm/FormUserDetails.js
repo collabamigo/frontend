@@ -87,24 +87,24 @@ export class FormUserDetails extends Component {
 
                                 <option
                                     selected
-                                    value="Initiation"
+                                    value="i"
                                 >
                                     Initiation
                                 </option>
 
-                                <option value="Planning">
+                                <option value="p">
                                     Planning
                                 </option>
 
-                                <option value="Execution">
+                                <option value="e">
                                     Execution
                                 </option>
 
-                                <option value="Monitoring and Controlling">
+                                <option value="mc">
                                     Monitoring and Controlling
                                 </option>
 
-                                <option value="Concluding">
+                                <option value="c">
                                     Concluding
                                 </option>
                             </select>

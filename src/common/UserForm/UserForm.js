@@ -22,7 +22,9 @@ export class UserForm extends Component {
     handleChange: PropTypes.func.isRequired,
     handleChangeTags: PropTypes.func.isRequired,
     handleChangeDate: PropTypes.func.isRequired,
-    // handleChangeTS: PropTypes.func.isRequired,
+    handleChangeteam: PropTypes.func.isRequired,
+    handleDeleteteam: PropTypes.func.isRequired,
+
 
 
     visible: PropTypes.bool.isRequired,
@@ -102,7 +104,8 @@ export class UserForm extends Component {
         return (
             <FormPersonalDetails
                 handleChange={this.props.handleChange}
-                // handleChangeTS={this.props.handleChangeTS}
+                handleChangeteam={this.props.handleChangeteam}
+                handleDeleteteam={this.props.handleDeleteteam}
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
                 values={v2}

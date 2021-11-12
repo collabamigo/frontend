@@ -9,7 +9,9 @@ export class FormPersonalDetails extends Component {
 
     static propTypes = {
         handleChange: PropTypes.func.isRequired,
-        // handleChangeTS: PropTypes.func.isRequired,
+        handleChangeteam: PropTypes.func.isRequired,
+        handleDeleteteam: PropTypes.func.isRequired,
+
         nextStep: PropTypes.func.isRequired,
         prevStep: PropTypes.func.isRequired,
         // eslint-disable-next-line react/forbid-prop-types
@@ -49,7 +51,9 @@ export class FormPersonalDetails extends Component {
             items:items
         })
     });
-    // this.props.handleChangeTS(this.state.items.length);
+
+    console.log(i);
+    this.props.handleDeleteteam(i);
 
  }
 
@@ -69,14 +73,17 @@ export class FormPersonalDetails extends Component {
                 <InputGroup className="mb-3 w-75">
                     <Form.Control
                         aria-describedby="basic-addon2"
-                        aria-label="Recipient's username"
-                        placeholder="Recipient's username"
+                        aria-label="Name"
+                        onChange={(e) => this.props.handleChangeteam('name',i,e)}
+                        placeholder="Name"
                     />
 
                     <Form.Control
                         aria-describedby="basic-addon2"
-                        aria-label="Recipient's username"
-                        placeholder="Recipient's username"
+                        aria-label="Email"
+                        onChange={(e) => this.props.handleChangeteam('email',i,e)}
+                        placeholder="Email"
+
                     />
 
                     <button
@@ -107,7 +114,7 @@ export class FormPersonalDetails extends Component {
             open
         >
 
-            {this.state.items.length}
+            {/* {this.state.items.length} */}
 
             <Form>
                 <Form.Group
@@ -122,12 +129,16 @@ export class FormPersonalDetails extends Component {
                         value={this.props.values.team_size}
                     /> */}
 
+                    <Form.Label>
+                        Add Team Members
+                    </Form.Label>
+
                     {this.createUI()} 
 
                     <input
                         onClick={this.addClick.bind(this)}
                         type='button'
-                        value={this.state.items.length<2?"add team bros":"add more hoes"}
+                        value={this.state.items.length<1?"add team bros":"add more hoes"}
                     />
 
 

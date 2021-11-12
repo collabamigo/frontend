@@ -29,7 +29,7 @@ export default class submissionPage extends Component {
             project_tags:["Example Tag"],
             
             // team_size: 0,
-            team_member_names: [],
+            team_members: [],
             team_member_emails: [],
             date_of_est: new Date(),
 
@@ -42,7 +42,9 @@ export default class submissionPage extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeTags = this.handleChangeTags.bind(this);
         this.handleChangeDate = this.handleChangeDate.bind(this);
-        // this.handleChangeTS = this.handleChangeTS.bind(this);
+        this.handleChangeteam = this.handleChangeteam.bind(this);
+        this.handleDeleteteam = this.handleDeleteteam.bind(this);
+
 
 
     }
@@ -58,6 +60,10 @@ export default class submissionPage extends Component {
     }
 
     handleChangeDate(date){
+
+        console.log(typeof(date))
+
+
         this.setState({
             date_of_est: date
         })
@@ -76,6 +82,50 @@ export default class submissionPage extends Component {
 
         this.setState({ [input]: e.target.value });
     };
+
+    handleDeleteteam(val){
+
+        if(val < this.state.team_members.length){
+            this.setState((prevState) => {team_members: prevState.team_members.splice(val,1)})
+        }
+        console.log(this.state.team_members, "hiii");
+    }
+
+    handleChangeteam(varr,val,e){
+
+        if(val >= this.state.team_members.length){
+            this.setState((prevState) => {
+                let va = prevState.team_members;
+                va[val] = {name:"",email:""};
+                return ({
+                    ...prevState,
+                    team_members: va
+                })
+            });
+        }
+
+        console.log(this.state.team_members);
+        if(varr === "name"){
+            this.setState((prevState) => {
+                let va = prevState.team_members;
+                va[val].name = e.target.value;
+                return ({
+                    ...prevState,
+                    team_members: va
+                })
+            });
+        }
+        else if(varr === "email"){
+            this.setState((prevState) => {
+                let va = prevState.team_members;
+                va[val].email = e.target.value;
+                return ({
+                    ...prevState,
+                    team_members: va
+                })
+            });
+        }
+    }
 
 
     render() {
@@ -118,7 +168,9 @@ export default class submissionPage extends Component {
                                     handleChange={this.handleChange}
                                     handleChangeTags={this.handleChangeTags}
                                     handleChangeDate={this.handleChangeDate}
-                                    // handleChangeTS={this.handleChangeTS}
+                                    handleChangeteam={this.handleChangeteam}
+                                    handleDeleteteam={this.handleDeleteteam}
+
                                 />
 
                             </div>
