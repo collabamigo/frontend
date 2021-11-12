@@ -18,7 +18,7 @@ export default function TextInput ({label, ...props}){
             <br />
 
             <textarea
-                className="text-input w-100 bg-secondary text-white border-secondary pb-4"
+                className="text-input w-100 bg-secondary text-white border-secondary pb-4 rounded-4"
                 {...field}
                 {...props}
             />

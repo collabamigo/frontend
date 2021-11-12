@@ -7,9 +7,9 @@ import colors from "../../styles/colors";
 import generateCode from "../LogicFormBuilder/GenerateCode";
 import builder from "./data/builder";
 import generic from "./data/generic"
-import * as buttonStyles from "../../styles/button.module.css"
-import * as containerStyles from "../../styles/container.module.css"
-import * as typographyStyles from "../../styles/typography.module.css";
+import * as buttonStyles from "styles/button.module.css"
+import * as containerStyles from "styles/container.module.css"
+import * as typographyStyles from "styles/typography.module.css";
 import * as styles from "./BuildForm.module.css";
 import {LivePreview, LiveProvider} from "react-live";
 import {Modal} from "react-bootstrap";
@@ -71,7 +71,6 @@ export default function FormBuilder({
     const copyFormData = useRef([]);
     const closeButton = useRef(null);
     // const [showValidation, toggleValidation] = useState(false);
-    const showValidation = false
 
     const onSubmit = (data) => {
         if (editIndex >= 0) {
@@ -269,13 +268,14 @@ export default function FormBuilder({
 
                         <option value="search">
                             Search
-                        </option>*/}
+                        </option>
 
                         <option value="tel">
                             Tel
                         </option>
 
-                        {/*<option value="url">
+
+                        <option value="url">
                             url
                         </option>*/}
 
@@ -336,7 +336,20 @@ export default function FormBuilder({
                         </>
                     )}
 
-                    <Animate
+                    <label
+                        style={{
+                            marginTop: 0,
+                        }}
+                    >
+                        <input
+                            name="required"
+                            ref={register}
+                            type="checkbox"
+                        />
+                        Required
+                    </label>
+
+                    {/*<Animate
                         end={{
                             maxHeight: 800,
                             overflow: "hidden",
@@ -417,7 +430,7 @@ export default function FormBuilder({
                                 type="text"
                             />
                         </fieldset>
-                    </Animate>
+                    </Animate>*/}
 
                     <button
                         className="btn btn-warning align-self-center"
@@ -518,13 +531,14 @@ export default function FormBuilder({
 
     if (isStatic) return child;
 
+    console.log("formData", formData)
     return (
         <Modal.Dialog
             className="modal-dialog w-75 mw-100 border-0"
             contentClassName="border-0"
         >
             <div
-                className="bg-dark text-white rounded-4"
+                className="bg-dark text-white rounded-5"
             >
                 <div
                     id="builder"
