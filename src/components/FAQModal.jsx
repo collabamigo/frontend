@@ -1,5 +1,5 @@
 
-import React, {useState} from "react"
+import React from "react"
 import {Button, Modal} from "react-bootstrap";
 import Accordion from 'react-bootstrap/Accordion'
 import Card from "react-bootstrap/Card";
@@ -19,7 +19,11 @@ export default class FAQModal extends React.Component {
         }
     }
 
-  handleClose(){ this.setState({
+    shouldComponentUpdate() {
+        return true;
+    }
+
+    handleClose(){ this.setState({
       show: false
   })}
 
@@ -29,44 +33,57 @@ export default class FAQModal extends React.Component {
 
     render() {
             return (
-        <>
-          <Button variant="primary" onClick={this.handleShow.bind(this)}>
-            Launch demo modal
-          </Button>
+                <>
+                    <Button
+                        onClick={this.handleShow.bind(this)}
+                        variant="primary"
+                    >
+                        Launch demo modal
+                    </Button>
 
-            {this.state.temp.map(item =>(
-          <Modal
-              show={this.state.show}
-              onHide={this.handleClose.bind(this)}
-              className="w-100"
-          >
-              <Modal.Dialog className="w-100">
-                  <Accordion>
-                  <Card>
-                    <Card.Header>
-                      <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                        Click me!
-                      </Accordion.Toggle>
-                    </Card.Header>
-                    <Accordion.Collapse eventKey="0">
-                        <div>
+                    {this.state.temp.map(item =>(
+                        <Modal
+                            className="w-100"
+                            key={item["answer"]}
+                            onHide={this.handleClose.bind(this)}
+                            show={this.state.show}
+                        >
+                            <Modal.Dialog className="w-100">
+                                <Accordion>
+                                    <Card>
+                                        <Card.Header>
+                                            <Accordion.Toggle
+                                                as={Button}
+                                                eventKey="0"
+                                                variant="link"
+                                            >
+                                                Click me!
+                                            </Accordion.Toggle>
+                                        </Card.Header>
 
-                            <Card.Body>
-                                {item["answer"]}
-                            </Card.Body>
+                                        <Accordion.Collapse eventKey="0">
+                                            <div>
 
-                        </div>
-                    </Accordion.Collapse>
-                  </Card>
-                  </Accordion>
-              </Modal.Dialog>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={this.handleClose.bind(this)}>
-                    Close
-                </Button>
-            </Modal.Footer>
-          </Modal>
+                                                <Card.Body>
+                                                    {item["answer"]}
+                                                </Card.Body>
+
+                                            </div>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                </Accordion>
+                            </Modal.Dialog>
+
+                            <Modal.Footer>
+                                <Button
+                                    onClick={this.handleClose.bind(this)}
+                                    variant="secondary"
+                                >
+                                    Close
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                 ))}
-        </>
+                </>
   );}
 }
