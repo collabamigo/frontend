@@ -60,7 +60,8 @@ export default function Event() {
                                 </Card.Body>
                             </Card>
 
-                            {isParticipateButtonVisible?null:<BrowserView className="d-flex justify-content-around text-end pt-5">
+                            {isParticipateButtonVisible?null:
+                            <BrowserView className="d-flex justify-content-around text-end pt-5">
 
                                 <Button
                                     className="rounded-4 w-20 fs-4 px-5"

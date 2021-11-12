@@ -1,6 +1,5 @@
 import React from "react"
 import FAQModal from "../components/FAQModal";
-import {Accordion} from "react-bootstrap";
 
 class Faq extends React.Component{
 
