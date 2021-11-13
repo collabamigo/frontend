@@ -21,6 +21,7 @@ class ClubAdminPage extends Component {
         this.state = {
             currentModal: null,
             basicInformation: {},
+            competition:{},
             basicInformationStatic : {
                 announcements: [{id: "1", content:"Welcome"}],
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
@@ -57,10 +58,11 @@ class ClubAdminPage extends Component {
     componentDidMount() {
         axios.get(backend + "club/club/Byld/?format=json").then((res) => {
             this.setState({basicInformation: res.data});
+            axios.get(backend + "club/competition/" + this.state.basicInformation.id + "/?format=json").then((res) => {
+                this.setState({competition: res.data});
+                });
         });
-        // axios.get(backend + "club/club/Byld/?format=json").then((res) => {
-        //     this.setState({basicInformation: res.data});
-        // });
+
     }
 
     shouldComponentUpdate () {
@@ -129,6 +131,7 @@ class ClubAdminPage extends Component {
 
     render(){
         console.log(this.state.basicInformation)
+        console.log(this.state.competition)
         return (
             <div className="row m-1">
                 <div className="col-3 d-flex justify-content-around">
