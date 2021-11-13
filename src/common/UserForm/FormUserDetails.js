@@ -41,11 +41,7 @@ export class FormUserDetails extends Component {
   render() {
     return (
         <div>
-            <div
-                fullWidth
-                maxWidth='sm'
-                open
-            >
+            <div>
                 <Form>
                     <Form.Group
                         className="mb-3"

@@ -108,11 +108,7 @@ export class FormPersonalDetails extends Component {
   render() {
 
     return (
-        <div
-            fullWidth
-            maxWidth='sm'
-            open
-        >
+        <div>
 
             {/* {this.state.items.length} */}
 

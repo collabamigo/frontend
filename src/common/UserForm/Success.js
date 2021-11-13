@@ -33,11 +33,7 @@ export class Success extends Component {
   render() {
     return (
         <div>
-            <div
-                fullWidth
-                maxWidth='sm'
-                open
-            >
+            <div>
                 <div title="Success" />
 
                 <h1>

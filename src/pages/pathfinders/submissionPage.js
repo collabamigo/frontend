@@ -130,8 +130,6 @@ export default class submissionPage extends Component {
     render() {
         return (
             <section className={box}>
-
-
                 <Card className={center + " container text-center  "}>
                     <div className={center2 + " row content"}>
 
