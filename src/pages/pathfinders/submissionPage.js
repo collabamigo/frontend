@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-sort-props */
-/* eslint-disable react/jsx-props-no-multi-spaces */
 // import {navbar} from "./submissionPage.module.css";
 import {static_left} from "./submissionPage.module.css";
 import {box, } from "./submissionPage.module.css";
@@ -18,7 +17,7 @@ export default class submissionPage extends Component {
     //     prop: PropTypes
     // }
 
-    
+
     constructor(props) {
         super(props);
 
@@ -27,7 +26,7 @@ export default class submissionPage extends Component {
             project_name: "",
             project_description:"",
             project_tags:["Example Tag"],
-            
+
             // team_size: 0,
             team_members: [],
             team_member_emails: [],
@@ -36,14 +35,14 @@ export default class submissionPage extends Component {
             visible: false,
             stage: ""
 
-    
+
         }
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleChangeTags = this.handleChangeTags.bind(this);
-        this.handleChangeDate = this.handleChangeDate.bind(this);
-        this.handleChangeteam = this.handleChangeteam.bind(this);
-        this.handleDeleteteam = this.handleDeleteteam.bind(this);
+        this.onChangeTags = this.onChangeTags.bind(this);
+        this.onChangeDate = this.onChangeDate.bind(this);
+        this.onChangeteam = this.onChangeteam.bind(this);
+        this.onDeleteteam = this.onDeleteteam.bind(this);
 
 
 
@@ -53,13 +52,13 @@ export default class submissionPage extends Component {
         return true;
     }
 
-    handleChangeTags(tags){
+    onChangeTags(tags){
         this.setState({
             project_tags: tags
         })
     }
 
-    handleChangeDate(date){
+    onChangeDate(date){
 
         console.log(typeof(date))
 
@@ -83,7 +82,7 @@ export default class submissionPage extends Component {
         this.setState({ [input]: e.target.value });
     };
 
-    handleDeleteteam(val){
+    onDeleteteam(val){
 
         if(val < this.state.team_members.length){
             this.setState((prevState) => {team_members: prevState.team_members.splice(val,1)})
@@ -91,7 +90,7 @@ export default class submissionPage extends Component {
         console.log(this.state.team_members, "hiii");
     }
 
-    handleChangeteam(varr,val,e){
+    onChangeteam(varr, val, e){
 
         if(val >= this.state.team_members.length){
             this.setState((prevState) => {
@@ -132,11 +131,11 @@ export default class submissionPage extends Component {
         return (
             <section className={box}>
 
-                
-                <Card className={center + " container text-center  "}>    
+
+                <Card className={center + " container text-center  "}>
                     <div className={center2 + " row content"}>
 
-                        <div className={static_left +"  col-sm-8 text-left  "}> 
+                        <div className={static_left +"  col-sm-8 text-left  "}>
                             <h1>
                                 Register and Feel safe
                             </h1>
@@ -150,27 +149,21 @@ export default class submissionPage extends Component {
                                 <hr />
 
                                 <UserForm
-
                                     project_name={this.state.project_name}
                                     project_description={this.state.project_description}
                                     project_tags={this.state.project_tags}
-
                                     // team_size={this.state.team_size}
                                     team_member_names={this.state.team_member_names}
                                     team_member_emails={this.state.team_member_emails}
-                                    
                                     date_of_est={this.state.date_of_est}
-
                                     visible={this.state.visible}
                                     stage={this.state.stage}
-
                                     // eslint-disable-next-line react/jsx-handler-names
                                     handleChange={this.handleChange}
-                                    handleChangeTags={this.handleChangeTags}
-                                    handleChangeDate={this.handleChangeDate}
-                                    handleChangeteam={this.handleChangeteam}
-                                    handleDeleteteam={this.handleDeleteteam}
-
+                                    handleChangeTags={this.onChangeTags}
+                                    handleChangeDate={this.onChangeDate}
+                                    handleChangeteam={this.onChangeteam}
+                                    handleDeleteteam={this.onDeleteteam}
                                 />
 
                             </div>
@@ -191,7 +184,7 @@ export default class submissionPage extends Component {
                                 <Carousel
                                     className=""
                                     nextIcon={
-                                        <span 
+                                        <span
                                             aria-hidden="true"
                                             className="carousel-control-next-icon"
                                             style={{
@@ -200,7 +193,7 @@ export default class submissionPage extends Component {
                                         />
                                                                     }
                                     prevIcon={
-                                        <span 
+                                        <span
                                             aria-hidden="true"
                                             className="carousel-control-prev-icon "
                                             style={{
@@ -263,11 +256,11 @@ export default class submissionPage extends Component {
                                         </Carousel.Caption> */}
                                     </Carousel.Item>
 
-                                    
+
                                 </Carousel>
-                                
-                                
-                                
+
+
+
                             </div>
 
                             <br />
