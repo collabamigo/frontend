@@ -24,6 +24,9 @@ export class UserForm extends Component {
     handleChangeDate: PropTypes.func.isRequired,
     handleChangeteam: PropTypes.func.isRequired,
     handleDeleteteam: PropTypes.func.isRequired,
+    
+    removeClick: PropTypes.func.isRequired,
+    addClick: PropTypes.func.isRequired,
 
 
 
@@ -35,6 +38,7 @@ export class UserForm extends Component {
     project_name: PropTypes.string.isRequired,
     project_tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 
+    team_members: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
     team_member_emails: PropTypes.arrayOf(PropTypes.string).isRequired,
     team_member_names: PropTypes.arrayOf(PropTypes.string).isRequired,    
     // team_size : PropTypes.number.isRequired,    
@@ -79,7 +83,7 @@ export class UserForm extends Component {
   render() {
     const { step } = this.state;
     const { visible, stage, project_name, project_description, project_tags,
-       team_member_names, team_member_emails, date_of_est } = this.props;
+       team_member_names, team_member_emails, date_of_est, team_members } = this.props;
 
     // console.log(v1);
     // console.log("v1");
@@ -87,7 +91,7 @@ export class UserForm extends Component {
     const v1 = {project_name, project_description, project_tags, date_of_est, stage};
     // const v2 = {fname, lname, batch , course};
 
-    const v2 = { team_member_names, team_member_emails, visible};
+    const v2 = { team_member_names, team_member_emails, visible ,team_members};
 
     switch (step) {
       case 1:
@@ -103,11 +107,13 @@ export class UserForm extends Component {
       case 2:
         return (
             <FormPersonalDetails
+                addClick={this.props.addClick}
                 handleChange={this.props.handleChange}
                 handleChangeteam={this.props.handleChangeteam}
                 handleDeleteteam={this.props.handleDeleteteam}
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
+                removeClick={this.props.removeClick}
                 values={v2}
             />
         );

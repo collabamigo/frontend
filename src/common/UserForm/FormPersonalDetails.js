@@ -12,6 +12,9 @@ export class FormPersonalDetails extends Component {
         handleChangeteam: PropTypes.func.isRequired,
         handleDeleteteam: PropTypes.func.isRequired,
 
+        removeClick: PropTypes.func.isRequired,
+        addClick: PropTypes.func.isRequired,
+
         nextStep: PropTypes.func.isRequired,
         prevStep: PropTypes.func.isRequired,
         // eslint-disable-next-line react/forbid-prop-types
@@ -21,10 +24,6 @@ export class FormPersonalDetails extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            items: [""],
-        }
 
         this.handleContinue = this.handleContinue.bind(this);
         this.handleBack = this.handleBack.bind(this);
@@ -42,29 +41,8 @@ export class FormPersonalDetails extends Component {
   };
 
 
- removeClick(i){
-    this.setState((prevState) => {
-        let items = prevState.items;
-        items.splice(i,1);
-        return ({
-            ...prevState,
-            items:items
-        })
-    });
-
-    console.log(i);
-    this.props.handleDeleteteam(i);
-
- }
-
- addClick(){
-    this.setState(prevState => ({ items: [...prevState.items, '']}))
-    // this.props.handleChangeTS(this.state.items.length);
-
-  }
-
   createUI(){
-    return this.state.items.map((el, i) => 
+    return this.props.values.team_members.map((el, i) => 
         (
             <div
                 id={i}
@@ -76,6 +54,7 @@ export class FormPersonalDetails extends Component {
                         aria-label="Name"
                         onChange={(e) => this.props.handleChangeteam('name',i,e)}
                         placeholder="Name"
+                        value={this.props.values.team_members[i].name}
                     />
 
                     <Form.Control
@@ -83,12 +62,14 @@ export class FormPersonalDetails extends Component {
                         aria-label="Email"
                         onChange={(e) => this.props.handleChangeteam('email',i,e)}
                         placeholder="Email"
+                        value={this.props.values.team_members[i].email}
+
 
                     />
 
                     <button
                         id="button-addon2"
-                        onClick={this.removeClick.bind(this, i)}
+                        onClick={(e) => this.props.removeClick(i)}
                         type="button"
                         variant="outline-secondary"
                     >
@@ -131,11 +112,14 @@ export class FormPersonalDetails extends Component {
 
                     {this.createUI()} 
 
-                    <input
-                        onClick={this.addClick.bind(this)}
-                        type='button'
-                        value={this.state.items.length<1?"add team bros":"add more hoes"}
-                    />
+                    <button
+                        className="btn btn-primary mt-2"
+                        // eslint-disable-next-line react/jsx-handler-names
+                        onClick={(e) => this.props.addClick(e)}
+                        type="button"
+                    >
+                        Add Team Members
+                    </button>
 
 
                     
