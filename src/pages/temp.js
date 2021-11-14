@@ -1,5 +1,5 @@
 import React from "react"
-import AccountChooser from "components/AccountChooser";
+import AccountChooser from "components/AccountChooser/AccountChooser";
 
 function temp() {
     return (
