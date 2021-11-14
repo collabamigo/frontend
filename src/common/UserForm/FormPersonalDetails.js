@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form'
 import "@pathofdev/react-tag-input/build/index.css";
 // import ReactTagInput from "@pathofdev/react-tag-input";
-
+import isEqual from "lodash/isEqual"
 import InputGroup from 'react-bootstrap/InputGroup'
 export class FormPersonalDetails extends Component {
 
@@ -54,6 +54,7 @@ export class FormPersonalDetails extends Component {
                         aria-label="Name"
                         onChange={(e) => this.props.handleChangeteam('name',i,e)}
                         placeholder="Name"
+                        required
                         value={this.props.values.team_members[i].name}
                     />
 
@@ -62,6 +63,7 @@ export class FormPersonalDetails extends Component {
                         aria-label="Email"
                         onChange={(e) => this.props.handleChangeteam('email',i,e)}
                         placeholder="Email"
+                        required
                         value={this.props.values.team_members[i].email}
 
 
@@ -87,6 +89,7 @@ export class FormPersonalDetails extends Component {
   };
 
   render() {
+      const team_members = this.props.values.team_members;
 
     return (
         <div>
@@ -115,8 +118,10 @@ export class FormPersonalDetails extends Component {
                     <button
                         className="btn btn-primary mt-2"
                         // eslint-disable-next-line react/jsx-handler-names
+                        disabled={isEqual(team_members[team_members.length -1 ], {email:"", name:""})}
                         onClick={(e) => this.props.addClick(e)}
                         type="button"
+
                     >
                         Add Team Members
                     </button>
