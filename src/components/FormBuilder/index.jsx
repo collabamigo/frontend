@@ -7,12 +7,10 @@ import colors from "../../styles/colors";
 import generateCode from "../LogicFormBuilder/GenerateCode";
 import builder from "./data/builder";
 import generic from "./data/generic"
-import * as buttonStyles from "styles/button.module.css"
 import * as containerStyles from "styles/container.module.css"
 import * as typographyStyles from "styles/typography.module.css";
 import * as styles from "./BuildForm.module.css";
 import {LivePreview, LiveProvider} from "react-live";
-import {Modal} from "react-bootstrap";
 // import CodeArea from "./CodeArea";
 
 const { useState, useRef, useEffect } = React;
@@ -37,12 +35,11 @@ const defaultValue = {
 export default function FormBuilder({
     showBuilder,
     isStatic,
+    state,
+    setState
 }) {
+
     const isV7 = false;
-    const [state, setState] = useState({
-        1: [],
-        2: defaultValue
-    })
 
     const updateFormData = (payload) => {
         setState({
@@ -440,40 +437,6 @@ export default function FormBuilder({
                             ? generic.update["en"]
                             : generic.create["en"]}
                     </button>
-
-                    {formData.length > 0 && (
-                        <h2
-                            className={typographyStyles.title}
-                            style={{
-                                fontSize: 14,
-                                maxWidth: "80%",
-                                margin: "0 auto 0",
-                            }}
-                        >
-                            or
-                        </h2>
-                    )}
-
-                    <Animate
-                        end={{
-                            opacity: 1,
-                            pointerEvents: "auto",
-                        }}
-                        play={(formData || []).length > 0}
-                        render={({style}) => (
-                            <button
-                                className={buttonStyles.darkButton}
-                                style={style}
-                                type="button"
-                            >
-                                {builder.inputCreator["en"].generate}
-                            </button>
-                        )}
-                        start={{
-                            opacity: 0,
-                            pointerEvents: "none",
-                        }}
-                    />
                 </form>
 
                 <section
@@ -531,24 +494,13 @@ export default function FormBuilder({
 
     if (isStatic) return child;
 
-    console.log("formData", formData)
+    if (!showBuilder) return <div />;
     return (
-        <Modal.Dialog
-            className="modal-dialog w-75 mw-100 border-0"
-            contentClassName="border-0"
+        <div
+            id="builder"
         >
-            <div
-                className="bg-dark text-white rounded-5"
-            >
-                <div
-                    id="builder"
-                >
-
-                    {child}
-                </div>
-            </div>
-        </Modal.Dialog>
-
+            {child}
+        </div>
     );
 }
 
@@ -562,7 +514,11 @@ FormBuilder.defaultProps = {
 FormBuilder.propTypes = {
     defaultLang: PropTypes.string,
     isStatic: PropTypes.bool,
+    setState: PropTypes.func.isRequired,
     showBuilder: PropTypes.bool,
+    // eslint-disable-next-line react/forbid-prop-types
+    state: PropTypes.object.isRequired,
     toggleBuilder: PropTypes.func,
+
 };
 
