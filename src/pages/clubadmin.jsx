@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 import Clublist from 'components/ClubList/ClubList.js';
-// import {edit_button} from "./clubadmin.module.css";
 import {clubDetails} from "./club.module.css"
-// import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
 import axios from "../utils/axios";
-import backend from "../env";   // todo reference
-
+import backend from "../env";
+import {string} from "prop-types";   // todo reference
 
 class ClubAdminPage extends Component {
 
@@ -18,8 +16,7 @@ class ClubAdminPage extends Component {
         this.state = {
             currentModal: null,
             basicInformation: {},
-            competition:{},
-            // announcements_list : [],
+            competitions:[],
             announcements: [],
             basicInformationStatic : {
                 // announcements: [{id: "1", content:"Welcome"}],
@@ -51,16 +48,21 @@ class ClubAdminPage extends Component {
                     {name: "Event11", logo: "https://via.placeholder.com/70X70"},
                 ],
             },
-        }
+            }
     }
 
     componentDidMount() {
         axios.get(backend + "club/club/Byld/?format=json").then((res) => {
             let announcements_list =[]
+            let competition_list =[]
             this.setState({basicInformation: res.data});
             announcements_list = res.data.announcements
+
+            competition_list = res.data.competitions
+
+            console.log("lol",competition_list)
+
             for (let temp in announcements_list){
-                console.log("lol")
                 axios.get(backend + "club/announcements/" + announcements_list[temp] + "/?format=json").then((ress) => {
                     this.setState((prevState) => {
                         return (
@@ -71,6 +73,20 @@ class ClubAdminPage extends Component {
                     })
                 });
             }
+            for (let temp in competition_list){
+                axios.get(backend + "club/competition/" + competition_list[temp] + "/?format=json").then((r) => {
+                    this.setState((prevState) => {
+                        return (
+                            {
+                                ...(prevState.competitions),
+                                competitions:[...(prevState.competitions), {id:r.data.id, club:r.data.club,
+                                    name:r.data.name, description: r.data.description,
+                                    on_going: r.data.on_going, disabled: r.data.disabled}]
+                            })
+                    })
+                });
+            }
+
         });
     }
 
@@ -84,29 +100,33 @@ class ClubAdminPage extends Component {
             return (
                 {
                     ...prevState,
-                    basicInformationStatic: {
-                        ...(prevState.basicInformationStatic),
+                    basicInformation: {
+                        ...(prevState.basicInformation),
                         description: description
                     }
                 })
         })
         this.handleCloseModal()
+        const payload = {
+            description: this.state.basicInformation.description
+        }
+        axios.patch(backend+"club/club/"+ this.state.basicInformation.username +"/" ,payload)
+            .then(() => this.setState(payload))
     }
 
-    handleSubmitAnnouncements(values){
-        const announcement_id=-1;
-        this.setState((prevState) => {
-            return (
-                {
-                    ...prevState,
-                    basicInformationStatic: {
-                        ...(prevState.basicInformationStatic),
-                        announcements: [...(prevState.basicInformationStatic.announcements) , {id:announcement_id, content:values[0]}]
-                    }
-                })
-        })
-        this.handleCloseModal()
-    }
+    // handleSubmitAnnouncements(values){
+    //     const announcement_id=-1;
+    //     axios.get(backend + "club/announcements/" + string(this.state.announcements[-1].id+1) + "/?format=json").then((ress) => {
+    //                 this.setState((prevState) => {
+    //                     return (
+    //                         {
+    //                             ...(prevState.announcements),
+    //                             announcements:[...(prevState.announcements), {id:ress.data.id, content:ress.data.content}]
+    //                         })
+    //                 })
+    //     });
+    //     this.handleCloseModal()
+    // }
 
     handleSubmitPanel(values){
         this.setState((prevState) => {
@@ -132,11 +152,9 @@ class ClubAdminPage extends Component {
         })
     }
 
-
     render(){
         console.log(this.state.basicInformation)
-        console.log(this.state.competition)
-        // console.log(this.state.announcements_list)
+        console.log(this.state.competitions)
         console.log(this.state.announcements)
         return (
             <div className="row m-1">
