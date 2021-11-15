@@ -100,9 +100,20 @@ export default class submissionPage extends Component {
 
     handleChange = input => e => {
 
-        console.log(input,e.target.value);
+        console.log(input,e.target.value, this.state.visible);
 
-        this.setState({ [input]: e.target.value });
+        if(input === "visible"){
+            if(e.target.value === "on"){
+                this.setState({ [input]: true });
+            }
+            else{
+                this.setState({ [input]: false });
+            }
+        }
+        else{
+            this.setState({ [input]: e.target.value });
+        }
+
     };
 
     onDeleteteam(val){

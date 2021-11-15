@@ -109,6 +109,14 @@ export class FormPersonalDetails extends Component {
                         value={this.props.values.team_size}
                     /> */}
 
+                    <Form.Check 
+                        // checked={this.props.values.visible}
+                        id="custom-switch"
+                        label="Want Project to be Public?"
+                        onChange={this.props.handleChange('visible')}
+                        type="switch"
+                    />
+
                     <Form.Label>
                         Add Team Members
                     </Form.Label>
@@ -153,63 +161,6 @@ export class FormPersonalDetails extends Component {
                         </button>
                     </InputGroup> */}
 
-                    <Form.Control 
-                        onChange={this.props.handleChange('project_name')}
-                        placeholder="Project Name"
-                        type="text"
-                        value={this.props.values.project_name}
-                    />
-
-                    <Form.Control 
-                        as="textarea"
-                        onChange={this.props.handleChange('project_description')}
-                        placeholder="Project Description"
-                        value={this.props.values.project_description}
-                    />
-
-                    {/* <ReactTagInput 
-                        onChange={(newTags) => this.props.handleChangeTags(newTags)} 
-                        tags={this.props.values.project_tags}
-                    /> */}
-
-
-
-                    <div className="form-floating">
-                        <select
-                            aria-label="hello"
-                            className="form-select"
-                            id="floatingSelect"
-                            onChange={this.props.handleChange('stage')}
-                        >
-
-                            <option
-                                selected
-                                value="Initiation"
-                            >
-                                Initiation
-                            </option>
-
-                            <option value="Planning">
-                                Planning
-                            </option>
-
-                            <option value="Execution">
-                                Execution
-                            </option>
-
-                            <option value="Monitoring and Controlling">
-                                Monitoring and Controlling
-                            </option>
-
-                            <option value="Concluding">
-                                Concluding
-                            </option>
-                        </select>
-
-                        <label htmlFor="floatingSelect">
-                            Stage of project
-                        </label>
-                    </div>
 
                 </Form.Group>
 

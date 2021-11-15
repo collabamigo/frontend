@@ -91,7 +91,7 @@ export class UserForm extends Component {
     const v1 = {project_name, project_description, project_tags, date_of_est, stage};
     // const v2 = {fname, lname, batch , course};
 
-    const v2 = { team_member_names, team_member_emails, visible ,team_members};
+    const v2 = {visible ,team_members};
 
     switch (step) {
       case 1:
