@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 // import Card from 'react-bootstrap/Card'
 import Link from "common/Link";
 import {leftButtons} from './landingPage.module.css';
+import axios from "utils/axios";
+import backend from "env";
 
 // import PropTypes from 'prop-types'
 import {dynamic_left} from "./landingPage.module.css";
@@ -30,40 +32,62 @@ export default class landingPage extends Component {
             modalShow: false,
 
             itemlist: [
-                {name: "Tasveer", logo: "https://via.placeholder.com/70X70"},
-                {name: "MicDrop", logo: "https://via.placeholder.com/70X70"},
-                {name: "Byld", logo: "https://via.placeholder.com/70X70"},
-                {name: "Litsoc", logo: "https://via.placeholder.com/70X70"},
-                {name: "Meraki", logo: "https://via.placeholder.com/70X70"},
-                {name: "MUSE", logo: "https://via.placeholder.com/70X70"},
-                {name: "Philsoc", logo: "https://via.placeholder.com/70X70"},
-                {name: "Electroholics", logo: "https://via.placeholder.com/70X70"},
-                {name: "Cyborg", logo: "https://via.placeholder.com/70X70"},
-                {name: "Astronuts", logo: "https://via.placeholder.com/70X70"},
-                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
+                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
+                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
+                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
+                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
+                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
+                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
+                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
+                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
+                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
+                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
+                
             ],
         }
 
         this.handleModalChange = this.handleModalChange.bind(this);
+        this.myprojects = this.myprojects.bind(this);
     }
 
-    
+    componentDidMount() {
+        //TODO: URDL FOR ALL PROJECTS
+        axios.get(backend + "pathfinders/ecell").then((res) => {
+                let Lists = [];
+                for (let i = 0; i < res.data.length; i++) {
+                    Lists.push(res.data[i]);
+                }
+                this.setState({itemlist: Lists});
+            });
+    }
     shouldComponentUpdate(){
         return true;
+    }
+
+
+    myprojects(){
+        //TODO: URL FOR MY PROJECTS
+        // axios.get(backend + "pathfinders/ecell").then((res) => {
+        //     let Lists = [];
+        //     for (let i = 0; i < res.data.length; i++) {
+        //         Lists.push(res.data[i]);
+        //     }
+        //     this.setState({itemlist: Lists});
+        // });
+
+        console.log("hello");
     }
 
 
     handleModalChange() {
         this.setState((prevState) => ({ modalShow: !prevState.modalShow }))
     }
-
-
-
     render() {
         return (
             <div className={box +" row mt-5 pb-3"}>
                 <div className={dynamic_left + " col-md-8"} >
-                    <hr/>
+                    <hr />
+
                     <div className="row m-2">
                         <div className="col-md-10">
                             
@@ -86,7 +110,8 @@ export default class landingPage extends Component {
                         <div className="col-md-2 ">
                             <button
                                 className={leftButtons + " col-md-5 btn fs-5"}
-                                onClick={() => console.log("hello")}
+                                // eslint-disable-next-line react/jsx-handler-names
+                                onClick={this.myprojects}
                                 type="button"
                             >
                                 M
@@ -113,7 +138,8 @@ export default class landingPage extends Component {
                 </div>
 
                 <div className={static_right + " col-md-4 rounded-1"}>
-                    <hr/>
+                    <hr />
+
                     <div>
                         <div>
                             <span className="pb-2 fw-bold fs-1">

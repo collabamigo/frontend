@@ -31,7 +31,7 @@ function Pathfinder_Project_Card (props) {
                 <Card.Title>
                     <div className="row">
                         <div className="col-sm">
-                            {props.Project_Name}
+                            {props.project_name}
                         </div>
 
                         <div className="col-3">
@@ -50,7 +50,7 @@ function Pathfinder_Project_Card (props) {
                 <Card.Body>
                     <div className="row">
                         <Card.Text className="col-md-8">
-                            {props.Basic_Description}
+                            {props.project_description}
                         </Card.Text>
 
                         <div className="col-md-4">
@@ -87,21 +87,21 @@ function Pathfinder_Project_Card (props) {
 }
 
 Pathfinder_Project_Card.propTypes = {
-    Basic_Description: PropTypes.string,
+    project_description: PropTypes.string,
     Contact: PropTypes.string.isRequired,
     Is_Bookmarked: PropTypes.bool,
     Ongoing: PropTypes.bool,
-    Project_Name : PropTypes.string,
+    project_name : PropTypes.string,
     Submitted: PropTypes.string.isRequired,
     element: PropTypes.objectOf(PropTypes.string).isRequired,
     
 }
 
 Pathfinder_Project_Card.defaultProps = {
-    Basic_Description: "Lorem Ipsum",
+    project_description: "Lorem Ipsum",
     Is_Bookmarked: false,
     Ongoing: true,
-    Project_Name: "Project Name",
+    project_name: "Project Name",
 }
 
 export default Pathfinder_Project_Card;
