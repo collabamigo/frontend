@@ -7,7 +7,7 @@ import {SvgIcon} from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
 import axios from "../utils/axios";
 import backend from "../env";
-import {string} from "prop-types";   // todo reference
+// import {string} from "prop-types";   // todo reference
 
 class ClubAdminPage extends Component {
 
