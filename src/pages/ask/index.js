@@ -12,7 +12,6 @@ class Ask extends React.Component {
 
         super(props);
         checkLoginStatus()
-        this.CARDS_PER_PAGE = 4
         this.state = {
             searchTerm: "",
             found_match: false,

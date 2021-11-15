@@ -58,12 +58,11 @@ function Layout({children}) {
 
                 <link
                     href="./img/svg/developer.svg"
-                    rel="apple-touch-icon"
                 />
 
                 <link
                     href="img/icons/favicon_dark.ico"
-                    rel="shortcut icon"
+                    rel="icon"
                 />
 
                 <link
