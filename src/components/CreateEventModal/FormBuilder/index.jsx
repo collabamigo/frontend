@@ -186,8 +186,7 @@ export default function FormBuilder({
                         aria-label="name"
                         autoComplete="off"
                         defaultValue={editFormData.name}
-                        name="name"
-                        ref={register({
+                        {...register('name', {
                             required: true,
                             validate,
                         })}
@@ -227,8 +226,7 @@ export default function FormBuilder({
                     <select
                         aria-label="Select type"
                         defaultValue={editFormData.type}
-                        name="type"
-                        ref={register}
+                        {...register('type')}
                     >
                         <option value="text">
                             Text
@@ -324,9 +322,8 @@ export default function FormBuilder({
                             <input
                                 defaultValue={editFormData.options}
                                 key={editFormData.name}
-                                name="options"
+                                {...register('options')}
                                 placeholder="Enter options separate by ;"
-                                ref={register}
                                 type="text"
                             />
                         </>
@@ -338,8 +335,7 @@ export default function FormBuilder({
                         }}
                     >
                         <input
-                            name="required"
-                            ref={register}
+                            {...register('required')}
                             type="checkbox"
                         />
                         Required

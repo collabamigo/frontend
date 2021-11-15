@@ -18,11 +18,11 @@ export default class CreateEventModal extends React.Component {
         const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         const yyyy = today.getFullYear();
         this.state = {
-            stage: 2,
+            stage: 1,
             name: "",
             description: "",
             eventDate: "",
-            formbuilder: {
+            formBuilder: {
                 1: [],
                 2: {
                 max: undefined,
@@ -53,7 +53,7 @@ export default class CreateEventModal extends React.Component {
     }
 
     setFormBuilderState(formBuilder){
-        this.setState({formbuilder: formBuilder});
+        this.setState({formBuilder: formBuilder});
     }
 
     render() {
@@ -213,7 +213,7 @@ export default class CreateEventModal extends React.Component {
                             <div>
                                 <FormBuilder
                                     setState={this.setFormBuilderState.bind(this)}
-                                    state={this.state.formbuilder}
+                                    state={this.state.formBuilder}
                                 />
 
                                 <div className="row">
