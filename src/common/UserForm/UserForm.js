@@ -14,17 +14,20 @@ export class UserForm extends Component {
 
     batch: PropTypes.number.isRequired,
     course: PropTypes.string.isRequired,
+    date_of_est: PropTypes.instanceOf(Date).isRequired,
     fname: PropTypes.string.isRequired,
     lname: PropTypes.string.isRequired,
 
-    date_of_est: PropTypes.instanceOf(Date).isRequired,
+
 
     handleChange: PropTypes.func.isRequired,
-    handleChangeTags: PropTypes.func.isRequired,
     handleChangeDate: PropTypes.func.isRequired,
+    handleChangeTags: PropTypes.func.isRequired,
+
     handleChangeteam: PropTypes.func.isRequired,
     handleDeleteteam: PropTypes.func.isRequired,
-    
+    handleProjectVisibilityChange: PropTypes.func.isRequired,
+
     removeClick: PropTypes.func.isRequired,
     addClick: PropTypes.func.isRequired,
 
@@ -40,8 +43,8 @@ export class UserForm extends Component {
 
     team_members: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
     team_member_emails: PropTypes.arrayOf(PropTypes.string).isRequired,
-    team_member_names: PropTypes.arrayOf(PropTypes.string).isRequired,    
-    // team_size : PropTypes.number.isRequired,    
+    team_member_names: PropTypes.arrayOf(PropTypes.string).isRequired,
+    // team_size : PropTypes.number.isRequired,
 }
 
 
@@ -55,7 +58,7 @@ export class UserForm extends Component {
         this.nextStep = this.nextStep.bind(this);
         this.prevStep = this.prevStep.bind(this);
     }
-  
+
 
   shouldComponentUpdate() {
     return true;
@@ -78,7 +81,7 @@ export class UserForm extends Component {
   };
 
   // Handle fields change
-  
+
 
   render() {
     const { step } = this.state;
@@ -111,6 +114,7 @@ export class UserForm extends Component {
                 handleChange={this.props.handleChange}
                 handleChangeteam={this.props.handleChangeteam}
                 handleDeleteteam={this.props.handleDeleteteam}
+                handleProjectVisibilityChange={this.props.handleProjectVisibilityChange}
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
                 removeClick={this.props.removeClick}

@@ -11,6 +11,7 @@ export class FormPersonalDetails extends Component {
         handleChange: PropTypes.func.isRequired,
         handleChangeteam: PropTypes.func.isRequired,
         handleDeleteteam: PropTypes.func.isRequired,
+        handleProjectVisibilityChange: PropTypes.func.isRequired,
 
         removeClick: PropTypes.func.isRequired,
         addClick: PropTypes.func.isRequired,
@@ -42,7 +43,7 @@ export class FormPersonalDetails extends Component {
 
 
   createUI(){
-    return this.props.values.team_members.map((el, i) => 
+    return this.props.values.team_members.map((el, i) =>
         (
             <div
                 id={i}
@@ -79,7 +80,7 @@ export class FormPersonalDetails extends Component {
                     </button>
                 </InputGroup>
             </div>
-        )          
+        )
     )
  }
 
@@ -102,18 +103,18 @@ export class FormPersonalDetails extends Component {
                     controlId="ProjectDetails"
                 >
 
-                    {/* <Form.Control 
+                    {/* <Form.Control
                         onChange={this.props.handleChange('team_size')}
                         placeholder="Team Size"
                         type="number"
                         value={this.props.values.team_size}
                     /> */}
 
-                    <Form.Check 
-                        // checked={this.props.values.visible}
+                    <Form.Check
+                        checked={this.props.values.visible}
                         id="custom-switch"
                         label="Want Project to be Public?"
-                        onChange={this.props.handleChange('visible')}
+                        onChange={(e)=> this.props.handleProjectVisibilityChange(e)}
                         type="switch"
                     />
 
@@ -121,7 +122,7 @@ export class FormPersonalDetails extends Component {
                         Add Team Members
                     </Form.Label>
 
-                    {this.createUI()} 
+                    {this.createUI()}
 
                     <button
                         className="btn btn-primary mt-2"
@@ -135,7 +136,7 @@ export class FormPersonalDetails extends Component {
                     </button>
 
 
-                    
+
 
 
 

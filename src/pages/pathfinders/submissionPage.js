@@ -86,12 +86,12 @@ export default class submissionPage extends Component {
                 team_members:items
             })
         });
-    
+
         console.log(i);
         this.onChangeteam(i);
-    
+
     }
-    
+
     addClick(){
         console.log("hi",this.state.team_members)
         this.setState(prevState => ({ team_members: [...prevState.team_members,  {name:"",email:""}]}))
@@ -99,6 +99,8 @@ export default class submissionPage extends Component {
     }
 
     handleChange = input => e => {
+
+        console.log(1111111111111111)
 
         console.log(input,e.target.value, this.state.visible);
 
@@ -115,6 +117,12 @@ export default class submissionPage extends Component {
         }
 
     };
+
+    onProjectVisibilityChange = (e) => {
+        this.setState({
+            visible: e.target.checked
+        })
+    }
 
     onDeleteteam(val){
 
@@ -197,6 +205,7 @@ export default class submissionPage extends Component {
                                     handleChangeDate={this.onChangeDate}
                                     handleChangeteam={this.onChangeteam}
                                     handleDeleteteam={this.onDeleteteam}
+                                    handleProjectVisibilityChange={this.onProjectVisibilityChange.bind(this)}
                                     removeClick={this.removeClick}
                                     addClick={this.addClick}
                                 />
