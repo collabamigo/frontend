@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import Card from 'react-bootstrap/Card'
 import Link from "common/Link";
+import {leftButtons} from './landingPage.module.css';
 
 // import PropTypes from 'prop-types'
 import {dynamic_left} from "./landingPage.module.css";
@@ -60,8 +61,9 @@ export default class landingPage extends Component {
 
     render() {
         return (
-            <div className={box +" row mt-5"}>
-                <div className={dynamic_left + " col-md-8 "} >
+            <div className={box +" row mt-5 pb-3"}>
+                <div className={dynamic_left + " col-md-8"} >
+                    <hr/>
                     <div className="row m-2">
                         <div className="col-md-10">
                             
@@ -73,8 +75,8 @@ export default class landingPage extends Component {
                                 />
                                 
                                 <Button
+                                    className={leftButtons + " fs-5"}
                                     id="button-addon2"
-                                    variant="primary"
                                 >
                                     Search
                                 </Button>
@@ -83,7 +85,7 @@ export default class landingPage extends Component {
 
                         <div className="col-md-2 ">
                             <button
-                                className="col-md-4 btn btn-primary "
+                                className={leftButtons + " col-md-5 btn fs-5"}
                                 onClick={() => console.log("hello")}
                                 type="button"
                             >
@@ -98,7 +100,7 @@ export default class landingPage extends Component {
                     </div>
 
 
-                    <div className="bg-white mt-3">
+                    <div className="bg-white mt-3 ">
                         <CardGroup>
 
 
@@ -110,34 +112,35 @@ export default class landingPage extends Component {
                     </div>
                 </div>
 
-                <div className={static_right + " col-md-4"}>
+                <div className={static_right + " col-md-4 rounded-1"}>
+                    <hr/>
                     <div>
                         <div>
-                            <span className="h1">
+                            <span className="pb-2 fw-bold fs-1">
                                 E-CEll
                             </span>
 
-                            <span className="h6">
+                            <span className="fs-5">
                                 PathFinders
                             </span>
                         </div>
 
                         <div>
-                            <span className="h4">
+                            <span className="fs-3">
                                 Guidelines and details
                             </span>
 
-                            <p>
+                            <p className="fs-5">
                                 In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.
                             </p>
                         </div>
 
                         <div>
-                            <span className="h4">
+                            <span className="fs-3">
                                 Guidelines and details
                             </span>
 
-                            <p>
+                            <p className="fs-5">
                                 In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.
                             </p>
                         </div>
@@ -154,7 +157,7 @@ export default class landingPage extends Component {
                             </button> */}
 
                             <Link
-                                className="col-md-8 btn btn-primary mt-2 ml-1 "
+                                className="col-md-7 btn btn-light mt-2 ml-1 "
                                 to="/pathfinders/submissionPage"
                                 type="button"
                             >
@@ -164,7 +167,7 @@ export default class landingPage extends Component {
                             </Link>
 
                             <button
-                                className="col-md-4 btn btn-primary mt-2 ml-1"
+                                className=" offset-1 col-md-3 btn btn-light mt-2 ml-1"
                                 onClick={this.handleModalChange}
                                 type="button"
                             >
