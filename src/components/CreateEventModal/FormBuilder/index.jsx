@@ -1,10 +1,10 @@
-import * as React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import PropTypes from "prop-types";
 import { Animate } from "react-simple-animate";
 import { useForm } from "react-hook-form";
 import SortableContainer from "./SortableContainer";
-import colors from "../../styles/colors";
-import generateCode from "../LogicFormBuilder/GenerateCode";
+import colors from "styles/colors";
+import generateCode from "./GenerateCode";
 import builder from "./data/builder";
 import generic from "./data/generic"
 import * as containerStyles from "styles/container.module.css"
@@ -13,7 +13,6 @@ import * as styles from "./BuildForm.module.css";
 import {LivePreview, LiveProvider} from "react-live";
 // import CodeArea from "./CodeArea";
 
-const { useState, useRef, useEffect } = React;
 
 const errorStyle = {
   border: `1px solid ${colors.secondary}`,

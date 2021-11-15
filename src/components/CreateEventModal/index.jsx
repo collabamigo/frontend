@@ -8,7 +8,7 @@ import {IconContext} from "react-icons";
 import FormBuilder from "./FormBuilder";
 import AdditionalFields from "./AdditionalFields";
 
-export default class NewEvent extends React.Component {
+export default class CreateEventModal extends React.Component {
 
     constructor(props) {
         super(props);
