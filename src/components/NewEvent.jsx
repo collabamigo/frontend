@@ -18,7 +18,7 @@ export default class NewEvent extends React.Component {
         const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         const yyyy = today.getFullYear();
         this.state = {
-            stage: 1,
+            stage: 2,
             name: "",
             description: "",
             eventDate: "",
