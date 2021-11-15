@@ -3,7 +3,8 @@
  */
 
 .footer {
-    position: relative;
+    grid-row-start: 2;
+    grid-row-end: 3;
     right: 0;
     bottom: 0;
     left: 0;

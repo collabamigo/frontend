@@ -12,9 +12,6 @@ import backend from "../env";   // todo reference
 
 
 class ClubAdminPage extends Component {
-    // static propTypes = {
-    //     clubName : PropTypes.string.isRequired,
-    // }
 
     constructor(props) {
         super(props)
@@ -22,8 +19,10 @@ class ClubAdminPage extends Component {
             currentModal: null,
             basicInformation: {},
             competition:{},
+            // announcements_list : [],
+            announcements: [],
             basicInformationStatic : {
-                announcements: [{id: "1", content:"Welcome"}],
+                // announcements: [{id: "1", content:"Welcome"}],
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 coordinators:[
                     {
@@ -57,12 +56,22 @@ class ClubAdminPage extends Component {
 
     componentDidMount() {
         axios.get(backend + "club/club/Byld/?format=json").then((res) => {
+            let announcements_list =[]
             this.setState({basicInformation: res.data});
-            axios.get(backend + "club/competition/" + this.state.basicInformation.id + "/?format=json").then((res) => {
-                this.setState({competition: res.data});
+            announcements_list = res.data.announcements
+            for (let temp in announcements_list){
+                console.log("lol")
+                axios.get(backend + "club/announcements/" + announcements_list[temp] + "/?format=json").then((ress) => {
+                    this.setState((prevState) => {
+                        return (
+                            {
+                                ...(prevState.announcements),
+                                announcements:[...(prevState.announcements), {id:ress.data.id, content:ress.data.content}]
+                            })
+                    })
                 });
+            }
         });
-
     }
 
     shouldComponentUpdate () {
@@ -86,11 +95,6 @@ class ClubAdminPage extends Component {
 
     handleSubmitAnnouncements(values){
         const announcement_id=-1;
-        // axios.get("connect/profile/").then(
-        //     (res) => this.setState({
-        //         handle: res.data[0].handle
-        //     })
-        // )
         this.setState((prevState) => {
             return (
                 {
@@ -132,6 +136,8 @@ class ClubAdminPage extends Component {
     render(){
         console.log(this.state.basicInformation)
         console.log(this.state.competition)
+        // console.log(this.state.announcements_list)
+        console.log(this.state.announcements)
         return (
             <div className="row m-1">
                 <div className="col-3 d-flex justify-content-around">
@@ -467,15 +473,21 @@ class ClubAdminPage extends Component {
 
                                         <div className="">
                                             <ul className="list">
-                                                {this.state.basicInformationStatic.announcements.map(item => (
-                                                    <ul key={item}>
-                                                        <span className="material-icons-outlined">
-                                                            notifications
-                                                        </span>
+                                                {/*{this.state.basicInformationStatic.announcements.map(item => (*/}
 
-                                                        {item["content"]}
-                                                    </ul>
-                                                ))}
+                                                {/*    <ul key={item}>*/}
+
+                                                {/*        <span className="material-icons-outlined">*/}
+
+                                                {/*            notifications*/}
+
+                                                {/*        </span>*/}
+                                                
+                                                {/*        {item["content"]}*/}
+
+                                                {/*    </ul>*/}
+
+                                                {/*))}*/}
 
                                             </ul>
 

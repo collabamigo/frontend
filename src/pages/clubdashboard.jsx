@@ -1,7 +1,7 @@
 
 import React from "react";
 
-import DashboardLayout from "../components/Layout/DashboardLayout.js";
+// import DashboardLayout from "../components/Layout/DashboardLayout.js";
 import Sidebar from "../components/Sidebar/index.jsx";
 
 export default function ClubDashBoard() {
@@ -14,4 +14,4 @@ export default function ClubDashBoard() {
     )
 }
 
-ClubDashBoard.Layout = DashboardLayout;
+// ClubDashBoard.Layout = DashboardLayout;

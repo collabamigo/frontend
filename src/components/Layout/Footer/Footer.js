@@ -1,17 +1,10 @@
 import React from "react";
 import {footer, linkFooter} from './Footer.module.css';
-class Footer extends React.Component {
 
-    // Noinspection JSCheckFunctionSignatures
-    shouldComponentUpdate() {
 
-        return false;
-
-    }
-
-    render() {
+export default function Footer() {
         return (
-            <footer className={'d-flex flex-row' + ' ' + footer}>
+            <footer className={'d-flex flex-row ' + footer}>
                 <div className={'col-md-7' + ' ' + linkFooter}>
                     <b className="float-right pe-5">
                         {/*eslint-disable-next-line*/}
@@ -37,12 +30,9 @@ class Footer extends React.Component {
                         Review Us
                     </a>
                 </div>
-                    
-            </footer>
 
+            </footer>
         )
     }
 
-}
 
-export default Footer;
