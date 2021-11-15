@@ -1,7 +1,7 @@
 import React from "react";
 import {headingWithTopMargin} from "styles/typography.module.css";
 import {Modal} from "react-bootstrap";
-import {Form, Formik, Field, useFormikContext} from "formik";
+import {Form, Formik, Field} from "formik";
 import Button from "react-bootstrap/Button";
 import {MdNavigateNext, MdNavigateBefore} from "react-icons/md";
 import {IconContext} from "react-icons";
@@ -54,52 +54,6 @@ export default class NewEvent extends React.Component {
 
     setFormBuilderState(formBuilder){
         this.setState({formbuilder: formBuilder});
-    }
-
-    additionalFields() {
-        const {
-            values
-        } = useFormikContext();
-        if (values.isFormConnected)
-            return (
-                <div>
-                    <div className="mb-3 align-middle">
-                        <label
-                            className="me-2 fs-5"
-                            htmlFor="registrationStartDate"
-                        >
-                            Registration opens on
-                        </label>
-
-                        <Field
-                            className="form-control w-auto text-input bg-secondary text-white border-secondary"
-                            id="registrationStartDate"
-                            name="registrationStartDate"
-                            placeholder="yyyy-mm-dd"
-                            type="date"
-                        />
-                    </div>
-
-                    <div className="mb-3 align-middle">
-                        <label
-                            className="me-2 fs-5"
-                            htmlFor="registrationDeadlineDate"
-                        >
-                            Registration deadline
-                        </label>
-
-                        <Field
-                            className="form-control w-auto text-input bg-secondary text-white border-secondary"
-                            id="registrationDeadlineDate"
-                            name="registrationDeadlineDate"
-                            placeholder="yyyy-mm-dd"
-                            type="date"
-                        />
-                    </div>
-                </div>
-            )
-        else
-            return null;
     }
 
     render() {

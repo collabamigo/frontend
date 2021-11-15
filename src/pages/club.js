@@ -29,9 +29,6 @@ class ClubHomePage extends Component {
 
         this.query = useQuery()
 
-        if (this.query)
-            this.name = this.query.get("name")
-
 
         this.state={
             basicInformation : {
@@ -201,7 +198,7 @@ class ClubHomePage extends Component {
                             <div className="">
                                 <Carousel
                                     nextIcon={
-                                        <span 
+                                        <span
                                             aria-hidden="true"
                                             className="carousel-control-next-icon"
                                             style={{
@@ -211,7 +208,7 @@ class ClubHomePage extends Component {
                                         />
                                     }
                                     prevIcon={
-                                        <span 
+                                        <span
                                             aria-hidden="true"
                                             className="carousel-control-prev-icon "
                                             style={{
