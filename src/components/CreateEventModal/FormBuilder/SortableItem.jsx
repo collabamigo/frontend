@@ -2,7 +2,7 @@ import React from 'react';
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 import {editPanel, list} from "./SortableContainer.module.css";
-import colors from "../../styles/colors";
+import colors from "../../../styles/colors";
 import generic from "./data/generic";
 import PropTypes from "prop-types";
 
