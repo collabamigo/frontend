@@ -1,8 +1,8 @@
 import React from 'react';
 import {Field, useFormikContext} from "formik";
 import Button from "react-bootstrap/Button";
-import {IconContext} from "react-icons";
-import {MdNavigateNext} from "react-icons/md";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faChevronRight} from '@fortawesome/free-solid-svg-icons'
 
 export default function AdditionalFields() {
 
@@ -57,16 +57,7 @@ export default function AdditionalFields() {
                         Create registration form
                         {' '}
 
-                        <IconContext.Provider
-                            // eslint-disable-next-line react/jsx-no-constructed-context-values
-                            value={{
-                                color: "rgb(26,32,44)",
-                                "vertical-align": "middle",
-                                size: "1.7em"
-                            }}
-                        >
-                            <MdNavigateNext />
-                        </IconContext.Provider>
+                        <FontAwesomeIcon icon={faChevronRight} />
                     </Button>
                 </div>
             </div>
