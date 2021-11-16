@@ -86,7 +86,7 @@ export class UserForm extends Component {
   render() {
     const { step } = this.state;
     const { visible, stage, project_name, project_description, project_tags,
-       team_member_names, team_member_emails, date_of_est, team_members } = this.props;
+           date_of_est, team_members } = this.props;
 
     // console.log(v1);
     // console.log("v1");
@@ -95,6 +95,8 @@ export class UserForm extends Component {
     // const v2 = {fname, lname, batch , course};
 
     const v2 = {visible ,team_members};
+
+    const v3 = {project_name, project_description, project_tags, date_of_est, stage,visible ,team_members};
 
     switch (step) {
       case 1:
@@ -135,6 +137,7 @@ export class UserForm extends Component {
             <Confirm
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
+                values={v3}
             />
         );
       case 4:

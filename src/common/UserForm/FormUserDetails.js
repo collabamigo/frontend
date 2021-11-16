@@ -79,10 +79,11 @@ export class FormUserDetails extends Component {
                                 className="form-select"
                                 id="floatingSelect"
                                 onChange={this.props.handleChange('stage')}
+                                value={this.props.values.stage}
                             >
 
                                 <option
-                                    selected
+                                    
                                     value="i"
                                 >
                                     Initiation

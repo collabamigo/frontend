@@ -33,7 +33,7 @@ export default class submissionPage extends Component {
             date_of_est: new Date(),
 
             visible: false,
-            stage: ""
+            stage: "i"
 
 
         }
