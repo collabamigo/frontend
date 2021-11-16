@@ -6,8 +6,6 @@ import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
 import axios from "../utils/axios";
-import backend from "../env";
-// import {string} from "prop-types";   // todo reference
 
 class ClubAdminPage extends Component {
 
@@ -52,7 +50,7 @@ class ClubAdminPage extends Component {
     }
 
     componentDidMount() {
-        axios.get(backend + "club/club/Byld/?format=json").then((res) => {
+        axios.get("club/club/Byld/?format=json").then((res) => {
             let announcements_list =[]
             let competition_list =[]
             this.setState({basicInformation: res.data});
@@ -63,7 +61,7 @@ class ClubAdminPage extends Component {
             console.log("lol",competition_list)
 
             for (let temp in announcements_list){
-                axios.get(backend + "club/announcements/" + announcements_list[temp] + "/?format=json").then((ress) => {
+                axios.get("club/announcements/" + announcements_list[temp] + "/?format=json").then((ress) => {
                     this.setState((prevState) => {
                         return (
                             {
@@ -74,7 +72,7 @@ class ClubAdminPage extends Component {
                 });
             }
             for (let temp in competition_list){
-                axios.get(backend + "club/competition/" + competition_list[temp] + "/?format=json").then((r) => {
+                axios.get("club/competition/" + competition_list[temp] + "/?format=json").then((r) => {
                     this.setState((prevState) => {
                         return (
                             {
@@ -110,23 +108,25 @@ class ClubAdminPage extends Component {
         const payload = {
             description: this.state.basicInformation.description
         }
-        axios.patch(backend+"club/club/"+ this.state.basicInformation.username +"/" ,payload)
+        axios.patch("club/club/"+ this.state.basicInformation.username +"/" ,payload)
             .then(() => this.setState(payload))
     }
 
-    // handleSubmitAnnouncements(values){
-    //     const announcement_id=-1;
-    //     axios.get(backend + "club/announcements/" + string(this.state.announcements[-1].id+1) + "/?format=json").then((ress) => {
-    //                 this.setState((prevState) => {
-    //                     return (
-    //                         {
-    //                             ...(prevState.announcements),
-    //                             announcements:[...(prevState.announcements), {id:ress.data.id, content:ress.data.content}]
-    //                         })
-    //                 })
-    //     });
-    //     this.handleCloseModal()
-    // }
+    handleSubmitAnnouncements(values){
+        axios.post("club/announcements/",{
+            club: "Byld",
+            content: values[0]
+        }).then((ress) => {
+                    this.setState((prevState) => {
+                        return (
+                            {
+                                ...(prevState.announcements),
+                                announcements:[...(prevState.announcements), {id:ress.data.id, content:ress.data.content}]
+                            })
+                    })
+        });
+        this.handleCloseModal()
+    }
 
     handleSubmitPanel(values){
         this.setState((prevState) => {
@@ -500,7 +500,7 @@ class ClubAdminPage extends Component {
                                                 {/*            notifications*/}
 
                                                 {/*        </span>*/}
-                                                
+
                                                 {/*        {item["content"]}*/}
 
                                                 {/*    </ul>*/}
