@@ -7,7 +7,6 @@ This repository contains the code for the frontend.
 ![Deploy to testing](https://github.com/watson-hex/frontend-collabamigo/actions/workflows/DeployTesting.yml/badge.svg?branch=testing)
 
 
-
 ## Technologies used
 <li>NextJS</li>
 <li>Bootstrap</li>
