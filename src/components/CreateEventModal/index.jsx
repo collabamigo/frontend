@@ -3,10 +3,10 @@ import {headingWithTopMargin} from "styles/typography.module.css";
 import {Modal} from "react-bootstrap";
 import {Form, Formik, Field} from "formik";
 import Button from "react-bootstrap/Button";
-import {MdNavigateNext, MdNavigateBefore} from "react-icons/md";
-import {IconContext} from "react-icons";
 import FormBuilder from "./FormBuilder";
 import AdditionalFields from "./AdditionalFields";
+import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default class CreateEventModal extends React.Component {
 
@@ -227,12 +227,7 @@ export default class CreateEventModal extends React.Component {
                                             variant="primary"
                                         >
 
-                                            <IconContext.Provider
-                                            // eslint-disable-next-line react/jsx-no-constructed-context-values
-                                                value={{color: "rgb(26,32,44)", "vertical-align": "middle", size: "1.7em"}}
-                                            >
-                                                <MdNavigateBefore />
-                                            </IconContext.Provider>
+                                            <FontAwesomeIcon icon={faChevronLeft} />
 
                                             {' '}
                                             Edit Event details
@@ -249,12 +244,7 @@ export default class CreateEventModal extends React.Component {
                                             variant="primary"
                                         >
                                             Edit Event details
-                                            <IconContext.Provider
-                                        // eslint-disable-next-line react/jsx-no-constructed-context-values
-                                                value={{color: "rgb(26,32,44)", "vertical-align": "middle", size: "1.7em"}}
-                                            >
-                                                <MdNavigateNext />
-                                            </IconContext.Provider>
+                                            <FontAwesomeIcon icon={faChevronRight} />
                                         </Button>
                                     </div>
                                 </div>
