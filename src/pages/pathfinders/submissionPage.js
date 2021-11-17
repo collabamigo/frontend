@@ -29,11 +29,11 @@ export default class submissionPage extends Component {
 
             // team_size: 0,
             team_members: [],
-            team_member_emails: [],
+            // team_member_emails: [],
             date_of_est: new Date(),
 
             visible: false,
-            stage: ""
+            stage: "i"
 
 
         }
@@ -43,6 +43,9 @@ export default class submissionPage extends Component {
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangeteam = this.onChangeteam.bind(this);
         this.onDeleteteam = this.onDeleteteam.bind(this);
+        this.removeClick = this.removeClick.bind(this);
+        this.addClick = this.addClick.bind(this);
+
 
 
 
@@ -74,13 +77,52 @@ export default class submissionPage extends Component {
     //     })
     // }
 
+    removeClick(i){
+        this.setState((prevState) => {
+            let items = prevState.team_members;
+            items.splice(i,1);
+            return ({
+                ...prevState,
+                team_members:items
+            })
+        });
+
+        console.log(i);
+        this.onChangeteam(i);
+
+    }
+
+    addClick(){
+        console.log("hi",this.state.team_members)
+        this.setState(prevState => ({ team_members: [...prevState.team_members,  {name:"",email:""}]}))
+        // this.props.handleChangeTS(this.state.items.length);
+    }
 
     handleChange = input => e => {
 
-        console.log(input,e.target.value);
+        console.log(1111111111111111)
 
-        this.setState({ [input]: e.target.value });
+        console.log(input,e.target.value, this.state.visible);
+
+        if(input === "visible"){
+            if(e.target.value === "on"){
+                this.setState({ [input]: true });
+            }
+            else{
+                this.setState({ [input]: false });
+            }
+        }
+        else{
+            this.setState({ [input]: e.target.value });
+        }
+
     };
+
+    onProjectVisibilityChange = (e) => {
+        this.setState({
+            visible: e.target.checked
+        })
+    }
 
     onDeleteteam(val){
 
@@ -151,8 +193,9 @@ export default class submissionPage extends Component {
                                     project_description={this.state.project_description}
                                     project_tags={this.state.project_tags}
                                     // team_size={this.state.team_size}
-                                    team_member_names={this.state.team_member_names}
-                                    team_member_emails={this.state.team_member_emails}
+                                    team_members={this.state.team_members}
+                                    // team_member_names={this.state.team_member_names}
+                                    // team_member_emails={this.state.team_member_emails}
                                     date_of_est={this.state.date_of_est}
                                     visible={this.state.visible}
                                     stage={this.state.stage}
@@ -162,6 +205,9 @@ export default class submissionPage extends Component {
                                     handleChangeDate={this.onChangeDate}
                                     handleChangeteam={this.onChangeteam}
                                     handleDeleteteam={this.onDeleteteam}
+                                    handleProjectVisibilityChange={this.onProjectVisibilityChange.bind(this)}
+                                    removeClick={this.removeClick}
+                                    addClick={this.addClick}
                                 />
 
                             </div>

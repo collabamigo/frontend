@@ -8,6 +8,8 @@ export class Confirm extends Component {
     static propTypes = {
         nextStep: PropTypes.func.isRequired,
         prevStep: PropTypes.func.isRequired,
+        // eslint-disable-next-line react/forbid-prop-types
+        values: PropTypes.object.isRequired,
     }
 
     constructor(props) {
@@ -47,37 +49,61 @@ export class Confirm extends Component {
                 <ul>
                     <li>
                         <span>
-                            hello
+                            Project name : 
+                            {' '}
+
+                            {this.props.values.project_name}
                         </span>
                     </li>
 
                     <li>
                         <span>
-                            hello
-                        </span>
-                    </li>
+                            Project Description : 
+                            {' '}
 
-                    <listenerCount>
-                        <span>
-                            hello
-                        </span>
-                    </listenerCount>
-
-                    <li>
-                        <span>
-                            hello
+                            {this.props.values.project_description}
                         </span>
                     </li>
 
                     <li>
                         <span>
-                            hello
+                            Project Tages : 
+                            {' '}
+
+                            {this.props.values.project_tags.map(item => {
+                                return (
+                                    // eslint-disable-next-line react/jsx-key
+                                    <li >
+                                        {item}
+                                    </li>);
+                            })}
                         </span>
                     </li>
 
                     <li>
                         <span>
-                            hello
+                            Date of Birth : 
+                            {' '}
+
+                            {this.props.values.date_of_est.toString()}
+                        </span>
+                    </li>
+
+                    <li>
+                        <span>
+                            Visibility : 
+                            {' '}
+
+                            {this.props.values.visible ? "Yes" : "No"}
+                        </span>
+                    </li>
+
+                    <li>
+                        <span>
+                            Stage : 
+                            {' '}
+
+                            {this.props.values.stage === "i" ? "Initiation" : (this.props.values.stage === "p" ? "Planning" : (this.props.values.stage === "e" ? "Execution" : (this.props.values.stage === "mc" ? "Monitoring and Controlling" : (this.props.values.stage === "c"  ? "Concluding" : null))))}
                         </span>
                     </li>
                 </ul>

@@ -1,29 +1,23 @@
 import React, {Component} from 'react';
 import Clublist from 'components/ClubList/ClubList.js';
-// import {edit_button} from "./clubadmin.module.css";
 import {clubDetails} from "./club.module.css"
-// import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
 import axios from "../utils/axios";
-import backend from "../env";   // todo reference
-
 
 class ClubAdminPage extends Component {
-    // static propTypes = {
-    //     clubName : PropTypes.string.isRequired,
-    // }
 
     constructor(props) {
         super(props)
         this.state = {
             currentModal: null,
             basicInformation: {},
-            competition:{},
+            competitions:[],
+            announcements: [],
             basicInformationStatic : {
-                announcements: [{id: "1", content:"Welcome"}],
+                // announcements: [{id: "1", content:"Welcome"}],
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 coordinators:[
                     {
@@ -52,17 +46,46 @@ class ClubAdminPage extends Component {
                     {name: "Event11", logo: "https://via.placeholder.com/70X70"},
                 ],
             },
-        }
+            }
     }
 
     componentDidMount() {
-        axios.get(backend + "club/club/Byld/?format=json").then((res) => {
+        axios.get("club/club/Byld/?format=json").then((res) => {
+            let announcements_list =[]
+            let competition_list =[]
             this.setState({basicInformation: res.data});
-            axios.get(backend + "club/competition/" + this.state.basicInformation.id + "/?format=json").then((res) => {
-                this.setState({competition: res.data});
-                });
-        });
+            announcements_list = res.data.announcements
 
+            competition_list = res.data.competitions
+
+            console.log("lol",competition_list)
+
+            for (let temp in announcements_list){
+                axios.get("club/announcements/" + announcements_list[temp] + "/?format=json").then((ress) => {
+                    this.setState((prevState) => {
+                        return (
+                            {
+                                ...(prevState.announcements),
+                                announcements:[...(prevState.announcements), {id:ress.data.id, content:ress.data.content}]
+                            })
+                    })
+                });
+            }
+            for (let temp in competition_list){
+                axios.get("club/competition/" + competition_list[temp] + "/?format=json").then((r) => {
+                    this.setState((prevState) => {
+                        return (
+                            {
+                                ...(prevState.competitions),
+                                competitions:[...(prevState.competitions), {id:r.data.id, club:r.data.club,
+                                    name:r.data.name, description: r.data.description,
+                                    on_going: r.data.on_going, disabled: r.data.disabled}]
+                            })
+                    })
+                });
+            }
+
+        });
     }
 
     shouldComponentUpdate () {
@@ -75,32 +98,33 @@ class ClubAdminPage extends Component {
             return (
                 {
                     ...prevState,
-                    basicInformationStatic: {
-                        ...(prevState.basicInformationStatic),
+                    basicInformation: {
+                        ...(prevState.basicInformation),
                         description: description
                     }
                 })
         })
         this.handleCloseModal()
+        const payload = {
+            description: this.state.basicInformation.description
+        }
+        axios.patch("club/club/"+ this.state.basicInformation.username +"/" ,payload)
+            .then(() => this.setState(payload))
     }
 
     handleSubmitAnnouncements(values){
-        const announcement_id=-1;
-        // axios.get("connect/profile/").then(
-        //     (res) => this.setState({
-        //         handle: res.data[0].handle
-        //     })
-        // )
-        this.setState((prevState) => {
-            return (
-                {
-                    ...prevState,
-                    basicInformationStatic: {
-                        ...(prevState.basicInformationStatic),
-                        announcements: [...(prevState.basicInformationStatic.announcements) , {id:announcement_id, content:values[0]}]
-                    }
-                })
-        })
+        axios.post("club/announcements/",{
+            club: "Byld",
+            content: values[0]
+        }).then((ress) => {
+                    this.setState((prevState) => {
+                        return (
+                            {
+                                ...(prevState.announcements),
+                                announcements:[...(prevState.announcements), {id:ress.data.id, content:ress.data.content}]
+                            })
+                    })
+        });
         this.handleCloseModal()
     }
 
@@ -128,10 +152,10 @@ class ClubAdminPage extends Component {
         })
     }
 
-
     render(){
         console.log(this.state.basicInformation)
-        console.log(this.state.competition)
+        console.log(this.state.competitions)
+        console.log(this.state.announcements)
         return (
             <div className="row m-1">
                 <div className="col-3 d-flex justify-content-around">
@@ -467,15 +491,21 @@ class ClubAdminPage extends Component {
 
                                         <div className="">
                                             <ul className="list">
-                                                {this.state.basicInformationStatic.announcements.map(item => (
-                                                    <ul key={item}>
-                                                        <span className="material-icons-outlined">
-                                                            notifications
-                                                        </span>
+                                                {/*{this.state.basicInformationStatic.announcements.map(item => (*/}
 
-                                                        {item["content"]}
-                                                    </ul>
-                                                ))}
+                                                {/*    <ul key={item}>*/}
+
+                                                {/*        <span className="material-icons-outlined">*/}
+
+                                                {/*            notifications*/}
+
+                                                {/*        </span>*/}
+
+                                                {/*        {item["content"]}*/}
+
+                                                {/*    </ul>*/}
+
+                                                {/*))}*/}
 
                                             </ul>
 

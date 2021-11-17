@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form'
 import "@pathofdev/react-tag-input/build/index.css";
 // import ReactTagInput from "@pathofdev/react-tag-input";
-
+import isEqual from "lodash/isEqual"
 import InputGroup from 'react-bootstrap/InputGroup'
 export class FormPersonalDetails extends Component {
 
@@ -11,6 +11,10 @@ export class FormPersonalDetails extends Component {
         handleChange: PropTypes.func.isRequired,
         handleChangeteam: PropTypes.func.isRequired,
         handleDeleteteam: PropTypes.func.isRequired,
+        handleProjectVisibilityChange: PropTypes.func.isRequired,
+
+        removeClick: PropTypes.func.isRequired,
+        addClick: PropTypes.func.isRequired,
 
         nextStep: PropTypes.func.isRequired,
         prevStep: PropTypes.func.isRequired,
@@ -21,10 +25,6 @@ export class FormPersonalDetails extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            items: [""],
-        }
 
         this.handleContinue = this.handleContinue.bind(this);
         this.handleBack = this.handleBack.bind(this);
@@ -42,29 +42,8 @@ export class FormPersonalDetails extends Component {
   };
 
 
- removeClick(i){
-    this.setState((prevState) => {
-        let items = prevState.items;
-        items.splice(i,1);
-        return ({
-            ...prevState,
-            items:items
-        })
-    });
-
-    console.log(i);
-    this.props.handleDeleteteam(i);
-
- }
-
- addClick(){
-    this.setState(prevState => ({ items: [...prevState.items, '']}))
-    // this.props.handleChangeTS(this.state.items.length);
-
-  }
-
   createUI(){
-    return this.state.items.map((el, i) => 
+    return this.props.values.team_members.map((el, i) =>
         (
             <div
                 id={i}
@@ -76,6 +55,8 @@ export class FormPersonalDetails extends Component {
                         aria-label="Name"
                         onChange={(e) => this.props.handleChangeteam('name',i,e)}
                         placeholder="Name"
+                        required
+                        value={this.props.values.team_members[i].name}
                     />
 
                     <Form.Control
@@ -83,12 +64,15 @@ export class FormPersonalDetails extends Component {
                         aria-label="Email"
                         onChange={(e) => this.props.handleChangeteam('email',i,e)}
                         placeholder="Email"
+                        required
+                        value={this.props.values.team_members[i].email}
+
 
                     />
 
                     <button
                         id="button-addon2"
-                        onClick={this.removeClick.bind(this, i)}
+                        onClick={(e) => this.props.removeClick(i)}
                         type="button"
                         variant="outline-secondary"
                     >
@@ -96,7 +80,7 @@ export class FormPersonalDetails extends Component {
                     </button>
                 </InputGroup>
             </div>
-        )          
+        )
     )
  }
 
@@ -106,6 +90,7 @@ export class FormPersonalDetails extends Component {
   };
 
   render() {
+      const team_members = this.props.values.team_members;
 
     return (
         <div>
@@ -118,27 +103,40 @@ export class FormPersonalDetails extends Component {
                     controlId="ProjectDetails"
                 >
 
-                    {/* <Form.Control 
+                    {/* <Form.Control
                         onChange={this.props.handleChange('team_size')}
                         placeholder="Team Size"
                         type="number"
                         value={this.props.values.team_size}
                     /> */}
 
+                    <Form.Check
+                        checked={this.props.values.visible}
+                        id="custom-switch"
+                        label="Want Project to be Public?"
+                        onChange={(e)=> this.props.handleProjectVisibilityChange(e)}
+                        type="switch"
+                    />
+
                     <Form.Label>
                         Add Team Members
                     </Form.Label>
 
-                    {this.createUI()} 
+                    {this.createUI()}
 
-                    <input
-                        onClick={this.addClick.bind(this)}
-                        type='button'
-                        value={this.state.items.length<1?"add team bros":"add more hoes"}
-                    />
+                    <button
+                        className="btn btn-primary mt-2"
+                        // eslint-disable-next-line react/jsx-handler-names
+                        disabled={isEqual(team_members[team_members.length -1 ], {email:"", name:""})}
+                        onClick={(e) => this.props.addClick(e)}
+                        type="button"
+
+                    >
+                        Add Team Members
+                    </button>
 
 
-                    
+
 
 
 
@@ -164,63 +162,6 @@ export class FormPersonalDetails extends Component {
                         </button>
                     </InputGroup> */}
 
-                    <Form.Control 
-                        onChange={this.props.handleChange('project_name')}
-                        placeholder="Project Name"
-                        type="text"
-                        value={this.props.values.project_name}
-                    />
-
-                    <Form.Control 
-                        as="textarea"
-                        onChange={this.props.handleChange('project_description')}
-                        placeholder="Project Description"
-                        value={this.props.values.project_description}
-                    />
-
-                    {/* <ReactTagInput 
-                        onChange={(newTags) => this.props.handleChangeTags(newTags)} 
-                        tags={this.props.values.project_tags}
-                    /> */}
-
-
-
-                    <div className="form-floating">
-                        <select
-                            aria-label="hello"
-                            className="form-select"
-                            id="floatingSelect"
-                            onChange={this.props.handleChange('stage')}
-                        >
-
-                            <option
-                                selected
-                                value="Initiation"
-                            >
-                                Initiation
-                            </option>
-
-                            <option value="Planning">
-                                Planning
-                            </option>
-
-                            <option value="Execution">
-                                Execution
-                            </option>
-
-                            <option value="Monitoring and Controlling">
-                                Monitoring and Controlling
-                            </option>
-
-                            <option value="Concluding">
-                                Concluding
-                            </option>
-                        </select>
-
-                        <label htmlFor="floatingSelect">
-                            Stage of project
-                        </label>
-                    </div>
 
                 </Form.Group>
 

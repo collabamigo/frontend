@@ -6,7 +6,7 @@ on:
       - testing
 
 jobs:
-  build_and_preview:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,6 +17,35 @@ jobs:
       - name: Building
         run: npm run build
 
+      - name: Upload build result
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: out
+
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Installing dependencies
+        run: npm ci
+
+      - name: ESLinting .js and .jsx files
+        run: npx eslint src --ext .js,.jsx
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download build result
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: out
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           target: preview
@@ -24,6 +53,3 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COLLABAMIGO_PREVIEW }}'
           expires: 30d
           projectId: preview
-
-      - name: ESLinting .js and .jsx files
-        run: npx eslint src --ext .js,.jsx

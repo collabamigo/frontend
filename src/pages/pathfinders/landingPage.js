@@ -64,7 +64,7 @@ export default class landingPage extends Component {
             <div className={box +" row mt-5 pb-3"}>
                 <div className={dynamic_left + " col-md-8"} >
                     <hr/>
-                    <div className="row">
+                    <div className="row m-2">
                         <div className="col-md-10">
                             
                             <InputGroup className="">
@@ -171,8 +171,8 @@ export default class landingPage extends Component {
                                 onClick={this.handleModalChange}
                                 type="button"
                             >
-                                <span className="material-icons-outlined">
-                                    comment
+                                <span className="material-icons">
+                                    help_outline
                                 </span>
                             </button>
 

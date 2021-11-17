@@ -1,18 +1,17 @@
 import React from "react"
 import {Helmet} from "react-helmet"
 import Header from "./Header"
-
-// Global styles and component-specific styles.
 import {isLoggedIn} from "../../utils/auth";
 import Footer from "./Footer/Footer";
 import PropTypes from "prop-types";
 import {useRouter} from 'next/router';
 import DashboardHeader from "./DashboardHeader";
+import {App} from "./layout.module.scss";
 
 function Layout({children}) {
     const router = useRouter();
     return (
-        <div className="App h-100 w-100">
+        <div className={App+" w-100"}>
             <Helmet>
                 <meta charSet="utf-8" />
 
@@ -59,12 +58,11 @@ function Layout({children}) {
 
                 <link
                     href="./img/svg/developer.svg"
-                    rel="apple-touch-icon"
                 />
 
                 <link
                     href="img/icons/favicon_dark.ico"
-                    rel="shortcut icon"
+                    rel="icon"
                 />
 
                 <link
@@ -82,7 +80,7 @@ function Layout({children}) {
                 />
             </Helmet>
 
-            <div className="position-relative min-vh-100">
+            <div className="">
                 {router.pathname!=="/clubdashboard"?
                     <Header isAuthenticated={isLoggedIn()} />:
                     <DashboardHeader isAuthenticated={isLoggedIn()} />}

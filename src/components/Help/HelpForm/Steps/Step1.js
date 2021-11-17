@@ -26,18 +26,6 @@ class Step1 extends React.Component {
         return true;
     }
 
-    nextButton(){
-        return (
-            <button 
-                className="btn btn-primary col-5"
-                onClick={this.props.handleNext}
-                type="button"
-                value="Next"
-            >
-                Next
-            </button>
-        )
-    }
     render () {
         if (this.props.currentStep !== 1)
             return null
@@ -108,7 +96,7 @@ class Step1 extends React.Component {
                                                     onChange={this.props.handleChangeContact}
                                                     placeholder="Mobile Number"
                                                     value={this.props.Contact}
-                                                />   
+                                                />
                                             </div>
                                         </div>
 
@@ -146,13 +134,13 @@ class Step1 extends React.Component {
                                             </div>
                                         </div>
 
-                                        <button 
+                                        <button
                                             className="btn btn-primary col-5"
                                             type="submit"
                                             value="submit"
                                         >
                                             Next
-                                        </button>                                    
+                                        </button>
                                     </form>
                                 </Card.Body>
 

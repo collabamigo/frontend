@@ -14,16 +14,22 @@ export class UserForm extends Component {
 
     batch: PropTypes.number.isRequired,
     course: PropTypes.string.isRequired,
+    date_of_est: PropTypes.instanceOf(Date).isRequired,
     fname: PropTypes.string.isRequired,
     lname: PropTypes.string.isRequired,
 
-    date_of_est: PropTypes.instanceOf(Date).isRequired,
+
 
     handleChange: PropTypes.func.isRequired,
-    handleChangeTags: PropTypes.func.isRequired,
     handleChangeDate: PropTypes.func.isRequired,
+    handleChangeTags: PropTypes.func.isRequired,
+
     handleChangeteam: PropTypes.func.isRequired,
     handleDeleteteam: PropTypes.func.isRequired,
+    handleProjectVisibilityChange: PropTypes.func.isRequired,
+
+    removeClick: PropTypes.func.isRequired,
+    addClick: PropTypes.func.isRequired,
 
 
 
@@ -35,9 +41,10 @@ export class UserForm extends Component {
     project_name: PropTypes.string.isRequired,
     project_tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 
+    team_members: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
     team_member_emails: PropTypes.arrayOf(PropTypes.string).isRequired,
-    team_member_names: PropTypes.arrayOf(PropTypes.string).isRequired,    
-    // team_size : PropTypes.number.isRequired,    
+    team_member_names: PropTypes.arrayOf(PropTypes.string).isRequired,
+    // team_size : PropTypes.number.isRequired,
 }
 
 
@@ -51,7 +58,7 @@ export class UserForm extends Component {
         this.nextStep = this.nextStep.bind(this);
         this.prevStep = this.prevStep.bind(this);
     }
-  
+
 
   shouldComponentUpdate() {
     return true;
@@ -74,12 +81,12 @@ export class UserForm extends Component {
   };
 
   // Handle fields change
-  
+
 
   render() {
     const { step } = this.state;
     const { visible, stage, project_name, project_description, project_tags,
-       team_member_names, team_member_emails, date_of_est } = this.props;
+           date_of_est, team_members } = this.props;
 
     // console.log(v1);
     // console.log("v1");
@@ -87,7 +94,9 @@ export class UserForm extends Component {
     const v1 = {project_name, project_description, project_tags, date_of_est, stage};
     // const v2 = {fname, lname, batch , course};
 
-    const v2 = { team_member_names, team_member_emails, visible};
+    const v2 = {visible ,team_members};
+
+    const v3 = {project_name, project_description, project_tags, date_of_est, stage,visible ,team_members};
 
     switch (step) {
       case 1:
@@ -103,11 +112,14 @@ export class UserForm extends Component {
       case 2:
         return (
             <FormPersonalDetails
+                addClick={this.props.addClick}
                 handleChange={this.props.handleChange}
                 handleChangeteam={this.props.handleChangeteam}
                 handleDeleteteam={this.props.handleDeleteteam}
+                handleProjectVisibilityChange={this.props.handleProjectVisibilityChange}
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
+                removeClick={this.props.removeClick}
                 values={v2}
             />
         );
@@ -125,6 +137,7 @@ export class UserForm extends Component {
             <Confirm
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
+                values={v3}
             />
         );
       case 4:

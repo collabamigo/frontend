@@ -1,9 +1,8 @@
 
 import React from "react";
-// import FormBuilder from "components/FormBuilder"
-import NewEvent from "../components/NewEvent";
+import CreateEventModal from "../components/CreateEventModal";
 
 export default function FormBuilderPage() {
     return (
-        <NewEvent />)
+        <CreateEventModal />)
 }
