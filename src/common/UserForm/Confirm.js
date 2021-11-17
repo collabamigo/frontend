@@ -82,6 +82,21 @@ export class Confirm extends Component {
 
                     <li>
                         <span>
+                            Project Tages : 
+                            {' '}
+
+                            {this.props.values.project_tags.map(item => {
+                                return (
+                                    // eslint-disable-next-line react/jsx-key
+                                    <li >
+                                        {item}
+                                    </li>);
+                            })}
+                        </span>
+                    </li>
+
+                    <li>
+                        <span>
                             Date of Birth : 
                             {' '}
 

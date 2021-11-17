@@ -45,10 +45,7 @@ export default class submissionPage extends Component {
         this.onDeleteteam = this.onDeleteteam.bind(this);
         this.removeClick = this.removeClick.bind(this);
         this.addClick = this.addClick.bind(this);
-
-
-
-
+        
     }
 
     shouldComponentUpdate(){
