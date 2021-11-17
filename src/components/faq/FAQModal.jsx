@@ -44,11 +44,13 @@ class FAQModal extends React.Component {
                     </Button>
 
                     <Modal
-                        className="w-100"
+                        className="w-100 my-2"
                         onHide={this.handleClose.bind(this)}
                         show={this.state.show}
                     >
-                        <FaqSearch details={this.state.temp} />
+                        <Modal.Body>
+                            <FaqSearch details={this.state.temp} />
+                        </Modal.Body>
                     </Modal>
                 </>
             )}

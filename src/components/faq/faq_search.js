@@ -26,7 +26,6 @@ export default function FaqSearch({ details }) {
     };
 
     function searchList() {
-        console.log("filet" ,filteredEvents)
         return (
             <FaqList filteredFaq={filteredEvents} />
         )
@@ -38,16 +37,13 @@ export default function FaqSearch({ details }) {
                 FAQ
             </h1>
 
-            <div className="w-100 d-flex flex-md-row flex-column my-4">
+            <div className="w-100 d-flex flex-column my-4 pd-3">
                 <div className="w-75">
-
                     <input
-                        className=""
-                        id=""
-                        name=""
+                        className="w-100"
                         onChange={handleChange}
                         placeholder="Search"
-                        style={{ borderRadius: "15px"}}
+                        style={{ borderRadius: "10px"}}
                         type="search"
                     />
                 </div>

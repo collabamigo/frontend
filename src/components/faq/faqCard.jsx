@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 export default function FaqCard({ event }) {
     return (
         <Accordion
-            className="w-100"
+            className="w-100 pt-1"
             defaultActiveKey="1"
             key={event['question']}
         >
