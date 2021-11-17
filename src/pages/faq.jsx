@@ -1,5 +1,5 @@
 import React from "react"
-import FAQModal from "../components/FAQModal";
+import FAQModal from "../components/faq/FAQModal";
 
 class Faq extends React.Component{
 
