@@ -7,6 +7,7 @@ import FormBuilder from "./FormBuilder";
 import AdditionalFields from "./AdditionalFields";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {isBrowser} from "../../utils/auth";
 
 export default class CreateEventModal extends React.Component {
 
@@ -18,7 +19,7 @@ export default class CreateEventModal extends React.Component {
         const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         const yyyy = today.getFullYear();
         this.state = {
-            stage: 1,
+            stage: 2,
             name: "",
             description: "",
             eventDate: "",
@@ -57,6 +58,8 @@ export default class CreateEventModal extends React.Component {
     }
 
     render() {
+        if (isBrowser())
+            console.log(window.JSON.stringify(this.state.formBuilder[1]));
 
         if (this.state.stage === null) {
             return <div />
