@@ -2,6 +2,7 @@ import React  from 'react'
 import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button';
 import Boxes from './Boxes';
+import {leftButtons} from './ProjectCard.module.css';
 
 class ProjectList extends React.Component {
     static propTypes = {
@@ -65,7 +66,9 @@ class ProjectList extends React.Component {
                     
                     : null}
 
-                <Button onClick={this.handleShowMoreboxes}>
+                <br/>
+
+                <Button className={leftButtons + " fs-5"} onClick={this.handleShowMoreboxes}>
                     Load more
                 </Button>
             </div>

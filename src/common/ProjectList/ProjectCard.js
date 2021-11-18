@@ -25,62 +25,61 @@ function Pathfinder_Project_Card (props) {
     }
 
     return (
-
-        <Card className="col-4">
-            <Card.Body>
-                <Card.Title>
-                    <div className="row">
-                        <div className="col-sm">
-                            {props.project_name}
-                        </div>
-
-                        <div className="col-3">
-                            <span
-                                className="material-icons"
-                                onClick={handleBookmark}
-                                type="button"
-                            >
-                                {bookmark}
-                            </span>
-                        </div>
-                    </div>
-
-                </Card.Title>
-
+            <Card className="">
                 <Card.Body>
-                    <div className="row">
-                        <Card.Text className="col-md-8">
-                            {props.project_description}
-                        </Card.Text>
-
-                        <div className="col-md-4">
-                            <div>
-                                TL;DR
+                    <Card.Title>
+                        <div className="row">
+                            <div className="col-sm fs-4">
+                                {props.project_name}
                             </div>
 
-                            <div>
-                                Contact
-                                {props.Ongoing}
-
-                                {props.Contact}
+                            <div className="col-3">
+                                <span
+                                    className="material-icons"
+                                    onClick={handleBookmark}
+                                    type="button"
+                                >
+                                    {bookmark}
+                                </span>
                             </div>
                         </div>
 
-                    </div>
+                    </Card.Title>
 
-                    
+                    <Card.Body>
+                        <div className="row">
+                            <Card.Text className="col-md-8">
+                                {props.project_description}
+                            </Card.Text>
+
+                            <div className="col-md-4">
+                                <div>
+                                    TL;DR
+                                </div>
+
+                                <div>
+                                    Contact
+                                    {props.Ongoing}
+
+                                    {props.Contact}
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </Card.Body>
                 </Card.Body>
-            </Card.Body>
 
-            <Card.Footer>
-                <small className="text-muted">
-                    Submitted on: 
-                    {' '}
+                <Card.Footer>
+                    <small className="text-muted">
+                        Submitted on:
+                        {' '}
 
-                    {props.Submitted}
-                </small>
-            </Card.Footer>
-        </Card>
+                        {props.Submitted}
+                    </small>
+                </Card.Footer>
+            </Card>
         // </Fade>
     );
 

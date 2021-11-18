@@ -8,3 +8,14 @@
     background-color: white !important;
     font-size: 1.4rem;
 }
+
+.leftButtons {
+    background-color: rgb(0,0,128);
+    color: rgb(245,245,245);
+}
+
+.leftButtons:hover, .leftButtons:focus, .leftButtons:active {
+    color: rgb(220,220,220);
+    background-color: rgb(25,25,110);
+}
+

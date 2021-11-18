@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 // import Card from 'react-bootstrap/Card'
 import Link from "common/Link";
-import {leftButtons} from './landingPage.module.css';
 
 // import PropTypes from 'prop-types'
-import {dynamic_left} from "./landingPage.module.css";
-import {static_right} from "./landingPage.module.css";
-import {box} from "./landingPage.module.css";
+import {dynamic_left, box, static_right, leftButtons, comment} from "./landingPage.module.css";
+
 import ProjectList from "../../common/ProjectList/ProjectList.js";
 // import Link from "common/Link";
 import Button from 'react-bootstrap/Button';
@@ -65,7 +63,7 @@ export default class landingPage extends Component {
                 <div className={dynamic_left + " col-md-8"} >
                     <hr/>
                     <div className="row m-2">
-                        <div className="col-md-10">
+                        <div className=" col-md-10">
                             
                             <InputGroup className="">
                                 <FormControl
@@ -83,7 +81,7 @@ export default class landingPage extends Component {
                             </InputGroup>
                         </div>
 
-                        <div className="col-md-2 ">
+                        <div className="col-md-2">
                             <button
                                 className={leftButtons + " col-md-5 btn fs-5"}
                                 onClick={() => console.log("hello")}
@@ -112,7 +110,7 @@ export default class landingPage extends Component {
                     </div>
                 </div>
 
-                <div className={static_right + " col-md-4 rounded-1"}>
+                <div className={static_right + " position-fixed col-md-4 rounded-1"}>
                     <hr/>
                     <div>
                         <div>
@@ -145,7 +143,8 @@ export default class landingPage extends Component {
                             </p>
                         </div>
 
-                        <div>
+
+                        <div className="pb-2">
                             {/* <button
                                 className="col-md-8 btn btn-primary mt-2 ml-1"
                                 onClick={() => console.log("hello")}
@@ -157,7 +156,7 @@ export default class landingPage extends Component {
                             </button> */}
 
                             <Link
-                                className="col-md-7 btn btn-light mt-2 ml-1 "
+                                className={leftButtons + " col-md-7 btn btn-light mt-2 ml-1 "}
                                 to="/pathfinders/submissionPage"
                                 type="button"
                             >
@@ -167,12 +166,12 @@ export default class landingPage extends Component {
                             </Link>
 
                             <button
-                                className=" offset-1 col-md-3 btn btn-light mt-2 ml-1"
+                                className= {comment + " offset-1 col-md-1 mt-2 ml-1"}
                                 onClick={this.handleModalChange}
                                 type="button"
                             >
-                                <span className="material-icons">
-                                    help_outline
+                                <span className=" material-icons-outlined">
+                                    comment
                                 </span>
                             </button>
 
