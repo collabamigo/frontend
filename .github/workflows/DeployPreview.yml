@@ -6,50 +6,35 @@ on:
       - testing
 
 jobs:
-  build:
+  vercel:
+    environment: testing
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Installing dependencies
-        run: npm ci
-
-      - name: Building
-        run: npm run build
-
-      - name: Upload build result
-        uses: actions/upload-artifact@v2
+      - uses: actions/setup-node@v1
         with:
-          name: build
-          path: out
+          node-version: '16.8.0'
+          registry-url: https://registry.npmjs.org/
 
-  eslint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+      - name: "Deploy to Vercel"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        run: echo "::set-output name=PREVIEW_URL::$(npx vercel --token "${VERCEL_TOKEN}" --prod)"
 
-      - name: Installing dependencies
-        run: npm ci
+      - name: "Temp"
+        env:
+          tag_name: ${{ steps.version.outputs.TAG_NAME }}
+        run: echo ${{ tag_name }}
 
-      - name: ESLinting .js and .jsx files
-        run: npx eslint src --ext .js,.jsx
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [ build ]
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Download build result
-        uses: actions/download-artifact@v2
-        with:
-          name: build
-          path: out
-
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          target: preview
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COLLABAMIGO_PREVIEW }}'
-          expires: 30d
-          projectId: preview
+#      - uses: actions/github-script@v5
+#        with:
+#          script: |
+#            github.rest.issues.createComment({
+#              issue_number: context.issue.number,
+#              owner: context.repo.owner,
+#              repo: context.repo.repo,
+#              body: '👋 Thanks for reporting!'
+#            })

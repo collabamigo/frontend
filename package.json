@@ -102,6 +102,7 @@
     "eslint": "^8.2.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.27.0",
-    "react-live": "2.2.3"
+    "react-live": "2.2.3",
+    "vercel": "^23.1.2"
   }
 }
