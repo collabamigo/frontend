@@ -1,5 +1,4 @@
 import React from "react";
-import Modal from "react-bootstrap/Modal";
 import 'react-bootstrap';
 import * as styles from './accountchooser.module.css';
 
@@ -31,9 +30,9 @@ export default function AccountChooser() {
     ));
 
     return (
-        <Modal.Dialog>
+        <div>
             <div className="my-4 d-flex flex-column justify-content-center align-items-center">
-                <div className="d-flex justify-content-between w-50 mx-auto align-items-center">
+                <div className="d-flex justify-content-between w-100 mx-auto align-items-center">
                     <img
                         alt="Profile Image"
                         className="rounded-circle"
@@ -70,5 +69,5 @@ export default function AccountChooser() {
                     Sign Out
                 </button>
             </div>
-        </Modal.Dialog>)
+        </div>)
 }

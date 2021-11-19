@@ -491,21 +491,15 @@ class ClubAdminPage extends Component {
 
                                         <div className="">
                                             <ul className="list">
-                                                {/*{this.state.basicInformationStatic.announcements.map(item => (*/}
+                                                {this.state.announcements.map(item => (
+                                                    <ul key={item}>
+                                                        <span className="material-icons-outlined">
+                                                            notifications
+                                                        </span>
 
-                                                {/*    <ul key={item}>*/}
-
-                                                {/*        <span className="material-icons-outlined">*/}
-
-                                                {/*            notifications*/}
-
-                                                {/*        </span>*/}
-
-                                                {/*        {item["content"]}*/}
-
-                                                {/*    </ul>*/}
-
-                                                {/*))}*/}
+                                                        {item["content"]}
+                                                    </ul>
+                                                ))}
 
                                             </ul>
 

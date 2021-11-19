@@ -6,6 +6,7 @@ import Image from "react-bootstrap/Image";
 import {floating_right_card} from "./event.module.scss";
 import useOnScreen from "utils/useOnScreen";
 import {BrowserView} from "react-device-detect";
+import FAQModal from "../../components/faq/FAQModal";
 
 export default function Event() {
     const ref = useRef()
@@ -63,12 +64,17 @@ export default function Event() {
                             {isParticipateButtonVisible?null:
                             <BrowserView className="d-flex justify-content-around text-end pt-5">
 
-                                <Button
-                                    className="rounded-4 w-20 fs-4 px-5"
-                                    variant="outline-primary"
-                                >
-                                    FAQ
-                                </Button>
+                                {/*<Button*/}
+
+                                {/*    className="rounded-4 w-20 fs-4 px-5"*/}
+
+                                {/*    variant="outline-primary"*/}
+
+                                {/*>*/}
+
+                                {/*</Button>*/}
+
+                                <FAQModal />
 
                                 <Button
                                     className="rounded-4 w-20 fs-4 px-3"
@@ -113,12 +119,7 @@ export default function Event() {
 
                                         <div className="d-flex justify-content-around text-end pt-5">
 
-                                            <Button
-                                                className="rounded-4 w-20 fs-4 px-5"
-                                                variant="outline-primary"
-                                            >
-                                                FAQ
-                                            </Button>
+                                            <FAQModal />
 
                                             <Button
                                                 className="rounded-4 w-20 fs-4 px-3"

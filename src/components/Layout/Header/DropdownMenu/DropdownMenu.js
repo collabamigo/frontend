@@ -5,11 +5,14 @@ import Link from "common/Link";
 import { isMobile } from "react-device-detect";
 import PropTypes from "prop-types";
 import {isBrowser, setLoggedOut} from "utils/auth";
+import AccountChooser from "components/AccountChooser/AccountChooser";
+import {Dropdown, DropdownButton} from "react-bootstrap";
 
 function signOut() {
     setLoggedOut()
     window.location.href = "/";
 }
+
 function DropdownMenu({ isAuthenticated }) {
     if (!isBrowser())
         return <div />
@@ -47,8 +50,6 @@ function DropdownMenu({ isAuthenticated }) {
                         </Link>
                     </div>}
 
-
-
                 <div className={CustomNavLink + " btn"}>
                     <Link
                         className={magicSpan}
@@ -60,6 +61,18 @@ function DropdownMenu({ isAuthenticated }) {
 
                 {isAuthenticated ?
                     <div className={CustomNavLink}>
+                        <Dropdown>
+                            <DropdownButton
+                                className="" // account circle
+                                title="Switch Account"
+                            >
+                                <Dropdown.Item>
+                                    <AccountChooser />
+                                </Dropdown.Item>
+
+                            </DropdownButton>
+                        </Dropdown>
+
                         <a
                             className="btn"
                             onClick={signOut}
@@ -86,7 +99,9 @@ function DropdownMenu({ isAuthenticated }) {
                                 />
                             </svg>
                         </a>
-                    </div> : null}
+                    </div>
+                    :
+                    null}
             </div>
         );
 }

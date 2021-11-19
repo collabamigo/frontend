@@ -37,10 +37,11 @@ class FAQModal extends React.Component {
             return (
                 <>
                     <Button
+                        className="rounded-4 w-20 fs-4 px-5"
                         onClick={this.handleShow.bind(this)}
                         variant="primary"
                     >
-                        Launch demo modal
+                        Faq
                     </Button>
 
                     <Modal
