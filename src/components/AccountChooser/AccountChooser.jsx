@@ -9,18 +9,6 @@ export default function AccountChooser() {
         'Club 3',
         'Club 4',
         'Club 5',
-        'Club 6',
-        'Club 6',
-        'Club 6',
-        'Club 6',
-        'Club 6',
-        'Club 6',
-        'Club 6',
-        'Club 6',
-        'Club 6',
-        'Club 6',
-        'Club 6',
-        'Club 6',
     ]
 
     const clubListItems = clubList.map((club) => (
