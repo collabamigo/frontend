@@ -141,7 +141,9 @@ export class UserForm extends Component {
             />
         );
       case 4:
-        return <Success />;
+        return (<Success
+            values={v3}
+                />);
       default:
         (console.log('This is a multi-step form built with React.'))
     }
