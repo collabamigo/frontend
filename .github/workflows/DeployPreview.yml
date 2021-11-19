@@ -27,7 +27,7 @@ jobs:
       - name: "Temp"
         env:
           tag_name: ${{ steps.version.outputs.TAG_NAME }}
-        run: echo ${{ tag_name }}
+        run: echo ${ tag_name }
 
 #      - uses: actions/github-script@v5
 #        with:
