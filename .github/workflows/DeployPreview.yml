@@ -23,18 +23,21 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
         run: echo "::set-output name=PREVIEW_URL::$(npx vercel --token "${VERCEL_TOKEN}" --prod)"
+        id: deploy
 
       - name: "Temp"
         env:
-          tag_name: ${{ steps.version.outputs.TAG_NAME }}
-        run: echo ${ tag_name }
+          PREVIEW_URL: ${{ steps.deploy.outputs.PREVIEW_URL }}
+        run: echo "${tag_name}"
 
-#      - uses: actions/github-script@v5
-#        with:
-#          script: |
-#            github.rest.issues.createComment({
-#              issue_number: context.issue.number,
-#              owner: context.repo.owner,
-#              repo: context.repo.repo,
-#              body: '👋 Thanks for reporting!'
-#            })
+      - uses: actions/github-script@v5
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.PREVIEW_URL }}
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'The preview URL for this PR is ${{ steps.deploy.outputs.PREVIEW_URL }}'
+            })
