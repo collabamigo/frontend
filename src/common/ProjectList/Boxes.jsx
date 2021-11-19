@@ -19,10 +19,12 @@ export default class Boxes extends React.Component {
                 <div className="">
                     <div className="row hello">
                         {this.props.boxesToRender.map((boxdata) => (
+                            <div className= "p-2 col-6 fs-5">
                             <ProjectCard
                                 element={boxdata}
                                 key={boxdata}
                             />
+                            </div>
                             ))}
                     </div>
                 </div>

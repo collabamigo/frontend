@@ -1,5 +1,7 @@
 .static_right {
     background-color: #DCDCDC;
+    position: fixed;
+    right:0;
 }
 
 .box {
@@ -12,6 +14,16 @@
 }
 
 .leftButtons:hover, .leftButtons:focus, .leftButtons:active {
-    color: rgb(220,220,220);
-    background-color: rgb(25,25,110);
+    color: rgb(200,200,200);
+    background-color: rgb(30,30,120);
+}
+
+.comment {
+    background-color: #DCDCDC;
+    border: none;
+    transform: scale(1.3);
+}
+
+.comment:hover {
+    transform: scale(1.5);
 }

@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 // import Card from 'react-bootstrap/Card'
 import Link from "common/Link";
-import {leftButtons} from './landingPage.module.css';
-import axios from "utils/axios";
-import backend from "env";
 
 // import PropTypes from 'prop-types'
-import {dynamic_left} from "./landingPage.module.css";
-import {static_right} from "./landingPage.module.css";
-import {box} from "./landingPage.module.css";
+import {dynamic_left, box, static_right, leftButtons, comment} from "./landingPage.module.css";
+
 import ProjectList from "../../common/ProjectList/ProjectList.js";
 // import Link from "common/Link";
 import Button from 'react-bootstrap/Button';
@@ -32,64 +28,42 @@ export default class landingPage extends Component {
             modalShow: false,
 
             itemlist: [
-                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
-                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
-                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
-                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
-                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
-                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
-                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
-                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
-                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
-                {project_name: "Dummy Project", project_description: "https://via.placeholder.com/70X70", stage: "Dummy"},
-                
+                {name: "Tasveer", logo: "https://via.placeholder.com/70X70"},
+                {name: "MicDrop", logo: "https://via.placeholder.com/70X70"},
+                {name: "Byld", logo: "https://via.placeholder.com/70X70"},
+                {name: "Litsoc", logo: "https://via.placeholder.com/70X70"},
+                {name: "Meraki", logo: "https://via.placeholder.com/70X70"},
+                {name: "MUSE", logo: "https://via.placeholder.com/70X70"},
+                {name: "Philsoc", logo: "https://via.placeholder.com/70X70"},
+                {name: "Electroholics", logo: "https://via.placeholder.com/70X70"},
+                {name: "Cyborg", logo: "https://via.placeholder.com/70X70"},
+                {name: "Astronuts", logo: "https://via.placeholder.com/70X70"},
+                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
             ],
         }
 
         this.handleModalChange = this.handleModalChange.bind(this);
-        this.myprojects = this.myprojects.bind(this);
     }
 
-    componentDidMount() {
-        //TODO: URDL FOR ALL PROJECTS
-        axios.get(backend + "pathfinders/ecell").then((res) => {
-                let Lists = [];
-                for (let i = 0; i < res.data.length; i++) {
-                    Lists.push(res.data[i]);
-                }
-                this.setState({itemlist: Lists});
-            });
-    }
+    
     shouldComponentUpdate(){
         return true;
-    }
-
-
-    myprojects(){
-        //TODO: URL FOR MY PROJECTS
-        // axios.get(backend + "pathfinders/ecell").then((res) => {
-        //     let Lists = [];
-        //     for (let i = 0; i < res.data.length; i++) {
-        //         Lists.push(res.data[i]);
-        //     }
-        //     this.setState({itemlist: Lists});
-        // });
-
-        console.log("hello");
     }
 
 
     handleModalChange() {
         this.setState((prevState) => ({ modalShow: !prevState.modalShow }))
     }
+
+
+
     render() {
         return (
             <div className={box +" row mt-5 pb-3"}>
                 <div className={dynamic_left + " col-md-8"} >
-                    <hr />
-
+                    <hr/>
                     <div className="row m-2">
-                        <div className="col-md-10">
+                        <div className=" col-md-10">
                             
                             <InputGroup className="">
                                 <FormControl
@@ -107,11 +81,10 @@ export default class landingPage extends Component {
                             </InputGroup>
                         </div>
 
-                        <div className="col-md-2 ">
+                        <div className="col-md-2">
                             <button
                                 className={leftButtons + " col-md-5 btn fs-5"}
-                                // eslint-disable-next-line react/jsx-handler-names
-                                onClick={this.myprojects}
+                                onClick={() => console.log("hello")}
                                 type="button"
                             >
                                 M
@@ -137,9 +110,8 @@ export default class landingPage extends Component {
                     </div>
                 </div>
 
-                <div className={static_right + " col-md-4 rounded-1"}>
-                    <hr />
-
+                <div className={static_right + " position-fixed col-md-4 rounded-1"}>
+                    <hr/>
                     <div>
                         <div>
                             <span className="pb-2 fw-bold fs-1">
@@ -171,7 +143,8 @@ export default class landingPage extends Component {
                             </p>
                         </div>
 
-                        <div>
+
+                        <div className="pb-2">
                             {/* <button
                                 className="col-md-8 btn btn-primary mt-2 ml-1"
                                 onClick={() => console.log("hello")}
@@ -183,7 +156,7 @@ export default class landingPage extends Component {
                             </button> */}
 
                             <Link
-                                className="col-md-7 btn btn-light mt-2 ml-1 "
+                                className={leftButtons + " col-md-7 btn btn-light mt-2 ml-1 "}
                                 to="/pathfinders/submissionPage"
                                 type="button"
                             >
@@ -193,12 +166,12 @@ export default class landingPage extends Component {
                             </Link>
 
                             <button
-                                className=" offset-1 col-md-3 btn btn-light mt-2 ml-1"
+                                className= {comment + " offset-1 col-md-1 mt-2 ml-1"}
                                 onClick={this.handleModalChange}
                                 type="button"
                             >
-                                <span className="material-icons">
-                                    help_outline
+                                <span className=" material-icons-outlined">
+                                    comment
                                 </span>
                             </button>
 
