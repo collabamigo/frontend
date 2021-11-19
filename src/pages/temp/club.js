@@ -7,9 +7,9 @@ import {clubDetails} from "./club.module.css"
 import PropTypes from "prop-types";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
-import {isBrowser} from "../utils/auth";
-import {SvgIcon} from "../common/SvgIcon";
-import Faq from "./faq";
+import {isBrowser} from "../../utils/auth";
+import {SvgIcon} from "../../common/SvgIcon";
+import Faq from "../faq";
 // import Figure from 'react-bootstrap/Figure';
 
 

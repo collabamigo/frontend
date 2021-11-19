@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Clublist from 'components/ClubList/ClubList.js';
-import {clubDetails} from "./club.module.css"
+import {clubDetails} from "./temp/club.module.css"
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
