@@ -25,12 +25,8 @@ jobs:
         run: echo "::set-output name=PREVIEW_URL::$(npx vercel --token "${VERCEL_TOKEN}" --prod)"
         id: deploy
 
-      - name: "Temp"
-        env:
-          PREVIEW_URL: ${{ steps.deploy.outputs.PREVIEW_URL }}
-        run: echo "${tag_name}"
-
-      - uses: actions/github-script@v5
+      - name: "Deploy to Preview Channel"
+        uses: actions/github-script@v5
         env:
           PREVIEW_URL: ${{ steps.deploy.outputs.PREVIEW_URL }}
         with:
