@@ -14,11 +14,6 @@ jobs:
     env:
       deploy_token: ${{secrets.LAYER0_DEPLOY_TOKEN}}
     steps:
-      - name: Check for Layer0 deploy token secret
-        if: env.deploy_token == ''
-        run: |
-          echo You must define the "LAYER0_DEPLOY_TOKEN" secret in GitHub project settings
-          exit 1
       - name: Extract branch name
         shell: bash
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_ENV
