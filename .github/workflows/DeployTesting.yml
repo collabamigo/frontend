@@ -1,23 +1,61 @@
-name: Deploy to Development
+name: Deploy testing branch to Layer0
+
 on:
   push:
     branches:
       - testing
+
 jobs:
-  vercel:
-    environment: testing
+  eslint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
+      - name: Cache node modules
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Installing dependencies
+        run: npm ci
+
+      - name: ESLinting .js and .jsx files
+        run: npx eslint src --ext .js,.jsx
+
+  build-and-deploy:
+    environment: testing
+    runs-on: ubuntu-latest
+    needs: eslint
+    steps:
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '16.8.0'
-          registry-url: https://registry.npmjs.org/
+          node-version: 14.18.1
 
-      - name: "Deploy to Vercel"
+      - name: Cache node modules
+        uses: actions/cache@v1
         env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-        run: npx vercel --token "${VERCEL_TOKEN}" --prod
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Deploy to Layer0
+        run: |
+          npm run layer0:deploy collabamigo -- --token=$deploy_token  --environment=default
+        env:
+          deploy_token: ${{secrets.LAYER0_DEPLOY_TOKEN}}
