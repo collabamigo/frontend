@@ -1,4 +1,13 @@
 {
+  "scripts": {
+    "layer0:dev": "layer0 dev",
+    "layer0:build": "layer0 build",
+    "layer0:deploy": "layer0 deploy",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next dev",
+    "deploy": "next start"
+  },
   "name": "frontend-collabamigo",
   "version": "0.1.0",
   "private": true,
@@ -64,12 +73,6 @@
     "utils": "^0.3.1",
     "web-vitals": "^2.1.2"
   },
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next dev",
-    "deploy": "next start"
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -89,12 +92,17 @@
     ]
   },
   "devDependencies": {
+    "@layer0/cli": "^4.3.0",
+    "@layer0/core": "^4.3.0",
+    "@layer0/devtools": "^4.3.0",
+    "@layer0/next": "^4.3.0",
+    "@layer0/prefetch": "^4.3.0",
+    "@layer0/react": "^4.3.0",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
     "eslint": "^8.2.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.27.0",
-    "react-live": "2.2.3",
-    "vercel": "^23.1.2"
+    "react-live": "2.2.3"
   }
 }
