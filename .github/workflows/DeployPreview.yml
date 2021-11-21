@@ -14,9 +14,6 @@ jobs:
     env:
       deploy_token: ${{secrets.LAYER0_DEPLOY_TOKEN}}
     steps:
-      - name: Extract branch name
-        shell: bash
-        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_ENV
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
@@ -40,3 +37,23 @@ jobs:
           npm run layer0:deploy collabamigo -- --token=$deploy_token  --environment=default --site=devcollabamigo
         env:
           deploy_token: ${{secrets.LAYER0_DEPLOY_TOKEN_PREVIEW}}
+
+      - run : echo "::set-output name=deploy_output::$(cat .layer0/deployment-manifest.json)"
+        id: set-output-deploy-output
+
+      - name: JSON processing
+        run: |
+          echo "${{fromJson(steps.set-output-deploy-output.outputs.deploy_output).url}}"
+
+      - name: "Comment preview URL on Pull Request"
+        uses: actions/github-script@v5
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.PREVIEW_URL }}
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'The preview URL for this PR is ${{fromJson(steps.set-output-deploy-output.outputs.deploy_output).url}}'
+            })
