@@ -39,6 +39,10 @@ export class FormUserDetails extends Component {
 
 
   render() {
+      const buttonStyle = {
+          backgroundColor: "rgb(0,0,128)",
+          color: "rgb(245,245,245)"
+      };
     return (
         <div>
             <div>
@@ -53,62 +57,73 @@ export class FormUserDetails extends Component {
                             placeholder="Project Name"
                             type="text"
                             value={this.props.values.project_name}
+                            className="fs-5"
                         />
+
+                        <br/>
 
                         <Form.Control 
                             as="textarea"
                             onChange={this.props.handleChange('project_description')}
                             placeholder="Project Description"
                             value={this.props.values.project_description}
+                            className="fs-5"
                         />
+
+                        <br/>
 
                         <ReactTagInput 
                             onChange={(newTags) => this.props.handleChangeTags(newTags)} 
                             tags={this.props.values.project_tags}
+                            className="fs-5"
                         />
+
+                        <br/>
 
                         <DatePicker
                             onChange={(date) => this.props.handleChangeDate(date)}
                             selected={this.props.values.date_of_est}
+                            className="fs-5 rounded-2 float-start"
                         />
 
-
-                        <div className="form-floating">
-                            <select
-                                aria-label="hello"
-                                className="form-select"
-                                id="floatingSelect"
-                                onChange={this.props.handleChange('stage')}
-                                value={this.props.values.stage}
-                            >
-
-                                <option
-                                    
-                                    value="i"
+                        <div>
+                            <div className="form-floating pt-2">
+                                <select
+                                    aria-label="hello"
+                                    className="form-select"
+                                    id="floatingSelect"
+                                    onChange={this.props.handleChange('stage')}
+                                    value={this.props.values.stage}
                                 >
-                                    Initiation
-                                </option>
 
-                                <option value="p">
-                                    Planning
-                                </option>
+                                    <option
 
-                                <option value="e">
-                                    Execution
-                                </option>
+                                        value="i"
+                                    >
+                                        Initiation
+                                    </option>
 
-                                <option value="mc">
-                                    Monitoring and Controlling
-                                </option>
+                                    <option value="p">
+                                        Planning
+                                    </option>
 
-                                <option value="c">
-                                    Concluding
-                                </option>
-                            </select>
+                                    <option value="e">
+                                        Execution
+                                    </option>
 
-                            <label htmlFor="floatingSelect">
-                                Stage of project
-                            </label>
+                                    <option value="mc">
+                                        Monitoring and Controlling
+                                    </option>
+
+                                    <option value="c">
+                                        Concluding
+                                    </option>
+                                </select>
+
+                                <label htmlFor="floatingSelect">
+                                    Stage of project
+                                </label>
+                            </div>
                         </div>
 
                     </Form.Group>
@@ -120,6 +135,8 @@ export class FormUserDetails extends Component {
                     onClick={this.handleContinue}
                     type="button"
                     variant="contained"
+                    style={buttonStyle}
+                    className="fs-5 rounded-2 p-2 float-end"
                 >
                     Continue
                 </button>

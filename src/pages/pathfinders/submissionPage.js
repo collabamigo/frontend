@@ -172,58 +172,15 @@ export default class submissionPage extends Component {
     render() {
         return (
             <section className={box}>
-                <Card className={center + " container text-center  "}>
-                    <div className={center2 + " row content"}>
+                <Card className={center + " container text-center mt-5"}>
+                    <div className={center2 + " row content fs-5"}>
 
-                        <div className={static_left +"  col-sm-8 text-left  "}>
-                            <h1>
+                        <div className={static_left +"  col-sm-8 text-left p-3"}>
+                            <div className="h1 text-decoration-underline">
                                 Register and Feel safe
-                            </h1>
-
-                            <div className="bg-white m-3 ">
-
-                                <h4 className="d-flex">
-                                    Form Fill-up
-                                </h4>
-
-                                <hr />
-
-                                <UserForm
-                                    project_name={this.state.project_name}
-                                    project_description={this.state.project_description}
-                                    project_tags={this.state.project_tags}
-                                    // team_size={this.state.team_size}
-                                    team_members={this.state.team_members}
-                                    // team_member_names={this.state.team_member_names}
-                                    // team_member_emails={this.state.team_member_emails}
-                                    date_of_est={this.state.date_of_est}
-                                    visible={this.state.visible}
-                                    stage={this.state.stage}
-                                    // eslint-disable-next-line react/jsx-handler-names
-                                    handleChange={this.handleChange}
-                                    handleChangeTags={this.onChangeTags}
-                                    handleChangeDate={this.onChangeDate}
-                                    handleChangeteam={this.onChangeteam}
-                                    handleDeleteteam={this.onDeleteteam}
-                                    handleProjectVisibilityChange={this.onProjectVisibilityChange.bind(this)}
-                                    removeClick={this.removeClick}
-                                    addClick={this.addClick}
-                                />
-
-                            </div>
-                        </div>
-
-                        <div className={dynamic_right + " col-sm-4 sidenav"}>
-                            <div className="well mt-2">
-                                <span className="h2">
-                                    Guidlines to keep in mind
-                                </span>
                             </div>
 
-                            <br />
-
-
-                            <div className="well bg-white">
+                            <div className="bg-white m-3 p-3">
 
                                 <Carousel
                                     className=""
@@ -231,20 +188,16 @@ export default class submissionPage extends Component {
                                         <span
                                             aria-hidden="true"
                                             className="carousel-control-next-icon"
-                                            style={{
-                                                                                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")`,
-                                                                            }}
+                                            style={{backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")`,}}
                                         />
-                                                                    }
+                                    }
                                     prevIcon={
                                         <span
                                             aria-hidden="true"
                                             className="carousel-control-prev-icon "
-                                            style={{
-                                                                                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e")`,
-                                                                            }}
+                                            style={{backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e")`,}}
                                         />
-                                                                    }
+                                    }
                                 >
                                     <Carousel.Item>
                                         <img
@@ -302,15 +255,54 @@ export default class submissionPage extends Component {
 
 
                                 </Carousel>
+                            </div>
+                        </div>
 
+                        <br />
 
+                        <div className={dynamic_right + " col-sm-4 sidenav p-3"}>
+                            <div className="well mt-2">
+                                <span className="h2 text-decoration-underline">
+                                    Guidlines to keep in mind
+                                </span>
+                            </div>
+
+                             <div className="well bg-white p-3">
+
+                                <h4 className="d-flex">
+                                    Form Fill-up
+                                </h4>
+
+                                <hr />
+
+                                <UserForm
+                                    project_name={this.state.project_name}
+                                    project_description={this.state.project_description}
+                                    project_tags={this.state.project_tags}
+                                    // team_size={this.state.team_size}
+                                    team_members={this.state.team_members}
+                                    // team_member_names={this.state.team_member_names}
+                                    // team_member_emails={this.state.team_member_emails}
+                                    date_of_est={this.state.date_of_est}
+                                    visible={this.state.visible}
+                                    stage={this.state.stage}
+                                    // eslint-disable-next-line react/jsx-handler-names
+                                    handleChange={this.handleChange}
+                                    handleChangeTags={this.onChangeTags}
+                                    handleChangeDate={this.onChangeDate}
+                                    handleChangeteam={this.onChangeteam}
+                                    handleDeleteteam={this.onDeleteteam}
+                                    handleProjectVisibilityChange={this.onProjectVisibilityChange.bind(this)}
+                                    removeClick={this.removeClick}
+                                    addClick={this.addClick}
+                                />
 
                             </div>
+                        </div>
 
                             <br />
 
                         </div>
-                    </div>
                 </Card>
 
             </section>
