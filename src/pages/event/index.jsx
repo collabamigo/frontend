@@ -1,197 +1,88 @@
-import React, {useRef} from "react"
+import React, { useRef } from "react"
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
-import {floating_right_card} from "./event.module.scss";
+import { floating_right_card } from "./event.module.scss";
 import useOnScreen from "utils/useOnScreen";
-import {BrowserView} from "react-device-detect";
+import { BrowserView } from "react-device-detect";
 import FAQModal from "../../components/faq/FAQModal";
+import { Row } from "react-bootstrap";
 
 export default function Event() {
-    const ref = useRef()
-    const isParticipateButtonVisible = useOnScreen(ref)
+    // const ref = useRef()
+    // const isParticipateButtonVisible = useOnScreen(ref)
 
-
-    const state = {
-        basicInformation: {
-            poster: "https://via.placeholder.com/500X580",
-            clubName: "Club Name",
-            eventName: "Event Name"
-        }
-    }
-
+    // const state = {
+    //     basicInformation: {
+    //         poster: "https://via.placeholder.com/500X580",
+    //         clubName: "Club Name",
+    //         eventName: "Event Name",
+    //     }
+    // }
 
     return (
         <>
-            <Container className="text-lg-center display-4 position-sticky my-3 bg-primary text-white">
-                {state.basicInformation.clubName}
-            </Container>
-
-            <Container className="pt-3 pb-3">
-                <div className="row flex-lg-row-reverse">
-
-                    <div className="col-lg-3 col-12 mx-sm-2 mx-lg-0 px-lg-2 ">
-                        <div
-                            className={floating_right_card}
-                        >
-                            <Card>
-                                <Card.Body>
-                                    <Card.Header className="text-center">
-                                        Event Details
-                                    </Card.Header>
-                                    Detailed Timeline
-
-                                    <ul className="list-unsettled">
-                                        <li>
-                                            Registrations & Team Formation Starts on: 25th June 2021
-                                            {' '}
-
-                                        </li>
-
-                                        <li>
-                                            Registrations & Team Formation Ends by: 26th July 2021
-                                        </li>
-
-                                        <li>
-                                            Orientation Webinar: 31st July - Saturday - 11:30 AM to 1 PM
-                                            Last Date for Concept Note Submissions: 2nd August 2021
-                                        </li>
-                                    </ul>
-                                </Card.Body>
-                            </Card>
-
-                            {isParticipateButtonVisible?null:
-                            <BrowserView className="d-flex justify-content-around text-end pt-5">
-
-                                {/*<Button*/}
-
-                                {/*    className="rounded-4 w-20 fs-4 px-5"*/}
-
-                                {/*    variant="outline-primary"*/}
-
-                                {/*>*/}
-
-                                {/*</Button>*/}
-
-                                <FAQModal />
-
-                                <Button
-                                    className="rounded-4 w-20 fs-4 px-3"
-                                >
-                                    Participate
-                                </Button>
-
-
-                            </BrowserView>}
-                        </div>
-
-                        <br />
+            <div className="d-flex flex-column flex-md-row align-items-center">
+                <div className="w-25">
+                    <div className="d-flex justify-content-center">
+                        {/* Slider/carousel needs to be used here */}
+                        <Image src="https://via.placeholder.com/200x200"></Image>
                     </div>
-
-                    <div className="col-lg-9 col-12 mx-sm-2 mx-lg-0 px-lg-2">
-                        <Card
-                            bg="light"
-                            className="px-2"
-                        >
-                            <div className="row text-left p-3">
-                                <div className="col-12 col-lg text-start">
-                                    <Image
-                                        className="rounded-3"
-                                        fluid
-                                        src={state.basicInformation.poster}
-                                    />
+                    <div>
+                        <p className="text-center">Organised By</p>
+                        <div className="d-flex flex-row justify-content-around">
+                            <Image src="https://via.placeholder.com/100x100"></Image>
+                            <Image src="https://via.placeholder.com/100x100"></Image>
+                        </div>
+                    </div>
+                </div>
+                <div className="w-75">
+                    <div className="d-flex flex-column flex-md-row justify-center-between w-100">
+                        <div className="w-75">
+                            <h1>
+                                Event Name
+                            </h1>
+                            <div>
+                                <div>
+                                    {/* icons */}
                                 </div>
-
-                                <div className="col d-table">
-                                    <div className="d-table-cell align-middle">
-                                        <h3 className="text-center display-3 fw-bold my-4 my-lg-0 ">
-                                            {state.basicInformation.eventName}
-                                        </h3>
-
-                                        <div className="text-end text-primary pb-lg-5 fs-5 mb-lg-5">
-                                            ~By
-                                            {' '}
-
-                                            {state.basicInformation.clubName}
-                                        </div>
-
-
-                                        <div className="d-flex justify-content-around text-end pt-5">
-
-                                            <FAQModal />
-
-                                            <Button
-                                                className="rounded-4 w-20 fs-4 px-3"
-                                                ref={ref}
-                                            >
-                                                Participate
-                                            </Button>
-
-
-                                        </div>
-                                    </div>
+                                <div className="">
+                                    <p>21 Jan 2022, 11:59 AM to 22 Jan 2022, 11:59 PM</p>
+                                    <p>Location</p>
+                                    <p>Reg. starts 10:00, 10/11/2021, closes 11/11/2021</p>
                                 </div>
                             </div>
-
-
-                            <p className="fs-lg-5">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the standard dummy text ever since the 1500s,
-                                when an unknown printer took a galley of type and scrambled it to make a type specimen
-                                book.
-                                It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release
-                                of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the standard dummy text ever since the 1500s,
-                                when an unknown printer took a galley of type and scrambled it to make a type specimen
-                                book.
-                                It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release
-                                of Letraset sheets Lorem Ipsum is simply dummy text of the printing and typesetting
-                                industry.
-                                Lorem Ipsum has been the standard dummy text ever since the 1500s,
-                                when an unknown printer took a galley of type and scrambled it to make a type specimen
-                                book.
-                                It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release
-                                of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the standard dummy text ever since the 1500s,
-                                when an unknown printer took a galley of type and scrambled it to make a type specimen
-                                book.
-                                It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release
-                                of Letraset sheets when an unknown printer took a galley of type and scrambled it to
-                                make a type specimen
-                                book.
-                                It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release
-                                of Letraset sheets Lorem Ipsum is simply dummy text of the printing and typesetting
-                                industry.
-                                Lorem Ipsum has been the standard dummy text ever since the 1500s,
-                                when an unknown printer took a galley of type and scrambled it to make a type specimen
-                                book.
-                                It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release
-                                of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the standard dummy text ever since the 1500s,
-                                when an unknown printer took a galley of type and scrambled it to make a type specimen
-                                book.
-                                It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release
-                                of Letraset sheets
-                            </p>
-                        </Card>
+                        </div>
+                        <div className="d-flex flex-column w-25">
+                            <div className="d-flex flex-column">
+                                <div>
+                                    <Button>
+                                        Register Here
+                                    </Button>
+                                </div>
+                                <div className="space">
+                                    <Button>
+                                        FAQ
+                                    </Button>
+                                    <Button>
+                                        Links
+                                    </Button>
+                                </div>
+                            </div>
+                            <div>
+                                {/* social icons */}
+                            </div>
+                        </div>
                     </div>
-
+                    <div>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. In earum itaque, porro corrupti, amet asperiores pariatur
+                            error magnam vel vero, expedita cumque sunt nesciunt ut sequi fugiat excepturi ex. Mollitia.
+                        </p>
+                    </div>
                 </div>
-            </Container>
+            </div>
         </>
     )
 }
