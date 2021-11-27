@@ -22,11 +22,11 @@ class FAQModal extends React.Component {
     shouldComponentUpdate() {
         return true;
     }
-       
+
     handleClose(){ this.setState({
         show: false
     })}
-    
+
     handleShow(){ this.setState({
         show: true
     })}
@@ -37,11 +37,12 @@ class FAQModal extends React.Component {
             return (
                 <>
                     <Button
-                        className="rounded-4 w-20 fs-4 px-5"
+                        className="w-100"
                         onClick={this.handleShow.bind(this)}
-                        variant="primary"
+                        size="lg"
+                        variant="outline-primary"
                     >
-                        Faq
+                        FAQ
                     </Button>
 
                     <Modal
@@ -56,5 +57,5 @@ class FAQModal extends React.Component {
                 </>
             )}
 }
-                        
+
 export default  FAQModal
