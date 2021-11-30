@@ -44,6 +44,7 @@
     "constants": "^0.0.2",
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.1.1",
+    "firebase": "^9.5.0",
     "formik": "^2.2.9",
     "fs-extra": "^10.0.0",
     "graphql": "^16.0.1",

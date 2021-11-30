@@ -5,7 +5,7 @@ import BasicLayout from "../components/Layout";
 import "styles/App.scss"
 
 import {Metrics} from '@layer0/rum'
-
+import FirebaseProvider from "firebaseProvider"
 
 export default function MyApp({Component, pageProps}) {
     new Metrics({
@@ -15,7 +15,9 @@ export default function MyApp({Component, pageProps}) {
     const Layout = Component.Layout || BasicLayout;
     return (
         <Layout>
-            <Component {...pageProps} />
+            <FirebaseProvider>
+                <Component {...pageProps} />
+            </FirebaseProvider>
         </Layout>
     )
 }
