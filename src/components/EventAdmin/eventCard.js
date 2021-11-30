@@ -5,7 +5,7 @@ import * as styles from './eventadmin.module.css';
 export default function eventCard({ event }) {
     return (
         <Card
-            className="m-3"
+            className="m-5"
             style={{ width: "22rem", borderRadius: "20px" }}
             // className={styles.eventCard}
         >
@@ -16,7 +16,7 @@ export default function eventCard({ event }) {
             />
 
             <Card.Body>
-                <Card.Title className="d-flex justify-content-between">
+                <Card.Title className="d-flex justify-content-between fs-4">
                     {event.name}
 
                     <p className="fs-6 text-black-50">
@@ -30,14 +30,14 @@ export default function eventCard({ event }) {
             </Card.Body>
 
             <div className="d-flex flex-row justify-content-between text-xs px-3">
-                <p className="fs-6">
+                <p className="fs-6 text-primary">
                     {event.clubName}
                 </p>
 
-                <p className="fs-6">
+                <p className="fs-6 text-primary">
                     Explore
                     <svg
-                        className="bi bi-arrow-right-short"
+                        className="bi bi-arrow-right-short text-primary"
                         fill="currentColor"
                         height="16"
                         viewBox="0 0 16 16"

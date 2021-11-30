@@ -38,27 +38,26 @@ export default function Search({ details }) {
 
     return (
         <div className="mx-5 d-flex flex-column">
-            <h1 className="">
+            <h1 className="w-50 text-center fw-bold">
                 Events
             </h1>
 
             <div className="w-100 d-flex flex-md-row flex-column my-4">
-                <div className="w-75">
+                <div className="w-75 text-center">
 
                     <input
-                        className=""
+                        className="rounded-3 w-50 h-75"
                         id=""
                         name=""
                         onChange={handleChange}
                         placeholder="Search"
-                        style={{ borderRadius: "15px"}}
                         type="search"
                     />
                 </div>
 
                 <div className="w-25 d-flex justify-content-center mt-md-0 mt-3">
                     <button
-                        className={styles.createEventButton}
+                        className={styles.createEventButton + " text-light"}
                         type="button"
                     >
                         Create New Event
