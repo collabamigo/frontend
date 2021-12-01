@@ -4,32 +4,46 @@ import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
-import axios from "utils/axios";
+import axios from "../../utils/axios";
+import {withRouter} from "next/router";
+import PropTypes from "prop-types";
+import {ListGroup} from "react-bootstrap";
 
 class ClubAdminPage extends Component {
+
+static propTypes = {
+        clubName: PropTypes.string.isRequired,
+        router: PropTypes.shape(
+            {
+                isReady: PropTypes.bool.isRequired,
+                query: PropTypes.shape({
+                    clubName: PropTypes.string.isRequired
+                }),
+
+            }
+        ).isRequired
+    }
 
     constructor(props) {
         super(props)
         this.state = {
-            currentModal: null,
-            basicInformation: {},
-            competitions: [],
-            announcements: [],
-            basicInformationStatic: {
-                // announcements: [{id: "1", content:"Welcome"}],
+            basicInformation: null,
+            competitions:null,
+            announcements: null,
+            basicInformationStatic : {
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
-                coordinators: [
+                coordinators:[
                     {
-                        name: "Tushar Singh",
-                        email: "shikhar@gmail.com",
+                        name:"Tushar Singh",
+                        email:"shikhar@gmail.com",
                     },
                     {
-                        name: "Prutyuy Singh",
-                        email: "shikhar@gmail.com",
+                        name:"Prutyuy Singh",
+                        email:"shikhar@gmail.com",
                     },
                 ],
-                joinDate: "26122020",
-                clubBanners: ["https://via.placeholder.com/1600X480", "https://via.placeholder.com/1600X480", "https://via.placeholder.com/1600X480"],
+                joinDate:"26122020",
+                clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"],
                 eventList: [
                     {name: "Event1", logo: "https://via.placeholder.com/70X70"},
                     {name: "Event2", logo: "https://via.placeholder.com/70X70"},
@@ -45,55 +59,36 @@ class ClubAdminPage extends Component {
                     {name: "Event11", logo: "https://via.placeholder.com/70X70"},
                 ],
             },
-        }
+            isLoading: true,
+            }
     }
 
     componentDidMount() {
-        axios.get("club/club/Byld/?format=json").then((res) => {
-            let announcements_list = []
-            let competition_list = []
-            this.setState({basicInformation: res.data});
-            announcements_list = res.data.announcements
-
-            competition_list = res.data.competitions
-
-            console.log("lol", competition_list)
-
-            for (let temp in announcements_list) {
-                axios.get("club/announcements/" + announcements_list[temp] + "/?format=json").then((ress) => {
-                    this.setState((prevState) => {
-                        return (
-                            {
-                                ...(prevState.announcements),
-                                announcements: [...(prevState.announcements), {
-                                    id: ress.data.id,
-                                    content: ress.data.content
-                                }]
-                            })
-                    })
-                });
-            }
-            for (let temp in competition_list) {
-                axios.get("club/competition/" + competition_list[temp] + "/?format=json").then((r) => {
-                    this.setState((prevState) => {
-                        return (
-                            {
-                                ...(prevState.competitions),
-                                competitions: [...(prevState.competitions), {
-                                    id: r.data.id, club: r.data.club,
-                                    name: r.data.name, description: r.data.description,
-                                    on_going: r.data.on_going, disabled: r.data.disabled
-                                }]
-                            })
-                    })
-                });
-            }
-
-        });
+        return true
     }
 
-    shouldComponentUpdate() {
-        return true;
+    shouldComponentUpdate(){
+        return true
+    }
+
+    componentDidUpdate () {
+        if (this.props.router.isReady){
+            if (this.state.basicInformation === null)
+                axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
+                    this.setState({basicInformation: res.data, isLoading: false});
+            if (this.state.announcements === null)
+                axios.get("club/clubannouncements/" + this.props.router.query.clubName + "/").
+                    then((res) => {
+                        this.setState({announcements : res.data})
+                    });
+            if (this.state.competitions === null)
+                axios.get("club/clubcompetitions/" + this.props.router.query.clubName + "/").
+                    then((res) => {
+                        this.setState({competitions: res.data})
+                    });
+            });
+            console.log(this.state)
+        }
     }
 
     handleSubmitDescription(values) {
@@ -112,27 +107,27 @@ class ClubAdminPage extends Component {
         const payload = {
             description: this.state.basicInformation.description
         }
-        axios.patch("club/club/" + this.state.basicInformation.username + "/", payload)
+        axios.patch("club/club/"+ this.props.router.query.clubName +"/" ,payload)
             .then(() => this.setState(payload))
     }
 
-    handleSubmitAnnouncements(values) {
-        axios.post("club/announcements/", {
-            club: "Byld",
+    handleSubmitAnnouncements(values){
+        axios.post("club/announcements/" + this.props.router.query.clubName,{
+            // club: "Byld",
             content: values[0]
         }).then((ress) => {
-            this.setState((prevState) => {
-                return (
-                    {
-                        ...(prevState.announcements),
-                        announcements: [...(prevState.announcements), {id: ress.data.id, content: ress.data.content}]
+                    this.setState((prevState) => {
+                        return (
+                            {
+                                ...(prevState.announcements),
+                                announcements:[...(prevState.announcements), {id:ress.data.id, content:ress.data.content}]
+                            })
                     })
-            })
         });
         this.handleCloseModal()
     }
 
-    handleSubmitPanel(values) {
+    handleSubmitPanel(values){
         this.setState((prevState) => {
             return (
                 {
@@ -156,7 +151,10 @@ class ClubAdminPage extends Component {
         })
     }
 
-    render() {
+    render(){
+        if (this.state.isLoading || this.state.announcements === null || this.state.competitions === null){
+            return "loading"; // LOADING SCREEN
+        }
         console.log(this.state.basicInformation)
         console.log(this.state.competitions)
         console.log(this.state.announcements)
@@ -167,16 +165,16 @@ class ClubAdminPage extends Component {
                         <div className="row">
                             <Card
                                 className="pt-2"
-                                style={{width: '18rem'}}
+                                style={{ width: '18rem' }}
                             >
 
                                 <button
                                     className="align-self-end btn btn-outline-warning col-2 material-icons"
                                     onClick={() => {
-                                        this.setState({
-                                            currentModal: "panel",
-                                        });
-                                    }}
+                                            this.setState({
+                                                currentModal: "panel",
+                                            });
+                                        }}
                                     type="button"
                                 >
                                     edit
@@ -186,11 +184,11 @@ class ClubAdminPage extends Component {
                                     handleClose={this.handleCloseModal.bind(this)}
                                     handleSubmit={this.handleSubmitPanel.bind(this)}
                                     initialValues={[this.state.basicInformation.facebook,
-                                        this.state.basicInformation.instagram,
-                                        this.state.basicInformation.linkedin,
-                                        this.state.basicInformation.website,
-                                        this.state.basicInformation.tagline]}
-                                    labels={['Facebook', 'Instagram', 'LinkedIn', 'Other website', 'Enter Your Clubs Catchphrase ']}
+                                    this.state.basicInformation.instagram,
+                                    this.state.basicInformation.linkedin,
+                                    this.state.basicInformation.website,
+                                    this.state.basicInformation.tagline]}
+                                    labels={['Facebook','Instagram','LinkedIn','Other website','Enter Your Clubs Catchphrase ']}
                                     show={this.state.currentModal === 'panel'}
                                 />
 
@@ -457,11 +455,11 @@ class ClubAdminPage extends Component {
                                         <button
                                             className="btn btn-outline-warning material-icons col-auto"
                                             onClick={() => {
-                                                this.setState({
-                                                    currentModal: "description",
-                                                });
-                                            }}
-                                            type="button"
+                                                    this.setState({
+                                                        currentModal: "description",
+                                                    });
+                                                }}
+                                                type="button"
                                         >
                                             edit
                                         </button>
@@ -495,16 +493,35 @@ class ClubAdminPage extends Component {
 
                                         <div className="">
                                             <ul className="list">
-                                                {this.state.announcements.map(item => (
+                                                {this.state.announcements.reverse().map(item => (
                                                     <ul key={item}>
-                                                        <span className="material-icons-outlined">
-                                                            notifications
-                                                        </span>
+                                                        <ListGroup
+                                                            as="ol"
+                                                        >
+                                                            <ListGroup.Item
+                                                                as="li"
+                                                                className="d-flex justify-content-between align-items-start my-2"
+                                                            >
+                                                                <div className="ms-2 me-auto">
+                                                                    <div className="fw-bold">
+                                                                        {item["content"]}
+                                                                    </div>
 
-                                                        {item["content"]}
+                                                                    {this.state.currentTime - item["timestamp"].split("t")}
+                                                                </div>
+
+                                                                <span
+                                                                    className="position-absolute start-95  p-1
+                                                                    bg-primary border border-light rounded-circle"
+                                                                >
+                                                                    <span className="visually-hidden">
+                                                                        New alerts
+                                                                    </span>
+                                                                </span>
+                                                            </ListGroup.Item>
+                                                        </ListGroup>
                                                     </ul>
                                                 ))}
-
                                             </ul>
 
                                         </div>
@@ -559,4 +576,4 @@ class ClubAdminPage extends Component {
     }
 }
 
-export default ClubAdminPage;
+export default withRouter (ClubAdminPage);

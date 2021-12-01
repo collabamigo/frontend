@@ -37,3 +37,5 @@ src/env.js
 out
 # Layer0 generated build directory
 .layer0
+# Layer0 generated build directory
+.layer0

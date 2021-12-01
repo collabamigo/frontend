@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Clublist from 'components/ClubList/ClubList.js';
-import {clubDetails} from "./temp/club.module.css"
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
@@ -17,7 +16,6 @@ class ClubAdminPage extends Component {
             competitions:[],
             announcements: [],
             basicInformationStatic : {
-                // announcements: [{id: "1", content:"Welcome"}],
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 coordinators:[
                     {
@@ -402,7 +400,7 @@ class ClubAdminPage extends Component {
 
                                 <br />
 
-                                <div className={clubDetails}>
+                                <div>
                                     <ClubAdminModal
                                         handleClose={this.handleCloseModal.bind(this)}
                                         handleSubmit={this.handleSubmitDescription.bind(this)}

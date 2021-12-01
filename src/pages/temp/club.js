@@ -1,58 +1,31 @@
-import React, { Component } from 'react';
-// import axios from "utils/axios";
-// import backend from "../../env";
-// import Image from 'react-bootstrap/Image'
+import React, {Component} from 'react';
 import Clublist from 'components/ClubList/ClubList.js';
-import {clubDetails} from "./club.module.css"
-import PropTypes from "prop-types";
+import {clubDetails} from "./temp/club.module.css"
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
-import {isBrowser} from "../../utils/auth";
-import {SvgIcon} from "../../common/SvgIcon";
-import Faq from "../faq";
-// import Figure from 'react-bootstrap/Figure';
-
-
-function useQuery() {
-    if (isBrowser())
-        return new URLSearchParams(window.location.search);
-    return null
-}
+import {SvgIcon} from "common/SvgIcon";
+import axios from "../utils/axios";
 
 class ClubHomePage extends Component {
-    static propTypes = {
-        clubName : PropTypes.string.isRequired,
-    }
 
     constructor(props) {
         super(props)
-
-        this.query = useQuery()
-
-
-        this.state={
-            basicInformation : {
-                Name: "Salt & Pepper",
+        this.state = {
+            basicInformation: {},
+            competitions:[],
+            announcements: [],
+            basicInformationStatic : {
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
-                tagline: "The Photography Society of IIITD",
-                description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                 coordinators:[
                     {
                         name:"Tushar Singh",
-                        email:"heemankv@gmail.com",
+                        email:"shikhar@gmail.com",
                     },
                     {
                         name:"Prutyuy Singh",
-                        email:"heemankv@gmail.com",
+                        email:"shikhar@gmail.com",
                     },
                 ],
-                memberSize: 10,
-                socialmediaLink: {
-                    instagram : "https://www.instagram.com/heemank_v",
-                    linkedin : "https://www.linkedin.com/heemank_v",
-                    facebook : "https://www.facebook.com/heemank_v",
-                    website : "https://www.collabconnect.com/404",
-                },
                 joinDate:"26122020",
                 clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"],
                 eventList: [
@@ -69,27 +42,48 @@ class ClubHomePage extends Component {
                     {name: "Event10", logo: "https://via.placeholder.com/70X70"},
                     {name: "Event11", logo: "https://via.placeholder.com/70X70"},
                 ],
+            },
             }
-        }
-
-
     }
 
     componentDidMount() {
-        console.log(this.props.clubName)
-        var caller = null;
-        if(isBrowser())
-        {
-            caller = this.query.get("name");
-        }
-        console.log(caller,"hellooo")
-        // axios.get("/club/" + caller)
-        //     .then((res) => {
-        //         console.log("axios call executed")
-        //         console.log(res)
-        //         }
-        //     )
-        }
+        axios.get("club/club/Byld/?format=json").then((res) => {
+            let announcements_list =[]
+            let competition_list =[]
+            this.setState({basicInformation: res.data});
+            announcements_list = res.data.announcements
+
+            competition_list = res.data.competitions
+
+            console.log("lol",competition_list)
+
+            for (let temp in announcements_list){
+                axios.get("club/announcements/" + announcements_list[temp] + "/?format=json").then((ress) => {
+                    this.setState((prevState) => {
+                        return (
+                            {
+                                ...(prevState.announcements),
+                                announcements:[...(prevState.announcements), {id:ress.data.id, content:ress.data.content}]
+                            })
+                    })
+                });
+            }
+            for (let temp in competition_list){
+                axios.get("club/competition/" + competition_list[temp] + "/?format=json").then((r) => {
+                    this.setState((prevState) => {
+                        return (
+                            {
+                                ...(prevState.competitions),
+                                competitions:[...(prevState.competitions), {id:r.data.id, club:r.data.club,
+                                    name:r.data.name, description: r.data.description,
+                                    on_going: r.data.on_going, disabled: r.data.disabled}]
+                            })
+                    })
+                });
+            }
+
+        });
+    }
 
     shouldComponentUpdate () {
         return true;
@@ -97,17 +91,20 @@ class ClubHomePage extends Component {
 
     render(){
         console.log(this.state.basicInformation)
-        console.log(this.props.clubName)
-
-
+        console.log(this.state.competitions)
+        console.log(this.state.announcements)
         return (
             <div className="row m-1">
                 <div className="col-3 d-flex justify-content-around">
                     <div className="position-fixed">
                         <div className="row">
-                            <Card style={{ width: '18rem' }}>
+                            <Card
+                                className="pt-2"
+                                style={{ width: '18rem' }}
+                            >
+
                                 <Card.Img
-                                    src={this.state.basicInformation.logoLink}
+                                    src={this.state.basicInformationStatic.logoLink}
                                     variant="top"
                                 />
 
@@ -126,7 +123,7 @@ class ClubHomePage extends Component {
                                     <div className="col text-center">
                                         <Card.Link
                                             className=""
-                                            href="https://www.linkedin.com/in/"
+                                            href={this.state.basicInformation.facebook}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -138,7 +135,7 @@ class ClubHomePage extends Component {
 
                                         <Card.Link
                                             className=""
-                                            href="https://www.linkedin.com/in/"
+                                            href={this.state.basicInformation.instagram}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -149,7 +146,7 @@ class ClubHomePage extends Component {
                                         </Card.Link>
 
                                         <Card.Link
-                                            href="https://www.github.com/"
+                                            href={this.state.basicInformation.linkedin}
                                             target="_blank"
                                         >
                                             <SvgIcon
@@ -161,38 +158,92 @@ class ClubHomePage extends Component {
 
                                         <Card.Link
                                             className=""
-                                            href="https://www.linkedin.com/in/"
+                                            href={this.state.basicInformation.website}
                                             target="_blank"
                                         >
                                             <SvgIcon
                                                 height="20px"
                                                 src="linkedin.svg"
                                                 width="20px"
-                                            />
-                                        </Card.Link>
-
-                                        <Card.Link
-                                            href="https://www.github.com/"
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="25px"
-                                                src="github.svg"
-                                                width="25px"
                                             />
                                         </Card.Link>
                                     </div>
 
-                                    {/* <Button variant="primary">
-                                    Go somewhere
-                                </Button> */}
                                 </Card.Body>
                             </Card>
                         </div>
+
+                        {/*<div className="row">*/}
+
+                        {/*    <Card>*/}
+
+                        {/*        <button*/}
+
+                        {/*            className="btn btn-outline-warning col-2 pt-2"*/}
+
+                        {/*            onClick={this.handleEditPanel}*/}
+
+                        {/*            type="button"*/}
+
+                        {/*        >*/}
+
+                        {/*            <span*/}
+
+                        {/*                className="material-icons"*/}
+
+                        {/*            >*/}
+
+                        {/*                edit*/}
+
+                        {/*            </span>*/}
+
+                        {/*        </button>*/}
+
+                        {/*        <Card.Title className='fs-2 text-start'>*/}
+
+                        {/*            Coordinators:*/}
+
+                        {/*        </Card.Title>*/}
+
+                        {/*        <CardBody>*/}
+
+                        {/*            <div>*/}
+
+                        {/*                <ul>*/}
+
+                        {/*                    <li>*/}
+
+                        {/*                        {this.state.basicInformationStatic.coordinators[0].name}*/}
+
+                        {/*                    </li>*/}
+
+                        {/*                    <li>*/}
+
+                        {/*                        {this.state.basicInformationStatic.coordinators[1].name}*/}
+
+                        {/*                    </li>*/}
+
+                        {/*                </ul>*/}
+
+                        {/*                <br />*/}
+
+                        {/*                Member Size:*/}
+
+                        {/*                {" "}*/}
+
+                        {/*                {this.state.basicInformationStatic.memberSize}*/}
+
+                        {/*            </div>*/}
+
+                        {/*        </CardBody>*/}
+
+                        {/*    </Card>*/}
+
+                        {/*</div>*/}
                     </div>
                 </div>
 
-                <div className="col-9">
+                <div className="col-9 justify-content-around">
                     <Card>
                         <Card.Body>
                             <div className="">
@@ -204,7 +255,6 @@ class ClubHomePage extends Component {
                                             style={{
                                                 backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")`,
                                             }}
-
                                         />
                                     }
                                     prevIcon={
@@ -221,7 +271,7 @@ class ClubHomePage extends Component {
                                         <img
                                             alt="First slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformation.clubBanners[0]}
+                                            src={this.state.basicInformationStatic.clubBanners[0]}
                                         />
 
                                         <Carousel.Caption>
@@ -236,7 +286,7 @@ class ClubHomePage extends Component {
                                         <img
                                             alt="Second slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformation.clubBanners[1]}
+                                            src={this.state.basicInformationStatic.clubBanners[1]}
                                         />
 
                                         <Carousel.Caption>
@@ -251,7 +301,7 @@ class ClubHomePage extends Component {
                                         <img
                                             alt="Third slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformation.clubBanners[2]}
+                                            src={this.state.basicInformationStatic.clubBanners    [2]}
                                         />
 
                                         <Carousel.Caption>
@@ -270,12 +320,12 @@ class ClubHomePage extends Component {
                                         Coordinators:
                                         {' '}
 
-                                        {this.state.basicInformation.coordinators[0].name}
+                                        {this.state.basicInformationStatic.coordinators[0].name}
                                         ,
 
                                         {' '}
 
-                                        {this.state.basicInformation.coordinators[1].name}
+                                        {this.state.basicInformationStatic.coordinators[1].name}
                                     </div>
 
                                     <div>
@@ -288,10 +338,14 @@ class ClubHomePage extends Component {
 
                                 <hr />
 
+
                                 <div className="d-flex">
                                     <div className="col-5">
                                         <div className="text-center h2">
                                             Description
+
+                                            {" "}
+
                                         </div>
 
                                         <p className="text-start h6">
@@ -300,38 +354,25 @@ class ClubHomePage extends Component {
 
                                     </div>
 
-                                    <div className="offset-2 col-5">
+                                    <div className="offset-1 col-5">
                                         <div className="text-center h2">
                                             Announcements
+                                            {" "}
+
                                         </div>
 
                                         <div className="">
-                                            <ul className="list-unstyled">
-                                                <li >
-                                                    <span className="material-icons-outlined">
-                                                        notifications
-                                                    </span>
+                                            <ul className="list">
+                                                {this.state.announcements.map(item => (
+                                                    <ul key={item}>
+                                                        <span className="material-icons-outlined">
+                                                            notifications
+                                                        </span>
 
-                                                    <span>
-                                                        hellloooo
-                                                    </span>
-                                                </li>
+                                                        {item["content"]}
+                                                    </ul>
+                                                ))}
 
-                                                <li>
-                                                    <span className="material-icons-outlined">
-                                                        last_page
-                                                    </span>
-
-                                                    <span>
-                                                        hellloooo
-                                                    </span>
-                                                </li>
-
-                                                <li>
-                                                    <span>
-                                                        hellloooo
-                                                    </span>
-                                                </li>
                                             </ul>
 
                                         </div>
@@ -347,8 +388,10 @@ class ClubHomePage extends Component {
 
                     <Card className="row">
                         <Card.Body className="mt-3">
-                            <Card.Title className="card-title fs-3 header-color text-left">
+                            <Card.Title className="card-title fs-2 header-color text-left">
                                 Events
+
+                                {" "}
                             </Card.Title>
 
                             <br />
@@ -356,7 +399,7 @@ class ClubHomePage extends Component {
                             <Card.Text className="card-text h5 text-muted col-12">
                                 <div>
                                     <Clublist
-                                        ItemList={this.state.basicInformation.eventList}
+                                        ItemList={this.state.basicInformationStatic.eventList}
                                         Type="Event"
                                     />
                                 </div>
@@ -365,13 +408,6 @@ class ClubHomePage extends Component {
                     </Card>
 
                     <br />
-
-                    <br />
-
-                    <br />
-
-                    <Faq />
-
                 </div>
             </div>
 
