@@ -47,18 +47,69 @@ class ClubHomePage extends Component {
                 joinDate:"26122020",
                 clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"],
                 eventList: [
-                    {name: "Event1", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event2", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event3", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event3", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event4", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event5", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event6", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event7", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event8", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event9", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event10", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event11", logo: "https://via.placeholder.com/70X70"},
+                    {
+                        id: 1,
+                        link: "https://via.placeholder.com/200x120",
+                        timestamp: "1634640509",
+                        name: "Git tutorial",
+                        clubName: "Byld",
+                        description:
+                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                    },
+                    {
+                        id: 2,
+                        link: "https://via.placeholder.com/200x120",
+                        timestamp: "1634640509",
+                        name: "GCP event",
+                        clubName: "GoogleDSC",
+                        description:
+                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                    },
+                    {
+                        id: 3,
+                        link: "https://via.placeholder.com/200x120",
+                        timestamp: "1634640509",
+                        name: "React Event",
+                        clubName: "Byld",
+                        description:
+                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                    },
+                    {
+                        id: 4,
+                        link: "https://via.placeholder.com/200x120",
+                        timestamp: "1634640509",
+                        name: "AWS tutorial",
+                        clubName: "GoogleDSC",
+                        description:
+                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                    },
+                    {
+                        id: 5,
+                        link: "https://via.placeholder.com/200x120",
+                        timestamp: "1634640509",
+                        name: "GCP event",
+                        clubName: "GoogleDSC",
+                        description:
+                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                    },
+                    {
+                        id: 6,
+                        link: "https://via.placeholder.com/200x120",
+                        timestamp: "1634640509",
+                        name: "React Event",
+                        clubName: "Byld",
+                        description:
+                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                    },
+                    {
+                        id: 7,
+                        link: "https://via.placeholder.com/200x120",
+                        timestamp: "1634640509",
+                        name: "AWS tutorial",
+                        clubName: "GoogleDSC",
+                        description:
+                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                    },
                 ],
             },
             isLoading: true,
