@@ -3,7 +3,7 @@ import DashBoard from "components/Help/DashBoard/DashBoard";
 import backend from "env";
 import axios from "utils/axios";
 import HelpForm from "components/Help/HelpForm/HelpForm";
-import Loading from "common/Loading";
+import Loading from "components/Loading";
 
 function removeItemAll(arr, value) {
     let i = 0;

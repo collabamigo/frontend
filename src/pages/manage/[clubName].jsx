@@ -459,7 +459,7 @@ static propTypes = {
                                                         currentModal: "description",
                                                     });
                                                 }}
-                                                type="button"
+                                            type="button"
                                         >
                                             edit
                                         </button>
