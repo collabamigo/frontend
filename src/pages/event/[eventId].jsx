@@ -13,6 +13,7 @@ import axios from "utils/axios";
 import Loading from "components/Loading";
 import isEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
+import GenerateEventForm from "../../components/GenerateEventForm";
 
 export default function Event() {
     const router = useRouter()
@@ -39,6 +40,11 @@ export default function Event() {
     const form = data.form;
     const clubLogoLinks = data.clubLogoLinks;
 
+    const convertToDatetimeString = iso_8601_string => {
+        const date = new Date(iso_8601_string);
+        return date.toLocaleString();
+    }
+
     useEffect(() => {
         if (router.query.eventId!==undefined) {
             if (isEmpty(event))
@@ -47,7 +53,7 @@ export default function Event() {
 
             if (isEmpty(form))
                 axios.get(`form/form/${router.query.eventId}/`)
-                    .then(res => setForm(res.data))
+                    .then(res => setForm(res.data)).catch(err => console.log(err))
 
             if (isEmpty(clubLogoLinks) && !isEmpty(event)) {
                 const storage = getStorage();
@@ -56,7 +62,7 @@ export default function Event() {
             }
     }})
 
-    const isLoading = isEmpty(event) || isEmpty(form);
+    const isLoading = isEmpty(event);
 
 
 
@@ -128,7 +134,8 @@ export default function Event() {
 
                                     {' '}
 
-                                    {event.event_start + (event.event_end?" to "+event.event_end:"")}
+                                    {convertToDatetimeString(event.event_start) +
+                                        (event.event_end?" to "+ convertToDatetimeString(event.event_end):"")}
                                 </p>
 
                                 <p>
@@ -139,6 +146,7 @@ export default function Event() {
                                     {event.location}
                                 </p>
 
+                                {isEmpty(form)?null:
                                 <p>
                                     <FontAwesomeIcon icon={faClock} />
 
@@ -147,28 +155,28 @@ export default function Event() {
                                     Reg. starts
                                     {' '}
 
-                                    {form.opens_at}
+                                    {convertToDatetimeString(form.opens_at)}
 
-                                    {form.closes_at?", closes "+form.closes_at:""}
-                                </p>
+                                    {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
+                                </p>}
                             </div>
                         </div>
                     </div>
 
                     <div className="col-md-3 col-12">
                         <div className="row">
+                            {isEmpty(form)?null:
                             <div className="col-12 p-2">
-                                <Button
-                                    className="w-100"
-                                    size="lg"
-                                >
-                                    Register Here
-                                </Button>
-                            </div>
+                                <GenerateEventForm
+                                    eventId={router.query.eventId}
+                                    formData={JSON.parse(form.skeleton)}
+                                />
+                            </div>}
 
+                            {(!event.faq || isEmpty(event.faq))?null:
                             <div className="p-2 col-6">
                                 <FAQModal data={JSON.parse(event.faq)} />
-                            </div>
+                            </div>}
 
                             <div className="p-2 col-6">
                                 <a
