@@ -19,7 +19,7 @@ export default class CreateEventModal extends React.Component {
         const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         const yyyy = today.getFullYear();
         this.state = {
-            stage: 2,
+            stage: 1,
             name: "",
             description: "",
             eventDate: "",
