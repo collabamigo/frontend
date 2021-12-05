@@ -7,7 +7,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import {Popover} from 'react-bootstrap';
 import SvgIcon from "common/SvgIcon";
 import {isMobile} from "react-device-detect";
-import Loading from "common/Loading";
+import Loading from "components/Loading";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 

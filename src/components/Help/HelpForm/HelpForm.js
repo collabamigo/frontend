@@ -4,7 +4,7 @@ import Step1 from './Steps/Step1'
 import Step2 from './Steps/Step2'
 import backend from "../../../env";
 import PropTypes from "prop-types";
-import Loading from "../../../common/Loading";
+import Loading from "components/Loading";
 
 class HelpForm extends React.Component{
     static propTypes = {
