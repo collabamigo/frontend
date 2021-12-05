@@ -65,6 +65,7 @@
     "react-google-charts": "^3.0.15",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.19.5",
+    "react-multi-carousel": "^2.6.5",
     "react-phone-number-input": "^3.1.38",
     "react-simple-animate": "^3.3.12",
     "react-tagsinput": "^3.19.0",

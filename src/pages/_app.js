@@ -14,11 +14,11 @@ export default function MyApp({Component, pageProps}) {
 
     const Layout = Component.Layout || BasicLayout;
     return (
-        <Layout>
+        // <Layout>
             <FirebaseProvider>
                 <Component {...pageProps} />
             </FirebaseProvider>
-        </Layout>
+        // </Layout>
     )
 }
 
