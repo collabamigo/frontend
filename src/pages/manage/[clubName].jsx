@@ -8,6 +8,8 @@ import axios from "../../utils/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+import Button from "react-bootstrap/Button";
 
 class ClubAdminPage extends Component {
 
@@ -27,10 +29,14 @@ static propTypes = {
     constructor(props) {
         super(props)
         this.state = {
+            image1:null,
+            image2:null,
+            image3:null,
+            setImage:null,
             basicInformation: null,
             competitions:null,
             announcements: null,
-            basicInformationStatic : {
+            basicInformationStatic:{
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 coordinators:[
                     {
@@ -71,7 +77,7 @@ static propTypes = {
         return true
     }
 
-    componentDidUpdate () {
+    componentDidUpdate(){
         if (this.props.router.isReady){
             if (this.state.basicInformation === null)
                 axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
@@ -101,9 +107,11 @@ static propTypes = {
                         ...(prevState.basicInformation),
                         description: description
                     }
-                })
+                }
+                )
         })
         this.handleCloseModal()
+
         const payload = {
             description: this.state.basicInformation.description
         }
@@ -143,6 +151,36 @@ static propTypes = {
                 })
         })
         this.handleCloseModal()
+    }
+
+    handleUpload1(){
+        const storage = getStorage();
+        const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
+            (new Date().getTime()));
+
+        if(this.state.image1 == null)
+            return;
+          uploadBytes(storageRef, this.state.image1).then(() => {console.log('Uploaded a blob or file!');});
+    }
+
+    handleUpload2(){
+        const storage = getStorage();
+        const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
+            (new Date().getTime()));
+
+        if(this.state.image2 == null)
+            return;
+          uploadBytes(storageRef, this.state.image2).then(() => {console.log('Uploaded a blob or file!');});
+    }
+
+    handleUpload3(){
+        const storage = getStorage();
+        const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
+            (new Date().getTime()));
+
+        if(this.state.image3 == null)
+            return;
+          uploadBytes(storageRef, this.state.image3).then(() => {console.log('Uploaded a blob or file!');});
     }
 
     handleCloseModal() {
@@ -261,74 +299,6 @@ static propTypes = {
                                 </Card.Body>
                             </Card>
                         </div>
-
-                        {/*<div className="row">*/}
-
-                        {/*    <Card>*/}
-
-                        {/*        <button*/}
-
-                        {/*            className="btn btn-outline-warning col-2 pt-2"*/}
-
-                        {/*            onClick={this.handleEditPanel}*/}
-
-                        {/*            type="button"*/}
-
-                        {/*        >*/}
-
-                        {/*            <span*/}
-
-                        {/*                className="material-icons"*/}
-
-                        {/*            >*/}
-
-                        {/*                edit*/}
-
-                        {/*            </span>*/}
-
-                        {/*        </button>*/}
-
-                        {/*        <Card.Title className='fs-2 text-start'>*/}
-
-                        {/*            Coordinators:*/}
-
-                        {/*        </Card.Title>*/}
-
-                        {/*        <CardBody>*/}
-
-                        {/*            <div>*/}
-
-                        {/*                <ul>*/}
-
-                        {/*                    <li>*/}
-
-                        {/*                        {this.state.basicInformationStatic.coordinators[0].name}*/}
-
-                        {/*                    </li>*/}
-
-                        {/*                    <li>*/}
-
-                        {/*                        {this.state.basicInformationStatic.coordinators[1].name}*/}
-
-                        {/*                    </li>*/}
-
-                        {/*                </ul>*/}
-
-                        {/*                <br />*/}
-
-                        {/*                Member Size:*/}
-
-                        {/*                {" "}*/}
-
-                        {/*                {this.state.basicInformationStatic.memberSize}*/}
-
-                        {/*            </div>*/}
-
-                        {/*        </CardBody>*/}
-
-                        {/*    </Card>*/}
-
-                        {/*</div>*/}
                     </div>
                 </div>
 
@@ -401,7 +371,49 @@ static propTypes = {
                                         </Carousel.Caption>
                                     </Carousel.Item>
                                 </Carousel>
+                                
+                                <div className="row">
+                                    <input
+                                        className=""
+                                        onChange={(e)=>{this.setState({image1: e.target.files[0]})}}
+                                        type="file"
+                                    />
 
+                                    <Button
+                                        className="material-icons"
+                                        onClick={this.handleUpload1.bind(this)}
+                                    >
+                                        add_circle
+                                    </Button>
+
+                                    <input
+                                        className=""
+                                        onChange={(e)=>{this.setState({image2: e.target.files[0]})}}
+                                        type="file"
+                                    />
+
+                                    <Button
+                                        className="material-icons"
+                                        onClick={this.handleUpload2.bind(this)}
+                                    >
+                                        add_circle
+                                    </Button>
+
+                                    <input
+                                        className=""
+                                        onChange={(e)=>{this.setState({image3: e.target.files[0]})}}
+                                        type="file"
+                                    />
+
+                                    <Button
+                                        className="material-icons"
+                                        onClick={this.handleUpload3.bind(this)}
+                                    >
+                                        add_circle
+                                    </Button>
+    
+                                </div>
+                                
                                 <br />
 
                                 <div>
@@ -409,7 +421,7 @@ static propTypes = {
                                         handleClose={this.handleCloseModal.bind(this)}
                                         handleSubmit={this.handleSubmitDescription.bind(this)}
                                         initialValues={[this.state.basicInformation.description]}
-                                        labels={['Description']}
+                                        labels={['Description','picture']}
                                         show={this.state.currentModal === 'description'}
                                     />
 
@@ -459,7 +471,7 @@ static propTypes = {
                                                         currentModal: "description",
                                                     });
                                                 }}
-                                                type="button"
+                                            type="button"
                                         >
                                             edit
                                         </button>

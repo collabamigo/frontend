@@ -3,11 +3,11 @@ import {headingWithTopMargin} from "styles/typography.module.css";
 import {Modal} from "react-bootstrap";
 import {Form, Formik, Field} from "formik";
 import Button from "react-bootstrap/Button";
-import FormBuilder from "./FormBuilder";
 import AdditionalFields from "./AdditionalFields";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {isBrowser} from "../../utils/auth";
+import FormBuilder from "./FormBuilder";
 
 export default class CreateEventModal extends React.Component {
 
@@ -19,7 +19,7 @@ export default class CreateEventModal extends React.Component {
         const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         const yyyy = today.getFullYear();
         this.state = {
-            stage: 2,
+            stage: 1,
             name: "",
             description: "",
             eventDate: "",

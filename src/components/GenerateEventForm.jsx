@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Formik, Field, Form} from 'formik';
 import {Modal} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import PropTypes from "prop-types";
+import axios from "utils/axios";
 
-
-function generateCode(formData) {
+function generateCode(formData, setShowModal, eventId) {
 
     const validate = (values, formData) => {
         const errors = {};
@@ -138,7 +140,6 @@ function generateCode(formData) {
                 </div>}
             </div>)
     }
-
 
     function generateRadioField(field, error, touched) {
         return (
@@ -396,60 +397,83 @@ function generateCode(formData) {
     }
 
     return (
-        <Modal
-            backdrop="static"
-            keyboard={false}
-            show
-        >
-            <div className="bg-dark p-4 text-white rounded-3">
-                <Modal.Header className="py-2 my-2">
-                    <Modal.Title>
-                        Generic title
-                    </Modal.Title>
-                </Modal.Header>
+        <div className="bg-dark p-4 text-white rounded-3 w-100">
+            <div className="row">
+                <div className="col-11 col-md-7 col-lg-5 m-auto">
+                    <Modal.Header className="py-2 my-2">
+                        <Modal.Title>
+                            Event Registration form
+                        </Modal.Title>
+                    </Modal.Header>
 
-                <Formik
-                    initialValues={{...(Array(formData.length).fill(""))}}
-                    onSubmit={() => {}}
-                    validate={(values) => validate(values, formData)}
-                >
-                    {({errors, touched}) => (
-                        <Form>
-                            {formFields(errors, touched)}
+                    <Formik
+                        initialValues={{...(Array(formData.length).fill(""))}}
+                        onSubmit={(values) => {console.log(values); axios.post("form/submit/"+eventId+"/", values).then(() => {
+                            setShowModal(false);
+                        })}}
+                        validate={(values) => validate(values, formData)}
+                    >
+                        {({errors, touched}) => (
+                            <Form>
+                                {formFields(errors, touched)}
 
-                            <button
-                                className="btn btn-primary btn-block mt-4"
-                                type="submit"
-                            >
-                                Submit
-                            </button>
+                                <button
+                                    className="btn btn-primary btn-block mt-4 me-3"
+                                    type="submit"
+                                >
+                                    Submit
+                                </button>
 
-                        </Form>)}
-                </Formik>
+                                <button
+                                    className="btn btn-secondary btn-block mt-4"
+                                    onClick={() => {
+                                setShowModal(false);
+                            }}
+                                    type="button"
+                                >
+                                    Cancel
+                                </button>
+
+                            </Form>)}
+                    </Formik>
+                </div>
             </div>
-        </Modal>
+        </div>
 
     )
 }
 
-export default function GenerateEventForm() {
-    const formData= [{"name": "re", "type": "text", "id": 0, "required": true}, {
-        "name": "tg",
-        "type": "select",
-        "required": true,
-        "options": "a;b;v;c",
-        "toggle": false,
-        "id": 1
-    }, {"name": "n", "type": "number", "required": true, id: 2}, {
-        "name": "reer",
-        "type": "textarea",
-        "required": false,
-        "id": 3
-    }, {"name": "fgfg", "type": "datetime-local", "required": false, id: 4}, {
-        "name": "wrewrter",
-        "type": "date",
-        "required": false,
-        "id": 5
-    }, {"name": "ttttttttttttt", "type": "time", "required": false, id: 6}];
-    return generateCode(formData);
+export default function GenerateEventForm({formData, eventId}) {
+    if (!formData)
+        return null
+
+    const [show, setShow] = useState(false);
+
+    return (
+        <>
+            <Button
+                className="w-100"
+                onClick={() => setShow(true)}
+                size="lg"
+            >
+                Register Here
+            </Button>
+
+            <Modal
+                backdrop="static"
+                className="w-100 h-100 p-0"
+                contentClassName="border-0 m-0 rounded-5 top-0"
+                dialogClassName="mw-100 w-100 h-100 top-0 m-0"
+                keyboard={false}
+                onHide={() => setShow(false)}
+                show={show}
+            >
+                {generateCode(formData, setShow, eventId)}
+            </Modal>
+        </>
+    )
+}
+GenerateEventForm.propTypes = {
+    eventId: PropTypes.string.isRequired,
+    formData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]))).isRequired
 }
