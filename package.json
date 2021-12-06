@@ -65,6 +65,7 @@
     "react-google-charts": "^3.0.15",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.19.5",
+    "react-multi-carousel": "^2.6.5",
     "react-phone-number-input": "^3.1.38",
     "react-simple-animate": "^3.3.12",
     "react-tagsinput": "^3.19.0",
@@ -83,18 +84,11 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "maintained node versions"
+  ],
   "devDependencies": {
     "@layer0/cli": "^4.3.0",
     "@layer0/core": "^4.3.0",

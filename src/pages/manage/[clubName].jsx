@@ -8,6 +8,9 @@ import axios from "../../utils/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import Button from "react-bootstrap/Button";
+import {getAuth, signInWithCustomToken} from 'firebase/auth';
 
 class ClubAdminPage extends Component {
 
@@ -26,11 +29,19 @@ static propTypes = {
 
     constructor(props) {
         super(props)
+        this.image1Ref = React.createRef()
+        this.image2Ref = React.createRef()
+        this.image3Ref = React.createRef()
         this.state = {
+            token:null,
+            image1:null,
+            image2:null,
+            image3:null,
+            setImage:null,
             basicInformation: null,
             competitions:null,
             announcements: null,
-            basicInformationStatic : {
+            basicInformationStatic:{
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 coordinators:[
                     {
@@ -64,6 +75,16 @@ static propTypes = {
     }
 
     componentDidMount() {
+    const auth = getAuth();
+    axios.get("/authenticate/get-firebase-token").then((res) => {
+                        this.setState({token: res.data.firebaseToken})
+    //         const auth = getAuth();
+            signInWithCustomToken(auth, res.data.firebaseToken).then(() => console.log(9999999999999))
+        const storage = getStorage();
+        getDownloadURL(ref(storage, 'data/'+ "byld" + '/uneditable/logo.png'))
+                    .then(url => console.log(url))
+
+    })
         return true
     }
 
@@ -71,7 +92,7 @@ static propTypes = {
         return true
     }
 
-    componentDidUpdate () {
+    componentDidUpdate(){
         if (this.props.router.isReady){
             if (this.state.basicInformation === null)
                 axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
@@ -101,9 +122,11 @@ static propTypes = {
                         ...(prevState.basicInformation),
                         description: description
                     }
-                })
+                }
+                )
         })
         this.handleCloseModal()
+
         const payload = {
             description: this.state.basicInformation.description
         }
@@ -143,6 +166,44 @@ static propTypes = {
                 })
         })
         this.handleCloseModal()
+    }
+
+    handleUpload1(){
+    this.image1Ref.current.click();
+        const storage = getStorage();
+        const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
+            (new Date().getTime()));
+
+        if(this.state.image1 == null)
+            return;
+          uploadBytes(storageRef, this.state.image1).then(() => {console.log('Uploaded a blob or file!');});
+    }
+
+    handleUpload2(){
+    this.image2Ref.current.click()
+        const storage = getStorage();
+        const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
+            (new Date().getTime()));
+
+        if(this.state.image2 == null)
+            return;
+          uploadBytes(storageRef, this.state.image2).then(() => {console.log('Uploaded a blob or file!');});
+    }
+
+    handleUpload3(image){
+        // this.image3Ref.current.click()
+        this.setState({image3: image})
+        console.log("sike bro1")
+        const storage = getStorage();
+        const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
+            (new Date().getTime()));
+        console.log("sike bro2")
+
+        if(image == null)
+            return;
+        console.log("sike bro3")
+        uploadBytes(storageRef, image).then(() => {console.log('Uploaded a blob or file!');})
+             .catch(() => {console.log("error bro")});
     }
 
     handleCloseModal() {
@@ -261,74 +322,6 @@ static propTypes = {
                                 </Card.Body>
                             </Card>
                         </div>
-
-                        {/*<div className="row">*/}
-
-                        {/*    <Card>*/}
-
-                        {/*        <button*/}
-
-                        {/*            className="btn btn-outline-warning col-2 pt-2"*/}
-
-                        {/*            onClick={this.handleEditPanel}*/}
-
-                        {/*            type="button"*/}
-
-                        {/*        >*/}
-
-                        {/*            <span*/}
-
-                        {/*                className="material-icons"*/}
-
-                        {/*            >*/}
-
-                        {/*                edit*/}
-
-                        {/*            </span>*/}
-
-                        {/*        </button>*/}
-
-                        {/*        <Card.Title className='fs-2 text-start'>*/}
-
-                        {/*            Coordinators:*/}
-
-                        {/*        </Card.Title>*/}
-
-                        {/*        <CardBody>*/}
-
-                        {/*            <div>*/}
-
-                        {/*                <ul>*/}
-
-                        {/*                    <li>*/}
-
-                        {/*                        {this.state.basicInformationStatic.coordinators[0].name}*/}
-
-                        {/*                    </li>*/}
-
-                        {/*                    <li>*/}
-
-                        {/*                        {this.state.basicInformationStatic.coordinators[1].name}*/}
-
-                        {/*                    </li>*/}
-
-                        {/*                </ul>*/}
-
-                        {/*                <br />*/}
-
-                        {/*                Member Size:*/}
-
-                        {/*                {" "}*/}
-
-                        {/*                {this.state.basicInformationStatic.memberSize}*/}
-
-                        {/*            </div>*/}
-
-                        {/*        </CardBody>*/}
-
-                        {/*    </Card>*/}
-
-                        {/*</div>*/}
                     </div>
                 </div>
 
@@ -401,7 +394,52 @@ static propTypes = {
                                         </Carousel.Caption>
                                     </Carousel.Item>
                                 </Carousel>
+                                
+                                <div className="column">
+                                    <input
+                                        className="d-none"
+                                        onChange={(e)=>{this.setState({image1: e.target.files[0]})}}
+                                        ref={this.image1Ref}
+                                        type="file"
+                                    />
 
+                                    <Button
+                                        className="material-icons"
+                                        onClick={this.handleUpload1.bind(this)}
+                                    >
+                                        add_circle
+                                    </Button>
+
+                                    <input
+                                        className="d-none"
+                                        onChange={(e)=>{this.setState({image2: e.target.files[0]})}}
+                                        ref={this.image2Ref}
+                                        type="file"
+                                    />
+
+                                    <Button
+                                        className="material-icons"
+                                        onClick={this.handleUpload2.bind(this)}
+                                    >
+                                        add_circle
+                                    </Button>
+
+                                    <input
+                                        className="d-none"
+                                        onChange={(e)=>this.handleUpload3(e.target.files[0])}
+                                        ref={this.image3Ref}
+                                        type="file"
+                                    />
+
+                                    <Button
+                                        className="material-icons"
+                                        onClick={()=> this.image3Ref.current.click()}
+                                    >
+                                        add_circle
+                                    </Button>
+    
+                                </div>
+                                
                                 <br />
 
                                 <div>
@@ -409,7 +447,7 @@ static propTypes = {
                                         handleClose={this.handleCloseModal.bind(this)}
                                         handleSubmit={this.handleSubmitDescription.bind(this)}
                                         initialValues={[this.state.basicInformation.description]}
-                                        labels={['Description']}
+                                        labels={['Description','picture']}
                                         show={this.state.currentModal === 'description'}
                                     />
 

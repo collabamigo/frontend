@@ -4,11 +4,9 @@ const { withLayer0, withServiceWorker } = require('@layer0/next/config')
 
 const _preLayer0Export = {
     eslint: {
-        // Warning: This allows production builds to successfully complete even if
-        // your project has ESLint errors.
         ignoreDuringBuilds: true,
     },
-};;
+};
 
 module.exports = (phase, config) =>
   withLayer0(
