@@ -1,13 +1,13 @@
-import Link from "common/Link";
-import Card from "react-bootstrap/Card";
-import ClubList from 'components/ClubList/ClubList.js';
+// import Link from "common/Link";
+// import Card from "react-bootstrap/Card";
+// import ClubList from 'components/ClubList/ClubList.js';
 import React from "react";
-import axios from "utils/axios";
-import backend from "env";
-import {Fade} from "react-awesome-reveal";
-import {isMobile} from "react-device-detect";
+// import axios from "utils/axios";
+// import backend from "env";
+// import {Fade} from "react-awesome-reveal";
+// import {isMobile} from "react-device-detect";
 // import ClubDashboard from "../components/ClubDasboard";
-import {SvgIcon} from "common/SvgIcon";
+// import {SvgIcon} from "common/SvgIcon";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Image from "react-bootstrap/Image";
@@ -17,7 +17,7 @@ import ClubCard from "common/HomePageCards/ClubCard.js";
 import EventTalkCard from "common/HomePageCards/EventTalkCard.js";
 
 
-import {checkLoginStatus} from "../utils/auth";
+// import {checkLoginStatus} from "../utils/auth";
 
 export default class AuthenticatedHome extends React.Component {
     constructor(props) {
