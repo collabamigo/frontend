@@ -8,8 +8,9 @@ import axios from "../../utils/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import Button from "react-bootstrap/Button";
+import {getAuth, signInWithCustomToken} from 'firebase/auth';
 
 class ClubAdminPage extends Component {
 
@@ -28,7 +29,11 @@ static propTypes = {
 
     constructor(props) {
         super(props)
+        this.image1Ref = React.createRef()
+        this.image2Ref = React.createRef()
+        this.image3Ref = React.createRef()
         this.state = {
+            token:null,
             image1:null,
             image2:null,
             image3:null,
@@ -70,6 +75,16 @@ static propTypes = {
     }
 
     componentDidMount() {
+    const auth = getAuth();
+    axios.get("/authenticate/get-firebase-token").then((res) => {
+                        this.setState({token: res.data.firebaseToken})
+    //         const auth = getAuth();
+            signInWithCustomToken(auth, res.data.firebaseToken).then(() => console.log(9999999999999))
+        const storage = getStorage();
+        getDownloadURL(ref(storage, 'data/'+ "byld" + '/uneditable/logo.png'))
+                    .then(url => console.log(url))
+
+    })
         return true
     }
 
@@ -154,6 +169,7 @@ static propTypes = {
     }
 
     handleUpload1(){
+    this.image1Ref.current.click();
         const storage = getStorage();
         const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
             (new Date().getTime()));
@@ -164,6 +180,7 @@ static propTypes = {
     }
 
     handleUpload2(){
+    this.image2Ref.current.click()
         const storage = getStorage();
         const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
             (new Date().getTime()));
@@ -173,14 +190,20 @@ static propTypes = {
           uploadBytes(storageRef, this.state.image2).then(() => {console.log('Uploaded a blob or file!');});
     }
 
-    handleUpload3(){
+    handleUpload3(image){
+        // this.image3Ref.current.click()
+        this.setState({image3: image})
+        console.log("sike bro1")
         const storage = getStorage();
         const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
             (new Date().getTime()));
+        console.log("sike bro2")
 
-        if(this.state.image3 == null)
+        if(image == null)
             return;
-          uploadBytes(storageRef, this.state.image3).then(() => {console.log('Uploaded a blob or file!');});
+        console.log("sike bro3")
+        uploadBytes(storageRef, image).then(() => {console.log('Uploaded a blob or file!');})
+             .catch(() => {console.log("error bro")});
     }
 
     handleCloseModal() {
@@ -372,10 +395,11 @@ static propTypes = {
                                     </Carousel.Item>
                                 </Carousel>
                                 
-                                <div className="row">
+                                <div className="column">
                                     <input
-                                        className=""
+                                        className="d-none"
                                         onChange={(e)=>{this.setState({image1: e.target.files[0]})}}
+                                        ref={this.image1Ref}
                                         type="file"
                                     />
 
@@ -387,8 +411,9 @@ static propTypes = {
                                     </Button>
 
                                     <input
-                                        className=""
+                                        className="d-none"
                                         onChange={(e)=>{this.setState({image2: e.target.files[0]})}}
+                                        ref={this.image2Ref}
                                         type="file"
                                     />
 
@@ -400,14 +425,15 @@ static propTypes = {
                                     </Button>
 
                                     <input
-                                        className=""
-                                        onChange={(e)=>{this.setState({image3: e.target.files[0]})}}
+                                        className="d-none"
+                                        onChange={(e)=>this.handleUpload3(e.target.files[0])}
+                                        ref={this.image3Ref}
                                         type="file"
                                     />
 
                                     <Button
                                         className="material-icons"
-                                        onClick={this.handleUpload3.bind(this)}
+                                        onClick={()=> this.image3Ref.current.click()}
                                     >
                                         add_circle
                                     </Button>
