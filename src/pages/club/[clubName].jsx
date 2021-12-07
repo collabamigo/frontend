@@ -8,7 +8,7 @@ import axios from "../../utils/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
-import {Carousel as RCarousel} from "react-multi-carousel";
+import RCarousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 class ClubHomePage extends Component {
 
@@ -439,7 +439,7 @@ class ClubHomePage extends Component {
                                             <ClubCard
                                                 element={option}
                                                 key={option}
-                                                type="Event" 
+                                                type="Event"
                                                 value={index}
                                             />
                                     ))}
