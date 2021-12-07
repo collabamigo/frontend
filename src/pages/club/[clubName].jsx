@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Clublist from '../../components/ClubList/ClubList.js';
+import ClubCard from 'components/ClubList/ClubCard.js';
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
@@ -7,7 +8,8 @@ import axios from "../../utils/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
-
+import {Carousel as RCarousel} from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 class ClubHomePage extends Component {
 
     static propTypes = {
@@ -124,25 +126,25 @@ class ClubHomePage extends Component {
         return true
     }
 
-    componentDidUpdate () {
-        if (this.props.router.isReady){
-            if (this.state.basicInformation === null)
-                axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
-                    this.setState({basicInformation: res.data, isLoading: false});
-            if (this.state.announcements === null)
-                axios.get("club/clubannouncements/" + this.props.router.query.clubName + "/").
-                    then((res) => {
-                        this.setState({announcements : res.data})
-                    });
-            if (this.state.competitions === null)
-                axios.get("club/clubcompetitions/" + this.props.router.query.clubName + "/").
-                    then((res) => {
-                        this.setState({competitions: res.data})
-                    });
-            });
-            console.log(this.state)
-        }
-    }
+    // componentDidUpdate () {
+    //     if (this.props.router.isReady){
+    //         if (this.state.basicInformation === null)
+    //             axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
+    //                 this.setState({basicInformation: res.data, isLoading: false});
+    //         if (this.state.announcements === null)
+    //             axios.get("club/clubannouncements/" + this.props.router.query.clubName + "/").
+    //                 then((res) => {
+    //                     this.setState({announcements : res.data})
+    //                 });
+    //         if (this.state.competitions === null)
+    //             axios.get("club/clubcompetitions/" + this.props.router.query.clubName + "/").
+    //                 then((res) => {
+    //                     this.setState({competitions: res.data})
+    //                 });
+    //         });
+    //         console.log(this.state)
+    //     }
+    // }
 
     render(){
         if (this.state.isLoading || this.state.announcements === null || this.state.competitions === null){
@@ -150,6 +152,28 @@ class ClubHomePage extends Component {
         }
         console.log("ann", this.state.announcements);
         console.log("com", this.state.competitions);
+
+        const responsive = {
+            superLargeDesktop: {
+              // the naming can be any, depends on you.
+              breakpoint: { max: 4000, min: 3000 },
+              items: 5
+            },
+            desktop: {
+              breakpoint: { max: 3000, min: 1024 },
+              items: 3
+            },
+            tablet: {
+              breakpoint: { max: 1024, min: 464 },
+              items: 2
+            },
+            mobile: {
+              breakpoint: { max: 464, min: 0 },
+              items: 1
+            }
+          };
+
+
         return (
             <div className="row m-1">
                 <div className="col-3 d-flex justify-content-around">
@@ -229,74 +253,6 @@ class ClubHomePage extends Component {
                                 </Card.Body>
                             </Card>
                         </div>
-
-                        {/*<div className="row">*/}
-
-                        {/*    <Card>*/}
-
-                        {/*        <button*/}
-
-                        {/*            className="btn btn-outline-warning col-2 pt-2"*/}
-
-                        {/*            onClick={this.handleEditPanel}*/}
-
-                        {/*            type="button"*/}
-
-                        {/*        >*/}
-
-                        {/*            <span*/}
-
-                        {/*                className="material-icons"*/}
-
-                        {/*            >*/}
-
-                        {/*                edit*/}
-
-                        {/*            </span>*/}
-
-                        {/*        </button>*/}
-
-                        {/*        <Card.Title className='fs-2 text-start'>*/}
-
-                        {/*            Coordinators:*/}
-
-                        {/*        </Card.Title>*/}
-
-                        {/*        <CardBody>*/}
-
-                        {/*            <div>*/}
-
-                        {/*                <ul>*/}
-
-                        {/*                    <li>*/}
-
-                        {/*                        {this.state.basicInformationStatic.coordinators[0].name}*/}
-
-                        {/*                    </li>*/}
-
-                        {/*                    <li>*/}
-
-                        {/*                        {this.state.basicInformationStatic.coordinators[1].name}*/}
-
-                        {/*                    </li>*/}
-
-                        {/*                </ul>*/}
-
-                        {/*                <br />*/}
-
-                        {/*                Member Size:*/}
-
-                        {/*                {" "}*/}
-
-                        {/*                {this.state.basicInformationStatic.memberSize}*/}
-
-                        {/*            </div>*/}
-
-                        {/*        </CardBody>*/}
-
-                        {/*    </Card>*/}
-
-                        {/*</div>*/}
                     </div>
                 </div>
 
@@ -477,10 +433,23 @@ class ClubHomePage extends Component {
 
                             <Card.Text className="card-text h5 text-muted col-12">
                                 <div>
-                                    <Clublist
+
+                                    <RCarousel responsive={responsive}>
+                                        {this.state.basicInformationStatic.eventList.map((option, index) => (
+                                            <ClubCard
+                                                element={option}
+                                                key={option}
+                                                type="Event" 
+                                                value={index}
+                                            />
+                                    ))}
+
+                                    </RCarousel>
+
+                                    {/* <Clublist
                                         ItemList={this.state.basicInformationStatic.eventList}
                                         Type="Event"
-                                    />
+                                    /> */}
                                 </div>
                             </Card.Text>
                         </Card.Body>
@@ -495,44 +464,3 @@ class ClubHomePage extends Component {
 }
 
 export default withRouter(ClubHomePage);
-
-//
-// if (this.props.router.isReady){
-//             axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
-//             let announcements_list =[]
-//             let competition_list =[]
-//             this.setState({basicInformation: res.data, isLoading: false});
-//             announcements_list = res.data.announcements
-//
-//             competition_list = res.data.competitions
-//
-//             for (let temp in announcements_list){
-//                 //url/club/clubannouncemnts/byld
-//                 axios.get("club/announcements/" + announcements_list[temp] + "/").
-//                 then((ress) => {
-//                     this.setState((prevState) => {
-//                         return (
-//                             {
-//                                 ...(prevState.announcements),
-//                                 announcements:[...(new Set([...(prevState.announcements), {id:ress.data.id, content:ress.data.content}]))]
-//                             })
-//                     })
-//                 });
-//             }
-//             for (let temp in competition_list){
-//                 axios.get("club/competition/" + competition_list[temp] + "/").
-//                 then((r) => {
-//                     this.setState((prevState) => {
-//                         return (
-//                             {
-//                                 ...(prevState.competitions),
-//                                 competitions:[...(prevState.competitions), {id:r.data.id, club:r.data.club,
-//                                     name:r.data.name, description: r.data.description,
-//                                     on_going: r.data.on_going, disabled: r.data.disabled}]
-//                             })
-//                     })
-//                 });
-//             }
-//         });
-//         }
-//     }
