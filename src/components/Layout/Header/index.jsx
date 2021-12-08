@@ -21,7 +21,7 @@ export default function Header({ isAuthenticated }) {
 
 
     return (
-        <div className="mb-3 sticky-top bg-white w-100">
+        <header className="mb-3 sticky-top bg-white w-100 pe-4">
             <div className=" row justify-content-center">
                 <div className="col-auto ms-5">
                     <Link
@@ -77,7 +77,7 @@ export default function Header({ isAuthenticated }) {
                     <DropdownMenu isAuthenticated={isAuthenticated} />
                 </Drawer>
             </div>
-        </div >
+        </header >
     );
 }
 

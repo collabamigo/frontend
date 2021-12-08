@@ -1,5 +1,6 @@
 .App {
-  min-height: 98vh;
-  //display: grid;
-  //grid-template-rows: 1fr auto;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
 }
