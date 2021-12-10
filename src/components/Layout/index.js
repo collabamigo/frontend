@@ -80,17 +80,13 @@ function Layout({children}) {
                 />
             </Helmet>
 
-            <div className="">
-                {router.pathname!=="/clubdashboard"?
-                    <Header isAuthenticated={isLoggedIn()} />:
-                    <DashboardHeader isAuthenticated={isLoggedIn()} />}
+            {router.pathname!=="/clubdashboard"?
+                <Header isAuthenticated={isLoggedIn()} />:
+                <DashboardHeader isAuthenticated={isLoggedIn()} />}
 
-                <main>
-                    {children}
-                </main>
-
-
-            </div>
+            <main>
+                {children}
+            </main>
 
             <Footer />
         </div>)

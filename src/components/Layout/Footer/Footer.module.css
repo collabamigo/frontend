@@ -1,4 +1,6 @@
 .container{
+    margin-top: auto;
+    overflow: hidden;
 }
 
 .row1{
@@ -28,7 +30,7 @@
 
 .row2{
     background-color:blue;
-    width:100%;
+    width:120%;
 }
 
 
@@ -51,41 +53,41 @@
 @media (max-width: 800px) {
     .container{
     }
-    
+
     .row1{
         padding:2px;
         width:100%;
         padding-left: 20px;
-    
+
     }
-    
+
     .leftcontainer{
         margin-top: 0% !important;
         padding-left:20px !important;
         width:50% !important;
     }
-    
+
     .rightcontainer{
         padding:2px;
         width:50% !important;
     }
-    
+
     .rightcontainerleft{
         display: none !important;
 
     }
-    
+
     .rightcontainerright{
         margin-top: 2% !important;
         font-size:12px;
         width:100% !important;
     }
-    
+
     .row2{
         background-color:blue;
         width:100%;
     }
-    
+
     .listt{
         list-style: none !important;
         padding:0 !important;
@@ -104,5 +106,5 @@
     .listtitems{
         padding-top:5px !important;
     }
-    
+
 }

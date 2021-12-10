@@ -4,7 +4,7 @@ import styles from './Footer.module.css';
 
 export default function Footer() {
         return (
-            <div className={styles.container}>
+            <footer className={styles.container}>
                 <div className={styles.row1 + " row"}>
                     <div className={styles.leftcontainer}>
                         <ul className={styles.listt}>
@@ -27,7 +27,7 @@ export default function Footer() {
                             <li className={styles.listtitems}>
                                 Contact us
                             </li>
-                        </ul>  
+                        </ul>
                     </div>
 
                     <div className={styles.rightcontainer + " row"}>
@@ -56,16 +56,16 @@ export default function Footer() {
                                     Z registrations to take place
                                 </li>
 
-                            </ul>  
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <div className={styles.row2 + " row"}>
+                <div className={styles.row2}>
                     {' _'}
                 </div>
 
-            </div>
+            </footer>
         )
     }
 
