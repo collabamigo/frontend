@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
-import Clublist from '../../components/ClubList/ClubList.js';
 import Card from 'react-bootstrap/Card'
-import Carousel from 'react-bootstrap/Carousel'
+import BCarousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
 import axios from "../../utils/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
+import RCarousel from "react-multi-carousel";
+import ClubCard from "components/ClubList/ClubCard";
+import "react-multi-carousel/lib/styles.css";
 
 class ClubHomePage extends Component {
 
@@ -99,6 +101,27 @@ class ClubHomePage extends Component {
         }
         console.log("ann", this.state.announcements);
         console.log("com", this.state.competitions);
+
+        const responsive = {
+            superLargeDesktop: {
+                // the naming can be any, depends on you.
+                breakpoint: {max: 4000, min: 3000},
+                items: 5
+            },
+            desktop: {
+                breakpoint: {max: 3000, min: 1024},
+                items: 3
+            },
+            tablet: {
+                breakpoint: {max: 1024, min: 464},
+                items: 2
+            },
+            mobile: {
+                breakpoint: {max: 464, min: 0},
+                items: 1
+            }
+        };
+
         return (
             <div className="row m-1">
                 <div className="col-3 d-flex justify-content-around">
@@ -253,7 +276,7 @@ class ClubHomePage extends Component {
                     <Card>
                         <Card.Body>
                             <div className="">
-                                <Carousel
+                                <BCarousel
                                     nextIcon={
                                         <span
                                             aria-hidden="true"
@@ -273,51 +296,51 @@ class ClubHomePage extends Component {
                                         />
                                     }
                                 >
-                                    <Carousel.Item>
+                                    <BCarousel.Item>
                                         <img
                                             alt="First slide"
                                             className="d-block w-100"
                                             src={this.state.basicInformationStatic.clubBanners[0]}
                                         />
 
-                                        <Carousel.Caption>
+                                        <BCarousel.Caption>
 
                                             <p>
                                                 Nulla vitae elit libero, a pharetra augue mollis interdum.
                                             </p>
-                                        </Carousel.Caption>
-                                    </Carousel.Item>
+                                        </BCarousel.Caption>
+                                    </BCarousel.Item>
 
-                                    <Carousel.Item>
+                                    <BCarousel.Item>
                                         <img
                                             alt="Second slide"
                                             className="d-block w-100"
                                             src={this.state.basicInformationStatic.clubBanners[1]}
                                         />
 
-                                        <Carousel.Caption>
+                                        <BCarousel.Caption>
 
                                             <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                             </p>
-                                        </Carousel.Caption>
-                                    </Carousel.Item>
+                                        </BCarousel.Caption>
+                                    </BCarousel.Item>
 
-                                    <Carousel.Item>
+                                    <BCarousel.Item>
                                         <img
                                             alt="Third slide"
                                             className="d-block w-100"
                                             src={this.state.basicInformationStatic.clubBanners    [2]}
                                         />
 
-                                        <Carousel.Caption>
+                                        <BCarousel.Caption>
 
                                             <p>
                                                 Praesent commodo cursus magna, vel scelerisque nisl consectetur.
                                             </p>
-                                        </Carousel.Caption>
-                                    </Carousel.Item>
-                                </Carousel>
+                                        </BCarousel.Caption>
+                                    </BCarousel.Item>
+                                </BCarousel>
 
                                 <br />
 
@@ -426,10 +449,17 @@ class ClubHomePage extends Component {
 
                             <Card.Text className="card-text h5 text-muted col-12">
                                 <div>
-                                    <Clublist
-                                        ItemList={this.state.basicInformationStatic.eventList}
-                                        Type="Event"
-                                    />
+                                    <RCarousel responsive={responsive}>
+                                        {this.state.basicInformationStatic.eventList.map((option, index) => (
+                                            <ClubCard
+                                                Type="Event"
+                                                element={option}
+                                                key={option}
+                                                value={index}
+                                            />
+                                        ))}
+
+                                    </RCarousel>
                                 </div>
                             </Card.Text>
                         </Card.Body>
@@ -444,44 +474,3 @@ class ClubHomePage extends Component {
 }
 
 export default withRouter(ClubHomePage);
-
-//
-// if (this.props.router.isReady){
-//             axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
-//             let announcements_list =[]
-//             let competition_list =[]
-//             this.setState({basicInformation: res.data, isLoading: false});
-//             announcements_list = res.data.announcements
-//
-//             competition_list = res.data.competitions
-//
-//             for (let temp in announcements_list){
-//                 //url/club/clubannouncemnts/byld
-//                 axios.get("club/announcements/" + announcements_list[temp] + "/").
-//                 then((ress) => {
-//                     this.setState((prevState) => {
-//                         return (
-//                             {
-//                                 ...(prevState.announcements),
-//                                 announcements:[...(new Set([...(prevState.announcements), {id:ress.data.id, content:ress.data.content}]))]
-//                             })
-//                     })
-//                 });
-//             }
-//             for (let temp in competition_list){
-//                 axios.get("club/competition/" + competition_list[temp] + "/").
-//                 then((r) => {
-//                     this.setState((prevState) => {
-//                         return (
-//                             {
-//                                 ...(prevState.competitions),
-//                                 competitions:[...(prevState.competitions), {id:r.data.id, club:r.data.club,
-//                                     name:r.data.name, description: r.data.description,
-//                                     on_going: r.data.on_going, disabled: r.data.disabled}]
-//                             })
-//                     })
-//                 });
-//             }
-//         });
-//         }
-//     }
