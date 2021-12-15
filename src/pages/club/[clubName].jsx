@@ -259,9 +259,9 @@ class ClubHomePage extends Component {
                                         {' '}
 
                                         {this.state.basicInformation.admins.map(item => (
-                                            <p key={item}>
+                                            <div key={item}>
                                                 {item}
-                                            </p>
+                                            </div>
                                         ))}
                                     </div>
 
