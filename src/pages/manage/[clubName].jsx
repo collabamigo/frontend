@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Clublist from 'components/ClubList/ClubList.js';
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
