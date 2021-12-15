@@ -11,6 +11,8 @@ import {ListGroup} from "react-bootstrap";
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import Button from "react-bootstrap/Button";
 import {getAuth, signInWithCustomToken} from 'firebase/auth';
+import RCarousel from "react-multi-carousel";
+import ClubCard from "components/ClubList/ClubCard";
 
 class ClubAdminPage extends Component {
 
@@ -204,6 +206,26 @@ static propTypes = {
     }
 
     render(){
+    const responsive = {
+            superLargeDesktop: {
+                // the naming can be any, depends on you.
+                breakpoint: {max: 4000, min: 3000},
+                items: 5
+            },
+            desktop: {
+                breakpoint: {max: 3000, min: 1024},
+                items: 3
+            },
+            tablet: {
+                breakpoint: {max: 1024, min: 464},
+                items: 2
+            },
+            mobile: {
+                breakpoint: {max: 464, min: 0},
+                items: 1
+            }
+        };
+
         if (this.state.isLoading || this.state.announcements === null || this.state.competitions === null){
             return "loading"; // LOADING SCREEN
         }
@@ -585,10 +607,16 @@ static propTypes = {
 
                             <Card.Text className="card-text h5 text-muted col-12">
                                 <div>
-                                    <Clublist
-                                        ItemList={this.state.basicInformationStatic.eventList}
-                                        Type="Event"
-                                    />
+                                    <RCarousel responsive={responsive}>
+                                        {this.state.competitions.map((option, index) => (
+                                            <ClubCard
+                                                Type="Event"
+                                                element={option}
+                                                key={option.description}
+                                                value={index}
+                                            />
+                                        ))}
+                                    </RCarousel>
                                 </div>
                             </Card.Text>
                         </Card.Body>
