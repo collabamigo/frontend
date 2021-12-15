@@ -34,7 +34,7 @@ class ClubHomePage extends Component {
             competitions:null,
             announcements: null,
             currentTime: time,
-            basicInformationStatic : {
+            basicInformationStatic:{
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 coordinators:[
                     {
@@ -450,11 +450,11 @@ class ClubHomePage extends Component {
                             <Card.Text className="card-text h5 text-muted col-12">
                                 <div>
                                     <RCarousel responsive={responsive}>
-                                        {this.state.basicInformationStatic.eventList.map((option, index) => (
+                                        {this.state.competitions.map((option, index) => (
                                             <ClubCard
                                                 Type="Event"
                                                 element={option}
-                                                key={option}
+                                                key={option.description}
                                                 value={index}
                                             />
                                         ))}

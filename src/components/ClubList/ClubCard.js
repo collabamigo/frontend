@@ -108,7 +108,7 @@ export default class ClubCard extends Component {
                                     </Card.Subtitle> */}
 
                                 <Card.Text className="text-start h6">
-                                    Something about Event
+                                    {this.props.element.description}
                                 </Card.Text>
 
                                 {/* <Card.Link href="#">
