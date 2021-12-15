@@ -34,37 +34,14 @@ class ClubHomePage extends Component {
             competitions:null,
             announcements: null,
             currentTime: time,
+            isLoading: true,
             basicInformationStatic:{
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
-                coordinators:[
-                    {
-                        name:"Tushar Singh",
-                        email:"shikhar@gmail.com",
-                    },
-                    {
-                        name:"Prutyuy Singh",
-                        email:"shikhar@gmail.com",
-                    },
-                ],
                 joinDate:"26122020",
-                clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"],
-                eventList: [
-                    {name: "Event1", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event2", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event3", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event3", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event4", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event5", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event6", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event7", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event8", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event9", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event10", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event11", logo: "https://via.placeholder.com/70X70"},
-                ],
+                clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480",
+                    "https://via.placeholder.com/1600X480"],
             },
-            isLoading: true,
-            }
+        }
     }
 
     componentDidMount() {
@@ -201,74 +178,6 @@ class ClubHomePage extends Component {
                                 </Card.Body>
                             </Card>
                         </div>
-
-                        {/*<div className="row">*/}
-
-                        {/*    <Card>*/}
-
-                        {/*        <button*/}
-
-                        {/*            className="btn btn-outline-warning col-2 pt-2"*/}
-
-                        {/*            onClick={this.handleEditPanel}*/}
-
-                        {/*            type="button"*/}
-
-                        {/*        >*/}
-
-                        {/*            <span*/}
-
-                        {/*                className="material-icons"*/}
-
-                        {/*            >*/}
-
-                        {/*                edit*/}
-
-                        {/*            </span>*/}
-
-                        {/*        </button>*/}
-
-                        {/*        <Card.Title className='fs-2 text-start'>*/}
-
-                        {/*            Coordinators:*/}
-
-                        {/*        </Card.Title>*/}
-
-                        {/*        <CardBody>*/}
-
-                        {/*            <div>*/}
-
-                        {/*                <ul>*/}
-
-                        {/*                    <li>*/}
-
-                        {/*                        {this.state.basicInformationStatic.coordinators[0].name}*/}
-
-                        {/*                    </li>*/}
-
-                        {/*                    <li>*/}
-
-                        {/*                        {this.state.basicInformationStatic.coordinators[1].name}*/}
-
-                        {/*                    </li>*/}
-
-                        {/*                </ul>*/}
-
-                        {/*                <br />*/}
-
-                        {/*                Member Size:*/}
-
-                        {/*                {" "}*/}
-
-                        {/*                {this.state.basicInformationStatic.memberSize}*/}
-
-                        {/*            </div>*/}
-
-                        {/*        </CardBody>*/}
-
-                        {/*    </Card>*/}
-
-                        {/*</div>*/}
                     </div>
                 </div>
 
@@ -349,12 +258,11 @@ class ClubHomePage extends Component {
                                         Coordinators:
                                         {' '}
 
-                                        {this.state.basicInformationStatic.coordinators[0].name}
-                                        ,
-
-                                        {' '}
-
-                                        {this.state.basicInformationStatic.coordinators[1].name}
+                                        {this.state.basicInformation.admins.map(item => (
+                                            <p key={item}>
+                                                {item}
+                                            </p>
+                                        ))}
                                     </div>
 
                                     <div>
