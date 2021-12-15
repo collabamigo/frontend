@@ -41,18 +41,9 @@ static propTypes = {
             basicInformation: null,
             competitions:null,
             announcements: null,
+            isLoading: true,
             basicInformationStatic:{
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
-                coordinators:[
-                    {
-                        name:"Tushar Singh",
-                        email:"shikhar@gmail.com",
-                    },
-                    {
-                        name:"Prutyuy Singh",
-                        email:"shikhar@gmail.com",
-                    },
-                ],
                 joinDate:"26122020",
                 clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"],
                 eventList: [
@@ -70,7 +61,7 @@ static propTypes = {
                     {name: "Event11", logo: "https://via.placeholder.com/70X70"},
                 ],
             },
-            isLoading: true,
+
             }
     }
 
@@ -453,14 +444,11 @@ static propTypes = {
 
                                     <div>
                                         Coordinators:
-                                        {' '}
-
-                                        {this.state.basicInformationStatic.coordinators[0].name}
-                                        ,
-
-                                        {' '}
-
-                                        {this.state.basicInformationStatic.coordinators[1].name}
+                                        {this.state.basicInformation.admins.map(item => (
+                                            <div key={item}>
+                                                {item}
+                                            </div>
+                                        ))}
                                     </div>
 
                                     <div>
