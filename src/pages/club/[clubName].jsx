@@ -37,7 +37,6 @@ class ClubHomePage extends Component {
             isLoading: true,
             basicInformationStatic:{
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
-                joinDate:"26122020",
                 clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480",
                     "https://via.placeholder.com/1600X480"],
             },
