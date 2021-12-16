@@ -9,6 +9,7 @@ import {ListGroup} from "react-bootstrap";
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
+import styles from "./styles.module.css";
 
 class ClubHomePage extends Component {
 
@@ -100,88 +101,86 @@ class ClubHomePage extends Component {
 
         return (
             <div className="row m-1">
-                <div className="col-3 d-flex justify-content-around">
-                    <div className="position-fixed">
-                        <div className="row">
-                            <Card
-                                className="pt-2"
-                                style={{ width: '18rem' }}
-                            >
+                <div className="mx-3 col-md-2 col-lg-2 col-sm-6 d-flex justify-content-around">
+                    <div className={styles.clubcard}>
+                        <Card
+                            className="pt-2"
+                            style={{ width: '18rem' }}
+                        >
 
-                                <Card.Img
-                                    src={this.state.basicInformationStatic.logoLink}
-                                    variant="top"
-                                />
+                            <Card.Img
+                                src={this.state.basicInformationStatic.logoLink}
+                                variant="top"
+                            />
 
-                                <Card.Body>
-                                    <Card.Title className='fs-2 fw-bold text-start pb-2'>
-                                        {this.state.basicInformation.name}
-                                    </Card.Title>
+                            <Card.Body>
+                                <Card.Title className='fs-2 fw-bold text-start pb-2'>
+                                    {this.state.basicInformation.name}
+                                </Card.Title>
 
 
-                                    <Card.Subtitle className=" text-start pb-2">
-                                        {this.state.basicInformation.tagline}
-                                    </Card.Subtitle>
+                                <Card.Subtitle className={styles.tagline}>
+                                    {this.state.basicInformation.tagline}
+                                </Card.Subtitle>
 
-                                    <br />
+                                <br />
 
-                                    <div className="col text-center">
-                                        <Card.Link
-                                            className=""
-                                            href={this.state.basicInformation.facebook}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="20px"
-                                                src="linkedin.svg"
-                                                width="20px"
-                                            />
-                                        </Card.Link>
+                                <div className="col text-center">
+                                    <Card.Link
+                                        className=""
+                                        href={this.state.basicInformation.facebook}
+                                        target="_blank"
+                                    >
+                                        <SvgIcon
+                                            height="20px"
+                                            src="linkedin.svg"
+                                            width="20px"
+                                        />
+                                    </Card.Link>
 
-                                        <Card.Link
-                                            className=""
-                                            href={this.state.basicInformation.instagram}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="20px"
-                                                src="linkedin.svg"
-                                                width="20px"
-                                            />
-                                        </Card.Link>
+                                    <Card.Link
+                                        className=""
+                                        href={this.state.basicInformation.instagram}
+                                        target="_blank"
+                                    >
+                                        <SvgIcon
+                                            height="20px"
+                                            src="linkedin.svg"
+                                            width="20px"
+                                        />
+                                    </Card.Link>
 
-                                        <Card.Link
-                                            href={this.state.basicInformation.linkedin}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="25px"
-                                                src="github.svg"
-                                                width="25px"
-                                            />
-                                        </Card.Link>
+                                    <Card.Link
+                                        href={this.state.basicInformation.linkedin}
+                                        target="_blank"
+                                    >
+                                        <SvgIcon
+                                            height="25px"
+                                            src="github.svg"
+                                            width="25px"
+                                        />
+                                    </Card.Link>
 
-                                        <Card.Link
-                                            className=""
-                                            href={this.state.basicInformation.website}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="20px"
-                                                src="linkedin.svg"
-                                                width="20px"
-                                            />
-                                        </Card.Link>
-                                    </div>
+                                    <Card.Link
+                                        className=""
+                                        href={this.state.basicInformation.website}
+                                        target="_blank"
+                                    >
+                                        <SvgIcon
+                                            height="20px"
+                                            src="linkedin.svg"
+                                            width="20px"
+                                        />
+                                    </Card.Link>
+                                </div>
 
-                                </Card.Body>
-                            </Card>
-                        </div>
+                            </Card.Body>
+                        </Card>
                     </div>
                 </div>
 
-                <div className="col-9 justify-content-around">
-                    <Card>
+                <div className=" col-md-9 col-lg-9 col-sm-12 justify-content-around">
+                    <Card className="w-500">
                         <Card.Body>
                             <div className="">
                                 <BCarousel
@@ -253,7 +252,7 @@ class ClubHomePage extends Component {
                                 <br />
 
                                 <div>
-                                    <div>
+                                    <div className={styles.coordinators}>
                                         Coordinators:
                                         {' '}
 
@@ -264,7 +263,7 @@ class ClubHomePage extends Component {
                                         ))}
                                     </div>
 
-                                    <div>
+                                    <div className={styles.memberSize}>
                                         Member Size:
                                         {' '}
 
@@ -276,22 +275,22 @@ class ClubHomePage extends Component {
 
 
                                 <div className="d-flex">
-                                    <div className="col-5">
-                                        <div className="text-center h2">
+                                    <div className="col-md-5 col-lg-5 col-sm-6">
+                                        <div className={styles.descriptionHeading}>
                                             Description
 
                                             {" "}
 
                                         </div>
 
-                                        <p className="text-start h6">
+                                        <p className={styles.description}>
                                             {this.state.basicInformation.description}
                                         </p>
 
                                     </div>
 
-                                    <div className="offset-1 col-5">
-                                        <div className="text-center h2">
+                                    <div className="offset-1 col-md-5 col-lg-5 col-sm-9">
+                                        <div className={styles.announcementsHeading}>
                                             Announcements
                                             {" "}
 
@@ -311,8 +310,8 @@ class ClubHomePage extends Component {
                                                                 as="li"
                                                                 className="d-flex justify-content-between align-items-start my-2"
                                                             >
-                                                                <div className="ms-2 me-auto">
-                                                                    <div className="fw-bold">
+                                                                <div className={styles.notifications}>
+                                                                    <div className={styles.notificationHeading}>
                                                                         {item["content"]}
                                                                     </div>
 
@@ -347,11 +346,10 @@ class ClubHomePage extends Component {
 
                     <br />
 
-                    <Card className="row">
+                    <Card className="w-500">
                         <Card.Body className="mt-3">
                             <Card.Title className="card-title fs-2 header-color text-left">
                                 Events
-
                                 {" "}
                             </Card.Title>
 

@@ -75,7 +75,7 @@ export default class ClubCard extends Component {
             else if (this.props.Type === "Event"){
                 return (
                     <div className="col-sm-6 col-lg-4 mb-3">
-                        <Card style={{ width: '18rem' }}>
+                        <Card style={{ width: '22rem' }}>
                             <Card.Body>
                                 <Card.Title className="text-start h1 pb-2">
                                     {this.props.element.name}
@@ -84,21 +84,13 @@ export default class ClubCard extends Component {
                                 <ul className="">
                                     <li className="text-start list-inline-item">
                                         <span>
-                                            {/* {this.state.basicInformation.coordinators[0].name} */}
-
                                             {" "}
-
-
-
                                         </span>
                                     </li>
 
                                     <li className="text-start list-inline-item">
                                         <span>
-                                            {/* {this.state.basicInformation.coordinators[1].name} */}
-
                                             {" "}
-
                                         </span>
                                     </li>
                                 </ul>
