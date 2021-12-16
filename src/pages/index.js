@@ -1,30 +1,21 @@
-// import Link from "common/Link";
-// import Card from "react-bootstrap/Card";
-// import ClubList from 'components/ClubList/ClubList.js';
+
 import React from "react";
-// import axios from "utils/axios";
-// import backend from "env";
-// import {Fade} from "react-awesome-reveal";
-// import {isMobile} from "react-device-detect";
-// import ClubDashboard from "../components/ClubDasboard";
-// import {SvgIcon} from "common/SvgIcon";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Image from "react-bootstrap/Image";
 
 import styles from "styles/index.module.css";
-import ClubCard from "common/HomePageCards/ClubCard.js";
-import EventTalkCard from "common/HomePageCards/EventTalkCard.js";
+import ClubCard from "../common/HomePageCards/ClubCard.js";
+import EventTalkCard from "../common/HomePageCards/EventTalkCard.js";
+import LandingFooter from "components/LandingFooter";
 
-
-// import {checkLoginStatus} from "../utils/auth";
 
 export default class AuthenticatedHome extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            
+
             clubList: [
                 {name: "Tasveer", logo: "https://via.placeholder.com/70X70"},
                 {name: "MicDrop", logo: "https://via.placeholder.com/70X70"},
@@ -152,19 +143,23 @@ export default class AuthenticatedHome extends React.Component {
                                     className={styles.firstsectionInnerleftImage}
                                     fluid
                                     rounded
-                                    src="https://via.placeholder.com/500x250"
+                                    src="/img/jpg/IntroImage.png"
                                 />
                             </div>
 
                             <div className={styles.firstsectionInnerright}>
-                                <span className={styles.firstsectionInnerheading + " display-3"}>
+                                <span className={styles.firstsectionInnerheading + " display-2 fw-bold text-primary"}>
                                     Welcome to CollabAmigo!
                                 </span>
 
                                 <br />
 
-                                <span className={styles.firstsectionInnertext}>
-                                    Participate in competitions in college, have lots of fun!
+                                <span className={styles.firstsectionInnertext + " text-primary"}>
+                                    Participate in competitions in college,
+                                </span>
+
+                                <span className={styles.firstsectionInnertext + " text-primary"}>
+                                    have lots of fun!
                                 </span>
                             </div>
                         </div>
@@ -172,7 +167,7 @@ export default class AuthenticatedHome extends React.Component {
 
                     <div className={styles.secondSection}>
                         <div className={styles.secondsectionInner}>
-                            <div className={styles.secondsectionHeading}>
+                            <div className={styles.secondsectionHeading + " text-primary"}>
                                 Competitions
                             </div>
 
@@ -208,7 +203,7 @@ export default class AuthenticatedHome extends React.Component {
 
                     <div className="thirdsection">
                         <div className={styles.thirdsectionInner}>
-                            <div className={styles.thirdsectionHeading}>
+                            <div className={styles.thirdsectionHeading + " text-primary"}>
                                 {' '}
                                 Clubs & Organizations
 
@@ -277,6 +272,8 @@ export default class AuthenticatedHome extends React.Component {
                     </div> */}
 
                 </div>
+
+                <LandingFooter />
             </div>
 
             // <div className=" h-75 w-100 justify-content-center card-group ">
