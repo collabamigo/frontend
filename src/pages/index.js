@@ -55,6 +55,7 @@ export default class AuthenticatedHome extends React.Component {
                 {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
             ],
 
+            // eslint-disable-next-line react/no-unused-state
             talkList: [
                 {name: "Tasveer", logo: "https://via.placeholder.com/70X70"},
                 {name: "MicDrop", logo: "https://via.placeholder.com/70X70"},
@@ -251,7 +252,7 @@ export default class AuthenticatedHome extends React.Component {
 
 
                             <div className={styles.fourthsectionMiddle}>
-                                <Carousel responsive={responsive}>
+                                {/* <Carousel responsive={responsive}>
                                     {this.state.talkList.map((option, index) => (
                                         <EventTalkCard
                                             key={option}
@@ -259,7 +260,7 @@ export default class AuthenticatedHome extends React.Component {
                                         />
                                     ))}
 
-                                </Carousel>
+                                </Carousel> */}
                             </div>
 
                             <div className={styles.fourthsectionfooter +" d-flex flex-row-reverse bd-highlight"}>
