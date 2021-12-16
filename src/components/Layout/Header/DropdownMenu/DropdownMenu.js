@@ -19,7 +19,6 @@ function DropdownMenu({ isAuthenticated }) {
     else
         return (
             <div className="pt-3">
-
                 {isAuthenticated ?
                     <>
                         <div className={CustomNavLink+ " btn"}>
