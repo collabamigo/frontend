@@ -1,8 +1,26 @@
 .cardCenter{
-    margin-left: 2rem;
-    margin-right: 2rem;
-    margin-left: 3rem;
-    margin-right: 3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     padding-top:1px;
     padding-bottom:1px;
+}
+
+.title{
+        text-align: center;
+        font-size: 25px;
+    }
+
+@media (max-width: 800px) {
+
+    .cardCenter{
+        width: 100%;
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+        padding-top:1px !important;
+        padding-bottom:1px !important;
+    }
+
+    .title{
+        font-size:15px;
+    }
 }
