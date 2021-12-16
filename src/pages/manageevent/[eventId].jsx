@@ -2,7 +2,6 @@
 import React, {useEffect, useState} from "react"
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
-import Carousel from "react-bootstrap/Carousel";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCalendar, faClock} from '@fortawesome/free-regular-svg-icons'
 import {faMapMarkerAlt, faShareAlt } from '@fortawesome/free-solid-svg-icons'
@@ -19,7 +18,7 @@ import EventAdminModal from "../../components/EventAdmin/modal";
 import Table from 'react-bootstrap/Table'
 export default function Event() {
     const router = useRouter()
-    
+
     const [show, setShow] = useState(false);
 
     const [isLoading, setLoading] = useState(true);
@@ -70,7 +69,6 @@ export default function Event() {
         return date.toLocaleString();
     }
 
-    const handleCloseEvent = () => setData({...data, showEvent: false});
     const handleCloseDescription = () => setData({...data, showDescription: false});
     const handleShowEvent = () => setData({...data, showEvent: true});
     const handleShowDescription = () => setData({...data, showDescription: true});
@@ -190,7 +188,7 @@ export default function Event() {
                         Woohoo, youre reading this text in a modal!
                     </Modal.Body>
 
-                    
+
                 </Modal>
 
                 <div className="row px-md-5 mx-md-5 px-2 mx-2">
@@ -296,7 +294,7 @@ export default function Event() {
 
                             <div className="col-md-3 col-12">
                                 <div className="row">
-                                 
+
                                     <div>
                                         <Button
                                             className="w-100"
