@@ -7,14 +7,14 @@ import styles from "./ClubCard.module.css";
 export default function ClubCard(props) {
     return (
         <div className={styles.cardCenter}>
-            <Card  >
+            <Card>
                 <Card.Img
                     src={props.element.src}
                     variant="top"
                 />
 
                 <Card.Body>
-                    <Card.Title>
+                    <Card.Title className={styles.title + " mb-2"}>
                         {props.element.title}
                     </Card.Title>
                 </Card.Body>

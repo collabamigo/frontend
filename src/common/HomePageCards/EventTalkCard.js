@@ -14,7 +14,7 @@ export default function EventTalkCard(props) {
 
                 <Card.Body>
                     <div className={styles.cardinner}>
-                        <Card.Title className={styles.title}>
+                        <Card.Title className={styles.title + " text-primary fw-bold"}>
                             {props.element.title}
                         </Card.Title>
 
@@ -26,7 +26,7 @@ export default function EventTalkCard(props) {
                             {props.element.text}
                         </Card.Text>
             
-                        <Card.Text className={styles.footer}>
+                        <Card.Text className={styles.footer + " text-primary"}>
                             {props.element.footer}
                         </Card.Text>
                     </div>
