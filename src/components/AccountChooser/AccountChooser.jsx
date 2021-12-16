@@ -1,21 +1,49 @@
-import React from "react";
+/* eslint-disable react/no-array-index-key */
+import React, { Component } from 'react'
 import 'react-bootstrap';
 import * as styles from './accountchooser.module.css';
+import axios from "utils/axios";
+import Link from "common/Link";
 
-export default function AccountChooser() {
-    const clubList = [
-        'Club 1',
-        'Club 2',
-        'Club 3',
-        'Club 4',
-        'Club 5',
-    ]
 
-    const clubListItems = clubList.map((club) => (
-        <li key={club.id}>
-            {club}
-        </li>
-    ));
+export default class AccountChooser extends Component {
+
+    // static propTypes = {
+    //     Type: PropTypes.string.isRequired,
+    //     element: PropTypes.objectOf(PropTypes.string).isRequired,
+    // }
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            // eslint-disable-next-line react/no-unused-state
+            basicInfo:{
+                "First_Name": "User name",
+                "Last_Name": "User name",
+                clubs: [
+                    {name:"Demo Club"}
+                ],
+            },
+
+
+        }
+    }
+
+    componentDidMount() {
+        axios.get("connect/profile/").then((res) => {
+                console.log(res.status);
+                console.log(res.data);
+                this.setState({
+                    basicInfo: res.data[0]
+                })
+            })
+        }
+
+    shouldComponentUpdate()
+    { return true;}
+
+
+    render(){
 
     return (
         <div>
@@ -29,11 +57,21 @@ export default function AccountChooser() {
 
                     <p className="d-flex flex-column">
                         <h3>
-                            Full Name
+                            {this.state.basicInfo.First_Name}
+
+                            {" "}
+
+                            {this.state.basicInfo.Last_Name}
+
                         </h3>
 
                         <span className={styles.manageSpan}>
-                            Manage Profile
+                            <Link
+                                internal
+                                to="/profile"
+                            >
+                                Manage Profile
+                            </Link>
                         </span>
                     </p>
                 </div>
@@ -44,8 +82,28 @@ export default function AccountChooser() {
                     </h5>
 
                     <div className={styles.clubScroll}>
-                        <ul className={styles.clubNames}>
-                            {clubListItems}
+
+                
+                        <ul
+                            className={styles.clubNames}
+                            style={{listStyle: "none"}}
+                        >
+                            {this.state.basicInfo.clubs.map((field, index) => {
+                            return (
+                                <li key={index}> 
+
+                                    <Link
+                                        internal
+                                        to={"/manage/" + field.username}
+                                    >
+                                        {field.name}
+                                        
+                                    </Link>
+
+                                </li>
+
+                            );
+                })}
                         </ul>
                     </div>
                 </div>
@@ -58,4 +116,5 @@ export default function AccountChooser() {
                 </button>
             </div>
         </div>)
+    }
 }
