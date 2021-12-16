@@ -25,13 +25,6 @@ export default class AccountChooser extends Component {
                 ],
             },
 
-            clubList : [
-                'Club 1',
-                'Club 2',
-                'Club 3',
-                'Club 4',
-                'Club 5',
-            ],
 
         }
     }
@@ -94,11 +87,22 @@ export default class AccountChooser extends Component {
 
 
 
-                        <ul className={styles.clubNames}>
+                        <ul
+                            className={styles.clubNames}
+                            style={{listStyle: "none"}}
+                        >
                             {this.state.basicInfo.clubs.map((field, index) => {
                             return (
                                 <li key={index}> 
-                                    {field.name}
+
+                                    <Link
+                                        internal
+                                        to={"/manage/" + field.username}
+                                    >
+                                        {field.name}
+                                        
+                                    </Link>
+
                                 </li>
 
                             );
