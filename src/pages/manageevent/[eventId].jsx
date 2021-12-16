@@ -19,32 +19,39 @@ import EventAdminModal from "../../components/EventAdmin/modal";
 import Table from 'react-bootstrap/Table'
 export default function Event() {
     const router = useRouter()
-
+    
     const [show, setShow] = useState(false);
+
+    const [isLoading, setLoading] = useState(true);
+//  useState([{name:"Demo"}]);
+// useState([{elements:[{value:"text"}, {value:"text"} ,{value:"text"}]}, {elements:[{value:"text"}, {value:"text"} ,{value:"text"}]}, {elements:[{value:"text"}, {value:"text"} ,{value:"text"}]}]);
+    const [tableHeaders,settableHeaders] = useState([]);
+    const [tableResponses,settableResponses] = useState([]);
+
 
     const [data, setData] = useState({
         clubLogoLinks: {},
         event: {},
-        form: {},
         showEvent: false,
         showDescription:false,
-        TableHeaders:[],
-        TableResponses:[],
     });
 
 
-    const setTableResponses = (TableResponses) => setData((prevData) => {
-        return {...prevData, TableResponses}
-    });
+    // const settableResponses = (tableResponses) => setData((prevData) => {
+    //     return {...prevData, tableResponses}
+    // });
 
 
-    const setTableHeaders = (data) => setData((prevData) => {
-        return {...prevData, TableHeaders: JSON.parse(data.skeleton), form: data}
-    });
+    // const settableHeaders = (tableHeaders) => setData((prevData) => {
+    //     return {...prevData, tableHeaders}
+    // });
 
     const setEvent = (event) => setData((prevData)=> {
         return {...prevData, event}
     });
+    // const setForm = (form) => setData((prevData) => {
+    //     return {...prevData, form}
+    // });
 
     const addClubLogoLinks = (club, link) => {
         console.log(clubLogoLinks)
@@ -55,6 +62,8 @@ export default function Event() {
     const event = data.event;
     const form = data.form;
     const clubLogoLinks = data.clubLogoLinks;
+    // const tableHeaders = data.tableHeaders;
+    // const tableResponses = data.tableResponses;
 
     const convertToDatetimeString = iso_8601_string => {
         const date = new Date(iso_8601_string);
@@ -66,13 +75,15 @@ export default function Event() {
     const handleShowEvent = () => setData({...data, showEvent: true});
     const handleShowDescription = () => setData({...data, showDescription: true});
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () =>{ setShow(false);
+        console.log(tableResponses);}
+    const handleShow = () => { setShow(true);
+        console.log(tableHeaders);}
 
-    const handleSubmitEvent =()=>{
-        console.log("edited");
-        handleCloseEvent();
-    }
+    // const handleSubmitEvent =()=>{
+    //     console.log("edited");
+    //     handleCloseEvent();
+    // }
 
     const handleSubmitDescription = ()=>{
         console.log("edited");
@@ -80,29 +91,33 @@ export default function Event() {
     }
 
 
-    useEffect(() => {
+     useEffect(() => {
         if (router.query.eventId!==undefined) {
-            if (isEmpty(data.TableHeaders))
+            if (isEmpty(tableHeaders))
                 axios.get(`form/form/${router.query.eventId}/`)
-                .then(res => setTableHeaders(res.data))
+                    .then(res => settableHeaders(JSON.parse(res.data.skeleton)))
 
-            // ERROR
-            // if (isEmpty(data.TableResponses))
-            //     axios.get(`form/response/${router.query.eventId}/`)
-            //         .then(res => setTableResponses(res.data.skeleton))
+            if (isEmpty(tableResponses))
+                axios.get(`form/response/${router.query.eventId}/`)
+                    .then(res => settableResponses(res.data))
 
             if (isEmpty(event))
                 axios.get(`club/competition/${router.query.eventId}/`)
-                    .then(res => setEvent(res.data))
+                    .then(res => setEvent(JSON.parse(res.data)))
+
+            // if (isEmpty(form))
+            //     axios.get(`form/form/${router.query.eventId}/`)
+            //         .then(res => setForm(res.data)).catch(err => console.log(err))
 
             if (isEmpty(clubLogoLinks) && !isEmpty(event)) {
                 const storage = getStorage();
                 event.clubs.map(club => getDownloadURL(ref(storage, 'data/'+club+'/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
             }
+
+            setLoading(false);
         }})
 
-    const isLoading = isEmpty(event);
 
 
 
@@ -111,256 +126,271 @@ export default function Event() {
 
     if (isLoading)
         return <Loading />
-    return (
-        <>
-            {isEmpty(data.TableHeaders) || isEmpty(data.TableResponses)? null:
-            <Modal
-                aria-labelledby="example-custom-modal-styling-title"
-                onHide={handleClose}
-                show={show}
-                size="lg"
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>
-                        Responses
-                    </Modal.Title>
-                </Modal.Header>
+    else
+        return (
+            <>
+                <Modal
+                    aria-labelledby="example-custom-modal-styling-title"
+                    onHide={handleClose}
+                    show={show}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Responses
 
-                <Modal.Body>
-                    <Table
-                        bordered
-                        hover
-                        striped
-                    >
-                        <thead>
-                            <tr>
-                                {data.TableHeaders.map((option) => (
-                                    <td>
-                                        {option.name}
-                                    </td>
-                            ))}
-                            </tr>
-                        </thead>
+                            {tableResponses.length}
+                        </Modal.Title>
+                    </Modal.Header>
 
-                        <tbody>
-                            {data.TableResponses.map((response) => (
+                    <Modal.Body>
+                        <Table
+                            bordered
+                            hover
+                            striped
+                        >
+                            <thead>
                                 <tr>
-                                    {response.map((values) => (
-                                        <td>
-                                            {values.value}
+                                    <td>
+                                        {' '}
+                                        Sr no.
+                                    </td>
+
+
+                                    {tableHeaders.map((option, index) => (
+                                        <td lol={index} >
+                                            {option.name}
                                         </td>
-                                ))}
+                                    ))}
+
                                 </tr>
+                            </thead>
 
-                        ))}
+                            <tbody>
+                                {tableResponses.map((response,index) => (
+                                    <tr lol={index}>
 
-                        </tbody>
-                    </Table>
+                                        <td>
+                                            {index}
+                                        </td>
 
-                    Woohoo, youre reading this text in a modal!
-                </Modal.Body>
+                                        {response.elements.map((values,index) => (
+                                            <td
+                                                lol={index}
+                                            >
+                                                {values.value}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
 
+                            </tbody>
+                        </Table>
 
-            </Modal>}
+                        Woohoo, youre reading this text in a modal!
+                    </Modal.Body>
 
-            <div className="row px-md-5 mx-md-5 px-2 mx-2">
-                <div className="col-md-4 col-12 me-4">
-                    <div className="pb-5">
+                    
+                </Modal>
 
-                        <Carousel>
-                            {JSON.parse(event.image_links).map((image) => {
+                <div className="row px-md-5 mx-md-5 px-2 mx-2">
+                    <div className="col-md-4 col-12 me-4">
+                        <div className="pb-5">
+
+                            {/* <Carousel>
+                                {event.image_links.map((image) => {
+                                    return (
+                                        <Carousel.Item >
+                                            <Image
+                                                alt={event.name}
+                                                fluid
+                                                rounded
+                                                src={image}
+                                            />
+                                        </Carousel.Item>
+                                    )
+                                })}
+                            </Carousel> */}
+                        </div>
+
+                        <div className="pt-4">
+                            <p className="text-center text-primary fs-4">
+                                Organised By
+                            </p>
+
+                            <div className="row justify-content-around">
+                                {lodashMap(clubLogoLinks, ((link, club) => {
                                 return (
-                                    <Carousel.Item key={image}>
+                                    <div
+                                        className="col-5 me-1"
+                                        // key={club+link}
+                                    >
                                         <Image
-                                            alt={event.name}
+                                            alt={club}
                                             fluid
                                             rounded
-                                            src={image}
+                                            src={link}
+                                            thumbnail
                                         />
-                                    </Carousel.Item>
+                                    </div>
                                 )
-                            })}
-                        </Carousel>
-                    </div>
-
-                    <div className="pt-4">
-                        <p className="text-center text-primary fs-4">
-                            Organised By
-                        </p>
-
-                        <div className="row justify-content-around">
-                            {lodashMap(clubLogoLinks, ((link, club) => {
-                            return (
-                                <div
-                                    className="col-5 me-1"
-                                    key={club+link}
-                                >
-                                    <Image
-                                        alt={club}
-                                        fluid
-                                        rounded
-                                        src={link}
-                                        thumbnail
-                                    />
-                                </div>
-                            )
-                        }))}
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col">
-                    <div className="row text-primary">
-                        <div className="col-md-9 col-12">
-                            <h1 className="fw-bold">
-                                {event.name}
-
-                                {" "}
-
-                                <button
-                                    className="btn btn-outline-warning material-icons"
-                                    onClick={handleShowEvent}
-                                    type="button"
-                                >
-                                    edit
-                                </button>
-                            </h1>
-
-                            <div>
-
-                                <div className="">
-                                    <p>
-
-                                        <FontAwesomeIcon icon={faCalendar} />
-
-                                        {' '}
-
-                                        {convertToDatetimeString(event.event_start) +
-                                        (event.event_end?" to "+ convertToDatetimeString(event.event_end):"")}
-                                    </p>
-
-                                    <p>
-                                        <FontAwesomeIcon icon={faMapMarkerAlt} />
-
-                                        {' '}
-
-                                        {event.location}
-                                    </p>
-
-                                    {isEmpty(form)?null:
-                                    <p>
-                                        <FontAwesomeIcon icon={faClock} />
-
-                                        {' '}
-
-                                        Reg. starts
-                                        {' '}
-
-                                        {convertToDatetimeString(form.opens_at)}
-
-                                        {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
-                                    </p>}
-                                </div>
+                            }))}
                             </div>
                         </div>
+                    </div>
 
-                        <div className="col-md-3 col-12">
-                            <div className="row">
-                                {isEmpty(data.TableHeaders) || isEmpty(data.TableResponses) ? null :
+                    <div className="col">
+                        <div className="row text-primary">
+                            <div className="col-md-9 col-12">
+                                <h1 className="fw-bold">
+                                    {event.name}
+
+                                    {" "}
+
+                                    <button
+                                        className="btn btn-outline-warning material-icons"
+                                        onClick={handleShowEvent}
+                                        type="button"
+                                    >
+                                        edit
+                                    </button>
+                                </h1>
+
                                 <div>
-                                    <Button
-                                        className="w-100"
-                                        onClick={handleShow}
-                                        size="lg"
-                                    >
-                                        View Responses
-                                    </Button>
-                                </div>}
 
-                                {(!event.faq || isEmpty(event.faq))?null:
-                                <div className="p-2 col-6">
-                                    <FAQModal data={JSON.parse(event.faq)} />
-                                </div>}
+                                    <div className="">
+                                        <p>
 
-                                <div className="p-2 col-6">
-                                    <a
-                                        href={event.link}
-                                        rel="noopener noreferrer"
-                                        target="_blank"
-                                    >
+                                            <FontAwesomeIcon icon={faCalendar} />
+
+                                            {' '}
+
+                                            {convertToDatetimeString(event.event_start) +
+                                            (event.event_end?" to "+ convertToDatetimeString(event.event_end):"")}
+                                        </p>
+
+                                        <p>
+                                            <FontAwesomeIcon icon={faMapMarkerAlt} />
+
+                                            {' '}
+
+                                            {event.location}
+                                        </p>
+
+                                        {isEmpty(form)?null:
+                                        <p>
+                                            <FontAwesomeIcon icon={faClock} />
+
+                                            {' '}
+
+                                            Reg. starts
+                                            {' '}
+
+                                            {convertToDatetimeString(form.opens_at)}
+
+                                            {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
+                                        </p>}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-md-3 col-12">
+                                <div className="row">
+                                 
+                                    <div>
                                         <Button
                                             className="w-100"
-                                            size="m"
-                                            variant="outline-primary"
+                                            onClick={handleShow}
+                                            size="lg"
                                         >
-                                            Add Links
+                                            View Responses
                                         </Button>
-                                    </a>
+                                    </div>
+
+                                    {(!event.faq || isEmpty(event.faq))?null:
+                                    <div className="p-2 col-6">
+                                        <FAQModal data={JSON.parse(event.faq)} />
+                                    </div>}
+
+                                    <div className="p-2 col-6">
+                                        <a
+                                            href={event.link}
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                        >
+                                            <Button
+                                                className="w-100"
+                                                size="m"
+                                                variant="outline-primary"
+                                            >
+                                                Add Links
+                                            </Button>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
+                                    <FontAwesomeIcon
+                                        className="mx-2"
+                                        icon={faWhatsapp}
+                                        size="2x"
+                                    />
+
+                                    <FontAwesomeIcon
+                                        className="mx-2"
+                                        icon={faFacebook}
+                                        size="2x"
+                                    />
+
+                                    <FontAwesomeIcon
+                                        className="mx-2"
+                                        icon={faInstagram}
+                                        size="2x"
+                                    />
+
+                                    <FontAwesomeIcon
+                                        className="mx-2"
+                                        icon={faShareAlt}
+                                        size="2x"
+                                    />
                                 </div>
                             </div>
+                        </div>
 
-                            <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
-                                <FontAwesomeIcon
-                                    className="mx-2"
-                                    icon={faWhatsapp}
-                                    size="2x"
-                                />
+                        {/* <EventAdminModal
+                            handleClose={handleCloseEvent}
+                            handleSubmit={handleSubmitEvent}
+                            initialValues={[event.name, convertToDatetimeString(event.event_start) +
+                                            (event.event_end?" to "+ convertToDatetimeString(event.event_end):""), event.location,
+                            convertToDatetimeString(form.opens_at), convertToDatetimeString(form.closes_at) ? + " " +
+                                + convertToDatetimeString(form.closes_at) : ""]}
+                            labels={['Event Name','Date and Time','Location','Registration Starts', 'Registration ends']}
+                            show={data.showEvent}
+                        /> */}
 
-                                <FontAwesomeIcon
-                                    className="mx-2"
-                                    icon={faFacebook}
-                                    size="2x"
-                                />
+                        <div>
+                            <p>
+                                {event.description}
+                            </p>
 
-                                <FontAwesomeIcon
-                                    className="mx-2"
-                                    icon={faInstagram}
-                                    size="2x"
-                                />
+                            <button
+                                className="btn btn-outline-warning material-icons"
+                                onClick={handleShowDescription}
+                                type="button"
+                            >
+                                edit
+                            </button>
 
-                                <FontAwesomeIcon
-                                    className="mx-2"
-                                    icon={faShareAlt}
-                                    size="2x"
-                                />
-                            </div>
+                            <EventAdminModal
+                                handleClose={handleCloseDescription}
+                                handleSubmit={handleSubmitDescription}
+                                initialValues={[event.description]}
+                                labels={['Event Description']}
+                                show={data.showDescription}
+                            />
                         </div>
                     </div>
-
-                    <EventAdminModal
-                        handleClose={handleCloseEvent}
-                        handleSubmit={handleSubmitEvent}
-                        initialValues={[event.name, convertToDatetimeString(event.event_start) +
-                                        (event.event_end?" to "+ convertToDatetimeString(event.event_end):""), event.location,
-                        convertToDatetimeString(form.opens_at), convertToDatetimeString(form.closes_at) ? + " " +
-                            + convertToDatetimeString(form.closes_at) : ""]}
-                        labels={['Event Name','Date and Time','Location','Registration Starts', 'Registration ends']}
-                        show={data.showEvent}
-                    />
-
-                    <div>
-                        <p>
-                            {event.description}
-                        </p>
-
-                        <button
-                            className="btn btn-outline-warning material-icons"
-                            onClick={handleShowDescription}
-                            type="button"
-                        >
-                            edit
-                        </button>
-
-                        <EventAdminModal
-                            handleClose={handleCloseDescription}
-                            handleSubmit={handleSubmitDescription}
-                            initialValues={[event.description]}
-                            labels={['Event Description']}
-                            show={data.showDescription}
-                        />
-                    </div>
                 </div>
-            </div>
-        </>
-    )
+            </>
+        )
 }
