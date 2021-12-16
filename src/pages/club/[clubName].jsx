@@ -34,37 +34,13 @@ class ClubHomePage extends Component {
             competitions:null,
             announcements: null,
             currentTime: time,
-            basicInformationStatic : {
-                logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
-                coordinators:[
-                    {
-                        name:"Tushar Singh",
-                        email:"shikhar@gmail.com",
-                    },
-                    {
-                        name:"Prutyuy Singh",
-                        email:"shikhar@gmail.com",
-                    },
-                ],
-                joinDate:"26122020",
-                clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"],
-                eventList: [
-                    {name: "Event1", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event2", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event3", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event3", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event4", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event5", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event6", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event7", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event8", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event9", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event10", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event11", logo: "https://via.placeholder.com/70X70"},
-                ],
-            },
             isLoading: true,
-            }
+            basicInformationStatic:{
+                logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
+                clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480",
+                    "https://via.placeholder.com/1600X480"],
+            },
+        }
     }
 
     componentDidMount() {
@@ -201,74 +177,6 @@ class ClubHomePage extends Component {
                                 </Card.Body>
                             </Card>
                         </div>
-
-                        {/*<div className="row">*/}
-
-                        {/*    <Card>*/}
-
-                        {/*        <button*/}
-
-                        {/*            className="btn btn-outline-warning col-2 pt-2"*/}
-
-                        {/*            onClick={this.handleEditPanel}*/}
-
-                        {/*            type="button"*/}
-
-                        {/*        >*/}
-
-                        {/*            <span*/}
-
-                        {/*                className="material-icons"*/}
-
-                        {/*            >*/}
-
-                        {/*                edit*/}
-
-                        {/*            </span>*/}
-
-                        {/*        </button>*/}
-
-                        {/*        <Card.Title className='fs-2 text-start'>*/}
-
-                        {/*            Coordinators:*/}
-
-                        {/*        </Card.Title>*/}
-
-                        {/*        <CardBody>*/}
-
-                        {/*            <div>*/}
-
-                        {/*                <ul>*/}
-
-                        {/*                    <li>*/}
-
-                        {/*                        {this.state.basicInformationStatic.coordinators[0].name}*/}
-
-                        {/*                    </li>*/}
-
-                        {/*                    <li>*/}
-
-                        {/*                        {this.state.basicInformationStatic.coordinators[1].name}*/}
-
-                        {/*                    </li>*/}
-
-                        {/*                </ul>*/}
-
-                        {/*                <br />*/}
-
-                        {/*                Member Size:*/}
-
-                        {/*                {" "}*/}
-
-                        {/*                {this.state.basicInformationStatic.memberSize}*/}
-
-                        {/*            </div>*/}
-
-                        {/*        </CardBody>*/}
-
-                        {/*    </Card>*/}
-
-                        {/*</div>*/}
                     </div>
                 </div>
 
@@ -349,12 +257,11 @@ class ClubHomePage extends Component {
                                         Coordinators:
                                         {' '}
 
-                                        {this.state.basicInformationStatic.coordinators[0].name}
-                                        ,
-
-                                        {' '}
-
-                                        {this.state.basicInformationStatic.coordinators[1].name}
+                                        {this.state.basicInformation.admins.map(item => (
+                                            <div key={item}>
+                                                {item}
+                                            </div>
+                                        ))}
                                     </div>
 
                                     <div>
@@ -390,8 +297,11 @@ class ClubHomePage extends Component {
 
                                         </div>
 
-                                        <div className="height-50">
-                                            <ul className="list">
+                                        <div className="overflow-auto">
+                                            <ul
+                                                className="list"
+                                                style={{ height: '250px'}}
+                                            >
                                                 {this.state.announcements.reverse().map(item => (
                                                     <ul key={item}>
                                                         <ListGroup
@@ -406,9 +316,9 @@ class ClubHomePage extends Component {
                                                                         {item["content"]}
                                                                     </div>
 
-                                                                    {this.state.currentTime}
+                                                                    {/*{this.state.currentTime}*/}
 
-                                                                    {item["timestamp"].split("T")[1].split(".")[0]}
+                                                                    {/*{item["timestamp"].split("T")[1].split(".")[0]}*/}
                                                                 </div>
 
                                                                 <span
@@ -450,11 +360,11 @@ class ClubHomePage extends Component {
                             <Card.Text className="card-text h5 text-muted col-12">
                                 <div>
                                     <RCarousel responsive={responsive}>
-                                        {this.state.basicInformationStatic.eventList.map((option, index) => (
+                                        {this.state.competitions.map((option, index) => (
                                             <ClubCard
                                                 Type="Event"
                                                 element={option}
-                                                key={option}
+                                                key={option.description}
                                                 value={index}
                                             />
                                         ))}
