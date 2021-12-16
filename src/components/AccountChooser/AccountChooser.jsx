@@ -83,10 +83,7 @@ export default class AccountChooser extends Component {
 
                     <div className={styles.clubScroll}>
 
-                        
-
-
-
+                
                         <ul
                             className={styles.clubNames}
                             style={{listStyle: "none"}}

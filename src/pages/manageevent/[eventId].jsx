@@ -22,75 +22,27 @@ export default function Event() {
     
     const [show, setShow] = useState(false);
 
+    const [isLoading, setLoading] = useState(true);
+
+
     const [data, setData] = useState({
         clubLogoLinks: {},
         event: {},
         form: {},
         showEvent: false,
         showDescription:false,
-        responses : [
-            {
-                id: 1,
-                name: 'John Doe',
-                email: 'john@iiitd.ac.in',
-                phone: '+91-1234567890',
-                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                date: '2019-01-01',
-                time: '10:00 AM',
-                status: 'Pending',
-            },
-            {
-                id: 2,
-                name: 'Johny Doe',
-                email: 'johny@iiitd.ac.in',
-                phone: '+91-1234567890',
-                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                date: '2019-01-01',
-                time: '10:00 AM',
-                status: 'Pending',
-            },
-            {
-                id: 3,
-                name: 'Johnoy Doe',
-                email: 'johnoy@iiitd.ac.in',
-                phone: '+91-1234567890',
-                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                date: '2019-01-01',
-                time: '10:00 AM',
-                status: 'Pending',
-            },
-            {
-                id: 4,
-                name: 'John Doe',
-                email: 'john@iiitd.ac.in',
-                phone: '+91-1234567890',
-                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                date: '2019-01-01',
-                time: '10:00 AM',
-                status: 'Pending',
-            },
-            {
-                id: 5,
-                name: 'Johny Doe',
-                email: 'johny@iiitd.ac.in',
-                phone: '+91-1234567890',
-                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                date: '2019-01-01',
-                time: '10:00 AM',
-                status: 'Pending',
-            },
-            {
-                id: 6,
-                name: 'Johnoy Doe',
-                email: 'johnoy@iiitd.ac.in',
-                phone: '+91-1234567890',
-                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                date: '2019-01-01',
-                time: '10:00 AM',
-                status: 'Pending',
-            },
-        ]
-        
+        TableHeaders:[],
+        TableResponses:[],       
+    });
+
+
+    const setTableResponses = (TableResponses) => setData((prevData) => {
+        return {...prevData, TableResponses}
+    });
+
+
+    const setTableHeaders = (TableHeaders) => setData((prevData) => {
+        return {...prevData, TableHeaders}
     });
 
     const setEvent = (event) => setData((prevData)=> {
@@ -99,6 +51,7 @@ export default function Event() {
     const setForm = (form) => setData((prevData) => {
         return {...prevData, form}
     });
+
     const addClubLogoLinks = (club, link) => {
         console.log(clubLogoLinks)
         setData((prevData) => {
@@ -135,6 +88,12 @@ export default function Event() {
 
     useEffect(() => {
         if (router.query.eventId!==undefined) {
+            axios.get(`form/form/${router.query.eventId}/`)
+                .then(res => setTableHeaders(JSON.parse(res.data.skeleton)))
+
+            axios.get(`form/response/${router.query.eventId}/`)
+                .then(res => setTableResponses(res.data.skeleton))
+
             if (isEmpty(event))
                 axios.get(`club/competition/${router.query.eventId}/`)
                     .then(res => setEvent(res.data))
@@ -148,9 +107,10 @@ export default function Event() {
                 event.clubs.map(club => getDownloadURL(ref(storage, 'data/'+club+'/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
             }
-    }})
 
-    const isLoading = isEmpty(event);
+            setLoading(false);
+        }})
+
 
 
 
@@ -163,9 +123,9 @@ export default function Event() {
         <>
             <Modal
                 aria-labelledby="example-custom-modal-styling-title"
-                dialogClassName="modal-90w"
                 onHide={handleClose}
                 show={show}
+                size="lg"
             >
                 <Modal.Header closeButton>
                     <Modal.Title>
@@ -181,48 +141,25 @@ export default function Event() {
                     >
                         <thead>
                             <tr>
-                                <th>
-                                    #
-                                </th>
-
-                                <th>
-                                    First Name
-                                </th>
-
-                                <th>
-                                    Last Name
-                                </th>
-
-                                <th>
-                                    Username
-                                </th>
+                                {data.TableHeaders.map((option) => (
+                                    <td>
+                                        {option.name}
+                                    </td>
+                                ))}
                             </tr>
                         </thead>
 
                         <tbody>
-                            {data.responses.map((option, index) => (
+                            {data.responses.map((response) => (
                                 <tr>
-                                    <td>
-                                        {option.id}
-
-                                        {index}
-                                    </td>
-
-                                    <td>
-                                        Mark
-                                    </td>
-
-                                    <td>
-                                        Otto
-                                    </td>
-
-                                    <td>
-                                        @mdo
-                                    </td>
+                                    {response.map((values) => (
+                                        <td>
+                                            {values.value}
+                                        </td>
+                                    ))}
                                 </tr>
                         
                             ))}
-
                            
                         </tbody>
                     </Table>
@@ -230,21 +167,7 @@ export default function Event() {
                     Woohoo, youre reading this text in a modal!
                 </Modal.Body>
 
-                {/* <Modal.Footer>
-                    <Button
-                        onClick={handleClose}
-                        variant="secondary"
-                    >
-                        Close
-                    </Button>
-
-                    <Button
-                        onClick={handleClose}
-                        variant="primary"
-                    >
-                        Save Changes
-                    </Button>
-                </Modal.Footer> */}
+                
             </Modal>
 
             <div className="row px-md-5 mx-md-5 px-2 mx-2">
