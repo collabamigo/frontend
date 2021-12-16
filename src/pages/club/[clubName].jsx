@@ -174,9 +174,6 @@ class ClubHomePage extends Component {
                                     </Card.Link>
                                 </div>
 
-                                </Card.Body>
-                            </Card>
-                        </div>
                             </Card.Body>
                         </Card>
                     </div>
