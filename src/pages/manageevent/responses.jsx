@@ -1,4 +1,4 @@
-const response = [
+export const response = [
     {
         id: 1,
         name: 'John Doe',

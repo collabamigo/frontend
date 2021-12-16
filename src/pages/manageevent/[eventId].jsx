@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import React, {useEffect, useState} from "react"
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
@@ -9,14 +10,17 @@ import {faWhatsapp, faInstagram, faFacebook} from '@fortawesome/free-brands-svg-
 import FAQModal from "components/faq/FAQModal";
 import {getStorage, ref, getDownloadURL} from "firebase/storage";
 import {useRouter} from 'next/router'
+import Modal from 'react-bootstrap/Modal'
 import axios from "utils/axios";
 import Loading from "components/Loading";
 import isEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
 import EventAdminModal from "../../components/EventAdmin/modal";
-
+import Table from 'react-bootstrap/Table'
 export default function Event() {
     const router = useRouter()
+    
+    const [show, setShow] = useState(false);
 
     const [data, setData] = useState({
         clubLogoLinks: {},
@@ -24,6 +28,69 @@ export default function Event() {
         form: {},
         showEvent: false,
         showDescription:false,
+        responses : [
+            {
+                id: 1,
+                name: 'John Doe',
+                email: 'john@iiitd.ac.in',
+                phone: '+91-1234567890',
+                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                date: '2019-01-01',
+                time: '10:00 AM',
+                status: 'Pending',
+            },
+            {
+                id: 2,
+                name: 'Johny Doe',
+                email: 'johny@iiitd.ac.in',
+                phone: '+91-1234567890',
+                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                date: '2019-01-01',
+                time: '10:00 AM',
+                status: 'Pending',
+            },
+            {
+                id: 3,
+                name: 'Johnoy Doe',
+                email: 'johnoy@iiitd.ac.in',
+                phone: '+91-1234567890',
+                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                date: '2019-01-01',
+                time: '10:00 AM',
+                status: 'Pending',
+            },
+            {
+                id: 4,
+                name: 'John Doe',
+                email: 'john@iiitd.ac.in',
+                phone: '+91-1234567890',
+                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                date: '2019-01-01',
+                time: '10:00 AM',
+                status: 'Pending',
+            },
+            {
+                id: 5,
+                name: 'Johny Doe',
+                email: 'johny@iiitd.ac.in',
+                phone: '+91-1234567890',
+                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                date: '2019-01-01',
+                time: '10:00 AM',
+                status: 'Pending',
+            },
+            {
+                id: 6,
+                name: 'Johnoy Doe',
+                email: 'johnoy@iiitd.ac.in',
+                phone: '+91-1234567890',
+                message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                date: '2019-01-01',
+                time: '10:00 AM',
+                status: 'Pending',
+            },
+        ]
+        
     });
 
     const setEvent = (event) => setData((prevData)=> {
@@ -51,6 +118,9 @@ export default function Event() {
     const handleCloseDescription = () => setData({...data, showDescription: false});
     const handleShowEvent = () => setData({...data, showEvent: true});
     const handleShowDescription = () => setData({...data, showDescription: true});
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const handleSubmitEvent =()=>{
         console.log("edited");
@@ -90,12 +160,99 @@ export default function Event() {
     if (isLoading)
         return <Loading />
     return (
-        <div className="row px-md-5 mx-md-5 px-2 mx-2">
-            <div className="col-md-4 col-12 me-4">
-                <div className="pb-5">
+        <>
+            <Modal
+                aria-labelledby="example-custom-modal-styling-title"
+                dialogClassName="modal-90w"
+                onHide={handleClose}
+                show={show}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        Responses
+                    </Modal.Title>
+                </Modal.Header>
 
-                    <Carousel>
-                        {JSON.parse(event.image_links).map((image) => {
+                <Modal.Body>
+                    <Table
+                        bordered
+                        hover
+                        striped
+                    >
+                        <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+
+                                <th>
+                                    First Name
+                                </th>
+
+                                <th>
+                                    Last Name
+                                </th>
+
+                                <th>
+                                    Username
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {data.responses.map((option, index) => (
+                                <tr>
+                                    <td>
+                                        {option.id}
+
+                                        {index}
+                                    </td>
+
+                                    <td>
+                                        Mark
+                                    </td>
+
+                                    <td>
+                                        Otto
+                                    </td>
+
+                                    <td>
+                                        @mdo
+                                    </td>
+                                </tr>
+                        
+                            ))}
+
+                           
+                        </tbody>
+                    </Table>
+
+                    Woohoo, youre reading this text in a modal!
+                </Modal.Body>
+
+                {/* <Modal.Footer>
+                    <Button
+                        onClick={handleClose}
+                        variant="secondary"
+                    >
+                        Close
+                    </Button>
+
+                    <Button
+                        onClick={handleClose}
+                        variant="primary"
+                    >
+                        Save Changes
+                    </Button>
+                </Modal.Footer> */}
+            </Modal>
+
+            <div className="row px-md-5 mx-md-5 px-2 mx-2">
+                <div className="col-md-4 col-12 me-4">
+                    <div className="pb-5">
+
+                        <Carousel>
+                            {JSON.parse(event.image_links).map((image) => {
                                 return (
                                     <Carousel.Item key={image}>
                                         <Image
@@ -107,16 +264,16 @@ export default function Event() {
                                     </Carousel.Item>
                                 )
                             })}
-                    </Carousel>
-                </div>
+                        </Carousel>
+                    </div>
 
-                <div className="pt-4">
-                    <p className="text-center text-primary fs-4">
-                        Organised By
-                    </p>
+                    <div className="pt-4">
+                        <p className="text-center text-primary fs-4">
+                            Organised By
+                        </p>
 
-                    <div className="row justify-content-around">
-                        {lodashMap(clubLogoLinks, ((link, club) => {
+                        <div className="row justify-content-around">
+                            {lodashMap(clubLogoLinks, ((link, club) => {
                             return (
                                 <div
                                     className="col-5 me-1"
@@ -132,160 +289,162 @@ export default function Event() {
                                 </div>
                             )
                         }))}
-                    </div>
-                </div>
-            </div>
-
-            <div className="col">
-                <div className="row text-primary">
-                    <div className="col-md-9 col-12">
-                        <h1 className="fw-bold">
-                            {event.name}
-
-                            {" "}
-
-                            <button
-                                className="btn btn-outline-warning material-icons"
-                                onClick={handleShowEvent}
-                                type="button"
-                            >
-                                edit
-                            </button>
-                        </h1>
-
-                        <div>
-
-                            <div className="">
-                                <p>
-
-                                    <FontAwesomeIcon icon={faCalendar} />
-
-                                    {' '}
-
-                                    {convertToDatetimeString(event.event_start) +
-                                        (event.event_end?" to "+ convertToDatetimeString(event.event_end):"")}
-                                </p>
-
-                                <p>
-                                    <FontAwesomeIcon icon={faMapMarkerAlt} />
-
-                                    {' '}
-
-                                    {event.location}
-                                </p>
-
-                                {isEmpty(form)?null:
-                                <p>
-                                    <FontAwesomeIcon icon={faClock} />
-
-                                    {' '}
-
-                                    Reg. starts
-                                    {' '}
-
-                                    {convertToDatetimeString(form.opens_at)}
-
-                                    {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
-                                </p>}
-                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div className="col-md-3 col-12">
-                        <div className="row">
-                            {isEmpty(form)?null:
+                <div className="col">
+                    <div className="row text-primary">
+                        <div className="col-md-9 col-12">
+                            <h1 className="fw-bold">
+                                {event.name}
+
+                                {" "}
+
+                                <button
+                                    className="btn btn-outline-warning material-icons"
+                                    onClick={handleShowEvent}
+                                    type="button"
+                                >
+                                    edit
+                                </button>
+                            </h1>
+
                             <div>
-                                <Button
-                                    className="w-100"
-                                    size="lg"
-                                >
-                                    Edit Form
-                                </Button>
-                            </div>}
 
-                            {(!event.faq || isEmpty(event.faq))?null:
-                            <div className="p-2 col-6">
-                                <FAQModal data={JSON.parse(event.faq)} />
-                            </div>}
+                                <div className="">
+                                    <p>
 
-                            <div className="p-2 col-6">
-                                <a
-                                    href={event.link}
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
+                                        <FontAwesomeIcon icon={faCalendar} />
+
+                                        {' '}
+
+                                        {convertToDatetimeString(event.event_start) +
+                                        (event.event_end?" to "+ convertToDatetimeString(event.event_end):"")}
+                                    </p>
+
+                                    <p>
+                                        <FontAwesomeIcon icon={faMapMarkerAlt} />
+
+                                        {' '}
+
+                                        {event.location}
+                                    </p>
+
+                                    {isEmpty(form)?null:
+                                    <p>
+                                        <FontAwesomeIcon icon={faClock} />
+
+                                        {' '}
+
+                                        Reg. starts
+                                        {' '}
+
+                                        {convertToDatetimeString(form.opens_at)}
+
+                                        {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
+                                    </p>}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-md-3 col-12">
+                            <div className="row">
+                                {isEmpty(form)?null:
+                                <div>
                                     <Button
                                         className="w-100"
-                                        size="m"
-                                        variant="outline-primary"
+                                        onClick={handleShow}
+                                        size="lg"
                                     >
-                                        Add Links
+                                        View Responses
                                     </Button>
-                                </a>
+                                </div>}
+
+                                {(!event.faq || isEmpty(event.faq))?null:
+                                <div className="p-2 col-6">
+                                    <FAQModal data={JSON.parse(event.faq)} />
+                                </div>}
+
+                                <div className="p-2 col-6">
+                                    <a
+                                        href={event.link}
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                    >
+                                        <Button
+                                            className="w-100"
+                                            size="m"
+                                            variant="outline-primary"
+                                        >
+                                            Add Links
+                                        </Button>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
+                                <FontAwesomeIcon
+                                    className="mx-2"
+                                    icon={faWhatsapp}
+                                    size="2x"
+                                />
+
+                                <FontAwesomeIcon
+                                    className="mx-2"
+                                    icon={faFacebook}
+                                    size="2x"
+                                />
+
+                                <FontAwesomeIcon
+                                    className="mx-2"
+                                    icon={faInstagram}
+                                    size="2x"
+                                />
+
+                                <FontAwesomeIcon
+                                    className="mx-2"
+                                    icon={faShareAlt}
+                                    size="2x"
+                                />
                             </div>
                         </div>
-
-                        <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
-                            <FontAwesomeIcon
-                                className="mx-2"
-                                icon={faWhatsapp}
-                                size="2x"
-                            />
-
-                            <FontAwesomeIcon
-                                className="mx-2"
-                                icon={faFacebook}
-                                size="2x"
-                            />
-
-                            <FontAwesomeIcon
-                                className="mx-2"
-                                icon={faInstagram}
-                                size="2x"
-                            />
-
-                            <FontAwesomeIcon
-                                className="mx-2"
-                                icon={faShareAlt}
-                                size="2x"
-                            />
-                        </div>
                     </div>
-                </div>
 
-                <EventAdminModal
-                    handleClose={handleCloseEvent}
-                    handleSubmit={handleSubmitEvent}
-                    initialValues={[event.name, convertToDatetimeString(event.event_start) +
+                    <EventAdminModal
+                        handleClose={handleCloseEvent}
+                        handleSubmit={handleSubmitEvent}
+                        initialValues={[event.name, convertToDatetimeString(event.event_start) +
                                         (event.event_end?" to "+ convertToDatetimeString(event.event_end):""), event.location,
                         convertToDatetimeString(form.opens_at), convertToDatetimeString(form.closes_at) ? + " " +
                             + convertToDatetimeString(form.closes_at) : ""]}
-                    labels={['Event Name','Date and Time','Location','Registration Starts', 'Registration ends']}
-                    show={data.showEvent}
-                />
-
-                <div>
-                    <p>
-                        {event.description}
-                    </p>
-
-                    <button
-                        className="btn btn-outline-warning material-icons"
-                        onClick={handleShowDescription}
-                        type="button"
-                    >
-                        edit
-                    </button>
-
-                    <EventAdminModal
-                        handleClose={handleCloseDescription}
-                        handleSubmit={handleSubmitDescription}
-                        initialValues={[event.description]}
-                        labels={['Event Description']}
-                        show={data.showDescription}
+                        labels={['Event Name','Date and Time','Location','Registration Starts', 'Registration ends']}
+                        show={data.showEvent}
                     />
+
+                    <div>
+                        <p>
+                            {event.description}
+                        </p>
+
+                        <button
+                            className="btn btn-outline-warning material-icons"
+                            onClick={handleShowDescription}
+                            type="button"
+                        >
+                            edit
+                        </button>
+
+                        <EventAdminModal
+                            handleClose={handleCloseDescription}
+                            handleSubmit={handleSubmitDescription}
+                            initialValues={[event.description]}
+                            labels={['Event Description']}
+                            show={data.showDescription}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
