@@ -7,7 +7,7 @@ import axios from "../../utils/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
-import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import {getStorage, ref, uploadBytes} from "firebase/storage";
 import Button from "react-bootstrap/Button";
 // import {getAuth, signInWithCustomToken} from 'firebase/auth';
 import RCarousel from "react-multi-carousel";
