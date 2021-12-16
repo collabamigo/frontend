@@ -19,11 +19,8 @@ import EventAdminModal from "../../components/EventAdmin/modal";
 import Table from 'react-bootstrap/Table'
 export default function Event() {
     const router = useRouter()
-    
+
     const [show, setShow] = useState(false);
-
-    const [isLoading, setLoading] = useState(true);
-
 
     const [data, setData] = useState({
         clubLogoLinks: {},
@@ -32,7 +29,7 @@ export default function Event() {
         showEvent: false,
         showDescription:false,
         TableHeaders:[],
-        TableResponses:[],       
+        TableResponses:[],
     });
 
 
@@ -41,15 +38,12 @@ export default function Event() {
     });
 
 
-    const setTableHeaders = (TableHeaders) => setData((prevData) => {
-        return {...prevData, TableHeaders}
+    const setTableHeaders = (data) => setData((prevData) => {
+        return {...prevData, TableHeaders: JSON.parse(data.skeleton), form: data}
     });
 
     const setEvent = (event) => setData((prevData)=> {
         return {...prevData, event}
-    });
-    const setForm = (form) => setData((prevData) => {
-        return {...prevData, form}
     });
 
     const addClubLogoLinks = (club, link) => {
@@ -88,29 +82,27 @@ export default function Event() {
 
     useEffect(() => {
         if (router.query.eventId!==undefined) {
-            axios.get(`form/form/${router.query.eventId}/`)
-                .then(res => setTableHeaders(JSON.parse(res.data.skeleton)))
+            if (isEmpty(data.TableHeaders))
+                axios.get(`form/form/${router.query.eventId}/`)
+                .then(res => setTableHeaders(res.data))
 
-            axios.get(`form/response/${router.query.eventId}/`)
-                .then(res => setTableResponses(res.data.skeleton))
+            // ERROR
+            // if (isEmpty(data.TableResponses))
+            //     axios.get(`form/response/${router.query.eventId}/`)
+            //         .then(res => setTableResponses(res.data.skeleton))
 
             if (isEmpty(event))
                 axios.get(`club/competition/${router.query.eventId}/`)
                     .then(res => setEvent(res.data))
-
-            if (isEmpty(form))
-                axios.get(`form/form/${router.query.eventId}/`)
-                    .then(res => setForm(res.data)).catch(err => console.log(err))
 
             if (isEmpty(clubLogoLinks) && !isEmpty(event)) {
                 const storage = getStorage();
                 event.clubs.map(club => getDownloadURL(ref(storage, 'data/'+club+'/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
             }
-
-            setLoading(false);
         }})
 
+    const isLoading = isEmpty(event);
 
 
 
@@ -121,6 +113,7 @@ export default function Event() {
         return <Loading />
     return (
         <>
+            {isEmpty(data.TableHeaders) || isEmpty(data.TableResponses)? null:
             <Modal
                 aria-labelledby="example-custom-modal-styling-title"
                 onHide={handleClose}
@@ -145,7 +138,7 @@ export default function Event() {
                                     <td>
                                         {option.name}
                                     </td>
-                                ))}
+                            ))}
                             </tr>
                         </thead>
 
@@ -156,19 +149,19 @@ export default function Event() {
                                         <td>
                                             {values.value}
                                         </td>
-                                    ))}
+                                ))}
                                 </tr>
-                        
-                            ))}
-                           
+
+                        ))}
+
                         </tbody>
                     </Table>
 
                     Woohoo, youre reading this text in a modal!
                 </Modal.Body>
 
-                
-            </Modal>
+
+            </Modal>}
 
             <div className="row px-md-5 mx-md-5 px-2 mx-2">
                 <div className="col-md-4 col-12 me-4">
@@ -273,7 +266,7 @@ export default function Event() {
 
                         <div className="col-md-3 col-12">
                             <div className="row">
-                                {isEmpty(form)?null:
+                                {isEmpty(data.TableHeaders) || isEmpty(data.TableResponses) ? null :
                                 <div>
                                     <Button
                                         className="w-100"
