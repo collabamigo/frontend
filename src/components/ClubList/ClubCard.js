@@ -84,21 +84,13 @@ export default class ClubCard extends Component {
                                 <ul className="">
                                     <li className="text-start list-inline-item">
                                         <span>
-                                            {/* {this.state.basicInformation.coordinators[0].name} */}
-
                                             {" "}
-
-
-
                                         </span>
                                     </li>
 
                                     <li className="text-start list-inline-item">
                                         <span>
-                                            {/* {this.state.basicInformation.coordinators[1].name} */}
-
                                             {" "}
-
                                         </span>
                                     </li>
                                 </ul>

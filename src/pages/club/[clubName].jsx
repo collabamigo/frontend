@@ -125,7 +125,7 @@ class ClubHomePage extends Component {
 
         return (
             <div className="row m-1">
-                <div className="col-3 d-flex justify-content-around">
+                <div className="mx-3 col-2 d-flex justify-content-around">
                     <div className={styles.clubcard}>
                         <Card
                             className="pt-2"
@@ -143,7 +143,7 @@ class ClubHomePage extends Component {
                                 </Card.Title>
 
 
-                                <Card.Subtitle className=" text-start pb-2">
+                                <Card.Subtitle className={styles.tagline}>
                                     {this.state.basicInformation.tagline}
                                 </Card.Subtitle>
 
@@ -203,8 +203,8 @@ class ClubHomePage extends Component {
                     </div>
                 </div>
 
-                <div className="col-9 justify-content-around">
-                    <Card>
+                <div className=" col-9 justify-content-around">
+                    <Card className="w-500">
                         <Card.Body>
                             <div className="">
                                 <BCarousel
@@ -276,7 +276,7 @@ class ClubHomePage extends Component {
                                 <br />
 
                                 <div>
-                                    <div>
+                                    <div className={styles.coordinators}>
                                         Coordinators:
                                         {' '}
 
@@ -288,7 +288,7 @@ class ClubHomePage extends Component {
                                         {this.state.basicInformationStatic.coordinators[1].name}
                                     </div>
 
-                                    <div>
+                                    <div className={styles.memberSize}>
                                         Member Size:
                                         {' '}
 
@@ -301,21 +301,21 @@ class ClubHomePage extends Component {
 
                                 <div className="d-flex">
                                     <div className="col-5">
-                                        <div className="text-center h2">
+                                        <div className={styles.descriptionHeading}>
                                             Description
 
                                             {" "}
 
                                         </div>
 
-                                        <p className="text-start h6">
+                                        <p className={styles.description}>
                                             {this.state.basicInformation.description}
                                         </p>
 
                                     </div>
 
                                     <div className="offset-1 col-5">
-                                        <div className="text-center h2">
+                                        <div className={styles.announcementsHeading}>
                                             Announcements
                                             {" "}
 
@@ -332,8 +332,8 @@ class ClubHomePage extends Component {
                                                                 as="li"
                                                                 className="d-flex justify-content-between align-items-start my-2"
                                                             >
-                                                                <div className="ms-2 me-auto">
-                                                                    <div className="fw-bold">
+                                                                <div className={styles.notifications}>
+                                                                    <div className={styles.notificationHeading}>
                                                                         {item["content"]}
                                                                     </div>
 
@@ -368,11 +368,10 @@ class ClubHomePage extends Component {
 
                     <br />
 
-                    <Card className="row">
+                    <Card className="w-500">
                         <Card.Body className="mt-3">
                             <Card.Title className="card-title fs-2 header-color text-left">
                                 Events
-
                                 {" "}
                             </Card.Title>
 
