@@ -4,6 +4,19 @@ import PropTypes from "prop-types";
 import styles from "./EventTalkCard.module.css";
 
 export default function EventTalkCard(props) {
+
+
+
+    var dates = new Date(props.element.event_end);
+    var finals = ((dates.getMonth() + 1) + '/' + dates.getDate() + '/' +  dates.getFullYear());
+    var datee = new Date(props.element.event_end);
+    var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' +  datee.getFullYear());
+
+
+
+
+
+
     return (
         <div className={styles.cardCenter}>
             <Card>
@@ -19,9 +32,13 @@ export default function EventTalkCard(props) {
                         </Card.Title>
 
                         <Card.Subtitle className={styles.subtitle + " mb-2 text-muted"}>
-                            {props.element.event_end}
 
-                            {/* TODO: resolve correct date timing */}
+                            {finals} 
+
+                            { " - "}
+
+                            {finale}
+
                         </Card.Subtitle>
 
                         <Card.Text className={styles.text}>
