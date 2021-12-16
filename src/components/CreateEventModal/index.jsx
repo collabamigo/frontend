@@ -151,6 +151,7 @@ export default class CreateEventModal extends React.Component {
                                                     name="description"
                                                     required
                                                 /> */}
+
                                                 <TextEditor />
                                             </div>
 
