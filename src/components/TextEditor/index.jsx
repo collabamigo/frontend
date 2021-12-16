@@ -1,13 +1,12 @@
-// import 'remirror/styles/all.css';
-// import './styles.css';
-import { cx, htmlToProsemirrorNode } from "remirror";
+/* eslint-disable react/no-multi-comp,react/no-unstable-nested-components */
+
+import { htmlToProsemirrorNode } from "remirror";
 import React from "react";
 import {
   BlockquoteExtension,
   BoldExtension,
   CodeBlockExtension,
   CodeExtension,
-  ColumnAttributes,
   ColumnsExtension,
   FontFamilyExtension,
   FontSizeExtension,
@@ -37,7 +36,6 @@ import {
 import {
   Remirror,
   ThemeProvider,
-  useActive,
   useCommands,
   useRemirror,
 } from "@remirror/react";
@@ -67,177 +65,139 @@ export default function TextEditor() {
     new UnderlineExtension(),
   ];
 
-  const BlockquoteButton = () => {
-    const commands = useCommands();
-    const active = useActive(true);
-    return (
-      <button
-        onMouseDown={(event) => event.preventDefault()}
-        onClick={() => commands.toggleBlockquote()}
-        className="btn-icon-editor"
-      >
-        <span class="material-icons-outlined icons-editor">
-          format_quote
-        </span>
-      </button>
-    );
-  };
 
-  const BoldButton = () => {
-    const commands = useCommands();
-    const active = useActive(true);
-    return (
-      <button
-        onMouseDown={(event) => event.preventDefault()}
-        onClick={() => commands.toggleBold()}
-        className="btn-icon-editor"
-      >
-        <span class="material-icons-outlined icons-editor">
-          format_bold
-        </span>
-      </button>
-    );
-  };
-
-  const CodeButton = () => {
-    const commands = useCommands();
-    const active = useActive(true);
-    return (
-      <button
-        onMouseDown={(event) => event.preventDefault()}
-        onClick={() => commands.toggleCode()}
-        className="btn-icon-editor"
-      >
-        <span class="material-icons-outlined icons-editor">
-          code
-        </span>
-      </button>
-    );
-  };
-
-  const TWO_COLUMNS = {
-    count: 2,
-    fill: "balance",
-    ruleColor: "darkred",
-    ruleStyle: "dashed",
-    ruleWidth: "thick",
-    gap: "5em",
-  };
-  const THREE_COLUMNS = {
-    count: 3,
-  };
-
-  const ColumnsButton = () => {
+  function BoldButton() {
     const commands = useCommands();
     return (
-      <>
         <button
-          onMouseDown={(event) => event.preventDefault()}
-          onClick={() => commands.toggleColumns(TWO_COLUMNS)}
-        >
-          2 col
-        </button>
-        <button
-          onMouseDown={(event) => event.preventDefault()}
-          onClick={() => commands.toggleColumns(THREE_COLUMNS)}
-        >
-          3 col
-        </button>
-      </>
-    );
-  };
-
-  const HeadingButtons = () => {
-    const commands = useCommands();
-    const active = useActive(true);
-    return (
-      <>
-        {[1, 2, 3, 4, 5, 6].map((level) => (
-          <button
-            key={level}
-            onMouseDown={(event) => event.preventDefault()}
-            onClick={() => commands.toggleHeading({ level })}
             className="btn-icon-editor"
-          >
-            H{level}
-          </button>
+            onClick={() => commands.toggleBold()}
+            onMouseDown={(event) => event.preventDefault()}
+            type="button"
+        >
+            <span className="material-icons-outlined icons-editor">
+                format_bold
+            </span>
+        </button>
+    );
+  }
+
+  function CodeButton() {
+    const commands = useCommands();
+    return (
+        <button
+            className="btn-icon-editor"
+            onClick={() => commands.toggleCode()}
+            onMouseDown={(event) => event.preventDefault()}
+            type="button"
+        >
+            <span className="material-icons-outlined icons-editor">
+                code
+            </span>
+        </button>
+    );
+  }
+
+
+  function HeadingButtons() {
+    const commands = useCommands();
+    return (
+        <>
+            {[1, 2, 3, 4, 5, 6].map((level) => (
+                <button
+                    className="btn-icon-editor"
+                    key={level}
+                    onClick={() => commands.toggleHeading({ level })}
+                    onMouseDown={(event) => event.preventDefault()}
+                    type="button"
+                >
+                    H
+                    {level}
+                </button>
         ))}
-      </>
+        </>
     );
-  };
+  }
 
-  const HorizontalRuleButton = () => {
+  function HorizontalRuleButton() {
     const commands = useCommands();
     return (
-      <button onClick={() => commands.insertHorizontalRule()} className="btn-icon-editor">
-        <span class="material-icons-outlined icons-editor">
-          horizontal_rule
-        </span>
-      </button>
+        <button
+            className="btn-icon-editor"
+            onClick={() => commands.insertHorizontalRule()}
+            type="button"
+        >
+            <span className="material-icons-outlined icons-editor">
+                horizontal_rule
+            </span>
+        </button>
     );
-  };
+  }
 
-  const ItalicButton = () => {
-    const commands = useCommands();
-    const active = useActive(true);
-    return (
-      <button
-        onMouseDown={(event) => event.preventDefault()}
-        onClick={() => commands.toggleItalic()}
-        className="btn-icon-editor"
-      >
-        <span class="material-icons-outlined icons-editor">
-          format_italic
-        </span>
-      </button>
-    );
-  };
-
-  const SubButton = () => {
+  function ItalicButton() {
     const commands = useCommands();
     return (
-      <button
-        onMouseDown={(event) => event.preventDefault()}
-        onClick={() => commands.toggleSubscript()}
-        className="btn-icon-editor"
-      >
-        <span class="material-icons-outlined icons-editor">
-          subscript
-        </span>
-      </button>
+        <button
+            className="btn-icon-editor"
+            onClick={() => commands.toggleItalic()}
+            onMouseDown={(event) => event.preventDefault()}
+            type="button"
+        >
+            <span className="material-icons-outlined icons-editor">
+                format_italic
+            </span>
+        </button>
     );
-  };
+  }
 
-  const SupButton = () => {
+  function SubButton() {
     const commands = useCommands();
     return (
-      <button
-        onMouseDown={(event) => event.preventDefault()}
-        onClick={() => commands.toggleSuperscript()}
-        className="btn-icon-editor"
-      >
-        <span class="material-icons-outlined icons-editor">
-          superscript
-        </span>
-      </button>
+        <button
+            className="btn-icon-editor"
+            onClick={() => commands.toggleSubscript()}
+            onMouseDown={(event) => event.preventDefault()}
+            type="button"
+        >
+            <span className="material-icons-outlined icons-editor">
+                subscript
+            </span>
+        </button>
     );
-  };
+  }
 
-  const UnderlineButton = () => {
+  function SupButton() {
     const commands = useCommands();
-    const active = useActive(true);
     return (
-      <button
-        onMouseDown={(event) => event.preventDefault()}
-        onClick={() => commands.toggleUnderline()}
-        className="btn-icon-editor"
-      >
-        <span class="material-icons-outlined icons-editor">
-          format_underlined
-        </span>
-      </button>
+        <button
+            className="btn-icon-editor"
+            onClick={() => commands.toggleSuperscript()}
+            onMouseDown={(event) => event.preventDefault()}
+            type="button"
+
+        >
+            <span className="material-icons-outlined icons-editor">
+                superscript
+            </span>
+        </button>
     );
-  };
+  }
+
+  function UnderlineButton() {
+    const commands = useCommands();
+    return (
+        <button
+            className="btn-icon-editor"
+            onClick={() => commands.toggleUnderline()}
+            onMouseDown={(event) => event.preventDefault()}
+            type="button"
+        >
+            <span className="material-icons-outlined icons-editor">
+                format_underlined
+            </span>
+        </button>
+    );
+  }
 
   const { manager, state, onChange } = useRemirror({
     extensions: extensions,
@@ -246,25 +206,34 @@ export default function TextEditor() {
   });
 
   return (
-    <ThemeProvider>
-      <Remirror
-        manager={manager}
-        autoFocus
-        onChange={onChange}
-        initialContent={state}
-        autoRender="end"
-      >
-        <BoldButton />
-        <ItalicButton />
-        <UnderlineButton />
-        {/* <BlockquoteButton /> */}
-        <CodeButton />
-        <HeadingButtons />
-        <HorizontalRuleButton />
-        <SubButton />
-        <SupButton />
-        {/* <ColumnsButton /> */}
-      </Remirror>
-    </ThemeProvider>
+      <ThemeProvider>
+          <Remirror
+              autoFocus
+              autoRender="end"
+              initialContent={state}
+              manager={manager}
+              onChange={onChange}
+          >
+              <BoldButton />
+
+              <ItalicButton />
+
+              <UnderlineButton />
+
+              {/* <BlockquoteButton /> */}
+
+              <CodeButton />
+
+              <HeadingButtons />
+
+              <HorizontalRuleButton />
+
+              <SubButton />
+
+              <SupButton />
+
+              {/* <ColumnsButton /> */}
+          </Remirror>
+      </ThemeProvider>
   );
 }
