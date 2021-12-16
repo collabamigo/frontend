@@ -197,9 +197,9 @@ export default class AuthenticatedHome extends React.Component {
 
                                 <div className="p-2 bd-highlight" />
 
-                                <div className="p-2 bd-highlight">
+                                {/* <div className="p-2 bd-highlight">
                                     See More
-                                </div>
+                                </div> */}
                             </div>
 
                         </div>
@@ -232,9 +232,9 @@ export default class AuthenticatedHome extends React.Component {
 
                                 <div className="p-2 bd-highlight" />
 
-                                <div className="p-2 bd-highlight">
+                                {/* <div className="p-2 bd-highlight">
                                     See More
-                                </div>
+                                </div> */}
                             </div>
 
                         </div>
@@ -267,9 +267,9 @@ export default class AuthenticatedHome extends React.Component {
 
                                 <div className="p-2 bd-highlight" />
 
-                                <div className="p-2 bd-highlight">
+                                {/* <div className="p-2 bd-highlight">
                                     See More
-                                </div>
+                                </div> */}
                             </div>
 
                         </div>
