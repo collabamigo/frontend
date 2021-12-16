@@ -1,8 +1,10 @@
+/* eslint-disable react/no-array-index-key */
 
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Image from "react-bootstrap/Image";
+import axios from "utils/axios";
 
 import styles from "styles/index.module.css";
 import ClubCard from "../common/HomePageCards/ClubCard.js";
@@ -15,76 +17,21 @@ export default class AuthenticatedHome extends React.Component {
         super(props);
 
         this.state = {
-
-            clubList: [
-                {name: "Tasveer", logo: "https://via.placeholder.com/70X70"},
-                {name: "MicDrop", logo: "https://via.placeholder.com/70X70"},
-                {name: "Byld", logo: "https://via.placeholder.com/70X70"},
-                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
-                {name: "Litsoc", logo: "https://via.placeholder.com/70X70"},
-                {name: "Meraki", logo: "https://via.placeholder.com/70X70"},
-                {name: "MUSE", logo: "https://via.placeholder.com/70X70"},
-                {name: "Philsoc", logo: "https://via.placeholder.com/70X70"},
-                {name: "Electroholics", logo: "https://via.placeholder.com/70X70"},
-                {name: "Cyborg", logo: "https://via.placeholder.com/70X70"},
-                {name: "Astronuts", logo: "https://via.placeholder.com/70X70"},
-                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
-            ],
-
-            eventList: [
-                {name: "Tasveer", logo: "https://via.placeholder.com/70X70"},
-                {name: "MicDrop", logo: "https://via.placeholder.com/70X70"},
-                {name: "Byld", logo: "https://via.placeholder.com/70X70"},
-                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
-                {name: "Litsoc", logo: "https://via.placeholder.com/70X70"},
-                {name: "Meraki", logo: "https://via.placeholder.com/70X70"},
-                {name: "MUSE", logo: "https://via.placeholder.com/70X70"},
-                {name: "Philsoc", logo: "https://via.placeholder.com/70X70"},
-                {name: "Electroholics", logo: "https://via.placeholder.com/70X70"},
-                {name: "Cyborg", logo: "https://via.placeholder.com/70X70"},
-                {name: "Astronuts", logo: "https://via.placeholder.com/70X70"},
-                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
-            ],
-
+            clubList: [],
+            eventList: [],
             // eslint-disable-next-line react/no-unused-state
-            talkList: [
-                {name: "Tasveer", logo: "https://via.placeholder.com/70X70"},
-                {name: "MicDrop", logo: "https://via.placeholder.com/70X70"},
-                {name: "Byld", logo: "https://via.placeholder.com/70X70"},
-                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
-                {name: "Litsoc", logo: "https://via.placeholder.com/70X70"},
-                {name: "Meraki", logo: "https://via.placeholder.com/70X70"},
-                {name: "MUSE", logo: "https://via.placeholder.com/70X70"},
-                {name: "Philsoc", logo: "https://via.placeholder.com/70X70"},
-                {name: "Electroholics", logo: "https://via.placeholder.com/70X70"},
-                {name: "Cyborg", logo: "https://via.placeholder.com/70X70"},
-                {name: "Astronuts", logo: "https://via.placeholder.com/70X70"},
-                {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
-            ],
+            talkList: [],
         };
     }
 
-    // async componentDidMount() {
-    //     if (await checkLoginStatus())
-    //         axios.get(backend + "club/club").then((res) => {
-    //             let clubLists = [];
-    //             for (let i = 0; i < res.data.length; i++) {
-    //                 clubLists.push(res.data[i]);
-    //             }
-    //             this.setState({clubList: clubLists});
-    //         });
-    //     axios.get(backend + "connect/teacher?format=json").then((res) => {
-    //         if (res.data.length)
-    //             this.setState({
-    //                 first: "VIEW DASHBOARD",
-    //                 second: "Dashboard",
-    //                 third:
-    //                     "Hi Collaborator," +
-    //                     "\nView and edit your skills here. You can also see your " +
-    //                     "work summary and the hot trending skills on the platform ",
-    //             });
-    //     });
-    // }
+    componentDidMount() {
+        axios.get("/club/feed").then((res) => {
+            this.setState({
+                clubList:res.data.clubs,
+                eventList:res.data.competitions
+            });
+        }).then(console.log(this.state.clubList));
+    }
 
     shouldComponentUpdate() {
         return true;
@@ -112,7 +59,7 @@ export default class AuthenticatedHome extends React.Component {
                         }
                       };
 
-                      const responsive2 = {
+        const responsive2 = {
                         superLargeDesktop: {
                           // the naming can be any, depends on you.
                           breakpoint: { max: 4000, min: 3000 },
@@ -179,9 +126,8 @@ export default class AuthenticatedHome extends React.Component {
 
                                     {this.state.eventList.map((option, index) => (
                                         <EventTalkCard
-                                            key={option}
-                                            value={index}
-
+                                            element={option}
+                                            key={index}
                                         />
                                     ))}
 
@@ -216,8 +162,8 @@ export default class AuthenticatedHome extends React.Component {
 
                                     {this.state.clubList.map((option, index) => (
                                         <ClubCard
-                                            key={option}
-                                            value={index}
+                                            key={index}
+                                            value={option}
                                         />
                                         ))}
                                 </Carousel>

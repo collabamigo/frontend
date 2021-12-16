@@ -4,6 +4,12 @@ import PropTypes from "prop-types";
 import styles from "./EventTalkCard.module.css";
 
 export default function EventTalkCard(props) {
+
+    var dates = new Date(props.element.event_end);
+    var finals = ((dates.getMonth() + 1) + '/' + dates.getDate() + '/' +  dates.getFullYear());
+    var datee = new Date(props.element.event_end);
+    var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' +  datee.getFullYear());
+
     return (
         <div className={styles.cardCenter}>
             <Card>
@@ -15,19 +21,21 @@ export default function EventTalkCard(props) {
                 <Card.Body>
                     <div className={styles.cardinner}>
                         <Card.Title className={styles.title + " text-primary fw-bold"}>
-                            {props.element.title}
+                            {props.element.name}
                         </Card.Title>
 
                         <Card.Subtitle className={styles.subtitle + " mb-2 text-muted"}>
-                            {props.element.subtitle}
+
+                            {finals} 
+
+                            { " - "}
+
+                            {finale}
+
                         </Card.Subtitle>
 
                         <Card.Text className={styles.text}>
-                            {props.element.text}
-                        </Card.Text>
-            
-                        <Card.Text className={styles.footer + " text-primary"}>
-                            {props.element.footer}
+                            {props.element.description}
                         </Card.Text>
                     </div>
                 </Card.Body>
@@ -48,7 +56,7 @@ EventTalkCard.defaultProps = {
         src: "https://via.placeholder.com/450x450",
         title: "Event title",
         subtitle: "Event subtitle",
-        text: "Event text comes here",
+        description: "Event descriptiontext comes here",
         footer: "Event footer",
     }
 }
