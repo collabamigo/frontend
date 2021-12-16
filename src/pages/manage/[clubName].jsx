@@ -23,7 +23,6 @@ static propTypes = {
                 query: PropTypes.shape({
                     clubName: PropTypes.string.isRequired
                 }),
-
             }
         ).isRequired
     }
@@ -185,15 +184,11 @@ static propTypes = {
     handleUpload3(image){
         // this.image3Ref.current.click()
         this.setState({image3: image})
-        console.log("sike bro1")
         const storage = getStorage();
         const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
             (new Date().getTime()));
-        console.log("sike bro2")
-
         if(image == null)
             return;
-        console.log("sike bro3")
         uploadBytes(storageRef, image).then(() => {console.log('Uploaded a blob or file!');})
              .catch(() => {console.log("error bro")});
     }
@@ -228,9 +223,6 @@ static propTypes = {
         if (this.state.isLoading || this.state.announcements === null || this.state.competitions === null){
             return "loading"; // LOADING SCREEN
         }
-        console.log(this.state.basicInformation)
-        console.log(this.state.competitions)
-        console.log(this.state.announcements)
         return (
             <div className="row m-1">
                 <div className="col-3 d-flex justify-content-around">
