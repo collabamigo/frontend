@@ -1,110 +1,24 @@
-.container{
-    margin-top: auto;
-    overflow: hidden;
+ /**
+ * Footer Styles
+ */
+
+.footer {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0.2rem;
+    clear: both;
+    background-color: #212d9c !important;
+    text-align: center;
+    width: 100%;
 }
 
-.row1{
-    width:100%;
+.linkFooter {
+    color: white;
 }
 
-.leftcontainer{
-    margin-top: 1% !important;
-    padding-left:20px !important;
-    width:50% !important;
-}
-
-.rightcontainer{
-    padding:2px;
-    width:50% !important;
-}
-
-.rightcontainerleft{
-    width:50% !important;
-}
-
-.rightcontainerright{
-    margin-top: 2% !important;
-    font-size:18px;
-    width:50% !important;
-}
-
-.row2{
-    background-color:blue;
-    width:120%;
-}
-
-
-.listt{
-    list-style: none !important;
-    padding:0 !important;
-    margin:1rem !important;
-}
-
-.collabtext{
-    font-size:50px !important;
-}
-
-.collabtext2{
-    display:none !important;
-}
-
-
-
-@media (max-width: 800px) {
-    .container{
-    }
-
-    .row1{
-        padding:2px;
-        width:100%;
-        padding-left: 20px;
-
-    }
-
-    .leftcontainer{
-        margin-top: 0% !important;
-        padding-left:20px !important;
-        width:50% !important;
-    }
-
-    .rightcontainer{
-        padding:2px;
-        width:50% !important;
-    }
-
-    .rightcontainerleft{
-        display: none !important;
-
-    }
-
-    .rightcontainerright{
-        margin-top: 2% !important;
-        font-size:12px;
-        width:100% !important;
-    }
-
-    .row2{
-        background-color:blue;
-        width:100%;
-    }
-
-    .listt{
-        list-style: none !important;
-        padding:0 !important;
-        margin:0 !important;
-    }
-
-    .collabtext{
-        font-size:13px !important;
-    }
-
-    .collabtext2{
-        display:contents !important;
-        font-size:18px !important;
-    }
-
-    .listtitems{
-        padding-top:5px !important;
-    }
-
+.linkFooter:hover {
+    color: #888888;
 }

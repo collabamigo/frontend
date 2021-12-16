@@ -7,6 +7,7 @@ import Image from "react-bootstrap/Image";
 import styles from "styles/index.module.css";
 import ClubCard from "../common/HomePageCards/ClubCard.js";
 import EventTalkCard from "../common/HomePageCards/EventTalkCard.js";
+import LandingFooter from "components/LandingFooter";
 
 
 export default class AuthenticatedHome extends React.Component {
@@ -271,6 +272,8 @@ export default class AuthenticatedHome extends React.Component {
                     </div> */}
 
                 </div>
+
+                <LandingFooter />
             </div>
 
             // <div className=" h-75 w-100 justify-content-center card-group ">
