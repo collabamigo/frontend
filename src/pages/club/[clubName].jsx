@@ -9,6 +9,7 @@ import {ListGroup} from "react-bootstrap";
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
+import styles from "./styles.module.css";
 
 class ClubHomePage extends Component {
 
@@ -125,150 +126,80 @@ class ClubHomePage extends Component {
         return (
             <div className="row m-1">
                 <div className="col-3 d-flex justify-content-around">
-                    <div className="position-fixed">
-                        <div className="row">
-                            <Card
-                                className="pt-2"
-                                style={{ width: '18rem' }}
-                            >
+                    <div className={styles.clubcard}>
+                        <Card
+                            className="pt-2"
+                            style={{ width: '18rem' }}
+                        >
 
-                                <Card.Img
-                                    src={this.state.basicInformationStatic.logoLink}
-                                    variant="top"
-                                />
+                            <Card.Img
+                                src={this.state.basicInformationStatic.logoLink}
+                                variant="top"
+                            />
 
-                                <Card.Body>
-                                    <Card.Title className='fs-2 fw-bold text-start pb-2'>
-                                        {this.state.basicInformation.name}
-                                    </Card.Title>
+                            <Card.Body>
+                                <Card.Title className='fs-2 fw-bold text-start pb-2'>
+                                    {this.state.basicInformation.name}
+                                </Card.Title>
 
 
-                                    <Card.Subtitle className=" text-start pb-2">
-                                        {this.state.basicInformation.tagline}
-                                    </Card.Subtitle>
+                                <Card.Subtitle className=" text-start pb-2">
+                                    {this.state.basicInformation.tagline}
+                                </Card.Subtitle>
 
-                                    <br />
+                                <br />
 
-                                    <div className="col text-center">
-                                        <Card.Link
-                                            className=""
-                                            href={this.state.basicInformation.facebook}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="20px"
-                                                src="linkedin.svg"
-                                                width="20px"
-                                            />
-                                        </Card.Link>
+                                <div className="col text-center">
+                                    <Card.Link
+                                        className=""
+                                        href={this.state.basicInformation.facebook}
+                                        target="_blank"
+                                    >
+                                        <SvgIcon
+                                            height="20px"
+                                            src="linkedin.svg"
+                                            width="20px"
+                                        />
+                                    </Card.Link>
 
-                                        <Card.Link
-                                            className=""
-                                            href={this.state.basicInformation.instagram}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="20px"
-                                                src="linkedin.svg"
-                                                width="20px"
-                                            />
-                                        </Card.Link>
+                                    <Card.Link
+                                        className=""
+                                        href={this.state.basicInformation.instagram}
+                                        target="_blank"
+                                    >
+                                        <SvgIcon
+                                            height="20px"
+                                            src="linkedin.svg"
+                                            width="20px"
+                                        />
+                                    </Card.Link>
 
-                                        <Card.Link
-                                            href={this.state.basicInformation.linkedin}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="25px"
-                                                src="github.svg"
-                                                width="25px"
-                                            />
-                                        </Card.Link>
+                                    <Card.Link
+                                        href={this.state.basicInformation.linkedin}
+                                        target="_blank"
+                                    >
+                                        <SvgIcon
+                                            height="25px"
+                                            src="github.svg"
+                                            width="25px"
+                                        />
+                                    </Card.Link>
 
-                                        <Card.Link
-                                            className=""
-                                            href={this.state.basicInformation.website}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="20px"
-                                                src="linkedin.svg"
-                                                width="20px"
-                                            />
-                                        </Card.Link>
-                                    </div>
+                                    <Card.Link
+                                        className=""
+                                        href={this.state.basicInformation.website}
+                                        target="_blank"
+                                    >
+                                        <SvgIcon
+                                            height="20px"
+                                            src="linkedin.svg"
+                                            width="20px"
+                                        />
+                                    </Card.Link>
+                                </div>
 
-                                </Card.Body>
-                            </Card>
-                        </div>
-
-                        {/*<div className="row">*/}
-
-                        {/*    <Card>*/}
-
-                        {/*        <button*/}
-
-                        {/*            className="btn btn-outline-warning col-2 pt-2"*/}
-
-                        {/*            onClick={this.handleEditPanel}*/}
-
-                        {/*            type="button"*/}
-
-                        {/*        >*/}
-
-                        {/*            <span*/}
-
-                        {/*                className="material-icons"*/}
-
-                        {/*            >*/}
-
-                        {/*                edit*/}
-
-                        {/*            </span>*/}
-
-                        {/*        </button>*/}
-
-                        {/*        <Card.Title className='fs-2 text-start'>*/}
-
-                        {/*            Coordinators:*/}
-
-                        {/*        </Card.Title>*/}
-
-                        {/*        <CardBody>*/}
-
-                        {/*            <div>*/}
-
-                        {/*                <ul>*/}
-
-                        {/*                    <li>*/}
-
-                        {/*                        {this.state.basicInformationStatic.coordinators[0].name}*/}
-
-                        {/*                    </li>*/}
-
-                        {/*                    <li>*/}
-
-                        {/*                        {this.state.basicInformationStatic.coordinators[1].name}*/}
-
-                        {/*                    </li>*/}
-
-                        {/*                </ul>*/}
-
-                        {/*                <br />*/}
-
-                        {/*                Member Size:*/}
-
-                        {/*                {" "}*/}
-
-                        {/*                {this.state.basicInformationStatic.memberSize}*/}
-
-                        {/*            </div>*/}
-
-                        {/*        </CardBody>*/}
-
-                        {/*    </Card>*/}
-
-                        {/*</div>*/}
+                            </Card.Body>
+                        </Card>
                     </div>
                 </div>
 
