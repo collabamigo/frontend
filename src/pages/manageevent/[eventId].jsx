@@ -150,7 +150,7 @@ export default function Event() {
                         </thead>
 
                         <tbody>
-                            {data.responses.map((response) => (
+                            {data.TableResponses.map((response) => (
                                 <tr>
                                     {response.map((values) => (
                                         <td>
