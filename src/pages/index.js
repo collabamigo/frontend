@@ -13,8 +13,8 @@ import "react-multi-carousel/lib/styles.css";
 import Image from "react-bootstrap/Image";
 
 import styles from "styles/index.module.css";
-import ClubCard from "common/HomePageCards/ClubCard.js";
-import EventTalkCard from "common/HomePageCards/EventTalkCard.js";
+import ClubCard from "../common/HomePageCards/ClubCard.js";
+import EventTalkCard from "../common/HomePageCards/EventTalkCard.js";
 
 
 // import {checkLoginStatus} from "../utils/auth";
@@ -152,19 +152,22 @@ export default class AuthenticatedHome extends React.Component {
                                     className={styles.firstsectionInnerleftImage}
                                     fluid
                                     rounded
-                                    src="https://via.placeholder.com/500x250"
+                                    src="/img/jpg/IntroImage.png"
                                 />
                             </div>
 
                             <div className={styles.firstsectionInnerright}>
-                                <span className={styles.firstsectionInnerheading + " display-2"}>
+                                <span className={styles.firstsectionInnerheading + " display-2 fw-bold text-primary"}>
                                     Welcome to CollabAmigo!
                                 </span>
 
                                 <br />
 
-                                <span className={styles.firstsectionInnertext + " display-2"}>
-                                    Participate in competitions in college, have lots of fun!
+                                <span className={styles.firstsectionInnertext + " text-primary"}>
+                                    Participate in competitions in college,
+                                </span>
+                                <span className={styles.firstsectionInnertext + " text-primary"}>
+                                    have lots of fun!
                                 </span>
                             </div>
                         </div>
@@ -172,7 +175,7 @@ export default class AuthenticatedHome extends React.Component {
 
                     <div className={styles.secondSection}>
                         <div className={styles.secondsectionInner}>
-                            <div className={styles.secondsectionHeading}>
+                            <div className={styles.secondsectionHeading + " text-primary"}>
                                 Competitions
                             </div>
 
@@ -208,7 +211,7 @@ export default class AuthenticatedHome extends React.Component {
 
                     <div className="thirdsection">
                         <div className={styles.thirdsectionInner}>
-                            <div className={styles.thirdsectionHeading}>
+                            <div className={styles.thirdsectionHeading + " text-primary"}>
                                 {' '}
                                 Clubs & Organizations
 

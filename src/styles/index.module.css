@@ -14,6 +14,7 @@
 }
 
 .firstsectionInnerright{
+    padding-top: 1%;
     width: 60%;
 }
 
@@ -31,8 +32,6 @@
     margin-left: 4rem;
     margin-right: 4rem;
 }
-
-
 
 .secondSection{
     padding:10px;
@@ -52,7 +51,7 @@
 }
 
 .secondsectionHeading{
-    font-size:25px; 
+    font-size:30px;
     margin-left: 3rem;
 }
 
@@ -62,42 +61,31 @@
     margin-right: 4rem;
 }
 
-
-
 .thirdsectionInner{
     padding:10px;
 }
-
 
 .fourthsectionInner{
     padding:10px;
 }
 
-
-
 .thirdsectionHeading{
-    font-size:25px; 
+    font-size:30px;
 }
-
-
-
 
 .thirdsectionHeading{
     font-size:25px; 
     margin-left: 3rem;
-
 }
 
 .thirdsectionMiddle{
     margin-left: 4rem;
     margin-right: 4rem;
-
 }
 
 .fourthsectionHeading{
     font-size:25px; 
     margin-left: 3rem;
-
 }
 
 .fourthsectionMiddle{
@@ -106,14 +94,11 @@
 }
 
 
-
-
 @media (max-width: 800px) {
     .firstSection{
         margin-left: 0rem;
         margin-right: 0rem;
         padding: 10px;
-    
     }
     
     .firstsectionInner{
@@ -127,10 +112,12 @@
     
     .firstsectionInnerright{
         width: 100%;
+        text-align: center;
     }
 
     .firstsectionInnerheading{
         font-size: 30px !important;
+        text-align: center;
     }
 
     .firstsectionInnertext{
