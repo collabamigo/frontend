@@ -28,7 +28,7 @@ import {
   // TextCaseExtension,
   UnderlineExtension,
 } from "remirror/extensions";
-import css from 'refractor/lang/css';
+// import css from 'refractor/lang/css';
 // import javascript from 'refractor/lang/javascript';
 // import html from 'refractor/lang/html';
 // import json from 'refractor/lang/json';
@@ -47,8 +47,8 @@ export default function TextEditor() {
     new BlockquoteExtension(),
     new BoldExtension(),
     new CodeBlockExtension({
-        // supportedLanguages: [javascript, typescript, 'html', css, markdown, json],
-        supportedLanguages: [css],
+      // supportedLanguages: [javascript, typescript, 'html', css, markdown, json],
+      // supportedLanguages: [css],
     }),
     new CodeExtension(),
     new ColumnsExtension(),
@@ -74,9 +74,11 @@ export default function TextEditor() {
       <button
         onMouseDown={(event) => event.preventDefault()}
         onClick={() => commands.toggleBlockquote()}
-        className={cx(active.blockquote() && "active")}
+        className="btn-icon-editor"
       >
-        BlockQ
+        <span class="material-icons-outlined icons-editor">
+          format_quote
+        </span>
       </button>
     );
   };
@@ -88,9 +90,11 @@ export default function TextEditor() {
       <button
         onMouseDown={(event) => event.preventDefault()}
         onClick={() => commands.toggleBold()}
-        className={cx(active.bold() && "active")}
+        className="btn-icon-editor"
       >
-        B
+        <span class="material-icons-outlined icons-editor">
+          format_bold
+        </span>
       </button>
     );
   };
@@ -102,9 +106,11 @@ export default function TextEditor() {
       <button
         onMouseDown={(event) => event.preventDefault()}
         onClick={() => commands.toggleCode()}
-        className={cx(active.code() && "active")}
+        className="btn-icon-editor"
       >
-        C
+        <span class="material-icons-outlined icons-editor">
+          code
+        </span>
       </button>
     );
   };
@@ -151,7 +157,7 @@ export default function TextEditor() {
             key={level}
             onMouseDown={(event) => event.preventDefault()}
             onClick={() => commands.toggleHeading({ level })}
-            className={cx(active.heading({ level }) && "active")}
+            className="btn-icon-editor"
           >
             H{level}
           </button>
@@ -163,8 +169,10 @@ export default function TextEditor() {
   const HorizontalRuleButton = () => {
     const commands = useCommands();
     return (
-      <button onClick={() => commands.insertHorizontalRule()}>
-        Insert
+      <button onClick={() => commands.insertHorizontalRule()} className="btn-icon-editor">
+        <span class="material-icons-outlined icons-editor">
+          horizontal_rule
+        </span>
       </button>
     );
   };
@@ -176,9 +184,11 @@ export default function TextEditor() {
       <button
         onMouseDown={(event) => event.preventDefault()}
         onClick={() => commands.toggleItalic()}
-        className={cx(active.italic() && "active")}
+        className="btn-icon-editor"
       >
-        I
+        <span class="material-icons-outlined icons-editor">
+          format_italic
+        </span>
       </button>
     );
   };
@@ -189,8 +199,11 @@ export default function TextEditor() {
       <button
         onMouseDown={(event) => event.preventDefault()}
         onClick={() => commands.toggleSubscript()}
+        className="btn-icon-editor"
       >
-        Sub
+        <span class="material-icons-outlined icons-editor">
+          subscript
+        </span>
       </button>
     );
   };
@@ -201,8 +214,11 @@ export default function TextEditor() {
       <button
         onMouseDown={(event) => event.preventDefault()}
         onClick={() => commands.toggleSuperscript()}
+        className="btn-icon-editor"
       >
-        Sup
+        <span class="material-icons-outlined icons-editor">
+          superscript
+        </span>
       </button>
     );
   };
@@ -214,9 +230,11 @@ export default function TextEditor() {
       <button
         onMouseDown={(event) => event.preventDefault()}
         onClick={() => commands.toggleUnderline()}
-        className={cx(active.underline() && "active")}
+        className="btn-icon-editor"
       >
-        U
+        <span class="material-icons-outlined icons-editor">
+          format_underlined
+        </span>
       </button>
     );
   };
@@ -239,7 +257,7 @@ export default function TextEditor() {
         <BoldButton />
         <ItalicButton />
         <UnderlineButton />
-        <BlockquoteButton />
+        {/* <BlockquoteButton /> */}
         <CodeButton />
         <HeadingButtons />
         <HorizontalRuleButton />
