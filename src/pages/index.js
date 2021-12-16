@@ -55,6 +55,7 @@ export default class AuthenticatedHome extends React.Component {
                 {name: "D4rkcode", logo: "https://via.placeholder.com/70X70"},
             ],
 
+            // eslint-disable-next-line react/no-unused-state
             talkList: [
                 {name: "Tasveer", logo: "https://via.placeholder.com/70X70"},
                 {name: "MicDrop", logo: "https://via.placeholder.com/70X70"},
@@ -240,7 +241,7 @@ export default class AuthenticatedHome extends React.Component {
                         </div>
                     </div>
 
-                    <div className="fourthsection">
+                    {/* <div className="fourthsection">
                         <div className={styles.fourthsectionInner}>
                             <div className={styles.fourthsectionHeading}>
                                 {' '}
@@ -267,13 +268,13 @@ export default class AuthenticatedHome extends React.Component {
 
                                 <div className="p-2 bd-highlight" />
 
-                                {/* <div className="p-2 bd-highlight">
+                                <div className="p-2 bd-highlight">
                                     See More
-                                </div> */}
+                                </div>
                             </div>
 
                         </div>
-                    </div>
+                    </div> */}
 
                 </div>
             </div>
