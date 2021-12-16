@@ -9,13 +9,13 @@ export default function ClubCard(props) {
         <div className={styles.cardCenter}>
             <Card>
                 <Card.Img
-                    src={props.element.src}
+                    src={props.value.picture}
                     variant="top"
                 />
 
                 <Card.Body>
                     <Card.Title className={styles.title + " mb-2"}>
-                        {props.element.title}
+                        {props.value.name}
                     </Card.Title>
                 </Card.Body>
             </Card>
@@ -25,12 +25,12 @@ export default function ClubCard(props) {
 
 ClubCard.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
-    element: PropTypes.object,
+    value: PropTypes.object,
 
 }
 
 ClubCard.defaultProps = {
-    element:{
+    value:{
         src: "https://via.placeholder.com/450x450",
         title: "Event title",
     }
