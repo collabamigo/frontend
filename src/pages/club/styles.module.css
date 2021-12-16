@@ -14,7 +14,7 @@
 .descriptionHeading, .announcementsHeading {
     font-size: 35px;
     text-align: center;
-    padding-bottom: 4px;
+    padding-bottom: 5px;
 }
 
 .description {
@@ -35,6 +35,35 @@
 
     .clubcard{
         position: relative;
+        margin: 1rem;
     }
 
+    .descriptionHeading, .announcementsHeading {
+        font-size: 20px;
+        text-align: center;
+        padding-bottom: 3px;
+    }
+
+    .description {
+        font-size: 15px;
+    }
+
+    .notifications {
+        font-size: 15px;
+    }
+
+    .notificationHeading {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+
+    .coordinators, .memberSize {
+        font-size: 15px;
+    }
+
+    .tagline {
+        font-size: 15px;
+        padding-bottom: 2px;
+    }
 }
