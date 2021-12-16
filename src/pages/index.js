@@ -156,13 +156,13 @@ export default class AuthenticatedHome extends React.Component {
                             </div>
 
                             <div className={styles.firstsectionInnerright}>
-                                <span className={styles.firstsectionInnerheading + " display-3"}>
+                                <span className={styles.firstsectionInnerheading + " display-2"}>
                                     Welcome to CollabAmigo!
                                 </span>
 
                                 <br />
 
-                                <span className={styles.firstsectionInnertext}>
+                                <span className={styles.firstsectionInnertext + " display-2"}>
                                     Participate in competitions in college, have lots of fun!
                                 </span>
                             </div>
