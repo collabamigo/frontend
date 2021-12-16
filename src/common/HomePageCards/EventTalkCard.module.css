@@ -1,34 +1,34 @@
 .cardCenter{
-    margin-left: 3rem;
-    margin-right: 3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     padding-top:1px;
     padding-bottom:1px;
 }
 
+.title{
+        font-size:30px;
+    }
 
-
-
-
+.subtitle{
+        font-size:20px;
+    }
 
 @media (max-width: 800px) {
 
     .cardCenter{
         width: 100%;
-        margin-left: 0rem !important;
-        margin-right: 0rem !important;
-        padding-top:1px !important;
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+        padding-top: 1px !important;
         padding-bottom:1px !important;
     }
-    
 
     .cardinner{
         padding: 0px;
         margin: 0px;
     }
+
     .title{
         font-size:15px;
     }
-
-
-
 }
