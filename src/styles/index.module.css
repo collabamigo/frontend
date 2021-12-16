@@ -19,11 +19,13 @@
 }
 
 .firstsectionInnertext{
+    margin-top: 2.5% !important;
+
     font-size: 30px !important;
 }
 
 .firstsectionHeading{
-    font-size:25px; 
+    font-size:25px;
     margin-left: 3rem;
 
 }
@@ -74,7 +76,7 @@
 }
 
 .thirdsectionHeading{
-    font-size:25px; 
+    font-size:25px;
     margin-left: 3rem;
 }
 
@@ -84,7 +86,7 @@
 }
 
 .fourthsectionHeading{
-    font-size:25px; 
+    font-size:25px;
     margin-left: 3rem;
 }
 
@@ -100,16 +102,16 @@
         margin-right: 0rem;
         padding: 10px;
     }
-    
+
     .firstsectionInner{
         padding:10px;
     }
-    
+
     .firstsectionInnerleft{
         margin-top: 2.5%;
         width: 100%;
     }
-    
+
     .firstsectionInnerright{
         width: 100%;
         text-align: center;
@@ -130,16 +132,16 @@
         margin-right: 0rem;
         padding: 10px;
     }
-    
+
     .secondsectionInner{
         padding:10px;
     }
-    
+
     .secondsectionInnerleft{
         margin-top: 2.5%;
         width: 40%;
     }
-    
+
     .secondsectionInnerright{
         width: 60%;
     }
@@ -148,7 +150,7 @@
         font-size:25px;
         margin-left: 0rem !important;
     }
-   
+
     .secondsectionMiddle{
         margin-left:3rem;
         margin-right: 3rem;
@@ -159,16 +161,16 @@
         margin-right: 0rem;
         padding: 10px;
     }
-    
+
     .thirdsectionInner{
         padding:10px;
     }
-    
+
     .thirdsectionInnerleft{
         margin-top: 2.5%;
         width: 40%;
     }
-    
+
     .thirdsectionInnerright{
         width: 60%;
     }
@@ -177,7 +179,7 @@
         font-size:25px;
         margin-left: 1rem !important;
     }
-   
+
     .thirdsectionMiddle{
         margin-left:3rem;
         margin-right: 3rem;
@@ -188,16 +190,16 @@
         margin-right: 0rem;
         padding: 10px;
     }
-    
+
     .fourthsectionInner{
         padding:10px;
     }
-    
+
     .fourthsectionInnerleft{
         margin-top: 2.5%;
         width: 40%;
     }
-    
+
     .fourthsectionInnerright{
         width: 60%;
     }
@@ -206,7 +208,7 @@
         font-size:25px;
         margin-left: 1rem !important;
     }
-   
+
     .fourthsectionMiddle{
         margin-left:3rem;
         margin-right: 3rem;
