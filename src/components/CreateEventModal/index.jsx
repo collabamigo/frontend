@@ -8,6 +8,7 @@ import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {isBrowser} from "../../utils/auth";
 import FormBuilder from "./FormBuilder";
+import TextEditor from "components/TextEditor";
 
 export default class CreateEventModal extends React.Component {
 
@@ -143,13 +144,14 @@ export default class CreateEventModal extends React.Component {
                                                     Event Description
                                                 </label>
 
-                                                <Field
+                                                {/* <Field
                                                     as="textarea"
                                                     className="form-control text-input w-100 bg-secondary text-white border-secondary"
                                                     id="description"
                                                     name="description"
                                                     required
-                                                />
+                                                /> */}
+                                                <TextEditor />
                                             </div>
 
                                             <div className="mb-3 align-middle">
