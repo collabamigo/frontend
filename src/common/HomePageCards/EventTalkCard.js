@@ -5,17 +5,10 @@ import styles from "./EventTalkCard.module.css";
 
 export default function EventTalkCard(props) {
 
-
-
     var dates = new Date(props.element.event_end);
     var finals = ((dates.getMonth() + 1) + '/' + dates.getDate() + '/' +  dates.getFullYear());
     var datee = new Date(props.element.event_end);
     var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' +  datee.getFullYear());
-
-
-
-
-
 
     return (
         <div className={styles.cardCenter}>
