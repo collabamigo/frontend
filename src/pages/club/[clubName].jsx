@@ -297,8 +297,11 @@ class ClubHomePage extends Component {
 
                                         </div>
 
-                                        <div className="height-50">
-                                            <ul className="list">
+                                        <div className="overflow-auto">
+                                            <ul
+                                                className="list"
+                                                style={{ height: '250px'}}
+                                            >
                                                 {this.state.announcements.reverse().map(item => (
                                                     <ul key={item}>
                                                         <ListGroup
@@ -313,9 +316,9 @@ class ClubHomePage extends Component {
                                                                         {item["content"]}
                                                                     </div>
 
-                                                                    {this.state.currentTime}
+                                                                    {/*{this.state.currentTime}*/}
 
-                                                                    {item["timestamp"].split("T")[1].split(".")[0]}
+                                                                    {/*{item["timestamp"].split("T")[1].split(".")[0]}*/}
                                                                 </div>
 
                                                                 <span

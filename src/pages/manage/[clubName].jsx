@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import Button from "react-bootstrap/Button";
-import {getAuth, signInWithCustomToken} from 'firebase/auth';
+// import {getAuth, signInWithCustomToken} from 'firebase/auth';
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 
@@ -66,16 +66,16 @@ static propTypes = {
     }
 
     componentDidMount() {
-    const auth = getAuth();
-    axios.get("/authenticate/get-firebase-token").then((res) => {
-                        this.setState({token: res.data.firebaseToken})
-    //         const auth = getAuth();
-            signInWithCustomToken(auth, res.data.firebaseToken).then(() => console.log(9999999999999))
-        const storage = getStorage();
-        getDownloadURL(ref(storage, 'data/'+ "byld" + '/uneditable/logo.png'))
-                    .then(url => console.log(url))
-
-    })
+    // const auth = getAuth();
+    // axios.get("/authenticate/get-firebase-token").then((res) => {
+    //                     this.setState({token: res.data.firebaseToken})
+    // //         const auth = getAuth();
+    //         signInWithCustomToken(auth, res.data.firebaseToken).then(() => console.log(9999999999999))
+    //     const storage = getStorage();
+    //     getDownloadURL(ref(storage, 'data/'+ "byld" + '/uneditable/logo.png'))
+    //                 .then(url => console.log(url))
+    //
+    // })
         return true
     }
 
@@ -126,8 +126,8 @@ static propTypes = {
     }
 
     handleSubmitAnnouncements(values){
-        axios.post("club/announcements/" + this.props.router.query.clubName,{
-            // club: "Byld",
+        axios.post("club/announcements/",{
+            club: this.props.router.query.clubName,
             content: values[0]
         }).then((ress) => {
                     this.setState((prevState) => {
@@ -387,7 +387,7 @@ static propTypes = {
                                         <img
                                             alt="Third slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformationStatic.clubBanners    [2]}
+                                            src={this.state.basicInformationStatic.clubBanners[2]}
                                         />
 
                                         <Carousel.Caption>
@@ -530,8 +530,11 @@ static propTypes = {
                                             />
                                         </div>
 
-                                        <div className="">
-                                            <ul className="list">
+                                        <div className="overflow-auto">
+                                            <ul
+                                                className="list"
+                                                style={{ height: '250px'}}
+                                            >
                                                 {this.state.announcements.reverse().map(item => (
                                                     <ul key={item}>
                                                         <ListGroup
@@ -546,7 +549,7 @@ static propTypes = {
                                                                         {item["content"]}
                                                                     </div>
 
-                                                                    {this.state.currentTime - item["timestamp"].split("t")}
+                                                                    {/*{this.state.currentTime - item["timestamp"].split("t")}*/}
                                                                 </div>
 
                                                                 <span
