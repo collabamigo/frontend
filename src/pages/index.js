@@ -241,7 +241,7 @@ export default class AuthenticatedHome extends React.Component {
                         </div>
                     </div>
 
-                    <div className="fourthsection">
+                    {/* <div className="fourthsection">
                         <div className={styles.fourthsectionInner}>
                             <div className={styles.fourthsectionHeading}>
                                 {' '}
@@ -252,7 +252,7 @@ export default class AuthenticatedHome extends React.Component {
 
 
                             <div className={styles.fourthsectionMiddle}>
-                                {/* <Carousel responsive={responsive}>
+                                <Carousel responsive={responsive}>
                                     {this.state.talkList.map((option, index) => (
                                         <EventTalkCard
                                             key={option}
@@ -260,7 +260,7 @@ export default class AuthenticatedHome extends React.Component {
                                         />
                                     ))}
 
-                                </Carousel> */}
+                                </Carousel>
                             </div>
 
                             <div className={styles.fourthsectionfooter +" d-flex flex-row-reverse bd-highlight"}>
@@ -268,13 +268,13 @@ export default class AuthenticatedHome extends React.Component {
 
                                 <div className="p-2 bd-highlight" />
 
-                                {/* <div className="p-2 bd-highlight">
+                                <div className="p-2 bd-highlight">
                                     See More
-                                </div> */}
+                                </div>
                             </div>
 
                         </div>
-                    </div>
+                    </div> */}
 
                 </div>
             </div>
