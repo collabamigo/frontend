@@ -69,6 +69,7 @@
     "react-phone-number-input": "^3.1.38",
     "react-simple-animate": "^3.3.12",
     "react-tagsinput": "^3.19.0",
+    "react-transition-group": "^4.4.2",
     "sass": "^1.43.4",
     "stream": "^0.0.2",
     "striptags": "^3.2.0",

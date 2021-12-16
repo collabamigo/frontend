@@ -1,6 +1,7 @@
 import React from "react";
 import 'react-bootstrap';
 import * as styles from './accountchooser.module.css';
+import Link from "common/Link";
 
 export default function AccountChooser() {
     const clubList = [
@@ -18,7 +19,7 @@ export default function AccountChooser() {
     ));
 
     return (
-        <div>
+        <div style={{background:"rgb(40, 92, 168) !important"}}>
             <div className="my-4 d-flex flex-column justify-content-center align-items-center">
                 <div className="d-flex justify-content-between w-100 mx-auto align-items-center">
                     <img
@@ -32,9 +33,15 @@ export default function AccountChooser() {
                             Full Name
                         </h3>
 
-                        <span className={styles.manageSpan}>
-                            Manage Profile
-                        </span>
+                        <Link
+                            internal
+                            to="/profile"
+                        >
+                            <span className={styles.manageSpan}>
+                                Manage Profile
+                            </span>
+                        </Link>
+                       
                     </p>
                 </div>
 
@@ -50,12 +57,12 @@ export default function AccountChooser() {
                     </div>
                 </div>
 
-                <button
+                {/* <button
                     className={styles.signoutBtn}
                     type="button"
                 >
                     Sign Out
-                </button>
+                </button> */}
             </div>
         </div>)
 }

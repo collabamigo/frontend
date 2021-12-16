@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './Footer.module.css';
+import Link from "common/Link";
 
 
 export default function Footer() {
@@ -13,7 +14,11 @@ export default function Footer() {
                             </li>
 
                             <li className={styles.listtitems}>
-                                About us
+                                <Link
+                                    to="/about"
+                                >
+                                    About Us
+                                </Link>
                             </li>
 
                             <li className={styles.listtitems}>
