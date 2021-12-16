@@ -1,244 +1,69 @@
 .clubcard{
-    position: absolute;
+    position: fixed;
 }
 
-
-
-/* lol */
-.firstSection{
-    margin-left: 7rem;
-    margin-right: 7rem;
-    padding: 10px;
-
-}
-.firstsectionInner{
-    padding:10px;
+.coordinators, .memberSize {
+    font-size: 25px;
 }
 
-.firstsectionInnerleft{
-    margin-top: 2.5%;
-    width: 40%;
+.tagline {
+    font-size: 20px;
+    padding-bottom: 2px;
 }
 
-.firstsectionInnerright{
-    width: 60%;
+.descriptionHeading, .announcementsHeading {
+    font-size: 35px;
+    text-align: center;
+    padding-bottom: 5px;
 }
 
-.firstsectionInnertext{
-    font-size: 20px !important;
+.description {
+    font-size: 20px;
 }
 
-.firstsectionHeading{
-    font-size:25px; 
-    margin-left: 3rem;
-
+.notifications {
+    font-size: 20px;
 }
 
-.firstsectionMiddle{
-    margin-left: 4rem;
-    margin-right: 4rem;
+.notificationHeading {
+    font-size: 20px;
+    font-weight: bold;
 }
-
-
-
-.secondSection{
-    padding:10px;
-}
-
-.secondsectionInner{
-    padding:10px;
-}
-
-.secondsectionInnerleft{
-    margin-top: 2.5%;
-    width: 40%;
-}
-
-.secondsectionInnerright{
-    width: 60%;
-}
-
-.secondsectionHeading{
-    font-size:25px; 
-    margin-left: 3rem;
-}
-
-
-.secondsectionMiddle{
-    margin-left: 4rem;
-    margin-right: 4rem;
-}
-
-
-
-.thirdsectionInner{
-    padding:10px;
-}
-
-
-.fourthsectionInner{
-    padding:10px;
-}
-
-
-
-.thirdsectionHeading{
-    font-size:25px; 
-}
-
-
-
-
-.thirdsectionHeading{
-    font-size:25px; 
-    margin-left: 3rem;
-
-}
-
-.thirdsectionMiddle{
-    margin-left: 4rem;
-    margin-right: 4rem;
-
-}
-
-.fourthsectionHeading{
-    font-size:25px; 
-    margin-left: 3rem;
-
-}
-
-.fourthsectionMiddle{
-    margin-left: 4rem;
-    margin-right: 4rem;
-}
-
-
 
 
 @media (max-width: 800px) {
 
     .clubcard{
         position: relative;
+        margin: 1rem;
+    }
+
+    .descriptionHeading, .announcementsHeading {
+        font-size: 20px;
+        text-align: center;
+        padding-bottom: 3px;
+    }
+
+    .description {
+        font-size: 15px;
+    }
+
+    .notifications {
+        font-size: 15px;
+    }
+
+    .notificationHeading {
+        font-size: 15px;
+        font-weight: bold;
     }
 
 
-
-
-    /* lol */
-    .firstSection{
-        margin-left: 0rem;
-        margin-right: 0rem;
-        padding: 10px;
-    
-    }
-    
-    .firstsectionInner{
-        padding:10px;
-    }
-    
-    .firstsectionInnerleft{
-        margin-top: 2.5%;
-        width: 100%;
-    }
-    
-    .firstsectionInnerright{
-        width: 100%;
+    .coordinators, .memberSize {
+        font-size: 15px;
     }
 
-    .firstsectionInnerheading{
-        font-size: 30px !important;
+    .tagline {
+        font-size: 15px;
+        padding-bottom: 2px;
     }
-
-    .firstsectionInnertext{
-        font-size: 15px !important;
-        padding-top: 20px !important;
-    }
-
-    .secondSection{
-        margin-left: 0rem;
-        margin-right: 0rem;
-        padding: 10px;
-    }
-    
-    .secondsectionInner{
-        padding:10px;
-    }
-    
-    .secondsectionInnerleft{
-        margin-top: 2.5%;
-        width: 40%;
-    }
-    
-    .secondsectionInnerright{
-        width: 60%;
-    }
-
-    .secondsectionHeading{
-        font-size:25px;
-        margin-left: 0rem !important;
-    }
-   
-    .secondsectionMiddle{
-        margin-left:3rem;
-        margin-right: 3rem;
-    }
-
-    .thirdSection{
-        margin-left: 0rem;
-        margin-right: 0rem;
-        padding: 10px;
-    }
-    
-    .thirdsectionInner{
-        padding:10px;
-    }
-    
-    .thirdsectionInnerleft{
-        margin-top: 2.5%;
-        width: 40%;
-    }
-    
-    .thirdsectionInnerright{
-        width: 60%;
-    }
-
-    .thirdsectionHeading{
-        font-size:25px;
-        margin-left: 1rem !important;
-    }
-   
-    .thirdsectionMiddle{
-        margin-left:3rem;
-        margin-right: 3rem;
-    }
-
-    .fourthSection{
-        margin-left: 0rem;
-        margin-right: 0rem;
-        padding: 10px;
-    }
-    
-    .fourthsectionInner{
-        padding:10px;
-    }
-    
-    .fourthsectionInnerleft{
-        margin-top: 2.5%;
-        width: 40%;
-    }
-    
-    .fourthsectionInnerright{
-        width: 60%;
-    }
-
-    .fourthsectionHeading{
-        font-size:25px;
-        margin-left: 1rem !important;
-    }
-   
-    .fourthsectionMiddle{
-        margin-left:3rem;
-        margin-right: 3rem;
-    }
-
 }
