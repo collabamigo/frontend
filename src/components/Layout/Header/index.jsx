@@ -183,6 +183,7 @@ export default function Header({ isAuthenticated }) {
                         to="/"
                     >
                         <SvgIcon
+                            className="col-"
                             height="60px"
                             src="logo.svg"
                             width="250px"
