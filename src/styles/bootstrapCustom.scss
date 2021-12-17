@@ -33,6 +33,9 @@ $text-color: var($gray-800);
 $focus-ring-color: var($blue-500);
 
 $secondary: $gray-800;
+
+
+$enable-responsive-font-sizes: true;
 //$warning: $orange;
 @import "~bootstrap/scss/_functions";
 @import "~bootstrap/scss/_variables";

@@ -2,14 +2,16 @@ import React, {Component} from 'react';
 import Card from 'react-bootstrap/Card'
 import BCarousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
-import axios from "../../utils/axios";
+import axios from "utils/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
+import Loading from "components/Loading";
+import isEmpty from "lodash/isEmpty";
 
 class ClubHomePage extends Component {
 
@@ -28,24 +30,23 @@ class ClubHomePage extends Component {
 
     constructor(props) {
         super(props)
-        var today = new Date()
-        let time = today.getHours() + ':' + today.getMinutes();
         this.state = {
-            basicInformation: null,
+            basicInformation: [],
             competitions:null,
             announcements: null,
-            currentTime: time,
-            isLoading: true,
             basicInformationStatic:{
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
-                clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480",
-                    "https://via.placeholder.com/1600X480"],
+                clubBanners:[
+                    "https://via.placeholder.com/1600X480",
+                    "https://via.placeholder.com/1600X480",
+                    "https://via.placeholder.com/1600X480"
+                ],
             },
         }
     }
 
     componentDidMount() {
-        return true
+        this.componentDidUpdate()
     }
 
     shouldComponentUpdate(){
@@ -54,9 +55,9 @@ class ClubHomePage extends Component {
 
     componentDidUpdate () {
         if (this.props.router.isReady){
-            if (this.state.basicInformation === null)
+            if (isEmpty(this.state.basicInformation))
                 axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
-                    this.setState({basicInformation: res.data, isLoading: false});
+                    this.setState({basicInformation: res.data});
             if (this.state.announcements === null)
                 axios.get("club/clubannouncements/" + this.props.router.query.clubName + "/").
                     then((res) => {
@@ -68,16 +69,18 @@ class ClubHomePage extends Component {
                         this.setState({competitions: res.data})
                     });
             });
-            console.log(this.state)
         }
     }
 
+
+
+
     render(){
-        if (this.state.isLoading || this.state.announcements === null || this.state.competitions === null){
-            return "loading"; // LOADING SCREEN
+        const isLoading = isEmpty(this.state.basicInformation);
+        if (isLoading || this.state.announcements === null || this.state.competitions === null){
+            return <Loading />; // LOADING SCREEN
         }
-        console.log("ann", this.state.announcements);
-        console.log("com", this.state.competitions);
+
 
         const responsive = {
             superLargeDesktop: {
@@ -99,8 +102,9 @@ class ClubHomePage extends Component {
             }
         };
 
+
         return (
-            <div className="row m-1">
+            <div className="row m-md-3">
                 <div className="mx-3 col-md-2 col-lg-2 col-sm-6 d-flex justify-content-around">
                     <div className={styles.clubcard}>
                         <Card
@@ -256,11 +260,7 @@ class ClubHomePage extends Component {
                                         Coordinators:
                                         {' '}
 
-                                        {this.state.basicInformation.admins.map(item => (
-                                            <div key={item}>
-                                                {item}
-                                            </div>
-                                        ))}
+                                        {this.state.basicInformation.admins.join(", ")}
                                     </div>
 
                                     <div className={styles.memberSize}>

@@ -1,9 +1,11 @@
+@import '~rfs/scss';
+
 .clubcard{
     position: fixed;
 }
 
 .coordinators, .memberSize {
-    font-size: 25px;
+    @include rfs(1.1rem, font-size);
 }
 
 .tagline {
@@ -55,11 +57,6 @@
     .notificationHeading {
         font-size: 15px;
         font-weight: bold;
-    }
-
-
-    .coordinators, .memberSize {
-        font-size: 15px;
     }
 
     .tagline {
