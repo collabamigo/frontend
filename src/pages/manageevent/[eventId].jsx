@@ -101,7 +101,7 @@ export default function Event() {
 
             if (isEmpty(event))
                 axios.get(`club/competition/${router.query.eventId}/`)
-                    .then(res => setEvent(JSON.parse(res.data)))
+                    .then(res => setEvent(res.data))
 
             // if (isEmpty(form))
             //     axios.get(`form/form/${router.query.eventId}/`)
