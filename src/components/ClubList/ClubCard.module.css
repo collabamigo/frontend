@@ -1,3 +1,13 @@
 .logo {
     border-radius: 100%;
 }
+
+.eventDetails {
+        width: 18em;
+    }
+
+@media (max-width: 800px) {
+    .eventDetails {
+        width: 12em;
+    }
+}

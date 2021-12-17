@@ -2,10 +2,19 @@
 
 .clubcard{
     position: fixed;
+    padding-left: 2em;
+}
+
+.clubBox {
+    padding-left: 4.5em;
+}
+
+.leftCard1, .leftCard2 {
+    width: 72em;
 }
 
 .coordinators, .memberSize {
-    @include rfs(1.1rem, font-size);
+    font-size: 20px;
 }
 
 .tagline {
@@ -14,40 +23,66 @@
 }
 
 .descriptionHeading, .announcementsHeading {
-    font-size: 35px;
+    font-size: 33px;
     text-align: center;
     padding-bottom: 5px;
 }
 
 .description {
-    font-size: 20px;
+    font-size: 18px;
+    width: 33em;
 }
 
 .notifications {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .notificationHeading {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
+.descriptionBox {
+    width: 33em;
+}
 
 @media (max-width: 800px) {
 
     .clubcard{
         position: relative;
-        margin: 1rem;
+        margin: 0em 1em 1em 0em;
     }
 
-    .descriptionHeading, .announcementsHeading {
-        font-size: 20px;
+    .coordinators, .memberSize {
+        font-size: 15px;
+    }
+
+    .descriptionHeading {
+        font-size: 18px;
         text-align: center;
         padding-bottom: 3px;
     }
 
+    .announcementsHeading {
+        font-size: 18px;
+        text-align: left;
+        padding-bottom: 3px;
+        padding-left: 0em;
+        margin-left: 0em;
+    }
+
+    .leftCard1, .leftCard2 {
+        width: 18em;
+    }
+
     .description {
         font-size: 15px;
+        width: 8em;
+    }
+
+    .description {
+        font-size: 18px;
+        width: 8em;
     }
 
     .notifications {

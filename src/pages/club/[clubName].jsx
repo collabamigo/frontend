@@ -227,7 +227,7 @@ class ClubHomePage extends Component {
 
         return (
             <div className="row m-md-3">
-                <div className="mx-3 col-md-2 col-lg-2 col-sm-6 d-flex justify-content-around">
+                <div className="mx-3 col-md-2 col-lg-2 col-sm-12 d-flex justify-content-around">
                     <div className={styles.clubcard}>
                         <Card
                             className="pt-2"
@@ -273,8 +273,8 @@ class ClubHomePage extends Component {
                     </div>
                 </div>
 
-                <div className=" col-md-9 col-lg-9 col-sm-12 justify-content-around">
-                    <Card className="w-500">
+                <div className={styles.clubBox + " col-md-9 col-lg-9 col-sm-12 justify-content-around"}>
+                    <Card className={styles.leftCard1}>
                         <Card.Body>
                             <div className="">
                                 <BCarousel
@@ -365,7 +365,7 @@ class ClubHomePage extends Component {
 
 
                                 <div className="d-flex">
-                                    <div className="col-md-5 col-lg-5 col-sm-6">
+                                    <div className={styles.descriptionBox + " col-md-5 col-lg-5 col-sm-6"}>
                                         <div className={styles.descriptionHeading}>
                                             Description
 
@@ -436,7 +436,7 @@ class ClubHomePage extends Component {
 
                     <br />
 
-                    <Card className="w-500">
+                    <Card className={styles.leftCard2}>
                         <Card.Body className="mt-3">
                             <Card.Title className="card-title fs-2 header-color text-left">
                                 Events
@@ -445,7 +445,7 @@ class ClubHomePage extends Component {
 
                             <br />
 
-                            <Card.Text className="card-text h5 text-muted col-12">
+                            <Card.Text className="card-text h5 col-12">
                                 <div>
                                     <RCarousel responsive={responsive}>
                                         {this.state.competitions.map((option, index) => (

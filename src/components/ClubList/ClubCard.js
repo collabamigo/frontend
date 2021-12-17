@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Image from 'react-bootstrap/Image';
-import {logo} from "./ClubCard.module.css";
+import {logo, eventDetails} from "./ClubCard.module.css";
 import Link from "common/Link";
 import Card from "react-bootstrap/Card";
 
@@ -75,7 +75,7 @@ export default class ClubCard extends Component {
             else if (this.props.Type === "Event"){
                 return (
                     <div className="col-sm-6 col-lg-4 mb-3">
-                        <Card style={{ width: '22rem' }}>
+                        <Card className={eventDetails}>
                             <Card.Body>
                                 <Card.Title className="text-start h1 pb-2">
                                     {this.props.element.name}
@@ -100,7 +100,7 @@ export default class ClubCard extends Component {
                                     </Card.Subtitle> */}
 
                                 <Card.Text
-                                    className="text-start h6 overflow-scroll"
+                                    className="text-start text-muted h6 overflow-scroll"
                                     style={{height:'250px'}}
                                 >
                                     {this.props.element.description}
