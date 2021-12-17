@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Image from 'react-bootstrap/Image';
+import {truncate} from "utilities";
 import {logo, eventDetails} from "./ClubCard.module.css";
 import Link from "common/Link";
 import Card from "react-bootstrap/Card";
@@ -100,10 +101,10 @@ export default class ClubCard extends Component {
                                     </Card.Subtitle> */}
 
                                 <Card.Text
-                                    className="text-start text-muted h6 overflow-scroll"
+                                    className="text-start text-muted h6 overflow-hidden"
                                     style={{height:'250px'}}
                                 >
-                                    {this.props.element.description}
+                                    {truncate(this.props.element.description, 470)}
                                 </Card.Text>
 
                                 {/* <Card.Link href="#">

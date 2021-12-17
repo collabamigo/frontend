@@ -180,6 +180,24 @@ class ClubHomePage extends Component {
         }
     }
 
+    renderMail(){
+        if(this.state.basicInformation.mail){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.mail}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="mail.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
     renderOther(){
         if(this.state.basicInformation.other){
             return(
@@ -263,6 +281,8 @@ class ClubHomePage extends Component {
                                     {this.renderTelegram()}
 
                                     {this.renderGithub()}
+
+                                    {this.renderMail()}
 
                                     {this.renderOther()}
 

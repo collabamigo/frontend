@@ -170,7 +170,7 @@ function signOut() {
 
 export default function Header({ isAuthenticated }) {
 
-    const [data, setData] = useState({First_Name:"Heemank", Last_Name:"Verma"});
+    const [data, setData] = useState();
 
     useEffect(() => {
         if (isEmpty(data))
@@ -182,7 +182,7 @@ export default function Header({ isAuthenticated }) {
     return (
         <Navbar
             bg="dark"
-            className={styles.navbar + " sticky-top mb-4"}
+            className={styles.navbar + " sticky-top mb-4 "}
             collapseOnSelect
             expand="lg"
             variant="dark"
@@ -210,96 +210,61 @@ export default function Header({ isAuthenticated }) {
 
                     <Nav>
                  
-                        <Nav.Link
-                            eventKey={2}
-                            href="/history"
-                        >
-                            Connections
-                        </Nav.Link>
+                        
 
-                        <Nav.Link
-                            eventKey={2}
-                            href="/about"
-                        >
-                            About Us
-                        </Nav.Link>
+                        {isAuthenticated ?
                     
-                        <NavDropdown
-                            id="dropdown-button-drop-start"
-                            title="User Profile"
-                        >
-                            <NavDropdown.Item>
+                            <NavDropdown
+                                id="dropdown-button-drop-start" 
+                                title={data.First_Name + " " + data.Last_Name}
 
-                                <div className="justify-content-end row">
-                                    <div className="col-md-3">
-                                        <Image
-                                            alt="Profile Image"
-                                            className="rounded-circle"
-                                            height="70px"
-                                            src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png"
-                                            width="70px"
-                                        />
-                                    </div>
+                            >
+                                <NavDropdown.Item href="/history">
+                                    Connections
+                                </NavDropdown.Item>
 
-                                    <div className="col-md-8">
-                                        <p className="d-flex flex-column pl-4">
-                                            <h3>
+                                <NavDropdown.Item href="/profile">
+                                    My Profile
+                                </NavDropdown.Item>
 
-                                                { " "}
-
-                                                {data.First_Name} 
-
-                                                {" "}
-
-                                                {data.Last_Name} 
-
-                                            </h3>
-
-                                            <Link
-                                                internal
-                                                to="/profile"
-                                            >
-                                                <span >
-                                                    Manage Profile
-                                                </span>
-                                            </Link>
-                
-                                        </p>
-                                    </div>
-                                </div>
+                                <NavDropdown.Divider />
 
                                 {isAuthenticated ?
-                                    <NavDropdown.Item>
-                                        <h5>
+                                    <>
+                                        <h6 className="p-2">
                                             Club Management
-                                        </h5>
+                                        </h6>
 
-                                        <div className={styles.clubScroll}>
-                                            <ul className={styles.clubNames}>
-                                                {data.clubs?.map((club) => (
-                                                    <li key={club.id}>
+                                        <ul
+                                            className=" p-0 m-0"
+                                            style={{listStyle: "none"}}
+                                        >
+                                            {data.clubs?.map((club) => (
+                                                    // TODO: Links sahi krdo
+                                                <li key={club.id}>
+                                                    <NavDropdown.Item
+                                                        href={"/manage/" + club.username}
+                                                        internal
+                                                    >
                                                         {club.name}
-                                                    </li>
+                                                    </NavDropdown.Item>
+                                                </li>
                                                 ))}
-                                            </ul>
-                                        </div>
-                                    </NavDropdown.Item>
-            : null }
-
-
+                                        </ul>
+                                    </>
+                                : null }
+                                
                                 {/* <AccountChooser 
                                     data={data}
                                     isAuthenticated={isAuthenticated}
                                 /> */}
-                            </NavDropdown.Item>
 
-                            <NavDropdown.Divider />
+                                <NavDropdown.Divider />
 
-                            <NavDropdown.Item>
                                 {isAuthenticated ?
                                     <div>
                                         <Nav.Link
-                                            className={styles.signoutBtn  + " text-light text-center"}
+                                            className={styles.signoutBtn  + " text-light text-center w-75"}
                                             href="#deets"
                                             onClick={signOut}
                                         >
@@ -307,8 +272,8 @@ export default function Header({ isAuthenticated }) {
                                         </Nav.Link>
                                     </div>
                             : null}
-                            </NavDropdown.Item>
-                        </NavDropdown>
+                            </NavDropdown>
+                        : null }
                         
                         {!isAuthenticated?
                             <Nav.Link
