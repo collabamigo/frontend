@@ -183,8 +183,8 @@ class ClubHomePage extends Component {
                     </div>
                 </div>
 
-                <div className=" col-md-9 col-lg-9 col-sm-12 justify-content-around">
-                    <Card className="w-500">
+                <div className={styles.clubBox + " col-md-9 col-lg-9 col-sm-12 justify-content-around"}>
+                    <Card className={styles.leftCard1}>
                         <Card.Body>
                             <div className="">
                                 <BCarousel
@@ -346,7 +346,7 @@ class ClubHomePage extends Component {
 
                     <br />
 
-                    <Card className="w-500">
+                    <Card className={styles.leftCard2}>
                         <Card.Body className="mt-3">
                             <Card.Title className="card-title fs-2 header-color text-left">
                                 Events
@@ -355,7 +355,7 @@ class ClubHomePage extends Component {
 
                             <br />
 
-                            <Card.Text className="card-text h5 text-muted col-12">
+                            <Card.Text className="card-text h5 col-12">
                                 <div>
                                     <RCarousel responsive={responsive}>
                                         {this.state.competitions.map((option, index) => (
