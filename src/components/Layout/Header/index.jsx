@@ -224,9 +224,9 @@ export default function Header({ isAuthenticated }) {
                         >
                             About Us
                         </Nav.Link>
-
+                    
                         <NavDropdown
-                            id="collasible-nav-dropdown"
+                            id="dropdown-button-drop-start"
                             title="User Profile"
                         >
                             <NavDropdown.Item>
