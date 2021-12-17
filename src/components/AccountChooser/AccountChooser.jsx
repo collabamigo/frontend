@@ -12,42 +12,37 @@ export default function AccountChooser({...props}) {
 
     return (
         <>
-            <div className="justify-content-end row">
-                <div className="col-md-3">
-                    <Image
-                        alt="Profile Image"
-                        className="rounded-circle"
-                        height="70px"
-                        src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png"
-                        width="70px"
-                    />
-                </div>
+            <div className="d-flex justify-content-end">
+                <Image
+                    alt="Profile Image"
+                    className="rounded-circle m-0 p-0 flex-column"
+                    height="70px"
+                    src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png"
+                    width="70px"
+                />
 
-                <div className="col-md-9">
-                    <p className="d-flex flex-column pl-4">
-                        <h3>
+                <p className="flex-column pl-4">
+                    <h3>
 
-                            { " "}
+                        { " "}
 
-                            {props.data.First_Name} 
 
-                            {" "}
+                        {" "}
 
-                            {props.data.Last_Name} 
+                        {props.data.Last_Name} 
 
-                        </h3>
+                    </h3>
 
-                        <Link
-                            internal
-                            to="/profile"
-                        >
-                            <span >
-                                Manage Profile
-                            </span>
-                        </Link>
+                    <Link
+                        internal
+                        to="/profile"
+                    >
+                        <span >
+                            Manage Profile
+                        </span>
+                    </Link>
                 
-                    </p>
-                </div>
+                </p>
             </div>
 
             {props.isAuthenticated ?
