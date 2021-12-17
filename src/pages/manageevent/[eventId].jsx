@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-key */
+
 import React, {useEffect, useState} from "react"
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
@@ -14,7 +14,7 @@ import axios from "utilities/axios";
 import Loading from "components/Loading";
 import isEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
-import EventAdminModal from "../../components/EventAdmin/modal";
+import EventAdminModal from "components/EventAdmin/modal";
 import Table from 'react-bootstrap/Table'
 export default function Event() {
     const router = useRouter()
@@ -155,8 +155,8 @@ export default function Event() {
                                     </td>
 
 
-                                    {tableHeaders.map((option, index) => (
-                                        <td lol={index} >
+                                    {tableHeaders.map((option) => (
+                                        <td key={option.name} >
                                             {option.name}
                                         </td>
                                     ))}
@@ -166,15 +166,15 @@ export default function Event() {
 
                             <tbody>
                                 {tableResponses.map((response,index) => (
-                                    <tr lol={index}>
+                                    <tr key={response}>
 
                                         <td>
                                             {index}
                                         </td>
 
-                                        {response.elements.map((values,index) => (
+                                        {response.elements.map((values) => (
                                             <td
-                                                lol={index}
+                                                key={values.value}
                                             >
                                                 {values.value}
                                             </td>
