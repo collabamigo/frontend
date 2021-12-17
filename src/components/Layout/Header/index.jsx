@@ -242,7 +242,10 @@ export default function Header({ isAuthenticated }) {
                                             {data.clubs?.map((club) => (
                                                     // TODO: Links sahi krdo
                                                 <li key={club.id}>
-                                                    <NavDropdown.Item href="#action/3.4">
+                                                    <NavDropdown.Item
+                                                        href={"/manage/" + club.username}
+                                                        internal
+                                                    >
                                                         {club.name}
                                                     </NavDropdown.Item>
                                                 </li>
