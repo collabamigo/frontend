@@ -18,7 +18,8 @@ function DropdownMenu({ isAuthenticated }) {
         return <div />
     else
         return (
-            <div className="pt-3">
+            <div className="">
+
                 {isAuthenticated ?
                     <>
                         <div className={CustomNavLink+ " btn"}>
@@ -39,41 +40,22 @@ function DropdownMenu({ isAuthenticated }) {
                                 Profile
                             </Link>
                         </div>
-                    </> :
-                    <div className={CustomNavLink + " btn"}>
-                        <Link
-                            className={magicSpan}
-                            to="/app/Demo"
-                        >
-                            Demo
-                        </Link>
-                    </div>}
 
-                <div className={CustomNavLink + " btn"}>
-                    <Link
-                        className={magicSpan}
-                        to="/about"
-                    >
-                        About Us
-                    </Link>
-                </div>
+                        <div className={CustomNavLink  + " btn"}>
+                            <Dropdown>
+                                <DropdownButton
+                                    title="Switch Account"
+                                >
+                                    <Dropdown.Item>
+                                        <AccountChooser />
+                                    </Dropdown.Item>
 
-                {isAuthenticated ?
-                    <div className={CustomNavLink}>
-                        <Dropdown>
-                            <DropdownButton
-                                className="" // account circle
-                                title="Switch Account"
-                            >
-                                <Dropdown.Item>
-                                    <AccountChooser />
-                                </Dropdown.Item>
-
-                            </DropdownButton>
-                        </Dropdown>
+                                </DropdownButton>
+                            </Dropdown>
+                        </div>
 
                         <a
-                            className="btn"
+                            className={CustomNavLink+ " btn"}
                             onClick={signOut}
                             title="Sign Out"
                         >
@@ -98,9 +80,17 @@ function DropdownMenu({ isAuthenticated }) {
                                 />
                             </svg>
                         </a>
-                    </div>
-                    :
-                    null}
+
+                    </> :
+                    <div className={CustomNavLink + " btn"}>
+                        <Link
+                            className={magicSpan}
+                            to="/app/Demo"
+                        >
+                            Demo
+                        </Link>
+                    </div>}
+
             </div>
         );
 }

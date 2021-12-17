@@ -1,3 +1,28 @@
+.signoutBtn {
+    color: white;
+    border: 1px solid rgb(90, 113, 211);
+    background-color: rgb(90, 113, 211);
+    width: 10rem;
+    padding: 10px;
+    border-radius: 30px;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+.navbar{
+    background: rgb(30, 48, 75) !important;
+    position: absolute;
+}
+  
+  
+
+
+
+
+
+
+/* 
+
 .Burger {
     display: none;
 
@@ -22,4 +47,4 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-}
+} */
