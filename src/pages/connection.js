@@ -1,8 +1,8 @@
 
 import React from 'react'
 // import {Button, Form} from "react-bootstrap";
-import axios from "utils/axios";
-import {isBrowser} from "../utils/auth";
+import axios from "utilities/axios";
+import {isBrowser} from "../utilities/auth";
 
 function useQuery() {
     if (isBrowser())

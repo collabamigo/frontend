@@ -2,11 +2,11 @@
 import React, {useState} from "react";
 import PropTypes from 'prop-types'
 import FormSignIn from "./FormSignIn/FormSignIn";
-import axios from "utils/axios";
+import axios from "utilities/axios";
 import backend from "../env";
 import jws from "jsonwebtoken";
-import {setLoggedIn} from "../utils/auth"
-import {setToken} from "../utils/axios";
+import {setLoggedIn} from "../utilities/auth"
+import {setToken} from "../utilities/axios";
 import {useRouter} from 'next/router';
 
 function GoogleSignIn (props) {

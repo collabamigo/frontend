@@ -10,7 +10,7 @@ import FAQModal from "components/faq/FAQModal";
 import {getStorage, ref, getDownloadURL} from "firebase/storage";
 import {useRouter} from 'next/router'
 import Modal from 'react-bootstrap/Modal'
-import axios from "utils/axios";
+import axios from "utilities/axios";
 import Loading from "components/Loading";
 import isEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";

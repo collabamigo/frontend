@@ -1,6 +1,6 @@
 
 import React from 'react'
-import axios from "utils/axios";
+import axios from "utilities/axios";
 import PropTypes from "prop-types";
 import backend from "../../env";
 import Loading from "components/Loading";

@@ -1,7 +1,7 @@
 import React from "react";
 import DashBoard from "components/Help/DashBoard/DashBoard";
 import backend from "env";
-import axios from "utils/axios";
+import axios from "utilities/axios";
 import HelpForm from "components/Help/HelpForm/HelpForm";
 import Loading from "components/Loading";
 

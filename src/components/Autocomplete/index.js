@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {no_suggestions, suggestion_active, suggestions, input} from './Autocomplete.module.css';
-import axios from "utils/axios";
+import axios from "utilities/axios";
 
 class Autocomplete extends React.Component {
 

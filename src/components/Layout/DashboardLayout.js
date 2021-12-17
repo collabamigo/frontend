@@ -3,7 +3,7 @@ import {Helmet} from "react-helmet"
 // import Header from "./Header"
 
 // Global styles and component-specific styles.
-// import {isLoggedIn} from "../../utils/auth";
+// import {isLoggedIn} from "../../utilities/auth";
 import Footer from "./Footer/Footer";
 import PropTypes from "prop-types";
 //import {useRouter} from 'next/router';

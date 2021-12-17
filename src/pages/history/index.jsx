@@ -1,7 +1,7 @@
 
 import React from "react";
 import {cardSkillSearch} from './index.module.css';
-import axios from "utils/axios";
+import axios from "utilities/axios";
 import backend from "../../env";
 import { Card } from "react-bootstrap";
 import CardExplorer from "../../components/CardExplorer";
