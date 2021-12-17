@@ -17,15 +17,15 @@ export default function ClubCard({value}) {
 
     console.log(value)
     return (
-        <div className={styles.cardCenter}>
-            <Card>
+        <div className={styles.cardCenter + " h-100"}>
+            <Card className="h-100">
                 <Card.Img
                     src={picture}
                     variant="top"
                 />
 
-                <Card.Body>
-                    <Card.Title className={styles.title + " mb-2"}>
+                <Card.Body className="d-flex">
+                    <Card.Title className={styles.title + " mt-auto ms-auto me-auto mb-2"}>
                         {value.name}
                     </Card.Title>
                 </Card.Body>

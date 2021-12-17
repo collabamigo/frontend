@@ -61,9 +61,7 @@ export default function LandingFooter() {
                     </div>
                 </div>
 
-                <div className={styles.row2}>
-                    {' _'}
-                </div>
+
 
             </footer>
         )
