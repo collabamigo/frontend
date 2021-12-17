@@ -30,6 +30,7 @@
 
 .description {
     font-size: 18px;
+    width: 33em;
 }
 
 .notifications {
@@ -41,12 +42,15 @@
     font-weight: bold;
 }
 
+.descriptionBox {
+    width: 33em;
+}
 
 @media (max-width: 800px) {
 
     .clubcard{
         position: relative;
-        margin: 1em 1em 1em 0em;
+        margin: 0em 1em 1em 0em;
     }
 
     .coordinators, .memberSize {
@@ -63,6 +67,8 @@
         font-size: 18px;
         text-align: left;
         padding-bottom: 3px;
+        padding-left: 0em;
+        margin-left: 0em;
     }
 
     .leftCard1, .leftCard2 {
@@ -71,6 +77,12 @@
 
     .description {
         font-size: 15px;
+        width: 8em;
+    }
+
+    .description {
+        font-size: 18px;
+        width: 8em;
     }
 
     .notifications {

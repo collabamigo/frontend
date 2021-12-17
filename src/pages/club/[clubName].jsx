@@ -105,7 +105,7 @@ class ClubHomePage extends Component {
 
         return (
             <div className="row m-md-3">
-                <div className="mx-3 col-md-2 col-lg-2 col-sm-6 d-flex justify-content-around">
+                <div className="mx-3 col-md-2 col-lg-2 col-sm-12 d-flex justify-content-around">
                     <div className={styles.clubcard}>
                         <Card
                             className="pt-2"
@@ -275,7 +275,7 @@ class ClubHomePage extends Component {
 
 
                                 <div className="d-flex">
-                                    <div className="col-md-5 col-lg-5 col-sm-6">
+                                    <div className={styles.descriptionBox + " col-md-5 col-lg-5 col-sm-6"}>
                                         <div className={styles.descriptionHeading}>
                                             Description
 

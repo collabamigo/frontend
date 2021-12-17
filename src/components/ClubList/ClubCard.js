@@ -44,10 +44,6 @@ export default class ClubCard extends Component {
         if(this.props.element === undefined) {
             return null;
         }
-        // let description = this.props.element.description;
-        // if(description.length > 100) {
-        //     description = myString.substring(0,100);
-        // }
         else{
             if(this.props.Type === "Club"){
                 return (
