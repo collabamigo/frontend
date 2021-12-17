@@ -11,7 +11,7 @@ import {App} from "./layout.module.scss";
 function Layout({children}) {
     const router = useRouter();
     return (
-        <div className={App+" w-100"}>
+        <div className={App}>
             <Helmet>
                 <meta charSet="utf-8" />
 

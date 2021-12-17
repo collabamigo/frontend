@@ -1,52 +1,25 @@
-/* eslint-disable react/no-array-index-key */
-import React, { Component } from 'react'
+import React from "react";
 import 'react-bootstrap';
 import * as styles from './accountchooser.module.css';
-import axios from "utils/axios";
 import Link from "common/Link";
 
+export default function AccountChooser() {
+    const clubList = [
+        'Club 1',
+        'Club 2',
+        'Club 3',
+        'Club 4',
+        'Club 5',
+    ]
 
-export default class AccountChooser extends Component {
-
-    // static propTypes = {
-    //     Type: PropTypes.string.isRequired,
-    //     element: PropTypes.objectOf(PropTypes.string).isRequired,
-    // }
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            // eslint-disable-next-line react/no-unused-state
-            basicInfo:{
-                "First_Name": "User name",
-                "Last_Name": "User name",
-                clubs: [
-                    {name:"Demo Club"}
-                ],
-            },
-
-
-        }
-    }
-
-    componentDidMount() {
-        axios.get("connect/profile/").then((res) => {
-                console.log(res.status);
-                console.log(res.data);
-                this.setState({
-                    basicInfo: res.data[0]
-                })
-            })
-        }
-
-    shouldComponentUpdate()
-    { return true;}
-
-
-    render(){
+    const clubListItems = clubList.map((club) => (
+        <li key={club.id}>
+            {club}
+        </li>
+    ));
 
     return (
-        <div>
+        <div style={{background:"rgb(40, 92, 168) !important"}}>
             <div className="my-4 d-flex flex-column justify-content-center align-items-center">
                 <div className="d-flex justify-content-between w-100 mx-auto align-items-center">
                     <img
@@ -57,22 +30,18 @@ export default class AccountChooser extends Component {
 
                     <p className="d-flex flex-column">
                         <h3>
-                            {this.state.basicInfo.First_Name}
-
-                            {" "}
-
-                            {this.state.basicInfo.Last_Name}
-
+                            Full Name
                         </h3>
 
-                        <span className={styles.manageSpan}>
-                            <Link
-                                internal
-                                to="/profile"
-                            >
+                        <Link
+                            internal
+                            to="/profile"
+                        >
+                            <span className={styles.manageSpan}>
                                 Manage Profile
-                            </Link>
-                        </span>
+                            </span>
+                        </Link>
+                       
                     </p>
                 </div>
 
@@ -82,39 +51,18 @@ export default class AccountChooser extends Component {
                     </h5>
 
                     <div className={styles.clubScroll}>
-
-                
-                        <ul
-                            className={styles.clubNames}
-                            style={{listStyle: "none"}}
-                        >
-                            {this.state.basicInfo.clubs.map((field, index) => {
-                            return (
-                                <li key={index}> 
-
-                                    <Link
-                                        internal
-                                        to={"/manage/" + field.username}
-                                    >
-                                        {field.name}
-                                        
-                                    </Link>
-
-                                </li>
-
-                            );
-                })}
+                        <ul className={styles.clubNames}>
+                            {clubListItems}
                         </ul>
                     </div>
                 </div>
 
-                <button
+                {/* <button
                     className={styles.signoutBtn}
                     type="button"
                 >
                     Sign Out
-                </button>
+                </button> */}
             </div>
         </div>)
-    }
 }
