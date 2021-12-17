@@ -12,6 +12,7 @@ import Button from "react-bootstrap/Button";
 // import {getAuth, signInWithCustomToken} from 'firebase/auth';
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
+import "react-multi-carousel/lib/styles.css";
 
 class ClubAdminPage extends Component {
 

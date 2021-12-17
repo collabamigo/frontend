@@ -57,7 +57,7 @@ export default function Event() {
 
             if (isEmpty(clubLogoLinks) && !isEmpty(event)) {
                 const storage = getStorage();
-                event.clubs.map(club => getDownloadURL(ref(storage, 'data/'+club+'/uneditable/logo.png'))
+                event.clubs.map(club => getDownloadURL(ref(storage, 'data/' + club + '/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
             }
     }})

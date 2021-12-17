@@ -90,7 +90,7 @@ export default class ClubCard extends Component {
 
                                     <li className="text-start list-inline-item">
                                         <span>
-                                            {" "}
+                                            {/* {this.state.basicInformation.coordinators[1].name} */}
                                         </span>
                                     </li>
                                 </ul>
@@ -99,7 +99,10 @@ export default class ClubCard extends Component {
                                         Card Subtitle
                                     </Card.Subtitle> */}
 
-                                <Card.Text className="text-start h6">
+                                <Card.Text
+                                    className="text-start h6 overflow-scroll"
+                                    style={{height:'250px'}}
+                                >
                                     {this.props.element.description}
                                 </Card.Text>
 

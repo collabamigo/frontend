@@ -1,16 +1,13 @@
 /* eslint-disable react/no-array-index-key */
-
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Image from "react-bootstrap/Image";
 import axios from "utils/axios";
-
 import styles from "styles/index.module.css";
 import ClubCard from "../common/HomePageCards/ClubCard.js";
 import EventTalkCard from "../common/HomePageCards/EventTalkCard.js";
 import LandingFooter from "components/LandingFooter";
-
 
 export default class AuthenticatedHome extends React.Component {
     constructor(props) {
