@@ -1,26 +1,17 @@
 import React from "react";
+import PropTypes from "prop-types";
 import 'react-bootstrap';
 import * as styles from './accountchooser.module.css';
 import Link from "common/Link";
 
-export default function AccountChooser() {
-    const clubList = [
-        'Club 1',
-        'Club 2',
-        'Club 3',
-        'Club 4',
-        'Club 5',
-    ]
+export default function AccountChooser({...props}) {
 
-    const clubListItems = clubList.map((club) => (
-        <li key={club.id}>
-            {club}
-        </li>
-    ));
+    if(props.data === undefined){return null}
 
+    console.log(props.data ," is data");
     return (
         <div style={{background:"rgb(40, 92, 168) !important"}}>
-            <div className="my-4 d-flex flex-column justify-content-center align-items-center">
+            <div className=" d-flex flex-column justify-content-center align-items-center">
                 <div className="d-flex justify-content-between w-100 mx-auto align-items-center">
                     <img
                         alt="Profile Image"
@@ -30,14 +21,19 @@ export default function AccountChooser() {
 
                     <p className="d-flex flex-column">
                         <h3>
-                            Full Name
+                            {props.data.First_Name} 
+
+                            {" "}
+
+                            {props.data.Last_Name} 
+
                         </h3>
 
                         <Link
                             internal
                             to="/profile"
                         >
-                            <span className={styles.manageSpan}>
+                            <span >
                                 Manage Profile
                             </span>
                         </Link>
@@ -45,17 +41,23 @@ export default function AccountChooser() {
                     </p>
                 </div>
 
-                <div className={styles.clubManage}>
-                    <h5 className="d-flex align-items-center justify-content-center">
-                        Club Management
-                    </h5>
+                {props.isAuthenticated ?
+                    <div className={styles.clubManage}>
+                        <h5 className="d-flex align-items-center justify-content-center">
+                            Club Management
+                        </h5>
 
-                    <div className={styles.clubScroll}>
-                        <ul className={styles.clubNames}>
-                            {clubListItems}
-                        </ul>
+                        <div className={styles.clubScroll}>
+                            <ul className={styles.clubNames}>
+                                {props.data.clubs?.map((club) => (
+                                    <li key={club.id}>
+                                        {club.name}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                : null }
 
                 {/* <button
                     className={styles.signoutBtn}
@@ -66,3 +68,14 @@ export default function AccountChooser() {
             </div>
         </div>)
 }
+
+
+AccountChooser.defaultProps = {
+    data: {},
+    isAuthenticated: false,
+};
+
+AccountChooser.propTypes = {
+    data: PropTypes.objectOf(PropTypes.string),
+    isAuthenticated: PropTypes.bool,
+};
