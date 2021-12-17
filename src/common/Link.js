@@ -1,39 +1,37 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import Link from "next/link";
+import NextLink from "next/link";
 
-export default function LinkMod (props) {
+export default function Link (props) {
 
-    if (props.internal)
+    // if (props.internal)
         return (
-            <Link href={props.to}>
+            <NextLink href={props.to}>
                 <a
                     className={props.className}
                 >
                     {props.children}
                 </a>
-            </Link>
+            </NextLink>
         )
-    else
-        return (
-            <a
-                className={props.className}
-                href={props.to}
-            >
-                {props.children}
-            </a>
-        )
+    // else
+    //     return (
+    //         <a
+    //             className={props.className}
+    //             href={props.to}
+    //         >
+    //             {props.children}
+    //         </a>
+    //     )
 }
 
-LinkMod.propTypes = {
+Link.propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
-    internal: PropTypes.bool,
     to: PropTypes.string.isRequired,
 }
 
-LinkMod.defaultProps = {
+Link.defaultProps = {
     className: "",
-    internal: false
 }

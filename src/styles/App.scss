@@ -32,3 +32,9 @@
 .start-93 {
   left: 93% !important
 }
+
+.reset-a, .reset-a:hover, .reset-a:visited, .reset-a:focus, .reset-a:active {
+  text-decoration: inherit;
+  color: inherit;
+  outline: inherit;
+}
