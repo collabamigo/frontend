@@ -1,6 +1,6 @@
 import React from 'react'
 import {cardHfColor, lowwl} from './Profile.module.css';
-import axios from "utils/axios";
+import axios from "utilities/axios";
 import backend from "env";
 import Card from 'react-bootstrap/Card';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'

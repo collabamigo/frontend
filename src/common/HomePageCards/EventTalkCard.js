@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 import PropTypes from "prop-types";
+import {truncate} from "utilities";
 import styles from "./EventTalkCard.module.css";
 
 export default function EventTalkCard(props) {
@@ -26,7 +27,7 @@ export default function EventTalkCard(props) {
 
                         <Card.Subtitle className={styles.subtitle + " mb-2 text-muted"}>
 
-                            {finals} 
+                            {finals}
 
                             { " - "}
 
@@ -35,7 +36,7 @@ export default function EventTalkCard(props) {
                         </Card.Subtitle>
 
                         <Card.Text className={styles.text}>
-                            {props.element.description}
+                            {truncate(props.element.description, 230)}
                         </Card.Text>
                     </div>
                 </Card.Body>

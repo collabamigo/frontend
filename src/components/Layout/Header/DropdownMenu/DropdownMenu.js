@@ -4,7 +4,7 @@ import {magicSpan, CustomNavLink} from './DropdownMenu.module.css';
 import Link from "common/Link";
 import { isMobile } from "react-device-detect";
 import PropTypes from "prop-types";
-import {isBrowser, setLoggedOut} from "utils/auth";
+import {isBrowser, setLoggedOut} from "utilities/auth";
 import AccountChooser from "components/AccountChooser/AccountChooser";
 import {Dropdown, DropdownButton} from "react-bootstrap";
 

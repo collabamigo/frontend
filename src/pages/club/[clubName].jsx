@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Card from 'react-bootstrap/Card'
 import BCarousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
-import axios from "utils/axios";
+import axios from "utilities/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
@@ -72,16 +72,138 @@ class ClubHomePage extends Component {
         }
     }
 
+    renderFacebook(){
+         if (this.state.basicInformation.facebook){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.facebook}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="facebook.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
 
+    renderInstagram(){
+        if(this.state.basicInformation.instagram){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.instagram}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="instagram.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
 
+    renderDiscord(){
+        if(this.state.basicInformation.discord){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.discord}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="discord.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
+    renderLinkedin(){
+        if(this.state.basicInformation.linkedin){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.linkedin}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="linkedin.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+
+    }
+
+    renderTelegram(){
+        if(this.state.basicInformation.telegram){
+            return(
+                <Card.Link
+                    href={this.state.basicInformation.telegram}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="25px"
+                        src="telegram.svg"
+                        width="25px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
+    renderGithub(){
+        if(this.state.basicInformation.github){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.github}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="github.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
+    renderOther(){
+        if(this.state.basicInformation.other){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.other}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="website.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
 
     render(){
         const isLoading = isEmpty(this.state.basicInformation);
         if (isLoading || this.state.announcements === null || this.state.competitions === null){
             return <Loading />; // LOADING SCREEN
         }
-
-
+        
         const responsive = {
             superLargeDesktop: {
                 // the naming can be any, depends on you.
@@ -130,52 +252,20 @@ class ClubHomePage extends Component {
                                 <br />
 
                                 <div className="col text-center">
-                                    <Card.Link
-                                        className=""
-                                        href={this.state.basicInformation.facebook}
-                                        target="_blank"
-                                    >
-                                        <SvgIcon
-                                            height="20px"
-                                            src="linkedin.svg"
-                                            width="20px"
-                                        />
-                                    </Card.Link>
+                                    {this.renderFacebook()}
 
-                                    <Card.Link
-                                        className=""
-                                        href={this.state.basicInformation.instagram}
-                                        target="_blank"
-                                    >
-                                        <SvgIcon
-                                            height="20px"
-                                            src="linkedin.svg"
-                                            width="20px"
-                                        />
-                                    </Card.Link>
+                                    {this.renderInstagram()}
 
-                                    <Card.Link
-                                        href={this.state.basicInformation.linkedin}
-                                        target="_blank"
-                                    >
-                                        <SvgIcon
-                                            height="25px"
-                                            src="github.svg"
-                                            width="25px"
-                                        />
-                                    </Card.Link>
+                                    {this.renderDiscord()}
 
-                                    <Card.Link
-                                        className=""
-                                        href={this.state.basicInformation.website}
-                                        target="_blank"
-                                    >
-                                        <SvgIcon
-                                            height="20px"
-                                            src="linkedin.svg"
-                                            width="20px"
-                                        />
-                                    </Card.Link>
+                                    {this.renderLinkedin()}
+
+                                    {this.renderTelegram()}
+
+                                    {this.renderGithub()}
+
+                                    {this.renderOther()}
+
                                 </div>
 
                             </Card.Body>

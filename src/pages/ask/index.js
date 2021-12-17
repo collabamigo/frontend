@@ -1,9 +1,9 @@
 
 import React from "react";
 import Autocomplete from "../../components/Autocomplete";
-import axios from "utils/axios";
+import axios from "utilities/axios";
 import CardExplorer from "../../components/CardExplorer";
-import {checkLoginStatus} from "../../utils/auth";
+import {checkLoginStatus} from "../../utilities/auth";
 
 
 class Ask extends React.Component {

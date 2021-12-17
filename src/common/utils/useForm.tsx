@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { notification } from "antd";
-import axios from "utils/axios";
+import axios from "utilities/axios";
 import React from 'react'
 
 export const useForm = (validate: any) => {

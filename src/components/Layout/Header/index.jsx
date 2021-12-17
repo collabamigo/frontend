@@ -148,7 +148,7 @@
 // Header.propTypes = {
 //     isAuthenticated: PropTypes.bool.isRequired
 // }
-import axios from "utils/axios";
+import axios from "utilities/axios";
 
 import PropTypes from "prop-types";
 import { SvgIcon } from "../../../common/SvgIcon";
@@ -157,7 +157,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
-import { setLoggedOut} from "utils/auth";
+import { setLoggedOut} from "utilities/auth";
 import Link from "common/Link";
 import Image from 'react-bootstrap/Image';
 import isEmpty from "lodash/isEmpty";

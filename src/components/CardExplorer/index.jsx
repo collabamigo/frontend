@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import CardsP from "../../common/CardsP/CardsP";
-import axios from "utils/axios";
+import axios from "utilities/axios";
 import backend from "../../env";
 import Loading from "components/Loading";
 

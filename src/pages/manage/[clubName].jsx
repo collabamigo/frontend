@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
-import axios from "../../utils/axios";
+import axios from "../../utilities/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
@@ -12,6 +12,7 @@ import Button from "react-bootstrap/Button";
 // import {getAuth, signInWithCustomToken} from 'firebase/auth';
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
+import "react-multi-carousel/lib/styles.css";
 
 class ClubAdminPage extends Component {
 
@@ -428,7 +429,7 @@ static propTypes = {
                                         </Carousel.Caption>
                                     </Carousel.Item>
                                 </Carousel>
-                                
+
                                 <div className="column">
                                     <input
                                         className="d-none"
@@ -471,9 +472,9 @@ static propTypes = {
                                     >
                                         add_circle
                                     </Button>
-    
+
                                 </div>
-                                
+
                                 <br />
 
                                 <div>
@@ -589,7 +590,7 @@ static propTypes = {
                                                                 </div>
 
                                                                 {this.getNotification(this.state.currentDateTime, item["timestamp"])}
-                                                                
+
                                                             </ListGroup.Item>
                                                         </ListGroup>
                                                     </ul>

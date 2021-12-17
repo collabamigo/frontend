@@ -1,6 +1,6 @@
 import React from "react";
-import {setToken} from "../utils/axios";
-import {setLoggedIn} from "../utils/auth";
+import {setToken} from "../utilities/axios";
+import {setLoggedIn} from "../utilities/auth";
 import {useRouter} from "next/router";
 
 export default function DummySignIn() {

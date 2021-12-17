@@ -3,7 +3,7 @@ import {Formik, Field, Form} from 'formik';
 import {Modal} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
-import axios from "utils/axios";
+import axios from "utilities/axios";
 
 function generateCode(formData, setShowModal, eventId) {
 

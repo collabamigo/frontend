@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
 import {SvgIcon} from "../../../common/SvgIcon";
 import { Doughnut } from "react-chartjs-2";
-import axios from "utils/axios";
+import axios from "utilities/axios";
 import Odal from "./modaldelete";
 import Oadd from "./modaladd";
 import {displayPic, pieChart, iconDashboard, cardDashboard, mainProfile, cardVotes, cardTrending, loql, headerCustom, fsxxl, fssm, lool} from './DashBoard.module.css';

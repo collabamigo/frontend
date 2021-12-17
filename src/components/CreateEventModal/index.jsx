@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import AdditionalFields from "./AdditionalFields";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {isBrowser} from "../../utils/auth";
+import {isBrowser} from "../../utilities/auth";
 import FormBuilder from "./FormBuilder";
 import TextEditor from "components/TextEditor";
 
