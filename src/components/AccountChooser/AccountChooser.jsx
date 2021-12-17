@@ -4,41 +4,50 @@ import 'react-bootstrap';
 import styles from './accountchooser.module.css';
 import Link from "common/Link";
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import Image from 'react-bootstrap/Image';
 
 export default function AccountChooser({...props}) {
 
     if(props.data === undefined){return null}
 
-    console.log(props.data ," is data");
     return (
         <>
-            <div className="d-flex justify-content-end">
-                <img
-                    alt="Profile Image"
-                    className="rounded-circle"
-                    src="https://via.placeholder.com/100x100"
-                />
+            <div className="justify-content-end row">
+                <div className="col-md-3">
+                    <Image
+                        alt="Profile Image"
+                        className="rounded-circle"
+                        height="70px"
+                        src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png"
+                        width="70px"
+                    />
+                </div>
 
-                <p className="d-flex flex-column">
-                    <h3>
-                        {props.data.First_Name} 
+                <div className="col-md-9">
+                    <p className="d-flex flex-column pl-4">
+                        <h3>
 
-                        {" "}
+                            { " "}
 
-                        {props.data.Last_Name} 
+                            {props.data.First_Name} 
 
-                    </h3>
+                            {" "}
 
-                    <Link
-                        internal
-                        to="/profile"
-                    >
-                        <span >
-                            Manage Profile
-                        </span>
-                    </Link>
+                            {props.data.Last_Name} 
+
+                        </h3>
+
+                        <Link
+                            internal
+                            to="/profile"
+                        >
+                            <span >
+                                Manage Profile
+                            </span>
+                        </Link>
                 
-                </p>
+                    </p>
+                </div>
             </div>
 
             {props.isAuthenticated ?
@@ -63,7 +72,7 @@ export default function AccountChooser({...props}) {
 
 
 AccountChooser.defaultProps = {
-    data: {},
+    data: {First_Name:"User", Last_Name:"Name"},
     isAuthenticated: false,
 };
 

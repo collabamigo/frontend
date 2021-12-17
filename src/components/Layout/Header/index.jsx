@@ -159,9 +159,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
 import { setLoggedOut} from "utils/auth";
 import Link from "common/Link";
+import Image from 'react-bootstrap/Image';
 import isEmpty from "lodash/isEmpty";
-
-import AccountChooser from "components/AccountChooser/AccountChooser";
 import styles from "./Header.module.css";
 
 function signOut() {
@@ -171,7 +170,7 @@ function signOut() {
 
 export default function Header({ isAuthenticated }) {
 
-    const [data, setData] = useState();
+    const [data, setData] = useState({First_Name:"Heemank", Last_Name:"Verma"});
 
     useEffect(() => {
         if (isEmpty(data))
@@ -179,11 +178,11 @@ export default function Header({ isAuthenticated }) {
                 .then(res => setData(res.data[0])).catch(err => console.log(err))
     })
 
-
+    if(data === undefined){return null}
     return (
         <Navbar
             bg="dark"
-            className={styles.navbar + " sticky-top"}
+            className={styles.navbar + " sticky-top mb-4"}
             collapseOnSelect
             expand="lg"
             variant="dark"
@@ -230,10 +229,68 @@ export default function Header({ isAuthenticated }) {
                             title="User Profile"
                         >
                             <NavDropdown.Item>
-                                <AccountChooser 
+
+                                <div className="justify-content-end row">
+                                    <div className="col-md-3">
+                                        <Image
+                                            alt="Profile Image"
+                                            className="rounded-circle"
+                                            height="70px"
+                                            src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png"
+                                            width="70px"
+                                        />
+                                    </div>
+
+                                    <div className="col-md-8">
+                                        <p className="d-flex flex-column pl-4">
+                                            <h3>
+
+                                                { " "}
+
+                                                {data.First_Name} 
+
+                                                {" "}
+
+                                                {data.Last_Name} 
+
+                                            </h3>
+
+                                            <Link
+                                                internal
+                                                to="/profile"
+                                            >
+                                                <span >
+                                                    Manage Profile
+                                                </span>
+                                            </Link>
+                
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {isAuthenticated ?
+                                    <NavDropdown.Item>
+                                        <h5>
+                                            Club Management
+                                        </h5>
+
+                                        <div className={styles.clubScroll}>
+                                            <ul className={styles.clubNames}>
+                                                {data.clubs?.map((club) => (
+                                                    <li key={club.id}>
+                                                        {club.name}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </NavDropdown.Item>
+            : null }
+
+
+                                {/* <AccountChooser 
                                     data={data}
                                     isAuthenticated={isAuthenticated}
-                                />
+                                /> */}
                             </NavDropdown.Item>
 
                             <NavDropdown.Divider />
