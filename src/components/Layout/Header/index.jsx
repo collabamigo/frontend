@@ -159,7 +159,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
 import { setLoggedOut} from "utilities/auth";
 import Link from "common/Link";
-import Image from 'react-bootstrap/Image';
+// import Image from 'react-bootstrap/Image';
 import isEmpty from "lodash/isEmpty";
 import styles from "./Header.module.css";
 
