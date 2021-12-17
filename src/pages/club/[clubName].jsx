@@ -2,13 +2,16 @@ import React, {Component} from 'react';
 import Card from 'react-bootstrap/Card'
 import BCarousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
-import axios from "../../utils/axios";
+import axios from "utils/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
+import styles from "./styles.module.scss";
+import Loading from "components/Loading";
+import isEmpty from "lodash/isEmpty";
 
 class ClubHomePage extends Component {
 
@@ -27,24 +30,23 @@ class ClubHomePage extends Component {
 
     constructor(props) {
         super(props)
-        var today = new Date()
-        let time = today.getHours() + ':' + today.getMinutes();
         this.state = {
-            basicInformation: null,
+            basicInformation: [],
             competitions:null,
             announcements: null,
-            currentTime: time,
-            isLoading: true,
             basicInformationStatic:{
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
-                clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480",
-                    "https://via.placeholder.com/1600X480"],
+                clubBanners:[
+                    "https://via.placeholder.com/1600X480",
+                    "https://via.placeholder.com/1600X480",
+                    "https://via.placeholder.com/1600X480"
+                ],
             },
         }
     }
 
     componentDidMount() {
-        return true
+        this.componentDidUpdate()
     }
 
     shouldComponentUpdate(){
@@ -53,9 +55,9 @@ class ClubHomePage extends Component {
 
     componentDidUpdate () {
         if (this.props.router.isReady){
-            if (this.state.basicInformation === null)
+            if (isEmpty(this.state.basicInformation))
                 axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
-                    this.setState({basicInformation: res.data, isLoading: false});
+                    this.setState({basicInformation: res.data});
             if (this.state.announcements === null)
                 axios.get("club/clubannouncements/" + this.props.router.query.clubName + "/").
                     then((res) => {
@@ -67,16 +69,18 @@ class ClubHomePage extends Component {
                         this.setState({competitions: res.data})
                     });
             });
-            console.log(this.state)
         }
     }
 
+
+
+
     render(){
-        if (this.state.isLoading || this.state.announcements === null || this.state.competitions === null){
-            return "loading"; // LOADING SCREEN
+        const isLoading = isEmpty(this.state.basicInformation);
+        if (isLoading || this.state.announcements === null || this.state.competitions === null){
+            return <Loading />; // LOADING SCREEN
         }
-        console.log("ann", this.state.announcements);
-        console.log("com", this.state.competitions);
+
 
         const responsive = {
             superLargeDesktop: {
@@ -98,90 +102,89 @@ class ClubHomePage extends Component {
             }
         };
 
+
         return (
-            <div className="row m-1">
-                <div className="col-3 d-flex justify-content-around">
-                    <div className="position-fixed">
-                        <div className="row">
-                            <Card
-                                className="pt-2"
-                                style={{ width: '18rem' }}
-                            >
+            <div className="row m-md-3">
+                <div className="mx-3 col-md-2 col-lg-2 col-sm-6 d-flex justify-content-around">
+                    <div className={styles.clubcard}>
+                        <Card
+                            className="pt-2"
+                            style={{ width: '18rem' }}
+                        >
 
-                                <Card.Img
-                                    src={this.state.basicInformationStatic.logoLink}
-                                    variant="top"
-                                />
+                            <Card.Img
+                                src={this.state.basicInformationStatic.logoLink}
+                                variant="top"
+                            />
 
-                                <Card.Body>
-                                    <Card.Title className='fs-2 fw-bold text-start pb-2'>
-                                        {this.state.basicInformation.name}
-                                    </Card.Title>
+                            <Card.Body>
+                                <Card.Title className='fs-2 fw-bold text-start pb-2'>
+                                    {this.state.basicInformation.name}
+                                </Card.Title>
 
 
-                                    <Card.Subtitle className=" text-start pb-2">
-                                        {this.state.basicInformation.tagline}
-                                    </Card.Subtitle>
+                                <Card.Subtitle className={styles.tagline}>
+                                    {this.state.basicInformation.tagline}
+                                </Card.Subtitle>
 
-                                    <br />
+                                <br />
 
-                                    <div className="col text-center">
-                                        <Card.Link
-                                            className=""
-                                            href={this.state.basicInformation.facebook}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="20px"
-                                                src="linkedin.svg"
-                                                width="20px"
-                                            />
-                                        </Card.Link>
+                                <div className="col text-center">
+                                    <Card.Link
+                                        className=""
+                                        href={this.state.basicInformation.facebook}
+                                        target="_blank"
+                                    >
+                                        <SvgIcon
+                                            height="20px"
+                                            src="linkedin.svg"
+                                            width="20px"
+                                        />
+                                    </Card.Link>
 
-                                        <Card.Link
-                                            className=""
-                                            href={this.state.basicInformation.instagram}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="20px"
-                                                src="linkedin.svg"
-                                                width="20px"
-                                            />
-                                        </Card.Link>
+                                    <Card.Link
+                                        className=""
+                                        href={this.state.basicInformation.instagram}
+                                        target="_blank"
+                                    >
+                                        <SvgIcon
+                                            height="20px"
+                                            src="linkedin.svg"
+                                            width="20px"
+                                        />
+                                    </Card.Link>
 
-                                        <Card.Link
-                                            href={this.state.basicInformation.linkedin}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="25px"
-                                                src="github.svg"
-                                                width="25px"
-                                            />
-                                        </Card.Link>
+                                    <Card.Link
+                                        href={this.state.basicInformation.linkedin}
+                                        target="_blank"
+                                    >
+                                        <SvgIcon
+                                            height="25px"
+                                            src="github.svg"
+                                            width="25px"
+                                        />
+                                    </Card.Link>
 
-                                        <Card.Link
-                                            className=""
-                                            href={this.state.basicInformation.website}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="20px"
-                                                src="linkedin.svg"
-                                                width="20px"
-                                            />
-                                        </Card.Link>
-                                    </div>
+                                    <Card.Link
+                                        className=""
+                                        href={this.state.basicInformation.website}
+                                        target="_blank"
+                                    >
+                                        <SvgIcon
+                                            height="20px"
+                                            src="linkedin.svg"
+                                            width="20px"
+                                        />
+                                    </Card.Link>
+                                </div>
 
-                                </Card.Body>
-                            </Card>
-                        </div>
+                            </Card.Body>
+                        </Card>
                     </div>
                 </div>
 
-                <div className="col-9 justify-content-around">
-                    <Card>
+                <div className=" col-md-9 col-lg-9 col-sm-12 justify-content-around">
+                    <Card className="w-500">
                         <Card.Body>
                             <div className="">
                                 <BCarousel
@@ -253,18 +256,14 @@ class ClubHomePage extends Component {
                                 <br />
 
                                 <div>
-                                    <div>
+                                    <div className={styles.coordinators}>
                                         Coordinators:
                                         {' '}
 
-                                        {this.state.basicInformation.admins.map(item => (
-                                            <div key={item}>
-                                                {item}
-                                            </div>
-                                        ))}
+                                        {this.state.basicInformation.admins.join(", ")}
                                     </div>
 
-                                    <div>
+                                    <div className={styles.memberSize}>
                                         Member Size:
                                         {' '}
 
@@ -276,22 +275,22 @@ class ClubHomePage extends Component {
 
 
                                 <div className="d-flex">
-                                    <div className="col-5">
-                                        <div className="text-center h2">
+                                    <div className="col-md-5 col-lg-5 col-sm-6">
+                                        <div className={styles.descriptionHeading}>
                                             Description
 
                                             {" "}
 
                                         </div>
 
-                                        <p className="text-start h6">
+                                        <p className={styles.description}>
                                             {this.state.basicInformation.description}
                                         </p>
 
                                     </div>
 
-                                    <div className="offset-1 col-5">
-                                        <div className="text-center h2">
+                                    <div className="offset-1 col-md-5 col-lg-5 col-sm-9">
+                                        <div className={styles.announcementsHeading}>
                                             Announcements
                                             {" "}
 
@@ -311,8 +310,8 @@ class ClubHomePage extends Component {
                                                                 as="li"
                                                                 className="d-flex justify-content-between align-items-start my-2"
                                                             >
-                                                                <div className="ms-2 me-auto">
-                                                                    <div className="fw-bold">
+                                                                <div className={styles.notifications}>
+                                                                    <div className={styles.notificationHeading}>
                                                                         {item["content"]}
                                                                     </div>
 
@@ -347,11 +346,10 @@ class ClubHomePage extends Component {
 
                     <br />
 
-                    <Card className="row">
+                    <Card className="w-500">
                         <Card.Body className="mt-3">
                             <Card.Title className="card-title fs-2 header-color text-left">
                                 Events
-
                                 {" "}
                             </Card.Title>
 

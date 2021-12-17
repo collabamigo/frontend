@@ -1,0 +1,66 @@
+@import '~rfs/scss';
+
+.clubcard{
+    position: fixed;
+}
+
+.coordinators, .memberSize {
+    @include rfs(1.1rem, font-size);
+}
+
+.tagline {
+    font-size: 20px;
+    padding-bottom: 2px;
+}
+
+.descriptionHeading, .announcementsHeading {
+    font-size: 35px;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.description {
+    font-size: 20px;
+}
+
+.notifications {
+    font-size: 20px;
+}
+
+.notificationHeading {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+@media (max-width: 800px) {
+
+    .clubcard{
+        position: relative;
+        margin: 1rem;
+    }
+
+    .descriptionHeading, .announcementsHeading {
+        font-size: 20px;
+        text-align: center;
+        padding-bottom: 3px;
+    }
+
+    .description {
+        font-size: 15px;
+    }
+
+    .notifications {
+        font-size: 15px;
+    }
+
+    .notificationHeading {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .tagline {
+        font-size: 15px;
+        padding-bottom: 2px;
+    }
+}
