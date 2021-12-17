@@ -7,89 +7,92 @@ import PropTypes from "prop-types";
 import {useRouter} from 'next/router';
 import DashboardHeader from "./DashboardHeader";
 import {App} from "./layout.module.scss";
+import SSRProvider from 'react-bootstrap/SSRProvider';
 
 function Layout({children}) {
     const router = useRouter();
     return (
-        <div className={App}>
-            <Helmet>
-                <meta charSet="utf-8" />
+        <SSRProvider>
+            <div className={App}>
+                <Helmet>
+                    <meta charSet="utf-8" />
 
-                <link
-                    href="https://collabamigo.com"
-                    rel="canonical"
-                />
+                    <link
+                        href="https://collabamigo.com"
+                        rel="canonical"
+                    />
 
-                <link
-                    href="%PUBLIC_URL%/icons/favicon_dark.ico"
-                    rel="icon"
-                />
+                    <link
+                        href="%PUBLIC_URL%/icons/favicon_dark.ico"
+                        rel="icon"
+                    />
 
-                <meta
-                    content="width=device-width, initial-scale=1"
-                    name="viewport"
-                />
+                    <meta
+                        content="width=device-width, initial-scale=1"
+                        name="viewport"
+                    />
 
-                <meta
-                    content="#18216d"
-                    name="theme-color"
-                />
+                    <meta
+                        content="#18216d"
+                        name="theme-color"
+                    />
 
-                <meta
-                    content="A platform to learn and grow"
-                    name="description"
-                />
+                    <meta
+                        content="A platform to learn and grow"
+                        name="description"
+                    />
 
-                <meta
-                    content="iiitd.ac.in"
-                    name="google-signin-hosted_domain"
-                />
+                    <meta
+                        content="iiitd.ac.in"
+                        name="google-signin-hosted_domain"
+                    />
 
-                <meta
-                    content="1O70mbIh0GWQJ6g3UsfCEnQyNUoygyq7k1CbvmWZzsU"
-                    name="google-site-verification"
-                />
+                    <meta
+                        content="1O70mbIh0GWQJ6g3UsfCEnQyNUoygyq7k1CbvmWZzsU"
+                        name="google-site-verification"
+                    />
 
-                <script
-                    async
-                    defer
-                    src="https://accounts.google.com/gsi/client"
-                />
+                    <script
+                        async
+                        defer
+                        src="https://accounts.google.com/gsi/client"
+                    />
 
-                <link
-                    href="./img/svg/developer.svg"
-                />
+                    <link
+                        href="./img/svg/developer.svg"
+                    />
 
-                <link
-                    href="img/icons/favicon_dark.ico"
-                    rel="icon"
-                />
+                    <link
+                        href="img/icons/favicon_dark.ico"
+                        rel="icon"
+                    />
 
-                <link
-                    href="%PUBLIC_URL%/manifest.json"
-                    rel="manifest"
-                />
+                    <link
+                        href="%PUBLIC_URL%/manifest.json"
+                        rel="manifest"
+                    />
 
-                <title>
-                    CollabAmigo
-                </title>
+                    <title>
+                        CollabAmigo
+                    </title>
 
-                <link
-                    href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined&display=swap"
-                    rel="stylesheet"
-                />
-            </Helmet>
+                    <link
+                        href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined&display=swap"
+                        rel="stylesheet"
+                    />
+                </Helmet>
 
-            {router.pathname!=="/clubdashboard"?
-                <Header isAuthenticated={isLoggedIn()} />:
-                <DashboardHeader isAuthenticated={isLoggedIn()} />}
+                {router.pathname!=="/clubdashboard"?
+                    <Header isAuthenticated={isLoggedIn()} />:
+                    <DashboardHeader isAuthenticated={isLoggedIn()} />}
 
-            <main>
-                {children}
-            </main>
+                <main>
+                    {children}
+                </main>
 
-            <Footer />
-        </div>)
+                <Footer />
+            </div>
+        </SSRProvider>)
 }
 
 Layout.propTypes = {
