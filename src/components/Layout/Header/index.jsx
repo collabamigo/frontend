@@ -148,16 +148,19 @@
 // Header.propTypes = {
 //     isAuthenticated: PropTypes.bool.isRequired
 // }
+import axios from "utils/axios";
 
 import PropTypes from "prop-types";
 import { SvgIcon } from "../../../common/SvgIcon";
-import React from "react";
+import React, { useState, useEffect} from "react";
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
 import { setLoggedOut} from "utils/auth";
 import Link from "common/Link";
+import isEmpty from "lodash/isEmpty";
+
 import AccountChooser from "components/AccountChooser/AccountChooser";
 import styles from "./Header.module.css";
 
@@ -167,6 +170,16 @@ function signOut() {
 }
 
 export default function Header({ isAuthenticated }) {
+
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        if (isEmpty(data))
+            axios.get(`connect/profile`)
+                .then(res => setData(res.data[0])).catch(err => console.log(err))
+    })
+
+
     return (
         <Navbar
             bg="dark"
@@ -211,13 +224,16 @@ export default function Header({ isAuthenticated }) {
                         >
                             About Us
                         </Nav.Link>
-
+                    
                         <NavDropdown
-                            id="collasible-nav-dropdown"
+                            id="dropdown-button-drop-start"
                             title="User Profile"
                         >
                             <NavDropdown.Item>
-                                <AccountChooser />
+                                <AccountChooser 
+                                    data={data}
+                                    isAuthenticated={isAuthenticated}
+                                />
                             </NavDropdown.Item>
 
                             <NavDropdown.Divider />
