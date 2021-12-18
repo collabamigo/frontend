@@ -1,5 +1,6 @@
 
-import React, {useEffect, useState} from "react"
+import {getAuth, signInWithCustomToken} from "firebase/auth";
+import React, {useContext, useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -7,7 +8,7 @@ import {faCalendar, faClock} from '@fortawesome/free-regular-svg-icons'
 import {faMapMarkerAlt, faShareAlt } from '@fortawesome/free-solid-svg-icons'
 import {faWhatsapp, faInstagram, faFacebook} from '@fortawesome/free-brands-svg-icons'
 import FAQModal from "components/faq/FAQModal";
-import {getStorage, ref, getDownloadURL} from "firebase/storage";
+import {getStorage, ref, getDownloadURL, uploadBytes} from "firebase/storage";
 import {useRouter} from 'next/router'
 import Modal from 'react-bootstrap/Modal'
 import axios from "utilities/axios";
@@ -17,6 +18,7 @@ import lodashMap from "lodash/map";
 import EventAdminModal from "components/EventAdmin/modal";
 import Table from 'react-bootstrap/Table';
 import Carousel from 'react-bootstrap/Carousel';
+import {FirebaseContext} from "firebaseProvider";
 
 function isEmpty(obj) {
 
@@ -37,7 +39,9 @@ function isEmpty(obj) {
 
 function Event() {
     const router = useRouter()
-    const storage = getStorage();
+
+    const firebase = useContext(FirebaseContext);
+    const storage = firebase?getStorage(firebase):getStorage();
 
     const [data, setData] = useState({
         clubLogoLinks: {},
@@ -118,10 +122,16 @@ function Event() {
         console.log("edited");
         handleCloseDescription();
     }
+    const image1Ref = React.createRef()
+    const handleUpload1 = ()=>{
+        image1Ref.current.click();
 
+    }
 
      useEffect(() => {
-        if (router.query.eventId!==undefined) {
+
+
+             if (router.query.eventId!==undefined) {
 
             if (isEmpty(tableResponses))
                 axios.get(`form/response/${router.query.eventId}/`)
@@ -237,6 +247,35 @@ function Event() {
                                 })}
                             </Carousel>
                         </div>
+
+
+                        <div className="column">
+                            <input
+                                className="d-none"
+                                onChange={(e) => {
+                                                const file = e.target.files[0];
+
+                                                const storage = getStorage(firebase);
+
+                                                const storageRef = ref(storage, "/data/" + "byld" + "/editable/" +
+                                                    (new Date().getTime()));
+                                                uploadBytes(storageRef, file).then(() => {
+                                                    console.log('Uploaded a blob or file!');
+                                                });
+                                }}
+                                ref={image1Ref}
+                                type="file"
+                            />
+
+                            <Button
+                                className="material-icons"
+                                onClick={handleUpload1}
+                            >
+                                add_circle
+                            </Button>
+
+                        </div>
+
 
                         <div className="pt-4">
                             <p className="text-center text-primary fs-4">

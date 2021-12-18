@@ -65,7 +65,7 @@ class ClubAdminPage extends Component {
                         this.setState({token: res.data.firebaseToken})
     //         const auth = getAuth();
             signInWithCustomToken(auth, res.data.firebaseToken).then(() => console.log(9999999999999))
-            const storage = getStorage();
+            // const storage = getStorage();
 
     })
         this.componentDidUpdate()
