@@ -1,3 +1,4 @@
+import {getDownloadURL, getStorage, ref} from "firebase/storage";
 import React, {Component} from 'react';
 import Card from 'react-bootstrap/Card'
 import BCarousel from 'react-bootstrap/Carousel'
@@ -35,13 +36,13 @@ class ClubHomePage extends Component {
             competitions:null,
             announcements: null,
             basicInformationStatic:{
-                logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 clubBanners:[
                     "https://via.placeholder.com/1600X480",
                     "https://via.placeholder.com/1600X480",
                     "https://via.placeholder.com/1600X480"
                 ],
             },
+            logoUrl: null,
         }
     }
 
@@ -55,6 +56,11 @@ class ClubHomePage extends Component {
 
     componentDidUpdate () {
         if (this.props.router.isReady){
+            if (!this.state.logoUrl) {
+                const storage = getStorage();
+                getDownloadURL(ref(storage, "data/" + this.props.router.query.clubName + "/uneditable/logo.png"))
+                    .then(url => this.setState({logoUrl: url}));
+            }
             if (isEmpty(this.state.basicInformation))
                 axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
                     this.setState({basicInformation: res.data});
@@ -221,7 +227,7 @@ class ClubHomePage extends Component {
         if (isLoading || this.state.announcements === null || this.state.competitions === null){
             return <Loading />; // LOADING SCREEN
         }
-        
+
         const responsive = {
             superLargeDesktop: {
                 // the naming can be any, depends on you.
@@ -253,7 +259,7 @@ class ClubHomePage extends Component {
                         >
 
                             <Card.Img
-                                src={this.state.basicInformationStatic.logoLink}
+                                src={this.state.logoUrl}
                                 variant="top"
                             />
 

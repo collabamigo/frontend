@@ -3,13 +3,15 @@ import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
+import Loading from "../../components/Loading";
+import {FirebaseContext} from "../../firebaseProvider";
 import axios from "../../utilities/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
-import {getStorage, ref, uploadBytes} from "firebase/storage";
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import Button from "react-bootstrap/Button";
-// import {getAuth, signInWithCustomToken} from 'firebase/auth';
+import {getAuth, signInWithCustomToken} from 'firebase/auth';
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
@@ -17,7 +19,7 @@ import styles from "../club/styles.module.scss";
 
 class ClubAdminPage extends Component {
 
-static propTypes = {
+    static propTypes = {
         clubName: PropTypes.string.isRequired,
         router: PropTypes.shape(
             {
@@ -28,6 +30,7 @@ static propTypes = {
             }
         ).isRequired
     }
+
 
     constructor(props) {
         super(props)
@@ -49,34 +52,37 @@ static propTypes = {
             isLoading: true,
             currentDateTime : date,
             basicInformationStatic:{
-                logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
                 joinDate:"26122020",
                 clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"],
             },
-
+            logoUrl:null,
             }
     }
 
     componentDidMount() {
-    // const auth = getAuth();
-    // axios.get("/authenticate/get-firebase-token").then((res) => {
-    //                     this.setState({token: res.data.firebaseToken})
-    // //         const auth = getAuth();
-    //         signInWithCustomToken(auth, res.data.firebaseToken).then(() => console.log(9999999999999))
-    //     const storage = getStorage();
-    //     getDownloadURL(ref(storage, 'data/'+ "byld" + '/uneditable/logo.png'))
-    //                 .then(url => console.log(url))
-    //
-    // })
-        return true
+    const auth = getAuth();
+    axios.get("/authenticate/get-firebase-token").then((res) => {
+                        this.setState({token: res.data.firebaseToken})
+    //         const auth = getAuth();
+            signInWithCustomToken(auth, res.data.firebaseToken).then(() => console.log(9999999999999))
+            const storage = getStorage();
+
+    })
+        this.componentDidUpdate()
     }
 
     shouldComponentUpdate(){
         return true
     }
 
+
     componentDidUpdate(){
         if (this.props.router.isReady){
+            if (!this.state.logoUrl) {
+                const storage = getStorage();
+                getDownloadURL(ref(storage, "data/" + this.props.router.query.clubName + "/uneditable/logo.png"))
+                    .then(url => this.setState({logoUrl: url}));
+            }
             if (this.state.basicInformation === null)
                 axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
                     this.setState({basicInformation: res.data, isLoading: false});
@@ -94,6 +100,8 @@ static propTypes = {
             console.log(this.state)
         }
     }
+
+    static contextType = FirebaseContext;
 
     handleSubmitDescription(values) {
         const description = values[0]
@@ -253,7 +261,7 @@ static propTypes = {
         };
 
         if (this.state.isLoading || this.state.announcements === null || this.state.competitions === null){
-            return "loading"; // LOADING SCREEN
+            return <Loading />;
         }
         return (
             <div className="row m-md-3">
@@ -290,7 +298,7 @@ static propTypes = {
                                 />
 
                                 <Card.Img
-                                    src={this.state.basicInformationStatic.logoLink}
+                                    src={this.state.logoUrl}
                                     variant="top"
                                 />
 
@@ -426,9 +434,9 @@ static propTypes = {
                                         </Carousel.Caption>
                                     </Carousel.Item>
                                 </Carousel>
-                                
+
                                 <br />
-                                
+
                                 <div className="column">
                                     <input
                                         className="d-none"
@@ -657,5 +665,4 @@ static propTypes = {
         );
     }
 }
-
 export default withRouter (ClubAdminPage);
