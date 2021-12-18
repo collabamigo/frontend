@@ -15,17 +15,11 @@ import Loading from "components/Loading";
 import isEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
 import EventAdminModal from "components/EventAdmin/modal";
-import Table from 'react-bootstrap/Table'
+import Table from 'react-bootstrap/Table';
+import Carousel from 'react-bootstrap/Carousel';
+
 export default function Event() {
     const router = useRouter()
-
-    const [show, setShow] = useState(false);
-
-    const [isLoading, setLoading] = useState(true);
-//  useState([{name:"Demo"}]);
-// useState([{elements:[{value:"text"}, {value:"text"} ,{value:"text"}]}, {elements:[{value:"text"}, {value:"text"} ,{value:"text"}]}, {elements:[{value:"text"}, {value:"text"} ,{value:"text"}]}]);
-    const [tableHeaders,settableHeaders] = useState([]);
-    const [tableResponses,settableResponses] = useState([]);
 
 
     const [data, setData] = useState({
@@ -33,24 +27,27 @@ export default function Event() {
         event: {},
         showEvent: false,
         showDescription:false,
+        showModal: false,
+        tableResponses: []
     });
 
 
-    // const settableResponses = (tableResponses) => setData((prevData) => {
-    //     return {...prevData, tableResponses}
-    // });
-
-
-    // const settableHeaders = (tableHeaders) => setData((prevData) => {
-    //     return {...prevData, tableHeaders}
-    // });
+    const settableResponses = (tableResponses) => setData((prevData) => {
+        return {...prevData, tableResponses}
+    });
 
     const setEvent = (event) => setData((prevData)=> {
-        return {...prevData, event}
+        return {
+            ...prevData,
+            event: {
+                ...event,
+                image_links: JSON.parse(event.image_links),
+            }}
     });
-    // const setForm = (form) => setData((prevData) => {
-    //     return {...prevData, form}
-    // });
+
+    const setForm = (form) => setData((prevData) => {
+        return {...prevData, form}
+    });
 
     const addClubLogoLinks = (club, link) => {
         console.log(clubLogoLinks)
@@ -61,8 +58,10 @@ export default function Event() {
     const event = data.event;
     const form = data.form;
     const clubLogoLinks = data.clubLogoLinks;
-    // const tableHeaders = data.tableHeaders;
-    // const tableResponses = data.tableResponses;
+    const tableHeaders = isEmpty(form)?[]:JSON.parse(data.form.skeleton);
+    const tableResponses = data.tableResponses;
+    const showModal = data.showModal;
+
 
     const convertToDatetimeString = iso_8601_string => {
         const date = new Date(iso_8601_string);
@@ -73,10 +72,9 @@ export default function Event() {
     const handleShowEvent = () => setData({...data, showEvent: true});
     const handleShowDescription = () => setData({...data, showDescription: true});
 
-    const handleClose = () =>{ setShow(false);
-        console.log(tableResponses);}
-    const handleShow = () => { setShow(true);
-        console.log(tableHeaders);}
+
+    const handleClose = () => setData({...data, showModal: false});
+    const handleShow = () => setData({...data, showModal: true});
 
     // const handleSubmitEvent =()=>{
     //     console.log("edited");
@@ -91,9 +89,6 @@ export default function Event() {
 
      useEffect(() => {
         if (router.query.eventId!==undefined) {
-            if (isEmpty(tableHeaders))
-                axios.get(`form/form/${router.query.eventId}/`)
-                    .then(res => settableHeaders(JSON.parse(res.data.skeleton)))
 
             if (isEmpty(tableResponses))
                 axios.get(`form/response/${router.query.eventId}/`)
@@ -103,9 +98,9 @@ export default function Event() {
                 axios.get(`club/competition/${router.query.eventId}/`)
                     .then(res => setEvent(res.data))
 
-            // if (isEmpty(form))
-            //     axios.get(`form/form/${router.query.eventId}/`)
-            //         .then(res => setForm(res.data)).catch(err => console.log(err))
+            if (isEmpty(form))
+                axios.get(`form/form/${router.query.eventId}/`)
+                    .then(res => setForm(res.data)).catch(err => console.log(err))
 
             if (isEmpty(clubLogoLinks) && !isEmpty(event)) {
                 const storage = getStorage();
@@ -113,7 +108,6 @@ export default function Event() {
                     .then(url => addClubLogoLinks(club, url)))
             }
 
-            setLoading(false);
         }})
 
 
@@ -121,7 +115,8 @@ export default function Event() {
 
     // const ref = useRef()
     // const isParticipateButtonVisible = useOnScreen(ref)
-
+    console.log(event)
+    const isLoading = isEmpty(event);
     if (isLoading)
         return <Loading />
     else
@@ -130,7 +125,7 @@ export default function Event() {
                 <Modal
                     aria-labelledby="example-custom-modal-styling-title"
                     onHide={handleClose}
-                    show={show}
+                    show={showModal}
                     size="lg"
                 >
                     <Modal.Header closeButton>
@@ -150,22 +145,22 @@ export default function Event() {
                             <thead>
                                 <tr>
                                     <td>
-                                        {' '}
+                                        {" "}
                                         Sr no.
                                     </td>
 
 
                                     {tableHeaders.map((option) => (
-                                        <td key={option.name} >
+                                        <td key={option.name}>
                                             {option.name}
                                         </td>
-                                    ))}
+                                ))}
 
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {tableResponses.map((response,index) => (
+                                {tableResponses.map((response, index) => (
                                     <tr key={response}>
 
                                         <td>
@@ -178,9 +173,9 @@ export default function Event() {
                                             >
                                                 {values.value}
                                             </td>
-                                        ))}
+                                    ))}
                                     </tr>
-                                ))}
+                            ))}
 
                             </tbody>
                         </Table>
@@ -195,7 +190,7 @@ export default function Event() {
                     <div className="col-md-4 col-12 me-4">
                         <div className="pb-5">
 
-                            {/* <Carousel>
+                            <Carousel>
                                 {event.image_links.map((image) => {
                                     return (
                                         <Carousel.Item >
@@ -208,7 +203,7 @@ export default function Event() {
                                         </Carousel.Item>
                                     )
                                 })}
-                            </Carousel> */}
+                            </Carousel>
                         </div>
 
                         <div className="pt-4">
