@@ -426,7 +426,9 @@ static propTypes = {
                                         </Carousel.Caption>
                                     </Carousel.Item>
                                 </Carousel>
-                                <br/>
+                                
+                                <br />
+                                
                                 <div className="column">
                                     <input
                                         className="d-none"
@@ -443,6 +445,7 @@ static propTypes = {
                                     </Button>
 
                                     {' '}
+
                                     <input
                                         className="d-none"
                                         onChange={(e)=>{this.setState({image2: e.target.files[0]})}}
@@ -458,6 +461,7 @@ static propTypes = {
                                     </Button>
 
                                     {' '}
+
                                     <input
                                         className="d-none"
                                         onChange={(e)=>this.handleUpload3(e.target.files[0])}
