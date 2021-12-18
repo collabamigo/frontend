@@ -12,19 +12,38 @@ import {useRouter} from 'next/router'
 import Modal from 'react-bootstrap/Modal'
 import axios from "utilities/axios";
 import Loading from "components/Loading";
-import isEmpty from "lodash/isEmpty";
+import lodashIsEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
 import EventAdminModal from "components/EventAdmin/modal";
 import Table from 'react-bootstrap/Table';
 import Carousel from 'react-bootstrap/Carousel';
 
-export default function Event() {
-    const router = useRouter()
+function isEmpty(obj) {
 
+    if (lodashIsEmpty(obj))
+        return true;
+
+    if (Array.isArray(obj) || typeof obj === 'object') {
+        let flag = true;
+        lodashMap(obj, (el) => {
+            if (!isEmpty(el))
+                flag = false;
+        })
+        return flag;
+    }
+
+    return false;
+}
+
+function Event() {
+    const router = useRouter()
+    const storage = getStorage();
 
     const [data, setData] = useState({
         clubLogoLinks: {},
-        event: {},
+        event: {
+            image_links: {}
+        },
         showEvent: false,
         showDescription:false,
         showModal: false,
@@ -36,15 +55,29 @@ export default function Event() {
         return {...prevData, tableResponses}
     });
 
-    const setEvent = (event) => setData((prevData)=> {
-        return {
-            ...prevData,
-            event: {
-                ...event,
-                image_links: JSON.parse(event.image_links),
-            }}
-    });
+    const setEvent = (event) => {
+        setData((prevData) => {
+            return {
+                ...prevData,
+                event: {
+                    ...prevData.event,
+                    ...event,
+                    image_links: prevData.event.image_links,
+                }
+            };
+        });
 
+        JSON.parse(event.image_links).map((link, index) => {
+            return getDownloadURL(ref(storage, link)).then((url) =>
+                setData((prevData) => {
+                    return {...prevData, event: {
+                        ...prevData.event,
+                        image_links: {...prevData.event.image_links, [index]: url}
+                    }}
+                })
+            )
+        })
+    }
     const setForm = (form) => setData((prevData) => {
         return {...prevData, form}
     });
@@ -102,11 +135,10 @@ export default function Event() {
                 axios.get(`form/form/${router.query.eventId}/`)
                     .then(res => setForm(res.data)).catch(err => console.log(err))
 
-            if (isEmpty(clubLogoLinks) && !isEmpty(event)) {
-                const storage = getStorage();
+            if (isEmpty(clubLogoLinks) && !isEmpty(event))
                 event.clubs.map(club => getDownloadURL(ref(storage, 'data/'+club+'/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
-            }
+
 
         }})
 
@@ -191,9 +223,9 @@ export default function Event() {
                         <div className="pb-5">
 
                             <Carousel>
-                                {event.image_links.map((image) => {
+                                {lodashMap(event.image_links, (image) => {
                                     return (
-                                        <Carousel.Item >
+                                        <Carousel.Item key={image}>
                                             <Image
                                                 alt={event.name}
                                                 fluid
@@ -387,3 +419,5 @@ export default function Event() {
             </>
         )
 }
+
+export default Event;
