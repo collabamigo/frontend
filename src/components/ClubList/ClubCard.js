@@ -73,6 +73,7 @@ export default class ClubCard extends Component {
 
                 )
             }
+
             else if (this.props.Type === "Event"){
                 return (
                     <div className="col-sm-6 col-lg-4 mb-3">
