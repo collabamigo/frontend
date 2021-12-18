@@ -13,6 +13,7 @@ import Button from "react-bootstrap/Button";
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
+import styles from "../club/styles.module.scss";
 
 class ClubAdminPage extends Component {
 
@@ -255,9 +256,9 @@ static propTypes = {
             return "loading"; // LOADING SCREEN
         }
         return (
-            <div className="row m-1">
-                <div className="col-3 d-flex justify-content-around">
-                    <div className="position-fixed">
+            <div className="row m-md-3">
+                <div className="mx-3 col-md-2 col-lg-2 col-sm-12 d-flex justify-content-around">
+                    <div className={styles.clubcard}>
                         <div className="row">
                             <Card
                                 className="pt-2"
@@ -298,8 +299,7 @@ static propTypes = {
                                         {this.state.basicInformation.name}
                                     </Card.Title>
 
-
-                                    <Card.Subtitle className=" text-start pb-2">
+                                    <Card.Subtitle className={styles.tagline}>
                                         {this.state.basicInformation.tagline}
                                     </Card.Subtitle>
 
@@ -360,8 +360,8 @@ static propTypes = {
                     </div>
                 </div>
 
-                <div className="col-9 justify-content-around">
-                    <Card>
+                <div className={styles.clubBox + " col-md-9 col-lg-9 col-sm-12 justify-content-around"}>
+                    <Card className={styles.leftCard1}>
                         <Card.Body>
                             <div className="">
                                 <Carousel
@@ -392,7 +392,6 @@ static propTypes = {
                                         />
 
                                         <Carousel.Caption>
-
                                             <p>
                                                 Nulla vitae elit libero, a pharetra augue mollis interdum.
                                             </p>
@@ -407,7 +406,6 @@ static propTypes = {
                                         />
 
                                         <Carousel.Caption>
-
                                             <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                             </p>
@@ -422,14 +420,15 @@ static propTypes = {
                                         />
 
                                         <Carousel.Caption>
-
                                             <p>
                                                 Praesent commodo cursus magna, vel scelerisque nisl consectetur.
                                             </p>
                                         </Carousel.Caption>
                                     </Carousel.Item>
                                 </Carousel>
-
+                                
+                                <br />
+                                
                                 <div className="column">
                                     <input
                                         className="d-none"
@@ -445,6 +444,8 @@ static propTypes = {
                                         add_circle
                                     </Button>
 
+                                    {' '}
+
                                     <input
                                         className="d-none"
                                         onChange={(e)=>{this.setState({image2: e.target.files[0]})}}
@@ -458,6 +459,8 @@ static propTypes = {
                                     >
                                         add_circle
                                     </Button>
+
+                                    {' '}
 
                                     <input
                                         className="d-none"
@@ -486,7 +489,7 @@ static propTypes = {
                                         show={this.state.currentModal === 'description'}
                                     />
 
-                                    <div>
+                                    <div className={styles.coordinators}>
                                         Coordinators:
                                         {this.state.basicInformation.admins.map(item => (
                                             <div key={item}>
@@ -495,7 +498,7 @@ static propTypes = {
                                         ))}
                                     </div>
 
-                                    <div>
+                                    <div className={styles.memberSize}>
                                         Member Size:
                                         {' '}
 
@@ -507,15 +510,15 @@ static propTypes = {
 
 
                                 <div className="d-flex">
-                                    <div className="col-5">
-                                        <div className="text-center h2">
+                                    <div className={styles.descriptionBox + " col-md-5 col-lg-5 col-sm-6"}>
+                                        <div className={styles.descriptionHeading}>
                                             Description
 
                                             {" "}
 
                                         </div>
 
-                                        <p className="text-start h6">
+                                        <p className={styles.description}>
                                             {this.state.basicInformation.description}
                                         </p>
 
@@ -535,8 +538,8 @@ static propTypes = {
                                         </button>
                                     </div>
 
-                                    <div className="offset-1 col-5">
-                                        <div className="text-center h2">
+                                    <div className={styles.announcementBox + " offset-1 col-md-5 col-lg-5 col-sm-9"}>
+                                        <div className={styles.announcementsHeading}>
                                             Announcements
                                             {" "}
 
@@ -578,8 +581,8 @@ static propTypes = {
                                                                 as="li"
                                                                 className="d-flex justify-content-between align-items-start my-2"
                                                             >
-                                                                <div className="ms-2 me-auto">
-                                                                    <div className="fw-bold">
+                                                                <div className={styles.notifications}>
+                                                                    <div className={styles.notificationHeading}>
                                                                         {item["content"]}
                                                                     </div>
 
@@ -608,7 +611,7 @@ static propTypes = {
 
                     <br />
 
-                    <Card className="row">
+                    <Card className={styles.leftCard2}>
                         <Card.Body className="mt-3">
                             <Card.Title className="card-title fs-2 header-color text-left">
                                 Events
@@ -630,7 +633,7 @@ static propTypes = {
 
                             <br />
 
-                            <Card.Text className="card-text h5 text-muted col-12">
+                            <Card.Text className="card-text h5 col-12">
                                 <div>
                                     <RCarousel responsive={responsive}>
                                         {this.state.competitions.map((option, index) => (
