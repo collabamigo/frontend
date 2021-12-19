@@ -1,6 +1,6 @@
 // import 'remirror/styles/all.css';
 // import './styles.css';
-import { cx, htmlToProsemirrorNode } from "remirror";
+import { cx } from "remirror";
 import React from "react";
 import {
   BlockquoteExtension,
@@ -17,7 +17,7 @@ import {
   ItalicExtension,
   LinkExtension,
   // ListExtension,
-  // MarkdownExtension,
+  MarkdownExtension,
   // MarkdownOptions,
   // MentionExtension,
   // TableExtension,
@@ -62,26 +62,8 @@ export default function TextEditor() {
     new LinkExtension({
       autoLink: true,
     }),
-    new SubExtension(),
-    new SupExtension(),
-    new UnderlineExtension(),
+    new MarkdownExtension(),
   ];
-
-  const BlockquoteButton = () => {
-    const commands = useCommands();
-    const active = useActive(true);
-    return (
-      <button
-        onMouseDown={(event) => event.preventDefault()}
-        onClick={() => commands.toggleBlockquote()}
-        className="btn-icon-editor"
-      >
-        <span class="material-icons-outlined icons-editor">
-          format_quote
-        </span>
-      </button>
-    );
-  };
 
   const BoldButton = () => {
     const commands = useCommands();
@@ -92,9 +74,16 @@ export default function TextEditor() {
         onClick={() => commands.toggleBold()}
         className="btn-icon-editor"
       >
-        <span class="material-icons-outlined icons-editor">
-          format_bold
-        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-type-bold"
+          viewBox="0 0 16 16"
+        >
+          <path d="M8.21 13c2.106 0 3.412-1.087 3.412-2.823 0-1.306-.984-2.283-2.324-2.386v-.055a2.176 2.176 0 0 0 1.852-2.14c0-1.51-1.162-2.46-3.014-2.46H3.843V13H8.21zM5.908 4.674h1.696c.963 0 1.517.451 1.517 1.244 0 .834-.629 1.32-1.73 1.32H5.908V4.673zm0 6.788V8.598h1.73c1.217 0 1.88.492 1.88 1.415 0 .943-.643 1.449-1.832 1.449H5.907z" />
+        </svg>
       </button>
     );
   };
@@ -108,42 +97,17 @@ export default function TextEditor() {
         onClick={() => commands.toggleCode()}
         className="btn-icon-editor"
       >
-        <span class="material-icons-outlined icons-editor">
-          code
-        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-code-slash"
+          viewBox="0 0 16 16"
+        >
+          <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z" />
+        </svg>
       </button>
-    );
-  };
-
-  const TWO_COLUMNS = {
-    count: 2,
-    fill: "balance",
-    ruleColor: "darkred",
-    ruleStyle: "dashed",
-    ruleWidth: "thick",
-    gap: "5em",
-  };
-  const THREE_COLUMNS = {
-    count: 3,
-  };
-
-  const ColumnsButton = () => {
-    const commands = useCommands();
-    return (
-      <>
-        <button
-          onMouseDown={(event) => event.preventDefault()}
-          onClick={() => commands.toggleColumns(TWO_COLUMNS)}
-        >
-          2 col
-        </button>
-        <button
-          onMouseDown={(event) => event.preventDefault()}
-          onClick={() => commands.toggleColumns(THREE_COLUMNS)}
-        >
-          3 col
-        </button>
-      </>
     );
   };
 
@@ -169,10 +133,28 @@ export default function TextEditor() {
   const HorizontalRuleButton = () => {
     const commands = useCommands();
     return (
-      <button onClick={() => commands.insertHorizontalRule()} className="btn-icon-editor">
-        <span class="material-icons-outlined icons-editor">
-          horizontal_rule
-        </span>
+      <button
+        onClick={() => commands.insertHorizontalRule()}
+        className="btn-icon-editor"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          ariaHidden="true"
+          role="img"
+          width="1em"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 24 24"
+        >
+          <g transform="translate(0 24) scale(1 -1)">
+            <path
+              d="M19 13H5c-.55 0-1-.45-1-1s.45-1 1-1h14c.55 0 1 .45 1 1s-.45 1-1 1z"
+              fillRule="evenodd"
+              fill="currentColor"
+            />
+          </g>
+        </svg>
       </button>
     );
   };
@@ -186,9 +168,16 @@ export default function TextEditor() {
         onClick={() => commands.toggleItalic()}
         className="btn-icon-editor"
       >
-        <span class="material-icons-outlined icons-editor">
-          format_italic
-        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-type-italic"
+          viewBox="0 0 16 16"
+        >
+          <path d="M7.991 11.674 9.53 4.455c.123-.595.246-.71 1.347-.807l.11-.52H7.211l-.11.52c1.06.096 1.128.212 1.005.807L6.57 11.674c-.123.595-.246.71-1.346.806l-.11.52h3.774l.11-.52c-1.06-.095-1.129-.211-1.006-.806z" />
+        </svg>
       </button>
     );
   };
@@ -201,9 +190,28 @@ export default function TextEditor() {
         onClick={() => commands.toggleSubscript()}
         className="btn-icon-editor"
       >
-        <span class="material-icons-outlined icons-editor">
-          subscript
-        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          ariaHidden="true"
+          role="img"
+          width="1em"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 24 24"
+        >
+          <g
+            class="icon-tabler"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 7l8 10m-8 0l8-10" />
+            <path d="M21 20h-4l3.5-4a1.73 1.73 0 0 0-3.5-2" />
+          </g>
+        </svg>
       </button>
     );
   };
@@ -216,9 +224,28 @@ export default function TextEditor() {
         onClick={() => commands.toggleSuperscript()}
         className="btn-icon-editor"
       >
-        <span class="material-icons-outlined icons-editor">
-          superscript
-        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          aria-hidden="true"
+          role="img"
+          width="1em"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 24 24"
+        >
+          <g
+            class="icon-tabler"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 7l8 10m-8 0l8-10" />
+            <path d="M21 11h-4l3.5-4A1.73 1.73 0 0 0 17 5" />
+          </g>
+        </svg>
       </button>
     );
   };
@@ -232,9 +259,16 @@ export default function TextEditor() {
         onClick={() => commands.toggleUnderline()}
         className="btn-icon-editor"
       >
-        <span class="material-icons-outlined icons-editor">
-          format_underlined
-        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-type-underline"
+          viewBox="0 0 16 16"
+        >
+          <path d="M5.313 3.136h-1.23V9.54c0 2.105 1.47 3.623 3.917 3.623s3.917-1.518 3.917-3.623V3.136h-1.23v6.323c0 1.49-.978 2.57-2.687 2.57-1.709 0-2.687-1.08-2.687-2.57V3.136zM12.5 15h-9v-1h9v1z" />
+        </svg>
       </button>
     );
   };
@@ -242,7 +276,7 @@ export default function TextEditor() {
   const { manager, state, onChange } = useRemirror({
     extensions: extensions,
     content: "Content here ...",
-    stringHandler: htmlToProsemirrorNode,
+    stringHandler: "markdown",
   });
 
   return (
@@ -254,16 +288,22 @@ export default function TextEditor() {
         initialContent={state}
         autoRender="end"
       >
-        <BoldButton />
-        <ItalicButton />
-        <UnderlineButton />
-        {/* <BlockquoteButton /> */}
-        <CodeButton />
-        <HeadingButtons />
-        <HorizontalRuleButton />
-        <SubButton />
-        <SupButton />
-        {/* <ColumnsButton /> */}
+        <div className="d-flex flex-row">
+          <div className="icon-group">
+            <BoldButton />
+            <ItalicButton />
+            <UnderlineButton />
+          </div>
+          <div className="icon-group">
+            <HeadingButtons />
+          </div>
+          <div className="icon-group">
+            <CodeButton />
+            <HorizontalRuleButton />
+            <SubButton />
+            <SupButton />
+          </div>
+        </div>
       </Remirror>
     </ThemeProvider>
   );
