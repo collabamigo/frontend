@@ -328,7 +328,7 @@ class ClubAdminPage extends Component {
                         width="130"
                     />
                 </div>
-                
+
             )
         }
         else{
@@ -568,39 +568,40 @@ class ClubAdminPage extends Component {
                                 <br />
                                 
                                 <div className="d-flex">
+                                    {!this.state.bannerLinks?null:
                                     <div className="mx-auto d-flex">
-                                        <div>
+                                        <div className="d-flex">
                                             <button
-                                                className={"mx-3 btn btn" + ((this.state.bannerLinks[0])?"":"-primary")}
+                                                className={"my-auto mx-3 btn btn" + ((this.state.bannerLinks[0]) ? "" : "-primary")}
                                                 onClick={this.handleUpload1.bind(this)}
                                                 type="button"
                                             >
-                                                {this.bannerControl(this.state.bannerLinks,0)}
+                                                {this.bannerControl(this.state.bannerLinks, 0)}
                                             </button>
                                         </div>
 
-                                        <div>
+                                        <div className="d-flex">
                                             <button
-                                                className={"mx-3 btn btn" + ((this.state.bannerLinks[1])?"":"-primary")}
+                                                className={"my-auto mx-3 btn btn" + ((this.state.bannerLinks[1]) ? "" : "-primary")}
                                                 onClick={this.handleUpload2.bind(this)}
                                                 type="button"
                                             >
-                                                {this.bannerControl(this.state.bannerLinks,1)}
+                                                {this.bannerControl(this.state.bannerLinks, 1)}
 
                                             </button>
                                         </div>
 
                                         <div className="d-flex">
                                             <button
-                                                className={"my-auto mx-3 btn btn" + ((this.state.bannerLinks[2])?"":"-primary")}
-                                                onClick={()=> this.image3Ref.current.click()}
+                                                className={"my-auto mx-3 btn btn" + ((this.state.bannerLinks[2]) ? "" : "-primary")}
+                                                onClick={() => this.image3Ref.current.click()}
                                                 type="button"
                                             >
-                                                {this.bannerControl(this.state.bannerLinks,2)}
+                                                {this.bannerControl(this.state.bannerLinks, 2)}
 
                                             </button>
                                         </div>
-                                    </div>
+                                    </div>}
                                 </div>
 
                                 <div>
