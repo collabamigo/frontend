@@ -109,6 +109,8 @@
         padding: 0px;
     }
 
+  
+
     .firstsectionInner{
         padding:10px;
     }
@@ -141,18 +143,22 @@
     }
 
     .secondSection{
-        margin-left: 0rem;
-        margin-right: 0rem;
-        padding: 10px;
+        padding:0px !important;
+        margin: 0px !important;
+        width: 100% !important;
     }
 
     .secondsectionInner{
-        padding:10px;
+        padding:0px !important;
+        margin: 0px !important;
+        width: 100% !important;
+        width: 100% !important;
+
+
     }
 
     .secondsectionInnerleft{
         margin-top: 2.5%;
-        width: 40%;
     }
 
     .secondsectionInnerright{
@@ -164,11 +170,14 @@
     .secondsectionHeading{
         font-size:25px;
         margin-left: 0rem !important;
+        padding-left:20px !important;
+
     }
 
     .secondsectionMiddle{
-        margin-left:2.5rem;
-        margin-right: 2.5rem;
+        margin-left: 0rem !important;
+        padding-left:10px !important;
+        width: 100% !important;
     }
 
     .thirdSection{

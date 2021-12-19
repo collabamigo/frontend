@@ -13,21 +13,20 @@ export default function EventTalkCard(props) {
     var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' +  datee.getFullYear());
 
     return (
-        <div className={styles.cardCenter}>
-            <Card>
-                <Card.Img
-                    className={styles.image}
-                    src="https://via.placeholder.com/350x200"
-                    variant="top"
-                />
+        <Card className={styles.cardCenter  + " h-100"}>
+            <Card.Img
+                className={styles.image}
+                src="https://via.placeholder.com/350x200"
+                variant="top"
+            />
 
-                <Card.Body className={styles.cardinner}>
-                    <Card.Title className=" text-primary fw-bold">
-                        {props.element.name}
-                    </Card.Title>
+            <Card.Body className={styles.cardinner}>
+                <Card.Title className=" text-primary fw-bold">
+                    {props.element.name}
+                </Card.Title>
 
-                    <Card.Subtitle className="mb-2 text-muted">
-                        {props.element.clubs.map((val) => {
+                <Card.Subtitle className="mb-2 text-muted">
+                    {props.element.clubs.map((val) => {
                             return (
                                 <span key={val}>
                                     {val}
@@ -35,32 +34,33 @@ export default function EventTalkCard(props) {
                             );
 
                         })}
-                    </Card.Subtitle>
+                </Card.Subtitle>
 
                    
-                    <Card.Text className={styles.text}>
-                        {truncate(props.element.description, 130)}
-                    </Card.Text>
+                <Card.Text className={styles.text}>
+                    {truncate(props.element.description, 80)}
+                </Card.Text>
 
-                    <Card.Subtitle className="d-flex text-muted">
-                        <SvgIcon
-                            height="15px"
-                            src="calendar_datee.svg"
-                            width="15px"
-                        /> 
+                <br />
 
-                        <p className={styles.text2}>
-                            .
+                <Card.Subtitle className={styles.bottom + " d-flex text-muted "}>
+                    <SvgIcon
+                        height="15px"
+                        src="calendar_datee.svg"
+                        width="15px"
+                    /> 
 
-                            Fill before  
+                    <p className={styles.text2}>
+                        .
 
-                            {finale}
-                        </p>
-                    </Card.Subtitle>
+                        Fill before  
 
-                </Card.Body>
-            </Card>
-        </div>
+                        {finale}
+                    </p>
+                </Card.Subtitle>
+
+            </Card.Body>
+        </Card>
     )
 }
 
