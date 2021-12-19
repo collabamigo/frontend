@@ -1,31 +1,21 @@
 /* eslint-disable react/no-multi-comp,react/no-unstable-nested-components */
 
-import { prosemirrorNodeToHtml } from "remirror";
-import React, {useCallback} from "react";
+// import { MarkdownExtension } from "remirror";
+import React from "react";
 import {
     BlockquoteExtension,
     BoldExtension,
     CodeBlockExtension,
     CodeExtension,
-    ColumnsExtension,
-    FontFamilyExtension,
-    FontSizeExtension,
-    HardBreakExtension,
     HeadingExtension,
     HorizontalRuleExtension,
     ItalicExtension,
     LinkExtension,
-    // ListExtension,
+    BulletListExtension,
+    OrderedListExtension,
+    ListExtension,
     MarkdownExtension,
     // MarkdownOptions,
-    // MentionExtension,
-    // TableExtension,
-    // ShortcutsExtension,
-    // StrikeExtension,
-    SubExtension,
-    SupExtension,
-    // TextCaseExtension,
-    UnderlineExtension,
 } from "remirror/extensions";
 // import css from 'refractor/lang/css';
 // import javascript from 'refractor/lang/javascript';
@@ -34,14 +24,14 @@ import {
 // import markdown from 'refractor/lang/markdown';
 // import typescript from 'refractor/lang/typescript';
 import {
+    EditorComponent,
     Remirror,
     ThemeProvider,
     useCommands,
     useRemirror,
     useHelpers,
-    useKeymap,
+    // useKeymap,
 } from "@remirror/react";
-import { node } from "prop-types";
 
 export default function TextEditor() {
     const extensions = [
@@ -52,11 +42,6 @@ export default function TextEditor() {
             // supportedLanguages: [css],
         }),
         new CodeExtension(),
-        new ColumnsExtension(),
-        // new ColumnAttributes(),
-        new FontFamilyExtension(),
-        new FontSizeExtension(),
-        new HardBreakExtension(),
         new HeadingExtension(),
         new HorizontalRuleExtension(),
         new ItalicExtension(),
@@ -64,9 +49,8 @@ export default function TextEditor() {
             autoLink: true,
         }),
         new MarkdownExtension(),
-        new SubExtension(),
-        new SupExtension(),
-        new UnderlineExtension(),
+        new BulletListExtension(),
+        new OrderedListExtension(),
     ];
 
     function BoldButton() {
@@ -152,51 +136,54 @@ export default function TextEditor() {
         );
     }
 
-    function SubButton() {
+    function ListButton() {
         const commands = useCommands();
         return (
-            <button
-                className="btn-icon-editor"
-                onClick={() => commands.toggleSubscript()}
-                onMouseDown={(event) => event.preventDefault()}
-                type="button"
-            >
-                <span className="material-icons-outlined icons-editor">
-                    subscript
-                </span>
-            </button>
-        );
-    }
+            <>
+                <button
+                    className="btn-icon-editor"
+                    onClick={() => commands.toggleBulletList()}
+                    onMouseDown={(event) => event.preventDefault()}
+                    type="button"
+                >
+                    <svg
+                        className="bi bi-list-ul"
+                        fill="currentColor"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        width="16"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                            fillRule="evenodd"
+                        />
+                    </svg>
+                </button>
 
-    function SupButton() {
-        const commands = useCommands();
-        return (
-            <button
-                className="btn-icon-editor"
-                onClick={() => commands.toggleSuperscript()}
-                onMouseDown={(event) => event.preventDefault()}
-                type="button"
-            >
-                <span className="material-icons-outlined icons-editor">
-                    superscript
-                </span>
-            </button>
-        );
-    }
+                <button
+                    className="btn-icon-editor"
+                    onClick={() => commands.toggleOrderedList()}
+                    onMouseDown={(event) => event.preventDefault()}
+                    type="button"
+                >
+                    <svg
+                        className="bi bi-list-ol"
+                        fill="currentColor"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        width="16"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z"
+                            fillRule="evenodd"
+                        />
 
-    function UnderlineButton() {
-        const commands = useCommands();
-        return (
-            <button
-                className="btn-icon-editor"
-                onClick={() => commands.toggleUnderline()}
-                onMouseDown={(event) => event.preventDefault()}
-                type="button"
-            >
-                <span className="material-icons-outlined icons-editor">
-                    format_underlined
-                </span>
-            </button>
+                        <path d="M1.713 11.865v-.474H2c.217 0 .363-.137.363-.317 0-.185-.158-.31-.361-.31-.223 0-.367.152-.373.31h-.59c.016-.467.373-.787.986-.787.588-.002.954.291.957.703a.595.595 0 0 1-.492.594v.033a.615.615 0 0 1 .569.631c.003.533-.502.8-1.051.8-.656 0-1-.37-1.008-.794h.582c.008.178.186.306.422.309.254 0 .424-.145.422-.35-.002-.195-.155-.348-.414-.348h-.3zm-.004-4.699h-.604v-.035c0-.408.295-.844.958-.844.583 0 .96.326.96.756 0 .389-.257.617-.476.848l-.537.572v.03h1.054V9H1.143v-.395l.957-.99c.138-.142.293-.304.293-.508 0-.18-.147-.32-.342-.32a.33.33 0 0 0-.342.338v.041zM2.564 5h-.635V2.924h-.031l-.598.42v-.567l.629-.443h.635V5z" />
+                    </svg>
+                </button>
+            </>
         );
     }
 
@@ -246,6 +233,8 @@ export default function TextEditor() {
                 <HeadingButtons />
 
                 <HorizontalRuleButton />
+
+                <ListButton />
 
                 {/*<SubButton />*/}
 
