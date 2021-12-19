@@ -198,7 +198,7 @@ export default function Header({ isAuthenticated }) {
                         <SvgIcon
                             className="col-"
                             height="60px"
-                            src="logo.svg"
+                            src="logo.png"
                             width="250px"
                         />
                     </Link>
