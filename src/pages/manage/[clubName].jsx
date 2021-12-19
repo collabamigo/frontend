@@ -31,7 +31,6 @@ class ClubAdminPage extends Component {
         ).isRequired
     }
 
-
     constructor(props) {
         super(props)
         const today = new Date();
@@ -65,7 +64,7 @@ class ClubAdminPage extends Component {
                         this.setState({token: res.data.firebaseToken})
     //         const auth = getAuth();
             signInWithCustomToken(auth, res.data.firebaseToken).then(() => console.log(9999999999999))
-            const storage = getStorage();
+            // const storage = getStorage();
 
     })
         this.componentDidUpdate()
@@ -74,7 +73,6 @@ class ClubAdminPage extends Component {
     shouldComponentUpdate(){
         return true
     }
-
 
     componentDidUpdate(){
         if (this.props.router.isReady){
@@ -98,6 +96,150 @@ class ClubAdminPage extends Component {
                     });
             });
             console.log(this.state)
+        }
+    }
+
+    renderFacebook(){
+         if (this.state.basicInformation.facebook){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.facebook}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="facebook.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
+    renderInstagram(){
+        if(this.state.basicInformation.instagram){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.instagram}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="instagram.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
+    renderDiscord(){
+        if(this.state.basicInformation.discord){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.discord}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="discord.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
+    renderLinkedin(){
+        if(this.state.basicInformation.linkedin){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.linkedin}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="linkedin.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+
+    }
+
+    renderTelegram(){
+        if(this.state.basicInformation.telegram){
+            return(
+                <Card.Link
+                    href={this.state.basicInformation.telegram}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="25px"
+                        src="telegram.svg"
+                        width="25px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
+    renderGithub(){
+        if(this.state.basicInformation.github){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.github}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="github.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
+    renderMail(){
+        if(this.state.basicInformation.mail){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.mail}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="mail.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
+    renderOther(){
+        if(this.state.basicInformation.other){
+            return(
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.other}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="website.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
         }
     }
 
@@ -134,7 +276,7 @@ class ClubAdminPage extends Component {
                         return (
                             {
                                 ...(prevState.announcements),
-                                announcements:[...(prevState.announcements), {id:ress.data.id, content:ress.data.content, timestamp:ress.data.timestamp}]
+                                announcements:[{id:ress.data.id, content:ress.data.content, timestamp:ress.data.timestamp},...(prevState.announcements)]
                             })
                     })
         });
@@ -314,52 +456,21 @@ class ClubAdminPage extends Component {
                                     <br />
 
                                     <div className="col text-center">
-                                        <Card.Link
-                                            className=""
-                                            href={this.state.basicInformation.facebook}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="20px"
-                                                src="linkedin.svg"
-                                                width="20px"
-                                            />
-                                        </Card.Link>
+                                        {this.renderFacebook()}
 
-                                        <Card.Link
-                                            className=""
-                                            href={this.state.basicInformation.instagram}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="20px"
-                                                src="linkedin.svg"
-                                                width="20px"
-                                            />
-                                        </Card.Link>
+                                        {this.renderInstagram()}
 
-                                        <Card.Link
-                                            href={this.state.basicInformation.linkedin}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="25px"
-                                                src="github.svg"
-                                                width="25px"
-                                            />
-                                        </Card.Link>
+                                        {this.renderDiscord()}
 
-                                        <Card.Link
-                                            className=""
-                                            href={this.state.basicInformation.website}
-                                            target="_blank"
-                                        >
-                                            <SvgIcon
-                                                height="20px"
-                                                src="linkedin.svg"
-                                                width="20px"
-                                            />
-                                        </Card.Link>
+                                        {this.renderLinkedin()}
+
+                                        {this.renderTelegram()}
+
+                                        {this.renderGithub()}
+
+                                        {this.renderMail()}
+
+                                        {this.renderOther()}
                                     </div>
 
                                 </Card.Body>
@@ -499,11 +610,9 @@ class ClubAdminPage extends Component {
 
                                     <div className={styles.coordinators}>
                                         Coordinators:
-                                        {this.state.basicInformation.admins.map(item => (
-                                            <div key={item}>
-                                                {item}
-                                            </div>
-                                        ))}
+                                        {' '}
+
+                                        {this.state.basicInformation.admins.join(", ")}
                                     </div>
 
                                     <div className={styles.memberSize}>
@@ -524,6 +633,20 @@ class ClubAdminPage extends Component {
 
                                             {" "}
 
+                                            {" "}
+                                            
+                                            <button
+                                                className="btn btn-outline-warning material-icons col-auto"
+                                                onClick={() => {
+                                                    this.setState({
+                                                        currentModal: "description",
+                                                    });
+                                                }}
+                                                type="button"
+                                            >
+                                                edit
+                                            </button>
+
                                         </div>
 
                                         <p className={styles.description}>
@@ -532,21 +655,7 @@ class ClubAdminPage extends Component {
 
                                     </div>
 
-                                    <div className="col-auto">
-                                        <button
-                                            className="btn btn-outline-warning material-icons col-auto"
-                                            onClick={() => {
-                                                    this.setState({
-                                                        currentModal: "description",
-                                                    });
-                                                }}
-                                            type="button"
-                                        >
-                                            edit
-                                        </button>
-                                    </div>
-
-                                    <div className={styles.announcementBox + " offset-1 col-md-5 col-lg-5 col-sm-9"}>
+                                    <div className=" offset-1 col-md-5 col-lg-5 col-sm-9">
                                         <div className={styles.announcementsHeading}>
                                             Announcements
                                             {" "}
@@ -577,7 +686,7 @@ class ClubAdminPage extends Component {
                                                 className="list"
                                                 style={{ height: '250px'}}
                                             >
-                                                {this.state.announcements.reverse().map(item => (
+                                                {this.state.announcements.map(item => (
                                                     <ul
                                                         className="pe-2"
                                                         key={item}
@@ -665,4 +774,5 @@ class ClubAdminPage extends Component {
         );
     }
 }
+
 export default withRouter (ClubAdminPage);

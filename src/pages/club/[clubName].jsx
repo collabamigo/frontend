@@ -24,17 +24,20 @@ class ClubHomePage extends Component {
                 query: PropTypes.shape({
                     clubName: PropTypes.string.isRequired
                 }),
-
             }
         ).isRequired
     }
 
     constructor(props) {
         super(props)
+        const today = new Date();
+        const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + " " +
+            today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
         this.state = {
             basicInformation: [],
             competitions:null,
             announcements: null,
+            currentDateTime : date,
             basicInformationStatic:{
                 clubBanners:[
                     "https://via.placeholder.com/1600X480",
@@ -219,6 +222,46 @@ class ClubHomePage extends Component {
                     />
                 </Card.Link>
             )
+        }
+    }
+
+    getNotification(date1,date2){
+        date1 = new Date(date1)
+        date2 = new Date(date2.split("T")[0] +" " + date2.split("T")[1].split(".")[0])
+        if (Math.floor((Math.abs(date2 - date1)) / (1000 * 60 * 60)) <= 1){
+            return(
+                <span
+                    className="position-absolute start-93  p-1
+                    bg-primary border border-light rounded-circle"
+                >
+                    <span className="visually-hidden">
+                        New alerts
+                    </span>
+                </span>
+            )
+        }
+    }
+
+    getDate(date1,date2){
+        let year1 = new Date (date2.split("T")[0])
+        let year2 = new Date(date1.split(" ")[0])
+        date1 = new Date(date1)
+        date2 = new Date(date2.split("T")[0] +" " + date2.split("T")[1].split(".")[0])
+
+        if (Math.floor((Math.abs(year2-year1))/(1000*60*60*24))>0){
+            return(Math.floor((Math.abs(year2-year1))/(1000*60*60*24)) + " days ago")
+        }
+
+        else{
+            if (Math.floor((Math.abs(date2-date1))/(1000*60))<=0 && Math.floor((Math.abs(date2-date1))/(1000*60*60))<=0){
+                return(" seconds ago")
+            }
+            else if (Math.floor((Math.abs(date2-date1))/(1000*60*60)) <= 0 && Math.floor((Math.abs(date2-date1))/(1000*60)) > 0){
+                return(Math.floor((Math.abs(date2-date1))/(1000*60)) + " mins ago")
+            }
+            else{
+                return(Math.floor((Math.abs(date2-date1))/(1000*60*60))+ " hrs ago")
+            }
         }
     }
 
@@ -417,8 +460,11 @@ class ClubHomePage extends Component {
                                                 className="list"
                                                 style={{ height: '250px'}}
                                             >
-                                                {this.state.announcements.reverse().map(item => (
-                                                    <ul key={item}>
+                                                {this.state.announcements.map(item => (
+                                                    <ul
+                                                        className="pe-2"
+                                                        key={item}
+                                                    >
                                                         <ListGroup
                                                             as="ol"
                                                         >
@@ -431,19 +477,14 @@ class ClubHomePage extends Component {
                                                                         {item["content"]}
                                                                     </div>
 
-                                                                    {/*{this.state.currentTime}*/}
+                                                                    <div>
+                                                                        {this.getDate(this.state.currentDateTime, item["timestamp"])}
+                                                                    </div>
 
-                                                                    {/*{item["timestamp"].split("T")[1].split(".")[0]}*/}
                                                                 </div>
 
-                                                                <span
-                                                                    className="position-absolute start-95  p-1
-                                                                    bg-primary border border-light rounded-circle"
-                                                                >
-                                                                    <span className="visually-hidden">
-                                                                        New alerts
-                                                                    </span>
-                                                                </span>
+                                                                {this.getNotification(this.state.currentDateTime, item["timestamp"])}
+
                                                             </ListGroup.Item>
                                                         </ListGroup>
                                                     </ul>
