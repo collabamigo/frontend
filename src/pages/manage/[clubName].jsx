@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import Button from "react-bootstrap/Button";
-import {getAuth, signInWithCustomToken} from 'firebase/auth';
+// import {getAuth, signInWithCustomToken} from 'firebase/auth';
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
@@ -59,14 +59,14 @@ class ClubAdminPage extends Component {
     }
 
     componentDidMount() {
-    const auth = getAuth();
-    axios.get("/authenticate/get-firebase-token").then((res) => {
-                        this.setState({token: res.data.firebaseToken})
+    // const auth = getAuth();
+    // axios.get("/authenticate/get-firebase-token").then((res) => {
+    //                     this.setState({token: res.data.firebaseToken})
     //         const auth = getAuth();
-            signInWithCustomToken(auth, res.data.firebaseToken).then(() => console.log(9999999999999))
+    //         signInWithCustomToken(auth, res.data.firebaseToken).then(() => console.log(9999999999999))
             // const storage = getStorage();
 
-    })
+    // })
         this.componentDidUpdate()
     }
 
