@@ -576,7 +576,7 @@ class ClubAdminPage extends Component {
                                         <div className="d-flex">
                                             <button
                                                 className={"my-auto mx-3 btn btn" + ((this.state.bannerLinks[0]) ? "" : "-primary")}
-                                                onClick={this.handleUpload1.bind(this)}
+                                                onClick={() => this.image1Ref.current.click()}
                                                 type="button"
                                             >
                                                 {this.bannerControl(this.state.bannerLinks, 0)}
@@ -586,7 +586,7 @@ class ClubAdminPage extends Component {
                                         <div className="d-flex">
                                             <button
                                                 className={"my-auto mx-3 btn btn" + ((this.state.bannerLinks[1]) ? "" : "-primary")}
-                                                onClick={this.handleUpload2.bind(this)}
+                                                onClick={() => this.image2Ref.current.click()}
                                                 type="button"
                                             >
                                                 {this.bannerControl(this.state.bannerLinks, 1)}
@@ -610,21 +610,21 @@ class ClubAdminPage extends Component {
                                 <div>
                                     <input
                                         className="d-none"
-                                        onChange={(e)=>{this.setState({image1: e.target.files[0]})}}
+                                        onChange={(e)=>this.handleUpload1(e.target.files[0])}
                                         ref={this.image1Ref}
                                         type="file"
                                     />
                                     
                                     <input
                                         className="d-none"
-                                        onChange={(e)=>{this.setState({image2: e.target.files[0]})}}
+                                        onChange={(e)=>this.handleUpload2(e.target.files[1])}
                                         ref={this.image2Ref}
                                         type="file"
                                     />
                                     
                                     <input
                                         className="d-none"
-                                        onChange={(e)=>this.handleUpload3(e.target.files[0])}
+                                        onChange={(e)=>this.handleUpload3(e.target.files[2])}
                                         ref={this.image3Ref}
                                         type="file"
                                     />
