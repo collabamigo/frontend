@@ -3,9 +3,9 @@ import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
-import Loading from "../../components/Loading";
-import {FirebaseContext} from "../../firebaseProvider";
-import axios from "../../utilities/axios";
+import Loading from "../../../components/Loading";
+import {FirebaseContext} from "../../../firebaseProvider";
+import axios from "../../../utilities/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
@@ -15,7 +15,9 @@ import Button from "react-bootstrap/Button";
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
-import styles from "../club/styles.module.scss";
+import styles from "../../club/styles.module.scss";
+import FormBuilderPage from "../../formbuilder";
+import Link from "../../../common/Link";
 
 class ClubAdminPage extends Component {
 
@@ -749,18 +751,21 @@ class ClubAdminPage extends Component {
 
                                 {" "}
 
+                            </Card.Title>
+
+                            <Link
+                                className="reset-a"
+                                to={"/manage/" + this.props.router.query.clubName + "/create-event"}
+                            >
                                 <button
                                     className="align-self-end  btn btn-outline-success material-icons"
-                                    onClick={() => {
-                                        this.setState({
-                                            currentModal: "Announcements",
-                                        });
-                                    }}
                                     type="button"
                                 >
-                                    edit
+                                    add_circle
                                 </button>
-                            </Card.Title>
+
+                            </Link>
+
 
                             <br />
 
