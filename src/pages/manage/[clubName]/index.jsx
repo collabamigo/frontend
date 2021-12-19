@@ -350,7 +350,7 @@ class ClubAdminPage extends Component {
             (new Date().getTime()));
         if(image == null)
             return;
-        uploadBytes(storageRef, image).then((args) => {console.log("test again",args);})
+        uploadBytes(storageRef, image).then((args) => {console.log("test again1",args);})
              .catch(() => {console.log("error bro")});
     }
 
@@ -363,7 +363,7 @@ class ClubAdminPage extends Component {
             (new Date().getTime()));
         if(image == null)
             return;
-        uploadBytes(storageRef, image).then((args) => {console.log("test again",args);})
+        uploadBytes(storageRef, image).then((args) => {console.log("test again2",args);})
              .catch(() => {console.log("error bro")});
     }
 
@@ -375,7 +375,7 @@ class ClubAdminPage extends Component {
             (new Date().getTime()));
         if(image == null)
             return;
-        uploadBytes(storageRef, image).then((args) => {console.log("test again",args);})
+        uploadBytes(storageRef, image).then((args) => {console.log("test again3",args);})
              .catch(() => {console.log("error bro")});
     }
 
