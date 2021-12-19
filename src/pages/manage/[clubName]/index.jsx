@@ -3,20 +3,21 @@ import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
-import Loading from "../../../components/Loading";
-import {FirebaseContext} from "../../../firebaseProvider";
-import axios from "../../../utilities/axios";
+import Loading from "components/Loading";
+import {FirebaseContext} from "firebaseProvider";
+import axios from "utilities/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
-import Button from "react-bootstrap/Button";
-// import {getAuth, signInWithCustomToken} from 'firebase/auth';
+// import Button from "react-bootstrap/Button";
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
-import styles from "../../club/styles.module.scss";
-import Link from "../../../common/Link";
+import styles from "pages/club/styles.module.scss";
+import Link from "common/Link";
+import lodashMap from "lodash/map";
+import Image from "react-bootstrap/Image";
 
 class ClubAdminPage extends Component {
 
@@ -51,6 +52,8 @@ class ClubAdminPage extends Component {
             announcements: null,
             isLoading: true,
             currentDateTime : date,
+            bannerLinks:null,
+            bannerPaths :null,
             basicInformationStatic:{
                 joinDate:"26122020",
                 clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"],
@@ -60,13 +63,6 @@ class ClubAdminPage extends Component {
     }
 
     componentDidMount() {
-    // const auth = getAuth();
-    // axios.get("/authenticate/get-firebase-token").then((res) => {
-    //                     this.setState({token: res.data.firebaseToken})
-    //         const auth = getAuth();
-            // const storage = getStorage();
-
-    // })
         this.componentDidUpdate()
     }
 
@@ -83,7 +79,7 @@ class ClubAdminPage extends Component {
             }
             if (this.state.basicInformation === null)
                 axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
-                    this.setState({basicInformation: res.data, isLoading: false});
+                    this.setState({basicInformation: res.data, isLoading: false,bannerPaths:res.data.picture});
             if (this.state.announcements === null)
                 axios.get("club/clubannouncements/" + this.props.router.query.clubName + "/").
                     then((res) => {
@@ -95,9 +91,26 @@ class ClubAdminPage extends Component {
                         this.setState({competitions: res.data})
                     });
             });
-            console.log(this.state)
-        }
-    }
+
+
+
+            if (this.state.bannerLinks === null && this.state.bannerPaths !== null) {
+                const firebase = this.context;
+                const storage = firebase ? getStorage(firebase) : getStorage();
+
+                JSON.parse(this.state.bannerPaths).map((link, index) => {
+                    getDownloadURL(ref(storage, link)).then((url) => {
+                        this.setState((prevState) => ({
+                            ...prevState,
+                            bannerLinks: {
+                                ...(prevState.bannerLinks),
+                                [index]: url,
+                            }
+                        }))
+                    })
+                })
+            }
+    }}
 
     renderFacebook(){
          if (this.state.basicInformation.facebook){
@@ -301,6 +314,34 @@ class ClubAdminPage extends Component {
         this.handleCloseModal()
     }
 
+    bannerControl(args,num) {
+        if (args[num] !== undefined){
+            return(
+                <div>
+                    <Image
+                        alt="Carousel Image"
+                        className="m-auto"
+                        fluid
+                        height="150"
+                        rounded
+                        src={args[num]}
+                        width="150"
+                    />
+                </div>
+                
+            )
+        }
+        else{
+            return(
+                <SvgIcon
+                    height="25px"
+                    src="plus.svg"
+                    width="25px"
+                />
+            )
+        }
+    }
+
     handleUpload1(){
     this.image1Ref.current.click();
         const storage = getStorage();
@@ -382,6 +423,7 @@ class ClubAdminPage extends Component {
     }
 
     render(){
+        console.log("test" ,  this.state);
     const responsive = {
             superLargeDesktop: {
                 // the naming can be any, depends on you.
@@ -503,113 +545,77 @@ class ClubAdminPage extends Component {
                                         />
                                     }
                                 >
-                                    <Carousel.Item>
-                                        <img
-                                            alt="First slide"
-                                            className="d-block w-100"
-                                            src={this.state.basicInformationStatic.clubBanners[0]}
-                                        />
+                                    {lodashMap(this.state.bannerLinks, (image) => {
+                                    return (
+                                        <Carousel.Item
+                                            key={image}
+                                        >
+                                            <div className="w-100 d-flex">
+                                                <Image
+                                                    alt="Carousel Image"
+                                                    className="m-auto"
+                                                    fluid
+                                                    rounded
+                                                    src={image}
+                                                />
+                                            </div>
+                                        </Carousel.Item>
+                                        )
+                                    })}
 
-                                        <Carousel.Caption>
-                                            <p>
-                                                Nulla vitae elit libero, a pharetra augue mollis interdum.
-                                            </p>
-                                        </Carousel.Caption>
-                                    </Carousel.Item>
-
-                                    <Carousel.Item>
-                                        <img
-                                            alt="Second slide"
-                                            className="d-block w-100"
-                                            src={this.state.basicInformationStatic.clubBanners[1]}
-                                        />
-
-                                        <Carousel.Caption>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                            </p>
-                                        </Carousel.Caption>
-                                    </Carousel.Item>
-
-                                    <Carousel.Item>
-                                        <img
-                                            alt="Third slide"
-                                            className="d-block w-100"
-                                            src={this.state.basicInformationStatic.clubBanners[2]}
-                                        />
-
-                                        <Carousel.Caption>
-                                            <p>
-                                                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                                            </p>
-                                        </Carousel.Caption>
-                                    </Carousel.Item>
                                 </Carousel>
 
                                 <br />
+                                
+                                <div className="">
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={this.handleUpload1.bind(this)}
+                                        type="button"
+                                    >
+                                        {this.bannerControl(this.state.bannerLinks,0)}
+                                    </button>
 
-                                <div className="column">
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={this.handleUpload2.bind(this)}
+                                        type="button"
+                                    >
+                                        {this.bannerControl(this.state.bannerLinks,1)}
+
+                                    </button>
+
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={()=> this.image3Ref.current.click()}
+                                        type="button"
+                                    >
+                                        {this.bannerControl(this.state.bannerLinks,2)}
+
+                                    </button>
+                                </div>
+
+                                <div>
                                     <input
                                         className="d-none"
                                         onChange={(e)=>{this.setState({image1: e.target.files[0]})}}
                                         ref={this.image1Ref}
                                         type="file"
                                     />
-
-                                    <Button
-                                        className=""
-                                        onClick={this.handleUpload1.bind(this)}
-                                    >
-
-                                        <SvgIcon
-                                            height="25px"
-                                            src="plus.svg"
-                                            width="25px"
-                                        />
-                                    </Button>
-
-
-
-                                    {' '}
-
+                                    
                                     <input
                                         className="d-none"
                                         onChange={(e)=>{this.setState({image2: e.target.files[0]})}}
                                         ref={this.image2Ref}
                                         type="file"
                                     />
-
-                                    <Button
-                                        className=""
-                                        onClick={this.handleUpload2.bind(this)}
-                                    >
-                                        <SvgIcon
-                                            height="25px"
-                                            src="plus.svg"
-                                            width="25px"
-                                        />
-                                    </Button>
-
-                                    {' '}
-
+                                    
                                     <input
                                         className="d-none"
                                         onChange={(e)=>this.handleUpload3(e.target.files[0])}
                                         ref={this.image3Ref}
                                         type="file"
                                     />
-
-                                    <Button
-                                        className=""
-                                        onClick={()=> this.image3Ref.current.click()}
-                                    >
-                                        <SvgIcon
-                                            height="25px"
-                                            src="plus.svg"
-                                            width="25px"
-                                        />
-                                    </Button>
-
                                 </div>
 
                                 <br />
