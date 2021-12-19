@@ -2,6 +2,7 @@
     margin-left: 1rem;
     margin-right: 1rem;
     padding-top:1px;
+    
     padding-bottom:1px;
 }
 
@@ -11,6 +12,11 @@
 
 .subtitle{
         font-size:20px;
+    }
+
+    .bottom{
+        position: absolute;
+        bottom: 0;
     }
 
 @media (max-width: 800px) {
