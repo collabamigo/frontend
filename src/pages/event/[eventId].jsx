@@ -84,7 +84,7 @@ export default function Event() {
                                             alt={event.name}
                                             fluid
                                             rounded
-                                            src={image}
+                                            src= "/img/placeholder-500.png"
                                         />
                                     </Carousel.Item>
                                 )
@@ -121,10 +121,11 @@ export default function Event() {
             <div className="col">
                 <div className="row text-primary">
                     <div className="col-md-9 col-12">
+                        <br/>
                         <h1 className="fw-bold">
                             {event.name}
                         </h1>
-
+                        <br/>
                         <div>
 
                             <div className="">
@@ -159,6 +160,11 @@ export default function Event() {
 
                                     {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
                                 </p>}
+                                <div>
+                                    <p className="text-black">
+                                        {event.description}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -221,12 +227,6 @@ export default function Event() {
                             />
                         </div>
                     </div>
-                </div>
-
-                <div>
-                    <p>
-                        {event.description}
-                    </p>
                 </div>
             </div>
         </div>
