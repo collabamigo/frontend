@@ -16,7 +16,6 @@ import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
 import styles from "../../club/styles.module.scss";
-import FormBuilderPage from "../../formbuilder";
 import Link from "../../../common/Link";
 
 class ClubAdminPage extends Component {
