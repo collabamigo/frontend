@@ -72,7 +72,7 @@ export default class AuthenticatedHome extends React.Component {
                         },
                         mobile: {
                           breakpoint: { max: 464, min: 0 },
-                          items: 2
+                          items: 3
                         }
                       };
 
@@ -139,35 +139,33 @@ export default class AuthenticatedHome extends React.Component {
                     </div>
                 </div>
 
-                <div className="thirdsection">
-                    <div className={styles.thirdsectionInner}>
-                        <div className={styles.thirdsectionHeading + " text-primary"}>
-                            {' '}
-                            Clubs & Organizations
-
-                        </div>
-
-                        <br />
-
-                        <div className={styles.thirdsectionMiddle}>
-                            <Carousel responsive={responsive2}>
-
-                                {this.state.clubList.map((option, index) => (
-                                    <ClubCard
-                                        key={index}
-                                        value={option}
-                                    />
-                                        ))}
-                            </Carousel>
-                        </div>
-
-                        <div className={styles.thirdsectionfooter +" d-flex flex-row-reverse bd-highlight"}>
-                            <div className="p-2 bd-highlight" />
-
-                            <div className="p-2 bd-highlight" />
-                        </div>
+                <div className={styles.thirdsectionInner}>
+                    <div className={styles.thirdsectionHeading + " text-primary"}>
+                        {' '}
+                        Clubs & Organizations
 
                     </div>
+
+                    <br />
+
+                    <div className={styles.thirdsectionMiddle}>
+                        <Carousel responsive={responsive2}>
+
+                            {this.state.clubList.map((option, index) => (
+                                <ClubCard
+                                    key={index}
+                                    value={option}
+                                />
+                                        ))}
+                        </Carousel>
+                    </div>
+
+                    <div className={styles.thirdsectionfooter +" d-flex flex-row-reverse bd-highlight"}>
+                        <div className="p-2 bd-highlight" />
+
+                        <div className="p-2 bd-highlight" />
+                    </div>
+
                 </div>
             </div>
 

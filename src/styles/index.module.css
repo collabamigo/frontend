@@ -181,9 +181,9 @@
     }
 
     .thirdSection{
-        margin-left: 0rem;
-        margin-right: 0rem;
-        padding: 10px;
+        padding:0px !important;
+        margin: 0px !important;
+        width: 100% !important;
     }
 
     .thirdsectionInner{
@@ -205,8 +205,8 @@
     }
 
     .thirdsectionMiddle{
-        margin-left:3rem;
-        margin-right: 3rem;
+        padding:0px !important;
+        margin: 0px !important;
     }
 
     .fourthSection{
