@@ -1,5 +1,6 @@
 import React from "react"
 import styles from "./Footer.module.css";
+import {SvgIcon} from "common/SvgIcon";
 
 function Footer() {
   return (
@@ -145,7 +146,11 @@ function Footer() {
                                   className="facebook"
                                   href="#"
                               >
-                                  <i className="fa fa-facebook" />
+                                  <SvgIcon
+                                      height="24px"
+                                      src="facebook.svg"
+                                      width="24px"
+                                  />
                               </a>
                           </li>
 
@@ -154,7 +159,11 @@ function Footer() {
                                   className="twitter"
                                   href="#"
                               >
-                                  <i className="fa fa-twitter" />
+                                  <SvgIcon
+                                      height="24px"
+                                      src="linkedin.svg"
+                                      width="24px"
+                                  />
                               </a>
                           </li>
 
@@ -163,7 +172,11 @@ function Footer() {
                                   className="dribbble"
                                   href="#"
                               >
-                                  <i className="fa fa-dribbble" />
+                                  <SvgIcon
+                                      height="24px"
+                                      src="instagram.svg"
+                                      width="24px"
+                                  />
                               </a>
                           </li>
 
@@ -172,7 +185,11 @@ function Footer() {
                                   className="linkedin"
                                   href="#"
                               >
-                                  <i className="fa fa-linkedin" />
+                                  <SvgIcon
+                                      height="24px"
+                                      src="mail.svg"
+                                      width="24px"
+                                  />
                               </a>
                           </li>   
                       </ul>
