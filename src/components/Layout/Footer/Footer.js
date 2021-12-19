@@ -1,30 +1,39 @@
 import React from "react"
-import styles from "./Footer.module.css"
+import styles from "./Footer.module.css";
+
 function Footer() {
   return (
       <footer className={styles.site_footer}>
           <div className="container">
               <div className="row">
                   <div className="col-sm-12 col-md-6">
-                      <h6>
-                          About
-                      </h6>
+                      
+                      <br />
 
-                      <p className="text-justify">
-                          Scanfcode.com
-                          {' '}
+                      <h3>
+                          CollabAmigo has helped
+                      </h3>
 
-                          <i>
-                              CODE WANTS TO BE SIMPLE
-                              {' '}
-                          </i>
 
-                          {' '}
-                          is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.
-                      </p>
+                      <div className="text-justify ">
+                          <ul className={styles.listt}>
+                              <li >
+                                  X students to register for events
+                              </li>
+
+                              <li>
+                                  Y clubs and Organizations to host events
+                              </li>
+
+                              <li>
+                                  Z registrations to take place
+                              </li>
+
+                          </ul>
+                      </div>
                   </div>
 
-                  <div className="col-xs-6 col-md-3">
+                  <div className={"col-xs-3 col-sm-3 col-md-3 p-4 " + styles.widthf}>
                       <h6>
                           Categories
                       </h6>
@@ -68,7 +77,7 @@ function Footer() {
                       </ul>
                   </div>
 
-                  <div className="col-xs-6 col-md-3">
+                  <div className={"col-xs-3 col-sm-3 col-md-3 p-4 " + styles.widthf}>
                       <h6>
                           Quick Links
                       </h6>
@@ -114,10 +123,17 @@ function Footer() {
               <div className="row">
                   <div className="col-md-8 col-sm-6 col-xs-12">
                       <p className={styles.copyright_text}>
-                          Copyright &copy; 2017 All Rights Reserved by 
-                          <a href="#">
-                              Scanfcode
+                          Copyright &copy; 2021 All Rights Reserved by  
+                          {' '}
+
+                          {" "}
+
+                          <a href="https://github.com/watson-hex">
+                              Watson-Hex
                           </a>
+
+                          {" "}
+
                           .
                       </p>
                   </div>

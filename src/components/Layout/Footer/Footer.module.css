@@ -1,4 +1,10 @@
 
+.listt{
+  list-style: none !important;
+  padding:0 !important;
+  margin:1rem !important;
+}
+
 
 .site_footer
 {
@@ -26,12 +32,12 @@
 }
 .site_footer hr.small
 {
-  margin:10px 0
+  margin:1px 0
 }
-.site_footer h6
+.site_footer h3
 {
   color:#fff;
-  font-size:16px;
+  font-size:30px;
   text-transform:uppercase;
   margin-top:5px;
   letter-spacing:2px
@@ -91,9 +97,22 @@
   {
     margin-bottom:30px
   }
+  
+  .widthf{
+    width:50% !important;
+  }
+
 }
 @media (max-width:767px)
 {
+
+    
+  .widthf{
+    width:50% !important;
+  }
+
+
+
   .site_footer
   {
     padding-bottom:0
