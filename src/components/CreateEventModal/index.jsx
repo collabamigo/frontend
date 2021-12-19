@@ -64,14 +64,27 @@ export default class CreateEventModal extends React.Component {
         this.setState({formBuilder: formBuilder});
     }
 
-    // eslint-disable-next-line react/no-unused-class-component-methods
     uploadEventDetails() {
         axios.post("club/competition/", {
-            club: this.props.clubName,
+            clubs: [this.props.clubName],
             name: this.state.name,
             description: this.state.description,
-
+            event_start: this.state.eventDate,
+        }).then((res) => {
+            axios.post("form/form/", {
+                skeleton: JSON.stringify(this.state.formBuilder[1]),
+                competition: res.data.id,
+                opens_at: this.state.registrationStartDate,
+                closes_at: this.state.registrationDeadlineDate,
+            })
         })
+
+
+
+    }
+
+    setDescription(description){
+        this.setState({description: description});
     }
 
     render() {
@@ -168,7 +181,10 @@ export default class CreateEventModal extends React.Component {
                                                     required
                                                 /> */}
 
-                                                <TextEditor />
+                                                <TextEditor
+                                                    description={this.state.description}
+                                                    handleSetDescription={this.setDescription.bind(this)}
+                                                />
                                             </div>
 
                                             <div className="mb-3 align-middle">
@@ -185,7 +201,7 @@ export default class CreateEventModal extends React.Component {
                                                     name="eventDate"
                                                     placeholder="yyyy-mm-dd"
                                                     required
-                                                    type="date"
+                                                    type="datetime-local"
                                                 />
                                             </div>
 
@@ -259,13 +275,11 @@ export default class CreateEventModal extends React.Component {
                                     <div className="col-6 text-end">
                                         <Button
                                             className=" fs-5"
-                                            onClick={() => {
-                                        this.setState({stage: 1})
-                                    }}
+                                            onClick={this.uploadEventDetails.bind(this)}
                                             type="submit"
                                             variant="primary"
                                         >
-                                            Edit Event details
+                                            Submit
                                             <FontAwesomeIcon icon={faChevronRight} />
                                         </Button>
                                     </div>

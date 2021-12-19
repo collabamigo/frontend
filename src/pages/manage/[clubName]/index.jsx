@@ -333,11 +333,14 @@ class ClubAdminPage extends Component {
         }
         else{
             return(
-                <SvgIcon
-                    height="40px"
-                    src="plus.svg"
-                    width="40px"
-                />
+                <svg
+                    height="44"
+                    viewBox="0 0 24 24"
+                    width="44"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path d="M19.5 12c-2.483 0-4.5 2.015-4.5 4.5s2.017 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.017-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-18 0l4-5.96 2.48 1.96 2.52-4 1.853 2.964c-1.271 1.303-1.977 3.089-1.827 5.036h-9.026zm10.82 4h-14.82v-18h22v7.501c-.623-.261-1.297-.422-2-.476v-5.025h-18v14h11.502c.312.749.765 1.424 1.318 2zm-9.32-11c-.828 0-1.5-.671-1.5-1.5 0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5c0 .829-.672 1.5-1.5 1.5z" />
+                </svg>
             )
         }
     }
@@ -350,7 +353,14 @@ class ClubAdminPage extends Component {
             (new Date().getTime()));
         if(image == null)
             return;
-        uploadBytes(storageRef, image).then((args) => {console.log("test again1",args);})
+        uploadBytes(storageRef, image).then((args) => {console.log("test again1");
+            const arr = [args["metadata"]["fullPath"]]
+            const payload = {
+
+                picture: JSON.stringify(arr)
+            }
+            axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("done"))
+        })
              .catch(() => {console.log("error bro")});
     }
 
@@ -460,18 +470,6 @@ class ClubAdminPage extends Component {
                                 style={{ width: '18rem' }}
                             >
 
-                                <button
-                                    className="align-self-end btn btn-outline-warning col-2 material-icons"
-                                    onClick={() => {
-                                            this.setState({
-                                                currentModal: "panel",
-                                            });
-                                        }}
-                                    type="button"
-                                >
-                                    edit
-                                </button>
-
                                 <ClubAdminModal
                                     handleClose={this.handleCloseModal.bind(this)}
                                     handleSubmit={this.handleSubmitPanel.bind(this)}
@@ -490,9 +488,32 @@ class ClubAdminPage extends Component {
                                 />
 
                                 <Card.Body>
-                                    <Card.Title className='fs-2 fw-bold text-start pb-2'>
-                                        {this.state.basicInformation.name}
-                                    </Card.Title>
+                                    <div className="d-flex justify-content-between">
+                                        <Card.Title className='fs-2 fw-bold text-start  pt-2'>
+                                            {this.state.basicInformation.name}
+                                        </Card.Title>
+
+                                        <div
+                                            className=" align-self-end "
+                                            onClick={() => {
+                                            this.setState({
+                                                currentModal: "panel",
+                                            });
+                                        }}
+                                            type="button"
+                                        >
+                                            <svg
+                                                className={styles.edit}
+                                                height="64"
+                                                viewBox="0 0 24 24"
+                                                width="24"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    
 
                                     <Card.Subtitle className={styles.tagline}>
                                         {this.state.basicInformation.tagline}
@@ -517,6 +538,8 @@ class ClubAdminPage extends Component {
 
                                         {this.renderOther()}
                                     </div>
+
+                                    
 
                                 </Card.Body>
                             </Card>
@@ -574,35 +597,36 @@ class ClubAdminPage extends Component {
                                     {!this.state.bannerLinks?null:
                                     <div className="mx-auto d-flex">
                                         <div className="d-flex">
-                                            <button
-                                                className={"my-auto mx-3 btn btn" + ((this.state.bannerLinks[0]) ? "" : "-primary")}
+                                            <div
+                                                className={"my-auto mx-3 " + ((this.state.bannerLinks[0]) ? "" : "-primary")}
                                                 onClick={() => this.image1Ref.current.click()}
                                                 type="button"
                                             >
+                                                
                                                 {this.bannerControl(this.state.bannerLinks, 0)}
-                                            </button>
+                                            </div>
                                         </div>
 
                                         <div className="d-flex">
-                                            <button
-                                                className={"my-auto mx-3 btn btn" + ((this.state.bannerLinks[1]) ? "" : "-primary")}
+                                            <div
+                                                className={"my-auto mx-3" + ((this.state.bannerLinks[1]) ? "" : "-primary")}
                                                 onClick={() => this.image2Ref.current.click()}
                                                 type="button"
                                             >
                                                 {this.bannerControl(this.state.bannerLinks, 1)}
 
-                                            </button>
+                                            </div>
                                         </div>
 
                                         <div className="d-flex">
-                                            <button
-                                                className={"my-auto mx-3 btn btn" + ((this.state.bannerLinks[2]) ? "" : "-primary")}
+                                            <div
+                                                className={"my-auto mx-3 " + ((this.state.bannerLinks[2]) ? "" : "-primary")}
                                                 onClick={() => this.image3Ref.current.click()}
                                                 type="button"
                                             >
                                                 {this.bannerControl(this.state.bannerLinks, 2)}
 
-                                            </button>
+                                            </div>
                                         </div>
                                     </div>}
                                 </div>
@@ -617,14 +641,14 @@ class ClubAdminPage extends Component {
                                     
                                     <input
                                         className="d-none"
-                                        onChange={(e)=>this.handleUpload2(e.target.files[1])}
+                                        onChange={(e)=>this.handleUpload2(e.target.files[0])}
                                         ref={this.image2Ref}
                                         type="file"
                                     />
                                     
                                     <input
                                         className="d-none"
-                                        onChange={(e)=>this.handleUpload3(e.target.files[2])}
+                                        onChange={(e)=>this.handleUpload3(e.target.files[0])}
                                         ref={this.image3Ref}
                                         type="file"
                                     />
@@ -661,25 +685,30 @@ class ClubAdminPage extends Component {
 
                                 <div className="d-flex">
                                     <div className={styles.descriptionBox + " col-md-5 col-lg-5 col-sm-6"}>
-                                        <div className={styles.descriptionHeading}>
-                                            Description
+                                        <div className="d-flex justify-content-between">
+                                            <div className={styles.descriptionHeading}>
+                                                Description
+                                            </div>
 
-                                            {" "}
-
-                                            {" "}
-                                            
-                                            <button
-                                                className="btn btn-outline-warning material-icons col-auto"
+                                            <div
+                                                className=""
                                                 onClick={() => {
-                                                    this.setState({
-                                                        currentModal: "description",
-                                                    });
+                                                this.setState({
+                                                    currentModal: "description",
+                                                });
                                                 }}
                                                 type="button"
                                             >
-                                                edit
-                                            </button>
-
+                                                <svg
+                                                    className={styles.edit}
+                                                    height="64"
+                                                    viewBox="0 0 24 24"
+                                                    width="24"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
+                                                </svg>
+                                            </div>
                                         </div>
 
                                         <p className={styles.description}>
@@ -689,12 +718,13 @@ class ClubAdminPage extends Component {
                                     </div>
 
                                     <div className=" offset-1 col-md-5 col-lg-5 col-sm-9">
-                                        <div className={styles.announcementsHeading}>
-                                            Announcements
-                                            {" "}
+                                        <div className="d-flex justify-content-between">
+                                            <div className={styles.announcementsHeading}>
+                                                Announcements
+                                            </div>
 
-                                            <button
-                                                className="align-self-end  btn btn-outline-success material-icons"
+                                            <div
+                                                className=""
                                                 onClick={() => {
                                                     this.setState({
                                                         currentModal: "Announcements",
@@ -702,8 +732,16 @@ class ClubAdminPage extends Component {
                                                 }}
                                                 type="button"
                                             >
-                                                add_circle
-                                            </button>
+                                                <svg
+                                                    className={styles.edit}
+                                                    height="64"
+                                                    viewBox="0 0 24 24"
+                                                    width="24"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
+                                                </svg>
+                                            </div>
 
                                             <ClubAdminModal
                                                 handleClose={this.handleCloseModal.bind(this)}
@@ -721,7 +759,7 @@ class ClubAdminPage extends Component {
                                             >
                                                 {this.state.announcements.map(item => (
                                                     <ul
-                                                        className="pe-2"
+                                                        className=""
                                                         key={item}
                                                     >
                                                         <ListGroup
@@ -763,25 +801,30 @@ class ClubAdminPage extends Component {
 
                     <Card className={styles.leftCard2}>
                         <Card.Body className="mt-3">
-                            <Card.Title className="card-title fs-2 header-color text-left">
-                                Events
+                            <div className="d-flex justify-content-between col-2">
+                                <Card.Title className="card-title fs-2 header-color text-left">
+                                    Events
 
-                                {" "}
+                                    {" "}
 
-                            </Card.Title>
+                                </Card.Title>
 
-                            <Link
-                                className="reset-a"
-                                to={"/manage/" + this.props.router.query.clubName + "/create-event"}
-                            >
-                                <button
-                                    className="align-self-end  btn btn-outline-success material-icons"
-                                    type="button"
+                                <Link
+                                    className="reset-a"
+                                    to={"/manage/" + this.props.router.query.clubName + "/create-event"}
                                 >
-                                    add_circle
-                                </button>
+                                    <svg
+                                        clipRule="evenodd"
+                                        fillRule="evenodd"
+                                        height="34"
+                                        width="34"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path d="M20 15h4.071v2h-4.071v4.071h-2v-4.071h-4.071v-2h4.071v-4.071h2v4.071zm-8 6h-12v-2h12v2zm0-4.024h-12v-2h12v2zm0-3.976h-12v-2h12v2zm12-4h-24v-2h24v2zm0-4h-24v-2h24v2z" />
+                                    </svg>
 
-                            </Link>
+                                </Link>
+                            </div>
 
 
                             <br />
@@ -812,5 +855,5 @@ class ClubAdminPage extends Component {
 }
 
 export default withRouter (ClubAdminPage);
-
+//  TODO: need to add option to edit coordinators
 //TODO: need to give attributions to icons8

@@ -5,7 +5,9 @@
   margin:1rem !important;
 }
 
-
+.colorwhite{
+  fill:white !important;
+}
 .site_footer
 {
   overflow: hidden;
@@ -85,7 +87,6 @@
   margin-left:6px;
   margin-right:0;
   border-radius:100%;
-  background-color:#ffffff
 }
 .copyright_text
 {
@@ -142,7 +143,6 @@
   font-size:13px
 }
 .social_icons a{
-  background-color:#eceeef;
   color:#818a91;
   font-size:16px;
   display:inline-block;
@@ -159,7 +159,6 @@
 .social_icons a:active,.social_icons a:focus,.social_icons a:hover
 {
   color:#fff;
-  background-color:#29aafe
 }
 .social_icons.size-sm a
 {

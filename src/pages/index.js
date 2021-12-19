@@ -52,7 +52,7 @@ export default class AuthenticatedHome extends React.Component {
                         },
                         mobile: {
                           breakpoint: { max: 464, min: 0 },
-                          items: 1
+                          items: 2
                         }
                       };
 
@@ -72,108 +72,103 @@ export default class AuthenticatedHome extends React.Component {
                         },
                         mobile: {
                           breakpoint: { max: 464, min: 0 },
-                          items: 1
+                          items: 2
                         }
                       };
 
         return (
             <div>
-                <div>
-                    <div className={styles.firstSection}>
-                        <div className={styles.firstsectionInner + " row"}>
-                            <div className={styles.firstsectionInnerleft}>
-                                <Image
-                                    alt="Front Photo"
-                                    className={styles.firstsectionInnerleftImage}
-                                    fluid
-                                    rounded
-                                    src="/img/jpg/IntroImage.png"
-                                />
-                            </div>
-
-                            <div className={styles.firstsectionInnerright}>
-                                <span className={styles.firstsectionInnerheading + " display-2 fw-bold text-primary"}>
-                                    Welcome to CollabAmigo!
-                                </span>
-
-                                <br />
-
-                                <span className={styles.firstsectionInnertext + " text-primary"}>
-                                    Participate in competitions in college,
-                                </span>
-
-                                <span className={styles.firstsectionInnertext + " text-primary"}>
-                                    have lots of fun!
-                                </span>
-                            </div>
+                <div className={styles.firstSection}>
+                    <div className={styles.firstsectionInner + " row"}>
+                        <div className={styles.firstsectionInnerleft}>
+                            <Image
+                                alt="Front Photo"
+                                className={styles.firstsectionInnerleftImage}
+                                fluid
+                                rounded
+                                src="/img/jpg/IntroImage.png"
+                            />
                         </div>
-                    </div>
 
-                    <div className={styles.secondSection}>
-                        <div className={styles.secondsectionInner}>
-                            <div className={styles.secondsectionHeading + " text-primary"}>
-                                Competitions
-                            </div>
+                        <div className={styles.firstsectionInnerright}>
+                            <span className={styles.firstsectionInnerheading + " display-2 fw-bold text-primary"}>
+                                Welcome to CollabAmigo!
+                            </span>
 
                             <br />
 
-
-                            <div className={styles.secondsectionMiddle}>
-                                <Carousel responsive={responsive}>
-
-                                    {this.state.eventList.map((option, index) => (
-                                        <EventTalkCard
-                                            element={option}
-                                            key={index}
-                                        />
-                                    ))}
-
-                                </Carousel>
-                            </div>
-
-                            <div className={styles.secondsectionfooter +" d-flex flex-row-reverse bd-highlight"}>
-                                <div className="p-2 bd-highlight" />
-
-                                <div className="p-2 bd-highlight" />
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div className="thirdsection">
-                        <div className={styles.thirdsectionInner}>
-                            <div className={styles.thirdsectionHeading + " text-primary"}>
-                                {' '}
-                                Clubs & Organizations
-
-                            </div>
+                            <span className={styles.firstsectionInnertext + " text-primary"}>
+                                Participate in competitions in college,
+                            </span>
 
                             <br />
 
-                            <div className={styles.thirdsectionMiddle}>
-                                <Carousel responsive={responsive2}>
-
-                                    {this.state.clubList.map((option, index) => (
-                                        <ClubCard
-                                            key={index}
-                                            value={option}
-                                        />
-                                        ))}
-                                </Carousel>
-                            </div>
-
-                            <div className={styles.thirdsectionfooter +" d-flex flex-row-reverse bd-highlight"}>
-                                <div className="p-2 bd-highlight" />
-
-                                <div className="p-2 bd-highlight" />
-                            </div>
+                            <span className={styles.firstsectionInnertext + " text-primary"}>
+                                have lots of fun!
+                            </span>
 
                         </div>
                     </div>
-
                 </div>
 
-                {/* <LandingFooter /> */}
+                <div className={styles.secondSection}>
+                    <div className={styles.secondsectionInner}>
+                        <div className={styles.secondsectionHeading + " text-primary"}>
+                            Competitions
+                        </div>
+
+                        <div className={styles.secondsectionMiddle}>
+                            <Carousel responsive={responsive}>
+
+                                {this.state.eventList.map((option, index) => (
+                                    <EventTalkCard
+                                        element={option}
+                                        key={index}
+                                    />
+                                    ))}
+
+                            </Carousel>
+                        </div>
+
+                        <div className={styles.secondsectionfooter +" d-flex flex-row-reverse bd-highlight"}>
+                            <div className="p-2 bd-highlight" />
+
+                            <div className="p-2 bd-highlight" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <div className="thirdsection">
+                    <div className={styles.thirdsectionInner}>
+                        <div className={styles.thirdsectionHeading + " text-primary"}>
+                            {' '}
+                            Clubs & Organizations
+
+                        </div>
+
+                        <br />
+
+                        <div className={styles.thirdsectionMiddle}>
+                            <Carousel responsive={responsive2}>
+
+                                {this.state.clubList.map((option, index) => (
+                                    <ClubCard
+                                        key={index}
+                                        value={option}
+                                    />
+                                        ))}
+                            </Carousel>
+                        </div>
+
+                        <div className={styles.thirdsectionfooter +" d-flex flex-row-reverse bd-highlight"}>
+                            <div className="p-2 bd-highlight" />
+
+                            <div className="p-2 bd-highlight" />
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
         );
