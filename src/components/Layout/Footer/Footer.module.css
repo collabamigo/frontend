@@ -5,7 +5,9 @@
   margin:1rem !important;
 }
 
-
+.colorwhite{
+  fill:white !important;
+}
 .site_footer
 {
   overflow: hidden;
