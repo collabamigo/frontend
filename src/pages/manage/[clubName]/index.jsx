@@ -315,17 +315,17 @@ class ClubAdminPage extends Component {
     }
 
     bannerControl(args,num) {
-        if (args[num] !== undefined){
+        if (args[num] !== undefined && args !== undefined){
             return(
                 <div>
                     <Image
                         alt="Carousel Image"
                         className="m-auto"
                         fluid
-                        height="150"
+                        height="130"
                         rounded
                         src={args[num]}
-                        width="150"
+                        width="130"
                     />
                 </div>
                 
@@ -334,9 +334,9 @@ class ClubAdminPage extends Component {
         else{
             return(
                 <SvgIcon
-                    height="25px"
+                    height="40px"
                     src="plus.svg"
-                    width="25px"
+                    width="40px"
                 />
             )
         }
@@ -567,32 +567,40 @@ class ClubAdminPage extends Component {
 
                                 <br />
                                 
-                                <div className="">
-                                    <button
-                                        className="btn btn-primary"
-                                        onClick={this.handleUpload1.bind(this)}
-                                        type="button"
-                                    >
-                                        {this.bannerControl(this.state.bannerLinks,0)}
-                                    </button>
+                                <div className="d-flex">
+                                    <div className="mx-auto d-flex">
+                                        <div>
+                                            <button
+                                                className={"mx-3 btn btn" + ((this.state.bannerLinks[0])?"":"-primary")}
+                                                onClick={this.handleUpload1.bind(this)}
+                                                type="button"
+                                            >
+                                                {this.bannerControl(this.state.bannerLinks,0)}
+                                            </button>
+                                        </div>
 
-                                    <button
-                                        className="btn btn-primary"
-                                        onClick={this.handleUpload2.bind(this)}
-                                        type="button"
-                                    >
-                                        {this.bannerControl(this.state.bannerLinks,1)}
+                                        <div>
+                                            <button
+                                                className={"mx-3 btn btn" + ((this.state.bannerLinks[1])?"":"-primary")}
+                                                onClick={this.handleUpload2.bind(this)}
+                                                type="button"
+                                            >
+                                                {this.bannerControl(this.state.bannerLinks,1)}
 
-                                    </button>
+                                            </button>
+                                        </div>
 
-                                    <button
-                                        className="btn btn-primary"
-                                        onClick={()=> this.image3Ref.current.click()}
-                                        type="button"
-                                    >
-                                        {this.bannerControl(this.state.bannerLinks,2)}
+                                        <div className="d-flex">
+                                            <button
+                                                className={"my-auto mx-3 btn btn" + ((this.state.bannerLinks[2])?"":"-primary")}
+                                                onClick={()=> this.image3Ref.current.click()}
+                                                type="button"
+                                            >
+                                                {this.bannerControl(this.state.bannerLinks,2)}
 
-                                    </button>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div>
