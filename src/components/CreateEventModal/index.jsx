@@ -1,8 +1,10 @@
+import PropTypes from "prop-types";
 import React from "react";
 import {headingWithTopMargin} from "styles/typography.module.css";
 import {Modal} from "react-bootstrap";
 import {Form, Formik, Field} from "formik";
 import Button from "react-bootstrap/Button";
+import axios from "../../utilities/axios";
 import AdditionalFields from "./AdditionalFields";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -11,6 +13,10 @@ import FormBuilder from "./FormBuilder";
 import TextEditor from "components/TextEditor";
 
 export default class CreateEventModal extends React.Component {
+
+    static propTypes = {
+        clubName: PropTypes.string.isRequired,
+    }
 
     constructor(props) {
         super(props);
@@ -56,6 +62,16 @@ export default class CreateEventModal extends React.Component {
 
     setFormBuilderState(formBuilder){
         this.setState({formBuilder: formBuilder});
+    }
+
+    // eslint-disable-next-line react/no-unused-class-component-methods
+    uploadEventDetails() {
+        axios.post("club/competition/", {
+            club: this.props.clubName,
+            name: this.state.name,
+            description: this.state.description,
+
+        })
     }
 
     render() {
