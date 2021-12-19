@@ -10,7 +10,7 @@ import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
@@ -314,6 +314,34 @@ class ClubAdminPage extends Component {
         this.handleCloseModal()
     }
 
+    bannerControl(args,num) {
+        if (args[num] !== undefined){
+            return(
+                <div>
+                    <Image
+                        alt="Carousel Image"
+                        className="m-auto"
+                        fluid
+                        height="150"
+                        rounded
+                        src={args[num]}
+                        width="150"
+                    />
+                </div>
+                
+            )
+        }
+        else{
+            return(
+                <SvgIcon
+                    height="25px"
+                    src="plus.svg"
+                    width="25px"
+                />
+            )
+        }
+    }
+
     handleUpload1(){
     this.image1Ref.current.click();
         const storage = getStorage();
@@ -538,69 +566,56 @@ class ClubAdminPage extends Component {
                                 </Carousel>
 
                                 <br />
+                                
+                                <div className="">
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={this.handleUpload1.bind(this)}
+                                        type="button"
+                                    >
+                                        {this.bannerControl(this.state.bannerLinks,0)}
+                                    </button>
 
-                                <div className="column">
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={this.handleUpload2.bind(this)}
+                                        type="button"
+                                    >
+                                        {this.bannerControl(this.state.bannerLinks,1)}
+
+                                    </button>
+
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={()=> this.image3Ref.current.click()}
+                                        type="button"
+                                    >
+                                        {this.bannerControl(this.state.bannerLinks,2)}
+
+                                    </button>
+                                </div>
+
+                                <div>
                                     <input
                                         className="d-none"
                                         onChange={(e)=>{this.setState({image1: e.target.files[0]})}}
                                         ref={this.image1Ref}
                                         type="file"
                                     />
-
-                                    <Button
-                                        className=""
-                                        onClick={this.handleUpload1.bind(this)}
-                                    >
-
-                                        <SvgIcon
-                                            height="25px"
-                                            src="plus.svg"
-                                            width="25px"
-                                        />
-                                    </Button>
-
-
-
-                                    {' '}
-
+                                    
                                     <input
                                         className="d-none"
                                         onChange={(e)=>{this.setState({image2: e.target.files[0]})}}
                                         ref={this.image2Ref}
                                         type="file"
                                     />
-
-                                    <Button
-                                        className=""
-                                        onClick={this.handleUpload2.bind(this)}
-                                    >
-                                        <SvgIcon
-                                            height="25px"
-                                            src="plus.svg"
-                                            width="25px"
-                                        />
-                                    </Button>
-
-                                    {' '}
-
+                                    
                                     <input
                                         className="d-none"
                                         onChange={(e)=>this.handleUpload3(e.target.files[0])}
                                         ref={this.image3Ref}
                                         type="file"
                                     />
-
-                                    <Button
-                                        className=""
-                                        onClick={()=> this.image3Ref.current.click()}
-                                    >
-                                        <SvgIcon
-                                            height="25px"
-                                            src="plus.svg"
-                                            width="25px"
-                                        />
-                                    </Button>
-
                                 </div>
 
                                 <br />
