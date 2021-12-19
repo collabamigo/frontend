@@ -102,9 +102,12 @@ export default class AuthenticatedHome extends React.Component {
                                     Participate in competitions in college,
                                 </span>
 
+                                <br />
+
                                 <span className={styles.firstsectionInnertext + " text-primary"}>
                                     have lots of fun!
                                 </span>
+
                             </div>
                         </div>
                     </div>
