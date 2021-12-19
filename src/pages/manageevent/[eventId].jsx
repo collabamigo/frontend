@@ -1,5 +1,4 @@
 
-import {getAuth, signInWithCustomToken} from "firebase/auth";
 import React, {useContext, useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
