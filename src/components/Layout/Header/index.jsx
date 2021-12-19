@@ -148,6 +148,8 @@
 // Header.propTypes = {
 //     isAuthenticated: PropTypes.bool.isRequired
 // }
+
+
 import axios from "utilities/axios";
 
 import PropTypes from "prop-types";
@@ -159,7 +161,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
 import { setLoggedOut} from "utilities/auth";
 import Link from "common/Link";
-// import Image from 'react-bootstrap/Image';
 import isEmpty from "lodash/isEmpty";
 import styles from "./Header.module.css";
 
@@ -209,8 +210,6 @@ export default function Header({ isAuthenticated }) {
                     <Nav className="me-auto" />
 
                     <Nav>
-                 
-                        
 
                         {isAuthenticated ?
                     
@@ -240,7 +239,7 @@ export default function Header({ isAuthenticated }) {
                                             style={{listStyle: "none"}}
                                         >
                                             {data.clubs?.map((club) => (
-                                                    // TODO: Links sahi krdo
+                                                    // TODO: state update problem on header
                                                 <li key={club.id}>
                                                     <NavDropdown.Item
                                                         href={"/manage/" + club.username}
@@ -265,7 +264,7 @@ export default function Header({ isAuthenticated }) {
                                     <div>
                                         <Nav.Link
                                             className={styles.signoutBtn  + " text-light text-center w-75"}
-                                            href="#deets"
+                                            href="/"
                                             onClick={signOut}
                                         >
                                             Sign out
