@@ -1,8 +1,10 @@
+import PropTypes from "prop-types";
 import React from "react";
 import {headingWithTopMargin} from "styles/typography.module.css";
 import {Modal} from "react-bootstrap";
 import {Form, Formik, Field} from "formik";
 import Button from "react-bootstrap/Button";
+import axios from "../../utilities/axios";
 import AdditionalFields from "./AdditionalFields";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -11,6 +13,10 @@ import FormBuilder from "./FormBuilder";
 import TextEditor from "components/TextEditor";
 
 export default class CreateEventModal extends React.Component {
+
+    static propTypes = {
+        clubName: PropTypes.string.isRequired,
+    }
 
     constructor(props) {
         super(props);
@@ -56,6 +62,29 @@ export default class CreateEventModal extends React.Component {
 
     setFormBuilderState(formBuilder){
         this.setState({formBuilder: formBuilder});
+    }
+
+    uploadEventDetails() {
+        axios.post("club/competition/", {
+            clubs: [this.props.clubName],
+            name: this.state.name,
+            description: this.state.description,
+            event_start: this.state.eventDate,
+        }).then((res) => {
+            axios.post("form/form/", {
+                skeleton: JSON.stringify(this.state.formBuilder[1]),
+                competition: res.data.id,
+                opens_at: this.state.registrationStartDate,
+                closes_at: this.state.registrationDeadlineDate,
+            })
+        })
+
+
+
+    }
+
+    setDescription(description){
+        this.setState({description: description});
     }
 
     render() {
@@ -152,7 +181,10 @@ export default class CreateEventModal extends React.Component {
                                                     required
                                                 /> */}
 
-                                                <TextEditor />
+                                                <TextEditor
+                                                    description={this.state.description}
+                                                    handleSetDescription={this.setDescription.bind(this)}
+                                                />
                                             </div>
 
                                             <div className="mb-3 align-middle">
@@ -169,7 +201,7 @@ export default class CreateEventModal extends React.Component {
                                                     name="eventDate"
                                                     placeholder="yyyy-mm-dd"
                                                     required
-                                                    type="date"
+                                                    type="datetime-local"
                                                 />
                                             </div>
 
@@ -243,13 +275,11 @@ export default class CreateEventModal extends React.Component {
                                     <div className="col-6 text-end">
                                         <Button
                                             className=" fs-5"
-                                            onClick={() => {
-                                        this.setState({stage: 1})
-                                    }}
+                                            onClick={this.uploadEventDetails.bind(this)}
                                             type="submit"
                                             variant="primary"
                                         >
-                                            Edit Event details
+                                            Submit
                                             <FontAwesomeIcon icon={faChevronRight} />
                                         </Button>
                                     </div>

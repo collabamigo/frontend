@@ -1,5 +1,6 @@
 /* eslint-disable react/no-multi-comp,react/no-unstable-nested-components */
 
+import PropTypes from "prop-types";
 // import { MarkdownExtension } from "remirror";
 import React from "react";
 import {
@@ -32,7 +33,7 @@ import {
     // useKeymap,
 } from "@remirror/react";
 
-export default function TextEditor() {
+export default function TextEditor({description, handleSetDescription}) {
     const extensions = [
         new BlockquoteExtension(),
         new BoldExtension(),
@@ -226,6 +227,14 @@ export default function TextEditor() {
         () => {
             const { getMarkdown } = useHelpers();
             console.log("content -" + getMarkdown(state));
+
+
+
+
+
+
+            if (getMarkdown(state) !== description)
+                handleSetDescription(getMarkdown(state));
             // const handleSaveShortcut = useCallback(
             //     ({ state }) => {
             //         console.log(`Save to backend: ${getMarkdown(state)}`);
@@ -280,3 +289,8 @@ export default function TextEditor() {
         </ThemeProvider>
     );
 }
+
+TextEditor.propTypes = {
+    description: PropTypes.string.isRequired,
+    handleSetDescription: PropTypes.func.isRequired,
+};
