@@ -342,26 +342,29 @@ class ClubAdminPage extends Component {
         }
     }
 
-    handleUpload1(){
-    this.image1Ref.current.click();
+    handleUpload1(image){
+        // this.image3Ref.current.click()
+        this.setState({image1: image})
         const storage = getStorage();
         const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
             (new Date().getTime()));
-
-        if(this.state.image1 == null)
+        if(image == null)
             return;
-          uploadBytes(storageRef, this.state.image1).then(() => {console.log('Uploaded a blob or file!');});
+        uploadBytes(storageRef, image).then((args) => {console.log("test again",args);})
+             .catch(() => {console.log("error bro")});
     }
 
-    handleUpload2(){
+    handleUpload2(image){
     this.image2Ref.current.click()
+        // this.image3Ref.current.click()
+        this.setState({image2: image})
         const storage = getStorage();
         const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
             (new Date().getTime()));
-
-        if(this.state.image2 == null)
+        if(image == null)
             return;
-          uploadBytes(storageRef, this.state.image2).then(() => {console.log('Uploaded a blob or file!');});
+        uploadBytes(storageRef, image).then((args) => {console.log("test again",args);})
+             .catch(() => {console.log("error bro")});
     }
 
     handleUpload3(image){
@@ -372,7 +375,7 @@ class ClubAdminPage extends Component {
             (new Date().getTime()));
         if(image == null)
             return;
-        uploadBytes(storageRef, image).then(() => {console.log('Uploaded a blob or file!');})
+        uploadBytes(storageRef, image).then((args) => {console.log("test again",args);})
              .catch(() => {console.log("error bro")});
     }
 
