@@ -1,5 +1,5 @@
 
-import React, {useEffect, useState} from "react"
+import React, {useContext, useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -7,50 +7,83 @@ import {faCalendar, faClock} from '@fortawesome/free-regular-svg-icons'
 import {faMapMarkerAlt, faShareAlt } from '@fortawesome/free-solid-svg-icons'
 import {faWhatsapp, faInstagram, faFacebook} from '@fortawesome/free-brands-svg-icons'
 import FAQModal from "components/faq/FAQModal";
-import {getStorage, ref, getDownloadURL} from "firebase/storage";
+import {getStorage, ref, getDownloadURL, uploadBytes} from "firebase/storage";
 import {useRouter} from 'next/router'
 import Modal from 'react-bootstrap/Modal'
 import axios from "utilities/axios";
 import Loading from "components/Loading";
-import isEmpty from "lodash/isEmpty";
+import lodashIsEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
 import EventAdminModal from "components/EventAdmin/modal";
-import Table from 'react-bootstrap/Table'
-export default function Event() {
+import Table from 'react-bootstrap/Table';
+import Carousel from 'react-bootstrap/Carousel';
+import {FirebaseContext} from "firebaseProvider";
+
+function isEmpty(obj) {
+
+    if (lodashIsEmpty(obj))
+        return true;
+
+    if (Array.isArray(obj) || typeof obj === 'object') {
+        let flag = true;
+        lodashMap(obj, (el) => {
+            if (!isEmpty(el))
+                flag = false;
+        })
+        return flag;
+    }
+
+    return false;
+}
+
+function Event() {
     const router = useRouter()
 
-    const [show, setShow] = useState(false);
-
-    const [isLoading, setLoading] = useState(true);
-//  useState([{name:"Demo"}]);
-// useState([{elements:[{value:"text"}, {value:"text"} ,{value:"text"}]}, {elements:[{value:"text"}, {value:"text"} ,{value:"text"}]}, {elements:[{value:"text"}, {value:"text"} ,{value:"text"}]}]);
-    const [tableHeaders,settableHeaders] = useState([]);
-    const [tableResponses,settableResponses] = useState([]);
-
+    const firebase = useContext(FirebaseContext);
+    const storage = firebase?getStorage(firebase):getStorage();
 
     const [data, setData] = useState({
         clubLogoLinks: {},
-        event: {},
+        event: {
+            image_links: {}
+        },
         showEvent: false,
         showDescription:false,
+        showModal: false,
+        tableResponses: []
     });
 
 
-    // const settableResponses = (tableResponses) => setData((prevData) => {
-    //     return {...prevData, tableResponses}
-    // });
-
-
-    // const settableHeaders = (tableHeaders) => setData((prevData) => {
-    //     return {...prevData, tableHeaders}
-    // });
-
-    const setEvent = (event) => setData((prevData)=> {
-        return {...prevData, event}
+    const settableResponses = (tableResponses) => setData((prevData) => {
+        return {...prevData, tableResponses}
     });
-    // const setForm = (form) => setData((prevData) => {
-    //     return {...prevData, form}
-    // });
+
+    const setEvent = (event) => {
+        setData((prevData) => {
+            return {
+                ...prevData,
+                event: {
+                    ...prevData.event,
+                    ...event,
+                    image_links: prevData.event.image_links,
+                }
+            };
+        });
+
+        JSON.parse(event.image_links).map((link, index) => {
+            return getDownloadURL(ref(storage, link)).then((url) =>
+                setData((prevData) => {
+                    return {...prevData, event: {
+                        ...prevData.event,
+                        image_links: {...prevData.event.image_links, [index]: url}
+                    }}
+                })
+            )
+        })
+    }
+    const setForm = (form) => setData((prevData) => {
+        return {...prevData, form}
+    });
 
     const addClubLogoLinks = (club, link) => {
         console.log(clubLogoLinks)
@@ -61,8 +94,10 @@ export default function Event() {
     const event = data.event;
     const form = data.form;
     const clubLogoLinks = data.clubLogoLinks;
-    // const tableHeaders = data.tableHeaders;
-    // const tableResponses = data.tableResponses;
+    const tableHeaders = isEmpty(form)?[]:JSON.parse(data.form.skeleton);
+    const tableResponses = data.tableResponses;
+    const showModal = data.showModal;
+
 
     const convertToDatetimeString = iso_8601_string => {
         const date = new Date(iso_8601_string);
@@ -73,10 +108,9 @@ export default function Event() {
     const handleShowEvent = () => setData({...data, showEvent: true});
     const handleShowDescription = () => setData({...data, showDescription: true});
 
-    const handleClose = () =>{ setShow(false);
-        console.log(tableResponses);}
-    const handleShow = () => { setShow(true);
-        console.log(tableHeaders);}
+
+    const handleClose = () => setData({...data, showModal: false});
+    const handleShow = () => setData({...data, showModal: true});
 
     // const handleSubmitEvent =()=>{
     //     console.log("edited");
@@ -87,13 +121,16 @@ export default function Event() {
         console.log("edited");
         handleCloseDescription();
     }
+    const image1Ref = React.createRef()
+    const handleUpload1 = ()=>{
+        image1Ref.current.click();
 
+    }
 
      useEffect(() => {
-        if (router.query.eventId!==undefined) {
-            if (isEmpty(tableHeaders))
-                axios.get(`form/form/${router.query.eventId}/`)
-                    .then(res => settableHeaders(JSON.parse(res.data.skeleton)))
+
+
+             if (router.query.eventId!==undefined) {
 
             if (isEmpty(tableResponses))
                 axios.get(`form/response/${router.query.eventId}/`)
@@ -103,17 +140,15 @@ export default function Event() {
                 axios.get(`club/competition/${router.query.eventId}/`)
                     .then(res => setEvent(res.data))
 
-            // if (isEmpty(form))
-            //     axios.get(`form/form/${router.query.eventId}/`)
-            //         .then(res => setForm(res.data)).catch(err => console.log(err))
+            if (isEmpty(form))
+                axios.get(`form/form/${router.query.eventId}/`)
+                    .then(res => setForm(res.data)).catch(err => console.log(err))
 
-            if (isEmpty(clubLogoLinks) && !isEmpty(event)) {
-                const storage = getStorage();
+            if (isEmpty(clubLogoLinks) && !isEmpty(event))
                 event.clubs.map(club => getDownloadURL(ref(storage, 'data/'+club+'/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
-            }
 
-            setLoading(false);
+
         }})
 
 
@@ -121,7 +156,8 @@ export default function Event() {
 
     // const ref = useRef()
     // const isParticipateButtonVisible = useOnScreen(ref)
-
+    console.log(event)
+    const isLoading = isEmpty(event);
     if (isLoading)
         return <Loading />
     else
@@ -130,7 +166,7 @@ export default function Event() {
                 <Modal
                     aria-labelledby="example-custom-modal-styling-title"
                     onHide={handleClose}
-                    show={show}
+                    show={showModal}
                     size="lg"
                 >
                     <Modal.Header closeButton>
@@ -150,22 +186,22 @@ export default function Event() {
                             <thead>
                                 <tr>
                                     <td>
-                                        {' '}
+                                        {" "}
                                         Sr no.
                                     </td>
 
 
                                     {tableHeaders.map((option) => (
-                                        <td key={option.name} >
+                                        <td key={option.name}>
                                             {option.name}
                                         </td>
-                                    ))}
+                                ))}
 
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {tableResponses.map((response,index) => (
+                                {tableResponses.map((response, index) => (
                                     <tr key={response}>
 
                                         <td>
@@ -178,9 +214,9 @@ export default function Event() {
                                             >
                                                 {values.value}
                                             </td>
-                                        ))}
+                                    ))}
                                     </tr>
-                                ))}
+                            ))}
 
                             </tbody>
                         </Table>
@@ -195,10 +231,10 @@ export default function Event() {
                     <div className="col-md-4 col-12 me-4">
                         <div className="pb-5">
 
-                            {/* <Carousel>
-                                {event.image_links.map((image) => {
+                            <Carousel>
+                                {lodashMap(event.image_links, (image) => {
                                     return (
-                                        <Carousel.Item >
+                                        <Carousel.Item key={image}>
                                             <Image
                                                 alt={event.name}
                                                 fluid
@@ -208,8 +244,37 @@ export default function Event() {
                                         </Carousel.Item>
                                     )
                                 })}
-                            </Carousel> */}
+                            </Carousel>
                         </div>
+
+
+                        <div className="column">
+                            <input
+                                className="d-none"
+                                onChange={(e) => {
+                                                const file = e.target.files[0];
+
+                                                const storage = getStorage(firebase);
+
+                                                const storageRef = ref(storage, "/data/" + "byld" + "/editable/" +
+                                                    (new Date().getTime()));
+                                                uploadBytes(storageRef, file).then(() => {
+                                                    console.log('Uploaded a blob or file!');
+                                                });
+                                }}
+                                ref={image1Ref}
+                                type="file"
+                            />
+
+                            <Button
+                                className="material-icons"
+                                onClick={handleUpload1}
+                            >
+                                add_circle
+                            </Button>
+
+                        </div>
+
 
                         <div className="pt-4">
                             <p className="text-center text-primary fs-4">
@@ -392,3 +457,5 @@ export default function Event() {
             </>
         )
 }
+
+export default Event;
