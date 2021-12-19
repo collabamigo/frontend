@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Clublist from 'components/ClubList/ClubList.js';
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
@@ -8,9 +7,11 @@ import axios from "../../utils/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
-import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import {getStorage, ref, uploadBytes} from "firebase/storage";
 import Button from "react-bootstrap/Button";
-import {getAuth, signInWithCustomToken} from 'firebase/auth';
+// import {getAuth, signInWithCustomToken} from 'firebase/auth';
+import RCarousel from "react-multi-carousel";
+import ClubCard from "components/ClubList/ClubCard";
 
 class ClubAdminPage extends Component {
 
@@ -22,13 +23,15 @@ static propTypes = {
                 query: PropTypes.shape({
                     clubName: PropTypes.string.isRequired
                 }),
-
             }
         ).isRequired
     }
 
     constructor(props) {
         super(props)
+        const today = new Date();
+        const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + " " +
+            today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
         this.image1Ref = React.createRef()
         this.image2Ref = React.createRef()
         this.image3Ref = React.createRef()
@@ -41,50 +44,28 @@ static propTypes = {
             basicInformation: null,
             competitions:null,
             announcements: null,
+            isLoading: true,
+            currentDateTime : date,
             basicInformationStatic:{
                 logoLink: "http://tasveer.iiitd.edu.in/images/logo.png",
-                coordinators:[
-                    {
-                        name:"Tushar Singh",
-                        email:"shikhar@gmail.com",
-                    },
-                    {
-                        name:"Prutyuy Singh",
-                        email:"shikhar@gmail.com",
-                    },
-                ],
                 joinDate:"26122020",
                 clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"],
-                eventList: [
-                    {name: "Event1", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event2", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event3", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event3", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event4", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event5", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event6", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event7", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event8", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event9", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event10", logo: "https://via.placeholder.com/70X70"},
-                    {name: "Event11", logo: "https://via.placeholder.com/70X70"},
-                ],
             },
-            isLoading: true,
+
             }
     }
 
     componentDidMount() {
-    const auth = getAuth();
-    axios.get("/authenticate/get-firebase-token").then((res) => {
-                        this.setState({token: res.data.firebaseToken})
-    //         const auth = getAuth();
-            signInWithCustomToken(auth, res.data.firebaseToken).then(() => console.log(9999999999999))
-        const storage = getStorage();
-        getDownloadURL(ref(storage, 'data/'+ "byld" + '/uneditable/logo.png'))
-                    .then(url => console.log(url))
-
-    })
+    // const auth = getAuth();
+    // axios.get("/authenticate/get-firebase-token").then((res) => {
+    //                     this.setState({token: res.data.firebaseToken})
+    // //         const auth = getAuth();
+    //         signInWithCustomToken(auth, res.data.firebaseToken).then(() => console.log(9999999999999))
+    //     const storage = getStorage();
+    //     getDownloadURL(ref(storage, 'data/'+ "byld" + '/uneditable/logo.png'))
+    //                 .then(url => console.log(url))
+    //
+    // })
         return true
     }
 
@@ -135,15 +116,15 @@ static propTypes = {
     }
 
     handleSubmitAnnouncements(values){
-        axios.post("club/announcements/" + this.props.router.query.clubName,{
-            // club: "Byld",
+        axios.post("club/announcements/",{
+            club: this.props.router.query.clubName,
             content: values[0]
         }).then((ress) => {
                     this.setState((prevState) => {
                         return (
                             {
                                 ...(prevState.announcements),
-                                announcements:[...(prevState.announcements), {id:ress.data.id, content:ress.data.content}]
+                                announcements:[...(prevState.announcements), {id:ress.data.id, content:ress.data.content, timestamp:ress.data.timestamp}]
                             })
                     })
         });
@@ -193,15 +174,11 @@ static propTypes = {
     handleUpload3(image){
         // this.image3Ref.current.click()
         this.setState({image3: image})
-        console.log("sike bro1")
         const storage = getStorage();
         const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
             (new Date().getTime()));
-        console.log("sike bro2")
-
         if(image == null)
             return;
-        console.log("sike bro3")
         uploadBytes(storageRef, image).then(() => {console.log('Uploaded a blob or file!');})
              .catch(() => {console.log("error bro")});
     }
@@ -212,13 +189,70 @@ static propTypes = {
         })
     }
 
+    getNotification(date1,date2){
+        date1 = new Date(date1)
+        date2 = new Date(date2.split("T")[0] +" " + date2.split("T")[1].split(".")[0])
+        if (Math.floor((Math.abs(date2 - date1)) / (1000 * 60 * 60)) <= 1){
+            return(
+                <span
+                    className="position-absolute start-93  p-1
+                    bg-primary border border-light rounded-circle"
+                >
+                    <span className="visually-hidden">
+                        New alerts
+                    </span>
+                </span>
+            )
+        }
+    }
+
+    getDate(date1,date2){
+        let year1 = new Date (date2.split("T")[0])
+        let year2 = new Date(date1.split(" ")[0])
+        date1 = new Date(date1)
+        date2 = new Date(date2.split("T")[0] +" " + date2.split("T")[1].split(".")[0])
+
+        if (Math.floor((Math.abs(year2-year1))/(1000*60*60*24))>0){
+            return(Math.floor((Math.abs(year2-year1))/(1000*60*60*24)) + " days ago")
+        }
+
+        else{
+            if (Math.floor((Math.abs(date2-date1))/(1000*60))<=0 && Math.floor((Math.abs(date2-date1))/(1000*60*60))<=0){
+                return(" seconds ago")
+            }
+            else if (Math.floor((Math.abs(date2-date1))/(1000*60*60)) <= 0 && Math.floor((Math.abs(date2-date1))/(1000*60)) > 0){
+                return(Math.floor((Math.abs(date2-date1))/(1000*60)) + " mins ago")
+            }
+            else{
+                return(Math.floor((Math.abs(date2-date1))/(1000*60*60))+ " hrs ago")
+            }
+        }
+    }
+
     render(){
+    const responsive = {
+            superLargeDesktop: {
+                // the naming can be any, depends on you.
+                breakpoint: {max: 4000, min: 3000},
+                items: 5
+            },
+            desktop: {
+                breakpoint: {max: 3000, min: 1024},
+                items: 3
+            },
+            tablet: {
+                breakpoint: {max: 1024, min: 464},
+                items: 2
+            },
+            mobile: {
+                breakpoint: {max: 464, min: 0},
+                items: 1
+            }
+        };
+
         if (this.state.isLoading || this.state.announcements === null || this.state.competitions === null){
             return "loading"; // LOADING SCREEN
         }
-        console.log(this.state.basicInformation)
-        console.log(this.state.competitions)
-        console.log(this.state.announcements)
         return (
             <div className="row m-1">
                 <div className="col-3 d-flex justify-content-around">
@@ -383,7 +417,7 @@ static propTypes = {
                                         <img
                                             alt="Third slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformationStatic.clubBanners    [2]}
+                                            src={this.state.basicInformationStatic.clubBanners[2]}
                                         />
 
                                         <Carousel.Caption>
@@ -453,14 +487,11 @@ static propTypes = {
 
                                     <div>
                                         Coordinators:
-                                        {' '}
-
-                                        {this.state.basicInformationStatic.coordinators[0].name}
-                                        ,
-
-                                        {' '}
-
-                                        {this.state.basicInformationStatic.coordinators[1].name}
+                                        {this.state.basicInformation.admins.map(item => (
+                                            <div key={item}>
+                                                {item}
+                                            </div>
+                                        ))}
                                     </div>
 
                                     <div>
@@ -529,10 +560,16 @@ static propTypes = {
                                             />
                                         </div>
 
-                                        <div className="">
-                                            <ul className="list">
+                                        <div className="overflow-auto">
+                                            <ul
+                                                className="list"
+                                                style={{ height: '250px'}}
+                                            >
                                                 {this.state.announcements.reverse().map(item => (
-                                                    <ul key={item}>
+                                                    <ul
+                                                        className="pe-2"
+                                                        key={item}
+                                                    >
                                                         <ListGroup
                                                             as="ol"
                                                         >
@@ -545,17 +582,14 @@ static propTypes = {
                                                                         {item["content"]}
                                                                     </div>
 
-                                                                    {this.state.currentTime - item["timestamp"].split("t")}
+                                                                    <div>
+                                                                        {this.getDate(this.state.currentDateTime, item["timestamp"])}
+                                                                    </div>
+
                                                                 </div>
 
-                                                                <span
-                                                                    className="position-absolute start-95  p-1
-                                                                    bg-primary border border-light rounded-circle"
-                                                                >
-                                                                    <span className="visually-hidden">
-                                                                        New alerts
-                                                                    </span>
-                                                                </span>
+                                                                {this.getNotification(this.state.currentDateTime, item["timestamp"])}
+                                                                
                                                             </ListGroup.Item>
                                                         </ListGroup>
                                                     </ul>
@@ -597,10 +631,16 @@ static propTypes = {
 
                             <Card.Text className="card-text h5 text-muted col-12">
                                 <div>
-                                    <Clublist
-                                        ItemList={this.state.basicInformationStatic.eventList}
-                                        Type="Event"
-                                    />
+                                    <RCarousel responsive={responsive}>
+                                        {this.state.competitions.map((option, index) => (
+                                            <ClubCard
+                                                Type="Event"
+                                                element={option}
+                                                key={option.description}
+                                                value={index}
+                                            />
+                                        ))}
+                                    </RCarousel>
                                 </div>
                             </Card.Text>
                         </Card.Body>

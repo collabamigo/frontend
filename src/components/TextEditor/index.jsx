@@ -1,13 +1,10 @@
-// import 'remirror/styles/all.css';
-// import './styles.css';
-import { cx } from "remirror";
+import { htmlToProsemirrorNode } from "remirror";
 import React from "react";
 import {
   BlockquoteExtension,
   BoldExtension,
   CodeBlockExtension,
   CodeExtension,
-  ColumnAttributes,
   ColumnsExtension,
   FontFamilyExtension,
   FontSizeExtension,
@@ -37,7 +34,6 @@ import {
 import {
   Remirror,
   ThemeProvider,
-  useActive,
   useCommands,
   useRemirror,
 } from "@remirror/react";
@@ -88,9 +84,8 @@ export default function TextEditor() {
     );
   };
 
-  const CodeButton = () => {
+  function BoldButton() {
     const commands = useCommands();
-    const active = useActive(true);
     return (
       <button
         onMouseDown={(event) => event.preventDefault()}
@@ -109,28 +104,30 @@ export default function TextEditor() {
         </svg>
       </button>
     );
-  };
+  }
 
-  const HeadingButtons = () => {
+
+  function HeadingButtons() {
     const commands = useCommands();
-    const active = useActive(true);
     return (
-      <>
-        {[1, 2, 3, 4, 5, 6].map((level) => (
-          <button
-            key={level}
-            onMouseDown={(event) => event.preventDefault()}
-            onClick={() => commands.toggleHeading({ level })}
-            className="btn-icon-editor"
-          >
-            H{level}
-          </button>
+        <>
+            {[1, 2, 3, 4, 5, 6].map((level) => (
+                <button
+                    className="btn-icon-editor"
+                    key={level}
+                    onClick={() => commands.toggleHeading({ level })}
+                    onMouseDown={(event) => event.preventDefault()}
+                    type="button"
+                >
+                    H
+                    {level}
+                </button>
         ))}
-      </>
+        </>
     );
-  };
+  }
 
-  const HorizontalRuleButton = () => {
+  function HorizontalRuleButton() {
     const commands = useCommands();
     return (
       <button
@@ -157,11 +154,10 @@ export default function TextEditor() {
         </svg>
       </button>
     );
-  };
+  }
 
-  const ItalicButton = () => {
+  function ItalicButton() {
     const commands = useCommands();
-    const active = useActive(true);
     return (
       <button
         onMouseDown={(event) => event.preventDefault()}
@@ -180,98 +176,7 @@ export default function TextEditor() {
         </svg>
       </button>
     );
-  };
-
-  const SubButton = () => {
-    const commands = useCommands();
-    return (
-      <button
-        onMouseDown={(event) => event.preventDefault()}
-        onClick={() => commands.toggleSubscript()}
-        className="btn-icon-editor"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          ariaHidden="true"
-          role="img"
-          width="1em"
-          height="1em"
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 24 24"
-        >
-          <g
-            class="icon-tabler"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M5 7l8 10m-8 0l8-10" />
-            <path d="M21 20h-4l3.5-4a1.73 1.73 0 0 0-3.5-2" />
-          </g>
-        </svg>
-      </button>
-    );
-  };
-
-  const SupButton = () => {
-    const commands = useCommands();
-    return (
-      <button
-        onMouseDown={(event) => event.preventDefault()}
-        onClick={() => commands.toggleSuperscript()}
-        className="btn-icon-editor"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          aria-hidden="true"
-          role="img"
-          width="1em"
-          height="1em"
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 24 24"
-        >
-          <g
-            class="icon-tabler"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M5 7l8 10m-8 0l8-10" />
-            <path d="M21 11h-4l3.5-4A1.73 1.73 0 0 0 17 5" />
-          </g>
-        </svg>
-      </button>
-    );
-  };
-
-  const UnderlineButton = () => {
-    const commands = useCommands();
-    const active = useActive(true);
-    return (
-      <button
-        onMouseDown={(event) => event.preventDefault()}
-        onClick={() => commands.toggleUnderline()}
-        className="btn-icon-editor"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-type-underline"
-          viewBox="0 0 16 16"
-        >
-          <path d="M5.313 3.136h-1.23V9.54c0 2.105 1.47 3.623 3.917 3.623s3.917-1.518 3.917-3.623V3.136h-1.23v6.323c0 1.49-.978 2.57-2.687 2.57-1.709 0-2.687-1.08-2.687-2.57V3.136zM12.5 15h-9v-1h9v1z" />
-        </svg>
-      </button>
-    );
-  };
+  }
 
   const { manager, state, onChange } = useRemirror({
     extensions: extensions,

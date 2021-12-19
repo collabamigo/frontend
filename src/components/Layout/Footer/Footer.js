@@ -1,68 +1,34 @@
 import React from "react";
-import styles from './Footer.module.css';
+import {footer, linkFooter} from './Footer.module.css';
 
 
 export default function Footer() {
         return (
-            <footer className={styles.container}>
-                <div className={styles.row1 + " row"}>
-                    <div className={styles.leftcontainer}>
-                        <ul className={styles.listt}>
-                            <li className={styles.listtitems}>
-                                FAQ
-                            </li>
-
-                            <li className={styles.listtitems}>
-                                About us
-                            </li>
-
-                            <li className={styles.listtitems}>
-                                Privacy Policy
-                            </li>
-
-                            <li className={styles.listtitems}>
-                                sitemap
-                            </li>
-
-                            <li className={styles.listtitems}>
-                                Contact us
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div className={styles.rightcontainer + " row"}>
-                        <div className={styles.rightcontainerleft}>
-                            <span className={styles.collabtext}>
-                                CollabAmigo has helped
-                            </span>
-                        </div>
-
-                        <div className={styles.rightcontainerright}>
-
-                            <span className={styles.collabtext2}>
-                                CollabAmigo has helped
-                            </span>
-
-                            <ul className={styles.listt}>
-                                <li >
-                                    X students to register for events
-                                </li>
-
-                                <li>
-                                    Y clubs and Organizations to host events
-                                </li>
-
-                                <li>
-                                    Z registrations to take place
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
+            <footer className={'d-flex flex-row ' + footer}>
+                <div className={'col-md-7' + ' ' + linkFooter}>
+                    <b className="float-right pe-5">
+                        {/*eslint-disable-next-line*/}
+                        <a
+                            className={linkFooter}
+                            href="https://github.com/watson-hex/frontend-collabamigo/"
+                            rel="noopener"
+                            target="_blank"
+                            type="external"
+                        >
+                            Watson-Hex &#169; 2021
+                        </a>
+                    </b>
                 </div>
 
-                <div className={styles.row2}>
-                    {' _'}
+                <div className="col-md-5 float-right ">
+                    <a
+                        className={'float-right' + ' ' + linkFooter}
+                        href="https://forms.gle/MScukDTAhm2N3ixA8"
+                        rel="noreferrer"
+                        target="_blank"
+                    >
+                        Review Us
+                    </a>
                 </div>
 
             </footer>
