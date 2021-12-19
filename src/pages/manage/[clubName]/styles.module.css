@@ -1,16 +1,7 @@
-@import '~rfs/scss';
 
 .clubcard {
     position: fixed;
     padding-left: 2em;
-}
-
-.edit{
-    fill:rgb(0, 0, 0);
-}
-
-.edit:hover{
-    fill:rgb(30, 67, 136)
 }
 
 .clubBox {
@@ -19,6 +10,10 @@
 
 .leftCard1, .leftCard2 {
     width: 72em;
+}
+
+.buttonsBox {
+    padding-top: 2em;
 }
 
 .coordinators, .memberSize {

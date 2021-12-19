@@ -1,6 +1,8 @@
+import {getAuth, signInWithCustomToken} from "firebase/auth";
 import React, {createContext} from 'react'
 import {getApps, initializeApp} from 'firebase/app'
 import PropTypes from "prop-types";
+import axios from "./utilities/axios";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBGsVMVNqqMgutGKJXEG13r6oGcEtN3hBY",
@@ -15,12 +17,17 @@ const FirebaseContext = createContext(null)
 export {FirebaseContext}
 
 export default function FirebaseProvider ({children}) {
-    let firebase = null;
+    let firebase;
 
-    if (!getApps().length) {
+    if (!getApps().length)
         firebase = initializeApp(firebaseConfig);
-    }
+    else
+        firebase = getApps()[0];
 
+    const auth = getAuth(firebase);
+    if (!auth.currentUser)
+        axios.get("/authenticate/get-firebase-token").then((res) =>
+            signInWithCustomToken(auth, res.data.firebaseToken))
     return (
         <FirebaseContext.Provider value={firebase}>
             {children}

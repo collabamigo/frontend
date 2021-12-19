@@ -8,6 +8,12 @@
     padding:10px;
 }
 
+/* .image{
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+} */
+
 .firstsectionInnerleft{
     margin-top: 1.5%;
     width: 40%;
@@ -100,66 +106,84 @@
     .firstSection{
         margin-left: 0rem;
         margin-right: 0rem;
-        padding: 10px;
+        padding: 0px;
     }
+
+  
 
     .firstsectionInner{
         padding:10px;
     }
 
     .firstsectionInnerleft{
-        margin-top: 2.5%;
-        width: 100%;
+        margin-top: 0% !important;
+        padding-top: 0px !important;
+        width: 100% !important;
+        margin-left: 0% !important;
+        padding-left: 0% !important;
     }
 
     .firstsectionInnerright{
         width: 100%;
-        text-align: center;
     }
 
     .firstsectionInnerheading{
-        font-size: 30px !important;
+        font-size: 25px !important;
         text-align: center;
+        padding-left: 20px !important;
+
     }
 
     .firstsectionInnertext{
+        text-align: left !important;
         font-size: 15px !important;
         padding-top: 20px !important;
+        padding-left: 20px !important;
+
     }
 
     .secondSection{
-        margin-left: 0rem;
-        margin-right: 0rem;
-        padding: 10px;
+        padding:0px !important;
+        margin: 0px !important;
+        width: 100% !important;
     }
 
     .secondsectionInner{
-        padding:10px;
+        padding:0px !important;
+        margin: 0px !important;
+        width: 100% !important;
+        width: 100% !important;
+
+
     }
 
     .secondsectionInnerleft{
         margin-top: 2.5%;
-        width: 40%;
     }
 
     .secondsectionInnerright{
         width: 60%;
     }
 
+   
+
     .secondsectionHeading{
         font-size:25px;
         margin-left: 0rem !important;
+        padding-left:20px !important;
+
     }
 
     .secondsectionMiddle{
-        margin-left:3rem;
-        margin-right: 3rem;
+        margin-left: 0rem !important;
+        padding-left:10px !important;
+        width: 100% !important;
     }
 
     .thirdSection{
-        margin-left: 0rem;
-        margin-right: 0rem;
-        padding: 10px;
+        padding:0px !important;
+        margin: 0px !important;
+        width: 100% !important;
     }
 
     .thirdsectionInner{
@@ -181,8 +205,8 @@
     }
 
     .thirdsectionMiddle{
-        margin-left:3rem;
-        margin-right: 3rem;
+        padding:0px !important;
+        margin: 0px !important;
     }
 
     .fourthSection{

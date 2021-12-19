@@ -3,6 +3,7 @@
     margin-right: 1rem;
     padding-top:1px;
     padding-bottom:1px;
+    border-radius: 12px !important;
 }
 
 .title{
@@ -13,14 +14,23 @@
 @media (max-width: 800px) {
 
     .cardCenter{
-        width: 100%;
-        margin-left: 1rem !important;
+        width: 80% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+
+        /* margin-left: 1rem !important;
         margin-right: 1rem !important;
         padding-top:1px !important;
-        padding-bottom:1px !important;
+        padding-bottom:1px !important; */
     }
 
     .title{
         font-size:15px;
+         margin-left: 0 !important;
+         margin-right: 0 !important;
+         margin-bottom: 0 !important;
+
+
+        padding: 0 !important;
     }
 }

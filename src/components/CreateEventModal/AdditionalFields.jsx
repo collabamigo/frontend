@@ -26,7 +26,7 @@ export default function AdditionalFields() {
                         name="registrationStartDate"
                         placeholder="yyyy-mm-dd"
                         required
-                        type="date"
+                        type="datetime-local"
                     />
                 </div>
 
@@ -44,7 +44,7 @@ export default function AdditionalFields() {
                         name="registrationDeadlineDate"
                         placeholder="yyyy-mm-dd"
                         required
-                        type="date"
+                        type="datetime-local"
                     />
                 </div>
 

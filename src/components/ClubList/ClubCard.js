@@ -41,7 +41,7 @@ export default class ClubCard extends Component {
 
     render() {
         var clublink = "/club?name=" + this.props.element.name
-        console.log(this.props.element, " hiiii")
+        // console.log(this.props.element, " hiiii")
         if(this.props.element === undefined) {
             return null;
         }
@@ -73,6 +73,7 @@ export default class ClubCard extends Component {
 
                 )
             }
+
             else if (this.props.Type === "Event"){
                 return (
                     <div className="col-sm-6 col-lg-4 mb-3">

@@ -22,7 +22,7 @@ function DashboardLayout({children}) {
                 />
 
                 <link
-                    href="%PUBLIC_URL%/icons/favicon_dark.ico"
+                    href="%PUBLIC_URL%/icons/favicon.ico"
                     rel="icon"
                 />
 
@@ -62,7 +62,7 @@ function DashboardLayout({children}) {
                 />
 
                 <link
-                    href="img/icons/favicon_dark.ico"
+                    href="img/icons/favicon.ico"
                     rel="icon"
                 />
 
