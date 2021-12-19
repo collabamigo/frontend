@@ -13,7 +13,7 @@ import {
     LinkExtension,
     BulletListExtension,
     OrderedListExtension,
-    ListExtension,
+    // ListExtension,
     MarkdownExtension,
     // MarkdownOptions,
 } from "remirror/extensions";
@@ -24,7 +24,7 @@ import {
 // import markdown from 'refractor/lang/markdown';
 // import typescript from 'refractor/lang/typescript';
 import {
-    EditorComponent,
+    // EditorComponent,
     Remirror,
     ThemeProvider,
     useCommands,
