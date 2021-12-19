@@ -46,9 +46,7 @@ function DropdownMenu({ isAuthenticated }) {
                                 <DropdownButton
                                     title="Switch Account"
                                 >
-                                    <Dropdown.Item>
-                                        <AccountChooser />
-                                    </Dropdown.Item>
+                                    <Dropdown.Item />
 
                                 </DropdownButton>
                             </Dropdown>
