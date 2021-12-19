@@ -557,11 +557,18 @@ class ClubAdminPage extends Component {
                                     />
 
                                     <Button
-                                        className="material-icons"
+                                        className=""
                                         onClick={this.handleUpload1.bind(this)}
                                     >
-                                        add_circle
+
+                                        <SvgIcon
+                                            height="25px"
+                                            src="plus.svg"
+                                            width="25px"
+                                        />
                                     </Button>
+
+
 
                                     {' '}
 
@@ -573,10 +580,14 @@ class ClubAdminPage extends Component {
                                     />
 
                                     <Button
-                                        className="material-icons"
+                                        className=""
                                         onClick={this.handleUpload2.bind(this)}
                                     >
-                                        add_circle
+                                        <SvgIcon
+                                            height="25px"
+                                            src="plus.svg"
+                                            width="25px"
+                                        />
                                     </Button>
 
                                     {' '}
@@ -589,10 +600,14 @@ class ClubAdminPage extends Component {
                                     />
 
                                     <Button
-                                        className="material-icons"
+                                        className=""
                                         onClick={()=> this.image3Ref.current.click()}
                                     >
-                                        add_circle
+                                        <SvgIcon
+                                            height="25px"
+                                            src="plus.svg"
+                                            width="25px"
+                                        />
                                     </Button>
 
                                 </div>
@@ -776,3 +791,5 @@ class ClubAdminPage extends Component {
 }
 
 export default withRouter (ClubAdminPage);
+
+//TODO: need to give attributions to icons8
