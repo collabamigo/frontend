@@ -237,7 +237,7 @@ export default function TextEditor() {
 
                 <ItalicButton />
 
-                <UnderlineButton />
+                {/*<UnderlineButton />*/}
 
                 {/* <BlockquoteButton /> */}
 
@@ -247,9 +247,9 @@ export default function TextEditor() {
 
                 <HorizontalRuleButton />
 
-                <SubButton />
+                {/*<SubButton />*/}
 
-                <SupButton />
+                {/*<SupButton />*/}
 
                 {/* <ColumnsButton /> */}
             </Remirror>
