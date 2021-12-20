@@ -349,12 +349,11 @@ class ClubAdminPage extends Component {
             const temp = args["metadata"]["fullPath"]
             const arr = JSON.parse(this.state.bannerPaths)
             arr.splice(0,0,temp)
-            console.log(arr,"final")
             const payload = {
                 picture: JSON.stringify(arr)
             }
             axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-            this.setState({bannerLink:null})
+            this.setState({bannerLinks:null, bannerPaths: JSON.stringify(arr)})
 
         })
              .catch(() => {console.log("error occured uploading")});
@@ -372,12 +371,11 @@ class ClubAdminPage extends Component {
             const temp = args["metadata"]["fullPath"]
             const arr = JSON.parse(this.state.bannerPaths)
             arr.splice(1,0,temp)
-            console.log(arr,"final")
             const payload = {
                 picture: JSON.stringify(arr)
             }
             axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-            this.setState({bannerLink:null})
+            this.setState({bannerLinks:null, bannerPaths: JSON.stringify(arr)})
         })
              .catch(() => {console.log("error occured uploading")});
     }
@@ -393,12 +391,11 @@ class ClubAdminPage extends Component {
             const temp = args["metadata"]["fullPath"]
             const arr = JSON.parse(this.state.bannerPaths)
             arr.splice(2,0,temp)
-            console.log(arr,"final")
             const payload = {
                 picture: JSON.stringify(arr)
             }
             axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-            this.setState({bannerLink:null})
+            this.setState({bannerLinks:null, bannerPaths: JSON.stringify(arr)})
         })
              .catch(() => {console.log("error occured uploading")});
     }
