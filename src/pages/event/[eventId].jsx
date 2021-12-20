@@ -15,7 +15,23 @@ import isEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
 import GenerateEventForm from "../../components/GenerateEventForm";
 import ReactMarkdown from 'react-markdown'
-
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    EmailShareButton,
+    EmailIcon,
+    WhatsappShareButton,
+    WhatsappIcon,
+    TwitterShareButton,
+    TwitterIcon,
+    HatenaIcon,
+    InstapaperIcon,
+    LinkedinShareButton,
+    LinkedinIcon,
+    MailruIcon,
+    TelegramShareButton,
+    TelegramIcon,
+  } from "react-share";
 export default function Event() {
     const router = useRouter()
 
@@ -223,18 +239,76 @@ export default function Event() {
                         </div>
 
                         <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
-                            <FontAwesomeIcon
-                                className="mx-2"
-                                icon={faWhatsapp}
-                                size="2x"
+
+                            <FacebookShareButton
+                                title="d"
+                                url="https://www.instagram.com/p/CV0DFwMpRXg/"
                             />
 
-                            <FontAwesomeIcon
-                                className="mx-2"
-                                icon={faFacebook}
-                                size="2x"
-                            />
+                            <FacebookShareButton
+                                title="fullTitle"
+                                url="https://www.instagram.com/p/CV0DFwMpRXg/"
+                            >
+                                <FacebookIcon
+                                    round
+                                    size="32"
+                                />
+                            </FacebookShareButton>
 
+                            <EmailShareButton
+                                onClick={() => {}}
+                                openShareDialogOnClick
+                                url="https://www.instagram.com/p/CV0DFwMpRXg/"
+                            >
+                                <EmailIcon
+                                    round
+                                    size="32"
+                                />
+                            </EmailShareButton>
+
+
+                            <WhatsappShareButton
+                                separator=":: "
+                                title="CampersTribe - World is yours to explore"
+                                url="http://www.camperstribe.com"
+                            >
+                                <WhatsappIcon
+                                    round
+                                    size={36}
+                                />
+                            </WhatsappShareButton>
+
+                            <TwitterShareButton
+                                title="fullTitle"
+                                url="http://www.camperstribe.com"
+                            >
+                                <TwitterIcon
+                                    round
+                                    size={32}
+                                />
+                            </TwitterShareButton>
+
+
+                            <TelegramShareButton
+                                title="fullTitle"
+                                url="http://www.camperstribe.com"
+                            >
+                                <TelegramIcon
+                                    round
+                                    size={32}
+                                />
+                            </TelegramShareButton>
+
+                            <LinkedinShareButton
+                                title="fullTitle"
+                                url="http://www.camperstribe.com"
+                            >
+                                <LinkedinIcon
+                                    round
+                                    size={32}
+                                />
+                            </LinkedinShareButton>
+                            
                             <FontAwesomeIcon
                                 className="mx-2"
                                 icon={faInstagram}
