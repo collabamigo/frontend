@@ -4,8 +4,7 @@ import Image from "react-bootstrap/Image";
 import Carousel from "react-bootstrap/Carousel";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCalendar, faClock} from '@fortawesome/free-regular-svg-icons'
-import {faMapMarkerAlt, faShareAlt } from '@fortawesome/free-solid-svg-icons'
-import {faWhatsapp, faInstagram, faFacebook} from '@fortawesome/free-brands-svg-icons'
+import {faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import FAQModal from "components/faq/FAQModal";
 import {getStorage, ref, getDownloadURL} from "firebase/storage";
 import {useRouter} from 'next/router'
@@ -24,11 +23,8 @@ import {
     WhatsappIcon,
     TwitterShareButton,
     TwitterIcon,
-    HatenaIcon,
-    InstapaperIcon,
     LinkedinShareButton,
     LinkedinIcon,
-    MailruIcon,
     TelegramShareButton,
     TelegramIcon,
   } from "react-share";
@@ -308,18 +304,6 @@ export default function Event() {
                                     size={32}
                                 />
                             </LinkedinShareButton>
-                            
-                            <FontAwesomeIcon
-                                className="mx-2"
-                                icon={faInstagram}
-                                size="2x"
-                            />
-
-                            <FontAwesomeIcon
-                                className="mx-2"
-                                icon={faShareAlt}
-                                size="2x"
-                            />
                         </div>
                     </div>
                 </div>
