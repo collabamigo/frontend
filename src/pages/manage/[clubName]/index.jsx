@@ -618,14 +618,14 @@ class ClubAdminPage extends Component {
                                         <div className="d-flex">
                                             {this.state.bannerLinks[0]?
                                                 <div>
-                                                    <span>
+                                                    <div onClick={this.deletePic()}>
                                                         <SvgIcon
                                                             className="align-content-end"
                                                             height="20px"
                                                             src="cross.svg"
                                                             width="20px"
                                                         />
-                                                    </span>
+                                                    </div>
                                                 </div>: null}
 
                                             <div
@@ -818,14 +818,14 @@ class ClubAdminPage extends Component {
 
 
 
-                                        <div className={styles.announcementsBody + " overflow-auto"}>
+                                        <div className="overflow-auto">
                                             <ul
                                                 className="list p-0 m-0"
                                                 style={{ height: '250px'}}
                                             >
                                                 {this.state.announcements.map(item => (
                                                     <ul
-                                                        className=""
+                                                        className="pe-2"
                                                         key={item}
                                                     >
                                                         <ListGroup
