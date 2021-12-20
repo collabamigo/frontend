@@ -14,6 +14,7 @@ import Loading from "components/Loading";
 import isEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
 import GenerateEventForm from "../../components/GenerateEventForm";
+import ReactMarkdown from 'react-markdown'
 
 export default function Event() {
     const router = useRouter()
@@ -119,12 +120,12 @@ export default function Event() {
             </div>
 
             <div className="col">
-                <div className="row text-primary">
+                <div className="row">
                     <div className="col-md-9 col-12">
 
                         <br />
 
-                        <h1 className="fw-bold">
+                        <h1 className="fw-bold  text-primary">
                             {event.name}
                         </h1>
 
@@ -133,7 +134,7 @@ export default function Event() {
                         <div>
 
                             <div className="">
-                                <p>
+                                <p className=" text-primary">
 
                                     <FontAwesomeIcon icon={faCalendar} />
 
@@ -143,7 +144,7 @@ export default function Event() {
                                         (event.event_end?" to "+ convertToDatetimeString(event.event_end):"")}
                                 </p>
 
-                                <p>
+                                <p className=" text-primary">
                                     <FontAwesomeIcon icon={faMapMarkerAlt} />
 
                                     {' '}
@@ -152,7 +153,7 @@ export default function Event() {
                                 </p>
 
                                 {isEmpty(form)?null:
-                                <p>
+                                <p className=" text-primary">
                                     <FontAwesomeIcon icon={faClock} />
 
                                     {' '}
@@ -166,9 +167,9 @@ export default function Event() {
                                 </p>}
 
                                 <div>
-                                    <p className="text-black">
+                                    <ReactMarkdown>
                                         {event.description}
-                                    </p>
+                                    </ReactMarkdown>
                                 </div>
                             </div>
                         </div>

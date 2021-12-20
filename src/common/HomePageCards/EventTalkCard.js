@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {SvgIcon} from "common/SvgIcon";
 import {truncate} from "utilities";
 import styles from "./EventTalkCard.module.css";
+import ReactMarkdown from "react-markdown";
 
 export default function EventTalkCard(props) {
 
@@ -36,9 +37,11 @@ export default function EventTalkCard(props) {
                         })}
                 </Card.Subtitle>
 
-                   
+
                 <Card.Text className={styles.text}>
-                    {truncate(props.element.description, 80)}
+                    <ReactMarkdown>
+                        {truncate(props.element.description, 80)}
+                    </ReactMarkdown>
                 </Card.Text>
 
                 <br />
@@ -48,12 +51,12 @@ export default function EventTalkCard(props) {
                         height="15px"
                         src="calendar_datee.svg"
                         width="15px"
-                    /> 
+                    />
 
                     <p className={styles.text2}>
                         .
 
-                        Fill before  
+                        Fill before
 
                         {finale}
                     </p>

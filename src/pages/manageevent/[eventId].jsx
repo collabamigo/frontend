@@ -18,6 +18,7 @@ import EventAdminModal from "components/EventAdmin/modal";
 import Table from 'react-bootstrap/Table';
 import Carousel from 'react-bootstrap/Carousel';
 import {FirebaseContext} from "firebaseProvider";
+import ReactMarkdown from 'react-markdown'
 
 function isEmpty(obj) {
 
@@ -432,9 +433,9 @@ function Event() {
                         /> */}
 
                         <div>
-                            <p>
+                            <ReactMarkdown>
                                 {event.description}
-                            </p>
+                            </ReactMarkdown>
 
                             <button
                                 className="btn btn-outline-warning material-icons"

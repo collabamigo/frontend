@@ -5,8 +5,8 @@ import {truncate} from "utilities";
 import {logo, eventDetails} from "./ClubCard.module.css";
 import Link from "common/Link";
 import Card from "react-bootstrap/Card";
-
 import Button from "react-bootstrap/Button";
+import ReactMarkdown from "react-markdown";
 
 export default class ClubCard extends Component {
 
@@ -105,7 +105,9 @@ export default class ClubCard extends Component {
                                     className="text-start text-muted h6 overflow-hidden"
                                     style={{height:'250px'}}
                                 >
-                                    {truncate(this.props.element.description, 470)}
+                                    <ReactMarkdown>
+                                        {truncate(this.props.element.description, 470)}
+                                    </ReactMarkdown>
                                 </Card.Text>
 
                                 {/* <Card.Link href="#">
