@@ -1,5 +1,6 @@
 import React from "react"
-import styles from "styles/404.module.css";
+import styles from "./404.module.css";
+
 function NotFound() {
   return (
       <div className={styles.boddy}>
