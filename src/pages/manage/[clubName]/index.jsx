@@ -52,8 +52,8 @@ class ClubAdminPage extends Component {
             announcements: null,
             isLoading: true,
             currentDateTime : date,
-            bannerLinks:null,
-            bannerPaths :null,
+            bannerLinks:undefined,
+            bannerPaths :undefined,
             logoUrl:null,
             }
     }
@@ -87,21 +87,26 @@ class ClubAdminPage extends Component {
                         this.setState({competitions: res.data})
                     });
             });
-            if (this.state.bannerLinks === null && this.state.bannerPaths !== null) {
+            if (this.state.bannerLinks === undefined && this.state.bannerPaths !== undefined) {
                 const firebase = this.context;
                 const storage = firebase ? getStorage(firebase) : getStorage();
-
-                JSON.parse(this.state.bannerPaths).map((link, index) => {
-                    getDownloadURL(ref(storage, link)).then((url) => {
-                        this.setState((prevState) => ({
-                            ...prevState,
-                            bannerLinks: {
-                                ...(prevState.bannerLinks),
-                                [index]: url,
-                            }
-                        }))
+                if (this.state.bannerPaths === '[]'){
+                    // suppression needed
+                    // eslint-disable-next-line react/no-did-update-set-state
+                    this.setState({bannerLinks:[]})
+                }
+                else
+                    JSON.parse(this.state.bannerPaths).map((link, index) => {
+                        getDownloadURL(ref(storage, link)).then((url) => {
+                            this.setState((prevState) => ({
+                                ...prevState,
+                                bannerLinks: {
+                                    ...(prevState.bannerLinks),
+                                    [index]: url,
+                                }
+                            }))
+                        })
                     })
-                })
             }
     }}
 
@@ -353,7 +358,7 @@ class ClubAdminPage extends Component {
                 picture: JSON.stringify(arr)
             }
             axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-            this.setState({bannerLinks:null, bannerPaths: JSON.stringify(arr)})
+            this.setState({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
 
         })
              .catch(() => {console.log("error occured uploading")});
@@ -375,7 +380,7 @@ class ClubAdminPage extends Component {
                 picture: JSON.stringify(arr)
             }
             axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-            this.setState({bannerLinks:null, bannerPaths: JSON.stringify(arr)})
+            this.setState({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
         })
              .catch(() => {console.log("error occured uploading")});
     }
@@ -395,7 +400,7 @@ class ClubAdminPage extends Component {
                 picture: JSON.stringify(arr)
             }
             axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-            this.setState({bannerLinks:null, bannerPaths: JSON.stringify(arr)})
+            this.setState({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
         })
              .catch(() => {console.log("error occured uploading")});
     }
@@ -604,7 +609,7 @@ class ClubAdminPage extends Component {
                                 <br />
                                 
                                 <div className="d-flex">
-                                    {!this.state.bannerLinks?null:
+                                    {this.state.bannerLinks === undefined ? null:
                                     <div className="mx-auto d-flex">
                                         <div className="d-flex">
                                             <div
