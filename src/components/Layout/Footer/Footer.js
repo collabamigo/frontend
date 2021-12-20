@@ -6,8 +6,8 @@ function Footer() {
       <footer className={styles.site_footer}>
           <div className="container">
               <div className="row">
-                  <div className="col-sm-12 col-md-6">
-                      
+                  <div className= "col-sm-12 col-md-6">
+
                       <br />
 
                       <h3>

@@ -2,7 +2,6 @@
 .listt{
   list-style: none !important;
   padding:0 !important;
-  margin:1rem !important;
 }
 
 .colorwhite{
@@ -22,7 +21,6 @@
 
 
   background-color:#1b202d;
-  padding:5px 0 5px;
   font-size:15px;
   line-height:24px;
   color:#737373;
@@ -32,10 +30,7 @@
   border-top-color:#bbb;
   opacity:0.5
 }
-.site_footer hr.small
-{
-  margin:10px 0
-}
+
 .site_footer h3
 {
   color:#fff;
@@ -96,20 +91,23 @@
 {
   .site_footer [class^=col-]
   {
-    margin-bottom:30px
+    margin-bottom:3px
   }
   
   .widthf{
-    width:50% !important;
+    width:30% !important;
   }
 
 }
 @media (max-width:767px)
 {
+  .site_footer [class^=col-]
+  {
+    margin-bottom:3px
+  }
 
-    
   .widthf{
-    width:50% !important;
+    width:30% !important;
   }
 
 

@@ -121,6 +121,7 @@ export default function Event() {
             <div className="col">
                 <div className="row text-primary">
                     <div className="col-md-9 col-12">
+
                         <br />
 
                         <h1 className="fw-bold">
