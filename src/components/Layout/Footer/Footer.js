@@ -6,7 +6,7 @@ function Footer() {
       <footer className={styles.site_footer}>
           <div className="container">
               <div className="row">
-                  <div className= "col-sm-12 col-md-6">
+                  <div className="col-sm-12 col-md-6">
 
                       <br />
 
@@ -93,7 +93,7 @@ function Footer() {
               <div className="row">
                   <div className="col-md-8 col-sm-6 col-xs-12">
                       <p className={styles.copyright_text}>
-                          Copyright &copy; 2021 All Rights Reserved by  
+                          Copyright &copy; 2021 All Rights Reserved by
                           {' '}
 
                           {" "}
@@ -176,7 +176,7 @@ function Footer() {
                                       <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z" />
                                   </svg>
                               </a>
-                          </li>   
+                          </li>
                       </ul>
                   </div>
               </div>
