@@ -1,4 +1,3 @@
-import {getDownloadURL, getStorage, ref} from "firebase/storage";
 import React, {Component} from 'react';
 import Card from 'react-bootstrap/Card'
 import BCarousel from 'react-bootstrap/Carousel'
@@ -10,6 +9,7 @@ import {ListGroup} from "react-bootstrap";
 import RCarousel from "react-multi-carousel";
 import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
+import {getDownloadURL, getStorage, ref} from "firebase/storage";
 import styles from "./styles.module.scss";
 import Loading from "components/Loading";
 import isEmpty from "lodash/isEmpty";
@@ -34,7 +34,8 @@ class ClubHomePage extends Component {
         const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + " " +
             today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
         this.state = {
-            basicInformation: [],
+            basicInformation: null,
+            bannerLinks:null,
             competitions:null,
             announcements: null,
             currentDateTime : date,
@@ -71,6 +72,25 @@ class ClubHomePage extends Component {
                         this.setState({competitions: res.data})
                     });
             });
+            if (this.state.bannerLinks === null && this.state.basicInformation !== null) {
+                const storage = getStorage();
+                if(this.state.basicInformation.picture) {
+                JSON.parse(this.state.basicInformation.picture).map((link, index) => {
+
+                    getDownloadURL(ref(storage, link)).then((url) => {
+
+                        this.setState((prevState) => ({
+                            ...prevState,
+                            bannerLinks: {
+                                ...(prevState.bannerLinks),
+                                [index]: url,
+                            }
+                        }))
+                    })
+                })}
+             
+            
+            }
         }
     }
 
@@ -359,50 +379,57 @@ class ClubHomePage extends Component {
                                         />
                                     }
                                 >
-                                    <BCarousel.Item>
-                                        <img
-                                            alt="First slide"
-                                            className="d-block w-100"
-                                            src={this.state.basicInformation.picture[0]}
-                                        />
+                                    { this.state.bannerLinks[0] ? 
+                                        <BCarousel.Item>
+                                            <img
+                                                alt="First slide"
+                                                className="d-block w-100"
+                                                src={this.state.bannerLinks[0] ?  this.state.bannerLinks[0] : "https://via.placeholder.com/350x200"}
+                                            />
 
-                                        <BCarousel.Caption>
+                                            <BCarousel.Caption>
 
-                                            <p>
-                                                Nulla vitae elit libero, a pharetra augue mollis interdum.
-                                            </p>
-                                        </BCarousel.Caption>
-                                    </BCarousel.Item>
+                                                <p>
+                                                    Nulla vitae elit libero, a pharetra augue mollis interdum.
+                                                </p>
+                                            </BCarousel.Caption>
+                                        </BCarousel.Item> 
+                                    : null }
 
-                                    <BCarousel.Item>
-                                        <img
-                                            alt="Second slide"
-                                            className="d-block w-100"
-                                            src={this.state.basicInformation.picture[1]}
-                                        />
+                                    { this.state.bannerLinks[1] ? 
 
-                                        <BCarousel.Caption>
+                                        <BCarousel.Item>
+                                            <img
+                                                alt="Second slide"
+                                                className="d-block w-100"
+                                                src={this.state.bannerLinks[1] ?  this.state.bannerLinks[1] : "https://via.placeholder.com/350x200"}
+                                            />
 
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                            </p>
-                                        </BCarousel.Caption>
-                                    </BCarousel.Item>
+                                            <BCarousel.Caption>
 
-                                    <BCarousel.Item>
-                                        <img
-                                            alt="Third slide"
-                                            className="d-block w-100"
-                                            src={this.state.basicInformation.picture[2]}
-                                        />
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                </p>
+                                            </BCarousel.Caption>
+                                        </BCarousel.Item>
+                                    : null }
 
-                                        <BCarousel.Caption>
+                                    { this.state.bannerLinks[2] ? 
+                                        <BCarousel.Item>
+                                            <img
+                                                alt="Third slide"
+                                                className="d-block w-100"
+                                                src={this.state.bannerLinks[2] ?  this.state.bannerLinks[2] : "https://via.placeholder.com/350x200"}
+                                            />
 
-                                            <p>
-                                                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                                            </p>
-                                        </BCarousel.Caption>
-                                    </BCarousel.Item>
+                                            <BCarousel.Caption>
+
+                                                <p>
+                                                    Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                                                </p>
+                                            </BCarousel.Caption>
+                                        </BCarousel.Item>
+                                    : null }
                                 </BCarousel>
 
                                 <br />
