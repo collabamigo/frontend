@@ -6,7 +6,7 @@ import Footer from "./Footer/Footer";
 import PropTypes from "prop-types";
 import {useRouter} from 'next/router';
 import DashboardHeader from "./DashboardHeader";
-import {App} from "./layout.module.scss";
+import {App, Main} from "./layout.module.scss";
 import SSRProvider from 'react-bootstrap/SSRProvider';
 
 function Layout({children}) {
@@ -86,7 +86,7 @@ function Layout({children}) {
                     <Header isAuthenticated={isLoggedIn()} />:
                     <DashboardHeader isAuthenticated={isLoggedIn()} />}
 
-                <main>
+                <main className={Main}>
                     {children}
                 </main>
 
