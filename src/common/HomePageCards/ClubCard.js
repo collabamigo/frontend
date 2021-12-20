@@ -29,11 +29,9 @@ export default function ClubCard({value}) {
                         variant="top"
                     />
 
-                    <Card.Body className="d-flex">
-                        <Card.Title className={styles.title + " mt-auto ms-auto me-auto mb-2 text-primary"}>
-                            {value.name}
-                        </Card.Title>
-                    </Card.Body>
+                    <Card.Title className={styles.title + " mt-auto mb-2 text-primary"}>
+                        {value.name}
+                    </Card.Title>
                 </Card>
             </Link>
         </div>
