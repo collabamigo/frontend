@@ -12,7 +12,6 @@ import {ListGroup} from "react-bootstrap";
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 // import Button from "react-bootstrap/Button";
 import RCarousel from "react-multi-carousel";
-import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
 import styles from "pages/club/styles.module.scss";
 import Link from "common/Link";
