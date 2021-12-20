@@ -46,11 +46,19 @@
     padding-bottom: 2px;
 }
 
-.descriptionHeading, .announcementsHeading {
-    font-size: 33px;
-    text-align: center;
-    padding-bottom: 5px;
+.descriptionHeading{
+    font-size: 33px  !important;
+    text-align: left !important;
+    padding-left: 2px !important;
+    padding-bottom: 5px !important;
 }
+.announcementsHeading {
+    font-size: 33px  !important;
+    text-align: left !important;
+    padding-left: 2px !important;
+    padding-bottom: 5px !important;
+}
+
 
 .description {
     font-size: 18px;
@@ -91,6 +99,8 @@
         padding : 0px !important;
         margin: 2% !important;
     }
+
+    
     
     .announcementsBox{
         width: 100% !important;
@@ -103,9 +113,11 @@
     }
 
     .descriptionHeading {
-        font-size: 18px;
+        // font-size: 18px;
         text-align: center;
-        padding-bottom: 3px;
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+        // padding-bottom: 3px;
     }
 
     .announcementsHeading {

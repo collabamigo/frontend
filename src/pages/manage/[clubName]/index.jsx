@@ -742,15 +742,20 @@ class ClubAdminPage extends Component {
                                 <hr />
 
 
-                                <div className="d-flex">
-                                    <div className={styles.descriptionBox + " col-md-5 col-lg-5 col-sm-6"}>
-                                        <div className="d-flex justify-content-between">
-                                            <div className={styles.descriptionHeading}>
+                                <div className={styles.mainBox + " row"}>
+                                    <div className={styles.descriptionBox + " col"}>
+                                        <div className={styles.descriptionHeading + " row d-flex justify-content-around"}>
+                                            
+                                            <span className="col-9 h2 align-self-start">
                                                 Description
-                                            </div>
+
+                                                {" "}
+                                            </span>
+
+                                            {" "}
 
                                             <div
-                                                className=""
+                                                className="col-3"
                                                 onClick={() => {
                                                 this.setState({
                                                     currentModal: "description",
@@ -760,7 +765,7 @@ class ClubAdminPage extends Component {
                                             >
                                                 <svg
                                                     className={styles.edit}
-                                                    height="64"
+                                                    height="34"
                                                     viewBox="0 0 24 24"
                                                     width="24"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -768,7 +773,10 @@ class ClubAdminPage extends Component {
                                                     <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
                                                 </svg>
                                             </div>
+
                                         </div>
+
+                                        
 
                                         <p className={styles.description}>
                                             {this.state.basicInformation.description}
@@ -776,14 +784,16 @@ class ClubAdminPage extends Component {
 
                                     </div>
 
-                                    <div className=" offset-1 col-md-5 col-lg-5 col-sm-9">
-                                        <div className="d-flex justify-content-between">
-                                            <div className={styles.announcementsHeading}>
+                                    <div className={styles.announcementsBox + " col"}>
+                                        <div className={styles.announcementsHeading + " row d-flex justify-content-between"}>
+                                            <span className="col-9 h4">
                                                 Announcements
-                                            </div>
+
+                                                {" "}
+                                            </span>
 
                                             <div
-                                                className=""
+                                                className="col-3"
                                                 onClick={() => {
                                                     this.setState({
                                                         currentModal: "Announcements",
@@ -793,7 +803,7 @@ class ClubAdminPage extends Component {
                                             >
                                                 <svg
                                                     className={styles.edit}
-                                                    height="64"
+                                                    height="34"
                                                     viewBox="0 0 24 24"
                                                     width="24"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -811,9 +821,11 @@ class ClubAdminPage extends Component {
                                             />
                                         </div>
 
-                                        <div className="overflow-auto">
+                                        
+
+                                        <div className={styles.announcementsBody + " overflow-auto"}>
                                             <ul
-                                                className="list"
+                                                className="list p-0 m-0"
                                                 style={{ height: '250px'}}
                                             >
                                                 {this.state.announcements.map(item => (
@@ -845,12 +857,12 @@ class ClubAdminPage extends Component {
                                                         </ListGroup>
                                                     </ul>
                                                 ))}
+
                                             </ul>
 
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                         </Card.Body>
@@ -860,7 +872,7 @@ class ClubAdminPage extends Component {
 
                     <Card className={styles.leftCard2}>
                         <Card.Body className="mt-3">
-                            <div className="d-flex justify-content-between col-2">
+                            <div className="d-flex justify-content-between ">
                                 <Card.Title className="card-title fs-2 header-color text-left">
                                     Events
 
