@@ -1,25 +1,20 @@
 
-import React from "react";
-
-import Container from "common/Container";
-import ContentBlock from "components/ContentBlock";
-import IntroContent from "content/IntroContent.json";
-import PostIntroContent from "content/PostIntroContent.json";
+import React, {useState} from "react";
+import GoogleSignIn from "../components/GoogleSignIn";
 
 function UnauthenticatedHome() {
+    const [stage, setStage] = useState("button");
+
     return (
-        <Container>
-            <ContentBlock
-                alt_content={PostIntroContent.text}
-                alt_title={PostIntroContent.title}
-                button={IntroContent.button}
-                content={IntroContent.text}
-                icon="developer.svg"
-                id="intro"
-                title={IntroContent.title}
-                type="left"
-            />
-        </Container>
+        <div className="row">
+            <div className="mx-auto col-auto">
+                <GoogleSignIn
+                    setStage={setStage}
+                    stage={stage}
+                    visibility
+                />
+            </div>
+        </div>
     )
 }
 
