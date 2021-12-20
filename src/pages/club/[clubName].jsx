@@ -438,12 +438,12 @@ class ClubHomePage extends Component {
 
                                         <div className={styles.announcementsBody + " overflow-auto"}>
                                             <ul
-                                                className="list"
+                                                className="list p-0 m-0"
                                                 style={{ height: '250px'}}
                                             >
                                                 {this.state.announcements.map(item => (
                                                     <ul
-                                                        className="pe-2"
+                                                        className=""
                                                         key={item}
                                                     >
                                                         <ListGroup
