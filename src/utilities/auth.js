@@ -2,31 +2,27 @@
 
 // const router = useRouter()
 
+import {createContext} from "react";
+
 export const isBrowser = () => typeof window !== "undefined"
 
-let loginStatus = false
 
-export const isLoggedIn = () => {
-    return (loginStatus || (isBrowser() && sessionStorage.getItem("loginFlag") != null))
-    // return isBrowser()?!!sessionStorage.getItem("loginFlag"):false;
-}
+const LoginContext = createContext({
+    loggedIn: (isBrowser() && sessionStorage.getItem("loginFlag")),
+    setLoggedIn: () => {
+    }
+});
+export {LoginContext}
 
-export const setLoggedIn = () => {
-    loginStatus = true
+export const authSetLoggedIn = () => {
+    if (isBrowser())
     sessionStorage.setItem("loginFlag", "true")
 }
 
-export const setLoggedOut = () => {
+export const authSetLoggedOut = () => {
     if (isBrowser()) {
         localStorage.clear()
         sessionStorage.clear()
     }
-}
-
-export const checkLoginStatus = async () => {
-    if (isBrowser()) {
-        if (!isLoggedIn())
-            window.open("/welcome?next=" + location.pathname, "_self")
-        return (isLoggedIn())
-    }
+    window.location.href = "/";
 }

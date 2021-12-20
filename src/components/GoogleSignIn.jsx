@@ -1,37 +1,55 @@
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types'
 import FormSignIn from "./FormSignIn/FormSignIn";
 import axios from "utilities/axios";
 import backend from "../env";
-import jws from "jsonwebtoken";
-import {setLoggedIn} from "../utilities/auth"
+import jwt from "jsonwebtoken";
 import {setToken} from "../utilities/axios";
-import {useRouter} from 'next/router';
 
-function GoogleSignIn (props) {
-    const router = useRouter();
+function GoogleSignIn ({isAuthenticated, setLoggedIn, setStage, stage, visibility}) {
+    const myRef = React.createRef();
     async function profileExists (googleUser) {
-        if (props.stage==="button")
+        if (stage==="button")
             return {
                 res:await axios.get("connect/profile/?format=json"),
                 googleUser: googleUser
             }
-        else
-            return {
-            res:{data: ["DUMMY"]},
-            googleUser: googleUser
-        }
     }
+
+    const [initializing, setInitializing] = useState(true);
+
+    useEffect(() => {
+
+        if (window.google && !isAuthenticated && initializing) {
+            window.google.accounts.id.initialize({
+                auto_select: false,
+                client_id: "597159953447-snucndrn3auafnv7gutico5vqvj20j3s.apps.googleusercontent.com",
+                callback: onSignIn,
+                context: "signin",
+                ux_mode: "popup",
+            })
+            window.google.accounts.id.prompt()
+            window.google.accounts.id.renderButton(myRef.current, {
+                text: "continue with Skype",
+                theme: 'filled_black',
+                shape: "pill",
+                size: 'large',
+
+            })
+            setInitializing(false)
+        }
+    })
 
 
     const [googleUserState, setGoogleUserState] = useState(undefined);
 
+
     async function onSignIn(googleUser) {
-        if (props.stage === "button") {
-            if (jws.decode(googleUser.credential).hd !== "iiitd.ac.in") {
+        if (stage === "button") {
+            if (jwt.decode(googleUser.credential).hd !== "iiitd.ac.in") {
                 alert("Please login using your IIITD ID")
-                window.google.accounts.id.revoke(jws.decode(googleUser.credential).email, () => {
+                window.google.accounts.id.revoke(jwt.decode(googleUser.credential).email, () => {
                     localStorage.clear();
                     window.location.href = "/";
                 })
@@ -43,8 +61,8 @@ function GoogleSignIn (props) {
             setToken(res_temp.data['access_token'])
 
             if (!googleUserState)
-                setGoogleUserState(jws.decode(googleUser.credential));
-            // props.setStage("form")
+                setGoogleUserState(jwt.decode(googleUser.credential));
+            // setStage("form")
 
 
             // setLoggedIn()
@@ -52,16 +70,15 @@ function GoogleSignIn (props) {
 
         }
         if (!googleUserState)
-            setGoogleUserState(jws.decode(googleUser.credential));
+            setGoogleUserState(jwt.decode(googleUser.credential));
 
         profileExists(googleUser).then((res) => {
             if (!res.res.data.length) {
                 if (!googleUserState)
-                    setGoogleUserState(jws.decode(googleUser.credential));
-                props.setStage("form");
+                    setGoogleUserState(jwt.decode(googleUser.credential));
+                setStage("form");
             } else {
                 setLoggedIn()
-                router.push("/")
             }
         })
     }
@@ -73,32 +90,17 @@ function GoogleSignIn (props) {
             onSignIn(googleUser);
         };
         loggedIn = Boolean(localStorage.getItem("encrypted_token"));
+        loggedIn = Boolean(localStorage.getItem("encrypted_token"));
     }
-    if (props.visibility) {
+    if (visibility) {
 
-        if (props.stage==="button")
+        if (stage==="button")
             return (
-                <>
-                    <div
-                        data-auto_select={loggedIn}
-                        data-callback="onSignIn"
-                        data-client_id="597159953447-snucndrn3auafnv7gutico5vqvj20j3s.apps.googleusercontent.com"
-                        data-context="signin"
-                        data-ux_mode="popup"
-                        id="g_id_onload"
-                    />
-
-                    <div
-                        className="g_id_signin"
-                        data-logo_alignment="left"
-                        data-shape="pill"
-                        data-size="large"
-                        data-text="continue_with"
-                        data-theme="filled_blue"
-                        data-type="standard"
-                    />
-                </>);
-        else if (props.stage==="form") {
+                <div
+                    ref={myRef}
+                />
+                );
+        else if (stage==="form") {
             console.log(googleUserState)
             return (
                 <FormSignIn
@@ -116,6 +118,8 @@ function GoogleSignIn (props) {
 }
 
 GoogleSignIn.propTypes={
+    isAuthenticated: PropTypes.bool.isRequired,
+    setLoggedIn: PropTypes.func.isRequired,
     setStage: PropTypes.func.isRequired,
     stage: PropTypes.string.isRequired,
     visibility: PropTypes.bool.isRequired,
