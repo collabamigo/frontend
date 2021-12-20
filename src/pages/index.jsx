@@ -6,6 +6,7 @@ import axios from "utilities/axios";
 import styles from "styles/index.module.css";
 import ClubCard from "../common/HomePageCards/ClubCard.js";
 import EventTalkCard from "../common/HomePageCards/EventTalkCard.js";
+
 // import LandingFooter from "components/LandingFooter";
 
 export default class AuthenticatedHome extends React.Component {

@@ -8,6 +8,8 @@ import {truncate} from "utilities";
 // import isEmpty from "lodash/isEmpty";
 import Link from "common/Link";
 import axios from "utilities/axios";
+import {isMobile} from "react-device-detect";
+
 
 import styles from "./EventTalkCard.module.css";
 import ReactMarkdown from "react-markdown";
@@ -71,7 +73,7 @@ export default function EventTalkCard(props) {
 
                         <Card.Text className={styles.text}>
                             <ReactMarkdown>
-                                {truncate(props.element.description, 80)}
+                                {isMobile ? truncate(props.element.description, 80) : truncate(props.element.description, 290) }
                             </ReactMarkdown>
                         </Card.Text>
 
