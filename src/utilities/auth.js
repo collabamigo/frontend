@@ -6,6 +6,9 @@ import {createContext} from "react";
 
 export const isBrowser = () => typeof window !== "undefined"
 
+export const setLoggedOut = ()  => {}
+
+export const checkLoginStatus = ()  => {}
 
 const LoginContext = createContext({
     loggedIn: (isBrowser() && sessionStorage.getItem("loginFlag")),

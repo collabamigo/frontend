@@ -560,9 +560,6 @@ class ClubAdminPage extends Component {
 
                                         {this.renderOther()}
                                     </div>
-
-                                    
-
                                 </Card.Body>
                             </Card>
                         </div>
@@ -626,6 +623,19 @@ class ClubAdminPage extends Component {
                                             >
                                                 
                                                 {this.bannerControl(this.state.bannerLinks, 0)}
+
+                                                {this.state.bannerLinks[0]?
+                                                    <div>
+                                                        <span>
+                                                            <SvgIcon
+                                                                className="align-content-end"
+                                                                height="20px"
+                                                                src="cross.svg"
+                                                                width="20px"
+                                                            />
+                                                        </span>
+                                                    </div>: null}
+
                                             </div>
                                         </div>
 
@@ -637,6 +647,19 @@ class ClubAdminPage extends Component {
                                             >
                                                 {this.bannerControl(this.state.bannerLinks, 1)}
 
+
+                                                {this.state.bannerLinks[1]?
+                                                    <div>
+                                                        <span>
+                                                            <SvgIcon
+                                                                className="align-content-end"
+                                                                height="20px"
+                                                                src="cross.svg"
+                                                                width="20px"
+                                                            />
+                                                        </span>
+                                                    </div>: null}
+
                                             </div>
                                         </div>
 
@@ -647,6 +670,20 @@ class ClubAdminPage extends Component {
                                                 type="button"
                                             >
                                                 {this.bannerControl(this.state.bannerLinks, 2)}
+
+
+                                                {this.state.bannerLinks[2]?
+                                                    <div>
+                                                        <span>
+                                                            <SvgIcon
+                                                                className="align-content-end"
+                                                                height="20px"
+                                                                src="cross.svg"
+                                                                width="20px"
+                                                            />
+                                                        </span>
+                                                    </div>: null}
+
 
                                             </div>
                                         </div>
