@@ -38,13 +38,6 @@ class ClubHomePage extends Component {
             competitions:null,
             announcements: null,
             currentDateTime : date,
-            basicInformationStatic:{
-                clubBanners:[
-                    "https://via.placeholder.com/1600X480",
-                    "https://via.placeholder.com/1600X480",
-                    "https://via.placeholder.com/1600X480"
-                ],
-            },
             logoUrl: null,
         }
     }
@@ -370,7 +363,7 @@ class ClubHomePage extends Component {
                                         <img
                                             alt="First slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformationStatic.clubBanners[0]}
+                                            src={this.state.basicInformation.picture[0]}
                                         />
 
                                         <BCarousel.Caption>
@@ -385,7 +378,7 @@ class ClubHomePage extends Component {
                                         <img
                                             alt="Second slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformationStatic.clubBanners[1]}
+                                            src={this.state.basicInformation.picture[1]}
                                         />
 
                                         <BCarousel.Caption>
@@ -400,7 +393,7 @@ class ClubHomePage extends Component {
                                         <img
                                             alt="Third slide"
                                             className="d-block w-100"
-                                            src={this.state.basicInformationStatic.clubBanners    [2]}
+                                            src={this.state.basicInformation.picture[2]}
                                         />
 
                                         <BCarousel.Caption>

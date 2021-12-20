@@ -54,10 +54,6 @@ class ClubAdminPage extends Component {
             currentDateTime : date,
             bannerLinks:null,
             bannerPaths :null,
-            basicInformationStatic:{
-                joinDate:"26122020",
-                clubBanners:["https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480","https://via.placeholder.com/1600X480"],
-            },
             logoUrl:null,
             }
     }
@@ -91,9 +87,6 @@ class ClubAdminPage extends Component {
                         this.setState({competitions: res.data})
                     });
             });
-
-
-
             if (this.state.bannerLinks === null && this.state.bannerPaths !== null) {
                 const firebase = this.context;
                 const storage = firebase ? getStorage(firebase) : getStorage();
@@ -346,47 +339,67 @@ class ClubAdminPage extends Component {
     }
 
     handleUpload1(image){
-        // this.image3Ref.current.click()
         this.setState({image1: image})
         const storage = getStorage();
         const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
             (new Date().getTime()));
         if(image == null)
             return;
-        uploadBytes(storageRef, image).then((args) => {console.log("test again1");
-            const arr = [args["metadata"]["fullPath"]]
+        uploadBytes(storageRef, image).then((args) => {
+            const temp = args["metadata"]["fullPath"]
+            const arr = JSON.parse(this.state.bannerPaths)
+            arr.splice(0,0,temp)
+            console.log(arr,"final")
             const payload = {
-
                 picture: JSON.stringify(arr)
             }
-            axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("done"))
+            axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
+
         })
-             .catch(() => {console.log("error bro")});
+             .catch(() => {console.log("error occured uploading")});
     }
 
     handleUpload2(image){
-    this.image2Ref.current.click()
-        // this.image3Ref.current.click()
+        this.image2Ref.current.click()
         this.setState({image2: image})
         const storage = getStorage();
         const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
             (new Date().getTime()));
         if(image == null)
             return;
-        uploadBytes(storageRef, image).then((args) => {console.log("test again2",args);})
-             .catch(() => {console.log("error bro")});
+        uploadBytes(storageRef, image).then((args) => {
+            const temp = args["metadata"]["fullPath"]
+            const arr = JSON.parse(this.state.bannerPaths)
+            arr.splice(1,0,temp)
+            console.log(arr,"final")
+            const payload = {
+                picture: JSON.stringify(arr)
+            }
+            axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
+
+        })
+             .catch(() => {console.log("error occured uploading")});
     }
 
     handleUpload3(image){
-        // this.image3Ref.current.click()
         this.setState({image3: image})
         const storage = getStorage();
         const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
             (new Date().getTime()));
         if(image == null)
             return;
-        uploadBytes(storageRef, image).then((args) => {console.log("test again3",args);})
-             .catch(() => {console.log("error bro")});
+                uploadBytes(storageRef, image).then((args) => {
+            const temp = args["metadata"]["fullPath"]
+            const arr = JSON.parse(this.state.bannerPaths)
+            arr.splice(2,0,temp)
+            console.log(arr,"final")
+            const payload = {
+                picture: JSON.stringify(arr)
+            }
+            axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
+
+        })
+             .catch(() => {console.log("error occured uploading")});
     }
 
     handleCloseModal() {
@@ -436,8 +449,7 @@ class ClubAdminPage extends Component {
     }
 
     render(){
-        console.log("test" ,  this.state);
-    const responsive = {
+    const responsive =  {
             superLargeDesktop: {
                 // the naming can be any, depends on you.
                 breakpoint: {max: 4000, min: 3000},
