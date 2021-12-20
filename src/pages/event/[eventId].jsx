@@ -20,6 +20,7 @@ export default function Event() {
     const router = useRouter()
 
     const [data, setData] = useState({
+        imageLinks:[],
         clubLogoLinks: {},
         event: {},
         form: {}
@@ -31,6 +32,12 @@ export default function Event() {
     const setForm = (form) => setData((prevData) => {
         return {...prevData, form}
     });
+
+    const setimageLinks = (link) => {
+        setData((prevData) => {
+            return {...prevData, imageLinks: [...(prevData.imageLinks), link]}
+        })
+    };
     const addClubLogoLinks = (club, link) => {
         console.log(clubLogoLinks)
         setData((prevData) => {
@@ -40,6 +47,8 @@ export default function Event() {
     const event = data.event;
     const form = data.form;
     const clubLogoLinks = data.clubLogoLinks;
+    const imageLinks = data.imageLinks;
+
 
     const convertToDatetimeString = iso_8601_string => {
         const date = new Date(iso_8601_string);
@@ -61,6 +70,11 @@ export default function Event() {
                 event.clubs.map(club => getDownloadURL(ref(storage, 'data/' + club + '/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
             }
+            if (isEmpty(imageLinks) && !isEmpty(event)) {
+                const storage = getStorage();
+                JSON.parse(event.image_links).map(linkk => getDownloadURL(ref(storage, linkk))
+                    .then(url => setimageLinks(url)))
+            }
     }})
 
     const isLoading = isEmpty(event);
@@ -76,21 +90,22 @@ export default function Event() {
         <div className="row px-md-5 mx-md-5 px-2 mx-2">
             <div className="col-md-4 col-12 me-4">
                 <div className="pb-5">
-
-                    <Carousel>
-                        {JSON.parse(event.image_links).map((image) => {
+                    {imageLinks.length > 0 ?
+                        <Carousel>
+                            {imageLinks.map((image) => {
                                 return (
                                     <Carousel.Item key={image}>
                                         <Image
                                             alt={event.name}
                                             fluid
                                             rounded
-                                            src="/img/placeholder-500.png"
+                                            src={image}
                                         />
                                     </Carousel.Item>
                                 )
                             })}
-                    </Carousel>
+                        </Carousel>
+                    : null}
                 </div>
 
                 <div className="pt-4">
