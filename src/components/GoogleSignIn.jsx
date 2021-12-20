@@ -72,8 +72,8 @@ function GoogleSignIn ({isAuthenticated, setLoggedIn, setStage, stage, visibilit
         if (!googleUserState)
             setGoogleUserState(jwt.decode(googleUser.credential));
 
-        profileExists(googleUser).then((res) => {
-            if (!res.res.data.length) {
+        profileExists(googleUser).then((response) => {
+            if (!response.res.data.length) {
                 if (!googleUserState)
                     setGoogleUserState(jwt.decode(googleUser.credential));
                 setStage("form");
@@ -106,7 +106,7 @@ function GoogleSignIn ({isAuthenticated, setLoggedIn, setStage, stage, visibilit
                     emailId={googleUserState.email}
                     firstName={googleUserState.name}
                     lastName=""
-                    onSubmit={onSignIn}
+                    onSubmit={setLoggedIn}
                 />
             )
         }
