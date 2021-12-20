@@ -90,15 +90,13 @@ export default class CreateEventModal extends React.Component {
     }
 
     uploadEventDetails() {
-        let eventLink = (eventLink && !eventLink.startsWith("http://") && !eventLink.startsWith("https://")) ? ("https://" +
-            this.state.eventLink) : this.state.eventLink;
-        alert(eventLink)
         axios.post("club/competition/", {
             clubs: [this.props.router.query.clubName],
             name: this.state.name,
             description: this.state.description,
             event_start: this.state.eventDate,
-            link: (eventLink && !eventLink.startsWith("http://") && !eventLink.startsWith("https://"))?("https://"+
+            link: (this.state.eventLink && !this.state.eventLink.startsWith("http://") && !this.state.eventLink
+                .startsWith("https://"))?("https://"+
                 this.state.eventLink):this.state.eventLink,
             promotional_message: this.state.promo,
         }).then((res) => {
@@ -110,7 +108,7 @@ export default class CreateEventModal extends React.Component {
                     closes_at: this.state.registrationDeadlineDate,
                 }).then(()=>this.props.router.push("/event/"+res.data.id));
             else
-                this.props.router.push("/event/"+res.data.id);
+                this.props.router.push("/manageevent/"+res.data.id);
         })
     }
 
