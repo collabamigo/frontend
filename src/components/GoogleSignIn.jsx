@@ -84,13 +84,12 @@ function GoogleSignIn ({isAuthenticated, setLoggedIn, setStage, stage, visibilit
     }
 
 
-    let loggedIn=false;
+    // let loggedIn=false;
     if (typeof window !== "undefined") {
         window.onSignIn = (googleUser) => {
             onSignIn(googleUser);
         };
-        loggedIn = Boolean(localStorage.getItem("encrypted_token"));
-        loggedIn = Boolean(localStorage.getItem("encrypted_token"));
+        // loggedIn = Boolean(localStorage.getItem("encrypted_token"));
     }
     if (visibility) {
 
