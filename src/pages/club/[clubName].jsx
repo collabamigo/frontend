@@ -415,8 +415,8 @@ class ClubHomePage extends Component {
                                 <hr />
 
 
-                                <div className="d-flex">
-                                    <div className={styles.descriptionBox + " col-md-5 col-lg-5 col-sm-6"}>
+                                <div className={styles.mainBox + " row"}>
+                                    <div className={styles.descriptionBox + " col"}>
                                         <div className={styles.descriptionHeading}>
                                             Description
 
@@ -430,14 +430,13 @@ class ClubHomePage extends Component {
 
                                     </div>
 
-                                    <div className="offset-1 col-md-5 col-lg-5 col-sm-9">
+                                    <div className={styles.announcementsBox + " col"}>
                                         <div className={styles.announcementsHeading}>
                                             Announcements
                                             {" "}
-
                                         </div>
 
-                                        <div className="overflow-auto">
+                                        <div className={styles.announcementsBody + " overflow-auto"}>
                                             <ul
                                                 className="list"
                                                 style={{ height: '250px'}}
