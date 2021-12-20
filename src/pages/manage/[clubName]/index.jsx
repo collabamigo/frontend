@@ -18,6 +18,7 @@ import styles from "pages/club/styles.module.scss";
 import Link from "common/Link";
 import lodashMap from "lodash/map";
 import Image from "react-bootstrap/Image";
+import EventTalkCard from "../../../common/HomePageCards/EventTalkCard";
 
 class ClubAdminPage extends Component {
 
@@ -535,7 +536,7 @@ class ClubAdminPage extends Component {
                                             </svg>
                                         </div>
                                     </div>
-                                    
+
 
                                     <Card.Subtitle className={styles.tagline}>
                                         {this.state.basicInformation.tagline}
@@ -611,7 +612,7 @@ class ClubAdminPage extends Component {
                                 </Carousel>
 
                                 <br />
-                                
+
                                 <div className="d-flex">
                                     {this.state.bannerLinks === undefined ? null:
                                     <div className="mx-auto d-flex">
@@ -633,7 +634,7 @@ class ClubAdminPage extends Component {
                                                 onClick={() => this.image1Ref.current.click()}
                                                 type="button"
                                             >
-                                                
+
                                                 {this.bannerControl(this.state.bannerLinks, 0)}
 
 
@@ -656,7 +657,6 @@ class ClubAdminPage extends Component {
                                             <div
                                                 className={"my-auto mx-3" + ((this.state.bannerLinks[1]) ? "" : "-primary")}
                                                 onClick={() => this.image2Ref.current.click()}
-                                                type="button"
                                             >
                                                 {this.bannerControl(this.state.bannerLinks, 1)}
                                             </div>
@@ -693,14 +693,14 @@ class ClubAdminPage extends Component {
                                         ref={this.image1Ref}
                                         type="file"
                                     />
-                                    
+
                                     <input
                                         className="d-none"
                                         onChange={(e)=>this.handleUpload2(e.target.files[0])}
                                         ref={this.image2Ref}
                                         type="file"
                                     />
-                                    
+
                                     <input
                                         className="d-none"
                                         onChange={(e)=>this.handleUpload3(e.target.files[0])}
@@ -741,7 +741,7 @@ class ClubAdminPage extends Component {
                                 <div className={styles.mainBox + " row"}>
                                     <div className={styles.descriptionBox + " col"}>
                                         <div className={styles.descriptionHeading + " row d-flex justify-content-around"}>
-                                            
+
                                             <span className="col-9 h2 align-self-start">
                                                 Description
 
@@ -772,7 +772,7 @@ class ClubAdminPage extends Component {
 
                                         </div>
 
-                                        
+
 
                                         <p className={styles.description}>
                                             {this.state.basicInformation.description}
@@ -817,7 +817,7 @@ class ClubAdminPage extends Component {
                                             />
                                         </div>
 
-                                        
+
 
                                         <div className={styles.announcementsBody + " overflow-auto"}>
                                             <ul
@@ -900,12 +900,11 @@ class ClubAdminPage extends Component {
                             <Card.Text className="card-text h5 col-12">
                                 <div>
                                     <RCarousel responsive={responsive}>
-                                        {this.state.competitions.map((option, index) => (
-                                            <ClubCard
-                                                Type="Event"
+                                        {this.state.competitions.map((option) => (
+                                            <EventTalkCard
                                                 element={option}
                                                 key={option.description}
-                                                value={index}
+                                                manage
                                             />
                                         ))}
                                     </RCarousel>
