@@ -1,14 +1,38 @@
-import React from 'react'
+import React, {useEffect, useState} from "react"
+// import {useRouter} from 'next/router'
 import Card from 'react-bootstrap/Card'
 import PropTypes from "prop-types";
 import {SvgIcon} from "common/SvgIcon";
+import {getStorage, ref, getDownloadURL} from "firebase/storage";
 import {truncate} from "utilities";
+// import isEmpty from "lodash/isEmpty";
 import Link from "common/Link";
+import axios from "utilities/axios";
 
 import styles from "./EventTalkCard.module.css";
 import ReactMarkdown from "react-markdown";
 
 export default function EventTalkCard(props) {
+
+    const [imagelink, setimagelink] = useState(undefined);
+
+    useEffect(() => {
+        if (imagelink === undefined){
+                axios.get(`club/competition/${props.element.id}/`)
+                .then(res => {
+                                const storage = getStorage();
+                                if((JSON.parse(res.data.image_links))[0])
+                                {
+                                    getDownloadURL(ref(storage, (JSON.parse(res.data.image_links))[0])).then(
+                                        link =>   setimagelink(link)
+                                    )
+                                }
+                                else{
+                                    setimagelink("https://via.placeholder.com/350x200")
+                                }
+                            })
+                        }
+            })
 
     // var dates = new Date(props.element.event_end);
     // var finals = ((dates.getMonth() + 1) + '/' + dates.getDate() + '/' +  dates.getFullYear());
@@ -24,7 +48,7 @@ export default function EventTalkCard(props) {
                 <Card className="h-100">
                     <Card.Img
                         className={styles.image}
-                        src="https://via.placeholder.com/350x200"
+                        src={imagelink ? imagelink : "https://via.placeholder.com/350x200"}
                         variant="top"
                     />
 
@@ -60,10 +84,14 @@ export default function EventTalkCard(props) {
                                 width="15px"
                             />
 
+
                             <p className={styles.text2}>
                                 .
 
-                                Fill before
+                                Fill before 
+                                {' '}
+
+                                
 
                                 {finale}
                             </p>
