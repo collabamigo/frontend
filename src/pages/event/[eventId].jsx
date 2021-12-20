@@ -18,17 +18,11 @@ import GenerateEventForm from "../../components/GenerateEventForm";
 import ReactMarkdown from 'react-markdown'
 import {
     FacebookShareButton,
-    FacebookIcon,
     EmailShareButton,
-    EmailIcon,
     WhatsappShareButton,
-    WhatsappIcon,
     TwitterShareButton,
-    TwitterIcon,
     LinkedinShareButton,
-    LinkedinIcon,
     TelegramShareButton,
-    TelegramIcon,
   } from "react-share";
 export default function Event() {
     const router = useRouter()
@@ -163,6 +157,28 @@ export default function Event() {
                         <div>
 
                             <div className="">
+
+                                <p className=" text-primary">
+                                    <SvgIcon
+                                        className={{Fill: 'blue'}}
+                                        height="20px"
+                                        src="organization.svg"
+                                        width="20px"
+                                    />
+
+                                    {' '}
+
+                                    {data.event.clubs.map(item => (
+                                        <span key={item}>
+                                            {item}
+
+                                            {data.event.clubs.length >1 ? ", " : null}
+
+                                            {' '}
+                                        </span>
+                                    ))}
+                                </p>
+
                                 <p className=" text-primary">
 
                                     <FontAwesomeIcon icon={faCalendar} />
@@ -170,8 +186,11 @@ export default function Event() {
                                     {' '}
 
                                     {convertToDatetimeString(event.event_start) +
-                                        (event.event_end?" to "+ convertToDatetimeString(event.event_end):"")}
+    (event.event_end?" to "+ convertToDatetimeString(event.event_end):"")}
                                 </p>
+
+
+                               
 
                                 <p className=" text-primary">
                                     <FontAwesomeIcon icon={faMapMarkerAlt} />
