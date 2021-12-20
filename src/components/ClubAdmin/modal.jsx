@@ -16,7 +16,7 @@ export default function ClubAdminModal({show, handleClose, labels, initialValues
                 <div className="bg-dark  text-white rounded-3">
                     <Modal.Header>
                         <Modal.Title>
-                            Generic title
+                            Edit Details
                         </Modal.Title>
                     </Modal.Header>
 

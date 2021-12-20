@@ -301,11 +301,14 @@ class ClubAdminPage extends Component {
                     ...prevState,
                     basicInformation: {
                         ...(prevState.basicInformation),
-                        facebook: values[0],
-                        instagram: values[1],
-                        linkedin: values[2],
-                        website: values[3],
-                        tagline: values[4]
+                        linkedin:values[0],
+                        facebook:values[1],
+                        discord:values[2],
+                        github:values[3],
+                        mail:values[4],
+                        telegram:values[5],
+                        other:values[6],
+                        tagline:values[7]
                     }
                 })
         })
@@ -488,12 +491,16 @@ class ClubAdminPage extends Component {
                                 <ClubAdminModal
                                     handleClose={this.handleCloseModal.bind(this)}
                                     handleSubmit={this.handleSubmitPanel.bind(this)}
-                                    initialValues={[this.state.basicInformation.facebook,
-                                    this.state.basicInformation.instagram,
-                                    this.state.basicInformation.linkedin,
-                                    this.state.basicInformation.website,
-                                    this.state.basicInformation.tagline]}
-                                    labels={['Facebook','Instagram','LinkedIn','Other website','Enter Your Clubs Catchphrase ']}
+                                    initialValues={[this.state.basicInformation.instagram,
+                                        this.state.basicInformation.linkedin,
+                                        this.state.basicInformation.facebook,
+                                        this.state.basicInformation.discord,
+                                        this.state.basicInformation.github,
+                                        this.state.basicInformation.mail,
+                                        this.state.basicInformation.telegram,
+                                        this.state.basicInformation.other,
+                                        this.state.basicInformation.tagline]}
+                                    labels={['Instagram','LinkedIn','Facebook','Discord','GitHub','Mail address','Telegram','Other website','Enter Your Clubs Tagline']}
                                     show={this.state.currentModal === 'panel'}
                                 />
 
