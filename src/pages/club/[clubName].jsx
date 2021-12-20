@@ -9,9 +9,9 @@ import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
 import RCarousel from "react-multi-carousel";
-import ClubCard from "components/ClubList/ClubCard";
 import "react-multi-carousel/lib/styles.css";
 import {getDownloadURL, getStorage, ref} from "firebase/storage";
+import EventTalkCard from "../../common/HomePageCards/EventTalkCard";
 import styles from "./styles.module.scss";
 import Loading from "components/Loading";
 import isEmpty from "lodash/isEmpty";
@@ -496,12 +496,10 @@ class ClubHomePage extends Component {
                             <Card.Text className="card-text h5 col-12">
                                 <div>
                                     <RCarousel responsive={responsive}>
-                                        {this.state.competitions.map((option, index) => (
-                                            <ClubCard
-                                                Type="Event"
+                                        {this.state.competitions.map((option) => (
+                                            <EventTalkCard
                                                 element={option}
                                                 key={option.description}
-                                                value={index}
                                             />
                                         ))}
 

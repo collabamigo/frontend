@@ -6,7 +6,13 @@ import {createContext} from "react";
 
 export const isBrowser = () => typeof window !== "undefined"
 
-export const setLoggedOut = ()  => {}
+export const setLoggedOut = () => {
+    if (isBrowser()) {
+        localStorage.clear()
+        sessionStorage.clear()
+    }
+    window.location.href="/"
+}
 
 export const checkLoginStatus = ()  => {}
 

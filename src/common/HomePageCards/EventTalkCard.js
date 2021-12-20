@@ -45,7 +45,7 @@ export default function EventTalkCard(props) {
         <div className={styles.cardCenter + " h-100"}>
             <Link
                 className="reset-a"
-                to={"/event/" + props.element.id}
+                to={"/"+(props.manage?"manage":"")+"event/" + props.element.id}
             >
                 <Card className="h-100">
                     <Card.Img
@@ -63,10 +63,9 @@ export default function EventTalkCard(props) {
                             {props.element.clubs.map((val) => {
                             return (
                                 <span key={val}>
-                                    {val}
+                                    {val+" "}
                                 </span>
                             );
-
                         })}
                         </Card.Subtitle>
 
@@ -90,10 +89,10 @@ export default function EventTalkCard(props) {
                             <p className={styles.text2}>
                                 .
 
-                                Fill before 
+                                Fill before
                                 {' '}
 
-                                
+
 
                                 {finale}
                             </p>
@@ -110,7 +109,7 @@ export default function EventTalkCard(props) {
 EventTalkCard.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     element: PropTypes.object,
-
+    manage: PropTypes.bool,
 }
 
 EventTalkCard.defaultProps = {
@@ -120,5 +119,7 @@ EventTalkCard.defaultProps = {
         subtitle: "Event subtitle",
         description: "Event descriptiontext comes here",
         footer: "Event footer",
-    }
+    },
+    manage: false,
+
 }
