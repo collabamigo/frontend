@@ -616,6 +616,18 @@ class ClubAdminPage extends Component {
                                     {this.state.bannerLinks === undefined ? null:
                                     <div className="mx-auto d-flex">
                                         <div className="d-flex">
+                                            {this.state.bannerLinks[0]?
+                                                <div>
+                                                    <span>
+                                                        <SvgIcon
+                                                            className="align-content-end"
+                                                            height="20px"
+                                                            src="cross.svg"
+                                                            width="20px"
+                                                        />
+                                                    </span>
+                                                </div>: null}
+
                                             <div
                                                 className={"my-auto mx-3 " + ((this.state.bannerLinks[0]) ? "" : "-primary")}
                                                 onClick={() => this.image1Ref.current.click()}
@@ -624,67 +636,51 @@ class ClubAdminPage extends Component {
                                                 
                                                 {this.bannerControl(this.state.bannerLinks, 0)}
 
-                                                {this.state.bannerLinks[0]?
-                                                    <div>
-                                                        <span>
-                                                            <SvgIcon
-                                                                className="align-content-end"
-                                                                height="20px"
-                                                                src="cross.svg"
-                                                                width="20px"
-                                                            />
-                                                        </span>
-                                                    </div>: null}
 
                                             </div>
                                         </div>
 
                                         <div className="d-flex">
+                                            {this.state.bannerLinks[1]?
+                                                <div>
+                                                    <span>
+                                                        <SvgIcon
+                                                            className="align-content-end"
+                                                            height="20px"
+                                                            src="cross.svg"
+                                                            width="20px"
+                                                        />
+                                                    </span>
+                                                </div>: null}
+
                                             <div
                                                 className={"my-auto mx-3" + ((this.state.bannerLinks[1]) ? "" : "-primary")}
                                                 onClick={() => this.image2Ref.current.click()}
                                                 type="button"
                                             >
                                                 {this.bannerControl(this.state.bannerLinks, 1)}
-
-
-                                                {this.state.bannerLinks[1]?
-                                                    <div>
-                                                        <span>
-                                                            <SvgIcon
-                                                                className="align-content-end"
-                                                                height="20px"
-                                                                src="cross.svg"
-                                                                width="20px"
-                                                            />
-                                                        </span>
-                                                    </div>: null}
-
                                             </div>
                                         </div>
 
                                         <div className="d-flex">
+                                            {this.state.bannerLinks[2]?
+                                                <div>
+                                                    <span>
+                                                        <SvgIcon
+                                                            className="align-content-end"
+                                                            height="20px"
+                                                            src="cross.svg"
+                                                            width="20px"
+                                                        />
+                                                    </span>
+                                                </div>: null}
+
                                             <div
                                                 className={"my-auto mx-3 " + ((this.state.bannerLinks[2]) ? "" : "-primary")}
                                                 onClick={() => this.image3Ref.current.click()}
                                                 type="button"
                                             >
                                                 {this.bannerControl(this.state.bannerLinks, 2)}
-
-
-                                                {this.state.bannerLinks[2]?
-                                                    <div>
-                                                        <span>
-                                                            <SvgIcon
-                                                                className="align-content-end"
-                                                                height="20px"
-                                                                src="cross.svg"
-                                                                width="20px"
-                                                            />
-                                                        </span>
-                                                    </div>: null}
-
-
                                             </div>
                                         </div>
                                     </div>}
