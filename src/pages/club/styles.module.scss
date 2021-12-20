@@ -38,6 +38,7 @@
 
 .description {
     font-size: 18px;
+    width: 33em;
 }
 
 .notifications {
@@ -53,9 +54,6 @@
     width: 33em;
 }
 
-.bannerImage {
-    max-height: 16rem;
-}
 @media (max-width: 800px) {
 
     .clubcard{
