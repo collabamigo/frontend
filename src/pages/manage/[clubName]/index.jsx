@@ -354,6 +354,7 @@ class ClubAdminPage extends Component {
                 picture: JSON.stringify(arr)
             }
             axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
+            this.setState({bannerLink:null})
 
         })
              .catch(() => {console.log("error occured uploading")});
@@ -376,7 +377,7 @@ class ClubAdminPage extends Component {
                 picture: JSON.stringify(arr)
             }
             axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-
+            this.setState({bannerLink:null})
         })
              .catch(() => {console.log("error occured uploading")});
     }
@@ -397,7 +398,7 @@ class ClubAdminPage extends Component {
                 picture: JSON.stringify(arr)
             }
             axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-
+            this.setState({bannerLink:null})
         })
              .catch(() => {console.log("error occured uploading")});
     }
