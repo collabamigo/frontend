@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -16,8 +15,7 @@ export default class AuthenticatedHome extends React.Component {
         this.state = {
             clubList: [],
             eventList: [],
-            // eslint-disable-next-line react/no-unused-state
-            talkList: [],
+            // talkList: [],
         };
     }
 
@@ -120,10 +118,10 @@ export default class AuthenticatedHome extends React.Component {
                         <div className={styles.secondsectionMiddle}>
                             <Carousel responsive={responsive}>
 
-                                {this.state.eventList.map((option, index) => (
+                                {this.state.eventList.map((option) => (
                                     <EventTalkCard
                                         element={option}
-                                        key={index}
+                                        key={option}
                                     />
                                     ))}
 
@@ -151,9 +149,9 @@ export default class AuthenticatedHome extends React.Component {
                     <div className={styles.thirdsectionMiddle}>
                         <Carousel responsive={responsive2}>
 
-                            {this.state.clubList.map((option, index) => (
+                            {this.state.clubList.map((option) => (
                                 <ClubCard
-                                    key={index}
+                                    key={option.username}
                                     value={option}
                                 />
                                         ))}
