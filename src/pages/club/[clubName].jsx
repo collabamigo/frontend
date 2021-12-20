@@ -1,7 +1,9 @@
+import lodashMap from "lodash/map";
 import React, {Component} from 'react';
 import Card from 'react-bootstrap/Card'
 import BCarousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
+import Image from "react-bootstrap/Image";
 import axios from "utilities/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
@@ -88,8 +90,8 @@ class ClubHomePage extends Component {
                         }))
                     })
                 })}
-             
-            
+
+
             }
         }
     }
@@ -313,7 +315,6 @@ class ClubHomePage extends Component {
                             className="pt-2"
                             style={{ width: '18rem' }}
                         >
-
                             <Card.Img
                                 src={this.state.logoUrl}
                                 variant="top"
@@ -379,57 +380,18 @@ class ClubHomePage extends Component {
                                         />
                                     }
                                 >
-                                    { this.state.bannerLinks[0] ? 
-                                        <BCarousel.Item>
-                                            <img
-                                                alt="First slide"
-                                                className="d-block w-100"
-                                                src={this.state.bannerLinks[0] ?  this.state.bannerLinks[0] : "https://via.placeholder.com/350x200"}
-                                            />
-
-                                            <BCarousel.Caption>
-
-                                                <p>
-                                                    Nulla vitae elit libero, a pharetra augue mollis interdum.
-                                                </p>
-                                            </BCarousel.Caption>
-                                        </BCarousel.Item> 
-                                    : null }
-
-                                    { this.state.bannerLinks[1] ? 
-
-                                        <BCarousel.Item>
-                                            <img
-                                                alt="Second slide"
-                                                className="d-block w-100"
-                                                src={this.state.bannerLinks[1] ?  this.state.bannerLinks[1] : "https://via.placeholder.com/350x200"}
-                                            />
-
-                                            <BCarousel.Caption>
-
-                                                <p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                </p>
-                                            </BCarousel.Caption>
-                                        </BCarousel.Item>
-                                    : null }
-
-                                    { this.state.bannerLinks[2] ? 
-                                        <BCarousel.Item>
-                                            <img
-                                                alt="Third slide"
-                                                className="d-block w-100"
-                                                src={this.state.bannerLinks[2] ?  this.state.bannerLinks[2] : "https://via.placeholder.com/350x200"}
-                                            />
-
-                                            <BCarousel.Caption>
-
-                                                <p>
-                                                    Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                                                </p>
-                                            </BCarousel.Caption>
-                                        </BCarousel.Item>
-                                    : null }
+                                    {lodashMap(this.state.bannerLinks, link =>
+                                        (
+                                            <BCarousel.Item key={link}>
+                                                <Image
+                                                    alt="First slide"
+                                                    className={"d-block w-100 "+styles.bannerImage}
+                                                    fluid
+                                                    rounded
+                                                    src={link}
+                                                />
+                                            </BCarousel.Item>)
+                                    )}
                                 </BCarousel>
 
                                 <br />

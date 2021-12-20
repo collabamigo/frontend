@@ -2,7 +2,7 @@
 
 .clubcard {
     position: fixed;
-    padding-left: 2em;
+    margin-left: 2em;
 }
 
 .edit{
@@ -38,7 +38,6 @@
 
 .description {
     font-size: 18px;
-    width: 33em;
 }
 
 .notifications {
@@ -58,7 +57,7 @@
 
     .clubcard{
         position: relative;
-        margin: 0em 1em 1em 0em;
+        margin: 0 2rem 2rem;
     }
 
     .coordinators, .memberSize {
