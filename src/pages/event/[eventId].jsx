@@ -9,6 +9,8 @@ import FAQModal from "components/faq/FAQModal";
 import {getStorage, ref, getDownloadURL} from "firebase/storage";
 import {useRouter} from 'next/router'
 import axios from "utilities/axios";
+import {SvgIcon} from "common/SvgIcon";
+
 import Loading from "components/Loading";
 import isEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
@@ -245,9 +247,10 @@ export default function Event() {
                                 title="fullTitle"
                                 url="https://www.instagram.com/p/CV0DFwMpRXg/"
                             >
-                                <FacebookIcon
-                                    round
-                                    size="32"
+                                <SvgIcon
+                                    height="20px"
+                                    src="facebook.svg"
+                                    width="20px"
                                 />
                             </FacebookShareButton>
 
@@ -256,9 +259,10 @@ export default function Event() {
                                 openShareDialogOnClick
                                 url="https://www.instagram.com/p/CV0DFwMpRXg/"
                             >
-                                <EmailIcon
-                                    round
-                                    size="32"
+                                <SvgIcon
+                                    height="20px"
+                                    src="mail.svg"
+                                    width="20px"
                                 />
                             </EmailShareButton>
 
@@ -268,9 +272,10 @@ export default function Event() {
                                 title="CampersTribe - World is yours to explore"
                                 url="http://www.camperstribe.com"
                             >
-                                <WhatsappIcon
-                                    round
-                                    size={36}
+                                <SvgIcon
+                                    height="20px"
+                                    src="whatsapp.svg"
+                                    width="20px"
                                 />
                             </WhatsappShareButton>
 
@@ -278,9 +283,10 @@ export default function Event() {
                                 title="fullTitle"
                                 url="http://www.camperstribe.com"
                             >
-                                <TwitterIcon
-                                    round
-                                    size={32}
+                                <SvgIcon
+                                    height="20px"
+                                    src="twitter.svg"
+                                    width="20px"
                                 />
                             </TwitterShareButton>
 
@@ -289,9 +295,10 @@ export default function Event() {
                                 title="fullTitle"
                                 url="http://www.camperstribe.com"
                             >
-                                <TelegramIcon
-                                    round
-                                    size={32}
+                                <SvgIcon
+                                    height="20px"
+                                    src="telegram.svg"
+                                    width="20px"
                                 />
                             </TelegramShareButton>
 
@@ -299,9 +306,10 @@ export default function Event() {
                                 title="fullTitle"
                                 url="http://www.camperstribe.com"
                             >
-                                <LinkedinIcon
-                                    round
-                                    size={32}
+                                <SvgIcon
+                                    height="20px"
+                                    src="linkedin.svg"
+                                    width="20px"
                                 />
                             </LinkedinShareButton>
                         </div>
