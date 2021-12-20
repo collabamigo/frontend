@@ -868,12 +868,13 @@ class ClubAdminPage extends Component {
 
                     <Card className={styles.leftCard2}>
                         <Card.Body className="mt-3">
-                            <div className="d-flex justify-content-between ">
-                                <Card.Title className="card-title fs-2 header-color text-left">
-                                    Events
+                            <div className="d-flex justify-content-between col-2 ">
+                                <Card.Title className="card-title header-color text-left ">
+                                    <h2>
+                                        Events
 
-                                    {" "}
-
+                                        {" "}
+                                    </h2>
                                 </Card.Title>
 
                                 <Link
@@ -883,8 +884,8 @@ class ClubAdminPage extends Component {
                                     <svg
                                         clipRule="evenodd"
                                         fillRule="evenodd"
-                                        height="34"
-                                        width="34"
+                                        height="24"
+                                        width="24"
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
                                         <path d="M20 15h4.071v2h-4.071v4.071h-2v-4.071h-4.071v-2h4.071v-4.071h2v4.071zm-8 6h-12v-2h12v2zm0-4.024h-12v-2h12v2zm0-3.976h-12v-2h12v2zm12-4h-24v-2h24v2zm0-4h-24v-2h24v2z" />
