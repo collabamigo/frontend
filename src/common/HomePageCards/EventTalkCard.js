@@ -3,6 +3,8 @@ import Card from 'react-bootstrap/Card'
 import PropTypes from "prop-types";
 import {SvgIcon} from "common/SvgIcon";
 import {truncate} from "utilities";
+import Link from "common/Link";
+
 import styles from "./EventTalkCard.module.css";
 import ReactMarkdown from "react-markdown";
 
@@ -14,20 +16,25 @@ export default function EventTalkCard(props) {
     var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' +  datee.getFullYear());
 
     return (
-        <Card className={styles.cardCenter  + " h-100"}>
-            <Card.Img
-                className={styles.image}
-                src="https://via.placeholder.com/350x200"
-                variant="top"
-            />
+        <div className={styles.cardCenter + " h-100"}>
+            <Link
+                className="reset-a"
+                to={"/event/" + props.element.id}
+            >
+                <Card className="h-100">
+                    <Card.Img
+                        className={styles.image}
+                        src="https://via.placeholder.com/350x200"
+                        variant="top"
+                    />
 
-            <Card.Body className={styles.cardinner}>
-                <Card.Title className=" text-primary fw-bold">
-                    {props.element.name}
-                </Card.Title>
+                    <Card.Body className={styles.cardinner}>
+                        <Card.Title className=" text-primary fw-bold">
+                            {props.element.name}
+                        </Card.Title>
 
-                <Card.Subtitle className="mb-2 text-muted">
-                    {props.element.clubs.map((val) => {
+                        <Card.Subtitle className="mb-2 text-muted">
+                            {props.element.clubs.map((val) => {
                             return (
                                 <span key={val}>
                                     {val}
@@ -35,35 +42,37 @@ export default function EventTalkCard(props) {
                             );
 
                         })}
-                </Card.Subtitle>
+                        </Card.Subtitle>
 
 
-                <Card.Text className={styles.text}>
-                    <ReactMarkdown>
-                        {truncate(props.element.description, 80)}
-                    </ReactMarkdown>
-                </Card.Text>
+                        <Card.Text className={styles.text}>
+                            <ReactMarkdown>
+                                {truncate(props.element.description, 80)}
+                            </ReactMarkdown>
+                        </Card.Text>
 
-                <br />
+                        <br />
 
-                <Card.Subtitle className={styles.bottom + " d-flex text-muted "}>
-                    <SvgIcon
-                        height="15px"
-                        src="calendar_datee.svg"
-                        width="15px"
-                    />
+                        <Card.Subtitle className={styles.bottom + " d-flex text-muted "}>
+                            <SvgIcon
+                                height="15px"
+                                src="calendar_datee.svg"
+                                width="15px"
+                            />
 
-                    <p className={styles.text2}>
-                        .
+                            <p className={styles.text2}>
+                                .
 
-                        Fill before
+                                Fill before
 
-                        {finale}
-                    </p>
-                </Card.Subtitle>
+                                {finale}
+                            </p>
+                        </Card.Subtitle>
 
-            </Card.Body>
-        </Card>
+                    </Card.Body>
+                </Card>
+            </Link>
+        </div>
     )
 }
 
