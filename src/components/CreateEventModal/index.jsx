@@ -9,7 +9,7 @@ import Loading from "../Loading";
 import AdditionalFields from "./AdditionalFields";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {isBrowser} from "../../utilities/auth";
+// import {isBrowser} from "../../utilities/auth";
 import FormBuilder from "./FormBuilder";
 import TextEditor from "components/TextEditor";
 
