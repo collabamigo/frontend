@@ -1,64 +1,74 @@
-import { Form } from 'formik';
-import React from 'react';
-import { Modal } from 'react-bootstrap';
+import { Form, Formik, Field } from "formik";
+import React from "react";
+import { Modal } from "react-bootstrap";
 
-export default function Faq () {
-  return (
-      <Modal
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          onHide={() => { }}
-          show
-          size="lg"
-      >
-          <Modal.Header closeButton>
-              <Modal.Title id="contained-modal-title-vcenter">
-                  FAQ
-              </Modal.Title>
-          </Modal.Header>
+export default function Faq() {
+    return (
+        <Modal
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            onHide={() => {}}
+            show
+            size="lg"
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    FAQ
+                </Modal.Title>
+            </Modal.Header>
 
-          <Modal.Body>
-              <Form
-                  initialValues={{
-                      question: 'Question Here...',
-                      answer: 'Answer Here...',
-                  }}
-                //   onSubmit={() => { }}
-              >
-                  <div className="form-group">
-                      <label htmlFor="question">
-                          Question
-                      </label>
+            <Modal.Body>
+                <Formik
+                    initialValues={{
+                        question: "",
+                        answer: "",
+                    }}
+                    onSubmit={(values, { setSubmitting }) => {
+                        setTimeout(() => {
+                            alert(JSON.stringify(values, null, 2));
+                            setSubmitting(false);
+                        }, 500);
+                    }}
+                >
+                    {({ isSubmitting }) => (
+                        <Form>
+                            <div className="form-group">
+                                <label htmlFor="question">
+                                    Question
+                                </label>
 
-                      <input
-                          className="form-control"
-                          id="question"
-                          placeholder="Question"
-                          type="text"
-                      />
-                  </div>
+                                <Field
+                                    className="form-control"
+                                    id="question"
+                                    name="question"
+                                    type="text"
+                                />
+                            </div>
 
-                  <div className="form-group">
-                      <label htmlFor="answer">
-                          Answer
-                      </label>
+                            <div className="form-group">
+                                <label htmlFor="answer">
+                                    Answer
+                                </label>
 
-                      <input
-                          className="form-control"
-                          id="answer"
-                          placeholder="Answer"
-                          type="text"
-                      />
-                  </div>
+                                <Field
+                                    className="form-control"
+                                    id="answer"
+                                    name="answer"
+                                    type="text"
+                                />
+                            </div>
 
-                  <button
-                      className="btn btn-primary"
-                      type="submit"
-                  >
-                      Submit
-                  </button>
-              </Form>
-          </Modal.Body>
-      </Modal>
-  );
+                            <button
+                                className="btn btn-primary mt-3"
+                                disabled={isSubmitting}
+                                type="submit"
+                            >
+                                Submit
+                            </button>
+                        </Form>
+                    )}
+                </Formik>
+            </Modal.Body>
+        </Modal>
+    );
 }
