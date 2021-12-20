@@ -46,7 +46,7 @@ function Footer() {
                           </li>
 
                           <li>
-                              <a href="http://scanfcode.com/contribute-at-scanfcode/">
+                              <a href="https://github.com/watson-hex/frontend-collabamigo/blob/testing/CONTRIBUTING.md">
                                   Contribute
                               </a>
                           </li>
@@ -66,7 +66,7 @@ function Footer() {
 
                       <ul className={styles.footer_links}>
                           <li>
-                              <a href="http://scanfcode.com/about/">
+                              <a href="/about/">
                                   About Us
                               </a>
                           </li>
