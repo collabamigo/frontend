@@ -201,7 +201,7 @@ export default function Event() {
                                         size="lg"
                                         variant="outline-primary"
                                     >
-                                        Links
+                                        Join meet
                                     </Button>
                                 </a>
                             </div>

@@ -5,6 +5,7 @@ import {Modal} from "react-bootstrap";
 import {Form, Formik, Field} from "formik";
 import Button from "react-bootstrap/Button";
 import axios from "../../utilities/axios";
+import Loading from "../Loading";
 import AdditionalFields from "./AdditionalFields";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -15,7 +16,13 @@ import TextEditor from "components/TextEditor";
 export default class CreateEventModal extends React.Component {
 
     static propTypes = {
-        clubName: PropTypes.string.isRequired,
+        router: PropTypes.shape({
+            isReady: PropTypes.bool.isRequired,
+            push: PropTypes.func.isRequired,
+            query: PropTypes.shape({
+                clubName: PropTypes.string.isRequired
+            })
+        }).isRequired,
     }
 
     constructor(props) {
@@ -30,6 +37,7 @@ export default class CreateEventModal extends React.Component {
             name: "",
             description: "",
             eventDate: "",
+            eventLink: null,
             formBuilder: {
                 1: [],
                 2: {
@@ -49,10 +57,14 @@ export default class CreateEventModal extends React.Component {
                 2: false,
                 3: false,
             },
-
+            promo: null,
             registrationDeadlineDate: "",
             registrationStartDate: yyyy+"-"+mm+"-"+dd,
         }
+    }
+
+    componentDidMount() {
+        this.componentDidUpdate()
     }
 
 
@@ -60,27 +72,46 @@ export default class CreateEventModal extends React.Component {
         return true;
     }
 
+    componentDidUpdate() {
+        if (this.props.router.isReady) {
+            if (this.state.promo === null) {
+                console.log("promo is null");
+                // suppression needed
+                // eslint-disable-next-line react/no-did-update-set-state
+                this.setState({
+                    promo: `Hello everyone. ${this.props.router.query.clubName} presents to you a new event! Check it out at <<link>>!`
+                })
+            }
+        }
+    }
+
     setFormBuilderState(formBuilder){
         this.setState({formBuilder: formBuilder});
     }
 
     uploadEventDetails() {
+        let eventLink = (eventLink && !eventLink.startsWith("http://") && !eventLink.startsWith("https://")) ? ("https://" +
+            this.state.eventLink) : this.state.eventLink;
+        alert(eventLink)
         axios.post("club/competition/", {
-            clubs: [this.props.clubName],
+            clubs: [this.props.router.query.clubName],
             name: this.state.name,
             description: this.state.description,
             event_start: this.state.eventDate,
+            link: (eventLink && !eventLink.startsWith("http://") && !eventLink.startsWith("https://"))?("https://"+
+                this.state.eventLink):this.state.eventLink,
+            promotional_message: this.state.promo,
         }).then((res) => {
-            axios.post("form/form/", {
-                skeleton: JSON.stringify(this.state.formBuilder[1]),
-                competition: res.data.id,
-                opens_at: this.state.registrationStartDate,
-                closes_at: this.state.registrationDeadlineDate,
-            })
+            if (this.state.isFormConnected)
+                axios.post("form/form/", {
+                    skeleton: JSON.stringify(this.state.formBuilder[1]),
+                    competition: res.data.id,
+                    opens_at: this.state.registrationStartDate,
+                    closes_at: this.state.registrationDeadlineDate,
+                }).then(()=>this.props.router.push("/event/"+res.data.id));
+            else
+                this.props.router.push("/event/"+res.data.id);
         })
-
-
-
     }
 
     setDescription(description){
@@ -88,11 +119,10 @@ export default class CreateEventModal extends React.Component {
     }
 
     render() {
-        if (isBrowser())
-            console.log(window.JSON.stringify(this.state.formBuilder[1]));
+        const isReady = this.state.promo!==null;
 
-        if (this.state.stage === null) {
-            return <div />
+        if (this.state.stage === null || !isReady) {
+            return <Loading />
         }
         else {
             return (
@@ -137,12 +167,17 @@ export default class CreateEventModal extends React.Component {
                                             name: this.state.name,
                                             description: this.state.description,
                                             eventDate: this.state.eventDate,
+                                            eventLink: this.state.eventLink,
                                             isFormConnected: this.state.isFormConnected,
+                                            promo: this.state.promo,
                                             registrationDeadlineDate: this.state.registrationDeadlineDate,
                                             registrationStartDate: this.state.registrationStartDate,
                                         }}
                                         onSubmit={(values) => {
-                                            this.setState({...values, stage: 2})
+                                            if (values.isFormConnected)
+                                                this.setState({...values, stage: 2})
+                                            else
+                                                this.setState({...values}, this.uploadEventDetails.bind(this))
                                         }}
                                     >
                                         <Form className="justify-content-center mt-3">
@@ -203,6 +238,41 @@ export default class CreateEventModal extends React.Component {
                                                     required
                                                     type="datetime-local"
                                                 />
+                                            </div>
+
+                                            <div className="mb-3 align-middle">
+                                                <label
+                                                    className="me-2 fs-5"
+                                                    htmlFor="eventLink"
+                                                >
+                                                    Event link (Zoom/Google Meet/etc)
+                                                </label>
+
+                                                <Field
+                                                    className="form-control text-input w-100 bg-secondary text-white border-secondary border-1"
+                                                    id="eventLink"
+                                                    name="eventLink"
+                                                    required
+                                                />
+
+                                            </div>
+
+                                            <div className="mb-3 align-middle">
+                                                <label
+                                                    className="me-2 fs-5"
+                                                    htmlFor="promo"
+                                                >
+                                                    Promotional message
+                                                </label>
+
+                                                <Field
+                                                    as="textarea"
+                                                    className="form-control text-input w-100 bg-secondary text-white border-secondary"
+                                                    id="promo"
+                                                    name="promo"
+                                                    required
+                                                />
+
                                             </div>
 
                                             <div className="mb-3">
