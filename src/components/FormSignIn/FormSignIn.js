@@ -4,7 +4,7 @@ import axios from "utilities/axios";
 import PropTypes from "prop-types";
 import backend from "../../env";
 import Loading from "components/Loading";
-import {Button, Modal} from "react-bootstrap";
+import {Modal} from "react-bootstrap";
 import Form from 'react-bootstrap/Form'
 
 class FormSignIn extends React.Component {
