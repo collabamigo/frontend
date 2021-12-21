@@ -55,7 +55,7 @@ class ClubAdminPage extends Component {
             bannerLinks:undefined,
             bannerPaths :undefined,
             logoUrl:null,
-            }
+        }
     }
 
     componentDidMount() {
@@ -279,7 +279,7 @@ class ClubAdminPage extends Component {
     }
 
     handleSubmitAnnouncements(values){
-        axios.post("club/announcements/",{
+        axios.patch("club/announcements/",{
             club: this.props.router.query.clubName,
             content: values[0]
         }).then((ress) => {
@@ -313,6 +313,18 @@ class ClubAdminPage extends Component {
                 })
         })
         this.handleCloseModal()
+        const payload = {
+            linkedin:   this.state.basicInformation.linkedin,
+            facebook:   this.state.basicInformation.facebook,
+            discord:    this.state.basicInformation.discord,
+            github:     this.state.basicInformation.github,
+            mail:       this.state.basicInformation.mail,
+            telegram:   this.state.basicInformation.telegram,
+            other:      this.state.basicInformation.other,
+            tagline:    this.state.basicInformation.tagline,
+        }
+        axios.patch("club/club/"+ this.props.router.query.clubName +"/" ,payload)
+            .then(() => this.setState(payload))
     }
 
     bannerControl(args,num) {
@@ -618,7 +630,7 @@ class ClubAdminPage extends Component {
                                         <div className="d-flex">
                                             {this.state.bannerLinks[0]?
                                                 <div>
-                                                    <div onClick={this.deletePic()}>
+                                                    <div>
                                                         <SvgIcon
                                                             className="align-content-end"
                                                             height="20px"
