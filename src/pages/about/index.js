@@ -430,7 +430,7 @@ class AboutUs extends React.Component {
                                     <div className="col-md-11">
                                         <img
                                             className="img-fluid rounded-circle"
-                                            src="/img/jpg/gonna.jpg"
+                                            src="/img/jpg/let_you.jpg"
                                         />
                                     </div>
 
