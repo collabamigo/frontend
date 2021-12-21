@@ -72,7 +72,7 @@ export default function EventTalkCard(props) {
 
                         <Card.Text className={styles.text}>
                             <ReactMarkdown>
-                                {isMobile ? truncate(props.element.description, 80) : truncate(props.element.description, 290) }
+                                {isMobile ? truncate(props.element.description, 100) : truncate(props.element.description, 290) }
                             </ReactMarkdown>
                         </Card.Text>
 

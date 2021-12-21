@@ -55,7 +55,7 @@ class ClubAdminPage extends Component {
             bannerLinks:undefined,
             bannerPaths :undefined,
             logoUrl:null,
-            }
+        }
     }
 
     componentDidMount() {
@@ -279,7 +279,7 @@ class ClubAdminPage extends Component {
     }
 
     handleSubmitAnnouncements(values){
-        axios.post("club/announcements/",{
+        axios.patch("club/announcements/",{
             club: this.props.router.query.clubName,
             content: values[0]
         }).then((ress) => {
@@ -301,18 +301,30 @@ class ClubAdminPage extends Component {
                     ...prevState,
                     basicInformation: {
                         ...(prevState.basicInformation),
-                        linkedin:values[0],
-                        facebook:values[1],
-                        discord:values[2],
-                        github:values[3],
-                        mail:values[4],
-                        telegram:values[5],
-                        other:values[6],
-                        tagline:values[7]
+                        instagram:values[0],
+                        linkedin:values[1],
+                        facebook:values[2],
+                        discord:values[3],
+                        github:values[4],
+                        mail:values[5],
+                        telegram:values[6],
+                        other:values[7],
                     }
                 })
         })
         this.handleCloseModal()
+        const payload = {
+            linkedin:   this.state.basicInformation.linkedin,
+            facebook:   this.state.basicInformation.facebook,
+            discord:    this.state.basicInformation.discord,
+            github:     this.state.basicInformation.github,
+            mail:       this.state.basicInformation.mail,
+            telegram:   this.state.basicInformation.telegram,
+            other:      this.state.basicInformation.other,
+            tagline:    this.state.basicInformation.tagline,
+        }
+        axios.patch("club/club/"+ this.props.router.query.clubName +"/" ,payload)
+            .then(() => this.setState(payload))
     }
 
     bannerControl(args,num) {
@@ -618,14 +630,14 @@ class ClubAdminPage extends Component {
                                         <div className="d-flex">
                                             {this.state.bannerLinks[0]?
                                                 <div>
-                                                    <span>
+                                                    <div>
                                                         <SvgIcon
                                                             className="align-content-end"
                                                             height="20px"
                                                             src="cross.svg"
                                                             width="20px"
                                                         />
-                                                    </span>
+                                                    </div>
                                                 </div>: null}
 
                                             <div
@@ -818,14 +830,14 @@ class ClubAdminPage extends Component {
 
 
 
-                                        <div className={styles.announcementsBody + " overflow-auto"}>
+                                        <div className="overflow-auto">
                                             <ul
                                                 className="list p-0 m-0"
                                                 style={{ height: '250px'}}
                                             >
                                                 {this.state.announcements.map(item => (
                                                     <ul
-                                                        className=""
+                                                        className="pe-2"
                                                         key={item}
                                                     >
                                                         <ListGroup

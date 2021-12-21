@@ -100,12 +100,12 @@ function GoogleSignIn ({isAuthenticated, setLoggedIn, setStage, stage, visibilit
                 />
                 );
         else if (stage==="form") {
-            console.log(googleUserState)
+            const nameSplitter = googleUserState.name.lastIndexOf(" ");
             return (
                 <FormSignIn
                     emailId={googleUserState.email}
-                    firstName={googleUserState.name}
-                    lastName=""
+                    firstName={googleUserState.name.substring(0, nameSplitter)}
+                    lastName={googleUserState.name.substring(nameSplitter + 1)}
                     onSubmit={setLoggedIn}
                 />
             )
