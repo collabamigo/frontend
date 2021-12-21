@@ -301,14 +301,14 @@ class ClubAdminPage extends Component {
                     ...prevState,
                     basicInformation: {
                         ...(prevState.basicInformation),
-                        linkedin:values[0],
-                        facebook:values[1],
-                        discord:values[2],
-                        github:values[3],
-                        mail:values[4],
-                        telegram:values[5],
-                        other:values[6],
-                        tagline:values[7]
+                        instagram:values[0],
+                        linkedin:values[1],
+                        facebook:values[2],
+                        discord:values[3],
+                        github:values[4],
+                        mail:values[5],
+                        telegram:values[6],
+                        other:values[7],
                     }
                 })
         })
