@@ -20,6 +20,31 @@ import Carousel from 'react-bootstrap/Carousel';
 import {FirebaseContext} from "firebaseProvider";
 import ReactMarkdown from 'react-markdown'
 
+function download_table_as_csv(table_id, separator = ',') {
+    var rows = document.querySelectorAll('tr');
+    var csv = [];
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll('td, th');
+        for (var j = 0; j < cols.length; j++) {
+            var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
+            data = data.replace(/"/g, '""');
+            row.push('"' + data + '"');
+        }
+        csv.push(row.join(separator));
+    }
+    var csv_string = csv.join('\n');
+    var filename = table_id + ' Dated- ' + new Date().toLocaleDateString() + '.csv';
+    var link = document.createElement('a');
+    link.style.display = 'none';
+    link.setAttribute('target', '_blank');
+    link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv_string));
+    link.setAttribute('download', filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    console.log("lol")
+}
+
 function isEmpty(obj) {
 
     if (lodashIsEmpty(obj))
@@ -131,7 +156,7 @@ function Event() {
      useEffect(() => {
 
 
-             if (router.query.eventId!==undefined) {
+        if (router.query.eventId!==undefined) {
 
             if (isEmpty(tableResponses))
                 axios.get(`form/response/${router.query.eventId}/`)
@@ -148,8 +173,6 @@ function Event() {
             if (isEmpty(clubLogoLinks) && !isEmpty(event))
                 event.clubs.map(club => getDownloadURL(ref(storage, 'data/'+club+'/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
-
-
         }})
 
 
@@ -191,7 +214,6 @@ function Event() {
                                         Sr no.
                                     </td>
 
-
                                     {tableHeaders.map((option) => (
                                         <td key={option.name}>
                                             {option.name}
@@ -222,8 +244,22 @@ function Event() {
                             </tbody>
                         </Table>
 
+                        <br />
+
                         Woohoo, youre reading this text in a modal!
                     </Modal.Body>
+
+
+                    <br />
+
+                    <Button
+                        className="w-50 align-self-center"
+                        onClick={() => {download_table_as_csv(event.name + ' responses')}}
+                    >
+                        Download as CSV
+                    </Button>
+
+                    <br />
 
 
                 </Modal>
