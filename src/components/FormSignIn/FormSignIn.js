@@ -93,11 +93,6 @@ class FormSignIn extends React.Component {
 
     }
 
-    handleChange(event) {
-        this.setState({LastName: event.target.value});
-  }
-
-
   render() {
     if (this.state.isLoading)
         return <Loading />     
@@ -133,7 +128,7 @@ class FormSignIn extends React.Component {
                         </Form.Label>
 
                         <Form.Control
-                            className="form-control"
+                            className="form-control bg-secondary text-white border-secondary border-1"
                             onChange={this.handleChangeFirstName}
                             placeholder="name input"
                             type="text"
@@ -148,7 +143,7 @@ class FormSignIn extends React.Component {
                         </Form.Label>
 
                         <Form.Control
-                            className="form-control"
+                            className="form-control bg-secondary text-white border-secondary border-1"
                             onChange={this.handleChangeLastName}
                             placeholder="name input"
                             type="text"
@@ -163,7 +158,7 @@ class FormSignIn extends React.Component {
                         </Form.Label>
 
                         <Form.Control
-                            className="form-control disabled"
+                            className="form-control disabled bg-secondary text-white border-secondary border-1"
                             disabled
                             type="email"
                             value={this.state.email}
@@ -185,7 +180,7 @@ class FormSignIn extends React.Component {
                         </Form.Label>
 
                         <Form.Select
-                            className="form-control required"
+                            className="form-control required bg-secondary text-white border-secondary border-1"
                             onChange={this.handleChangeDegree}
                             required
                             value={this.state.degree}
@@ -227,9 +222,9 @@ class FormSignIn extends React.Component {
                         </Form.Label>
 
                         <Form.Select
-                            className="form-control required"
+                            className="form-control required bg-secondary text-white border-secondary border-1"
                             onChange={this.handleChangeCourse}
-                            required={this.state.degree==="B"}
+                            required={this.state.course==="B"}
                             value={this.state.course}
                         >
 
