@@ -9,8 +9,7 @@ import axios from "utilities/axios";
 import {withRouter} from "next/router";
 import PropTypes from "prop-types";
 import {ListGroup} from "react-bootstrap";
-import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
-// import Button from "react-bootstrap/Button";
+import {getDownloadURL, getStorage, ref, uploadBytes, deleteObject} from "firebase/storage";
 import RCarousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styles from "pages/club/styles.module.scss";
@@ -68,8 +67,9 @@ class ClubAdminPage extends Component {
 
     componentDidUpdate(){
         if (this.props.router.isReady){
+            const firebase = this.context;
+            const storage = getStorage(firebase);
             if (!this.state.logoUrl) {
-                const storage = getStorage();
                 getDownloadURL(ref(storage, "data/" + this.props.router.query.clubName + "/uneditable/logo.png"))
                     .then(url => this.setState({logoUrl: url}));
             }
@@ -466,6 +466,24 @@ class ClubAdminPage extends Component {
         }
     }
 
+    handleDeletePic(num){
+        console.log("Picture deleted")
+        console.log(this.state.bannerPaths)
+        const temp = JSON.parse(this.state.bannerPaths)
+        const firebase = this.context;
+        const storage = getStorage(firebase);
+        const desertRef = ref(storage,temp[num]);
+
+        temp.splice(num, 1)
+        const payload = {
+            picture:JSON.stringify(temp)
+        }
+        axios.patch(`/club/club/${this.props.router.query.clubName}/`, payload).then(()=>
+            deleteObject(desertRef))
+        this.setState({bannerLinks:undefined,bannerPaths:JSON.stringify(temp)})
+    }
+
+
     render(){
     const responsive =  {
             superLargeDesktop: {
@@ -630,14 +648,14 @@ class ClubAdminPage extends Component {
                                         <div className="d-flex">
                                             {this.state.bannerLinks[0]?
                                                 <div>
-                                                    <div>
+                                                    <span onClick={() => this.handleDeletePic(0)}>
                                                         <SvgIcon
                                                             className="align-content-end"
                                                             height="20px"
                                                             src="cross.svg"
                                                             width="20px"
                                                         />
-                                                    </div>
+                                                    </span>
                                                 </div>: null}
 
                                             <div
@@ -655,7 +673,7 @@ class ClubAdminPage extends Component {
                                         <div className="d-flex">
                                             {this.state.bannerLinks[1]?
                                                 <div>
-                                                    <span>
+                                                    <span onClick={() => this.handleDeletePic(1)}>
                                                         <SvgIcon
                                                             className="align-content-end"
                                                             height="20px"
@@ -676,7 +694,7 @@ class ClubAdminPage extends Component {
                                         <div className="d-flex">
                                             {this.state.bannerLinks[2]?
                                                 <div>
-                                                    <span>
+                                                    <span onClick={() => this.handleDeletePic(2)}>
                                                         <SvgIcon
                                                             className="align-content-end"
                                                             height="20px"
