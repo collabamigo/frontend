@@ -263,8 +263,6 @@ function Event() {
     }
 
      useEffect(() => {
-
-
         if (router.query.eventId!==undefined) {
 
             if (isEmpty(tableResponses))
@@ -284,11 +282,6 @@ function Event() {
                     .then(url => addClubLogoLinks(club, url)))
         }})
 
-
-
-
-    // const ref = useRef()
-    // const isParticipateButtonVisible = useOnScreen(ref)
     console.log(event)
     const isLoading = isEmpty(event);
     if (isLoading)
