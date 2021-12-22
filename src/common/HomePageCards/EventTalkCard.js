@@ -13,7 +13,6 @@ import {remark} from 'remark'
 import strip from 'strip-markdown'
 
 import styles from "./EventTalkCard.module.css";
-import ReactMarkdown from "react-markdown";
 
 export default function EventTalkCard(props) {
 
