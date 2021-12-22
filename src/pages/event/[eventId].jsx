@@ -95,11 +95,7 @@ export default function Event() {
                 JSON.parse(event.image_links).map(linkk => getDownloadURL(ref(storage, linkk))
                     .then(url => setimageLinks(url)))
             }
-            if (!ModalShow && (event.winners !== undefined)){
-                setModalShow(true);
-                console.log("truee", event.winners);
-            }
-            
+
     }})
 
     const isLoading = isEmpty(event);
@@ -117,11 +113,6 @@ export default function Event() {
                 handleClose={handleClose}
                 handleShow={handleShow}
             />
-
-            <h1>
-                {' '}
-                hello
-            </h1>
 
             <div className="row px-md-5 mx-md-5 px-2 mx-2">
                 <div className="col-md-4 col-12 me-4">
@@ -218,7 +209,7 @@ export default function Event() {
                                     </p>
 
 
-                               
+
 
                                     <p className=" text-primary">
                                         <FontAwesomeIcon icon={faMapMarkerAlt} />
