@@ -7,7 +7,7 @@ import {faCalendar, faClock} from '@fortawesome/free-regular-svg-icons'
 import {faMapMarkerAlt, faShareAlt } from '@fortawesome/free-solid-svg-icons'
 import {faWhatsapp, faInstagram, faFacebook} from '@fortawesome/free-brands-svg-icons'
 import FAQModal from "components/faq/FAQModal";
-import {getStorage, ref, getDownloadURL, uploadBytes} from "firebase/storage";
+import {getStorage, ref, getDownloadURL, uploadBytes, deleteObject} from "firebase/storage";
 import {useRouter} from 'next/router'
 import Modal from 'react-bootstrap/Modal'
 import axios from "utilities/axios";
@@ -19,6 +19,7 @@ import Table from 'react-bootstrap/Table';
 import Carousel from 'react-bootstrap/Carousel';
 import {FirebaseContext} from "firebaseProvider";
 import ReactMarkdown from 'react-markdown'
+import SvgIcon from "../../common/SvgIcon";
 
 function download_table_as_csv(table_id, separator = ',') {
     var rows = document.querySelectorAll('tr');
@@ -76,7 +77,12 @@ function Event() {
         showEvent: false,
         showDescription:false,
         showModal: false,
-        tableResponses: []
+        tableResponses: [],
+        bannerLinks:undefined,
+        bannerPaths :undefined,
+        image1Ref : React.createRef(),
+        image2Ref : React.createRef(),
+        image3Ref : React.createRef()
     });
 
 
@@ -147,10 +153,113 @@ function Event() {
         console.log("edited");
         handleCloseDescription();
     }
-    const image1Ref = React.createRef()
-    const handleUpload1 = ()=>{
-        image1Ref.current.click();
 
+    const handleDeletePic = (num) => {
+        console.log("Picture deleted")
+        console.log(data.bannerPaths)
+        const temp = JSON.parse(data.bannerPaths)
+        const storage = getStorage(firebase);
+        const desertRef = ref(storage,temp[num]);
+
+        temp.splice(num, 1)
+        const payload = {
+            picture:JSON.stringify(temp)
+        }
+        axios.patch(`/club/club/${router.query.clubName}/`, payload).then(()=>
+            deleteObject(desertRef))
+        setData({bannerLinks:undefined,bannerPaths:JSON.stringify(temp)})
+    }
+
+    const bannerControl = (args,num) => {
+        if (args[num] !== undefined && args !== undefined){
+            return(
+                <div>
+                    <Image
+                        alt="Carousel Image"
+                        className="m-auto"
+                        fluid
+                        height="130"
+                        rounded
+                        src={args[num]}
+                        width="130"
+                    />
+                </div>
+
+            )
+        }
+        else{
+            return(
+                <svg
+                    height="44"
+                    viewBox="0 0 24 24"
+                    width="44"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path d="M19.5 12c-2.483 0-4.5 2.015-4.5 4.5s2.017 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.017-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-18 0l4-5.96 2.48 1.96 2.52-4 1.853 2.964c-1.271 1.303-1.977 3.089-1.827 5.036h-9.026zm10.82 4h-14.82v-18h22v7.501c-.623-.261-1.297-.422-2-.476v-5.025h-18v14h11.502c.312.749.765 1.424 1.318 2zm-9.32-11c-.828 0-1.5-.671-1.5-1.5 0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5c0 .829-.672 1.5-1.5 1.5z" />
+                </svg>
+            )
+        }
+    }
+
+    const handleUpload1 = (image) => {
+        setData({image1: image})
+        const storage = getStorage();
+        const storageRef = ref(storage, "/data/"+ router.query.clubName +"/editable/" +
+            (new Date().getTime()));
+        if(image == null)
+            return;
+        uploadBytes(storageRef, image).then((args) => {
+            const temp = args["metadata"]["fullPath"]
+            const arr = JSON.parse(data.bannerPaths)
+            arr.splice(0,0,temp)
+            const payload = {
+                picture: JSON.stringify(arr)
+            }
+            axios.patch("/club/club/" + router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
+            setData({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
+
+        })
+             .catch(() => {console.log("error occurred uploading")});
+    }
+
+    const handleUpload2 = (image) => {
+        setData({image2: image})
+        const storage = getStorage();
+        const storageRef = ref(storage, "/data/"+ router.query.clubName +"/editable/" +
+            (new Date().getTime()));
+        if(image == null)
+            return;
+        uploadBytes(storageRef, image).then((args) => {
+            const temp = args["metadata"]["fullPath"]
+            const arr = JSON.parse(data.bannerPaths)
+            arr.splice(1,0,temp)
+            const payload = {
+                picture: JSON.stringify(arr)
+            }
+            axios.patch("/club/club/" + router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
+            setData({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
+        })
+             .catch(() => {console.log("error occurred uploading")});
+    }
+
+    const handleUpload3 = (image) => {
+        setData({image3: image})
+        const storage = getStorage();
+        const storageRef = ref(storage, "/data/"+ router.query.clubName +"/editable/" +
+            (new Date().getTime()));
+        if(image == null)
+            return;
+                uploadBytes(storageRef, image).then((args) => {
+            const temp = args["metadata"]["fullPath"]
+            const arr = JSON.parse(data.bannerPaths)
+            arr.splice(2,0,temp)
+            const payload = {
+                picture: JSON.stringify(arr)
+            }
+            axios.patch("/club/club/" + router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
+            setData({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
+        })
+             .catch(() => {console.log("error occured uploading")});
     }
 
      useEffect(() => {
@@ -286,29 +395,101 @@ function Event() {
 
 
                         <div className="column">
-                            <input
-                                className="d-none"
-                                onChange={(e) => {
-                                                const file = e.target.files[0];
+                            <div className="d-flex">
+                                {data.bannerLinks === undefined ? null:
+                                <div className="mx-auto d-flex">
+                                    <div className="d-flex">
+                                        {data.bannerLinks[0]?
+                                            <div>
+                                                <span onClick={() => handleDeletePic(0)}>
+                                                    <SvgIcon
+                                                        className="align-content-end"
+                                                        height="20px"
+                                                        src="cross.svg"
+                                                        width="20px"
+                                                    />
+                                                </span>
+                                            </div>: null}
 
-                                                const storage = getStorage(firebase);
+                                        <div
+                                            className={"my-auto mx-3 " + ((data.bannerLinks[0]) ? "" : "-primary")}
+                                            onClick={() => data.image1Ref.current.click()}
+                                            type="button"
+                                        >
 
-                                                const storageRef = ref(storage, "/data/" + "byld" + "/editable/" +
-                                                    (new Date().getTime()));
-                                                uploadBytes(storageRef, file).then(() => {
-                                                    console.log('Uploaded a blob or file!');
-                                                });
-                                }}
-                                ref={image1Ref}
-                                type="file"
-                            />
+                                            {bannerControl(data.bannerLinks, 0)}
 
-                            <Button
-                                className="material-icons"
-                                onClick={handleUpload1}
-                            >
-                                add_circle
-                            </Button>
+
+                                        </div>
+                                    </div>
+
+                                    <div className="d-flex">
+                                        {data.bannerLinks[1]?
+                                            <div>
+                                                <span onClick={() => handleDeletePic(1)}>
+                                                    <SvgIcon
+                                                        className="align-content-end"
+                                                        height="20px"
+                                                        src="cross.svg"
+                                                        width="20px"
+                                                    />
+                                                </span>
+                                            </div>: null}
+
+                                        <div
+                                            className={"my-auto mx-3" + ((data.bannerLinks[1]) ? "" : "-primary")}
+                                            onClick={() => data.image2Ref.current.click()}
+                                        >
+                                            {bannerControl(data.bannerLinks, 1)}
+                                        </div>
+                                    </div>
+
+                                    <div className="d-flex">
+                                        {data.bannerLinks[2]?
+                                            <div>
+                                                <span onClick={() => handleDeletePic(2)}>
+                                                    <SvgIcon
+                                                        className="align-content-end"
+                                                        height="20px"
+                                                        src="cross.svg"
+                                                        width="20px"
+                                                    />
+                                                </span>
+                                            </div>: null}
+
+                                        <div
+                                            className={"my-auto mx-3 " + ((data.bannerLinks[2]) ? "" : "-primary")}
+                                            onClick={() => data.image3Ref.current.click()}
+                                            type="button"
+                                        >
+                                            {bannerControl(data.bannerLinks, 2)}
+                                        </div>
+                                    </div>
+                                </div>}
+                            </div>
+
+                            <div>
+                                <input
+                                    className="d-none"
+                                    onChange={(e)=>handleUpload1(e.target.files[0])}
+                                    ref={data.image1Ref}
+                                    type="file"
+                                />
+
+                                <input
+                                    className="d-none"
+                                    onChange={(e)=>handleUpload2(e.target.files[0])}
+                                    ref={data.image2Ref}
+                                    type="file"
+                                />
+
+                                <input
+                                    className="d-none"
+                                    onChange={(e)=>handleUpload3(e.target.files[0])}
+                                    ref={data.image3Ref}
+                                    type="file"
+                                />
+                            </div>
 
                         </div>
 
