@@ -20,6 +20,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import {FirebaseContext} from "firebaseProvider";
 import ReactMarkdown from 'react-markdown'
 import SvgIcon from "../../common/SvgIcon";
+import ClubAdminModal from "../../components/ClubAdmin/modal";
 
 function download_table_as_csv(table_id, separator = ',') {
     var rows = document.querySelectorAll('tr');
@@ -77,12 +78,14 @@ function Event() {
         showEvent: false,
         showDescription:false,
         showModal: false,
+        showModal2:false,
         tableResponses: [],
         bannerLinks:undefined,
         bannerPaths :undefined,
         image1Ref : React.createRef(),
         image2Ref : React.createRef(),
-        image3Ref : React.createRef()
+        image3Ref : React.createRef(),
+        links:null
     });
 
 
@@ -129,6 +132,7 @@ function Event() {
     const tableHeaders = isEmpty(form)?[]:JSON.parse(data.form.skeleton);
     const tableResponses = data.tableResponses;
     const showModal = data.showModal;
+    const showModal2= data.showModal2;
 
 
     const convertToDatetimeString = iso_8601_string => {
@@ -143,6 +147,9 @@ function Event() {
 
     const handleClose = () => setData({...data, showModal: false});
     const handleShow = () => setData({...data, showModal: true});
+
+    const handleClose2 = () => setData({...data, showModal2:false});
+    const handleShow2 = () => setData({...data, showModal2:true});
 
     // const handleSubmitEvent =()=>{
     //     console.log("edited");
@@ -260,6 +267,14 @@ function Event() {
             setData({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
         })
              .catch(() => {console.log("error occured uploading")});
+    }
+
+    const handleSubmitLinks = (args) => {
+        const payload = {
+            link: args,
+        }
+        axios.patch('/club/competition/' + router.query.eventId + '/', payload).then(()=>{console.log("done")})
+        console.log("link submitted")
     }
 
      useEffect(() => {
@@ -587,19 +602,23 @@ function Event() {
                                     </div>}
 
                                     <div className="p-2 col-6">
-                                        <a
-                                            href={event.link}
-                                            rel="noopener noreferrer"
-                                            target="_blank"
+                                        <Button
+                                            className="w-100"
+                                            onClick={handleShow2}
+                                            size="m"
+                                            variant="outline-primary"
                                         >
-                                            <Button
-                                                className="w-100"
-                                                size="m"
-                                                variant="outline-primary"
-                                            >
-                                                Add Links
-                                            </Button>
-                                        </a>
+                                            Add Links
+                                        </Button>
+
+                                        <ClubAdminModal
+                                            handleClose={handleClose2}
+                                            handleSubmit={handleSubmitLinks}
+                                            initialValues={[data.links]}
+                                            labels={['Links to Add']}
+                                            show={showModal2}
+                                        />
+
                                     </div>
                                 </div>
 
