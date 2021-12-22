@@ -29,7 +29,7 @@ export default function ClubCard({value}) {
                         variant="top"
                     />
 
-                    <Card.Title className={styles.title + " mt-auto mb-2 text-primary"}>
+                    <Card.Title className={styles.title + " mb-2 text-primary"}>
                         {value.name}
                     </Card.Title>
                 </Card>
