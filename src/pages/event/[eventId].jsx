@@ -76,7 +76,6 @@ export default function Event() {
                     .then(res => {
                         setEvent(res.data)
                         if ((res.data.winners !== undefined)){
-                            alert("naina")
                             setModalShow(true);
                             console.log("truee", event.winners);
                         }
@@ -97,7 +96,6 @@ export default function Event() {
                     .then(url => setimageLinks(url)))
             }
             if (!ModalShow && (event.winners !== undefined)){
-                alert("naina")
                 setModalShow(true);
                 console.log("truee", event.winners);
             }

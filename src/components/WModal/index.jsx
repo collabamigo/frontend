@@ -22,9 +22,6 @@ export default class index extends Component {
                 onHide={this.props.handleClose}
                 show={this.props.ModalShow}
             >
-                {/* <button onClick={this.props.handleClose}>
-                    naina
-                </button> */}
 
                 <Modal.Header closeButton>
                     <Modal.Title>
