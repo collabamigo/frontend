@@ -771,7 +771,7 @@ class ClubAdminPage extends Component {
                                     <div className={styles.descriptionBox + " col"}>
                                         <div className={styles.descriptionHeading + " row d-flex justify-content-around"}>
 
-                                            <span className="col-9 h2 align-self-start">
+                                            <span className="col-9 h3 align-self-start">
                                                 Description
 
                                                 {" "}
@@ -811,7 +811,7 @@ class ClubAdminPage extends Component {
 
                                     <div className={styles.announcementsBox + " col"}>
                                         <div className={styles.announcementsHeading + " row d-flex justify-content-between"}>
-                                            <span className="col-9 h4">
+                                            <span className="col-9 h3">
                                                 Announcements
 
                                                 {" "}
