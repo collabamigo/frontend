@@ -271,7 +271,7 @@ function Event() {
 
     const handleSubmitLinks = (args) => {
         const payload = {
-            link: args,
+            link: args[0],
         }
         axios.patch('/club/competition/' + router.query.eventId + '/', payload).then(()=>{console.log("done")})
         console.log("link submitted")
