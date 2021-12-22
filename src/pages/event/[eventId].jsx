@@ -278,12 +278,12 @@ export default function Event() {
 
                                 <FacebookShareButton
                                     title="d"
-                                    url="https://www.instagram.com/p/CV0DFwMpRXg/"
+                                    url="https://www.instagram.com/p/CXwbZg3APiU/"
                                 />
 
                                 <FacebookShareButton
                                     title="fullTitle"
-                                    url="https://www.instagram.com/p/CV0DFwMpRXg/"
+                                    url="https://www.instagram.com/p/CXwbZg3APiU/"
                                 >
                                     <SvgIcon
                                         height="20px"
@@ -295,7 +295,7 @@ export default function Event() {
                                 <EmailShareButton
                                     onClick={() => {}}
                                     openShareDialogOnClick
-                                    url="https://www.instagram.com/p/CV0DFwMpRXg/"
+                                    url="https://www.instagram.com/p/CXwbZg3APiU/"
                                 >
                                     <SvgIcon
                                         height="20px"
