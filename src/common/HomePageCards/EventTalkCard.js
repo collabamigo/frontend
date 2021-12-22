@@ -9,31 +9,60 @@ import {truncate} from "utilities";
 import Link from "common/Link";
 import axios from "utilities/axios";
 import {isMobile} from "react-device-detect";
-
+import {remark} from 'remark'
+import strip from 'strip-markdown'
 
 import styles from "./EventTalkCard.module.css";
 import ReactMarkdown from "react-markdown";
 
 export default function EventTalkCard(props) {
 
-    const [imagelink, setimagelink] = useState(undefined);
+    const [data, setData] = useState({
+        imageLink: undefined,
+        strippedText: undefined,
+    });
+
+    const imageLink = data.imageLink;
+    const strippedText = data.strippedText;
+
+    const setImageLink = (imageLink) => {
+        setData({
+            ...data,
+            imageLink,
+        });
+    };
+    const setStrippedText = (strippedText) => {
+        setData({
+            ...data,
+            strippedText,
+        });
+    };
 
     useEffect(() => {
-        if (imagelink === undefined){
+        if (imageLink === undefined){
                 axios.get(`club/competition/${props.element.id}/`)
                 .then(res => {
                                 const storage = getStorage();
                                 if((JSON.parse(res.data.image_links))[0])
                                 {
                                     getDownloadURL(ref(storage, (JSON.parse(res.data.image_links))[0])).then(
-                                        link =>   setimagelink(link)
+                                        link =>   setImageLink(link)
                                     )
                                 }
                                 else{
-                                    setimagelink("https://via.placeholder.com/350x200")
+                                    setImageLink("https://via.placeholder.com/350x200")
                                 }
                             })
                         }
+
+        if (strippedText === undefined){
+            remark()
+                .use(strip)
+                .process(props.element.description)
+                .then((file) => {
+                    setStrippedText(String(file))
+                })
+        }
             })
 
     // var dates = new Date(props.element.event_end);
@@ -42,7 +71,7 @@ export default function EventTalkCard(props) {
     var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' +  datee.getFullYear());
 
     return (
-        <div className={styles.cardCenter + " h-100"}>
+        <div className={styles.cardCenter+" h-100"}>
             <Link
                 className="reset-a"
                 to={"/"+(props.manage?"manage":"")+"event/" + props.element.id}
@@ -50,7 +79,7 @@ export default function EventTalkCard(props) {
                 <Card className="h-100">
                     <Card.Img
                         className={styles.image}
-                        src={imagelink ? imagelink : "https://via.placeholder.com/350x200"}
+                        src={imageLink ? imageLink : "https://via.placeholder.com/350x200"}
                         variant="top"
                     />
 
@@ -71,9 +100,9 @@ export default function EventTalkCard(props) {
 
 
                         <Card.Text className={styles.text}>
-                            <ReactMarkdown>
-                                {isMobile ? truncate(props.element.description, 100) : truncate(props.element.description, 290) }
-                            </ReactMarkdown>
+                            <p>
+                                {isMobile ? truncate(strippedText, 100) : truncate(strippedText, 290) }
+                            </p>
                         </Card.Text>
 
                         <br />
