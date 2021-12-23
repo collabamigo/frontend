@@ -97,7 +97,7 @@ export default function Event() {
             }
 
     }})
-
+    const d = new Date();
     const isLoading = isEmpty(event);
 
     // const ref = useRef()
@@ -258,19 +258,17 @@ export default function Event() {
                                 </div>}
 
                                 <div className="p-2 col-6">
-                                    <a
+                                    <Button
+                                        className="w-100"
+                                        disabled={d > form.closes_at ? true : false}
                                         href={event.link}
                                         rel="noopener noreferrer"
+                                        size="lg"
                                         target="_blank"
+                                        variant="outline-primary"
                                     >
-                                        <Button
-                                            className="w-100"
-                                            size="lg"
-                                            variant="outline-primary"
-                                        >
-                                            Join meet
-                                        </Button>
-                                    </a>
+                                        Join meet
+                                    </Button>
                                 </div>
                             </div>
 
@@ -278,12 +276,12 @@ export default function Event() {
 
                                 <FacebookShareButton
                                     title="d"
-                                    url="https://www.instagram.com/p/CV0DFwMpRXg/"
+                                    url="https://www.instagram.com/p/CXwbZg3APiU/"
                                 />
 
                                 <FacebookShareButton
                                     title="fullTitle"
-                                    url="https://www.instagram.com/p/CV0DFwMpRXg/"
+                                    url="https://www.instagram.com/p/CXwbZg3APiU/"
                                 >
                                     <SvgIcon
                                         height="20px"
@@ -295,7 +293,7 @@ export default function Event() {
                                 <EmailShareButton
                                     onClick={() => {}}
                                     openShareDialogOnClick
-                                    url="https://www.instagram.com/p/CV0DFwMpRXg/"
+                                    url="https://www.instagram.com/p/CXwbZg3APiU/"
                                 >
                                     <SvgIcon
                                         height="20px"
