@@ -26,7 +26,7 @@ export default function FirebaseProvider ({children}) {
 
     const auth = getAuth(firebase);
     if (!auth.currentUser)
-        axios.get("/authenticate/get-firebase-token").then((res) =>
+        axios.get("/authenticate/get-firebase-token/").then((res) =>
             signInWithCustomToken(auth, res.data.firebaseToken))
     return (
         <FirebaseContext.Provider value={firebase}>

@@ -1,3 +1,4 @@
+import {getAuth} from "firebase/auth";
 import React, {Component} from 'react';
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel'
@@ -358,66 +359,30 @@ class ClubAdminPage extends Component {
         }
     }
 
-    handleUpload1(image){
-        this.setState({image1: image})
+    handleUpload (image, index) {
+        const firebase = this.context;
         const storage = getStorage();
-        const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
-            (new Date().getTime()));
-        if(image == null)
+        const storageRef = ref(storage, `/files/${getAuth(firebase).lastNotifiedUid}/${new Date().getTime()}`);
+        if (image == null)
             return;
-        uploadBytes(storageRef, image).then((args) => {
+        const metadata = {
+            contentType: image.type,
+            customMetadata: {
+                clubs: JSON.stringify([this.props.router.query.clubName]),
+                misc: `club-${this.props.router.query.clubName}-banner`
+            }
+        }
+        uploadBytes(storageRef, image, metadata).then((args) => {
             const temp = args["metadata"]["fullPath"]
             const arr = JSON.parse(this.state.bannerPaths)
-            arr.splice(0,0,temp)
+            arr.splice(index, 0, temp)
             const payload = {
-                picture: JSON.stringify(arr)
+                image_links: JSON.stringify(arr)
             }
-            axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-            this.setState({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
-
+            axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(() => {
+                this.setState({bannerLinks: undefined, bannerPaths: JSON.stringify(arr)})
+            })
         })
-             .catch(() => {console.log("error occured uploading")});
-    }
-
-    handleUpload2(image){
-        this.image2Ref.current.click()
-        this.setState({image2: image})
-        const storage = getStorage();
-        const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
-            (new Date().getTime()));
-        if(image == null)
-            return;
-        uploadBytes(storageRef, image).then((args) => {
-            const temp = args["metadata"]["fullPath"]
-            const arr = JSON.parse(this.state.bannerPaths)
-            arr.splice(1,0,temp)
-            const payload = {
-                picture: JSON.stringify(arr)
-            }
-            axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-            this.setState({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
-        })
-             .catch(() => {console.log("error occured uploading")});
-    }
-
-    handleUpload3(image){
-        this.setState({image3: image})
-        const storage = getStorage();
-        const storageRef = ref(storage, "/data/"+ this.props.router.query.clubName +"/editable/" +
-            (new Date().getTime()));
-        if(image == null)
-            return;
-                uploadBytes(storageRef, image).then((args) => {
-            const temp = args["metadata"]["fullPath"]
-            const arr = JSON.parse(this.state.bannerPaths)
-            arr.splice(2,0,temp)
-            const payload = {
-                picture: JSON.stringify(arr)
-            }
-            axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-            this.setState({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
-        })
-             .catch(() => {console.log("error occured uploading")});
     }
 
     handleCloseModal() {
@@ -718,21 +683,21 @@ class ClubAdminPage extends Component {
                                 <div>
                                     <input
                                         className="d-none"
-                                        onChange={(e)=>this.handleUpload1(e.target.files[0])}
+                                        onChange={(e)=>this.handleUpload(e.target.files[0], 0)}
                                         ref={this.image1Ref}
                                         type="file"
                                     />
 
                                     <input
                                         className="d-none"
-                                        onChange={(e)=>this.handleUpload2(e.target.files[0])}
+                                        onChange={(e)=>this.handleUpload(e.target.files[0], 1)}
                                         ref={this.image2Ref}
                                         type="file"
                                     />
 
                                     <input
                                         className="d-none"
-                                        onChange={(e)=>this.handleUpload3(e.target.files[0])}
+                                        onChange={(e)=>this.handleUpload(e.target.files[0], 2)}
                                         ref={this.image3Ref}
                                         type="file"
                                     />
