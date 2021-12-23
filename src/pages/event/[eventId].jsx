@@ -259,14 +259,15 @@ export default function Event() {
 
                                 <div className="p-2 col-6">
                                     <Button
-                                        className="w-100"
-                                        disabled={d > form.closes_at ? true : false}
+                                        className={"w-100 "+(((new Date()) > (new Date(form.closes_at))) ?"disabled":"")}
+                                        disabled={((new Date()) > (new Date(form.closes_at))) ? true : false}
                                         href={event.link}
                                         rel="noopener noreferrer"
                                         size="lg"
                                         target="_blank"
                                         variant="outline-primary"
                                     >
+                                        {()=>alert(event.link)}
                                         Join meet
                                     </Button>
                                 </div>
