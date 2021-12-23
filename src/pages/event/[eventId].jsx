@@ -97,7 +97,6 @@ export default function Event() {
             }
 
     }})
-    const d = new Date();
     const isLoading = isEmpty(event);
 
     // const ref = useRef()
@@ -247,8 +246,11 @@ export default function Event() {
                                 {isEmpty(form)?null:
                                 <div className="col-12 p-2">
                                     <GenerateEventForm
+                                        end={event.event_end}
                                         eventId={router.query.eventId}
                                         formData={JSON.parse(form.skeleton)}
+                                        start={event.event_start}
+
                                     />
                                 </div>}
 
@@ -259,7 +261,7 @@ export default function Event() {
 
                                 <div className="p-2 col-6">
                                     <Button
-                                        className={"w-100 "+(((new Date()) > (new Date(form.closes_at))) ?"disabled":"")}
+                                        className={"w-100 "+ (((new Date()) > (new Date(form.closes_at))) && ((new Date()) < (new Date(form.starts_at))) ?"disabled":"")}
                                         disabled={((new Date()) > (new Date(form.closes_at))) ? true : false}
                                         href={event.link}
                                         rel="noopener noreferrer"
