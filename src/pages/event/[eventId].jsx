@@ -97,7 +97,7 @@ export default function Event() {
             }
 
     }})
-
+    const d = new Date();
     const isLoading = isEmpty(event);
 
     // const ref = useRef()
@@ -258,19 +258,17 @@ export default function Event() {
                                 </div>}
 
                                 <div className="p-2 col-6">
-                                    <a
+                                    <Button
+                                        className="w-100"
+                                        disabled={d > form.closes_at ? true : false}
                                         href={event.link}
                                         rel="noopener noreferrer"
+                                        size="lg"
                                         target="_blank"
+                                        variant="outline-primary"
                                     >
-                                        <Button
-                                            className="w-100"
-                                            size="lg"
-                                            variant="outline-primary"
-                                        >
-                                            Join meet
-                                        </Button>
-                                    </a>
+                                        Join meet
+                                    </Button>
                                 </div>
                             </div>
 
