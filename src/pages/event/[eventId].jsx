@@ -41,18 +41,21 @@ export default function Event() {
     const handleClose = () => setModalShow(false);
     const handleShow = () => setModalShow(true);
 
-    const setEvent = (event) => setData((prevData)=> {
-        return {...prevData, event}
-    });
+    const setEvent = (event) => {
+        setData((prevData) => {
+            return {
+                ...prevData,
+                bannerPaths: event.image_links,
+                event: {
+                    ...prevData.event,
+                    ...event,
+                }
+            };
+    })};
     const setForm = (form) => setData((prevData) => {
         return {...prevData, form}
     });
 
-    const setimageLinks = (link) => {
-        setData((prevData) => {
-            return {...prevData, imageLinks: [...(prevData.imageLinks), link]}
-        })
-    };
     const addClubLogoLinks = (club, link) => {
         setData((prevData) => {
             return {...prevData, clubLogoLinks: {...(prevData.clubLogoLinks), [club]: link}}
@@ -61,7 +64,7 @@ export default function Event() {
     const event = data.event;
     const form = data.form;
     const clubLogoLinks = data.clubLogoLinks;
-    const imageLinks = data.imageLinks;
+    const imageLinks = data.bannerLinks;
 
 
     const convertToDatetimeString = iso_8601_string => {
@@ -90,10 +93,27 @@ export default function Event() {
                 event.clubs.map(club => getDownloadURL(ref(storage, 'data/' + club + '/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
             }
-            if (isEmpty(imageLinks) && !isEmpty(event)) {
+
+            if (data.bannerLinks === undefined && data.bannerPaths !== undefined) {
                 const storage = getStorage();
-                JSON.parse(event.image_links).map(linkk => getDownloadURL(ref(storage, linkk))
-                    .then(url => setimageLinks(url)))
+                if (data.bannerPaths === '[]') {
+                    // suppression needed
+                    // eslint-disable-next-line react/no-did-update-set-state
+                    setData({...data, bannerLinks: []})
+                } else
+                    JSON.parse(data.bannerPaths).map((link, index) => {
+                        getDownloadURL(ref(storage, link)).then((url) => {
+                            // alert("adding "+url+" at "+index)
+                            setData((data) => ({
+                                    ...data,
+                                    bannerLinks: {
+                                        ...(data.bannerLinks),
+                                        [index]: url,
+                                    }
+                                })
+                            )
+                        })
+                    })
             }
 
     }})
@@ -116,9 +136,9 @@ export default function Event() {
             <div className="row px-md-5 mx-md-5 px-2 mx-2">
                 <div className="col-md-4 col-12 me-4">
                     <div className="pb-5">
-                        {imageLinks.length > 0 ?
+                        {imageLinks ?
                             <Carousel>
-                                {imageLinks.map((image,index) => {
+                                {lodashMap(imageLinks, (image,index) => {
                                 return (
                                     <Carousel.Item key={index}>
                                         <Image

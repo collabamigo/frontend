@@ -1,4 +1,5 @@
 
+import {getAuth} from "firebase/auth";
 import React, {useContext, useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
@@ -19,7 +20,7 @@ import Table from 'react-bootstrap/Table';
 import Carousel from 'react-bootstrap/Carousel';
 import {FirebaseContext} from "firebaseProvider";
 import ReactMarkdown from 'react-markdown'
-import SvgIcon from "../../common/SvgIcon";
+import SvgIcon from "common/SvgIcon";
 import ClubAdminModal from "../../components/ClubAdmin/modal";
 
 function download_table_as_csv(table_id, separator = ',') {
@@ -69,11 +70,11 @@ function Event() {
 
     const firebase = useContext(FirebaseContext);
     const storage = firebase?getStorage(firebase):getStorage();
+    console.log(getAuth(firebase).lastNotifiedUid)
 
     const [data, setData] = useState({
         clubLogoLinks: {},
         event: {
-            image_links: {}
         },
         showEvent: false,
         showDescription:false,
@@ -97,24 +98,24 @@ function Event() {
         setData((prevData) => {
             return {
                 ...prevData,
+                bannerPaths: event.image_links,
                 event: {
                     ...prevData.event,
                     ...event,
-                    image_links: prevData.event.image_links,
                 }
             };
         });
 
-        JSON.parse(event.image_links).map((link, index) => {
-            return getDownloadURL(ref(storage, link)).then((url) =>
-                setData((prevData) => {
-                    return {...prevData, event: {
-                        ...prevData.event,
-                        image_links: {...prevData.event.image_links, [index]: url}
-                    }}
-                })
-            )
-        })
+        // JSON.parse(event.image_links).map((link, index) => {
+        //     return getDownloadURL(ref(storage, link)).then((url) =>
+        //         setData((prevData) => {
+        //             return {...prevData, event: {
+        //                 ...prevData.event,
+        //                 image_links: {...prevData.event.image_links, [index]: url}
+        //             }}
+        //         })
+        //     )
+        // })
     }
     const setForm = (form) => setData((prevData) => {
         return {...prevData, form}
@@ -170,11 +171,11 @@ function Event() {
 
         temp.splice(num, 1)
         const payload = {
-            picture:JSON.stringify(temp)
+            image_links:JSON.stringify(temp)
         }
-        axios.patch(`/club/club/${router.query.clubName}/`, payload).then(()=>
+        axios.patch(`/club/competition/${router.query.eventId}/`, payload).then(()=>
             deleteObject(desertRef))
-        setData({bannerLinks:undefined,bannerPaths:JSON.stringify(temp)})
+        setData({...data, bannerLinks:undefined,bannerPaths:JSON.stringify(temp)})
     }
 
     const bannerControl = (args,num) => {
@@ -208,65 +209,30 @@ function Event() {
         }
     }
 
-    const handleUpload1 = (image) => {
-        setData({image1: image})
+    const handleUpload = (image, index) => {
         const storage = getStorage();
-        const storageRef = ref(storage, "/data/"+ router.query.clubName +"/editable/" +
-            (new Date().getTime()));
+        const storageRef = ref(storage, `/files/${getAuth(firebase).lastNotifiedUid}/${new Date().getTime()}`);
         if(image == null)
             return;
-        uploadBytes(storageRef, image).then((args) => {
+        const metadata = {
+            contentType: image.type,
+            customMetadata: {
+                clubs: JSON.stringify(event.clubs),
+                misc: `event-${router.query.eventId}-banner`
+            }
+        }
+        console.log("marker2", metadata)
+        uploadBytes(storageRef, image, metadata).then((args) => {
             const temp = args["metadata"]["fullPath"]
             const arr = JSON.parse(data.bannerPaths)
-            arr.splice(0,0,temp)
+            arr.splice(index,0,temp)
             const payload = {
-                picture: JSON.stringify(arr)
+                image_links: JSON.stringify(arr)
             }
-            axios.patch("/club/club/" + router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-            setData({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
-
+            axios.patch("/club/competition/" + router.query.eventId + "/", payload).then(() => {
+                setData({...data, bannerLinks: undefined, bannerPaths: JSON.stringify(arr)})
+            })
         })
-             .catch(() => {console.log("error occurred uploading")});
-    }
-
-    const handleUpload2 = (image) => {
-        setData({image2: image})
-        const storage = getStorage();
-        const storageRef = ref(storage, "/data/"+ router.query.clubName +"/editable/" +
-            (new Date().getTime()));
-        if(image == null)
-            return;
-        uploadBytes(storageRef, image).then((args) => {
-            const temp = args["metadata"]["fullPath"]
-            const arr = JSON.parse(data.bannerPaths)
-            arr.splice(1,0,temp)
-            const payload = {
-                picture: JSON.stringify(arr)
-            }
-            axios.patch("/club/club/" + router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-            setData({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
-        })
-             .catch(() => {console.log("error occurred uploading")});
-    }
-
-    const handleUpload3 = (image) => {
-        setData({image3: image})
-        const storage = getStorage();
-        const storageRef = ref(storage, "/data/"+ router.query.clubName +"/editable/" +
-            (new Date().getTime()));
-        if(image == null)
-            return;
-                uploadBytes(storageRef, image).then((args) => {
-            const temp = args["metadata"]["fullPath"]
-            const arr = JSON.parse(data.bannerPaths)
-            arr.splice(2,0,temp)
-            const payload = {
-                picture: JSON.stringify(arr)
-            }
-            axios.patch("/club/club/" + router.query.clubName + "/", payload).then(()=>console.log("uploaded"))
-            setData({bannerLinks:undefined, bannerPaths: JSON.stringify(arr)})
-        })
-             .catch(() => {console.log("error occured uploading")});
     }
 
     const handleSubmitLinks = (args) => {
@@ -295,7 +261,27 @@ function Event() {
             if (isEmpty(clubLogoLinks) && !isEmpty(event))
                 event.clubs.map(club => getDownloadURL(ref(storage, 'data/'+club+'/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
-        }})
+
+            if (data.bannerLinks === undefined && data.bannerPaths !== undefined) {
+                const storage = firebase ? getStorage(firebase) : getStorage();
+                if (data.bannerPaths === '[]') {
+                    // suppression needed
+                    // eslint-disable-next-line react/no-did-update-set-state
+                    setData({...data, bannerLinks: []})
+                } else
+                    JSON.parse(data.bannerPaths).map((link, index) => {
+                        getDownloadURL(ref(storage, link)).then((url) => {
+                            // alert("adding "+url+" at "+index)
+                            setData((data) => ({
+                                ...data,
+                                bannerLinks: {
+                                    ...(data.bannerLinks),
+                                    [index]: url,
+                                }})
+                            )
+                        })
+                    })
+            }}})
 
     console.log(event)
     const isLoading = isEmpty(event);
@@ -386,7 +372,7 @@ function Event() {
                         <div className="pb-5">
 
                             <Carousel>
-                                {lodashMap(event.image_links, (image) => {
+                                {lodashMap(data.bannerLinks, (image) => {
                                     return (
                                         <Carousel.Item key={image}>
                                             <Image
@@ -479,21 +465,21 @@ function Event() {
                             <div>
                                 <input
                                     className="d-none"
-                                    onChange={(e)=>handleUpload1(e.target.files[0])}
+                                    onChange={(e)=>handleUpload(e.target.files[0], 0)}
                                     ref={data.image1Ref}
                                     type="file"
                                 />
 
                                 <input
                                     className="d-none"
-                                    onChange={(e)=>handleUpload2(e.target.files[0])}
+                                    onChange={(e)=>handleUpload(e.target.files[0], 1)}
                                     ref={data.image2Ref}
                                     type="file"
                                 />
 
                                 <input
                                     className="d-none"
-                                    onChange={(e)=>handleUpload3(e.target.files[0])}
+                                    onChange={(e)=>handleUpload(e.target.files[0], 2)}
                                     ref={data.image3Ref}
                                     type="file"
                                 />
