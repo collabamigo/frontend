@@ -26,6 +26,9 @@ export default class index extends Component {
     }
 
     render() {
+        if(!this.props.values){
+            return null
+        }
         return (
             <Modal
                 onHide={this.props.handleClose}
@@ -34,7 +37,7 @@ export default class index extends Component {
 
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Congratulations to the winners 
+                        Congratulations to the winners
                     </Modal.Title>
                 </Modal.Header>
 

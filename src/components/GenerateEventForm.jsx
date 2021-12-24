@@ -4,8 +4,18 @@ import {Modal} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import axios from "utilities/axios";
+import {toast} from "react-toastify";
 
 function generateCode(formData, setShowModal, eventId) {
+    toast.success('Wow so easy!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
     const validate = (values, formData) => {
         const errors = {};
@@ -409,6 +419,7 @@ function generateCode(formData, setShowModal, eventId) {
                     <Formik
                         initialValues={{...(Array(formData.length).fill(""))}}
                         onSubmit={(values) => {console.log(values); axios.post("form/submit/"+eventId+"/", values).then(() => {
+                            toast()
                             setShowModal(false);
                         })}}
                         validate={(values) => validate(values, formData)}
