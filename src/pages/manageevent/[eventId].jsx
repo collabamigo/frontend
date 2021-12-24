@@ -7,7 +7,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCalendar, faClock} from '@fortawesome/free-regular-svg-icons'
 import {faMapMarkerAlt, faShareAlt } from '@fortawesome/free-solid-svg-icons'
 import {faWhatsapp, faInstagram, faFacebook} from '@fortawesome/free-brands-svg-icons'
-import FAQModal from "components/faq/FAQModal";
 import {getStorage, ref, getDownloadURL, uploadBytes, deleteObject} from "firebase/storage";
 import {useRouter} from 'next/router'
 import Modal from 'react-bootstrap/Modal'
@@ -23,6 +22,7 @@ import ReactMarkdown from 'react-markdown'
 import SvgIcon from "common/SvgIcon";
 import ClubAdminModal from "../../components/ClubAdmin/modal";
 import UModal from "components/UModal";
+import FaqEditor from "components/FaqEditor";
 
 function download_table_as_csv(table_id, separator = ',') {
     var rows = document.querySelectorAll('tr');
@@ -71,7 +71,6 @@ function Event() {
 
     const firebase = useContext(FirebaseContext);
     const storage = firebase?getStorage(firebase):getStorage();
-    console.log(getAuth(firebase).lastNotifiedUid)
 
     const [data, setData] = useState({
         clubLogoLinks: {},
@@ -88,7 +87,8 @@ function Event() {
         image1Ref : React.createRef(),
         image2Ref : React.createRef(),
         image3Ref : React.createRef(),
-        links:null
+        links:null,
+        currentModal:null,
     });
 
 
@@ -156,10 +156,16 @@ function Event() {
     const handleClose2 = () => setData({...data, showModal2:false});
     const handleShow2 = () => setData({...data, showModal2:true});
 
-    // const handleSubmitEvent =()=>{
-    //     console.log("edited");
-    //     handleCloseEvent();
-    // }
+    const setFaq = (faq) => {
+        axios.patch(`club/competition/${router.query.eventId}/`, {
+            faq: JSON.stringify(faq)
+        }).then(() => {
+            setData((prevData) => {
+                return {...prevData, event: {...prevData.event, faq: JSON.stringify(faq)}}
+            })
+        })
+    }
+
 
     const handleSubmitDescription = ()=>{
         console.log("edited");
@@ -618,7 +624,13 @@ function Event() {
 
                                     {(!event.faq || isEmpty(event.faq))?null:
                                     <div className="p-2 col-6">
-                                        <FAQModal data={JSON.parse(event.faq)} />
+                                        <FaqEditor
+                                            disappear={()=>{setData({...data, currentModal: null})}}
+                                            faq={JSON.parse(event.faq)}
+                                            setFaq={setFaq}
+                                            setShow={()=>{setData({...data,currentModal:"faq"})}}
+                                            show={data.currentModal=== "faq"}
+                                        />
                                     </div>}
 
                                     <div className="p-2 col-6">
