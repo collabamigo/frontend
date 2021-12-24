@@ -2,6 +2,7 @@ import React from "react";
 import {contents_heeman, subtitle, instagram, github, linkedin, behance} from "./index.module.css"
 
 class AboutUs extends React.Component {
+    
 
     componentDidMount() {
         this.scrollToBottom();
@@ -338,7 +339,7 @@ class AboutUs extends React.Component {
                                     <div className="col-md-11">
                                         <img
                                             className="img-fluid rounded-circle"
-                                            src="/img/jpg/never.jpg"
+                                            src="/img/jpg/never_gonna.jpeg"
                                         />
                                     </div>
 
@@ -525,7 +526,7 @@ class AboutUs extends React.Component {
                                     <div className="col-md-11">
                                         <img
                                             className="img-fluid rounded-circle"
-                                            src="/img/jpg/give_you_up.jpg"
+                                            src="/img/jpg/down.jpg"
                                         />
                                     </div>
 

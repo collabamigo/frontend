@@ -443,7 +443,7 @@ function generateCode(formData, setShowModal, eventId) {
     )
 }
 
-export default function GenerateEventForm({formData, eventId}) {
+export default function GenerateEventForm({formData, eventId,start,end}) {
     if (!formData)
         return null
 
@@ -452,7 +452,7 @@ export default function GenerateEventForm({formData, eventId}) {
     return (
         <>
             <Button
-                className="w-100"
+                className={"w-100 "+ (((new Date()) < (new Date(start))) && ((new Date()) < (new Date(end))) ? "disabled":"")}
                 onClick={() => setShow(true)}
                 size="lg"
             >
@@ -474,6 +474,8 @@ export default function GenerateEventForm({formData, eventId}) {
     )
 }
 GenerateEventForm.propTypes = {
+    end: PropTypes.string.isRequired,
     eventId: PropTypes.string.isRequired,
-    formData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]))).isRequired
+    formData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]))).isRequired,
+    start: PropTypes.string.isRequired,
 }

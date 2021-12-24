@@ -2,113 +2,101 @@
 import React from "react";
 import {cardSkillSearch} from './index.module.css';
 import axios from "utilities/axios";
-import backend from "../../env";
-import { Card } from "react-bootstrap";
-import CardExplorer from "../../components/CardExplorer";
+import Loading from "../../components/Loading";
+import EventTalkCard from "../../common/HomePageCards/EventTalkCard";
+import RCarousel from "react-multi-carousel";
 
-
-class ConnectionHistory extends React.Component {
+class EventHistory extends React.Component {
 
     constructor(props) {
-
         super(props);
         this.state = {
-            list: [],
+            eventList: undefined,
             loading: true
         }
     }
 
     componentDidMount() {
-        this.getTeacherIds();
+        axios.get("form/participation-history/")
+            .then((res) =>
+                this.setState({ eventList: res.data, loading: false }))
     }
 
-    // Noinspection JSCheckFunctionSignatures
-    shouldComponentUpdate() {
-        return true;
+    shouldComponentUpdate(){
+        return true
     }
 
     caller() {
-
-        if ((this.state.list).length > 1)
+        console.log(this.state.eventList[0])
+        if (this.state.eventList !== undefined && (this.state.eventList[0] !== null))
             return (
                 this.renderCardsIfNeeded()
             )
         else
             return (
                 <>
-                    Your Connections will be shown here once you connect with others
+                    Your Past events will appear once you have participated
                 </>
             )
     }
 
-    getTeacherIds = () => {
-        axios.get(backend + "connect/approvals/", {
-            params: {
-                format: "json",
-            }
-        })
-            .then((res) =>
-                this.setState({ list: [...(res.data), localStorage.getItem("id")], loading: false }))
-    };
-
     renderCardsIfNeeded() {
+        const responsive = {
+            superLargeDesktop: {
+                // the naming can be any, depends on you.
+                breakpoint: {max: 4000, min: 3000},
+                items: 5
+            },
+            desktop: {
+                breakpoint: {max: 3000, min: 1024},
+                items: 3
+            },
+            tablet: {
+                breakpoint: {max: 1024, min: 464},
+                items: 2
+            },
+            mobile: {
+                breakpoint: {max: 464, min: 0},
+                items: 1
+            }
+        };
         return (
-            <CardExplorer
-                isLoading={this.state.loading}
-                parentList={this.state.list}
-                showVotingAll
-            />
+            <RCarousel responsive={responsive}>
+                {this.state.eventList.map((option) => (
+                    <EventTalkCard
+                        element={option}
+                        key={option.description}
+                    />
+                ))}
+            </RCarousel>
         )
     }
 
     render() {
         if (this.state.loading)
             return (
-                <>
-                    <h1 className="col-sm-5 col-md-5">
-                        {" "}
-                        Fetching Data...
-
-                        {" "}
-                    </h1>
-
-                    <div
-                        className="spinner-border"
-                        role="status"
-                    >
-                        <span className="sr-only">
-                            Loading...
-                        </span>
-                    </div>
-                </>
+                <Loading />
             )
         else
             return (
                 <div className="container-fluid">
-                    <Card className={cardSkillSearch}>
-                        <Card.Title>
-                            <h1 className="col-sm-5 col-md-5">
-                                {" "}
-                                My Connection History
+                    <div className={cardSkillSearch}>
+                        <h1 className="text-center">
+                            {" "}
+                            Your Previous Events
 
-                                {" "}
-                            </h1>
-                        </Card.Title>
+                            {" "}
+                        </h1>
 
-                        <Card.Body>
-                            <div className="row-auto pt-5">
-                                <div className="col-auto ps-lg-5">
-                                    {this.caller()}
-                                </div>
+                        <div className="row-auto pt-5">
+                            <div className="col-auto ps-lg-5">
+                                {this.caller()}
                             </div>
-
-
-                        </Card.Body>
-                    </Card>
+                        </div>
+                    </div>
                 </div>
             );
-
     }
 }
 
-export default ConnectionHistory;
+export default EventHistory;
