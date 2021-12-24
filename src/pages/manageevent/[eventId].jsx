@@ -22,6 +22,7 @@ import {FirebaseContext} from "firebaseProvider";
 import ReactMarkdown from 'react-markdown'
 import SvgIcon from "common/SvgIcon";
 import ClubAdminModal from "../../components/ClubAdmin/modal";
+import UModal from "components/UModal";
 
 function download_table_as_csv(table_id, separator = ',') {
     var rows = document.querySelectorAll('tr');
@@ -158,6 +159,9 @@ function Event() {
     //     console.log("edited");
     //     handleCloseEvent();
     // }
+
+    const [ModalShow2, setModalShow2] = useState(false);
+
 
     const handleSubmitDescription = ()=>{
         console.log("edited");
@@ -303,9 +307,86 @@ function Event() {
         return <Loading />
     else
         return (
-            <div className="row px-md-5 mx-md-5 px-2 mx-2">
-                <div className="col-md-4 col-12 me-4">
-                    <div className="pb-5">
+            <>
+
+                <UModal
+                    ModalShow={ModalShow2}
+                    handleClose={() => setModalShow2(false)}
+                />
+
+                <Modal
+                    aria-labelledby="example-custom-modal-styling-title"
+                    onHide={handleClose}
+                    show={showModal}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Responses
+
+                            {tableResponses.length}
+                        </Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Table
+                            bordered
+                            hover
+                            striped
+                        >
+                            <thead>
+                                <tr>
+                                    <td>
+                                        {" "}
+                                        Sr no.
+                                    </td>
+
+                                    {tableHeaders.map((option) => (
+                                        <td key={option.name}>
+                                            {option.name}
+                                        </td>
+                                ))}
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {tableResponses.map((response, index) => (
+                                    <tr key={response}>
+
+                                        <td>
+                                            {index}
+                                        </td>
+
+                                        {response.elements.map((values) => (
+                                            <td
+                                                key={values.value}
+                                            >
+                                                {values.value}
+                                            </td>
+                                    ))}
+                                    </tr>
+                            ))}
+
+                            </tbody>
+                        </Table>
+
+                        <br />
+
+                        Woohoo, youre reading this text in a modal!
+                    </Modal.Body>
+
+
+                    <br />
+
+                    <Button
+                        className="w-50 align-self-center"
+                        onClick={() => {download_table_as_csv(event.name + ' responses')}}
+                    >
+                        Download as CSV
+                    </Button>
+
+                    <br />
 
                         <Carousel>
                             {lodashMap(data.bannerLinks, (image) => {
@@ -518,6 +599,14 @@ function Event() {
                                         >
                                             View Responses
                                         </Button>
+                                        <Button
+                                            onClick={() => setModalShow2(true)}
+                                            variant="primary"
+                                        >
+                                            Launch modal with grid
+                                        </Button>
+
+                                    </div>
 
                                         <Modal
                                             aria-labelledby="example-custom-modal-styling-title"
