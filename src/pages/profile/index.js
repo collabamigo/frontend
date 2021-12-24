@@ -195,7 +195,7 @@ class Profile extends React.Component{
                         <div className={styles.rightSection} >
                             <div>
                                 <Card.Header className={' ' + ' ' + styles.cardHfColor}>
-                                    <div className="fs-1 fw-bold">
+                                    <div className="display-4">
                                         Your Profile
                                     </div>
                                 </Card.Header>
