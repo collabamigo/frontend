@@ -81,24 +81,20 @@ class EventHistory extends React.Component {
         else
             return (
                 <div className="container-fluid">
-                    <Card className={cardSkillSearch}>
-                        <Card.Body>
-                            <Card.Title>
-                                <h1 className="text-center">
-                                    {" "}
-                                    Your Previous Events
+                    <div className={cardSkillSearch}>
+                        <h1 className="text-center">
+                            {" "}
+                            Your Previous Events
 
-                                    {" "}
-                                </h1>
-                            </Card.Title>
+                            {" "}
+                        </h1>
 
-                            <div className="row-auto pt-5">
-                                <div className="col-auto ps-lg-5">
-                                    {this.caller()}
-                                </div>
+                        <div className="row-auto pt-5">
+                            <div className="col-auto ps-lg-5">
+                                {this.caller()}
                             </div>
-                        </Card.Body>
-                    </Card>
+                        </div>
+                    </div>
                 </div>
             );
     }
