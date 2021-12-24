@@ -186,25 +186,20 @@ class Profile extends React.Component{
                                 <div className="mr-5 mt-5">
                                     <SvgIcon
                                         className="profile-image mt-5"
-                                        height="100%"
-                                        src="waving.svg"
-                                        width="120%"
+                                        height="60%"
+                                        src="profile.svg"
+                                        width="90%"
                                     />
-
-                                    <h5 className="text-center">
-                                        Here is all the information we have about you,
-                                        feel free to change whatever doesn&apos;t fit right
-                                    </h5>
                                 </div>
                             </div>)}
 
-                        <div className="col container" >
+                        <div className="col-5 mt-5 container" >
                             <Card className="card ms-5 container mb-5">
 
                                 <Card.Header className={'card-header' + ' ' + cardHfColor}>
-                                    <h1>
+                                    <div className="fs-1 fw-bold">
                                         Profile
-                                    </h1>
+                                    </div>
 
                                     <p className="text-danger float-left">
                                         * Required
@@ -216,68 +211,28 @@ class Profile extends React.Component{
                                         onSubmit={this.handleSubmit}
                                     >
                                         <div className="form-group required">
-                                            <div className="col-auto form-inline col-form-label">
-
-                                                <label>
-                                                    First Name
-                                                </label>
-
-                                                <OverlayTrigger
-                                                    overlay={popoverRight}
-                                                    placement="right"
-                                                    trigger="click"
-                                                >
-                                                    <div className="btn">
-                                                        <span
-                                                            className="material-icons"
-                                                        >
-                                                            help_outline
-                                                        </span>
-                                                    </div>
-                                                </OverlayTrigger>
-
-                                            </div>
 
                                             <div>
                                                 <input
-                                                    className="form-control col-auto"
+                                                    className="border-primary form-control col-auto"
                                                     disabled
+                                                    placeholder="First Name"
                                                     onChange={this.handleChangeFirstName}
                                                     type='text'
                                                     value={this.state.First_Name}
                                                 />
                                             </div>
-
-
                                         </div>
 
+                                        <br/>
+
                                         <div className="form-group required">
-                                            <div className="col-auto form-inline col-form-label">
-
-                                                <label>
-                                                    Last Name
-                                                </label>
-
-                                                <OverlayTrigger
-                                                    overlay={popoverRight}
-                                                    placement="right"
-                                                    trigger="click"
-                                                >
-                                                    <div className="btn">
-                                                        <span
-                                                            className="material-icons"
-                                                        >
-                                                            help_outline
-                                                        </span>
-                                                    </div>
-                                                </OverlayTrigger>
-
-                                            </div>
 
                                             <div className="row-auto">
                                                 <input
-                                                    className="form-control col-auto"
+                                                    className="border-primary form-control col-auto"
                                                     disabled
+                                                    placeholder="Last Name"
                                                     onChange={this.handleChangeLastName}
                                                     type='text'
                                                     value={this.state.Last_Name}
@@ -285,36 +240,22 @@ class Profile extends React.Component{
                                             </div>
                                         </div>
 
+                                         <br/>
+
                                         <div className="form-group required">
-                                            <label className="col-auto form-inline col-form-label">
-                                                Email Address
-                                            </label>
 
                                             <div>
                                                 <input
-                                                    className="form-control col-auto"
+                                                    className="border-primary form-control col-auto"
                                                     disabled
+                                                    placeholder="Email ID"
                                                     type='text'
                                                     value={this.state.email}
                                                 />
                                             </div>
                                         </div>
 
-                                        <div className="form-group ">
-                                            <label className=" form-inline col-form-label">
-                                                Telegram
-                                            </label>
-
-                                            <div>
-                                                <input
-                                                    className="form-control col-auto"
-                                                    onChange={this.handleChangeHandle}
-                                                    placeholder="username"
-                                                    type='text'
-                                                    value={this.state.handle}
-                                                />
-                                            </div>
-                                        </div>
+                                         <br/>
 
                                         {this.state.isTeacher?
                                             <div>
@@ -369,18 +310,22 @@ class Profile extends React.Component{
                                                 </div>
                                             </div>:null}
 
-                                        <div className="row form-group justify-content-center">
-                                            <div className="col-form-label required">
-                                                <label>
-                                                    Degree:
-                                                </label>
+                                        <div className="row form-group justify-content-around">
+                                            <div className="col-5 required mt-2">
 
                                                 <select
-                                                    className="form-control col-auto form-select m-2 p-6"
+                                                    className="border-primary form-control col-auto form-select m-2 p-6"
                                                     onChange={this.handleChangeDegree}
                                                     required
                                                     value={this.state.degree}
                                                 >
+                                                    <option
+                                                        value=""
+                                                        selected
+                                                    >
+                                                        ---Select Degree---
+                                                    </option>
+
                                                     <option value="M" >
                                                         M-Tech
                                                     </option>
@@ -399,18 +344,16 @@ class Profile extends React.Component{
                                                 </select>
                                             </div>
 
-                                            <div className="col-auto col-form-label ms-1 required">
-                                                <label>
-                                                    Course:
-                                                </label>
+                                            <div className="col-5 col-form-label required">
 
                                                 <select
-                                                    className="form-control col-auto form-select m-2 p-6"
+                                                    className="border-primary form-control col-auto form-select m-2 p-6"
                                                     onChange={this.handleChangeCourse}
                                                     value={this.state.course}
                                                 >
                                                     <option
                                                         value=""
+                                                        selected
                                                     >
                                                         ---Select Course---
                                                     </option>
@@ -447,6 +390,12 @@ class Profile extends React.Component{
                                             </div>
 
                                         </div>
+
+                                        <br/>
+
+                                        <p className="text-muted"> The above data is taken from your google account, do let us know if anything is wrong! </p>
+
+                                        <br/>
 
                                         <div>
                                             <button
