@@ -452,7 +452,7 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
     return (
         <>
             <Button
-                className={"w-100 "+ (((new Date()) > (new Date(start))) && ((new Date()) < (new Date(end))) ?"disabled":"")}
+                className={"w-100 "+ (((new Date()) < (new Date(start))) && ((new Date()) < (new Date(end))) ? "disabled":"")}
                 onClick={() => setShow(true)}
                 size="lg"
             >
