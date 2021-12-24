@@ -6,7 +6,6 @@ import backend from "../../env";
 import { Card } from "react-bootstrap";
 import CardExplorer from "../../components/CardExplorer";
 
-
 class ConnectionHistory extends React.Component {
 
     constructor(props) {
@@ -101,8 +100,6 @@ class ConnectionHistory extends React.Component {
                                     {this.caller()}
                                 </div>
                             </div>
-
-
                         </Card.Body>
                     </Card>
                 </div>

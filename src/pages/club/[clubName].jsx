@@ -306,7 +306,6 @@ class ClubHomePage extends Component {
             }
         };
 
-
         return (
             <div className="row m-md-3">
                 <div className="mx-3 col-md-2 col-lg-2 col-sm-12 d-flex justify-content-around">
