@@ -15,6 +15,7 @@ import WModal from 'components/WModal';
 import Loading from "components/Loading";
 import isEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
+import Link from "../../common/Link";
 import GenerateEventForm from "../../components/GenerateEventForm";
 import ReactMarkdown from 'react-markdown'
 import {
@@ -298,6 +299,13 @@ export default function Event() {
                                     </Button>
                                 </div>
                             </div>
+
+                            <Link to="/history">
+                                <div className="small text-end w-100">
+                                    See previous entries
+                                </div>
+
+                            </Link>
 
                             <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
 
