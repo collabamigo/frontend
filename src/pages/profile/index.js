@@ -163,7 +163,7 @@ class Profile extends React.Component{
                             Contact: (this.state.contact === undefined)?0:parseInt(this.state.contact.slice(1)),
                         })
 
-                    this.setState({loading: false, submitBtntext:"Submitted"})
+                    this.setState({loading: false, submitBtntext:"Submit Again"})
 
                 })
         }
@@ -232,9 +232,7 @@ class Profile extends React.Component{
                                             </div>
                                         </div>
 
-
                                         <div className="form-group required">
-
                                             <div>
                                                 <input
                                                     className="border-primary form-control col-auto mt-4"
@@ -389,7 +387,7 @@ class Profile extends React.Component{
 
                                         <div>
                                             <button
-                                                className="btn btn-lg btn-primary col-5"
+                                                className="btn btn-lg btn-primary col-auto"
                                                 onClick={this.handleSubmit.bind(this)}
                                                 type="submit"
                                             >
