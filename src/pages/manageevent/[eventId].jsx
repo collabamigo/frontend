@@ -22,6 +22,7 @@ import {FirebaseContext} from "firebaseProvider";
 import ReactMarkdown from 'react-markdown'
 import SvgIcon from "common/SvgIcon";
 import ClubAdminModal from "../../components/ClubAdmin/modal";
+import UModal from "components/UModal";
 
 function download_table_as_csv(table_id, separator = ',') {
     var rows = document.querySelectorAll('tr');
@@ -157,6 +158,9 @@ function Event() {
     //     handleCloseEvent();
     // }
 
+    const [ModalShow2, setModalShow2] = useState(false);
+
+
     const handleSubmitDescription = ()=>{
         console.log("edited");
         handleCloseDescription();
@@ -290,6 +294,12 @@ function Event() {
     else
         return (
             <>
+
+                <UModal
+                    ModalShow={ModalShow2}
+                    handleClose={() => setModalShow2(false)}
+                />
+
                 <Modal
                     aria-labelledby="example-custom-modal-styling-title"
                     onHide={handleClose}
@@ -580,6 +590,14 @@ function Event() {
                                         >
                                             View Responses
                                         </Button>
+
+                                        <Button
+                                            onClick={() => setModalShow2(true)}
+                                            variant="primary"
+                                        >
+                                            Launch modal with grid
+                                        </Button>
+
                                     </div>
 
                                     {(!event.faq || isEmpty(event.faq))?null:
