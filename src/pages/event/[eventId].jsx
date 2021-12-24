@@ -34,7 +34,7 @@ export default function Event() {
         imageLinks:[],
         clubLogoLinks: {},
         event: {},
-        form: {},
+        form: [undefined, false],
     });
 
 
@@ -61,8 +61,10 @@ export default function Event() {
             return {...prevData, clubLogoLinks: {...(prevData.clubLogoLinks), [club]: link}}
         })
     };
+
+
     const event = data.event;
-    const form = data.form;
+    const form = data.form[0];
     const clubLogoLinks = data.clubLogoLinks;
     const imageLinks = data.bannerLinks;
 
@@ -80,11 +82,10 @@ export default function Event() {
                         setEvent(res.data)
                         if ((res.data.winners !== undefined)){
                             setModalShow(true);
-                            console.log("truee", event.winners);
                         }
                     })
 
-            if (isEmpty(form))
+            if (!data.form[1])
                 axios.get(`form/form/${router.query.eventId}/`)
                     .then(res => setForm(res.data)).catch(err => console.log(err))
 
@@ -126,11 +127,13 @@ export default function Event() {
         return <Loading />
     return (
         <>
+
+
             <WModal
-                // data={JSON.parse(event.winners) ? JSON.parse(event.winners): null}
                 ModalShow={ModalShow}
                 handleClose={handleClose}
                 handleShow={handleShow}
+                values={isEmpty(event.winners) ? null : event.winners}
             />
 
             <div className="row px-md-5 mx-md-5 px-2 mx-2">
@@ -281,8 +284,9 @@ export default function Event() {
 
                                 <div className="p-2 col-6">
                                     <Button
-                                        className={"w-100 "+ (((new Date()) > (new Date(form.closes_at))) && ((new Date()) < (new Date(form.starts_at))) ?"disabled":"")}
-                                        disabled={((new Date()) > (new Date(form.closes_at))) ? true : false}
+                                        // className={"w-100 "+ (((new Date()) > (new Date(form.closes_at))) && ((new Date()) < (new Date(form.starts_at))) ?"disabled":"")}
+                                        className="w-100 "
+                                        // disabled={((new Date()) > (new Date(form.closes_at))) ? true : false}
                                         href={event.link}
                                         rel="noopener noreferrer"
                                         size="lg"

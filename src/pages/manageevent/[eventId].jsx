@@ -81,7 +81,8 @@ function Event() {
         showDescription:false,
         showModal: false,
         showModal2:false,
-        tableResponses: [],
+        tableResponses: [[], false],
+        form: [undefined, false],
         bannerLinks:undefined,
         bannerPaths :undefined,
         image1Ref : React.createRef(),
@@ -92,7 +93,7 @@ function Event() {
 
 
     const settableResponses = (tableResponses) => setData((prevData) => {
-        return {...prevData, tableResponses}
+        return {...prevData, tableResponses: [tableResponses, true]}
     });
 
     const setEvent = (event) => {
@@ -119,7 +120,8 @@ function Event() {
         // })
     }
     const setForm = (form) => setData((prevData) => {
-        return {...prevData, form}
+        console.log("setting ", form)
+        return {...prevData, form: [form, true]}
     });
 
     const addClubLogoLinks = (club, link) => {
@@ -129,10 +131,10 @@ function Event() {
         })
     };
     const event = data.event;
-    const form = data.form;
+    const form = data.form[0];
     const clubLogoLinks = data.clubLogoLinks;
-    const tableHeaders = isEmpty(form)?[]:JSON.parse(data.form.skeleton);
-    const tableResponses = data.tableResponses;
+    const tableHeaders = isEmpty(form)?[]:JSON.parse(form.skeleton);
+    const tableResponses = data.tableResponses[0];
     const showModal = data.showModal;
     const showModal2= data.showModal2;
 
@@ -250,17 +252,29 @@ function Event() {
      useEffect(() => {
         if (router.query.eventId!==undefined) {
 
-            if (isEmpty(tableResponses))
+            if (!data.tableResponses[1])
                 axios.get(`form/response/${router.query.eventId}/`)
                     .then(res => settableResponses(res.data))
+                    .catch(err => {
+                        if (err.response.status === 404)
+                            settableResponses(-1);
+                        else
+                            throw err;
+                    })
 
             if (isEmpty(event))
                 axios.get(`club/competition/${router.query.eventId}/`)
                     .then(res => setEvent(res.data))
 
-            if (isEmpty(form))
+            if (!data.form[1])
                 axios.get(`form/form/${router.query.eventId}/`)
-                    .then(res => setForm(res.data)).catch(err => console.log(err))
+                    .then(res => setForm(res.data))
+                    .catch(err => {
+                        if (err.response.status === 404)
+                            setForm(-1);
+                        else
+                            throw err;
+                })
 
             if (isEmpty(clubLogoLinks) && !isEmpty(event))
                 event.clubs.map(club => getDownloadURL(ref(storage, 'data/'+club+'/uneditable/logo.png'))
@@ -287,7 +301,7 @@ function Event() {
                     })
             }}})
 
-    console.log(event)
+
     const isLoading = isEmpty(event);
     if (isLoading)
         return <Loading />
@@ -374,15 +388,8 @@ function Event() {
 
                     <br />
 
-
-                </Modal>
-
-                <div className="row px-md-5 mx-md-5 px-2 mx-2">
-                    <div className="col-md-4 col-12 me-4">
-                        <div className="pb-5">
-
-                            <Carousel>
-                                {lodashMap(data.bannerLinks, (image) => {
+                        <Carousel>
+                            {lodashMap(data.bannerLinks, (image) => {
                                     return (
                                         <Carousel.Item key={image}>
                                             <Image
@@ -394,117 +401,117 @@ function Event() {
                                         </Carousel.Item>
                                     )
                                 })}
-                            </Carousel>
+                        </Carousel>
+                    </div>
+
+
+                    <div className="column">
+                        <div className="d-flex">
+                            {data.bannerLinks === undefined ? null:
+                            <div className="mx-auto d-flex">
+                                <div className="d-flex">
+                                    {data.bannerLinks[0]?
+                                        <div>
+                                            <span onClick={() => handleDeletePic(0)}>
+                                                <SvgIcon
+                                                    className="align-content-end"
+                                                    height="20px"
+                                                    src="cross.svg"
+                                                    width="20px"
+                                                />
+                                            </span>
+                                        </div>: null}
+
+                                    <div
+                                        className={"my-auto mx-3 " + ((data.bannerLinks[0]) ? "" : "-primary")}
+                                        onClick={() => data.image1Ref.current.click()}
+                                        type="button"
+                                    >
+
+                                        {bannerControl(data.bannerLinks, 0)}
+
+
+                                    </div>
+                                </div>
+
+                                <div className="d-flex">
+                                    {data.bannerLinks[1]?
+                                        <div>
+                                            <span onClick={() => handleDeletePic(1)}>
+                                                <SvgIcon
+                                                    className="align-content-end"
+                                                    height="20px"
+                                                    src="cross.svg"
+                                                    width="20px"
+                                                />
+                                            </span>
+                                        </div>: null}
+
+                                    <div
+                                        className={"my-auto mx-3" + ((data.bannerLinks[1]) ? "" : "-primary")}
+                                        onClick={() => data.image2Ref.current.click()}
+                                    >
+                                        {bannerControl(data.bannerLinks, 1)}
+                                    </div>
+                                </div>
+
+                                <div className="d-flex">
+                                    {data.bannerLinks[2]?
+                                        <div>
+                                            <span onClick={() => handleDeletePic(2)}>
+                                                <SvgIcon
+                                                    className="align-content-end"
+                                                    height="20px"
+                                                    src="cross.svg"
+                                                    width="20px"
+                                                />
+                                            </span>
+                                        </div>: null}
+
+                                    <div
+                                        className={"my-auto mx-3 " + ((data.bannerLinks[2]) ? "" : "-primary")}
+                                        onClick={() => data.image3Ref.current.click()}
+                                        type="button"
+                                    >
+                                        {bannerControl(data.bannerLinks, 2)}
+                                    </div>
+                                </div>
+                            </div>}
                         </div>
 
+                        <div>
+                            <input
+                                className="d-none"
+                                onChange={(e)=>handleUpload(e.target.files[0], 0)}
+                                ref={data.image1Ref}
+                                type="file"
+                            />
 
-                        <div className="column">
-                            <div className="d-flex">
-                                {data.bannerLinks === undefined ? null:
-                                <div className="mx-auto d-flex">
-                                    <div className="d-flex">
-                                        {data.bannerLinks[0]?
-                                            <div>
-                                                <span onClick={() => handleDeletePic(0)}>
-                                                    <SvgIcon
-                                                        className="align-content-end"
-                                                        height="20px"
-                                                        src="cross.svg"
-                                                        width="20px"
-                                                    />
-                                                </span>
-                                            </div>: null}
+                            <input
+                                className="d-none"
+                                onChange={(e)=>handleUpload(e.target.files[0], 1)}
+                                ref={data.image2Ref}
+                                type="file"
+                            />
 
-                                        <div
-                                            className={"my-auto mx-3 " + ((data.bannerLinks[0]) ? "" : "-primary")}
-                                            onClick={() => data.image1Ref.current.click()}
-                                            type="button"
-                                        >
-
-                                            {bannerControl(data.bannerLinks, 0)}
-
-
-                                        </div>
-                                    </div>
-
-                                    <div className="d-flex">
-                                        {data.bannerLinks[1]?
-                                            <div>
-                                                <span onClick={() => handleDeletePic(1)}>
-                                                    <SvgIcon
-                                                        className="align-content-end"
-                                                        height="20px"
-                                                        src="cross.svg"
-                                                        width="20px"
-                                                    />
-                                                </span>
-                                            </div>: null}
-
-                                        <div
-                                            className={"my-auto mx-3" + ((data.bannerLinks[1]) ? "" : "-primary")}
-                                            onClick={() => data.image2Ref.current.click()}
-                                        >
-                                            {bannerControl(data.bannerLinks, 1)}
-                                        </div>
-                                    </div>
-
-                                    <div className="d-flex">
-                                        {data.bannerLinks[2]?
-                                            <div>
-                                                <span onClick={() => handleDeletePic(2)}>
-                                                    <SvgIcon
-                                                        className="align-content-end"
-                                                        height="20px"
-                                                        src="cross.svg"
-                                                        width="20px"
-                                                    />
-                                                </span>
-                                            </div>: null}
-
-                                        <div
-                                            className={"my-auto mx-3 " + ((data.bannerLinks[2]) ? "" : "-primary")}
-                                            onClick={() => data.image3Ref.current.click()}
-                                            type="button"
-                                        >
-                                            {bannerControl(data.bannerLinks, 2)}
-                                        </div>
-                                    </div>
-                                </div>}
-                            </div>
-
-                            <div>
-                                <input
-                                    className="d-none"
-                                    onChange={(e)=>handleUpload(e.target.files[0], 0)}
-                                    ref={data.image1Ref}
-                                    type="file"
-                                />
-
-                                <input
-                                    className="d-none"
-                                    onChange={(e)=>handleUpload(e.target.files[0], 1)}
-                                    ref={data.image2Ref}
-                                    type="file"
-                                />
-
-                                <input
-                                    className="d-none"
-                                    onChange={(e)=>handleUpload(e.target.files[0], 2)}
-                                    ref={data.image3Ref}
-                                    type="file"
-                                />
-                            </div>
-
+                            <input
+                                className="d-none"
+                                onChange={(e)=>handleUpload(e.target.files[0], 2)}
+                                ref={data.image3Ref}
+                                type="file"
+                            />
                         </div>
 
+                    </div>
 
-                        <div className="pt-4">
-                            <p className="text-center text-primary fs-4">
-                                Organised By
-                            </p>
 
-                            <div className="row justify-content-around">
-                                {lodashMap(clubLogoLinks, ((link, club) => {
+                    <div className="pt-4">
+                        <p className="text-center text-primary fs-4">
+                            Organised By
+                        </p>
+
+                        <div className="row justify-content-around">
+                            {lodashMap(clubLogoLinks, ((link, club) => {
                                 return (
                                     <div
                                         className="col-5 me-1"
@@ -520,69 +527,71 @@ function Event() {
                                     </div>
                                 )
                             }))}
-                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div className="col">
-                        <div className="row text-primary">
-                            <div className="col-md-9 col-12">
-                                <h1 className="fw-bold">
-                                    {event.name}
+                <div className="col">
+                    <div className="row text-primary">
+                        <div className="col-md-9 col-12">
+                            <h1 className="fw-bold">
+                                {event.name}
 
-                                    {" "}
+                                {" "}
 
-                                    <button
-                                        className="btn btn-outline-warning material-icons"
-                                        onClick={handleShowEvent}
-                                        type="button"
-                                    >
-                                        edit
-                                    </button>
-                                </h1>
+                                <button
+                                    className="btn btn-outline-warning material-icons"
+                                    onClick={handleShowEvent}
+                                    type="button"
+                                >
+                                    edit
+                                </button>
+                            </h1>
 
-                                <div>
+                            <div>
 
-                                    <div className="">
-                                        <p>
+                                <div className="">
+                                    <p>
 
-                                            <FontAwesomeIcon icon={faCalendar} />
+                                        <FontAwesomeIcon icon={faCalendar} />
 
-                                            {' '}
+                                        {' '}
 
-                                            {convertToDatetimeString(event.event_start) +
+                                        {convertToDatetimeString(event.event_start) +
                                             (event.event_end?" to "+ convertToDatetimeString(event.event_end):"")}
-                                        </p>
+                                    </p>
 
-                                        <p>
-                                            <FontAwesomeIcon icon={faMapMarkerAlt} />
+                                    <p>
+                                        <FontAwesomeIcon icon={faMapMarkerAlt} />
 
-                                            {' '}
+                                        {' '}
 
-                                            {event.location}
-                                        </p>
+                                        {event.location}
+                                    </p>
 
-                                        {isEmpty(form)?null:
-                                        <p>
-                                            <FontAwesomeIcon icon={faClock} />
+                                    {isEmpty(form)?null:
+                                    <p>
+                                        <FontAwesomeIcon icon={faClock} />
 
-                                            {' '}
+                                        {' '}
 
-                                            Reg. starts
-                                            {' '}
+                                        Reg. starts
+                                        {' '}
 
-                                            {convertToDatetimeString(form.opens_at)}
+                                        {convertToDatetimeString(form.opens_at)}
 
-                                            {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
-                                        </p>}
-                                    </div>
+                                        {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
+                                    </p>}
                                 </div>
                             </div>
+                        </div>
 
-                            <div className="col-md-3 col-12">
-                                <div className="row">
+                        <div className="col-md-3 col-12">
+                            <div className="row">
 
-                                    <div>
+                                <div>
+                                    {isEmpty(form)?null:
+                                    <>
                                         <Button
                                             className="w-100"
                                             onClick={handleShow}
@@ -590,7 +599,6 @@ function Event() {
                                         >
                                             View Responses
                                         </Button>
-
                                         <Button
                                             onClick={() => setModalShow2(true)}
                                             variant="primary"
@@ -600,61 +608,142 @@ function Event() {
 
                                     </div>
 
-                                    {(!event.faq || isEmpty(event.faq))?null:
-                                    <div className="p-2 col-6">
-                                        <FAQModal data={JSON.parse(event.faq)} />
-                                    </div>}
-
-                                    <div className="p-2 col-6">
-                                        <Button
-                                            className="w-100"
-                                            onClick={handleShow2}
-                                            size="m"
-                                            variant="outline-primary"
+                                        <Modal
+                                            aria-labelledby="example-custom-modal-styling-title"
+                                            onHide={handleClose}
+                                            show={showModal}
+                                            size="lg"
                                         >
-                                            Add Links
-                                        </Button>
+                                            <Modal.Header closeButton>
+                                                <Modal.Title>
+                                                    Responses
 
-                                        <ClubAdminModal
-                                            handleClose={handleClose2}
-                                            handleSubmit={handleSubmitLinks}
-                                            initialValues={[data.links]}
-                                            labels={['Links to Add']}
-                                            show={showModal2}
-                                        />
+                                                    {tableResponses.length}
+                                                </Modal.Title>
+                                            </Modal.Header>
 
-                                    </div>
+                                            <Modal.Body>
+                                                <Table
+                                                    bordered
+                                                    hover
+                                                    striped
+                                                >
+                                                    <thead>
+                                                        <tr>
+                                                            <td>
+                                                                {" "}
+                                                                Sr no.
+                                                            </td>
+
+                                                            {tableHeaders.map((option) => (
+                                                                <td key={option.name}>
+                                                                    {option.name}
+                                                                </td>
+                                                                ))}
+
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        {tableResponses.map((response, index) => (
+                                                            <tr key={response}>
+
+                                                                <td>
+                                                                    {index}
+                                                                </td>
+
+                                                                {response.elements.map((values) => (
+                                                                    <td
+                                                                        key={values.value}
+                                                                    >
+                                                                        {values.value}
+                                                                    </td>
+                                                                    ))}
+                                                            </tr>
+                                                            ))}
+
+                                                    </tbody>
+                                                </Table>
+
+                                                <br />
+
+                                                Woohoo, youre reading this text in a modal!
+                                            </Modal.Body>
+
+
+                                            <br />
+
+                                            <Button
+                                                className="w-50 align-self-center"
+                                                onClick={() => {
+                                                            download_table_as_csv(event.name + " responses");
+                                                        }}
+                                            >
+                                                Download as CSV
+                                            </Button>
+
+                                            <br />
+
+
+                                        </Modal>
+                                    </>}
                                 </div>
 
-                                <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faWhatsapp}
-                                        size="2x"
+                                {(!event.faq || isEmpty(event.faq))?null:
+                                <div className="p-2 col-6">
+                                    <FAQModal data={JSON.parse(event.faq)} />
+                                </div>}
+
+                                <div className="p-2 col-6">
+                                    <Button
+                                        className="w-100"
+                                        onClick={handleShow2}
+                                        size="m"
+                                        variant="outline-primary"
+                                    >
+                                        Add Links
+                                    </Button>
+
+                                    <ClubAdminModal
+                                        handleClose={handleClose2}
+                                        handleSubmit={handleSubmitLinks}
+                                        initialValues={[data.links]}
+                                        labels={['Links to Add']}
+                                        show={showModal2}
                                     />
 
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faFacebook}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faInstagram}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faShareAlt}
-                                        size="2x"
-                                    />
                                 </div>
                             </div>
-                        </div>
 
-                        {/* <EventAdminModal
+                            <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
+                                <FontAwesomeIcon
+                                    className="mx-2"
+                                    icon={faWhatsapp}
+                                    size="2x"
+                                />
+
+                                <FontAwesomeIcon
+                                    className="mx-2"
+                                    icon={faFacebook}
+                                    size="2x"
+                                />
+
+                                <FontAwesomeIcon
+                                    className="mx-2"
+                                    icon={faInstagram}
+                                    size="2x"
+                                />
+
+                                <FontAwesomeIcon
+                                    className="mx-2"
+                                    icon={faShareAlt}
+                                    size="2x"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* <EventAdminModal
                             handleClose={handleCloseEvent}
                             handleSubmit={handleSubmitEvent}
                             initialValues={[event.name, convertToDatetimeString(event.event_start) +
@@ -665,30 +754,29 @@ function Event() {
                             show={data.showEvent}
                         /> */}
 
-                        <div>
-                            <ReactMarkdown>
-                                {event.description}
-                            </ReactMarkdown>
+                    <div>
+                        <ReactMarkdown>
+                            {event.description}
+                        </ReactMarkdown>
 
-                            <button
-                                className="btn btn-outline-warning material-icons"
-                                onClick={handleShowDescription}
-                                type="button"
-                            >
-                                edit
-                            </button>
+                        <button
+                            className="btn btn-outline-warning material-icons"
+                            onClick={handleShowDescription}
+                            type="button"
+                        >
+                            edit
+                        </button>
 
-                            <EventAdminModal
-                                handleClose={handleCloseDescription}
-                                handleSubmit={handleSubmitDescription}
-                                initialValues={[event.description]}
-                                labels={['Event Description']}
-                                show={data.showDescription}
-                            />
-                        </div>
+                        <EventAdminModal
+                            handleClose={handleCloseDescription}
+                            handleSubmit={handleSubmitDescription}
+                            initialValues={[event.description]}
+                            labels={['Event Description']}
+                            show={data.showDescription}
+                        />
                     </div>
                 </div>
-            </>
+            </div>
         )
 }
 
