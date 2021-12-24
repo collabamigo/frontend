@@ -2,7 +2,7 @@
 import React from "react";
 import {cardSkillSearch} from './index.module.css';
 import axios from "utilities/axios";
-import { Card } from "react-bootstrap";
+// import { Card } from "react-bootstrap";
 import Loading from "../../components/Loading";
 import EventTalkCard from "../../common/HomePageCards/EventTalkCard";
 import RCarousel from "react-multi-carousel";
