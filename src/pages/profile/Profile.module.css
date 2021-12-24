@@ -7,10 +7,50 @@
     background-color: rgba(255, 255, 255, 0.918) !important;
 }
 
-.lowwl {
+.mainSection {
     max-width: 70% !important;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .lowwla {
     max-width: 80% !important;
+}
+
+.leftSection {
+    width: 50% !important;
+}
+
+.rightSection{
+    width: 30% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 5rem;
+}
+
+.profileImage {
+    display: block !important;}
+
+@media screen and (max-width: 768px) {
+
+    .mainSection {
+        max-width: 95% !important;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .profileImage {
+        
+        display: none !important;
+    }
+
+    .leftSection {
+        width: 0% !important;
+    }
+    
+    .rightSection{
+        width: 100% !important;
+        margin-top: 1rem;
+
+    }
 }

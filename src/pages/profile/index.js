@@ -1,55 +1,55 @@
 import React from 'react'
-import {cardHfColor, lowwl} from './Profile.module.css';
+import styles from './Profile.module.css';
 import axios from "utilities/axios";
 import backend from "env";
 import Card from 'react-bootstrap/Card';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import {Popover} from 'react-bootstrap';
+// import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+// import {Popover} from 'react-bootstrap';
 import SvgIcon from "common/SvgIcon";
-import {isMobile} from "react-device-detect";
+// import {isMobile} from "react-device-detect";
 import Loading from "components/Loading";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 
-const popoverRight = (
-    <Popover
-        id="popover-positioned-right"
-        title="Popover right"
-    >
-        <Popover.Title as="h3">
-            <strong>
-                My name is not right!
-            </strong>
-        </Popover.Title>
+// const popoverRight = (
+//     <Popover
+//         id="popover-positioned-right"
+//         title="Popover right"
+//     >
+//         <Popover.Title as="h3">
+//             <strong>
+//                 My name is not right!
+//             </strong>
+//         </Popover.Title>
 
-        <Popover.Content>
-            Your name was authenticated from your google account.
-            {' '}
-            Contact us at our email
+//         <Popover.Content>
+//             Your name was authenticated from your google account.
+//             {' '}
+//             Contact us at our email
 
-            {' '}
+//             {' '}
 
-            <strong>
-                <a
-                    href="mailto:watsonhex@gmail.com ?subject=My Name is not correct"
-                    onClick="window.open(this.href)"
-                    onKeyPress="window.open(this.href)"
-                    rel="noreferrer"
-                    target="_blank"
-                >
-                    watsonhex@gmail.com
-                </a>
+//             <strong>
+//                 <a
+//                     href="mailto:watsonhex@gmail.com ?subject=My Name is not correct"
+//                     onClick="window.open(this.href)"
+//                     onKeyPress="window.open(this.href)"
+//                     rel="noreferrer"
+//                     target="_blank"
+//                 >
+//                     watsonhex@gmail.com
+//                 </a>
 
 
-            </strong>
+//             </strong>
 
-            {' '}
-            and we will get it right.
+//             {' '}
+//             and we will get it right.
 
-            {' '}
-        </Popover.Content>
-    </Popover>
-  );
+//             {' '}
+//         </Popover.Content>
+//     </Popover>
+//   );
 
 // eslint-disable-next-line react/no-multi-comp
 class Profile extends React.Component{
@@ -68,6 +68,7 @@ class Profile extends React.Component{
         this.state ={
             First_Name: '',
             Last_Name:'',
+            submitBtntext:'Submit',
             degree: '',
             contact: undefined,
             course:'',
@@ -162,8 +163,7 @@ class Profile extends React.Component{
                             Contact: (this.state.contact === undefined)?0:parseInt(this.state.contact.slice(1)),
                         })
 
-                    this.setState({loading: false})
-                    alert("Profile update successful")
+                    this.setState({loading: false, submitBtntext:"Submit Again"})
 
                 })
         }
@@ -179,106 +179,53 @@ class Profile extends React.Component{
             return <Loading />
         else
             return (
-                <section className={'container-fluid mt-0' + ' ' + lowwl}>
+                <section className={styles.mainSection}>
                     <div className="row" >
-                        {isMobile?null:(
-                            <div className="col container">
-                                <div className="mr-5 mt-5">
-                                    <SvgIcon
-                                        className="profile-image mt-5"
-                                        height="100%"
-                                        src="waving.svg"
-                                        width="120%"
-                                    />
+                        <div className={styles.leftSection}>
+                            <div className={"mt-0 "  + styles.profileImage}>
+                                <SvgIcon
+                                    className="profile-image mt-5"
+                                    height="60%"
+                                    src="profile.svg"
+                                    width="90%"
+                                />
+                            </div>
+                        </div>
 
-                                    <h5 className="text-center">
-                                        Here is all the information we have about you,
-                                        feel free to change whatever doesn&apos;t fit right
-                                    </h5>
-                                </div>
-                            </div>)}
-
-                        <div className="col container" >
-                            <Card className="card ms-5 container mb-5">
-
-                                <Card.Header className={'card-header' + ' ' + cardHfColor}>
-                                    <h1>
-                                        Profile
-                                    </h1>
-
-                                    <p className="text-danger float-left">
-                                        * Required
-                                    </p>
+                        <div className={styles.rightSection} >
+                            <div>
+                                <Card.Header className={' ' + ' ' + styles.cardHfColor}>
+                                    <div className="display-4">
+                                        Your Profile
+                                    </div>
                                 </Card.Header>
 
-                                <Card.Body className="pt-0 mt-0">
+                                <Card.Body className="pt-0 mt-4">
                                     <form
                                         onSubmit={this.handleSubmit}
                                     >
                                         <div className="form-group required">
-                                            <div className="col-auto form-inline col-form-label">
-
-                                                <label>
-                                                    First Name
-                                                </label>
-
-                                                <OverlayTrigger
-                                                    overlay={popoverRight}
-                                                    placement="right"
-                                                    trigger="click"
-                                                >
-                                                    <div className="btn">
-                                                        <span
-                                                            className="material-icons"
-                                                        >
-                                                            help_outline
-                                                        </span>
-                                                    </div>
-                                                </OverlayTrigger>
-
-                                            </div>
-
                                             <div>
                                                 <input
-                                                    className="form-control col-auto"
+                                                    className="border-primary form-control col-auto mt-2"
                                                     disabled
                                                     onChange={this.handleChangeFirstName}
+                                                    placeholder="First Name"
                                                     type='text'
                                                     value={this.state.First_Name}
                                                 />
                                             </div>
-
-
                                         </div>
 
+
                                         <div className="form-group required">
-                                            <div className="col-auto form-inline col-form-label">
-
-                                                <label>
-                                                    Last Name
-                                                </label>
-
-                                                <OverlayTrigger
-                                                    overlay={popoverRight}
-                                                    placement="right"
-                                                    trigger="click"
-                                                >
-                                                    <div className="btn">
-                                                        <span
-                                                            className="material-icons"
-                                                        >
-                                                            help_outline
-                                                        </span>
-                                                    </div>
-                                                </OverlayTrigger>
-
-                                            </div>
 
                                             <div className="row-auto">
                                                 <input
-                                                    className="form-control col-auto"
+                                                    className="border-primary form-control col-auto mt-4"
                                                     disabled
                                                     onChange={this.handleChangeLastName}
+                                                    placeholder="Last Name"
                                                     type='text'
                                                     value={this.state.Last_Name}
                                                 />
@@ -286,39 +233,20 @@ class Profile extends React.Component{
                                         </div>
 
                                         <div className="form-group required">
-                                            <label className="col-auto form-inline col-form-label">
-                                                Email Address
-                                            </label>
-
                                             <div>
                                                 <input
-                                                    className="form-control col-auto"
+                                                    className="border-primary form-control col-auto mt-4"
                                                     disabled
+                                                    placeholder="Email ID"
                                                     type='text'
                                                     value={this.state.email}
                                                 />
                                             </div>
                                         </div>
 
-                                        <div className="form-group ">
-                                            <label className=" form-inline col-form-label">
-                                                Telegram
-                                            </label>
-
-                                            <div>
-                                                <input
-                                                    className="form-control col-auto"
-                                                    onChange={this.handleChangeHandle}
-                                                    placeholder="username"
-                                                    type='text'
-                                                    value={this.state.handle}
-                                                />
-                                            </div>
-                                        </div>
-
                                         {this.state.isTeacher?
                                             <div>
-                                                <div className="form-group required">
+                                                <div className="form-group required mt-4">
                                                     <label className=" form-inline col-form-label">
                                                         LinkedIn URL
                                                     </label>
@@ -369,18 +297,22 @@ class Profile extends React.Component{
                                                 </div>
                                             </div>:null}
 
-                                        <div className="row form-group justify-content-center">
-                                            <div className="col-form-label required">
-                                                <label>
-                                                    Degree:
-                                                </label>
+                                        <div className="row form-group justify-content-around mt-4">
+                                            <div className="col-6 required ">
 
                                                 <select
-                                                    className="form-control col-auto form-select m-2 p-6"
+                                                    className="border-primary form-control col-auto form-select "
                                                     onChange={this.handleChangeDegree}
                                                     required
                                                     value={this.state.degree}
                                                 >
+                                                    <option
+                                                        selected
+                                                        value=""
+                                                    >
+                                                        ---Select Degree---
+                                                    </option>
+
                                                     <option value="M" >
                                                         M-Tech
                                                     </option>
@@ -399,17 +331,15 @@ class Profile extends React.Component{
                                                 </select>
                                             </div>
 
-                                            <div className="col-auto col-form-label ms-1 required">
-                                                <label>
-                                                    Course:
-                                                </label>
+                                            <div className="col-6 required">
 
                                                 <select
-                                                    className="form-control col-auto form-select m-2 p-6"
+                                                    className="border-primary form-control col-auto form-select "
                                                     onChange={this.handleChangeCourse}
                                                     value={this.state.course}
                                                 >
                                                     <option
+                                                        selected
                                                         value=""
                                                     >
                                                         ---Select Course---
@@ -448,18 +378,25 @@ class Profile extends React.Component{
 
                                         </div>
 
+                                        <p className="text-muted mt-3">
+                                            {' '}
+                                            The above data is taken from your google account, do let us know if anything is wrong!
+
+                                            {' '}
+                                        </p>
+
                                         <div>
                                             <button
-                                                className="btn btn-lg btn-primary col-5"
-                                            // onClick={this.handleSubmit.bind(this)}
+                                                className="btn btn-lg btn-primary col-auto"
+                                                onClick={this.handleSubmit.bind(this)}
                                                 type="submit"
                                             >
-                                                Submit
+                                                {this.state.submitBtntext}
                                             </button>
                                         </div>
                                     </form>
                                 </Card.Body>
-                            </Card>
+                            </div>
                         </div>
                     </div>
                 </section>
