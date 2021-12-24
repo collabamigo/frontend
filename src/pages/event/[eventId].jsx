@@ -61,6 +61,8 @@ export default function Event() {
             return {...prevData, clubLogoLinks: {...(prevData.clubLogoLinks), [club]: link}}
         })
     };
+
+
     const event = data.event;
     const form = data.form;
     const clubLogoLinks = data.clubLogoLinks;
@@ -80,7 +82,6 @@ export default function Event() {
                         setEvent(res.data)
                         if ((res.data.winners !== undefined)){
                             setModalShow(true);
-                            console.log("truee", event.winners);
                         }
                     })
 
@@ -126,11 +127,13 @@ export default function Event() {
         return <Loading />
     return (
         <>
+
+
             <WModal
-                // data={JSON.parse(event.winners) ? JSON.parse(event.winners): null}
                 ModalShow={ModalShow}
                 handleClose={handleClose}
                 handleShow={handleShow}
+                values={isEmpty(event.winners) ? null : event.winners}
             />
 
             <div className="row px-md-5 mx-md-5 px-2 mx-2">
