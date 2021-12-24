@@ -34,7 +34,7 @@ export default function Event() {
         imageLinks:[],
         clubLogoLinks: {},
         event: {},
-        form: {},
+        form: [undefined, false],
     });
 
 
@@ -64,7 +64,7 @@ export default function Event() {
 
 
     const event = data.event;
-    const form = data.form;
+    const form = data.form[0];
     const clubLogoLinks = data.clubLogoLinks;
     const imageLinks = data.bannerLinks;
 
@@ -85,7 +85,7 @@ export default function Event() {
                         }
                     })
 
-            if (isEmpty(form))
+            if (!data.form[1])
                 axios.get(`form/form/${router.query.eventId}/`)
                     .then(res => setForm(res.data)).catch(err => console.log(err))
 
