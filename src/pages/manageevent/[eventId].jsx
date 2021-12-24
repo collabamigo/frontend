@@ -309,6 +309,7 @@ function Event() {
 
                 <UModal
                     ModalShow={ModalShow2}
+                    eventID={router.query.eventId}
                     handleClose={() => setModalShow2(false)}
                 />
 

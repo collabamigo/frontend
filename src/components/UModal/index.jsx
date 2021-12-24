@@ -4,10 +4,14 @@ import PropTypes from 'prop-types'
 import Modal from 'react-bootstrap/Modal'
 import Button from "react-bootstrap/Button";
 import Form from 'react-bootstrap/Form';
+import axios from "utilities/axios";
+
 export default class index extends Component {
     static propTypes = {
         ModalShow: PropTypes.bool.isRequired,
+        eventID : PropTypes.number.isRequired,
         handleClose: PropTypes.func.isRequired,
+
     }
 
 
@@ -20,6 +24,7 @@ export default class index extends Component {
         this.updateformdata = this.updateformdata.bind(this);
         this.handleUpdatearray = this.handleUpdatearray.bind(this);
         this.handleDeleteField = this.handleDeleteField.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     shouldComponentUpdate(){
@@ -62,6 +67,14 @@ export default class index extends Component {
 
     }
 
+
+    handleSubmit() {
+        axios.patch('form/form/' + this.props.eventID, {
+            winners: this.state.array
+        })
+            .then(this.props.handleClose).catch(() => console.log("Error"))
+    }
+
     render() {
         return (
             <Modal
@@ -77,10 +90,7 @@ export default class index extends Component {
 
                 <Modal.Body>
 
-                    <Form onSubmit={(e)=> {
-                        e.preventDefault()
-                        console.log(this.state.array)}}
-                    >
+                    <Form onSubmit={this.handleSubmit}>
                         {this.state.array.map((item,index) => (
                             // eslint-disable-next-line react/jsx-key
                             <Form.Group
