@@ -10,7 +10,7 @@ import {App, Main} from "./layout.module.scss";
 import SSRProvider from 'react-bootstrap/SSRProvider';
 import {authSetLoggedIn, authSetLoggedOut, isBrowser, LoginContext} from "utilities/auth";
 
-function Layout({children}) {
+function Layout({children, title}) {
     const router = useRouter();
     const [loggedIn, _setLoggedIn] = useState((isBrowser() && sessionStorage.getItem("loginFlag")));
     const setLoggedIn = () => {
@@ -23,6 +23,9 @@ function Layout({children}) {
         _setLoggedIn(false);
     }
 
+    // eslint-disable-next-line no-undef
+    const NEXT_PUBLIC_GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+
     return (
         <LoginContext.Provider value={loggedIn}>
             <SSRProvider>
@@ -31,6 +34,25 @@ function Layout({children}) {
                     strategy="beforeInteractive"
                 />
 
+                <Script
+                    src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_ID}`}
+                    strategy='lazyOnload'
+                />
+
+                <Script id='ga-analytics'>
+                    {
+                        `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                
+                            gtag('config', '${NEXT_PUBLIC_GA_ID}', {
+                                page_path: window.location.pathname,
+                              });
+                        `
+                    }
+                </Script>
+
                 <div className={App}>
                     <Helmet>
                         <meta charSet="utf-8" />
@@ -38,11 +60,6 @@ function Layout({children}) {
                         <link
                             href="https://collabamigo.com"
                             rel="canonical"
-                        />
-
-                        <link
-                            href="%PUBLIC_URL%/icons/favicon.ico"
-                            rel="icon"
                         />
 
                         <meta
@@ -71,11 +88,7 @@ function Layout({children}) {
                         />
 
                         <link
-                            href="./img/svg/developer.svg"
-                        />
-
-                        <link
-                            href="img/icons/favicon.ico"
+                            href="/img/icons/favicon.ico"
                             rel="icon"
                         />
 
@@ -85,7 +98,7 @@ function Layout({children}) {
                         />
 
                         <title>
-                            CollabAmigo
+                            {title}
                         </title>
 
                         <link
@@ -113,7 +126,11 @@ function Layout({children}) {
 }
 
 Layout.propTypes = {
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    title: PropTypes.string,
 }
 
+Layout.defaultProps = {
+    title: 'CollabAmigo'
+}
 export default Layout

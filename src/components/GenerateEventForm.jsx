@@ -4,18 +4,10 @@ import {Modal} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import axios from "utilities/axios";
-import {toast} from "react-toastify";
+import {ToastContainer} from "react-toastify";
+import * as ga from "lib/ga";
 
 function generateCode(formData, setShowModal, eventId) {
-    toast.success('Wow so easy!', {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    });
 
     const validate = (values, formData) => {
         const errors = {};
@@ -418,10 +410,11 @@ function generateCode(formData, setShowModal, eventId) {
 
                     <Formik
                         initialValues={{...(Array(formData.length).fill(""))}}
-                        onSubmit={(values) => {console.log(values); axios.post("form/submit/"+eventId+"/", values).then(() => {
-                            toast()
+                        onSubmit={(values) => {axios.post("form/submit/" + eventId + "/", values).then(() => {
                             setShowModal(false);
-                        })}}
+
+                        }
+                        )}}
                         validate={(values) => validate(values, formData)}
                     >
                         {({errors, touched}) => (
@@ -460,11 +453,40 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
 
     const [show, setShow] = useState(false);
 
+    const register = () => {
+        ga.event({
+            action: "event-registration",
+            params: {
+                event_id: eventId
+            }
+        })
+        setShow(true);
+    }
+
+    const handleNotification =()=>{
+        if (!show){
+            return(
+                <ToastContainer
+                    autoClose={5000}
+                    closeOnClick
+                    draggable
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    pauseOnFocusLoss
+                    pauseOnHover
+                    position="top-center"
+                    rtl={false}
+                />
+        )
+
+        }
+    }
+
     return (
         <>
             <Button
                 className={"w-100 "+ (((new Date()) < (new Date(start))) && ((new Date()) < (new Date(end))) ? "disabled":"")}
-                onClick={() => setShow(true)}
+                onClick={register}
                 size="lg"
             >
                 Register Here
@@ -481,6 +503,8 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
             >
                 {generateCode(formData, setShow, eventId)}
             </Modal>
+
+            { handleNotification }
         </>
     )
 }

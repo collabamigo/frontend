@@ -516,4 +516,6 @@ class ClubHomePage extends Component {
     }
 }
 
-export default withRouter(ClubHomePage);
+const wrappedPage = withRouter(ClubHomePage);
+export default wrappedPage;
+wrappedPage.title = "CollabAmigo Club page";

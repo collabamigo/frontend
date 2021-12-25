@@ -134,8 +134,6 @@ export default function Event() {
         return <Loading />
     return (
         <>
-
-
             <WModal
                 ModalShow={ModalShow}
                 handleClose={handleClose}
@@ -396,3 +394,4 @@ export default function Event() {
         </>
     )
 }
+Event.title = "CollabAmigo Event page"
