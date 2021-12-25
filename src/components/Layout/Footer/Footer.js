@@ -1,6 +1,5 @@
 import React from "react"
 import styles from "./Footer.module.css";
-import SvgIcon from "../../../common/SvgIcon";
 import {EmailShareButton} from "react-share";
 
 function Footer() {
