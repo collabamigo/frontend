@@ -1,0 +1,77 @@
+name: Deploy PR preview to Layer0
+
+on:
+  pull_request:
+    branches:
+      - testing
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Installing dependencies
+        run: npm ci
+
+      - name: ESLinting .js and .jsx files
+        run: npx eslint src --ext .js,.jsx
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.18.1
+      - name: Cache node modules
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install packages
+        run: npm ci
+
+      - name: Deploy to Layer0
+        run: |
+          npm run layer0:deploy collabamigo -- --token=$deploy_token  --environment=default
+        env:
+          deploy_token: ${{secrets.LAYER0_DEPLOY_TOKEN_PREVIEW}}
+
+      - run: echo "::set-output name=deploy_output::$(cat .layer0/deployment-manifest.json)"
+        id: set-output-deploy-output
+
+      - name: JSON processing
+        run: |
+          echo "${{fromJson(steps.set-output-deploy-output.outputs.deploy_output).url}}"
+
+      - name: "Comment preview URL on Pull Request"
+        uses: actions/github-script@v5
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.PREVIEW_URL }}
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'The preview URL for this PR is ${{fromJson(steps.set-output-deploy-output.outputs.deploy_output).url}}'
+            })

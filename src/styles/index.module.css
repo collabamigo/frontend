@@ -1,0 +1,241 @@
+.firstSection{
+    margin-left: 7rem;
+    margin-right: 7rem;
+    padding: 10px;
+
+}
+.firstsectionInner{
+    padding:10px;
+}
+
+/* .image{
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+} */
+
+.firstsectionInnerleft{
+    margin-top: 1.5%;
+    width: 40%;
+}
+
+.firstsectionInnerright{
+    padding-top: 1%;
+    width: 60%;
+}
+
+.firstsectionInnertext{
+    margin-top: 2.5% !important;
+
+    font-size: 30px !important;
+}
+
+.firstsectionHeading{
+    font-size:25px;
+    margin-left: 3rem;
+
+}
+
+.firstsectionMiddle{
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+.secondSection{
+    padding:10px;
+}
+
+.secondsectionInner{
+    padding:10px;
+}
+
+.secondsectionInnerleft{
+    margin-top: 2.5%;
+    width: 40%;
+}
+
+.secondsectionInnerright{
+    width: 60%;
+}
+
+.secondsectionHeading{
+    font-size:30px;
+    margin-left: 3rem;
+}
+
+
+.secondsectionMiddle{
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+.thirdsectionInner{
+    padding:10px;
+}
+
+.fourthsectionInner{
+    padding:10px;
+}
+
+.thirdsectionHeading{
+    font-size:30px;
+}
+
+.thirdsectionHeading{
+    font-size:25px;
+    margin-left: 3rem;
+}
+
+.thirdsectionMiddle{
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+.fourthsectionHeading{
+    font-size:25px;
+    margin-left: 3rem;
+}
+
+.fourthsectionMiddle{
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+
+@media (max-width: 800px) {
+    .firstSection{
+        margin-left: 0rem;
+        margin-right: 0rem;
+        padding: 0px;
+    }
+
+  
+
+    .firstsectionInner{
+        padding:10px;
+    }
+
+    .firstsectionInnerleft{
+        margin-top: 0% !important;
+        padding-top: 0px !important;
+        width: 100% !important;
+        margin-left: 0% !important;
+        padding-left: 0% !important;
+    }
+
+    .firstsectionInnerright{
+        width: 100%;
+    }
+
+    .firstsectionInnerheading{
+        font-size: 25px !important;
+        text-align: center;
+        padding-left: 20px !important;
+
+    }
+
+    .firstsectionInnertext{
+        text-align: left !important;
+        font-size: 15px !important;
+        padding-top: 20px !important;
+        padding-left: 20px !important;
+
+    }
+
+    .secondSection{
+        padding:0px !important;
+        margin: 0px !important;
+        width: 100% !important;
+    }
+
+    .secondsectionInner{
+        padding:0px !important;
+        margin: 0px !important;
+        width: 100% !important;
+        width: 100% !important;
+
+
+    }
+
+    .secondsectionInnerleft{
+        margin-top: 2.5%;
+    }
+
+    .secondsectionInnerright{
+        width: 60%;
+    }
+
+   
+
+    .secondsectionHeading{
+        font-size:25px;
+        margin-left: 0rem !important;
+        padding-left:20px !important;
+
+    }
+
+    .secondsectionMiddle{
+        margin-left: 0rem !important;
+        padding-left:10px !important;
+        width: 100% !important;
+    }
+
+    .thirdSection{
+        padding:0px !important;
+        margin: 0px !important;
+        width: 100% !important;
+    }
+
+    .thirdsectionInner{
+        padding:10px;
+    }
+
+    .thirdsectionInnerleft{
+        margin-top: 2.5%;
+        width: 40%;
+    }
+
+    .thirdsectionInnerright{
+        width: 60%;
+    }
+
+    .thirdsectionHeading{
+        font-size:25px;
+        margin-left: 1rem !important;
+    }
+
+    .thirdsectionMiddle{
+        padding:0px !important;
+        margin: 0px !important;
+    }
+
+    .fourthSection{
+        margin-left: 0rem;
+        margin-right: 0rem;
+        padding: 10px;
+    }
+
+    .fourthsectionInner{
+        padding:10px;
+    }
+
+    .fourthsectionInnerleft{
+        margin-top: 2.5%;
+        width: 40%;
+    }
+
+    .fourthsectionInnerright{
+        width: 60%;
+    }
+
+    .fourthsectionHeading{
+        font-size:25px;
+        margin-left: 1rem !important;
+    }
+
+    .fourthsectionMiddle{
+        margin-left:3rem;
+        margin-right: 3rem;
+    }
+
+}

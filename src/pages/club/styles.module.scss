@@ -1,0 +1,158 @@
+@import '~rfs/scss';
+
+.clubcard {
+    position: fixed;
+    margin-left: 2em;
+}
+
+.mainBox{
+    width: 100% !important;
+}
+
+.descriptionBox {
+    width: 45% !important;
+    padding : 0px !important;
+    margin: 2% !important;
+}
+
+.announcementsBox{
+    width: 45% !important;
+    padding : 0 !important;
+    margin: 2% !important;
+}
+
+.edit{
+    fill:rgb(0, 0, 0);
+}
+
+.edit:hover{
+    fill:rgb(30, 67, 136)
+}
+
+.clubBox {
+    padding-left: 4.5em;
+}
+
+.leftCard1, .leftCard2 {
+    width: 72em;
+}
+
+.coordinators, .memberSize {
+    font-size: 20px;
+}
+
+.tagline {
+    font-size: 20px;
+    padding-bottom: 2px;
+}
+
+.descriptionHeading{
+    font-size: 33px  !important;
+    text-align: left !important;
+    padding-left: 2px !important;
+    padding-bottom: 5px !important;
+}
+.announcementsHeading {
+    font-size: 33px  !important;
+    text-align: left !important;
+    padding-left: 2px !important;
+    padding-bottom: 5px !important;
+}
+
+
+.description {
+    font-size: 18px;
+}
+
+.notifications {
+    font-size: 18px;
+}
+
+.notificationHeading {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.bannerImage {
+    max-height: 16rem;
+}
+@media (max-width: 800px) {
+
+    .clubcard{
+        position: relative;
+        margin: 0 2rem 2rem;
+    }
+
+    // .mainBox{
+    //     display: flex;
+    //     flex-direction: reverse;
+    // }
+
+    .mainBox{
+        width: 100% !important;
+        flex-direction: column-reverse;
+    }
+    
+    .descriptionBox {
+        width: 100% !important;
+        padding : 0px !important;
+        margin: 2% !important;
+    }
+
+    
+    
+    .announcementsBox{
+        width: 100% !important;
+        padding : 0 !important;
+        margin: 0% !important;
+    }
+
+    .coordinators, .memberSize {
+        font-size: 15px;
+    }
+
+    .descriptionHeading {
+        // font-size: 18px;
+        text-align: center;
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+        // padding-bottom: 3px;
+    }
+
+    .announcementsHeading {
+        font-size: 18px;
+        text-align: left;
+        padding-bottom: 3px;
+        padding-left: 0em;
+        margin-left: 0em;
+    }
+
+    .leftCard1, .leftCard2 {
+        width: 18em;
+    }
+
+    .description {
+        font-size: 15px;
+        width: 8em;
+    }
+
+    .description {
+        font-size: 18px;
+        width: 8em;
+    }
+
+    .notifications {
+        font-size: 15px;
+    }
+
+    .notificationHeading {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .tagline {
+        font-size: 15px;
+        padding-bottom: 2px;
+    }
+}

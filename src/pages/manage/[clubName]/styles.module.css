@@ -1,0 +1,104 @@
+
+.clubcard {
+    position: fixed;
+    padding-left: 2em;
+}
+
+.clubBox {
+    padding-left: 4.5em;
+}
+
+.leftCard1, .leftCard2 {
+    width: 72em;
+}
+
+.buttonsBox {
+    padding-top: 2em;
+}
+
+.coordinators, .memberSize {
+    font-size: 20px;
+}
+
+.tagline {
+    font-size: 20px;
+    padding-bottom: 2px;
+}
+
+.descriptionHeading, .announcementsHeading {
+    font-size: 33px;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.description {
+    font-size: 18px;
+    width: 33em;
+}
+
+.notifications {
+    font-size: 18px;
+}
+
+.notificationHeading {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.descriptionBox {
+    width: 33em;
+}
+
+@media (max-width: 800px) {
+
+    .clubcard{
+        position: relative;
+        margin: 0em 1em 1em 0em;
+    }
+
+    .coordinators, .memberSize {
+        font-size: 15px;
+    }
+
+    .descriptionHeading {
+        font-size: 18px;
+        text-align: center;
+        padding-bottom: 3px;
+    }
+
+    .announcementsHeading {
+        font-size: 18px;
+        text-align: left;
+        padding-bottom: 3px;
+        padding-left: 0em;
+        margin-left: 0em;
+    }
+
+    .leftCard1, .leftCard2 {
+        width: 18em;
+    }
+
+    .description {
+        font-size: 15px;
+        width: 8em;
+    }
+
+    .description {
+        font-size: 18px;
+        width: 8em;
+    }
+
+    .notifications {
+        font-size: 15px;
+    }
+
+    .notificationHeading {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .tagline {
+        font-size: 15px;
+        padding-bottom: 2px;
+    }
+}

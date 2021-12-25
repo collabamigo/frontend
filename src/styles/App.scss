@@ -1,0 +1,40 @@
+@import "bootstrapCustom";
+@import "remirror";
+
+.rounded-5 {
+  border-radius: 1rem;
+}
+
+.rounded-4 {
+  border-radius: 0.4rem;
+}
+
+.mw-50 {
+  max-width: 50%;
+}
+
+.mw-75 {
+  max-width: 75%;
+}
+
+.cursor-move {
+  cursor: move;
+}
+
+.appearance-auto {
+  appearance: auto !important;
+}
+
+.start-95 {
+  left: 95% !important
+}
+
+.start-93 {
+  left: 93% !important
+}
+
+.reset-a, .reset-a:hover, .reset-a:visited, .reset-a:focus, .reset-a:active {
+  text-decoration: inherit;
+  color: inherit;
+  outline: inherit;
+}

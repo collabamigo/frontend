@@ -1,0 +1,53 @@
+.signoutBtn {
+    color: white;
+    border: 1px solid rgb(90, 113, 211);
+    background-color: rgb(90, 113, 211);
+    width: 10rem;
+    padding: 10px;
+    border-radius: 30px;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+.navbar{
+    background: rgb(30, 48, 75) !important;
+    position: absolute;
+}
+  
+.colorr{
+    background: rgb(30, 48, 75) !important;
+
+}
+
+
+
+
+
+
+/* 
+
+.Burger {
+    display: none;
+
+}
+.Burger svg {
+    fill: #2e186a;
+}
+@media only screen and (max-width: 890px) {
+    .NotHidden{
+        display: none;
+    }
+
+    .Burger {
+        display: block;
+    }
+}
+
+.Label {
+    font-weight: 500;
+    color: #404041;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+} */
