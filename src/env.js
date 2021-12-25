@@ -4,7 +4,7 @@ const production = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production';
 let backend = ""
 
 if (production)
-    backend = "https://collabamigo.iiitd.edu.in/"
+    backend = "https://api.collabamigo.com/"
 else
     backend = "https://blooming-peak-53825.herokuapp.com/"
 
