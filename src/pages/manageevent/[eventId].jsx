@@ -46,7 +46,6 @@ function download_table_as_csv(table_id, separator = ',') {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    console.log("lol")
 }
 
 function isEmpty(obj) {
@@ -107,17 +106,6 @@ function Event() {
                 }
             };
         });
-
-        // JSON.parse(event.image_links).map((link, index) => {
-        //     return getDownloadURL(ref(storage, link)).then((url) =>
-        //         setData((prevData) => {
-        //             return {...prevData, event: {
-        //                 ...prevData.event,
-        //                 image_links: {...prevData.event.image_links, [index]: url}
-        //             }}
-        //         })
-        //     )
-        // })
     }
     const setForm = (form) => setData((prevData) => {
         return {...prevData, form: [form, true]}
@@ -155,6 +143,13 @@ function Event() {
     const handleClose2 = () => setData({...data, showModal2:false});
     const handleShow2 = () => setData({...data, showModal2:true});
 
+    // const handleSubmitEvent =()=>{
+    //     console.log("edited");
+    //     handleCloseEvent();
+    // }
+
+    const [ModalShow2, setModalShow2] = useState(false);
+
     const setFaq = (faq) => {
         axios.patch(`club/competition/${router.query.eventId}/`, {
             faq: JSON.stringify(faq)
@@ -164,8 +159,6 @@ function Event() {
             })
         })
     }
-
-
     const handleSubmitDescription = ()=>{
         console.log("edited");
         handleCloseDescription();
@@ -248,8 +241,7 @@ function Event() {
         const payload = {
             link: args[0],
         }
-        axios.patch('/club/competition/' + router.query.eventId + '/', payload).then(()=>{console.log("done")})
-        console.log("link submitted")
+        axios.patch('/club/competition/' + router.query.eventId + '/', payload).then(()=>{console.log("link submitted")})
     }
 
      useEffect(() => {
@@ -314,6 +306,7 @@ function Event() {
 
                 <UModal
                     ModalShow={ModalShow2}
+                    eventID={router.query.eventId}
                     handleClose={() => setModalShow2(false)}
                 />
 
@@ -534,10 +527,10 @@ function Event() {
                                             </Button>
 
                                             <Button
-                                                onClick={() => setModalShow2(true)}
-                                                variant="primary"
+                                                className="my-2 w-100"onClick={() => setModalShow2(true)}
+                                                size="lg"
                                             >
-                                                Launch modal with grid
+                                                Declare winners
                                             </Button>
 
                                             <Modal
@@ -636,7 +629,7 @@ function Event() {
                                         <Button
                                             className="w-100"
                                             onClick={handleShow2}
-                                            size="m"
+
                                             variant="outline-primary"
                                         >
                                             Add Links
