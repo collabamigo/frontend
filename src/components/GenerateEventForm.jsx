@@ -453,20 +453,22 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
     const [show, setShow] = useState(false);
 
     const handleNotification =()=>{
-        return(
-            <ToastContainer
-                autoClose={5000}
-                closeOnClick
-                draggable
-                hideProgressBar={false}
-                newestOnTop={false}
-                pauseOnFocusLoss
-                pauseOnHover
-                position="top-center"
-                rtl={false}
-            />
+        if (!show){
+            return(
+                <ToastContainer
+                    autoClose={5000}
+                    closeOnClick
+                    draggable
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    pauseOnFocusLoss
+                    pauseOnHover
+                    position="top-center"
+                    rtl={false}
+                />
         )
 
+        }
     }
 
     return (
