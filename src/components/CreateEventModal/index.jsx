@@ -125,17 +125,11 @@ export default class CreateEventModal extends React.Component {
         else {
             return (
                 <div>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-
 
                     <Modal
-                        className="mw-100 rounded-5"
+                        className=" rounded-5"
                         contentClassName="border-0 m-0 rounded-5"
-                        dialogClassName="mw-50 w-50"
+                        dialogClassName="mw-50 w-100"
                         onEntered={() => this.setState((prevState) => ({
                             modalOpened: {
                                 ...prevState.modalOpened,
