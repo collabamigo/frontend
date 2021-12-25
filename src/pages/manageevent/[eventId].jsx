@@ -23,7 +23,7 @@ import SvgIcon from "common/SvgIcon";
 import ClubAdminModal from "../../components/ClubAdmin/modal";
 import UModal from "components/UModal";
 import FaqEditor from "components/FaqEditor";
-
+import DuplicateModal from "components/DuplicateModal";
 function download_table_as_csv(table_id, separator = ',') {
     var rows = document.querySelectorAll('tr');
     var csv = [];
@@ -133,7 +133,7 @@ function Event() {
 
     const handleCloseDescription = () => setData({...data, showDescription: false});
     const handleShowEvent = () => setData({...data, showEvent: true});
-    const handleShowDescription = () => setData({...data, showDescription: true});
+    // const handleShowDescription = () => setData({...data, showDescription: true});
 
     const handleClose = () => setData({...data, showModal: false});
     const handleShow = () => setData({...data, showModal: true});
@@ -147,6 +147,8 @@ function Event() {
     // }
 
     const [ModalShow2, setModalShow2] = useState(false);
+    const [ModalShow3, setModalShow3] = useState(false);
+
 
     const setFaq = (faq) => {
         axios.patch(`club/competition/${router.query.eventId}/`, {
@@ -306,6 +308,12 @@ function Event() {
                     ModalShow={ModalShow2}
                     eventID={router.query.eventId}
                     handleClose={() => setModalShow2(false)}
+                />
+
+                <DuplicateModal
+                    handleClose={() => setModalShow3(false)}
+                    router={router}
+                    show={ModalShow3}
                 />
 
                 <div className="row px-md-5 mx-md-5 px-2 mx-2">
@@ -688,13 +696,13 @@ function Event() {
                                 {event.description}
                             </ReactMarkdown>
 
-                            <button
-                                className="btn btn-outline-warning material-icons"
-                                onClick={handleShowDescription}
-                                type="button"
+                            <Button
+                                className="my-2 w-100"
+                                onClick={() => setModalShow3(true)}
+                                size="lg"
                             >
-                                edit
-                            </button>
+                                Declare winners
+                            </Button>
 
                             <EventAdminModal
                                 handleClose={handleCloseDescription}
