@@ -15,6 +15,7 @@ import TextEditor from "components/TextEditor";
 export default class CreateEventModal extends React.Component {
 
     static propTypes = {
+        description: PropTypes.string.isRequired,
         handleClose: PropTypes.func.isRequired,
         router: PropTypes.shape({
             isReady: PropTypes.bool.isRequired,
@@ -24,45 +25,15 @@ export default class CreateEventModal extends React.Component {
             })
         }).isRequired,
         show: PropTypes.bool.isRequired,
-       
-
     }
 
     constructor(props) {
         super(props);
 
-        const today = new Date();
-        const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        const yyyy = today.getFullYear();
         this.state = {
             stage: 1,
-            name: "",
             description: "",
-            eventDate: "",
-            eventLink: null,
-            formBuilder: {
-                1: [],
-                2: {
-                max: undefined,
-                min: undefined,
-                pattern: undefined,
-                maxLength: undefined,
-                minLength: undefined,
-                required: undefined,
-                name: "",
-                type: "",
-                options: [],
-            }},
-            isFormConnected: true,
-            modalOpened: {
-                1: false,
-                2: false,
-                3: false,
-            },
-            promo: null,
-            registrationDeadlineDate: "",
-            registrationStartDate: yyyy+"-"+mm+"-"+dd,
+            
         }
     }
 
@@ -151,7 +122,7 @@ export default class CreateEventModal extends React.Component {
                                         className={headingWithTopMargin + " fw-bold mb-1"}
                                         id="main"
                                     >
-                                        Create new event
+                                        Update Description
                                     </h1>
                                 </Modal.Header>
 
@@ -159,14 +130,8 @@ export default class CreateEventModal extends React.Component {
 
                                     <Formik
                                         initialValues={{
-                                            name: this.state.name,
-                                            description: this.state.description,
-                                            eventDate: this.state.eventDate,
-                                            eventLink: this.state.eventLink,
-                                            isFormConnected: this.state.isFormConnected,
-                                            promo: this.state.promo,
-                                            registrationDeadlineDate: this.state.registrationDeadlineDate,
-                                            registrationStartDate: this.state.registrationStartDate,
+                                            description: this.props.description,
+                                            
                                         }}
                                         onSubmit={(values) => {
                                             if (values.isFormConnected)
@@ -177,23 +142,7 @@ export default class CreateEventModal extends React.Component {
                                     >
                                         <Form className="justify-content-center mt-3">
 
-                                            <div className="mb-4">
-
-                                                <label
-                                                    className="me-2 fs-5"
-                                                    htmlFor="name"
-                                                >
-                                                    Event Name
-                                                </label>
-
-                                                <Field
-                                                    className="form-control text-input w-100 bg-secondary text-white border-secondary border-1"
-                                                    id="name"
-                                                    name="name"
-                                                    required
-                                                />
-
-                                            </div>
+                                            
 
                                             <div className="mb-4">
                                                 <label
@@ -215,78 +164,6 @@ export default class CreateEventModal extends React.Component {
                                                     description={this.state.description}
                                                     handleSetDescription={this.setDescription.bind(this)}
                                                 />
-                                            </div>
-
-                                            <div className="mb-3 align-middle">
-                                                <label
-                                                    className="me-2 fs-5"
-                                                    htmlFor="eventDate"
-                                                >
-                                                    Event Date
-                                                </label>
-
-                                                <Field
-                                                    className="form-control w-auto text-input bg-secondary text-white border-secondary"
-                                                    id="eventDate"
-                                                    name="eventDate"
-                                                    placeholder="yyyy-mm-dd"
-                                                    required
-                                                    type="datetime-local"
-                                                />
-                                            </div>
-
-                                            <div className="mb-3 align-middle">
-                                                <label
-                                                    className="me-2 fs-5"
-                                                    htmlFor="eventLink"
-                                                >
-                                                    Event link (Zoom/Google Meet/etc)
-                                                </label>
-
-                                                <Field
-                                                    className="form-control text-input w-100 bg-secondary text-white border-secondary border-1"
-                                                    id="eventLink"
-                                                    name="eventLink"
-                                                    required
-                                                />
-
-                                            </div>
-
-                                            <div className="mb-3 align-middle">
-                                                <label
-                                                    className="me-2 fs-5"
-                                                    htmlFor="promo"
-                                                >
-                                                    Promotional message
-                                                </label>
-
-                                                <Field
-                                                    as="textarea"
-                                                    className="form-control text-input w-100 bg-secondary text-white border-secondary"
-                                                    id="promo"
-                                                    name="promo"
-                                                    required
-                                                />
-
-                                            </div>
-
-                                            <div className="mb-3">
-
-                                                <Field
-                                                    className="form-check-input bg-secondary text-white border-secondary me-3 fs-5"
-                                                    id="isFormConnected"
-                                                    name="isFormConnected"
-                                                    type="checkbox"
-                                                />
-
-                                                <label
-                                                    className="me-2 fs-5"
-                                                    htmlFor="isFormConnected"
-                                                >
-                                                    Create a registration form
-                                                </label>
-
-
                                             </div>
 
                                         </Form>
