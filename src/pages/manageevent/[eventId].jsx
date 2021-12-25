@@ -135,8 +135,6 @@ function Event() {
     const handleShowEvent = () => setData({...data, showEvent: true});
     const handleShowDescription = () => setData({...data, showDescription: true});
 
-    const [ModalShow2, setModalShow2] = useState(false);
-
     const handleClose = () => setData({...data, showModal: false});
     const handleShow = () => setData({...data, showModal: true});
 
@@ -527,7 +525,8 @@ function Event() {
                                             </Button>
 
                                             <Button
-                                                className="my-2 w-100"onClick={() => setModalShow2(true)}
+                                                className="my-2 w-100"
+                                                onClick={() => setModalShow2(true)}
                                                 size="lg"
                                             >
                                                 Declare winners
@@ -629,7 +628,6 @@ function Event() {
                                         <Button
                                             className="w-100"
                                             onClick={handleShow2}
-
                                             variant="outline-primary"
                                         >
                                             Add Links
