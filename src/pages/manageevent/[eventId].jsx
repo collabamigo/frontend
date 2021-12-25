@@ -135,7 +135,7 @@ function Event() {
 
     const handleCloseDescription = () => setData({...data, showDescription: false});
     const handleShowEvent = () => setData({...data, showEvent: true});
-    const handleShowDescription = () => setData({...data, showDescription: true});
+    // const handleShowDescription = () => setData({...data, showDescription: true});
 
     const handleClose = () => setData({...data, showModal: false});
     const handleShow = () => setData({...data, showModal: true});
@@ -149,6 +149,8 @@ function Event() {
     // }
 
     const [ModalShow2, setModalShow2] = useState(false);
+    const [ModalShow3, setModalShow3] = useState(false);
+
 
     const setFaq = (faq) => {
         axios.patch(`club/competition/${router.query.eventId}/`, {
@@ -715,7 +717,7 @@ function Event() {
                                 onClick={() => setModalShow3(true)}
                                 size="lg"
                             >
-                                Declare winners
+                                Update description
                             </Button>
 
                             <EventAdminModal

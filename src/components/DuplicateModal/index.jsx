@@ -15,15 +15,17 @@ import TextEditor from "components/TextEditor";
 export default class CreateEventModal extends React.Component {
 
     static propTypes = {
+        handleClose: PropTypes.func.isRequired,
         router: PropTypes.shape({
-            show: PropTypes.bool.isRequired,
-            handleClose: PropTypes.func.isRequired,
             isReady: PropTypes.bool.isRequired,
             push: PropTypes.func.isRequired,
             query: PropTypes.shape({
                 clubName: PropTypes.string.isRequired
             })
         }).isRequired,
+        show: PropTypes.bool.isRequired,
+       
+
     }
 
     constructor(props) {
@@ -137,7 +139,7 @@ export default class CreateEventModal extends React.Component {
                                 1: true
                             }
                         }))}
-                        show={this.state.stage===1}
+                        show={this.props.show}
                     >
                         <div
                             className="bg-dark text-white rounded-5 px-4 pb-4"
@@ -291,6 +293,20 @@ export default class CreateEventModal extends React.Component {
 
                                     </Formik>
                                 </Modal.Body>
+
+                                <Modal.Footer> 
+                                    {' '}
+
+                                    <Button
+                                        className="my-2 w-100"
+                                        onClick={this.props.handleClose}
+                                        size="lg"
+                                        varient="secondary"
+                                    >
+                                        Close
+                                    </Button>
+
+                                </Modal.Footer>
                             </div>
                         </div>
                     </Modal>
