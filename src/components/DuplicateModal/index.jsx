@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import {headingWithTopMargin} from "styles/typography.module.css";
 import {Modal} from "react-bootstrap";
-import {Form, Formik, Field} from "formik";
+import {Form, Formik} from "formik";
 import Button from "react-bootstrap/Button";
 import axios from "../../utilities/axios";
 import Loading from "../Loading";
