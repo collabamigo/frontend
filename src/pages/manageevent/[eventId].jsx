@@ -120,7 +120,6 @@ function Event() {
         // })
     }
     const setForm = (form) => setData((prevData) => {
-        console.log("setting ", form)
         return {...prevData, form: [form, true]}
     });
 

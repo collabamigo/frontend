@@ -54,7 +54,7 @@ export default function Event() {
             };
     })};
     const setForm = (form) => setData((prevData) => {
-        return {...prevData, form}
+        return {...prevData, form: [form, true]}
     });
 
     const addClubLogoLinks = (club, link) => {
@@ -88,7 +88,13 @@ export default function Event() {
 
             if (!data.form[1])
                 axios.get(`form/form/${router.query.eventId}/`)
-                    .then(res => setForm(res.data)).catch(err => console.log(err))
+                    .then(res => setForm(res.data))
+                    .catch(err => {
+                        if (err.response.status === 404)
+                            setForm(-1);
+                        else
+                            throw err;
+                    })
 
             if (isEmpty(clubLogoLinks) && !isEmpty(event)) {
                 const storage = getStorage();
