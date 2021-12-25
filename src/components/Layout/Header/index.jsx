@@ -67,7 +67,7 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
                                     My Profile
                                 </NavDropdown.Item>
 
-                                <NavDropdown.Item href="/eventhistory">
+                                <NavDropdown.Item href="/history">
                                     Your Events
                                 </NavDropdown.Item>
 
