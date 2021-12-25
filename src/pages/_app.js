@@ -9,7 +9,7 @@ import * as ga from 'lib/ga'
 
 export default function MyApp({Component, pageProps}) {
     new Metrics({
-        token: process.env.RUM_TOKEN_LAYER0
+        token: process.env.NEXT_PUBLIC_LAYER0_RUM_TOKEN
     }).collect()
 
     const router = useRouter()

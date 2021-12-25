@@ -18,6 +18,8 @@ export const setToken = (access_token) => {
 axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
+    if (!isBrowser())
+        throw error;
     if (localStorage.getItem("err") !== JSON.stringify(error)) {
         localStorage.setItem("err", JSON.stringify(error))
         if (error.response.status === 500)

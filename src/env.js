@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-undef
-const production = process.env.ENVIRONMENT === 'production';
+const production = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production';
 
 let backend = ""
 
