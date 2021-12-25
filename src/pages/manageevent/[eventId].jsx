@@ -237,9 +237,9 @@ function Event() {
 
     const handleSubmitLinks = (args) => {
         const payload = {
-            link: args[0],
+            link: (args[0].startsWith("http://") || args[0].startsWith("https://"))?args[0]:`https://${args[0]}`,
         }
-        axios.patch('/club/competition/' + router.query.eventId + '/', payload).then(()=>{console.log("link submitted")})
+        axios.patch('/club/competition/' + router.query.eventId + '/', payload).then(handleClose2)
     }
 
      useEffect(() => {
