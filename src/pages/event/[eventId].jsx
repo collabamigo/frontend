@@ -134,8 +134,6 @@ export default function Event() {
         return <Loading />
     return (
         <>
-
-
             <WModal
                 ModalShow={ModalShow}
                 handleClose={handleClose}

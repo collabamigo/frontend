@@ -4,18 +4,9 @@ import {Modal} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import axios from "utilities/axios";
-import {toast} from "react-toastify";
+import {ToastContainer} from "react-toastify";
 
 function generateCode(formData, setShowModal, eventId) {
-    toast.success('Wow so easy!', {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    });
 
     const validate = (values, formData) => {
         const errors = {};
@@ -418,10 +409,11 @@ function generateCode(formData, setShowModal, eventId) {
 
                     <Formik
                         initialValues={{...(Array(formData.length).fill(""))}}
-                        onSubmit={(values) => {console.log(values); axios.post("form/submit/"+eventId+"/", values).then(() => {
-                            toast()
+                        onSubmit={(values) => {axios.post("form/submit/" + eventId + "/", values).then(() => {
                             setShowModal(false);
-                        })}}
+
+                        }
+                        )}}
                         validate={(values) => validate(values, formData)}
                     >
                         {({errors, touched}) => (
@@ -460,6 +452,23 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
 
     const [show, setShow] = useState(false);
 
+    const handleNotification =()=>{
+        return(
+            <ToastContainer
+                autoClose={5000}
+                closeOnClick
+                draggable
+                hideProgressBar={false}
+                newestOnTop={false}
+                pauseOnFocusLoss
+                pauseOnHover
+                position="top-center"
+                rtl={false}
+            />
+        )
+
+    }
+
     return (
         <>
             <Button
@@ -481,6 +490,8 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
             >
                 {generateCode(formData, setShow, eventId)}
             </Modal>
+
+            { handleNotification }
         </>
     )
 }

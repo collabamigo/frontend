@@ -1,5 +1,7 @@
 import React from "react"
 import styles from "./Footer.module.css";
+import SvgIcon from "../../../common/SvgIcon";
+import {EmailShareButton} from "react-share";
 
 function Footer() {
   return (
@@ -40,7 +42,7 @@ function Footer() {
 
                       <ul className={styles.footer_links}>
                           <li>
-                              <a href="http://scanfcode.com/contact/">
+                              <a href="/contactUs/">
                                   Contact Us
                               </a>
                           </li>
@@ -52,7 +54,7 @@ function Footer() {
                           </li>
 
                           <li>
-                              <a href="http://scanfcode.com/privacy-policy/">
+                              <a href="/privacyPolicy/">
                                   Privacy Policy
                               </a>
                           </li>
@@ -72,13 +74,13 @@ function Footer() {
                           </li>
 
                           <li>
-                              <a href="http://scanfcode.com/sitemap/">
+                              <a href="/sitemap/">
                                   Sitemap
                               </a>
                           </li>
 
                           <li>
-                              <a href="http://scanfcode.com/sitemap/">
+                              <a href="/rateUs/">
                                   Rate us
                               </a>
                           </li>
@@ -113,7 +115,7 @@ function Footer() {
                           <li>
                               <a
                                   className="github"
-                                  href="#"
+                                  href="https://github.com/watson-hex"
                               >
                                   <svg
                                       className={styles.colorwhite}
@@ -130,7 +132,7 @@ function Footer() {
                           <li>
                               <a
                                   className="linkedin"
-                                  href="#"
+                                  href="https://www.linkedin.com/company/collabamigo/"
                               >
                                   <svg
                                       className={styles.colorwhite}
@@ -147,7 +149,7 @@ function Footer() {
                           <li>
                               <a
                                   className="instagram"
-                                  href="#"
+                                  href="https://www.instagram.com/collabamigo/"
                               >
                                   <svg
                                       className={styles.colorwhite}
@@ -162,9 +164,10 @@ function Footer() {
                           </li>
 
                           <li>
-                              <a
-                                  className="email"
-                                  href="#"
+                              <EmailShareButton
+                                  onClick={() => {}}
+                                  openShareDialogOnClick
+                                  to="watsonhex@gmail.com"  // please check this
                               >
                                   <svg
                                       className={styles.colorwhite}
@@ -175,7 +178,8 @@ function Footer() {
                                   >
                                       <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z" />
                                   </svg>
-                              </a>
+                              </EmailShareButton>
+
                           </li>
                       </ul>
                   </div>
