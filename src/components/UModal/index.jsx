@@ -1,6 +1,6 @@
-/* eslint-disable react/button-has-type */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import {Col, Row} from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal'
 import Button from "react-bootstrap/Button";
 import Form from 'react-bootstrap/Form';
@@ -11,7 +11,6 @@ export default class index extends Component {
         ModalShow: PropTypes.bool.isRequired,
         eventID : PropTypes.number.isRequired,
         handleClose: PropTypes.func.isRequired,
-
     }
 
 
@@ -22,7 +21,7 @@ export default class index extends Component {
         }
 
         this.updateformdata = this.updateformdata.bind(this);
-        this.handleUpdatearray = this.handleUpdatearray.bind(this);
+        this.handleUpdateArray = this.handleUpdateArray.bind(this);
         this.handleDeleteField = this.handleDeleteField.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -33,23 +32,19 @@ export default class index extends Component {
 
 
     updateformdata(pos,val,i){
-        console.log(pos + " " + val + " " + i);
-        console.log(this.state.array);
         this.setState((prevState)=>{
-            var a = prevState.array;
-            var obj = a[i];
+            let a = prevState.array;
+            let obj = a[i];
             obj[pos] = val;
             a[i] = obj;
             return {array:a}
         })
     }
 
-    handleUpdatearray() {
+    handleUpdateArray() {
         this.setState((prevState) => ({
             array: prevState.array.concat([{
                 position:null,
-                winner_first_name:null,
-                winner_last_name:null,
                 winner_email:null,
             }])
     }))}
@@ -57,22 +52,23 @@ export default class index extends Component {
 
     handleDeleteField(index){
         this.setState((prevState)=>{
-            var a = prevState.array;
-            var removed = a.splice(index,1);
+            let a = prevState.array;
+            let removed = a.splice(index,1);
             return {array:removed}
         })
-        // this.setState((prevState) => ({
-        //     array: prevState.array.splice(index, 1)
-        // }))
-
     }
 
 
     handleSubmit() {
-        axios.patch('form/form/' + this.props.eventID, {
-            winners: this.state.array
+        this.state.array.forEach((item,index)=>{
+            axios.post(`club/competition-winner/`, {
+                position:item.position,
+                winner_email:item.winner_email,
+                index:index,
+                competition:this.props.eventID,
+            })
         })
-            .then(this.props.handleClose).catch(() => console.log("Error"))
+            this.props.handleClose();
     }
 
     render() {
@@ -92,50 +88,42 @@ export default class index extends Component {
 
                     <Form onSubmit={this.handleSubmit}>
                         {this.state.array.map((item,index) => (
-                            // eslint-disable-next-line react/jsx-key
-                            <Form.Group
+                            <Row
                                 className="mb-3"
                                 controlId="formKey"
+                                key={item}
                             >
-                                <Form.Control
-                                    onChange={(e) =>{this.updateformdata("position", e.target.value, index )}}
-                                    placeholder="Position"
-                                    type="text"
-                                    value={item.position}
-                                />
+                                <Col>
+                                    <Form.Control
+                                        onChange={(e) =>{this.updateformdata("position", e.target.value, index )}}
+                                        placeholder="Position"
+                                        type="text"
+                                        value={item.position}
+                                    />
+                                </Col>
 
-                                <Form.Control
-                                    onChange={(e) =>{this.updateformdata("winner_first_name",  e.target.value, index )}}
-                                    placeholder="First Name"
-                                    type="text"
-                                    value={item.winner_first_name}
-                                />
+                                <Col>
+                                    <Form.Control
+                                        onChange={(e) =>{this.updateformdata("winner_email",  e.target.value, index )}}
+                                        placeholder="Enter email"
+                                        type="email"
+                                        value={item.winner_email}
+                                    />
+                                </Col>
 
-                                <Form.Control
-                                    onChange={(e) =>{this.updateformdata("winner_last_name",  e.target.value, index )}}
-                                    placeholder="Last Name"
-                                    type="text"
-                                    value={item.winner_last_name}
-                                />
-                        
-                                <Form.Control
-                                    onChange={(e) =>{this.updateformdata("winner_email",  e.target.value, index )}}
-                                    placeholder="Enter email"
-                                    type="email"
-                                    value={item.winner_email}
-                                />
-
-                                <Button
-                                    onClick={() => {this.handleDeleteField(index)}}
-                                    variant="secondary"
-                                >
-                                    Delete
-                                </Button>
-                            </Form.Group>
+                                <Col>
+                                    <Button
+                                        onClick={() => {this.handleDeleteField(index)}}
+                                        variant="secondary"
+                                    >
+                                        Delete
+                                    </Button>
+                                </Col>
+                            </Row>
                 ))}
 
                         <Button
-                            onClick={this.handleUpdatearray}
+                            onClick={this.handleUpdateArray}
                             variant="primary"
                         >
                             Add field
@@ -143,14 +131,8 @@ export default class index extends Component {
 
 
 
-                        <Button
-                            type="submit"
-                            variant="primary"
-                        >
-                            Submit
-                        </Button>
                     </Form>
-              
+
                 </Modal.Body>
 
                 <Modal.Footer>
@@ -162,7 +144,7 @@ export default class index extends Component {
                     </Button>
 
                     <Button
-                        onClick={this.props.handleClose}
+                        onClick={this.handleSubmit}
                         variant="primary"
                     >
                         Save Changes

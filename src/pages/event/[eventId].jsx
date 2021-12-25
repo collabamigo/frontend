@@ -289,7 +289,6 @@ export default function Event() {
                                         // disabled={((new Date()) > (new Date(form.closes_at))) ? true : false}
                                         href={event.link}
                                         rel="noopener noreferrer"
-                                        size="lg"
                                         target="_blank"
                                         variant="outline-primary"
                                     >
