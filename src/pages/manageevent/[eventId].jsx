@@ -23,6 +23,8 @@ import SvgIcon from "common/SvgIcon";
 import ClubAdminModal from "../../components/ClubAdmin/modal";
 import UModal from "components/UModal";
 import FaqEditor from "components/FaqEditor";
+import {showAlert} from "../../common/Toast";
+
 import DuplicateModal from "components/DuplicateModal";
 function download_table_as_csv(table_id, separator = ',') {
     var rows = document.querySelectorAll('tr');
@@ -133,7 +135,7 @@ function Event() {
 
     const handleCloseDescription = () => setData({...data, showDescription: false});
     const handleShowEvent = () => setData({...data, showEvent: true});
-    // const handleShowDescription = () => setData({...data, showDescription: true});
+    const handleShowDescription = () => setData({...data, showDescription: true});
 
     const handleClose = () => setData({...data, showModal: false});
     const handleShow = () => setData({...data, showModal: true});
@@ -147,8 +149,6 @@ function Event() {
     // }
 
     const [ModalShow2, setModalShow2] = useState(false);
-    const [ModalShow3, setModalShow3] = useState(false);
-
 
     const setFaq = (faq) => {
         axios.patch(`club/competition/${router.query.eventId}/`, {
@@ -176,7 +176,12 @@ function Event() {
             image_links:JSON.stringify(temp)
         }
         axios.patch(`/club/competition/${router.query.eventId}/`, payload).then(()=>
-            deleteObject(desertRef))
+        {deleteObject(desertRef)
+            showAlert(
+                "Picture Deleted",
+                "success"
+            )
+        })
         setData({...data, bannerLinks:undefined,bannerPaths:JSON.stringify(temp)})
     }
 
@@ -232,6 +237,10 @@ function Event() {
                 image_links: JSON.stringify(arr)
             }
             axios.patch("/club/competition/" + router.query.eventId + "/", payload).then(() => {
+                showAlert(
+                    "Picture Uploaded",
+                    "success"
+                )
                 setData({...data, bannerLinks: undefined, bannerPaths: JSON.stringify(arr)})
             })
         })
@@ -241,7 +250,12 @@ function Event() {
         const payload = {
             link: (args[0].startsWith("http://") || args[0].startsWith("https://"))?args[0]:`https://${args[0]}`,
         }
-        axios.patch('/club/competition/' + router.query.eventId + '/', payload).then(handleClose2)
+        axios.patch('/club/competition/' + router.query.eventId + '/', payload).then(()=>{handleClose2
+            showAlert(
+            "Links Added",
+                "success"
+            )
+        })
     }
 
      useEffect(() => {

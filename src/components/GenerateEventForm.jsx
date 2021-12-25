@@ -4,8 +4,8 @@ import {Modal} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import axios from "utilities/axios";
-import {ToastContainer} from "react-toastify";
 import * as ga from "lib/ga";
+import {showAlert} from "../common/Toast";
 
 function generateCode(formData, setShowModal, eventId) {
 
@@ -411,8 +411,12 @@ function generateCode(formData, setShowModal, eventId) {
                     <Formik
                         initialValues={{...(Array(formData.length).fill(""))}}
                         onSubmit={(values) => {axios.post("form/submit/" + eventId + "/", values).then(() => {
+                            // alert("test")
+                            showAlert(
+                                "Form Submitted",
+                                "success"
+                            );
                             setShowModal(false);
-
                         }
                         )}}
                         validate={(values) => validate(values, formData)}
@@ -431,8 +435,7 @@ function generateCode(formData, setShowModal, eventId) {
                                 <button
                                     className="btn btn-secondary btn-block mt-4"
                                     onClick={() => {
-                                setShowModal(false);
-                            }}
+                                }}
                                     type="button"
                                 >
                                     Cancel
@@ -463,25 +466,6 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
         setShow(true);
     }
 
-    const handleNotification =()=>{
-        if (!show){
-            return(
-                <ToastContainer
-                    autoClose={5000}
-                    closeOnClick
-                    draggable
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    pauseOnFocusLoss
-                    pauseOnHover
-                    position="top-center"
-                    rtl={false}
-                />
-        )
-
-        }
-    }
-
     return (
         <>
             <Button
@@ -503,8 +487,6 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
             >
                 {generateCode(formData, setShow, eventId)}
             </Modal>
-
-            { handleNotification }
         </>
     )
 }

@@ -157,6 +157,7 @@ class Profile extends React.Component{
             axios.patch(backend + "connect/profile/" + this.state.id + "/", payload)
                 .then(() => {
                     if (this.state.isTeacher)
+                        console.log("yes for teacher")
                         axios.patch(backend + "connect/teacher/" + this.state.id + "/", {
                             Linkedin: this.state.linkedIn,
                             Gitname: this.state.github,

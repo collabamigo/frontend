@@ -18,6 +18,7 @@ import Link from "common/Link";
 import lodashMap from "lodash/map";
 import Image from "react-bootstrap/Image";
 import EventTalkCard from "../../../common/HomePageCards/EventTalkCard";
+import {showAlert} from "../../../common/Toast";
 
 class ClubAdminPage extends Component {
 
@@ -276,7 +277,13 @@ class ClubAdminPage extends Component {
             description: this.state.basicInformation.description
         }
         axios.patch("club/club/"+ this.props.router.query.clubName +"/" ,payload)
-            .then(() => this.setState(payload))
+            .then(() => {
+                this.setState(payload)
+                    showAlert(
+                        "Description Updated",
+                        "success"
+                    )
+            })
     }
 
     handleSubmitAnnouncements(values){
@@ -284,12 +291,17 @@ class ClubAdminPage extends Component {
             club: this.props.router.query.clubName,
             content: values[0]
         }).then((ress) => {
+                    showAlert(
+                        "Announcements Updated",
+                        "success"
+                    )
                     this.setState((prevState) => {
                         return (
                             {
                                 ...(prevState.announcements),
                                 announcements:[{id:ress.data.id, content:ress.data.content, timestamp:ress.data.timestamp},...(prevState.announcements)]
                             })
+
                     })
         });
         this.handleCloseModal()
@@ -325,7 +337,12 @@ class ClubAdminPage extends Component {
             tagline:    this.state.basicInformation.tagline,
         }
         axios.patch("club/club/"+ this.props.router.query.clubName +"/" ,payload)
-            .then(() => this.setState(payload))
+            .then(() => {this.setState(payload)
+            showAlert(
+                "Links Updated",
+                "success"
+                )
+            })
     }
 
     bannerControl(args,num) {
@@ -380,6 +397,10 @@ class ClubAdminPage extends Component {
                 image_links: JSON.stringify(arr)
             }
             axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(() => {
+                showAlert(
+                    "Picture Uploaded",
+                    "success"
+                )
                 this.setState({bannerLinks: undefined, bannerPaths: JSON.stringify(arr)})
             })
         })
@@ -443,8 +464,13 @@ class ClubAdminPage extends Component {
         const payload = {
             picture:JSON.stringify(temp)
         }
-        axios.patch(`/club/club/${this.props.router.query.clubName}/`, payload).then(()=>
-            deleteObject(desertRef))
+        axios.patch(`/club/club/${this.props.router.query.clubName}/`, payload).then(()=> {
+            deleteObject(desertRef)
+            showAlert(
+                "Picture Deleted",
+                "success"
+            )
+        })
         this.setState({bannerLinks:undefined,bannerPaths:JSON.stringify(temp)})
     }
 
