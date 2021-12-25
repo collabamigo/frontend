@@ -711,3 +711,5 @@ function Event() {
 }
 
 export default Event;
+
+Event.title = "CollabAmigo Event Management page"

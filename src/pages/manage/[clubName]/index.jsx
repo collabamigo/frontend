@@ -915,6 +915,8 @@ class ClubAdminPage extends Component {
     }
 }
 
-export default withRouter (ClubAdminPage);
+const wrappedPage = withRouter(ClubAdminPage);
+export default wrappedPage;
+wrappedPage.title = "CollabAmigo Club Management page";
 //  TODO: need to add option to edit coordinators
 //TODO: need to give attributions to icons8

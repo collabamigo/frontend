@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import axios from "utilities/axios";
 import {ToastContainer} from "react-toastify";
+import * as ga from "lib/ga";
 
 function generateCode(formData, setShowModal, eventId) {
 
@@ -452,6 +453,16 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
 
     const [show, setShow] = useState(false);
 
+    const register = () => {
+        ga.event({
+            action: "event-registration",
+            params: {
+                event_id: eventId
+            }
+        })
+        setShow(true);
+    }
+
     const handleNotification =()=>{
         if (!show){
             return(
@@ -475,7 +486,7 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
         <>
             <Button
                 className={"w-100 "+ (((new Date()) < (new Date(start))) && ((new Date()) < (new Date(end))) ? "disabled":"")}
-                onClick={() => setShow(true)}
+                onClick={register}
                 size="lg"
             >
                 Register Here

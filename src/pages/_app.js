@@ -1,24 +1,40 @@
 /* eslint-disable */
-import React from "react";
+import {useRouter} from "next/router";
+import React, {useEffect} from "react";
 import BasicLayout from "../components/Layout";
-// import {SSRProvider} from 'react-bootstrap';
 import "styles/App.scss"
-
 import {Metrics} from '@layer0/rum'
 import FirebaseProvider from "firebaseProvider"
+import * as ga from 'lib/ga'
 
 export default function MyApp({Component, pageProps}) {
     new Metrics({
         token: '0d764cb7-fbb3-4c5b-8a77-0483c87215c2'
     }).collect()
 
-    const Layout = Component.Layout || BasicLayout;
+    const router = useRouter()
+
+    useEffect(() => {
+        const handleRouteChange = (url) => {
+            ga.pageview(url)
+        }
+        //When the component is mounted, subscribe to router changes
+        //and log those page views
+        router.events.on('routeChangeComplete', handleRouteChange)
+
+        // If the component is unmounted, unsubscribe
+        // from the event with the `off` method
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChange)
+        }
+    }, [router.events])
+
     return (
-        <Layout>
+        <BasicLayout title={Component.title?Component.title:"CollabAmigo"}>
             <FirebaseProvider>
                 <Component {...pageProps} />
             </FirebaseProvider>
-        </Layout>
+        </BasicLayout>
     )
 }
 

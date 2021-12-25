@@ -394,3 +394,4 @@ export default function Event() {
         </>
     )
 }
+Event.title = "CollabAmigo Event page"
