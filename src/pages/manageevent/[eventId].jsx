@@ -667,32 +667,6 @@ function Event() {
 
                                     </div>
                                 </div>
-
-                                <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faWhatsapp}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faFacebook}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faInstagram}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faShareAlt}
-                                        size="2x"
-                                    />
-                                </div>
                             </div>
                         </div>
 
