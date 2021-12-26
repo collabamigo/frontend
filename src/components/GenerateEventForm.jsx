@@ -434,8 +434,7 @@ function generateCode(formData, setShowModal, eventId) {
 
                                 <button
                                     className="btn btn-secondary btn-block mt-4"
-                                    onClick={() => {
-                                }}
+                                    onClick={() => {setShowModal(false)}}
                                     type="button"
                                 >
                                     Cancel

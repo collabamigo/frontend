@@ -77,7 +77,7 @@ class ClubAdminPage extends Component {
             }
             if (this.state.basicInformation === null)
                 axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
-                    this.setState({basicInformation: res.data, isLoading: false,bannerPaths:res.data.picture});
+                    this.setState({basicInformation: res.data, isLoading: false,bannerPaths:res.data.image_links});
             if (this.state.announcements === null)
                 axios.get("club/clubannouncements/" + this.props.router.query.clubName + "/").
                     then((res) => {
@@ -287,7 +287,7 @@ class ClubAdminPage extends Component {
     }
 
     handleSubmitAnnouncements(values){
-        axios.patch("club/announcements/",{
+        axios.post("club/announcements/",{
             club: this.props.router.query.clubName,
             content: values[0]
         }).then((ress) => {
@@ -308,36 +308,39 @@ class ClubAdminPage extends Component {
     }
 
     handleSubmitPanel(values){
-        this.setState((prevState) => {
-            return (
-                {
-                    ...prevState,
-                    basicInformation: {
-                        ...(prevState.basicInformation),
-                        instagram:values[0],
-                        linkedin:values[1],
-                        facebook:values[2],
-                        discord:values[3],
-                        github:values[4],
-                        mail:values[5],
-                        telegram:values[6],
-                        other:values[7],
-                    }
-                })
-        })
+
         this.handleCloseModal()
         const payload = {
-            linkedin:   this.state.basicInformation.linkedin,
-            facebook:   this.state.basicInformation.facebook,
-            discord:    this.state.basicInformation.discord,
-            github:     this.state.basicInformation.github,
-            mail:       this.state.basicInformation.mail,
-            telegram:   this.state.basicInformation.telegram,
-            other:      this.state.basicInformation.other,
-            tagline:    this.state.basicInformation.tagline,
+            instagram: values[0],
+            linkedin: values[1],
+            facebook: values[2],
+            discord: values[3],
+            github: values[4],
+            mail: values[5],
+            telegram: values[6],
+            other: values[7],
+            tagline: values[8],
         }
         axios.patch("club/club/"+ this.props.router.query.clubName +"/" ,payload)
-            .then(() => {this.setState(payload)
+            .then(() => {
+                this.setState((prevState) => {
+                    return (
+                        {
+                            ...prevState,
+                            basicInformation: {
+                                ...(prevState.basicInformation),
+                                instagram: values[0],
+                                linkedin: values[1],
+                                facebook: values[2],
+                                discord: values[3],
+                                github: values[4],
+                                mail: values[5],
+                                telegram: values[6],
+                                other: values[7],
+                                tagline: values[8],
+                            }
+                        })
+                })
             showAlert(
                 "Links Updated",
                 "success"
@@ -351,7 +354,7 @@ class ClubAdminPage extends Component {
                 <div>
                     <Image
                         alt="Carousel Image"
-                        className="m-auto"
+                        className={"d-block m-auto " + styles.bannerImage}
                         fluid
                         height="130"
                         rounded
