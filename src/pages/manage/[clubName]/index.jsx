@@ -465,7 +465,7 @@ class ClubAdminPage extends Component {
 
         temp.splice(num, 1)
         const payload = {
-            picture:JSON.stringify(temp)
+            image_links:JSON.stringify(temp)
         }
         axios.patch(`/club/club/${this.props.router.query.clubName}/`, payload).then(()=> {
             deleteObject(desertRef)
