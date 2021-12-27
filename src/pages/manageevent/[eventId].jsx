@@ -125,8 +125,9 @@ function Event() {
     const tableHeaders = isEmpty(form)?[]:JSON.parse(form.skeleton);
     const tableResponses = data.tableResponses[0];
     const showModal = data.showModal;
-    const showModal2= data.showModal2;
-
+    const showModal2 = data.showModal2;
+    
+    // console.log("eventtttt" + event.description);
 
     const convertToDatetimeString = iso_8601_string => {
         const date = new Date(iso_8601_string);
@@ -161,8 +162,8 @@ function Event() {
             })
         })
     }
-    const handleSubmitDescription = ()=>{
-        console.log("edited");
+    const handleSubmitDescription = () => {
+        
         handleCloseDescription();
     }
 
@@ -328,6 +329,7 @@ function Event() {
 
                 <DuplicateModal
                     handleClose={() => setModalShow3(false)}
+                    initialValues={event}
                     router={router}
                     show={ModalShow3}
                 />

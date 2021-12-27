@@ -90,7 +90,10 @@ export default class CreateEventModal extends React.Component {
         this.setState({description: description});
     }
 
+    
+
     render() {
+        console.log("description222 " + this.props.description);
         const isReady = this.state.promo!==null;
 
         if (this.state.stage === null || !isReady) {
@@ -131,7 +134,6 @@ export default class CreateEventModal extends React.Component {
                                     <Formik
                                         initialValues={{
                                             description: this.props.description,
-                                            
                                         }}
                                         onSubmit={(values) => {
                                             if (values.isFormConnected)
@@ -159,9 +161,9 @@ export default class CreateEventModal extends React.Component {
                                                     name="description"
                                                     required
                                                 /> */}
-
+                                                
                                                 <TextEditor
-                                                    description={this.state.description}
+                                                    description={this.props.description}
                                                     handleSetDescription={this.setDescription.bind(this)}
                                                 />
                                             </div>
