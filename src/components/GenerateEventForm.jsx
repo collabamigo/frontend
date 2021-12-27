@@ -1,3 +1,4 @@
+import lodashIsEmpty from "lodash/isEmpty";
 import React, {useState} from 'react';
 import {Formik, Field, Form} from 'formik';
 import {Modal} from "react-bootstrap";
@@ -7,7 +8,7 @@ import axios from "utilities/axios";
 import * as ga from "lib/ga";
 import {showAlert} from "../common/Toast";
 
-function generateCode(formData, setShowModal, eventId) {
+function generateCode(formData, setShowModal, eventId, response) {
 
     const validate = (values, formData) => {
         const errors = {};
@@ -409,7 +410,7 @@ function generateCode(formData, setShowModal, eventId) {
                     </Modal.Header>
 
                     <Formik
-                        initialValues={{...(Array(formData.length).fill(""))}}
+                        initialValues={lodashIsEmpty(response)?{...(Array(formData.length).fill(""))}:response}
                         onSubmit={(values) => {axios.post("form/submit/" + eventId + "/", values).then(() => {
                             // alert("test")
                             showAlert(
@@ -463,8 +464,15 @@ export default function GenerateEventForm({formData, eventId, start, end, respon
                     event_id: eventId
                 }
             })
-            setShow(true);
         }
+        else
+            ga.event({
+                action: "event-registration-edit",
+                params: {
+                    event_id: eventId
+                }
+            })
+        setShow(true);
 
     }
 
@@ -475,7 +483,7 @@ export default function GenerateEventForm({formData, eventId, start, end, respon
                 onClick={register}
                 size="lg"
             >
-                {response? "View form":"Register Here"}
+                {response? "Edit Response":"Register Here"}
             </Button>
 
             <Modal
@@ -487,7 +495,7 @@ export default function GenerateEventForm({formData, eventId, start, end, respon
                 onHide={() => setShow(false)}
                 show={show}
             >
-                {generateCode(formData, setShow, eventId)}
+                {generateCode(formData, setShow, eventId, response)}
             </Modal>
         </>
     )
