@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {getAuth, signInWithCustomToken} from "firebase/auth";
 import React, {createContext} from 'react'
 import {getApps, initializeApp} from 'firebase/app'
@@ -5,12 +6,11 @@ import PropTypes from "prop-types";
 import axios from "./utilities/axios";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBGsVMVNqqMgutGKJXEG13r6oGcEtN3hBY",
-    authDomain: "collabamigo-testing.firebaseapp.com",
-    projectId: "collabamigo-testing",
-    storageBucket: "collabamigo-testing.appspot.com",
-    messagingSenderId: "109135106784",
-    appId: "1:109135106784:web:98615d77bf7c49dc59f685"
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTHDOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECTID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APPID
 };
 
 const FirebaseContext = createContext(null)
