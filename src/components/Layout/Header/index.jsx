@@ -56,6 +56,31 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
 
                     <Nav>
 
+
+                        {(isAuthenticated && data ) ?
+                            <NavDropdown
+                                id="dropdown-button-drop-start"
+                                title="Club Management"
+                            >
+                                <ul
+                                    className=" p-0 m-0"
+                                    style={{listStyle: "none"}}
+                                >
+                                    {data.clubs?.map((club) => (
+                                        <li key={club.id}>
+                                            <NavDropdown.Item
+                                                href={"/manage/" + club.username}
+                                                internal
+                                            >
+                                                {club.name}
+                                            </NavDropdown.Item>
+                                        </li>
+                                        ))}
+                                </ul>
+                            </NavDropdown>
+
+                            : null}
+
                         {(isAuthenticated) ?
 
                             <NavDropdown
@@ -73,37 +98,13 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
 
                                 <NavDropdown.Divider />
 
-                                {isAuthenticated && data ?
-                                    <>
-                                        <h6 className="p-2">
-                                            Club Management
-                                        </h6>
-
-                                        <ul
-                                            className=" p-0 m-0"
-                                            style={{listStyle: "none"}}
-                                        >
-                                            {data.clubs?.map((club) => (
-                                                    // TODO: state update problem on header
-                                                <li key={club.id}>
-                                                    <NavDropdown.Item
-                                                        href={"/manage/" + club.username}
-                                                        internal
-                                                    >
-                                                        {club.name}
-                                                    </NavDropdown.Item>
-                                                </li>
-                                                ))}
-                                        </ul>
-                                    </>
-                                : null }
+                               
 
                                 {/* <AccountChooser
                                     data={data}
                                     isAuthenticated={isAuthenticated}
                                 /> */}
 
-                                <NavDropdown.Divider />
 
                                 {isAuthenticated ?
                                     <div>
@@ -118,6 +119,9 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
                             : null}
                             </NavDropdown>
                         : null }
+
+                        <NavDropdown.Divider />
+
 
                         {!isAuthenticated?
                             <GoogleSignIn
