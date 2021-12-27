@@ -27,6 +27,7 @@ import {
     LinkedinShareButton,
     TelegramShareButton,
   } from "react-share";
+import {isBrowser} from "../../utilities/auth";
 
 export default function Event() {
     const router = useRouter()
@@ -149,6 +150,12 @@ export default function Event() {
 
     // const ref = useRef()
     // const isParticipateButtonVisible = useOnScreen(ref)
+
+    let url;
+    if (isBrowser())
+        url=window.location.href
+    else
+        url="https://collabamigo.com/"
 
     if (isLoading)
         return <Loading />
@@ -331,15 +338,9 @@ export default function Event() {
                             </Link>
 
                             <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
-
                                 <FacebookShareButton
-                                    title="d"
-                                    url="https://www.instagram.com/p/CXwbZg3APiU/"
-                                />
-
-                                <FacebookShareButton
-                                    title="fullTitle"
-                                    url="https://www.instagram.com/p/CXwbZg3APiU/"
+                                    quote={event.promotional_message.replace("<<link>>", url)}
+                                    url={url}
                                 >
                                     <SvgIcon
                                         height="20px"
@@ -349,9 +350,9 @@ export default function Event() {
                                 </FacebookShareButton>
 
                                 <EmailShareButton
-                                    onClick={() => {}}
-                                    openShareDialogOnClick
-                                    url="https://www.instagram.com/p/CXwbZg3APiU/"
+                                    body={event.promotional_message.replace("<<link>>", url)}
+                                    subject={event.name}
+                                    url={url}
                                 >
                                     <SvgIcon
                                         height="20px"
@@ -360,11 +361,9 @@ export default function Event() {
                                     />
                                 </EmailShareButton>
 
-
                                 <WhatsappShareButton
-                                    separator=":: "
-                                    title="CampersTribe - World is yours to explore"
-                                    url="http://www.camperstribe.com"
+                                    title={event.promotional_message.replace("<<link>>", url)}
+                                    url={url}
                                 >
                                     <SvgIcon
                                         height="20px"
@@ -374,8 +373,8 @@ export default function Event() {
                                 </WhatsappShareButton>
 
                                 <TwitterShareButton
-                                    title="fullTitle"
-                                    url="http://www.camperstribe.com"
+                                    title={event.name}
+                                    url={url}
                                 >
                                     <SvgIcon
                                         height="20px"
@@ -386,8 +385,8 @@ export default function Event() {
 
 
                                 <TelegramShareButton
-                                    title="fullTitle"
-                                    url="http://www.camperstribe.com"
+                                    title={event.promotional_message.replace("<<link>>", url)}
+                                    url={url}
                                 >
                                     <SvgIcon
                                         height="20px"
@@ -397,8 +396,9 @@ export default function Event() {
                                 </TelegramShareButton>
 
                                 <LinkedinShareButton
-                                    title="fullTitle"
-                                    url="http://www.camperstribe.com"
+                                    summary={event.promotional_message.replace("<<link>>", url)}
+                                    title={event.name}
+                                    url={url}
                                 >
                                     <SvgIcon
                                         height="20px"

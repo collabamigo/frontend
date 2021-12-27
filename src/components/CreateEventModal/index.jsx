@@ -38,6 +38,7 @@ export default class CreateEventModal extends React.Component {
             name: "",
             description: "",
             eventDate: "",
+            eventEndDate:"",
             eventLink: null,
             formBuilder: {
                 1: [],
@@ -96,6 +97,7 @@ export default class CreateEventModal extends React.Component {
             name: this.state.name,
             description: this.state.description,
             event_start: this.state.eventDate,
+            event_end:this.state.eventEndDate,
             link: (this.state.eventLink && !this.state.eventLink.startsWith("http://") && !this.state.eventLink
                 .startsWith("https://"))?("https://"+
                 this.state.eventLink):this.state.eventLink,
@@ -164,6 +166,7 @@ export default class CreateEventModal extends React.Component {
                                             name: this.state.name,
                                             description: this.state.description,
                                             eventDate: this.state.eventDate,
+                                            eventEndDate:this.state.eventEndDate,
                                             eventLink: this.state.eventLink,
                                             isFormConnected: this.state.isFormConnected,
                                             promo: this.state.promo,
@@ -233,6 +236,23 @@ export default class CreateEventModal extends React.Component {
                                                     name="eventDate"
                                                     placeholder="yyyy-mm-dd"
                                                     required
+                                                    type="datetime-local"
+                                                />
+                                            </div>
+
+                                            <div className="mb-3 align-middle">
+                                                <label
+                                                    className="me-2 fs-5"
+                                                    htmlFor="eventEndDate"
+                                                >
+                                                    Event End Date
+                                                </label>
+
+                                                <Field
+                                                    className="form-control w-auto text-input bg-secondary text-white border-secondary"
+                                                    id="eventEndDate"
+                                                    name="eventEndDate"
+                                                    placeholder="yyyy-mm-dd"
                                                     type="datetime-local"
                                                 />
                                             </div>
