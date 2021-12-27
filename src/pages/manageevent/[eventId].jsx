@@ -149,8 +149,6 @@ function Event() {
     const handleSubmitEvent =(value)=>{
 
         handleCloseEvent();
-
-
         console.log("edited maginc", value[0]);
 
         let start = (new Date(value[1].split('to')[1])).toISOString();
@@ -162,24 +160,38 @@ function Event() {
             event_end: (new Date(value[1].split('to')[1])).toISOString(),
             location: value[2],
         }).then(() => {
-                event.name = value[0];
-                event.event_start = (new Date(value[1].split('to')[0])).toISOString()
-                event.event_end = (new Date(value[1].split('to')[1])).toISOString()
-                event.location= value[2]
+                setData((prevData) => {
+                    return {...prevData, event: {...prevData.event, name: value[0],
+                        event_start: (new Date(value[1].split('to')[0])).toISOString(),
+                        event_end: (new Date(value[1].split('to')[1])).toISOString(),
+                        location: value[2],
+
+                    }}
+                })
+
                 console.log("ediawdawdawdawdawdwadted", value[0]);
         })
+
+        console.log(value[3],"sjkdk");
+        console.log(value[4], "lll");
+
+
+        var lolstart = (new Date(value[3])).toISOString();
+        console.log(lolstart, " hello");
+        var lolend = (new Date(value[4])).toISOString();
+        console.log(lolend, " hellsdsdsdo");
 
         axios.patch("form/form/"+ router.query.eventId +"/" ,{
-            name: value[3],
-            opens_at: (new Date(value[3])).toISOString(),
-            closes_at: ( new Date(value[4])).toISOString(),
-        }).then(() => {
-                console.log("ediawdawdawdawdawdwadted", value[0]);
-
+            opens_at: lolstart,
+            closes_at: lolend,
+        }).then((res) => {
+                console.log(res.data);
+                setData((prevData) => {
+                    return {...prevData,
+                         form: [res.data, true],
+                    }
+                })
         })
-
-
-
     }
 
 
@@ -705,16 +717,16 @@ function Event() {
                             </div>
                         </div>
 
-                        <EventAdminModal
+                        {form && <EventAdminModal
                             handleClose={handleCloseEvent}
                             handleSubmit={handleSubmitEvent}
                             initialValues={[event.name, convertToDatetimeString(event.event_start) +
                                             (event.event_end?" to "+ convertToDatetimeString(event.event_end):""), event.location,
-                            convertToDatetimeString(form?.opens_at), convertToDatetimeString(form?.closes_at) ? + " " +
-                                + convertToDatetimeString(form?.closes_at) : ""]}
+                            convertToDatetimeString(form.opens_at),
+                            convertToDatetimeString(form.closes_at) ? (convertToDatetimeString(form.closes_at)) : ""]}
                             labels={['Event Name','Date and Time','Location','Registration Starts', 'Registration ends']}
                             show={data.showEvent}
-                        />
+                                 />}
 
                         <div>
                             <ReactMarkdown>
