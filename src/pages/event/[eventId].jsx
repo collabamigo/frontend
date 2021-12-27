@@ -339,7 +339,8 @@ export default function Event() {
 
                             <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
                                 <FacebookShareButton
-                                    quote={event.promo}
+                                    quote={event.promotional_message.replace("<<link>>", url)}
+                                    url={url}
                                 >
                                     <SvgIcon
                                         height="20px"
@@ -349,8 +350,9 @@ export default function Event() {
                                 </FacebookShareButton>
 
                                 <EmailShareButton
-                                    body={event.promo}
+                                    body={event.promotional_message.replace("<<link>>", url)}
                                     subject={event.name}
+                                    url={url}
                                 >
                                     <SvgIcon
                                         height="20px"
@@ -360,7 +362,8 @@ export default function Event() {
                                 </EmailShareButton>
 
                                 <WhatsappShareButton
-                                    title={event.promo}
+                                    title={event.promotional_message.replace("<<link>>", url)}
+                                    url={url}
                                 >
                                     <SvgIcon
                                         height="20px"
@@ -371,6 +374,7 @@ export default function Event() {
 
                                 <TwitterShareButton
                                     title={event.name}
+                                    url={url}
                                 >
                                     <SvgIcon
                                         height="20px"
@@ -381,7 +385,8 @@ export default function Event() {
 
 
                                 <TelegramShareButton
-                                    title={event.promo}
+                                    title={event.promotional_message.replace("<<link>>", url)}
+                                    url={url}
                                 >
                                     <SvgIcon
                                         height="20px"
@@ -391,9 +396,9 @@ export default function Event() {
                                 </TelegramShareButton>
 
                                 <LinkedinShareButton
-                                    source={url}
-                                    summary={event.promo}
+                                    summary={event.promotional_message.replace("<<link>>", url)}
                                     title={event.name}
+                                    url={url}
                                 >
                                     <SvgIcon
                                         height="20px"
