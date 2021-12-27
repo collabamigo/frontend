@@ -109,7 +109,7 @@ export default class CreateEventModal extends React.Component {
                     competition: res.data.id,
                     opens_at: this.state.registrationStartDate,
                     closes_at: this.state.registrationDeadlineDate,
-                }).then(()=> {this.props.router.push("/event/"+res.data.id)
+                }).then(()=> {this.props.router.push("/manageevent/"+res.data.id)
                     showAlert(
                         "Form Created",
                         "success"

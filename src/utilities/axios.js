@@ -2,6 +2,7 @@
 import axios_base from "axios";
 import backend from "../env";
 import {isBrowser, setLoggedOut} from "./auth";
+import {showAlert} from "../common/Toast";
 
 const axios = axios_base.create({
     baseURL: backend
@@ -23,9 +24,15 @@ axios.interceptors.response.use(function (response) {
     if (localStorage.getItem("err") !== JSON.stringify(error)) {
         localStorage.setItem("err", JSON.stringify(error))
         if (error.response.status === 500)
-            alert("Unexpected error occurred. Please contact us if you see this message repeatedly.")
+            showAlert(
+                    "Unexpected error occurred. Please contact us if you see this message repeatedly.",
+                    "error"
+                )
         else if (error.response.status === 401) {
-            alert("Authentication error. Please try clicking/tapping on the CollabConnect logo to re-authenticate")
+            showAlert(
+                "Authentication error. Please try clicking/tapping on the CollabConnect logo to re-authenticate",
+                "error"
+            )
             setLoggedOut()
         }
     }
