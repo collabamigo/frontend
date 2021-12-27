@@ -253,7 +253,6 @@ export default class CreateEventModal extends React.Component {
                                                     id="eventEndDate"
                                                     name="eventEndDate"
                                                     placeholder="yyyy-mm-dd"
-                                                    required
                                                     type="datetime-local"
                                                 />
                                             </div>
