@@ -689,7 +689,7 @@ function Event() {
                                             letiant="outline-primary"
                                             onClick={handleShow2}
                                         >
-                                            Add Links
+                                            Add Event link
                                         </Button>
 
                                         <ClubAdminModal
