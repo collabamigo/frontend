@@ -1,5 +1,3 @@
-/* eslint-disable react/no-this-in-sfc */
-/* eslint-disable react/jsx-handler-names */
 
 import {getAuth} from "firebase/auth";
 import React, {useContext, useEffect, useState} from "react";
@@ -28,20 +26,20 @@ import {showAlert} from "../../common/Toast";
 
 import DuplicateModal from "components/DuplicateModal";
 function download_table_as_csv(table_id, separator = ',') {
-    var rows = document.querySelectorAll('tr');
-    var csv = [];
-    for (var i = 0; i < rows.length; i++) {
-        var row = [], cols = rows[i].querySelectorAll('td, th');
-        for (var j = 0; j < cols.length; j++) {
-            var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
+    let rows = document.querySelectorAll('tr');
+    let csv = [];
+    for (let i = 0; i < rows.length; i++) {
+        let row = [], cols = rows[i].querySelectorAll('td, th');
+        for (let j = 0; j < cols.length; j++) {
+            let data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
             data = data.replace(/"/g, '""');
             row.push('"' + data + '"');
         }
         csv.push(row.join(separator));
     }
-    var csv_string = csv.join('\n');
-    var filename = table_id + ' Dated- ' + new Date().toLocaleDateString() + '.csv';
-    var link = document.createElement('a');
+    let csv_string = csv.join('\n');
+    let filename = table_id + ' Dated- ' + new Date().toLocaleDateString() + '.csv';
+    let link = document.createElement('a');
     link.style.display = 'none';
     link.setAttribute('target', '_blank');
     link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv_string));
@@ -155,7 +153,7 @@ function Event() {
 
         console.log("edited maginc", value[0]);
 
-        var start = (new Date(value[1].split('to')[1])).toISOString();
+        let start = (new Date(value[1].split('to')[1])).toISOString();
         console.log("edited maginc", start);
 
         axios.patch("club/competition/"+ router.query.eventId +"/" ,{
@@ -165,9 +163,9 @@ function Event() {
             location: value[2],
         }).then(() => {
                 event.name = value[0];
-                event.event_start = (new Date(value[1].split('to')[0])).toISOString(),
-                event.event_end = (new Date(value[1].split('to')[1])).toISOString(),
-                event.location= value[2],
+                event.event_start = (new Date(value[1].split('to')[0])).toISOString()
+                event.event_end = (new Date(value[1].split('to')[1])).toISOString()
+                event.location= value[2]
                 console.log("ediawdawdawdawdawdwadted", value[0]);
         })
 
@@ -180,8 +178,8 @@ function Event() {
 
         })
 
-        
-        
+
+
     }
 
 
@@ -688,8 +686,8 @@ function Event() {
                                     <div className="p-2 col-6">
                                         <Button
                                             className="w-100"
+                                            letiant="outline-primary"
                                             onClick={handleShow2}
-                                            variant="outline-primary"
                                         >
                                             Add Links
                                         </Button>
