@@ -1,3 +1,5 @@
+/* eslint-disable react/no-this-in-sfc */
+/* eslint-disable react/jsx-handler-names */
 
 import {getAuth} from "firebase/auth";
 import React, {useContext, useEffect, useState} from "react";
@@ -134,6 +136,10 @@ function Event() {
 
     const handleCloseDescription = () => setData({...data, showDescription: false});
     const handleShowEvent = () => setData({...data, showEvent: true});
+    // const handleSubmitEvent = () => setData({...data, showEvent: false});
+    const handleCloseEvent = () => setData({...data, showEvent: false});
+
+
     // const handleShowDescription = () => setData({...data, showDescription: true});
 
     const handleClose = () => setData({...data, showModal: false});
@@ -142,10 +148,42 @@ function Event() {
     const handleClose2 = () => setData({...data, showModal2:false});
     const handleShow2 = () => setData({...data, showModal2:true});
 
-    // const handleSubmitEvent =()=>{
-    //     console.log("edited");
-    //     handleCloseEvent();
-    // }
+    const handleSubmitEvent =(value)=>{
+
+        handleCloseEvent();
+
+
+        console.log("edited maginc", value[0]);
+
+        var start = (new Date(value[1].split('to')[1])).toISOString();
+        console.log("edited maginc", start);
+
+        axios.patch("club/competition/"+ router.query.eventId +"/" ,{
+            name: value[0],
+            event_start: (new Date(value[1].split('to')[0])).toISOString(),
+            event_end: (new Date(value[1].split('to')[1])).toISOString(),
+            location: value[2],
+        }).then(() => {
+                event.name = value[0];
+                event.event_start = (new Date(value[1].split('to')[0])).toISOString(),
+                event.event_end = (new Date(value[1].split('to')[1])).toISOString(),
+                event.location= value[2],
+                console.log("ediawdawdawdawdawdwadted", value[0]);
+        })
+
+        axios.patch("form/form/"+ router.query.eventId +"/" ,{
+            name: value[3],
+            opens_at: (new Date(value[3])).toISOString(),
+            closes_at: ( new Date(value[4])).toISOString(),
+        }).then(() => {
+                console.log("ediawdawdawdawdawdwadted", value[0]);
+
+        })
+
+        
+        
+    }
+
 
     const [ModalShow2, setModalShow2] = useState(false);
     const [ModalShow3, setModalShow3] = useState(false);
@@ -486,13 +524,13 @@ function Event() {
 
                                     {" "}
 
-                                    <button
+                                    <Button
                                         className="btn btn-outline-warning material-icons"
                                         onClick={handleShowEvent}
                                         type="button"
                                     >
                                         edit
-                                    </button>
+                                    </Button>
                                 </h1>
 
                                 <div>
@@ -669,16 +707,16 @@ function Event() {
                             </div>
                         </div>
 
-                        {/* <EventAdminModal
+                        <EventAdminModal
                             handleClose={handleCloseEvent}
                             handleSubmit={handleSubmitEvent}
                             initialValues={[event.name, convertToDatetimeString(event.event_start) +
                                             (event.event_end?" to "+ convertToDatetimeString(event.event_end):""), event.location,
-                            convertToDatetimeString(form.opens_at), convertToDatetimeString(form.closes_at) ? + " " +
-                                + convertToDatetimeString(form.closes_at) : ""]}
+                            convertToDatetimeString(form?.opens_at), convertToDatetimeString(form?.closes_at) ? + " " +
+                                + convertToDatetimeString(form?.closes_at) : ""]}
                             labels={['Event Name','Date and Time','Location','Registration Starts', 'Registration ends']}
                             show={data.showEvent}
-                        /> */}
+                        />
 
                         <div>
                             <ReactMarkdown>
