@@ -36,6 +36,8 @@ export default function Event() {
         clubLogoLinks: {},
         event: {},
         form: [undefined, false],
+        response: false,
+        responseData:[],
     });
 
 
@@ -277,8 +279,8 @@ export default function Event() {
                                         end={event.event_end}
                                         eventId={router.query.eventId}
                                         formData={JSON.parse(form.skeleton)}
+                                        response={data.response}
                                         start={event.event_start}
-
                                     />
                                 </div>}
 

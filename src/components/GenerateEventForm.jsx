@@ -449,20 +449,23 @@ function generateCode(formData, setShowModal, eventId) {
     )
 }
 
-export default function GenerateEventForm({formData, eventId,start,end}) {
+export default function GenerateEventForm({formData, eventId, start, end, response}) {
     if (!formData)
         return null
 
     const [show, setShow] = useState(false);
 
     const register = () => {
-        ga.event({
-            action: "event-registration",
-            params: {
-                event_id: eventId
-            }
-        })
-        setShow(true);
+        if (!response){
+                ga.event({
+                action: "event-registration",
+                params: {
+                    event_id: eventId
+                }
+            })
+            setShow(true);
+        }
+
     }
 
     return (
@@ -472,7 +475,7 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
                 onClick={register}
                 size="lg"
             >
-                Register Here
+                {response? "View form":"Register Here"}
             </Button>
 
             <Modal
@@ -493,5 +496,6 @@ GenerateEventForm.propTypes = {
     end: PropTypes.string.isRequired,
     eventId: PropTypes.string.isRequired,
     formData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]))).isRequired,
+    response:PropTypes.bool.isRequired,
     start: PropTypes.string.isRequired,
 }
