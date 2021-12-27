@@ -163,7 +163,9 @@ function Event() {
         })
     }
     const handleSubmitDescription = () => {
-
+        setData((prevData) => {
+            return { ...prevData, event: { ...prevData.event, description: event.description } }
+        })
         handleCloseDescription();
     }
 

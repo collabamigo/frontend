@@ -28,7 +28,7 @@ export default class CreateEventModal extends React.Component {
     }
 
     uploadEventDetails(description) {
-        axios.patch(`club/competition/${this.props.eventId}`, {
+        axios.patch(`club/competition/${this.props.eventId}/`, {
             description,
         })
     }
