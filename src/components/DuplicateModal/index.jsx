@@ -33,7 +33,7 @@ export default class CreateEventModal extends React.Component {
         this.state = {
             stage: 1,
             description: "",
-            
+
         }
     }
 
@@ -80,7 +80,7 @@ export default class CreateEventModal extends React.Component {
                     competition: res.data.id,
                     opens_at: this.state.registrationStartDate,
                     closes_at: this.state.registrationDeadlineDate,
-                }).then(()=>this.props.router.push("/event/"+res.data.id));
+                }).then(()=>this.props.router.push("/manageevent/"+res.data.id));
             else
                 this.props.router.push("/manageevent/"+res.data.id);
         })
@@ -131,7 +131,7 @@ export default class CreateEventModal extends React.Component {
                                     <Formik
                                         initialValues={{
                                             description: this.props.description,
-                                            
+
                                         }}
                                         onSubmit={(values) => {
                                             if (values.isFormConnected)
@@ -142,7 +142,7 @@ export default class CreateEventModal extends React.Component {
                                     >
                                         <Form className="justify-content-center mt-3">
 
-                                            
+
 
                                             <div className="mb-4">
                                                 <label
@@ -171,7 +171,7 @@ export default class CreateEventModal extends React.Component {
                                     </Formik>
                                 </Modal.Body>
 
-                                <Modal.Footer> 
+                                <Modal.Footer>
                                     {' '}
 
                                     <Button
