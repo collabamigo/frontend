@@ -76,8 +76,8 @@ class ClubHomePage extends Component {
             });
             if (this.state.bannerLinks === null && this.state.basicInformation !== null) {
                 const storage = getStorage();
-                if(this.state.basicInformation.picture) {
-                JSON.parse(this.state.basicInformation.picture).map((link, index) => {
+                if(this.state.basicInformation.image_links) {
+                JSON.parse(this.state.basicInformation.image_links).map((link, index) => {
 
                     getDownloadURL(ref(storage, link)).then((url) => {
 
@@ -306,7 +306,6 @@ class ClubHomePage extends Component {
             }
         };
 
-
         return (
             <div className="row m-md-3">
                 <div className="mx-3 col-md-2 col-lg-2 col-sm-12 d-flex justify-content-around">
@@ -385,7 +384,7 @@ class ClubHomePage extends Component {
                                             <BCarousel.Item key={link}>
                                                 <Image
                                                     alt="First slide"
-                                                    className={"d-block w-100 "+styles.bannerImage}
+                                                    className={"d-block m-auto "+styles.bannerImage}
                                                     fluid
                                                     rounded
                                                     src={link}
@@ -517,4 +516,6 @@ class ClubHomePage extends Component {
     }
 }
 
-export default withRouter(ClubHomePage);
+const wrappedPage = withRouter(ClubHomePage);
+export default wrappedPage;
+wrappedPage.title = "CollabAmigo Club page";

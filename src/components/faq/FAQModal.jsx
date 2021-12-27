@@ -13,7 +13,6 @@ function FAQModal (props) {
             <Button
                 className="w-100"
                 onClick={() => setShow(true)}
-                size="lg"
                 variant="outline-primary"
             >
                 FAQ

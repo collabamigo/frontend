@@ -7,9 +7,18 @@ import Button from "react-bootstrap/Button";
 
 export default class index extends Component {
     static propTypes = {
-        ModalShow: PropTypes.bool.isRequired,
+        // eslint-disable-next-line react/no-unused-prop-types
         handleClose: PropTypes.func.isRequired,
+        // eslint-disable-next-line react/sort-prop-types
+        ModalShow: PropTypes.bool.isRequired,
+        values: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+
         // handleShow: PropTypes.func.isRequired,
+    }
+
+    constructor(props) {
+        super(props);
+        // console.log(this.props.values);
     }
 
     shouldComponentUpdate(){
@@ -17,6 +26,9 @@ export default class index extends Component {
     }
 
     render() {
+        if(!this.props.values){
+            return null
+        }
         return (
             <Modal
                 onHide={this.props.handleClose}
@@ -25,12 +37,42 @@ export default class index extends Component {
 
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Modal heading
+                        Congratulations to the winners
                     </Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    Woohoo, youre reading this text in a modal!
+
+                    {this.props.values.map((item,index) => (
+                        <div
+                            className="container-fluid"
+                            // eslint-disable-next-line react/no-array-index-key
+                            key={index}
+                        >
+
+                            <span>
+                                {item.position}
+
+                                {' : '}
+
+                                {" "}
+                            </span>
+
+                            {item.winner_first_name}
+
+                            {' '}
+
+                            {" "}
+
+                            <span />
+
+                            <span>
+                                {item.winner_last_name}
+                            </span>
+                        </div>
+                    ))}
+
+
                 </Modal.Body>
 
                 <Modal.Footer>

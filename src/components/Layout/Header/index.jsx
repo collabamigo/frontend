@@ -63,12 +63,12 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
                                 title={data?(data.First_Name + " " + data.Last_Name):""}
 
                             >
-                                <NavDropdown.Item href="/history">
-                                    Connections
-                                </NavDropdown.Item>
-
                                 <NavDropdown.Item href="/profile">
                                     My Profile
+                                </NavDropdown.Item>
+
+                                <NavDropdown.Item href="/history">
+                                    Your Events
                                 </NavDropdown.Item>
 
                                 <NavDropdown.Divider />

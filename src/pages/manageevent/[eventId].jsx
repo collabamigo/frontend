@@ -5,9 +5,7 @@ import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCalendar, faClock} from '@fortawesome/free-regular-svg-icons'
-import {faMapMarkerAlt, faShareAlt } from '@fortawesome/free-solid-svg-icons'
-import {faWhatsapp, faInstagram, faFacebook} from '@fortawesome/free-brands-svg-icons'
-import FAQModal from "components/faq/FAQModal";
+import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons'
 import {getStorage, ref, getDownloadURL, uploadBytes, deleteObject} from "firebase/storage";
 import {useRouter} from 'next/router'
 import Modal from 'react-bootstrap/Modal'
@@ -22,22 +20,26 @@ import {FirebaseContext} from "firebaseProvider";
 import ReactMarkdown from 'react-markdown'
 import SvgIcon from "common/SvgIcon";
 import ClubAdminModal from "../../components/ClubAdmin/modal";
+import UModal from "components/UModal";
+import FaqEditor from "components/FaqEditor";
+import {showAlert} from "../../common/Toast";
 
+import DuplicateModal from "components/DuplicateModal";
 function download_table_as_csv(table_id, separator = ',') {
-    var rows = document.querySelectorAll('tr');
-    var csv = [];
-    for (var i = 0; i < rows.length; i++) {
-        var row = [], cols = rows[i].querySelectorAll('td, th');
-        for (var j = 0; j < cols.length; j++) {
-            var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
+    let rows = document.querySelectorAll('tr');
+    let csv = [];
+    for (let i = 0; i < rows.length; i++) {
+        let row = [], cols = rows[i].querySelectorAll('td, th');
+        for (let j = 0; j < cols.length; j++) {
+            let data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
             data = data.replace(/"/g, '""');
             row.push('"' + data + '"');
         }
         csv.push(row.join(separator));
     }
-    var csv_string = csv.join('\n');
-    var filename = table_id + ' Dated- ' + new Date().toLocaleDateString() + '.csv';
-    var link = document.createElement('a');
+    let csv_string = csv.join('\n');
+    let filename = table_id + ' Dated- ' + new Date().toLocaleDateString() + '.csv';
+    let link = document.createElement('a');
     link.style.display = 'none';
     link.setAttribute('target', '_blank');
     link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv_string));
@@ -45,7 +47,6 @@ function download_table_as_csv(table_id, separator = ',') {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    console.log("lol")
 }
 
 function isEmpty(obj) {
@@ -70,7 +71,6 @@ function Event() {
 
     const firebase = useContext(FirebaseContext);
     const storage = firebase?getStorage(firebase):getStorage();
-    console.log(getAuth(firebase).lastNotifiedUid)
 
     const [data, setData] = useState({
         clubLogoLinks: {},
@@ -80,18 +80,20 @@ function Event() {
         showDescription:false,
         showModal: false,
         showModal2:false,
-        tableResponses: [],
+        tableResponses: [[], false],
+        form: [undefined, false],
         bannerLinks:undefined,
         bannerPaths :undefined,
         image1Ref : React.createRef(),
         image2Ref : React.createRef(),
         image3Ref : React.createRef(),
-        links:null
+        links:null,
+        currentModal:null,
     });
 
 
     const settableResponses = (tableResponses) => setData((prevData) => {
-        return {...prevData, tableResponses}
+        return {...prevData, tableResponses: [tableResponses, true]}
     });
 
     const setEvent = (event) => {
@@ -105,20 +107,9 @@ function Event() {
                 }
             };
         });
-
-        // JSON.parse(event.image_links).map((link, index) => {
-        //     return getDownloadURL(ref(storage, link)).then((url) =>
-        //         setData((prevData) => {
-        //             return {...prevData, event: {
-        //                 ...prevData.event,
-        //                 image_links: {...prevData.event.image_links, [index]: url}
-        //             }}
-        //         })
-        //     )
-        // })
     }
     const setForm = (form) => setData((prevData) => {
-        return {...prevData, form}
+        return {...prevData, form: [form, true]}
     });
 
     const addClubLogoLinks = (club, link) => {
@@ -128,10 +119,10 @@ function Event() {
         })
     };
     const event = data.event;
-    const form = data.form;
+    const form = data.form[0];
     const clubLogoLinks = data.clubLogoLinks;
-    const tableHeaders = isEmpty(form)?[]:JSON.parse(data.form.skeleton);
-    const tableResponses = data.tableResponses;
+    const tableHeaders = isEmpty(form)?[]:JSON.parse(form.skeleton);
+    const tableResponses = data.tableResponses[0];
     const showModal = data.showModal;
     const showModal2= data.showModal2;
 
@@ -143,8 +134,11 @@ function Event() {
 
     const handleCloseDescription = () => setData({...data, showDescription: false});
     const handleShowEvent = () => setData({...data, showEvent: true});
-    const handleShowDescription = () => setData({...data, showDescription: true});
+    // const handleSubmitEvent = () => setData({...data, showEvent: false});
+    const handleCloseEvent = () => setData({...data, showEvent: false});
 
+
+    // const handleShowDescription = () => setData({...data, showDescription: true});
 
     const handleClose = () => setData({...data, showModal: false});
     const handleShow = () => setData({...data, showModal: true});
@@ -152,11 +146,68 @@ function Event() {
     const handleClose2 = () => setData({...data, showModal2:false});
     const handleShow2 = () => setData({...data, showModal2:true});
 
-    // const handleSubmitEvent =()=>{
-    //     console.log("edited");
-    //     handleCloseEvent();
-    // }
+    const handleSubmitEvent =(value)=>{
 
+        handleCloseEvent();
+        console.log("edited maginc", value[0]);
+
+        let start = (new Date(value[1].split('to')[1])).toISOString();
+        console.log("edited maginc", start);
+
+        axios.patch("club/competition/"+ router.query.eventId +"/" ,{
+            name: value[0],
+            event_start: (new Date(value[1].split('to')[0])).toISOString(),
+            event_end: (new Date(value[1].split('to')[1])).toISOString(),
+            location: value[2],
+        }).then(() => {
+                setData((prevData) => {
+                    return {...prevData, event: {...prevData.event, name: value[0],
+                        event_start: (new Date(value[1].split('to')[0])).toISOString(),
+                        event_end: (new Date(value[1].split('to')[1])).toISOString(),
+                        location: value[2],
+
+                    }}
+                })
+
+                console.log("ediawdawdawdawdawdwadted", value[0]);
+        })
+
+        console.log(value[3],"sjkdk");
+        console.log(value[4], "lll");
+
+
+        var lolstart = (new Date(value[3])).toISOString();
+        console.log(lolstart, " hello");
+        var lolend = (new Date(value[4])).toISOString();
+        console.log(lolend, " hellsdsdsdo");
+
+        axios.patch("form/form/"+ router.query.eventId +"/" ,{
+            opens_at: lolstart,
+            closes_at: lolend,
+        }).then((res) => {
+                console.log(res.data);
+                setData((prevData) => {
+                    return {...prevData,
+                         form: [res.data, true],
+                    }
+                })
+        })
+    }
+
+
+    const [ModalShow2, setModalShow2] = useState(false);
+    const [ModalShow3, setModalShow3] = useState(false);
+
+
+    const setFaq = (faq) => {
+        axios.patch(`club/competition/${router.query.eventId}/`, {
+            faq: JSON.stringify(faq)
+        }).then(() => {
+            setData((prevData) => {
+                return {...prevData, event: {...prevData.event, faq: JSON.stringify(faq)}}
+            })
+        })
+    }
     const handleSubmitDescription = ()=>{
         console.log("edited");
         handleCloseDescription();
@@ -174,7 +225,12 @@ function Event() {
             image_links:JSON.stringify(temp)
         }
         axios.patch(`/club/competition/${router.query.eventId}/`, payload).then(()=>
-            deleteObject(desertRef))
+        {deleteObject(desertRef)
+            showAlert(
+                "Picture Deleted",
+                "success"
+            )
+        })
         setData({...data, bannerLinks:undefined,bannerPaths:JSON.stringify(temp)})
     }
 
@@ -230,6 +286,10 @@ function Event() {
                 image_links: JSON.stringify(arr)
             }
             axios.patch("/club/competition/" + router.query.eventId + "/", payload).then(() => {
+                showAlert(
+                    "Picture Uploaded",
+                    "success"
+                )
                 setData({...data, bannerLinks: undefined, bannerPaths: JSON.stringify(arr)})
             })
         })
@@ -237,26 +297,42 @@ function Event() {
 
     const handleSubmitLinks = (args) => {
         const payload = {
-            link: args[0],
+            link: (args[0].startsWith("http://") || args[0].startsWith("https://"))?args[0]:`https://${args[0]}`,
         }
-        axios.patch('/club/competition/' + router.query.eventId + '/', payload).then(()=>{console.log("done")})
-        console.log("link submitted")
+        axios.patch('/club/competition/' + router.query.eventId + '/', payload).then(()=>{handleClose2
+            showAlert(
+            "Links Added",
+                "success"
+            )
+        })
     }
 
      useEffect(() => {
         if (router.query.eventId!==undefined) {
 
-            if (isEmpty(tableResponses))
+            if (!data.tableResponses[1])
                 axios.get(`form/response/${router.query.eventId}/`)
                     .then(res => settableResponses(res.data))
+                    .catch(err => {
+                        if (err.response.status === 404)
+                            settableResponses(-1);
+                        else
+                            throw err;
+                    })
 
             if (isEmpty(event))
                 axios.get(`club/competition/${router.query.eventId}/`)
                     .then(res => setEvent(res.data))
 
-            if (isEmpty(form))
+            if (!data.form[1])
                 axios.get(`form/form/${router.query.eventId}/`)
-                    .then(res => setForm(res.data)).catch(err => console.log(err))
+                    .then(res => setForm(res.data))
+                    .catch(err => {
+                        if (err.response.status === 404)
+                            setForm(-1);
+                        else
+                            throw err;
+                })
 
             if (isEmpty(clubLogoLinks) && !isEmpty(event))
                 event.clubs.map(club => getDownloadURL(ref(storage, 'data/'+club+'/uneditable/logo.png'))
@@ -283,89 +359,25 @@ function Event() {
                     })
             }}})
 
-    console.log(event)
+
     const isLoading = isEmpty(event);
     if (isLoading)
         return <Loading />
     else
         return (
             <>
-                <Modal
-                    aria-labelledby="example-custom-modal-styling-title"
-                    onHide={handleClose}
-                    show={showModal}
-                    size="lg"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            Responses
 
-                            {tableResponses.length}
-                        </Modal.Title>
-                    </Modal.Header>
+                <UModal
+                    ModalShow={ModalShow2}
+                    eventID={router.query.eventId}
+                    handleClose={() => setModalShow2(false)}
+                />
 
-                    <Modal.Body>
-                        <Table
-                            bordered
-                            hover
-                            striped
-                        >
-                            <thead>
-                                <tr>
-                                    <td>
-                                        {" "}
-                                        Sr no.
-                                    </td>
-
-                                    {tableHeaders.map((option) => (
-                                        <td key={option.name}>
-                                            {option.name}
-                                        </td>
-                                ))}
-
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                {tableResponses.map((response, index) => (
-                                    <tr key={response}>
-
-                                        <td>
-                                            {index}
-                                        </td>
-
-                                        {response.elements.map((values) => (
-                                            <td
-                                                key={values.value}
-                                            >
-                                                {values.value}
-                                            </td>
-                                    ))}
-                                    </tr>
-                            ))}
-
-                            </tbody>
-                        </Table>
-
-                        <br />
-
-                        Woohoo, youre reading this text in a modal!
-                    </Modal.Body>
-
-
-                    <br />
-
-                    <Button
-                        className="w-50 align-self-center"
-                        onClick={() => {download_table_as_csv(event.name + ' responses')}}
-                    >
-                        Download as CSV
-                    </Button>
-
-                    <br />
-
-
-                </Modal>
+                <DuplicateModal
+                    handleClose={() => setModalShow3(false)}
+                    router={router}
+                    show={ModalShow3}
+                />
 
                 <div className="row px-md-5 mx-md-5 px-2 mx-2">
                     <div className="col-md-4 col-12 me-4">
@@ -522,13 +534,13 @@ function Event() {
 
                                     {" "}
 
-                                    <button
+                                    <Button
                                         className="btn btn-outline-warning material-icons"
                                         onClick={handleShowEvent}
                                         type="button"
                                     >
                                         edit
-                                    </button>
+                                    </Button>
                                 </h1>
 
                                 <div>
@@ -573,28 +585,123 @@ function Event() {
                                 <div className="row">
 
                                     <div>
-                                        <Button
-                                            className="w-100"
-                                            onClick={handleShow}
-                                            size="lg"
-                                        >
-                                            View Responses
-                                        </Button>
+                                        {isEmpty(form)?null:
+                                        <>
+                                            <Button
+                                                className="w-100"
+                                                onClick={handleShow}
+                                                size="lg"
+                                            >
+                                                View Responses
+                                            </Button>
+
+                                            <Button
+                                                className="my-2 w-100"
+                                                onClick={() => setModalShow2(true)}
+                                                size="lg"
+                                            >
+                                                Declare winners
+                                            </Button>
+
+                                            <Modal
+                                                aria-labelledby="example-custom-modal-styling-title"
+                                                onHide={handleClose}
+                                                show={showModal}
+                                                size="lg"
+                                            >
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title>
+                                                        Responses
+
+                                                        {tableResponses.length}
+                                                    </Modal.Title>
+                                                </Modal.Header>
+
+                                                <Modal.Body>
+                                                    <Table
+                                                        bordered
+                                                        hover
+                                                        striped
+                                                    >
+                                                        <thead>
+                                                            <tr>
+                                                                <td>
+                                                                    {" "}
+                                                                    Sr no.
+                                                                </td>
+
+                                                                {tableHeaders.map((option) => (
+                                                                    <td key={option.name}>
+                                                                        {option.name}
+                                                                    </td>
+                                                                ))}
+
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            {tableResponses.map((response, index) => (
+                                                                <tr key={response}>
+
+                                                                    <td>
+                                                                        {index}
+                                                                    </td>
+
+                                                                    {response.elements.map((values) => (
+                                                                        <td
+                                                                            key={values.value}
+                                                                        >
+                                                                            {values.value}
+                                                                        </td>
+                                                                    ))}
+                                                                </tr>
+                                                            ))}
+
+                                                        </tbody>
+                                                    </Table>
+
+                                                    <br />
+
+                                                    Woohoo, youre reading this text in a modal!
+                                                </Modal.Body>
+
+
+                                                <br />
+
+                                                <Button
+                                                    className="w-50 align-self-center"
+                                                    onClick={() => {
+                                                            download_table_as_csv(event.name + " responses");
+                                                        }}
+                                                >
+                                                    Download as CSV
+                                                </Button>
+
+                                                <br />
+
+
+                                            </Modal>
+                                        </>}
                                     </div>
 
                                     {(!event.faq || isEmpty(event.faq))?null:
                                     <div className="p-2 col-6">
-                                        <FAQModal data={JSON.parse(event.faq)} />
+                                        <FaqEditor
+                                            disappear={()=>{setData({...data, currentModal: null})}}
+                                            faq={JSON.parse(event.faq)}
+                                            setFaq={setFaq}
+                                            setShow={()=>{setData({...data,currentModal:"faq"})}}
+                                            show={data.currentModal=== "faq"}
+                                        />
                                     </div>}
 
                                     <div className="p-2 col-6">
                                         <Button
                                             className="w-100"
+                                            letiant="outline-primary"
                                             onClick={handleShow2}
-                                            size="m"
-                                            variant="outline-primary"
                                         >
-                                            Add Links
+                                            Add Event link
                                         </Button>
 
                                         <ClubAdminModal
@@ -607,58 +714,32 @@ function Event() {
 
                                     </div>
                                 </div>
-
-                                <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faWhatsapp}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faFacebook}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faInstagram}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faShareAlt}
-                                        size="2x"
-                                    />
-                                </div>
                             </div>
                         </div>
 
-                        {/* <EventAdminModal
+                        {form && <EventAdminModal
                             handleClose={handleCloseEvent}
                             handleSubmit={handleSubmitEvent}
                             initialValues={[event.name, convertToDatetimeString(event.event_start) +
                                             (event.event_end?" to "+ convertToDatetimeString(event.event_end):""), event.location,
-                            convertToDatetimeString(form.opens_at), convertToDatetimeString(form.closes_at) ? + " " +
-                                + convertToDatetimeString(form.closes_at) : ""]}
+                            convertToDatetimeString(form.opens_at),
+                            convertToDatetimeString(form.closes_at) ? (convertToDatetimeString(form.closes_at)) : ""]}
                             labels={['Event Name','Date and Time','Location','Registration Starts', 'Registration ends']}
                             show={data.showEvent}
-                        /> */}
+                                 />}
 
                         <div>
                             <ReactMarkdown>
                                 {event.description}
                             </ReactMarkdown>
 
-                            <button
-                                className="btn btn-outline-warning material-icons"
-                                onClick={handleShowDescription}
-                                type="button"
+                            <Button
+                                className="my-2 w-100"
+                                onClick={() => setModalShow3(true)}
+                                size="lg"
                             >
-                                edit
-                            </button>
+                                Update description
+                            </Button>
 
                             <EventAdminModal
                                 handleClose={handleCloseDescription}
@@ -675,3 +756,5 @@ function Event() {
 }
 
 export default Event;
+
+Event.title = "CollabAmigo Event Management page"

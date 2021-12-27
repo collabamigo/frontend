@@ -1,11 +1,14 @@
+import lodashIsEmpty from "lodash/isEmpty";
 import React, {useState} from 'react';
 import {Formik, Field, Form} from 'formik';
 import {Modal} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import axios from "utilities/axios";
+import * as ga from "lib/ga";
+import {showAlert} from "../common/Toast";
 
-function generateCode(formData, setShowModal, eventId) {
+function generateCode(formData, setShowModal, eventId, response) {
 
     const validate = (values, formData) => {
         const errors = {};
@@ -407,10 +410,16 @@ function generateCode(formData, setShowModal, eventId) {
                     </Modal.Header>
 
                     <Formik
-                        initialValues={{...(Array(formData.length).fill(""))}}
-                        onSubmit={(values) => {console.log(values); axios.post("form/submit/"+eventId+"/", values).then(() => {
+                        initialValues={lodashIsEmpty(response)?{...(Array(formData.length).fill(""))}:response}
+                        onSubmit={(values) => {axios.post("form/submit/" + eventId + "/", values).then(() => {
+                            // alert("test")
+                            showAlert(
+                                "Form Submitted",
+                                "success"
+                            );
                             setShowModal(false);
-                        })}}
+                        }
+                        )}}
                         validate={(values) => validate(values, formData)}
                     >
                         {({errors, touched}) => (
@@ -426,9 +435,7 @@ function generateCode(formData, setShowModal, eventId) {
 
                                 <button
                                     className="btn btn-secondary btn-block mt-4"
-                                    onClick={() => {
-                                setShowModal(false);
-                            }}
+                                    onClick={() => {setShowModal(false)}}
                                     type="button"
                                 >
                                     Cancel
@@ -443,20 +450,40 @@ function generateCode(formData, setShowModal, eventId) {
     )
 }
 
-export default function GenerateEventForm({formData, eventId,start,end}) {
+export default function GenerateEventForm({formData, eventId, start, end, response}) {
     if (!formData)
         return null
 
     const [show, setShow] = useState(false);
 
+    const register = () => {
+        if (!response){
+                ga.event({
+                action: "event-registration",
+                params: {
+                    event_id: eventId
+                }
+            })
+        }
+        else
+            ga.event({
+                action: "event-registration-edit",
+                params: {
+                    event_id: eventId
+                }
+            })
+        setShow(true);
+
+    }
+
     return (
         <>
             <Button
-                className={"w-100 "+ (((new Date()) > (new Date(start))) && ((new Date()) < (new Date(end))) ?"disabled":"")}
-                onClick={() => setShow(true)}
+                className={"w-100 "+ (((new Date()) < (new Date(start))) && ((new Date()) < (new Date(end))) ? "disabled":"")}
+                onClick={register}
                 size="lg"
             >
-                Register Here
+                {response? "Edit Response":"Register Here"}
             </Button>
 
             <Modal
@@ -468,7 +495,7 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
                 onHide={() => setShow(false)}
                 show={show}
             >
-                {generateCode(formData, setShow, eventId)}
+                {generateCode(formData, setShow, eventId, response)}
             </Modal>
         </>
     )
@@ -477,5 +504,6 @@ GenerateEventForm.propTypes = {
     end: PropTypes.string.isRequired,
     eventId: PropTypes.string.isRequired,
     formData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]))).isRequired,
+    response:PropTypes.bool.isRequired,
     start: PropTypes.string.isRequired,
 }

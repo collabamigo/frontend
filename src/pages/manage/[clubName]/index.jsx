@@ -18,6 +18,7 @@ import Link from "common/Link";
 import lodashMap from "lodash/map";
 import Image from "react-bootstrap/Image";
 import EventTalkCard from "../../../common/HomePageCards/EventTalkCard";
+import {showAlert} from "../../../common/Toast";
 
 class ClubAdminPage extends Component {
 
@@ -76,7 +77,7 @@ class ClubAdminPage extends Component {
             }
             if (this.state.basicInformation === null)
                 axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
-                    this.setState({basicInformation: res.data, isLoading: false,bannerPaths:res.data.picture});
+                    this.setState({basicInformation: res.data, isLoading: false,bannerPaths:res.data.image_links});
             if (this.state.announcements === null)
                 axios.get("club/clubannouncements/" + this.props.router.query.clubName + "/").
                     then((res) => {
@@ -276,56 +277,75 @@ class ClubAdminPage extends Component {
             description: this.state.basicInformation.description
         }
         axios.patch("club/club/"+ this.props.router.query.clubName +"/" ,payload)
-            .then(() => this.setState(payload))
+            .then(() => {
+                this.setState(payload)
+                    showAlert(
+                        "Description Updated",
+                        "success"
+                    )
+            })
     }
 
     handleSubmitAnnouncements(values){
-        axios.patch("club/announcements/",{
+        axios.post("club/announcements/",{
             club: this.props.router.query.clubName,
             content: values[0]
         }).then((ress) => {
+                    showAlert(
+                        "Announcements Updated",
+                        "success"
+                    )
                     this.setState((prevState) => {
                         return (
                             {
                                 ...(prevState.announcements),
                                 announcements:[{id:ress.data.id, content:ress.data.content, timestamp:ress.data.timestamp},...(prevState.announcements)]
                             })
+
                     })
         });
         this.handleCloseModal()
     }
 
     handleSubmitPanel(values){
-        this.setState((prevState) => {
-            return (
-                {
-                    ...prevState,
-                    basicInformation: {
-                        ...(prevState.basicInformation),
-                        instagram:values[0],
-                        linkedin:values[1],
-                        facebook:values[2],
-                        discord:values[3],
-                        github:values[4],
-                        mail:values[5],
-                        telegram:values[6],
-                        other:values[7],
-                    }
-                })
-        })
+
         this.handleCloseModal()
         const payload = {
-            linkedin:   this.state.basicInformation.linkedin,
-            facebook:   this.state.basicInformation.facebook,
-            discord:    this.state.basicInformation.discord,
-            github:     this.state.basicInformation.github,
-            mail:       this.state.basicInformation.mail,
-            telegram:   this.state.basicInformation.telegram,
-            other:      this.state.basicInformation.other,
-            tagline:    this.state.basicInformation.tagline,
+            instagram: values[0],
+            linkedin: values[1],
+            facebook: values[2],
+            discord: values[3],
+            github: values[4],
+            mail: values[5],
+            telegram: values[6],
+            other: values[7],
+            tagline: values[8],
         }
         axios.patch("club/club/"+ this.props.router.query.clubName +"/" ,payload)
-            .then(() => this.setState(payload))
+            .then(() => {
+                this.setState((prevState) => {
+                    return (
+                        {
+                            ...prevState,
+                            basicInformation: {
+                                ...(prevState.basicInformation),
+                                instagram: values[0],
+                                linkedin: values[1],
+                                facebook: values[2],
+                                discord: values[3],
+                                github: values[4],
+                                mail: values[5],
+                                telegram: values[6],
+                                other: values[7],
+                                tagline: values[8],
+                            }
+                        })
+                })
+            showAlert(
+                "Links Updated",
+                "success"
+                )
+            })
     }
 
     bannerControl(args,num) {
@@ -334,7 +354,7 @@ class ClubAdminPage extends Component {
                 <div>
                     <Image
                         alt="Carousel Image"
-                        className="m-auto"
+                        className={"d-block m-auto " + styles.bannerImage}
                         fluid
                         height="130"
                         rounded
@@ -380,6 +400,10 @@ class ClubAdminPage extends Component {
                 image_links: JSON.stringify(arr)
             }
             axios.patch("/club/club/" + this.props.router.query.clubName + "/", payload).then(() => {
+                showAlert(
+                    "Picture Uploaded",
+                    "success"
+                )
                 this.setState({bannerLinks: undefined, bannerPaths: JSON.stringify(arr)})
             })
         })
@@ -443,8 +467,13 @@ class ClubAdminPage extends Component {
         const payload = {
             picture:JSON.stringify(temp)
         }
-        axios.patch(`/club/club/${this.props.router.query.clubName}/`, payload).then(()=>
-            deleteObject(desertRef))
+        axios.patch(`/club/club/${this.props.router.query.clubName}/`, payload).then(()=> {
+            deleteObject(desertRef)
+            showAlert(
+                "Picture Deleted",
+                "success"
+            )
+        })
         this.setState({bannerLinks:undefined,bannerPaths:JSON.stringify(temp)})
     }
 
@@ -915,6 +944,8 @@ class ClubAdminPage extends Component {
     }
 }
 
-export default withRouter (ClubAdminPage);
+const wrappedPage = withRouter(ClubAdminPage);
+export default wrappedPage;
+wrappedPage.title = "CollabAmigo Club Management page";
 //  TODO: need to add option to edit coordinators
 //TODO: need to give attributions to icons8

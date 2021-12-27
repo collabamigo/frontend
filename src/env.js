@@ -1,9 +1,10 @@
-const production = false
+// eslint-disable-next-line no-undef
+const production = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production';
 
 let backend = ""
 
 if (production)
-    backend = "https://mysterious-savannah-09391.herokuapp.com/"
+    backend = "https://api.collabamigo.com/"
 else
     backend = "https://blooming-peak-53825.herokuapp.com/"
 
