@@ -5,8 +5,7 @@ import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCalendar, faClock} from '@fortawesome/free-regular-svg-icons'
-import {faMapMarkerAlt, faShareAlt } from '@fortawesome/free-solid-svg-icons'
-import {faWhatsapp, faInstagram, faFacebook} from '@fortawesome/free-brands-svg-icons'
+import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons'
 import {getStorage, ref, getDownloadURL, uploadBytes, deleteObject} from "firebase/storage";
 import {useRouter} from 'next/router'
 import Modal from 'react-bootstrap/Modal'
@@ -666,32 +665,6 @@ function Event() {
                                         />
 
                                     </div>
-                                </div>
-
-                                <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faWhatsapp}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faFacebook}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faInstagram}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faShareAlt}
-                                        size="2x"
-                                    />
                                 </div>
                             </div>
                         </div>
