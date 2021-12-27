@@ -126,7 +126,7 @@ function Event() {
     const tableResponses = data.tableResponses[0];
     const showModal = data.showModal;
     const showModal2 = data.showModal2;
-    
+
     // console.log("eventtttt" + event.description);
 
     const convertToDatetimeString = iso_8601_string => {
@@ -163,7 +163,7 @@ function Event() {
         })
     }
     const handleSubmitDescription = () => {
-        
+
         handleCloseDescription();
     }
 
@@ -328,6 +328,8 @@ function Event() {
                 />
 
                 <DuplicateModal
+                    description={event.description}
+                    eventId={router.query.eventId}
                     handleClose={() => setModalShow3(false)}
                     initialValues={event}
                     router={router}
