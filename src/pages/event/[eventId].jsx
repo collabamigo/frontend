@@ -1,4 +1,5 @@
 /* eslint-disable react/no-array-index-key */
+import lodashIsEmpty from "lodash/isEmpty";
 import React, {useEffect, useState} from "react"
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
@@ -36,6 +37,7 @@ export default function Event() {
         clubLogoLinks: {},
         event: {},
         form: [undefined, false],
+        pastResponse: [[], false],
     });
 
 
@@ -122,6 +124,24 @@ export default function Event() {
                             )
                         })
                     })
+            }
+
+            if (!data.pastResponse[1]) {
+                axios.get(`form/get-response/${router.query.eventId}/`)
+                    .then(res => setData((prevData) => {
+                        if (lodashIsEmpty(res.data))
+                            return {...prevData, pastResponse: [[], true]}
+
+                        let response = res.data[0].elements;
+                        let temp_holder = {};
+                        response.forEach(element => {
+                            temp_holder[element.question] = element.value;
+                        });
+                        return {...prevData, pastResponse: [temp_holder, true]}
+                    }))
+                    .catch(() => {setData((prevData) => {
+                        return {...prevData, pastResponse: [[], true]}
+                    })})
             }
 
     }})
@@ -277,8 +297,8 @@ export default function Event() {
                                         end={event.event_end}
                                         eventId={router.query.eventId}
                                         formData={JSON.parse(form.skeleton)}
+                                        response={data.pastResponse[0]}
                                         start={event.event_start}
-
                                     />
                                 </div>}
 

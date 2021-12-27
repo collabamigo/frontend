@@ -26,20 +26,20 @@ import {showAlert} from "../../common/Toast";
 
 import DuplicateModal from "components/DuplicateModal";
 function download_table_as_csv(table_id, separator = ',') {
-    var rows = document.querySelectorAll('tr');
-    var csv = [];
-    for (var i = 0; i < rows.length; i++) {
-        var row = [], cols = rows[i].querySelectorAll('td, th');
-        for (var j = 0; j < cols.length; j++) {
-            var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
+    let rows = document.querySelectorAll('tr');
+    let csv = [];
+    for (let i = 0; i < rows.length; i++) {
+        let row = [], cols = rows[i].querySelectorAll('td, th');
+        for (let j = 0; j < cols.length; j++) {
+            let data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
             data = data.replace(/"/g, '""');
             row.push('"' + data + '"');
         }
         csv.push(row.join(separator));
     }
-    var csv_string = csv.join('\n');
-    var filename = table_id + ' Dated- ' + new Date().toLocaleDateString() + '.csv';
-    var link = document.createElement('a');
+    let csv_string = csv.join('\n');
+    let filename = table_id + ' Dated- ' + new Date().toLocaleDateString() + '.csv';
+    let link = document.createElement('a');
     link.style.display = 'none';
     link.setAttribute('target', '_blank');
     link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv_string));
@@ -134,6 +134,10 @@ function Event() {
 
     const handleCloseDescription = () => setData({...data, showDescription: false});
     const handleShowEvent = () => setData({...data, showEvent: true});
+    // const handleSubmitEvent = () => setData({...data, showEvent: false});
+    const handleCloseEvent = () => setData({...data, showEvent: false});
+
+
     // const handleShowDescription = () => setData({...data, showDescription: true});
 
     const handleClose = () => setData({...data, showModal: false});
@@ -142,10 +146,42 @@ function Event() {
     const handleClose2 = () => setData({...data, showModal2:false});
     const handleShow2 = () => setData({...data, showModal2:true});
 
-    // const handleSubmitEvent =()=>{
-    //     console.log("edited");
-    //     handleCloseEvent();
-    // }
+    const handleSubmitEvent =(value)=>{
+
+        handleCloseEvent();
+
+
+        console.log("edited maginc", value[0]);
+
+        let start = (new Date(value[1].split('to')[1])).toISOString();
+        console.log("edited maginc", start);
+
+        axios.patch("club/competition/"+ router.query.eventId +"/" ,{
+            name: value[0],
+            event_start: (new Date(value[1].split('to')[0])).toISOString(),
+            event_end: (new Date(value[1].split('to')[1])).toISOString(),
+            location: value[2],
+        }).then(() => {
+                event.name = value[0];
+                event.event_start = (new Date(value[1].split('to')[0])).toISOString()
+                event.event_end = (new Date(value[1].split('to')[1])).toISOString()
+                event.location= value[2]
+                console.log("ediawdawdawdawdawdwadted", value[0]);
+        })
+
+        axios.patch("form/form/"+ router.query.eventId +"/" ,{
+            name: value[3],
+            opens_at: (new Date(value[3])).toISOString(),
+            closes_at: ( new Date(value[4])).toISOString(),
+        }).then(() => {
+                console.log("ediawdawdawdawdawdwadted", value[0]);
+
+        })
+
+
+
+    }
+
 
     const [ModalShow2, setModalShow2] = useState(false);
     const [ModalShow3, setModalShow3] = useState(false);
@@ -486,13 +522,13 @@ function Event() {
 
                                     {" "}
 
-                                    <button
+                                    <Button
                                         className="btn btn-outline-warning material-icons"
                                         onClick={handleShowEvent}
                                         type="button"
                                     >
                                         edit
-                                    </button>
+                                    </Button>
                                 </h1>
 
                                 <div>
@@ -650,10 +686,10 @@ function Event() {
                                     <div className="p-2 col-6">
                                         <Button
                                             className="w-100"
+                                            letiant="outline-primary"
                                             onClick={handleShow2}
-                                            variant="outline-primary"
                                         >
-                                            Add Links
+                                            Add Event link
                                         </Button>
 
                                         <ClubAdminModal
@@ -669,16 +705,16 @@ function Event() {
                             </div>
                         </div>
 
-                        {/* <EventAdminModal
+                        <EventAdminModal
                             handleClose={handleCloseEvent}
                             handleSubmit={handleSubmitEvent}
                             initialValues={[event.name, convertToDatetimeString(event.event_start) +
                                             (event.event_end?" to "+ convertToDatetimeString(event.event_end):""), event.location,
-                            convertToDatetimeString(form.opens_at), convertToDatetimeString(form.closes_at) ? + " " +
-                                + convertToDatetimeString(form.closes_at) : ""]}
+                            convertToDatetimeString(form?.opens_at), convertToDatetimeString(form?.closes_at) ? + " " +
+                                + convertToDatetimeString(form?.closes_at) : ""]}
                             labels={['Event Name','Date and Time','Location','Registration Starts', 'Registration ends']}
                             show={data.showEvent}
-                        /> */}
+                        />
 
                         <div>
                             <ReactMarkdown>
