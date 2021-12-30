@@ -6,7 +6,8 @@ import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import axios from "utilities/axios";
 import * as ga from "lib/ga";
-import {showAlert} from "../common/Toast";
+import {showAlert} from "common/Toast";
+import {isBrowser} from "utilities/auth";
 
 function generateCode(formData, setShowModal, eventId, response) {
 
@@ -399,6 +400,8 @@ function generateCode(formData, setShowModal, eventId, response) {
         return formFields;
     }
 
+    const submissionUrl = `form/submit/${eventId}/`+(lodashIsEmpty(response)?"new/":"existing/");
+
     return (
         <div className="bg-dark p-4 text-white rounded-3 w-100">
             <div className="row">
@@ -411,12 +414,14 @@ function generateCode(formData, setShowModal, eventId, response) {
 
                     <Formik
                         initialValues={lodashIsEmpty(response)?{...(Array(formData.length).fill(""))}:response}
-                        onSubmit={(values) => {axios.post("form/submit/" + eventId + "/", values).then(() => {
+                        onSubmit={(values) => {axios.post(submissionUrl, values).then(() => {
                             // alert("test")
                             showAlert(
-                                "Form Submitted",
+                                "Form Submitted. Reloading page...",
                                 "success"
                             );
+                            if (isBrowser())
+                                window.location.reload();
                             setShowModal(false);
                         }
                         )}}
@@ -483,7 +488,7 @@ export default function GenerateEventForm({formData, eventId, start, end, respon
                 onClick={register}
                 size="lg"
             >
-                {response? "Edit Response":"Register Here"}
+                {lodashIsEmpty(response)?"Register Here":"Edit Response"}
             </Button>
 
             <Modal
