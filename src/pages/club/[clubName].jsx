@@ -42,6 +42,7 @@ class ClubHomePage extends Component {
             announcements: null,
             currentDateTime : date,
             logoUrl: null,
+            clubName: undefined,
         }
     }
 
@@ -54,7 +55,24 @@ class ClubHomePage extends Component {
     }
 
     componentDidUpdate () {
+        if (this.state.clubName !== this.props.router.query.clubName)
+            // SUPPRESSION necessary
+            // eslint-disable-next-line react/no-did-update-set-state
+            this.setState((prevState) => ({
+                basicInformation: null,
+                bannerLinks: null,
+                competitions: null,
+                announcements: null,
+                currentDateTime: prevState.currentDateTime,
+                logoUrl: null,
+                clubName: undefined,
+            }))
+
         if (this.props.router.isReady){
+            if (this.state.clubName !== this.props.router.query.clubName)
+                // SUPPRESSION necessary
+                // eslint-disable-next-line react/no-did-update-set-state
+                this.setState({clubName: this.props.router.query.clubName})
             if (!this.state.logoUrl) {
                 const storage = getStorage();
                 getDownloadURL(ref(storage, "data/" + this.props.router.query.clubName + "/uneditable/logo.png"))
@@ -405,7 +423,6 @@ class ClubHomePage extends Component {
                                         (
                                             <BCarousel.Item key={link}>
                                                 <Image
-                                                    alt="First slide"
                                                     className={"d-block m-auto "+styles.bannerImage}
                                                     fluid
                                                     rounded

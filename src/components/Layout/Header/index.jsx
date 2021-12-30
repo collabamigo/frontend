@@ -67,14 +67,15 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
                                     style={{listStyle: "none"}}
                                 >
                                     {data.clubs?.map((club) => (
-                                        <li key={club.id}>
-                                            <NavDropdown.Item
-                                                href={"/manage/" + club.username}
-                                                internal
-                                            >
+                                        <Link
+                                            className="reset-a cursor-pointer"
+                                            key={club.id}
+                                            to={`/manage/${club.username}/`}
+                                        >
+                                            <NavDropdown.Item as="span">
                                                 {club.name}
                                             </NavDropdown.Item>
-                                        </li>
+                                        </Link>
                                         ))}
                                 </ul>
                             </NavDropdown>
@@ -98,7 +99,7 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
 
                                 <NavDropdown.Divider />
 
-                               
+
 
                                 {/* <AccountChooser
                                     data={data}

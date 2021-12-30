@@ -75,6 +75,7 @@ export default class CreateEventModal extends React.Component {
     }
 
     componentDidUpdate() {
+        console.log("formBuilder", this.state.formBuilder);
         if (this.props.router.isReady) {
             if (this.state.promo === null) {
                 console.log("promo is null");

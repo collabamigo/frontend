@@ -1,6 +1,7 @@
 import {getAuth} from "firebase/auth";
 import React, {Component} from 'react';
 import Card from 'react-bootstrap/Card'
+import BCarousel from "react-bootstrap/Carousel";
 import Carousel from 'react-bootstrap/Carousel'
 import {SvgIcon} from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
@@ -56,6 +57,7 @@ class ClubAdminPage extends Component {
             bannerLinks:undefined,
             bannerPaths :undefined,
             logoUrl:null,
+            clubName: undefined,
         }
     }
 
@@ -68,7 +70,31 @@ class ClubAdminPage extends Component {
     }
 
     componentDidUpdate(){
-        if (this.props.router.isReady){
+        if (this.state.clubName !== this.props.router.query.clubName)
+            // SUPPRESSION necessary
+            // eslint-disable-next-line react/no-did-update-set-state
+            this.setState((prevState)=>({
+                token: null,
+                image1: null,
+                image2: null,
+                image3: null,
+                setImage: null,
+                basicInformation: null,
+                competitions: null,
+                announcements: null,
+                isLoading: true,
+                currentDateTime: prevState.currentDateTime,
+                bannerLinks: undefined,
+                bannerPaths: undefined,
+                logoUrl: null,
+                clubName: undefined,
+            }))
+
+        if (this.props.router.isReady) {
+            if (this.state.clubName !== this.props.router.query.clubName)
+                // SUPPRESSION necessary
+                // eslint-disable-next-line react/no-did-update-set-state
+                this.setState({clubName: this.props.router.query.clubName})
             const firebase = this.context;
             const storage = getStorage(firebase);
             if (!this.state.logoUrl) {
@@ -433,7 +459,7 @@ class ClubAdminPage extends Component {
     }
 
     getDate(date1,date2){
-        let year1 = new Date (date2.split("T")[0])
+        let year1 = new Date(date2.split("T")[0])
         let year2 = new Date(date1.split(" ")[0])
         date1 = new Date(date1)
         date2 = new Date(date2.split("T")[0] +" " + date2.split("T")[1].split(".")[0])
@@ -614,23 +640,16 @@ class ClubAdminPage extends Component {
                                         />
                                     }
                                 >
-                                    {lodashMap(this.state.bannerLinks, (image) => {
-                                    return (
-                                        <Carousel.Item
-                                            key={image}
-                                        >
-                                            <div className="w-100 d-flex">
-                                                <Image
-                                                    alt="Carousel Image"
-                                                    className="m-auto"
-                                                    fluid
-                                                    rounded
-                                                    src={image}
-                                                />
-                                            </div>
-                                        </Carousel.Item>
-                                        )
-                                    })}
+                                    {lodashMap(this.state.bannerLinks, (link) => (
+                                        <BCarousel.Item key={link}>
+                                            <Image
+                                                className={"d-block m-auto " + styles.bannerImage}
+                                                fluid
+                                                rounded
+                                                src={link}
+                                            />
+                                        </BCarousel.Item>
+                                    ))}
 
                                 </Carousel>
 
