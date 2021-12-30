@@ -205,18 +205,40 @@ class ClubHomePage extends Component {
     }
 
     renderMail(){
+        // eslint-disable-next-line react/no-unstable-nested-components
+        const Mailto = ({ email, subject = '', body = '', children }) => {
+          let params = subject || body ? '?' : '';
+          if (subject) params += `subject=${encodeURIComponent(subject)}`;
+          if (body) params += `${subject ? '&' : ''}body=${encodeURIComponent(body)}`;
+
+          return (
+              <a
+                  href={`mailto:${email}${params}`}
+                  rel="noreferrer"
+                  target="_blank"
+              >
+                  {children}
+              </a>
+          );
+        };
         if(this.state.basicInformation.mail){
             return(
                 <Card.Link
                     className=""
-                    href={this.state.basicInformation.mail}
                     target="_blank"
                 >
-                    <SvgIcon
-                        height="20px"
-                        src="mail.svg"
-                        width="20px"
-                    />
+                    <Mailto
+                        body={"Greetings " + this.state.basicInformation.name}
+                        email={this.state.basicInformation.mail}
+                        subject="Query"
+                        target="_blank"
+                    >
+                        <SvgIcon
+                            height="20px"
+                            src="mail.svg"
+                            width="20px"
+                        />
+                    </Mailto>
                 </Card.Link>
             )
         }

@@ -424,7 +424,11 @@ function generateCode(formData, setShowModal, eventId, response) {
                                 window.location.reload();
                             setShowModal(false);
                         }
-                        )}}
+                        ).catch((err) => {showAlert(
+                                err,
+                                "warning"
+                            );})
+                        }}
                         validate={(values) => validate(values, formData)}
                     >
                         {({errors, touched}) => (
