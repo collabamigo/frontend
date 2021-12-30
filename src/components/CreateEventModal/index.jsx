@@ -39,7 +39,7 @@ export default class CreateEventModal extends React.Component {
             description: "",
             eventDate: "",
             eventEndDate:"",
-            eventLink: null,
+            eventLink: "",
             formBuilder: {
                 1: [],
                 2: {
@@ -77,7 +77,6 @@ export default class CreateEventModal extends React.Component {
     componentDidUpdate() {
         if (this.props.router.isReady) {
             if (this.state.promo === null) {
-                console.log("promo is null");
                 // suppression needed
                 // eslint-disable-next-line react/no-did-update-set-state
                 this.setState({
@@ -269,7 +268,6 @@ export default class CreateEventModal extends React.Component {
                                                     className="form-control text-input w-100 bg-secondary text-white border-secondary border-1"
                                                     id="eventLink"
                                                     name="eventLink"
-                                                    required
                                                 />
 
                                             </div>

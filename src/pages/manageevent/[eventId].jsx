@@ -662,7 +662,6 @@ function Event() {
 
                                                     <br />
 
-                                                    Woohoo, youre reading this text in a modal!
                                                 </Modal.Body>
 
 
