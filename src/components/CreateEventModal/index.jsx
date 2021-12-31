@@ -38,7 +38,8 @@ export default class CreateEventModal extends React.Component {
             name: "",
             description: "",
             eventDate: "",
-            eventLink: null,
+            eventEndDate:"",
+            eventLink: "",
             formBuilder: {
                 1: [],
                 2: {
@@ -76,7 +77,6 @@ export default class CreateEventModal extends React.Component {
     componentDidUpdate() {
         if (this.props.router.isReady) {
             if (this.state.promo === null) {
-                console.log("promo is null");
                 // suppression needed
                 // eslint-disable-next-line react/no-did-update-set-state
                 this.setState({
@@ -96,6 +96,7 @@ export default class CreateEventModal extends React.Component {
             name: this.state.name,
             description: this.state.description,
             event_start: this.state.eventDate,
+            event_end:this.state.eventEndDate,
             link: (this.state.eventLink && !this.state.eventLink.startsWith("http://") && !this.state.eventLink
                 .startsWith("https://"))?("https://"+
                 this.state.eventLink):this.state.eventLink,
@@ -107,7 +108,7 @@ export default class CreateEventModal extends React.Component {
                     competition: res.data.id,
                     opens_at: this.state.registrationStartDate,
                     closes_at: this.state.registrationDeadlineDate,
-                }).then(()=> {this.props.router.push("/event/"+res.data.id)
+                }).then(()=> {this.props.router.push("/manageevent/"+res.data.id)
                     showAlert(
                         "Form Created",
                         "success"
@@ -164,6 +165,7 @@ export default class CreateEventModal extends React.Component {
                                             name: this.state.name,
                                             description: this.state.description,
                                             eventDate: this.state.eventDate,
+                                            eventEndDate:this.state.eventEndDate,
                                             eventLink: this.state.eventLink,
                                             isFormConnected: this.state.isFormConnected,
                                             promo: this.state.promo,
@@ -240,6 +242,23 @@ export default class CreateEventModal extends React.Component {
                                             <div className="mb-3 align-middle">
                                                 <label
                                                     className="me-2 fs-5"
+                                                    htmlFor="eventEndDate"
+                                                >
+                                                    Event End Date
+                                                </label>
+
+                                                <Field
+                                                    className="form-control w-auto text-input bg-secondary text-white border-secondary"
+                                                    id="eventEndDate"
+                                                    name="eventEndDate"
+                                                    placeholder="yyyy-mm-dd"
+                                                    type="datetime-local"
+                                                />
+                                            </div>
+
+                                            <div className="mb-3 align-middle">
+                                                <label
+                                                    className="me-2 fs-5"
                                                     htmlFor="eventLink"
                                                 >
                                                     Event link (Zoom/Google Meet/etc)
@@ -249,7 +268,6 @@ export default class CreateEventModal extends React.Component {
                                                     className="form-control text-input w-100 bg-secondary text-white border-secondary border-1"
                                                     id="eventLink"
                                                     name="eventLink"
-                                                    required
                                                 />
 
                                             </div>

@@ -5,6 +5,7 @@ import axios from "utilities/axios";
 import Loading from "../../components/Loading";
 import EventTalkCard from "../../common/HomePageCards/EventTalkCard";
 import RCarousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 class EventHistory extends React.Component {
 
@@ -61,14 +62,17 @@ class EventHistory extends React.Component {
             }
         };
         return (
-            <RCarousel responsive={responsive}>
-                {this.state.eventList.map((option) => (
-                    <EventTalkCard
-                        element={option}
-                        key={option.description}
-                    />
-                ))}
-            </RCarousel>
+            <div>
+                <RCarousel responsive={responsive}>
+                    {this.state.eventList.map((option) => (
+                        <EventTalkCard
+                            element={option}
+                            key={option.description}
+                            manage
+                        />
+                    ))}
+                </RCarousel>
+            </div>
         )
     }
 

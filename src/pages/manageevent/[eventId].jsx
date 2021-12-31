@@ -5,8 +5,7 @@ import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCalendar, faClock} from '@fortawesome/free-regular-svg-icons'
-import {faMapMarkerAlt, faShareAlt } from '@fortawesome/free-solid-svg-icons'
-import {faWhatsapp, faInstagram, faFacebook} from '@fortawesome/free-brands-svg-icons'
+import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons'
 import {getStorage, ref, getDownloadURL, uploadBytes, deleteObject} from "firebase/storage";
 import {useRouter} from 'next/router'
 import Modal from 'react-bootstrap/Modal'
@@ -27,20 +26,20 @@ import {showAlert} from "../../common/Toast";
 
 import DuplicateModal from "components/DuplicateModal";
 function download_table_as_csv(table_id, separator = ',') {
-    var rows = document.querySelectorAll('tr');
-    var csv = [];
-    for (var i = 0; i < rows.length; i++) {
-        var row = [], cols = rows[i].querySelectorAll('td, th');
-        for (var j = 0; j < cols.length; j++) {
-            var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
+    let rows = document.querySelectorAll('tr');
+    let csv = [];
+    for (let i = 0; i < rows.length; i++) {
+        let row = [], cols = rows[i].querySelectorAll('td, th');
+        for (let j = 0; j < cols.length; j++) {
+            let data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
             data = data.replace(/"/g, '""');
             row.push('"' + data + '"');
         }
         csv.push(row.join(separator));
     }
-    var csv_string = csv.join('\n');
-    var filename = table_id + ' Dated- ' + new Date().toLocaleDateString() + '.csv';
-    var link = document.createElement('a');
+    let csv_string = csv.join('\n');
+    let filename = table_id + ' Dated- ' + new Date().toLocaleDateString() + '.csv';
+    let link = document.createElement('a');
     link.style.display = 'none';
     link.setAttribute('target', '_blank');
     link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv_string));
@@ -136,6 +135,10 @@ function Event() {
 
     const handleCloseDescription = () => setData({...data, showDescription: false});
     const handleShowEvent = () => setData({...data, showEvent: true});
+    // const handleSubmitEvent = () => setData({...data, showEvent: false});
+    const handleCloseEvent = () => setData({...data, showEvent: false});
+
+
     // const handleShowDescription = () => setData({...data, showDescription: true});
 
     const handleClose = () => setData({...data, showModal: false});
@@ -144,10 +147,54 @@ function Event() {
     const handleClose2 = () => setData({...data, showModal2:false});
     const handleShow2 = () => setData({...data, showModal2:true});
 
-    // const handleSubmitEvent =()=>{
-    //     console.log("edited");
-    //     handleCloseEvent();
-    // }
+    const handleSubmitEvent =(value)=>{
+
+        handleCloseEvent();
+        console.log("edited maginc", value[0]);
+
+        let start = (new Date(value[1].split('to')[1])).toISOString();
+        console.log("edited maginc", start);
+
+        axios.patch("club/competition/"+ router.query.eventId +"/" ,{
+            name: value[0],
+            event_start: (new Date(value[1].split('to')[0])).toISOString(),
+            event_end: (new Date(value[1].split('to')[1])).toISOString(),
+            location: value[2],
+        }).then(() => {
+                setData((prevData) => {
+                    return {...prevData, event: {...prevData.event, name: value[0],
+                        event_start: (new Date(value[1].split('to')[0])).toISOString(),
+                        event_end: (new Date(value[1].split('to')[1])).toISOString(),
+                        location: value[2],
+
+                    }}
+                })
+
+                console.log("ediawdawdawdawdawdwadted", value[0]);
+        })
+
+        console.log(value[3],"sjkdk");
+        console.log(value[4], "lll");
+
+
+        var lolstart = (new Date(value[3])).toISOString();
+        console.log(lolstart, " hello");
+        var lolend = (new Date(value[4])).toISOString();
+        console.log(lolend, " hellsdsdsdo");
+
+        axios.patch("form/form/"+ router.query.eventId +"/" ,{
+            opens_at: lolstart,
+            closes_at: lolend,
+        }).then((res) => {
+                console.log(res.data);
+                setData((prevData) => {
+                    return {...prevData,
+                         form: [res.data, true],
+                    }
+                })
+        })
+    }
+
 
     const [ModalShow2, setModalShow2] = useState(false);
     const [ModalShow3, setModalShow3] = useState(false);
@@ -493,13 +540,13 @@ function Event() {
 
                                     {" "}
 
-                                    <button
+                                    <Button
                                         className="btn btn-outline-warning material-icons"
                                         onClick={handleShowEvent}
                                         type="button"
                                     >
                                         edit
-                                    </button>
+                                    </Button>
                                 </h1>
 
                                 <div>
@@ -621,7 +668,6 @@ function Event() {
 
                                                     <br />
 
-                                                    Woohoo, youre reading this text in a modal!
                                                 </Modal.Body>
 
 
@@ -657,10 +703,10 @@ function Event() {
                                     <div className="p-2 col-6">
                                         <Button
                                             className="w-100"
+                                            letiant="outline-primary"
                                             onClick={handleShow2}
-                                            variant="outline-primary"
                                         >
-                                            Add Links
+                                            Add Event link
                                         </Button>
 
                                         <ClubAdminModal
@@ -673,45 +719,19 @@ function Event() {
 
                                     </div>
                                 </div>
-
-                                <div className="d-flex justify-content-around mt-2 mb-5 mb-md-4">
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faWhatsapp}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faFacebook}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faInstagram}
-                                        size="2x"
-                                    />
-
-                                    <FontAwesomeIcon
-                                        className="mx-2"
-                                        icon={faShareAlt}
-                                        size="2x"
-                                    />
-                                </div>
                             </div>
                         </div>
 
-                        {/* <EventAdminModal
+                        {form && <EventAdminModal
                             handleClose={handleCloseEvent}
                             handleSubmit={handleSubmitEvent}
                             initialValues={[event.name, convertToDatetimeString(event.event_start) +
                                             (event.event_end?" to "+ convertToDatetimeString(event.event_end):""), event.location,
-                            convertToDatetimeString(form.opens_at), convertToDatetimeString(form.closes_at) ? + " " +
-                                + convertToDatetimeString(form.closes_at) : ""]}
+                            convertToDatetimeString(form.opens_at),
+                            convertToDatetimeString(form.closes_at) ? (convertToDatetimeString(form.closes_at)) : ""]}
                             labels={['Event Name','Date and Time','Location','Registration Starts', 'Registration ends']}
                             show={data.showEvent}
-                        /> */}
+                                 />}
 
                         <div>
                             <ReactMarkdown>

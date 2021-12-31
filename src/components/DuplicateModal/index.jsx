@@ -34,6 +34,28 @@ export default class CreateEventModal extends React.Component {
     }
 
 
+    uploadEventDetails() {
+        axios.post("club/competition/", {
+            clubs: [this.props.router.query.clubName],
+            name: this.state.name,
+            description: this.state.description,
+            event_start: this.state.eventDate,
+            link: (this.state.eventLink && !this.state.eventLink.startsWith("http://") && !this.state.eventLink
+                .startsWith("https://"))?("https://"+
+                this.state.eventLink):this.state.eventLink,
+            promotional_message: this.state.promo,
+        }).then((res) => {
+            if (this.state.isFormConnected)
+                axios.post("form/form/", {
+                    skeleton: JSON.stringify(this.state.formBuilder[1]),
+                    competition: res.data.id,
+                    opens_at: this.state.registrationStartDate,
+                    closes_at: this.state.registrationDeadlineDate,
+                }).then(()=>this.props.router.push("/manageevent/"+res.data.id));
+            else
+                this.props.router.push("/manageevent/"+res.data.id);
+        })
+    }
 
 
     render() {

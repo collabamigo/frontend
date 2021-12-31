@@ -1,3 +1,4 @@
+import lodashIsEmpty from "lodash/isEmpty";
 import React, {useState} from 'react';
 import {Formik, Field, Form} from 'formik';
 import {Modal} from "react-bootstrap";
@@ -5,13 +6,13 @@ import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import axios from "utilities/axios";
 import * as ga from "lib/ga";
-import {showAlert} from "../common/Toast";
+import {showAlert} from "common/Toast";
+import {isBrowser} from "utilities/auth";
 
-function generateCode(formData, setShowModal, eventId) {
+function generateCode(formData, setShowModal, eventId, response) {
 
     const validate = (values, formData) => {
         const errors = {};
-        console.log("validate called", formData)
 
         // if (!values.email) {
         //
@@ -25,14 +26,10 @@ function generateCode(formData, setShowModal, eventId) {
 
         for (let itr in formData) {
             const field=formData[itr];
-            console.log(field)
             if (field.required && !values[field.id])
                 errors[field.id] = 'This field is required';
-            else
-                console.log(values[field.id], field.name, field.required)
 
         }
-        console.log("err", errors)
         return errors;
     };
 
@@ -49,6 +46,7 @@ function generateCode(formData, setShowModal, eventId) {
                 <Field
                     className={"text-input w-100 bg-secondary text-white border-secondary pb-4 rounded-4"+((touched && error)?" is-invalid":null)}
                     name={field.id}
+                    required={field.required}
                 />
 
                 {touched && error &&
@@ -76,6 +74,7 @@ function generateCode(formData, setShowModal, eventId) {
                     as="select"
                     className={"form-control w-100 bg-secondary text-white border-secondary mb-4 rounded-4 appearance-auto" + ((touched && error) ? " is-invalid" : "")}
                     name={field.id}
+                    required={field.required}
                 >
                     <option
                         value=""
@@ -121,6 +120,7 @@ function generateCode(formData, setShowModal, eventId) {
                             <Field
                                 className="form-check-input  bg-secondary text-white border-secondary mb-4 "
                                 name={field.id}
+                                required={field.required}
                                 type="checkbox"
                                 value={option}
                             />
@@ -163,6 +163,7 @@ function generateCode(formData, setShowModal, eventId) {
                             <Field
                                 className="form-check-input  bg-secondary text-white border-secondary mb-4 "
                                 name={field.id}
+                                required={field.required}
                                 type="radio"
                                 value={option}
                             />
@@ -198,6 +199,7 @@ function generateCode(formData, setShowModal, eventId) {
                 <Field
                     className={"text-input w-100 bg-secondary text-white border-secondary pb-4 rounded-4" + ((touched && error) ? " is-invalid" : "")}
                     name={field.id}
+                    required={field.required}
                     type="date"
                 />
 
@@ -222,6 +224,7 @@ function generateCode(formData, setShowModal, eventId) {
                 <Field
                     className={"text-input w-100 bg-secondary text-white border-secondary pb-4 rounded-4" + ((touched && error) ? " is-invalid" : "")}
                     name={field.id}
+                    required={field.required}
                     type="time"
                 />
 
@@ -246,6 +249,7 @@ function generateCode(formData, setShowModal, eventId) {
                 <Field
                     className={"text-input w-100 bg-secondary text-white border-secondary pb-4 rounded-4" + ((touched && error) ? " is-invalid" : "")}
                     name={field.id}
+                    required={field.required}
                     type="datetime-local"
                 />
 
@@ -271,6 +275,7 @@ function generateCode(formData, setShowModal, eventId) {
                     as="textarea"
                     className={"text-input w-100 bg-secondary text-white border-secondary pb-4 rounded-4" + ((touched && error) ? " is-invalid" : "")}
                     name={field.id}
+                    required={field.required}
                 />
 
 
@@ -294,6 +299,7 @@ function generateCode(formData, setShowModal, eventId) {
                 <Field
                     className="text-input w-100 bg-secondary text-white border-secondary pb-4 rounded-4"
                     name={field.id}
+                    required={field.required}
                     type="file"
                 />
 
@@ -318,6 +324,7 @@ function generateCode(formData, setShowModal, eventId) {
                 <Field
                     className={"text-input w-100 bg-secondary text-white border-secondary pb-4 rounded-4" + ((touched && error) ? " is-invalid" : "")}
                     name={field.id}
+                    required={field.required}
                     type="email"
                 />
 
@@ -342,6 +349,7 @@ function generateCode(formData, setShowModal, eventId) {
                 <Field
                     className={"text-input w-100 bg-secondary text-white border-secondary pb-4 rounded-4" + ((touched && error) ? " is-invalid" : "")}
                     name={field.id}
+                    required={field.required}
                     type="number"
                 />
 
@@ -398,6 +406,8 @@ function generateCode(formData, setShowModal, eventId) {
         return formFields;
     }
 
+    const submissionUrl = `form/submit/${eventId}/`+(lodashIsEmpty(response)?"new/":"existing/");
+
     return (
         <div className="bg-dark p-4 text-white rounded-3 w-100">
             <div className="row">
@@ -409,16 +419,21 @@ function generateCode(formData, setShowModal, eventId) {
                     </Modal.Header>
 
                     <Formik
-                        initialValues={{...(Array(formData.length).fill(""))}}
-                        onSubmit={(values) => {axios.post("form/submit/" + eventId + "/", values).then(() => {
-                            // alert("test")
+                        initialValues={lodashIsEmpty(response)?{...(Array(formData.length).fill(""))}:response}
+                        onSubmit={(values) => {axios.post(submissionUrl, values).then(() => {
                             showAlert(
-                                "Form Submitted",
+                                "Form Submitted. Reloading page...",
                                 "success"
                             );
+                            if (isBrowser())
+                                window.location.reload();
                             setShowModal(false);
                         }
-                        )}}
+                        ).catch((err) => {showAlert(
+                                err,
+                                "warning"
+                            );})
+                        }}
                         validate={(values) => validate(values, formData)}
                     >
                         {({errors, touched}) => (
@@ -449,20 +464,30 @@ function generateCode(formData, setShowModal, eventId) {
     )
 }
 
-export default function GenerateEventForm({formData, eventId,start,end}) {
+export default function GenerateEventForm({formData, eventId, start, end, response}) {
     if (!formData)
         return null
 
     const [show, setShow] = useState(false);
 
     const register = () => {
-        ga.event({
-            action: "event-registration",
-            params: {
-                event_id: eventId
-            }
-        })
+        if (!response){
+                ga.event({
+                action: "event-registration",
+                params: {
+                    event_id: eventId
+                }
+            })
+        }
+        else
+            ga.event({
+                action: "event-registration-edit",
+                params: {
+                    event_id: eventId
+                }
+            })
         setShow(true);
+
     }
 
     return (
@@ -472,7 +497,7 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
                 onClick={register}
                 size="lg"
             >
-                Register Here
+                {lodashIsEmpty(response)?"Register Here":"Edit Response"}
             </Button>
 
             <Modal
@@ -484,7 +509,7 @@ export default function GenerateEventForm({formData, eventId,start,end}) {
                 onHide={() => setShow(false)}
                 show={show}
             >
-                {generateCode(formData, setShow, eventId)}
+                {generateCode(formData, setShow, eventId, response)}
             </Modal>
         </>
     )
@@ -493,5 +518,6 @@ GenerateEventForm.propTypes = {
     end: PropTypes.string.isRequired,
     eventId: PropTypes.string.isRequired,
     formData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]))).isRequired,
+    response:PropTypes.bool.isRequired,
     start: PropTypes.string.isRequired,
 }
