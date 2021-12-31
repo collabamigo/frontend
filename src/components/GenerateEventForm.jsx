@@ -490,6 +490,13 @@ export default function GenerateEventForm({formData, eventId, start, end, respon
 
     }
 
+    let registrationMessage;
+    if ((new Date()) < (new Date(start)))
+        registrationMessage = "Registration not yet open"
+    else if ((new Date()) < (new Date(end)))
+        registrationMessage = lodashIsEmpty(response) ? "Register Here" : "Edit Response"
+    else
+        registrationMessage = "Registration closed"
     return (
         <>
             <Button
@@ -497,7 +504,7 @@ export default function GenerateEventForm({formData, eventId, start, end, respon
                 onClick={register}
                 size="lg"
             >
-                {lodashIsEmpty(response)?"Register Here":"Edit Response"}
+                {registrationMessage}
             </Button>
 
             <Modal
