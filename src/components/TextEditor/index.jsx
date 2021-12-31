@@ -53,6 +53,8 @@ export default function TextEditor({description, handleSetDescription}) {
         new OrderedListExtension(),
     ];
 
+    console.log("description" + description);
+
     function BoldButton() {
         const commands = useCommands();
         return (
@@ -248,7 +250,7 @@ export default function TextEditor({description, handleSetDescription}) {
 
     const { manager, state, onChange } = useRemirror({
         extensions: extensions,
-        content: "Content here ...",
+        content: description,
         stringHandler: "markdown",
     });
     // const { getMarkdown } = useHelpers();
