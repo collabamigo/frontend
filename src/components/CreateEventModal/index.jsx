@@ -4,15 +4,15 @@ import {headingWithTopMargin} from "styles/typography.module.css";
 import {Modal} from "react-bootstrap";
 import {Form, Formik, Field} from "formik";
 import Button from "react-bootstrap/Button";
-import axios from "../../utilities/axios";
-import Loading from "../Loading";
+import axios from "utilities/axios";
+import Loading from "components/Loading";
 import AdditionalFields from "./AdditionalFields";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 // import {isBrowser} from "../../utilities/auth";
 import FormBuilder from "./FormBuilder";
 import TextEditor from "components/TextEditor";
-import {showAlert} from "../../common/Toast";
+import {showAlert} from "common/Toast";
 
 export default class CreateEventModal extends React.Component {
 
