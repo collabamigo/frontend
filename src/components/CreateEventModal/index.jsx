@@ -29,10 +29,6 @@ export default class CreateEventModal extends React.Component {
     constructor(props) {
         super(props);
 
-        const today = new Date();
-        const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        const yyyy = today.getFullYear();
         this.state = {
             stage: 1,
             name: "",
@@ -61,7 +57,7 @@ export default class CreateEventModal extends React.Component {
             },
             promo: null,
             registrationDeadlineDate: "",
-            registrationStartDate: yyyy+"-"+mm+"-"+dd,
+            registrationStartDate: "", //yyyy+"-"+mm+"-"+dd,
         }
     }
 
@@ -84,6 +80,58 @@ export default class CreateEventModal extends React.Component {
                 })
             }
         }
+    }
+
+    validate(values) {
+        const errors = {};
+
+        // if (!values.email) {
+        //
+        //     errors.email = 'Required';
+        //
+        // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        //
+        //     errors.email = 'Invalid email address';
+        //
+        // }
+
+        console.log("validate", values);
+        if (values.eventDate && values.eventEndDate) {
+            if (new Date(values.eventDate) > new Date(values.eventEndDate)) {
+                errors.eventEndDate = "Event End date must be after start date";
+            }
+        }
+
+        if (values.registrationStartDate && values.registrationDeadlineDate) {
+            if (new Date(values.registrationStartDate) > new Date(values.registrationDeadlineDate)) {
+                errors.eventEndDate = "Registration deadline date must be after registration opening date";
+            }
+        }
+
+        if (values.eventEndDate && new Date(values.eventEndDate) < new Date()) {
+            console.log("erer")
+            errors.eventEndDate = "Event End date must be in the future";
+        }
+
+        if (values.registrationDeadlineDate && new Date(values.registrationDeadlineDate) < new Date()) {
+            errors.registrationDeadlineDate = "Registration deadline date must be in the future";
+        }
+
+        if (values.registrationStartDate && new Date(values.registrationStartDate) < new Date()) {
+            errors.registrationStartDate = "Registration opening date must be in the future";
+        }
+
+        if (values.eventDate && new Date(values.eventDate) < new Date()) {
+            errors.eventDate = "Event date must be in the future";
+        }
+
+        // for (let itr in values) {
+        //     const field = formData[itr];
+        //     if (field.required && !values[field.id])
+        //         errors[field.id] = 'This field is required';
+        //
+        // }
+        return errors;
     }
 
     setFormBuilderState(formBuilder){
@@ -178,139 +226,176 @@ export default class CreateEventModal extends React.Component {
                                             else
                                                 this.setState({...values}, this.uploadEventDetails.bind(this))
                                         }}
+                                        validate={this.validate.bind(this)}
                                     >
-                                        <Form className="justify-content-center mt-3">
+                                        {({errors, touched}) => {
+                                            console.log(errors);
+                                            return (
+                                                <Form className="justify-content-center mt-3">
 
-                                            <div className="mb-4">
+                                                    <div className="mb-4">
 
-                                                <label
-                                                    className="me-2 fs-5"
-                                                    htmlFor="name"
-                                                >
-                                                    Event Name
-                                                </label>
+                                                        <label
+                                                            className="me-2 fs-5"
+                                                            htmlFor="name"
+                                                        >
+                                                            Event Name
+                                                        </label>
 
-                                                <Field
-                                                    className="form-control text-input w-100 bg-secondary text-white border-secondary border-1"
-                                                    id="name"
-                                                    name="name"
-                                                    required
-                                                />
+                                                        <Field
+                                                            className={"form-control text-input w-100 bg-secondary " +
+                                                                "text-white border-secondary border-1" +
+                                                                ((touched.name && errors.name) ? " is-invalid" : "")}
+                                                            id="name"
+                                                            name="name"
+                                                            required
+                                                        />
 
-                                            </div>
+                                                        {touched.name && errors.name &&
+                                                            <div className="invalid-feedback">
+                                                                {errors.name}
+                                                            </div>}
 
-                                            <div className="mb-4">
-                                                <label
-                                                    className="me-2 fs-5"
-                                                    htmlFor="description"
-                                                >
-                                                    Event Description
-                                                </label>
+                                                    </div>
 
-                                                {/* <Field
-                                                    as="textarea"
-                                                    className="form-control text-input w-100 bg-secondary text-white border-secondary"
-                                                    id="description"
-                                                    name="description"
-                                                    required
-                                                /> */}
+                                                    <div className="mb-4">
+                                                        <label
+                                                            className="me-2 fs-5"
+                                                            htmlFor="description"
+                                                        >
+                                                            Event Description
+                                                        </label>
 
-                                                <TextEditor
-                                                    description={this.state.description}
-                                                    handleSetDescription={this.setDescription.bind(this)}
-                                                />
-                                            </div>
+                                                        <TextEditor
+                                                            description={this.state.description}
+                                                            handleSetDescription={this.setDescription.bind(this)}
+                                                        />
+                                                    </div>
 
-                                            <div className="mb-3 align-middle">
-                                                <label
-                                                    className="me-2 fs-5"
-                                                    htmlFor="eventDate"
-                                                >
-                                                    Event Date
-                                                </label>
+                                                    <div className="mb-3 align-middle">
+                                                        <label
+                                                            className="me-2 fs-5"
+                                                            htmlFor="eventDate"
+                                                        >
+                                                            Event Date
+                                                        </label>
 
-                                                <Field
-                                                    className="form-control w-auto text-input bg-secondary text-white border-secondary"
-                                                    id="eventDate"
-                                                    name="eventDate"
-                                                    placeholder="yyyy-mm-dd"
-                                                    required
-                                                    type="datetime-local"
-                                                />
-                                            </div>
+                                                        <Field
+                                                            className={"form-control w-auto text-input bg-secondary " +
+                                                                "text-white border-secondary" +
+                                                                ((touched.eventDate && errors.eventDate) ? " is-invalid" : "")}
+                                                            id="eventDate"
+                                                            name="eventDate"
+                                                            placeholder="yyyy-mm-dd"
+                                                            required
+                                                            type="datetime-local"
+                                                        />
 
-                                            <div className="mb-3 align-middle">
-                                                <label
-                                                    className="me-2 fs-5"
-                                                    htmlFor="eventEndDate"
-                                                >
-                                                    Event End Date
-                                                </label>
+                                                        {touched.eventDate && errors.eventDate &&
+                                                            <div className="invalid-feedback">
+                                                                {errors.eventDate}
+                                                            </div>}
+                                                    </div>
 
-                                                <Field
-                                                    className="form-control w-auto text-input bg-secondary text-white border-secondary"
-                                                    id="eventEndDate"
-                                                    name="eventEndDate"
-                                                    placeholder="yyyy-mm-dd"
-                                                    type="datetime-local"
-                                                />
-                                            </div>
+                                                    <div className="mb-3 align-middle">
+                                                        <label
+                                                            className="me-2 fs-5"
+                                                            htmlFor="eventEndDate"
+                                                        >
+                                                            Event End Date
+                                                        </label>
 
-                                            <div className="mb-3 align-middle">
-                                                <label
-                                                    className="me-2 fs-5"
-                                                    htmlFor="eventLink"
-                                                >
-                                                    Event link (Zoom/Google Meet/etc)
-                                                </label>
+                                                        <Field
+                                                            className={"form-control w-auto text-input bg-secondary " +
+                                                                "text-white border-secondary"+
+                                                                ((touched.eventEndDate && errors.eventEndDate) ? " is-invalid" : "")}
+                                                            id="eventEndDate"
+                                                            name="eventEndDate"
+                                                            placeholder="yyyy-mm-dd"
+                                                            type="datetime-local"
+                                                        />
 
-                                                <Field
-                                                    className="form-control text-input w-100 bg-secondary text-white border-secondary border-1"
-                                                    id="eventLink"
-                                                    name="eventLink"
-                                                />
+                                                        {touched.eventEndDate && errors.eventEndDate &&
+                                                            <div className="invalid-feedback">
+                                                                {errors.eventEndDate}
+                                                            </div>}
+                                                    </div>
 
-                                            </div>
+                                                    <div className="mb-3 align-middle">
+                                                        <label
+                                                            className="me-2 fs-5"
+                                                            htmlFor="eventLink"
+                                                        >
+                                                            Event link (Zoom/Google Meet/etc)
+                                                        </label>
 
-                                            <div className="mb-3 align-middle">
-                                                <label
-                                                    className="me-2 fs-5"
-                                                    htmlFor="promo"
-                                                >
-                                                    Promotional message
-                                                </label>
+                                                        <Field
+                                                            className={"form-control text-input w-100 bg-secondary " +
+                                                                "text-white border-secondary border-1" +
+                                                                ((touched.eventLink && errors.eventLink) ? " is-invalid" : "")}
+                                                            id="eventLink"
+                                                            name="eventLink"
+                                                        />
 
-                                                <Field
-                                                    as="textarea"
-                                                    className="form-control text-input w-100 bg-secondary text-white border-secondary"
-                                                    id="promo"
-                                                    name="promo"
-                                                    required
-                                                />
+                                                        {touched.eventLink && errors.eventLink &&
+                                                            <div className="invalid-feedback">
+                                                                {errors.eventLink}
+                                                            </div>}
 
-                                            </div>
+                                                    </div>
 
-                                            <div className="mb-3">
+                                                    <div className="mb-3 align-middle">
+                                                        <label
+                                                            className="me-2 fs-5"
+                                                            htmlFor="promo"
+                                                        >
+                                                            Promotional message
+                                                        </label>
 
-                                                <Field
-                                                    className="form-check-input bg-secondary text-white border-secondary me-3 fs-5"
-                                                    id="isFormConnected"
-                                                    name="isFormConnected"
-                                                    type="checkbox"
-                                                />
+                                                        <Field
+                                                            as="textarea"
+                                                            className={"form-control text-input w-100 bg-secondary " +
+                                                                "text-white border-secondary" +
+                                                                ((touched.promo && errors.promo) ? " is-invalid" : "")}
+                                                            id="promo"
+                                                            name="promo"
+                                                            required
+                                                        />
 
-                                                <label
-                                                    className="me-2 fs-5"
-                                                    htmlFor="isFormConnected"
-                                                >
-                                                    Create a registration form
-                                                </label>
+                                                        {touched.promo && errors.promo &&
+                                                            <div className="invalid-feedback">
+                                                                {errors.promo}
+                                                            </div>}
+
+                                                    </div>
+
+                                                    <div className="mb-3">
+
+                                                        <Field
+                                                            className={"form-check-input bg-secondary text-white " +
+                                                                "border-secondary me-3 fs-5" +
+                                                                ((touched.isFormConnected && errors.isFormConnected) ? " is-invalid" : "")}
+                                                            id="isFormConnected"
+                                                            name="isFormConnected"
+                                                            type="checkbox"
+                                                        />
+
+                                                        <label
+                                                            className="me-2 fs-5"
+                                                            htmlFor="isFormConnected"
+                                                        >
+                                                            Create a registration form
+                                                        </label>
 
 
-                                            </div>
+                                                    </div>
 
-                                            <AdditionalFields />
-                                        </Form>
+                                                    <AdditionalFields
+                                                        errors={errors}
+                                                        touched={touched}
+                                                    />
+                                                </Form>);
+                                        }}
 
                                     </Formik>
                                 </Modal.Body>
