@@ -24,7 +24,7 @@ import UModal from "components/UModal";
 import FaqEditor from "components/FaqEditor";
 import {showAlert} from "../../common/Toast";
 
-import DuplicateModal from "components/DuplicateModal";
+import DuplicateModal from "components/EventAdmin/DuplicateModal";
 function download_table_as_csv(table_id, separator = ',') {
     let rows = document.querySelectorAll('tr');
     let csv = [];
@@ -77,7 +77,6 @@ function Event() {
         event: {
         },
         showEvent: false,
-        showDescription:false,
         showModal: false,
         showModal2:false,
         tableResponses: [[], false],
@@ -126,20 +125,17 @@ function Event() {
     const showModal = data.showModal;
     const showModal2 = data.showModal2;
 
-    // console.log("eventtttt" + event.description);
 
     const convertToDatetimeString = iso_8601_string => {
         const date = new Date(iso_8601_string);
         return date.toLocaleString();
     }
 
-    const handleCloseDescription = () => setData({...data, showDescription: false});
     const handleShowEvent = () => setData({...data, showEvent: true});
     // const handleSubmitEvent = () => setData({...data, showEvent: false});
     const handleCloseEvent = () => setData({...data, showEvent: false});
 
 
-    // const handleShowDescription = () => setData({...data, showDescription: true});
 
     const handleClose = () => setData({...data, showModal: false});
     const handleShow = () => setData({...data, showModal: true});
@@ -197,7 +193,7 @@ function Event() {
 
 
     const [ModalShow2, setModalShow2] = useState(false);
-    const [ModalShow3, setModalShow3] = useState(false);
+    const [showDescriptionModal, setShowDescriptionModal] = useState(false);
 
 
     const setFaq = (faq) => {
@@ -208,12 +204,6 @@ function Event() {
                 return {...prevData, event: {...prevData.event, faq: JSON.stringify(faq)}}
             })
         })
-    }
-    const handleSubmitDescription = () => {
-        setData((prevData) => {
-            return { ...prevData, event: { ...prevData.event, description: event.description } }
-        })
-        handleCloseDescription();
     }
 
     const handleDeletePic = (num) => {
@@ -379,10 +369,10 @@ function Event() {
                 <DuplicateModal
                     description={event.description}
                     eventId={router.query.eventId}
-                    handleClose={() => setModalShow3(false)}
-                    initialValues={event}
-                    router={router}
-                    show={ModalShow3}
+                    handleClose={() => setShowDescriptionModal(false)}
+                    setDescription={(desc)=>{setData((data)=>{return {...data, event:{...data.event, description: desc}}})}}
+                    show={showDescriptionModal}
+
                 />
 
                 <div className="row px-md-5 mx-md-5 px-2 mx-2">
@@ -740,19 +730,11 @@ function Event() {
 
                             <Button
                                 className="my-2 w-100"
-                                onClick={() => setModalShow3(true)}
+                                onClick={() => setShowDescriptionModal(true)}
                                 size="lg"
                             >
                                 Update description
                             </Button>
-
-                            <EventAdminModal
-                                handleClose={handleCloseDescription}
-                                handleSubmit={handleSubmitDescription}
-                                initialValues={[event.description]}
-                                labels={['Event Description']}
-                                show={data.showDescription}
-                            />
                         </div>
                     </div>
                 </div>

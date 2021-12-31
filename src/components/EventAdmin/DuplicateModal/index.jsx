@@ -3,7 +3,8 @@ import React from "react";
 import {headingWithTopMargin} from "styles/typography.module.css";
 import {Modal} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import axios from "../../utilities/axios";
+import {showAlert} from "common/Toast";
+import axios from "utilities/axios";
 import TextEditor from "components/TextEditor";
 
 export default class CreateEventModal extends React.Component {
@@ -12,6 +13,7 @@ export default class CreateEventModal extends React.Component {
         description: PropTypes.string.isRequired,
         eventId: PropTypes.string.isRequired,
         handleClose: PropTypes.func.isRequired,
+        setDescription: PropTypes.func.isRequired,
         show: PropTypes.bool.isRequired,
     }
 
@@ -30,40 +32,18 @@ export default class CreateEventModal extends React.Component {
     uploadEventDetails(description) {
         axios.patch(`club/competition/${this.props.eventId}/`, {
             description,
-        })
-    }
+        }).then(() => {
+            this.props.setDescription(description);
+            showAlert("Event description updated successfully", "success");
+            this.props.handleClose();
 
-
-    uploadEventDetails() {
-        axios.post("club/competition/", {
-            clubs: [this.props.router.query.clubName],
-            name: this.state.name,
-            description: this.state.description,
-            event_start: this.state.eventDate,
-            link: (this.state.eventLink && !this.state.eventLink.startsWith("http://") && !this.state.eventLink
-                .startsWith("https://"))?("https://"+
-                this.state.eventLink):this.state.eventLink,
-            promotional_message: this.state.promo,
-        }).then((res) => {
-            if (this.state.isFormConnected)
-                axios.post("form/form/", {
-                    skeleton: JSON.stringify(this.state.formBuilder[1]),
-                    competition: res.data.id,
-                    opens_at: this.state.registrationStartDate,
-                    closes_at: this.state.registrationDeadlineDate,
-                }).then(()=>this.props.router.push("/manageevent/"+res.data.id));
-            else
-                this.props.router.push("/manageevent/"+res.data.id);
         })
     }
 
 
     render() {
-        console.log("description222 " + this.props.description);
-
             return (
                 <div>
-
                     <Modal
                         className=" rounded-5"
                         contentClassName="border-0 m-0 rounded-5"
@@ -92,14 +72,6 @@ export default class CreateEventModal extends React.Component {
                                         >
                                             Event Description
                                         </label>
-
-                                        {/* <Field
-                                                    as="textarea"
-                                                    className="form-control text-input w-100 bg-secondary text-white border-secondary"
-                                                    id="description"
-                                                    name="description"
-                                                    required
-                                                /> */}
 
                                         <TextEditor
                                             description={this.state.description}
