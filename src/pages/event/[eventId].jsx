@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import lodashIsEmpty from "lodash/lodashIsEmpty";
+import lodashIsEmpty from "lodash/isEmpty";
 import React, {useEffect, useState} from "react"
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";

@@ -508,16 +508,20 @@ export default function GenerateEventForm({formData, eventId, start, end, respon
     }
 
     let registrationMessage;
+    let registrationDisabled = true;
     if ((new Date()) < (new Date(start)))
         registrationMessage = "Registration not yet open"
-    else if ((new Date()) < (new Date(end)))
-        registrationMessage = lodashIsEmpty(response) ? "Register Here" : "Edit Response"
+    else if ((new Date()) < (new Date(end))) {
+        registrationMessage = lodashIsEmpty(response) ? "Register Here" : "Edit Response";
+        registrationDisabled = false;
+    }
     else
         registrationMessage = "Registration closed"
     return (
         <>
             <Button
-                className={"w-100 "+ (((new Date()) < (new Date(start))) && ((new Date()) < (new Date(end))) ? "disabled":"")}
+                className={"w-100 "+ ((registrationDisabled) ? "disabled":"")}
+                disabled={registrationDisabled}
                 onClick={register}
                 size="lg"
             >
