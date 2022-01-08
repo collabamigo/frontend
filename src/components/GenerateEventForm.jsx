@@ -1,5 +1,5 @@
 import lodashIsEmpty from "lodash/isEmpty";
-import React, {useState} from 'react';
+import React, {useContext, useState} from "react";
 import {Formik, Field, Form} from 'formik';
 import {Modal} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import axios from "utilities/axios";
 import * as ga from "lib/ga";
 import {showAlert} from "common/Toast";
-import {isBrowser} from "utilities/auth";
+import {isBrowser, LoginContext} from "utilities/auth";
 import {sleep} from "utilities";
 
 function generateCode(formData, setShowModal, eventId, response) {
@@ -485,6 +485,8 @@ export default function GenerateEventForm({formData, eventId, start, end, respon
     if (!formData)
         return null
 
+    const loggedIn = useContext(LoginContext);
+
     const [show, setShow] = useState(false);
 
     const register = () => {
@@ -509,7 +511,9 @@ export default function GenerateEventForm({formData, eventId, start, end, respon
 
     let registrationMessage;
     let registrationDisabled = true;
-    if ((new Date()) < (new Date(start)))
+    if (!loggedIn)
+        registrationMessage = "Log in to register for an event"
+    else if ((new Date()) < (new Date(start)))
         registrationMessage = "Registration not yet open"
     else if ((new Date()) < (new Date(end))) {
         registrationMessage = lodashIsEmpty(response) ? "Register Here" : "Edit Response";

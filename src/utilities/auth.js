@@ -16,11 +16,7 @@ export const setLoggedOut = () => {
 
 export const checkLoginStatus = ()  => {}
 
-const LoginContext = createContext({
-    loggedIn: (isBrowser() && sessionStorage.getItem("loginFlag")),
-    setLoggedIn: () => {
-    }
-});
+const LoginContext = createContext((isBrowser() && (sessionStorage.getItem("loginFlag") !== null)));
 export {LoginContext}
 
 export const authSetLoggedIn = () => {
