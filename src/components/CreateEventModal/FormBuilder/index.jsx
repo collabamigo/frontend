@@ -67,6 +67,7 @@ export default function FormBuilder({
     const copyFormData = useRef([]);
     const closeButton = useRef(null);
     // const [showValidation, toggleValidation] = useState(false);
+    const [duplicationError, setDuplicationError] = useState(false);
 
     const onSubmit = (data) => {
         if (editIndex >= 0) {
@@ -93,11 +94,17 @@ export default function FormBuilder({
     editIndexRef.current = editIndex;
 
     const validate = (value) => {
-        return (
+        const result = (
             !Object.values(copyFormData.current).find(
                 (data) => data.name === value
             ) || editIndexRef.current !== -1
         );
+        if (!result) {
+            setDuplicationError(true);
+        } else {
+            setDuplicationError(false);
+        }
+        return result;
     };
 
     useEffect(() => {
@@ -185,6 +192,7 @@ export default function FormBuilder({
                         aria-invalid={errors["name"] ? "true" : "false"}
                         aria-label="name"
                         autoComplete="off"
+                        className={"form-control " + (duplicationError? "is-invalid" : "")}
                         defaultValue={editFormData.name}
                         {...register('name', {
                             required: true,
@@ -194,6 +202,12 @@ export default function FormBuilder({
                             ...(errors["name"] ? errorStyle : null),
                         }}
                     />
+
+                    {duplicationError && (
+                        <div className="invalid-feedback">
+                            Duplicate field names not allowed
+                        </div>
+                    )}
 
                     <Animate
                         duration={0.6}
