@@ -14,6 +14,7 @@ function generateCode(formData, setShowModal, eventId, response) {
     const validate = (values, formData) => {
         const errors = {};
 
+
         // if (!values.email) {
         //
         //     errors.email = 'Required';
@@ -26,10 +27,12 @@ function generateCode(formData, setShowModal, eventId, response) {
 
         for (let itr in formData) {
             const field=formData[itr];
-            if (field.required && !values[field.id])
+            if (field.required && (!values[field.id] || lodashIsEmpty(values[field.id])))
                 errors[field.id] = 'This field is required';
 
         }
+
+        // console.log("validate", errors, values);
         return errors;
     };
 
@@ -44,7 +47,7 @@ function generateCode(formData, setShowModal, eventId, response) {
                 </label>
 
                 <Field
-                    className={"text-input w-100 bg-secondary text-white border-secondary pb-4 rounded-4"+((touched && error)?" is-invalid":null)}
+                    className={"text-input w-100 bg-secondary text-white border-secondary pb-4 rounded-4"+((touched && error)?" is-invalid":"")}
                     name={field.id}
                     required={field.required}
                 />
@@ -106,33 +109,45 @@ function generateCode(formData, setShowModal, eventId, response) {
                 <label
                     className="fw-bold pb-2"
                     htmlFor={field.id}
+                    name={field.id}
                 >
                     {field.name}
                 </label>
 
                 <div >
-                    {field.options.split(";").map((option, index) => (
-                        <div
-                            className="form-check"
-                            key={index.toString() + option}
-                        >
-
-                            <Field
-                                className="form-check-input  bg-secondary text-white border-secondary mb-4 "
-                                name={field.id}
-                                required={field.required}
-                                type="checkbox"
-                                value={option}
-                            />
-
-                            <label
-                                className="fw-bold pb-2 form-check-label"
+                    <div >
+                        {field.options.split(";").map((option, index) => (
+                            <div
+                                className="form-check"
                                 key={index.toString() + option}
                             >
-                                {option}
-                            </label>
-                        </div>
+
+                                <Field
+                                    className={"form-check-input  bg-secondary text-white border-secondary mb-4 " + ((touched
+                                    && error) ? " is-invalid" : "")}
+                                    name={field.id}
+                                    type="checkbox"
+                                    value={option}
+                                />
+
+                                <label
+                                    className="fw-bold pb-2 form-check-label"
+                                    key={index.toString() + option}
+                                >
+                                    {option}
+                                </label>
+
+                                {(index === (field.options.split(";").length - 1))?
+                                    <div className="invalid-feedback">
+                                        {error}
+                                    </div>
+                                    :null}
+
+                            </div>
                     ))}
+                    </div>
+
+
                 </div>
 
 
