@@ -25,6 +25,7 @@ import FaqEditor from "components/FaqEditor";
 import {showAlert} from "../../common/Toast";
 
 import DuplicateModal from "components/EventAdmin/DuplicateModal";
+import {isValidUrl} from "../../utilities";
 function download_table_as_csv(table_id, separator = ',') {
     let rows = document.querySelectorAll('tr');
     let csv = [];
@@ -609,7 +610,6 @@ function Event() {
                                                     <Modal.Title>
                                                         Responses
 
-                                                        {tableResponses.length}
                                                     </Modal.Title>
                                                 </Modal.Header>
 
@@ -647,7 +647,17 @@ function Event() {
                                                                         <td
                                                                             key={values.value}
                                                                         >
-                                                                            {values.value}
+                                                                            {isValidUrl(values.value) ? (
+                                                                                <a
+                                                                                    href={values.value}
+                                                                                    rel="noopener noreferrer"
+                                                                                    target="_blank"
+                                                                                >
+                                                                                    {values.value}
+                                                                                </a>
+                                                                            ) : (
+                                                                                    values.value
+                                                                                )}
                                                                         </td>
                                                                     ))}
                                                                 </tr>
