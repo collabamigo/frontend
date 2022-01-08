@@ -689,7 +689,6 @@ function Event() {
                                         </>}
                                     </div>
 
-                                    {(!event.faq || isEmpty(event.faq))?null:
                                     <div className="p-2 col-6">
                                         <FaqEditor
                                             disappear={()=>{setData({...data, currentModal: null})}}
@@ -698,7 +697,7 @@ function Event() {
                                             setShow={()=>{setData({...data,currentModal:"faq"})}}
                                             show={data.currentModal=== "faq"}
                                         />
-                                    </div>}
+                                    </div>
 
                                     <div className="p-2 col-6">
                                         <Button

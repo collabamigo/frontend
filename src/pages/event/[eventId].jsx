@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import lodashIsEmpty from "lodash/isEmpty";
+import lodashIsEmpty from "lodash/lodashIsEmpty";
 import React, {useEffect, useState} from "react"
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
@@ -14,7 +14,6 @@ import axios from "utilities/axios";
 import {SvgIcon} from "common/SvgIcon";
 import WModal from 'components/WModal';
 import Loading from "components/Loading";
-import isEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
 import Link from "../../common/Link";
 import GenerateEventForm from "../../components/GenerateEventForm";
@@ -80,7 +79,7 @@ export default function Event() {
 
     useEffect(() => {
         if (router.query.eventId!==undefined) {
-            if (isEmpty(event))
+            if (lodashIsEmpty(event))
                 axios.get(`club/competition/${router.query.eventId}/`)
                     .then(res => {
                         setEvent(res.data)
@@ -99,7 +98,7 @@ export default function Event() {
                             throw err;
                     })
 
-            if (isEmpty(clubLogoLinks) && !isEmpty(event)) {
+            if (lodashIsEmpty(clubLogoLinks) && !lodashIsEmpty(event)) {
                 const storage = getStorage();
                 event.clubs.map(club => getDownloadURL(ref(storage, 'data/' + club + '/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
@@ -146,7 +145,7 @@ export default function Event() {
             }
 
     }})
-    const isLoading = isEmpty(event);
+    const isLoading = lodashIsEmpty(event);
 
     // const ref = useRef()
     // const isParticipateButtonVisible = useOnScreen(ref)
@@ -165,7 +164,7 @@ export default function Event() {
                 ModalShow={ModalShow}
                 handleClose={handleClose}
                 handleShow={handleShow}
-                values={isEmpty(event.winners) ? null : event.winners}
+                values={lodashIsEmpty(event.winners) ? null : event.winners}
             />
 
             <div className="row px-md-5 mx-md-5 px-2 mx-2">
@@ -273,7 +272,7 @@ export default function Event() {
                                         {event.location}
                                     </p>
 
-                                    {isEmpty(form)?null:
+                                    {lodashIsEmpty(form)?null:
                                     <p className=" text-primary">
                                         <FontAwesomeIcon icon={faClock} />
 
@@ -298,7 +297,7 @@ export default function Event() {
 
                         <div className="col-md-3 col-12">
                             <div className="row">
-                                {isEmpty(form)?null:
+                                {lodashIsEmpty(form)?null:
                                 <div className="col-12 p-2">
                                     <GenerateEventForm
                                         end={form.closes_at}
@@ -309,7 +308,7 @@ export default function Event() {
                                     />
                                 </div>}
 
-                                {(!event.faq || isEmpty(event.faq))?null:
+                                {(!event.faq || lodashIsEmpty(JSON.parse(event.faq)))?null:
                                 <div className="p-2 col-6">
                                     <FAQModal data={JSON.parse(event.faq)} />
                                 </div>}
