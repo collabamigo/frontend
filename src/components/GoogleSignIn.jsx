@@ -46,13 +46,13 @@ function GoogleSignIn ({isAuthenticated, setLoggedIn, setStage, stage, visibilit
 
     async function onSignIn(googleUser) {
         if (stage === "button") {
-            if (jwt.decode(googleUser.credential).hd !== "iiitd.ac.in") {
-                alert("Please login using your IIITD ID")
-                window.google.accounts.id.revoke(jwt.decode(googleUser.credential).email, () => {
-                    localStorage.clear();
-                    window.location.href = "/";
-                })
-            }
+            // if (jwt.decode(googleUser.credential).hd !== "iiitd.ac.in") {
+            //     alert("Please login using your IIITD ID")
+            //     window.google.accounts.id.revoke(jwt.decode(googleUser.credential).email, () => {
+            //         localStorage.clear();
+            //         window.location.href = "/";
+            //     })
+            // }
 
             let res_temp = await axios.post("authenticate/oauthcallback/", {
                 "jwt": googleUser.credential
