@@ -3,9 +3,8 @@ import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types'
 import FormSignIn from "./FormSignIn/FormSignIn";
 import axios from "utilities/axios";
-import backend from "../env";
 import jwt from "jsonwebtoken";
-import {setToken} from "../utilities/axios";
+import {setToken} from "utilities/axios";
 
 function GoogleSignIn ({isAuthenticated, setLoggedIn, setStage, stage, visibility}) {
     const myRef = React.createRef();
@@ -55,7 +54,7 @@ function GoogleSignIn ({isAuthenticated, setLoggedIn, setStage, stage, visibilit
                 })
             }
 
-            let res_temp = await axios.post(backend + "authenticate/oauthcallback/", {
+            let res_temp = await axios.post("authenticate/oauthcallback/", {
                 "jwt": googleUser.credential
             })
             setToken(res_temp.data['access_token'])
