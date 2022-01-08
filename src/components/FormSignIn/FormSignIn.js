@@ -58,13 +58,13 @@ class FormSignIn extends React.Component {
     handleChangeCourse(e) {
         this.setState({ course: e.target.value })
     }
-    
+
     handleCloseModal() {
         this.setState({
             currentModal: false,
         })
     }
-    
+
     handleSubmit(e) {
         this.handleCloseModal
         this.setState({isLoading: true})
@@ -95,7 +95,7 @@ class FormSignIn extends React.Component {
 
   render() {
     if (this.state.isLoading)
-        return <Loading />     
+        return <Loading />
     else
         return (
             <Modal
@@ -167,9 +167,6 @@ class FormSignIn extends React.Component {
                         <br />
 
                         <Form.Label>
-                            <div className="text-danger float-start">
-                                *
-                            </div>
 
                             <span className="text-light">
                                 {' '}
@@ -209,9 +206,6 @@ class FormSignIn extends React.Component {
                         <br />
 
                         <Form.Label>
-                            <div className="text-danger float-start">
-                                *
-                            </div>
 
                             <span className="text-light">
                                 {' '}
@@ -261,7 +255,7 @@ class FormSignIn extends React.Component {
                             </option>
 
                         </Form.Select>
-                        
+
                     </Form.Group>
 
                 </Modal.Body>
