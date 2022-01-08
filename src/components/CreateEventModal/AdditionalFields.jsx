@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
 import React from 'react';
-import {Field, useFormikContext} from "formik";
+import {useFormikContext} from "formik";
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons'
+import {DatePickerField} from "common/DatePickerField";
 
 export default function AdditionalFields({errors, touched}) {
 
@@ -21,14 +22,14 @@ export default function AdditionalFields({errors, touched}) {
                         Registration opens on
                     </label>
 
-                    <Field
-                        className={"form-control w-auto text-input bg-secondary text-white border-secondary" +
+                    <DatePickerField
+                        className={"form-control w-auto text-input bg-secondary " +
+                            "text-white border-secondary" +
                             ((touched.registrationStartDate && errors.registrationStartDate) ? " is-invalid" : "")}
                         id="registrationStartDate"
                         name="registrationStartDate"
-                        placeholder="yyyy-mm-dd"
                         required
-                        type="datetime-local"
+                        showTimeSelect
                     />
 
                     {touched.registrationStartDate && errors.registrationStartDate &&
@@ -45,14 +46,14 @@ export default function AdditionalFields({errors, touched}) {
                         Registration deadline
                     </label>
 
-                    <Field
-                        className={"form-control w-auto text-input bg-secondary text-white border-secondary" +
+                    <DatePickerField
+                        className={"form-control w-auto text-input bg-secondary " +
+                            "text-white border-secondary" +
                             ((touched.registrationDeadlineDate && errors.registrationDeadlineDate) ? " is-invalid" : "")}
                         id="registrationDeadlineDate"
                         name="registrationDeadlineDate"
-                        placeholder="yyyy-mm-dd"
                         required
-                        type="datetime-local"
+                        showTimeSelect
                     />
 
                     {touched.registrationDeadlineDate && errors.registrationDeadlineDate &&

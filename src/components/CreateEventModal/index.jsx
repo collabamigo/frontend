@@ -6,6 +6,7 @@ import {Form, Formik, Field} from "formik";
 import Button from "react-bootstrap/Button";
 import axios from "utilities/axios";
 import Loading from "components/Loading";
+import {DatePickerField} from "common/DatePickerField";
 import AdditionalFields from "./AdditionalFields";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -95,7 +96,6 @@ export default class CreateEventModal extends React.Component {
         //
         // }
 
-        console.log("validate", values);
         if (values.eventDate && values.eventEndDate) {
             if (new Date(values.eventDate) > new Date(values.eventEndDate)) {
                 errors.eventEndDate = "Event End date must be after start date";
@@ -104,12 +104,11 @@ export default class CreateEventModal extends React.Component {
 
         if (values.registrationStartDate && values.registrationDeadlineDate) {
             if (new Date(values.registrationStartDate) > new Date(values.registrationDeadlineDate)) {
-                errors.eventEndDate = "Registration deadline date must be after registration opening date";
+                errors.registrationDeadlineDate = "Registration deadline date must be after registration opening date";
             }
         }
 
         if (values.eventEndDate && new Date(values.eventEndDate) < new Date()) {
-            console.log("erer")
             errors.eventEndDate = "Event End date must be in the future";
         }
 
@@ -280,15 +279,14 @@ export default class CreateEventModal extends React.Component {
                                                             Event Date
                                                         </label>
 
-                                                        <Field
+                                                        <DatePickerField
                                                             className={"form-control w-auto text-input bg-secondary " +
                                                                 "text-white border-secondary" +
                                                                 ((touched.eventDate && errors.eventDate) ? " is-invalid" : "")}
                                                             id="eventDate"
                                                             name="eventDate"
-                                                            placeholder="yyyy-mm-dd"
                                                             required
-                                                            type="datetime-local"
+                                                            showTimeSelect
                                                         />
 
                                                         {touched.eventDate && errors.eventDate &&
@@ -305,14 +303,14 @@ export default class CreateEventModal extends React.Component {
                                                             Event End Date
                                                         </label>
 
-                                                        <Field
+                                                        <DatePickerField
                                                             className={"form-control w-auto text-input bg-secondary " +
-                                                                "text-white border-secondary"+
+                                                                "text-white border-secondary" +
                                                                 ((touched.eventEndDate && errors.eventEndDate) ? " is-invalid" : "")}
                                                             id="eventEndDate"
                                                             name="eventEndDate"
-                                                            placeholder="yyyy-mm-dd"
-                                                            type="datetime-local"
+                                                            required
+                                                            showTimeSelect
                                                         />
 
                                                         {touched.eventEndDate && errors.eventEndDate &&
