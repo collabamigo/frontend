@@ -116,9 +116,9 @@ export default class CreateEventModal extends React.Component {
             errors.registrationDeadlineDate = "Registration deadline date must be in the future";
         }
 
-        if (values.registrationStartDate && new Date(values.registrationStartDate) < new Date()) {
-            errors.registrationStartDate = "Registration opening date must be in the future";
-        }
+        // if (values.registrationStartDate && new Date(values.registrationStartDate) < new Date()) {
+        //     errors.registrationStartDate = "Registration opening date must be in the future";
+        // }
 
         if (values.eventDate && new Date(values.eventDate) < new Date()) {
             errors.eventDate = "Event date must be in the future";
