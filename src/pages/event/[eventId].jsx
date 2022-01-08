@@ -301,11 +301,11 @@ export default function Event() {
                                 {isEmpty(form)?null:
                                 <div className="col-12 p-2">
                                     <GenerateEventForm
-                                        end={event.event_end}
+                                        end={form.closes_at}
                                         eventId={router.query.eventId}
                                         formData={JSON.parse(form.skeleton)}
                                         response={data.pastResponse[0]}
-                                        start={event.event_start}
+                                        start={form.opens_at}
                                     />
                                 </div>}
 
