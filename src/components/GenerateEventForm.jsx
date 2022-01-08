@@ -8,6 +8,7 @@ import axios from "utilities/axios";
 import * as ga from "lib/ga";
 import {showAlert} from "common/Toast";
 import {isBrowser} from "utilities/auth";
+import {sleep} from "utilities";
 
 function generateCode(formData, setShowModal, eventId, response) {
 
@@ -434,13 +435,15 @@ function generateCode(formData, setShowModal, eventId, response) {
 
                     <Formik
                         initialValues={lodashIsEmpty(response)?{...(Array(formData.length).fill(""))}:response}
-                        onSubmit={(values) => {axios.post(submissionUrl, values).then(() => {
+                        onSubmit={async (values) => {axios.post(submissionUrl, values).then(async () => {
                             showAlert(
                                 "Form Submitted. Reloading page...",
                                 "success"
                             );
-                            if (isBrowser())
+                            if (isBrowser()) {
+                                await sleep(1200);
                                 window.location.reload();
+                            }
                             setShowModal(false);
                         }
                         ).catch((err) => {showAlert(

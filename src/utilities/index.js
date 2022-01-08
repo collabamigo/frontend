@@ -14,3 +14,7 @@ export function isValidUrl(string) {
 
   return true;
 }
+
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
