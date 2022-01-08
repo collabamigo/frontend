@@ -109,7 +109,6 @@ function generateCode(formData, setShowModal, eventId, response) {
                 <label
                     className="fw-bold pb-2"
                     htmlFor={field.id}
-                    name={field.id}
                 >
                     {field.name}
                 </label>
