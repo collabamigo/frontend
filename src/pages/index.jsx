@@ -26,7 +26,7 @@ export default class AuthenticatedHome extends React.Component {
                 clubList:res.data.clubs,
                 eventList:res.data.competitions
             });
-        }).then(console.log(this.state.clubList));
+        })
     }
 
     shouldComponentUpdate() {
