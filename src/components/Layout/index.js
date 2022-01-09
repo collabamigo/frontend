@@ -1,6 +1,7 @@
+import Head from "next/head";
 import Script from "next/script";
 import React, {useState} from "react";
-import {Helmet} from "react-helmet"
+import {Helmet} from "react-helmet";
 import Header from "./Header"
 import Footer from "./Footer/Footer";
 import PropTypes from "prop-types";
@@ -54,13 +55,8 @@ function Layout({children, title}) {
                 </Script>
 
                 <div className={App}>
-                    <Helmet>
+                    <Head>
                         <meta charSet="utf-8" />
-
-                        <link
-                            href="https://collabamigo.com"
-                            rel="canonical"
-                        />
 
                         <meta
                             content="width=device-width, initial-scale=1"
@@ -78,14 +74,23 @@ function Layout({children, title}) {
                         />
 
                         <meta
-                            content="iiitd.ac.in"
-                            name="google-signin-hosted_domain"
+                            content="website"
+                            property="og:type"
                         />
 
                         <meta
                             content="1O70mbIh0GWQJ6g3UsfCEnQyNUoygyq7k1CbvmWZzsU"
                             name="google-site-verification"
                         />
+
+
+                        <title>
+                            {title}
+                        </title>
+
+                    </Head>
+
+                    <Helmet>
 
                         <link
                             href="/img/icons/favicon.ico"
@@ -96,10 +101,6 @@ function Layout({children, title}) {
                             href="%PUBLIC_URL%/manifest.json"
                             rel="manifest"
                         />
-
-                        <title>
-                            {title}
-                        </title>
 
                         <link
                             href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined&display=swap"

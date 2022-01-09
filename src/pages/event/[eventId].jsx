@@ -164,7 +164,7 @@ export default function Event({eventData}) {
     if (isBrowser())
         url=window.location.href
     else
-        url="https://collabamigo.com/"
+        url="https://collabamigo.com/event/"+router.query.eventId
 
     if (isLoading)
         return <Loading />
