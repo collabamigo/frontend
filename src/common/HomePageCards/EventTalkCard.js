@@ -88,10 +88,10 @@ export default function EventTalkCard(props) {
                         </Card.Title>
 
                         <Card.Subtitle className="mb-2 text-muted">
-                            {props.element.clubs.map((val) => {
+                            {props.element.club_names.map((val) => {
                             return (
                                 <span key={val}>
-                                    {val+" "}
+                                    {val+", "}
                                 </span>
                             );
                         })}

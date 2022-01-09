@@ -240,11 +240,11 @@ export default function Event() {
 
                                         {' '}
 
-                                        {data.event.clubs.map(item => (
+                                        {data.event.club_names.map(item => (
                                             <span key={item}>
                                                 {item}
 
-                                                {data.event.clubs.length >1 ? ", " : null}
+                                                {data.event.club_names.length >1 ? ", " : null}
 
                                                 {' '}
                                             </span>
