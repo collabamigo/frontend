@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Image from "react-bootstrap/Image";
 import axios from "utilities/axios";
-import styles from "styles/index.module.css";
+import styles from "../styles/index.module.css";
 import ClubCard from "../common/HomePageCards/ClubCard.js";
 import EventTalkCard from "../common/HomePageCards/EventTalkCard.js";
 
@@ -112,7 +112,7 @@ export default class AuthenticatedHome extends React.Component {
 
                 <div className={styles.secondSection}>
                     <div className={styles.secondsectionInner}>
-                        <div className={styles.secondsectionHeading + " text-primary"}>
+                        <div className={styles.secondsectionHeading + " text-primary mb-2"}>
                             Competitions
                         </div>
 

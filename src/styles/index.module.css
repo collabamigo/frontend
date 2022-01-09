@@ -109,8 +109,6 @@
         padding: 0px;
     }
 
-  
-
     .firstsectionInner{
         padding:10px;
     }
@@ -153,8 +151,7 @@
         margin: 0px !important;
         width: 100% !important;
         width: 100% !important;
-
-
+        margin-bottom: 10px !important;
     }
 
     .secondsectionInnerleft{
@@ -165,13 +162,10 @@
         width: 60%;
     }
 
-   
-
     .secondsectionHeading{
         font-size:25px;
         margin-left: 0rem !important;
         padding-left:20px !important;
-
     }
 
     .secondsectionMiddle{

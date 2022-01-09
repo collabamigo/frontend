@@ -19,6 +19,11 @@
         bottom: 0;
     }
 
+    .cardinner{
+        padding: 4px;
+        margin-top: 0px;
+    }
+
 @media (max-width: 800px) {
 
     .cardCenter{
@@ -28,7 +33,6 @@
         
         margin: 0rem !important;
         padding: 0px !important;
-
     }
 
     .cardinner{
@@ -56,7 +60,5 @@
     .image{
         border-top-left-radius: 10px !important;
         border-top-right-radius: 10px !important;
-
-
     }
 }

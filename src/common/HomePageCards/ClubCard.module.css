@@ -9,6 +9,8 @@
 .title{
         text-align: center;
         font-size: 25px;
+        margin-top: auto !important;
+        padding-top: 6px;
     }
 
 @media (max-width: 800px) {
