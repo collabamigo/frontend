@@ -52,7 +52,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install packages
-        run: npm ci
+        run: npm i @layer0/cli
 
       - name: Deploy to Layer0
         run: |
