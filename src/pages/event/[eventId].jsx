@@ -1,5 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import lodashIsEmpty from "lodash/isEmpty";
+import Head from "next/head";
+import PropTypes from "prop-types";
 import React, {useEffect, useState} from "react"
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
@@ -28,7 +30,7 @@ import {
   } from "react-share";
 import {isBrowser} from "../../utilities/auth";
 
-export default function Event() {
+export default function Event({eventData}) {
     const router = useRouter()
     const [ModalShow, setModalShow] = useState(false);
 
@@ -66,11 +68,19 @@ export default function Event() {
     };
 
 
+
+
     const event = data.event;
     const form = data.form[0];
     const clubLogoLinks = data.clubLogoLinks;
     const imageLinks = data.bannerLinks;
 
+    if (lodashIsEmpty(event) && !lodashIsEmpty(eventData)) {
+        setEvent(eventData);
+        if ((eventData.winners !== undefined)) {
+            setModalShow(true);
+        }
+    }
 
     const convertToDatetimeString = iso_8601_string => {
         const date = new Date(iso_8601_string);
@@ -160,6 +170,37 @@ export default function Event() {
         return <Loading />
     return (
         <>
+            <Head>
+                <title>
+                    {event.name}
+                </title>
+
+                <meta
+                    content={event.description}
+                    name="description"
+                />
+
+                <meta
+                    content={event.name}
+                    property="og:title"
+                />
+
+                <meta
+                    content={event.description}
+                    property="og:description"
+                />
+
+                <meta
+                    content={event.graph_link}
+                    property="og:image"
+                />
+
+                <meta
+                    content={url}
+                    property="og:url"
+                />
+            </Head>
+
             <WModal
                 ModalShow={ModalShow}
                 handleClose={handleClose}
@@ -413,4 +454,27 @@ export default function Event() {
         </>
     )
 }
-Event.title = "CollabAmigo Event page"
+
+export async function getServerSideProps(context) {
+    // console.log(context)
+    const eventId = context.query.eventId;
+    const res = await axios.get(`club/competition/${eventId}/`)
+
+    // const res = await fetch(`https://...`)
+    // const data = await res.
+    //
+    if (!res) {
+        return {
+            eventData: [],
+        }
+    }
+    //
+    console.log(res.data)
+    return {
+        props: {eventData: res.data}, // will be passed to the page component as props
+    }
+}
+
+Event.propTypes = {
+    eventData: PropTypes.objectOf(PropTypes.string).isRequired,
+}
