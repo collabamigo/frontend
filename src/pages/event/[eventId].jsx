@@ -30,6 +30,7 @@ import {
     LinkedinShareButton,
     TelegramShareButton,
   } from "react-share";
+import * as ga from "../../lib/ga";
 import {isBrowser} from "../../utilities/auth";
 
 export default function Event({eventData}) {
@@ -43,6 +44,8 @@ export default function Event({eventData}) {
         form: [undefined, false],
         pastResponse: [[], false],
     });
+
+    const [analyticLogged, setAnalyticLogged] = useState(false);
 
 
     const handleClose = () => setModalShow(false);
@@ -68,6 +71,18 @@ export default function Event({eventData}) {
             return {...prevData, clubLogoLinks: {...(prevData.clubLogoLinks), [club]: link}}
         })
     };
+
+    useEffect(() => {
+        if (!analyticLogged && isBrowser()) {
+            ga.event({
+                action: `event-${eventData.id}-page-viewed`,
+                params: {
+                    event_id: eventData.id,
+                }
+            });
+            setAnalyticLogged(true);
+        }
+    })
 
 
 
