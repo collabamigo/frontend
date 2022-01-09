@@ -12,6 +12,8 @@ import {faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import FAQModal from "components/faq/FAQModal";
 import {getStorage, ref, getDownloadURL} from "firebase/storage";
 import {useRouter} from 'next/router'
+import {remark} from "remark";
+import strip from "strip-markdown";
 import axios from "utilities/axios";
 import {SvgIcon} from "common/SvgIcon";
 import WModal from 'components/WModal';
@@ -186,7 +188,7 @@ export default function Event({eventData}) {
                 />
 
                 <meta
-                    content={event.description}
+                    content={event.strippedDescription}
                     property="og:description"
                 />
 
@@ -468,10 +470,14 @@ export async function getServerSideProps(context) {
             eventData: [],
         }
     }
-    //
-    console.log(res.data)
+
+    const strippedDescription = String(await remark()
+        .use(strip)
+        .process(res.data.description)).substring(0, 200)
+
+    // console.log(res.data)
     return {
-        props: {eventData: res.data}, // will be passed to the page component as props
+        props: {eventData: {...(res.data), strippedDescription}}, // will be passed to the page component as props
     }
 }
 
