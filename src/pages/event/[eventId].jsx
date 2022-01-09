@@ -181,7 +181,7 @@ export default function Event({eventData}) {
                 />
 
                 <meta
-                    content={event.name}
+                    content={`CollabAmigo - ${event.name}`}
                     property="og:title"
                 />
 
