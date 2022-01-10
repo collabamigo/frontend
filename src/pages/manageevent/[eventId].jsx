@@ -23,6 +23,7 @@ import ClubAdminModal from "../../components/ClubAdmin/modal";
 import UModal from "components/UModal";
 import FaqEditor from "components/FaqEditor";
 import {showAlert} from "../../common/Toast";
+import imageCompression from 'browser-image-compression';
 
 import DuplicateModal from "components/EventAdmin/DuplicateModal";
 import {isValidUrl} from "../../utilities";
@@ -271,22 +272,39 @@ function Event() {
                 misc: `event-${router.query.eventId}-banner`
             }
         }
-        console.log("marker2", metadata)
-        uploadBytes(storageRef, image, metadata).then((args) => {
-            const temp = args["metadata"]["fullPath"]
-            const arr = JSON.parse(data.bannerPaths)
-            arr.splice(index,0,temp)
-            const payload = {
-                image_links: JSON.stringify(arr)
-            }
-            axios.patch("/club/competition/" + router.query.eventId + "/", payload).then(() => {
-                showAlert(
-                    "Picture Uploaded",
-                    "success"
-                )
-                setData({...data, bannerLinks: undefined, bannerPaths: JSON.stringify(arr)})
-            })
+
+        console.log('originalFile instanceof Blob', image instanceof Blob); // true
+        console.log(`originalFile size ${image.size / 1024 / 1024} MB`);
+
+        var options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true
+        }
+        imageCompression(image, options)
+            .then(function (compressedFile) {
+              console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+              console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+
+              uploadBytes(storageRef, image, metadata).then((args) => {
+                  const temp = args["metadata"]["fullPath"]
+                  const arr = JSON.parse(data.bannerPaths)
+                  arr.splice(index,0,temp)
+                  const payload = {
+                      image_links: JSON.stringify(arr)
+                  }
+                  axios.patch("/club/competition/" + router.query.eventId + "/", payload).then(() => {
+                      showAlert(
+                          "Picture Uploaded",
+                          "success"
+                        )
+                      setData({...data, bannerLinks: undefined, bannerPaths: JSON.stringify(arr)})
+                  })
+              })
         })
+        .catch(function (error) {
+          console.log(error.message);
+        });
     }
 
     const handleSubmitLinks = (args) => {
