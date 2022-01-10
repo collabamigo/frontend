@@ -433,7 +433,7 @@ class ClubAdminPage extends Component {
           console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
           console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
 
-              uploadBytes(storageRef, image, metadata).then((args) => {
+              uploadBytes(storageRef, compressedFile, metadata).then((args) => {
                 const temp = args["metadata"]["fullPath"]
                 const arr = JSON.parse(this.state.bannerPaths)
                 arr.splice(index, 0, temp)
