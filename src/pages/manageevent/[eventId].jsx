@@ -276,8 +276,8 @@ function Event() {
         console.log('originalFile instanceof Blob', image instanceof Blob); // true
         console.log(`originalFile size ${image.size / 1024 / 1024} MB`);
 
-        var options = {
-            maxSizeMB: 0.3,
+        const options = {
+            maxSizeMB: 250/1024,
             maxWidthOrHeight: 1920,
             useWebWorker: true
         }
