@@ -7,6 +7,16 @@ import {Metrics} from '@layer0/rum'
 import FirebaseProvider from "firebaseProvider"
 import * as ga from 'lib/ga'
 
+if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'production') {
+    // Disable console.log() in production
+    console.log = () => {
+    }
+    // console.error = () => {
+    // }
+    // console.debug = () => {
+    // }
+}
+
 export default function MyApp({Component, pageProps}) {
     new Metrics({
         token: process.env.NEXT_PUBLIC_LAYER0_RUM_TOKEN
