@@ -429,7 +429,7 @@ class ClubAdminPage extends Component {
             useWebWorker: true
         }
       imageCompression(image, options)
-        .then(function (compressedFile) {
+        .then((compressedFile) => {
           console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
           console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
 
@@ -445,6 +445,7 @@ class ClubAdminPage extends Component {
                         "Picture Uploaded",
                         "success"
                     )
+                    console.log(JSON.stringify(arr))
                     this.setState({bannerLinks: undefined, bannerPaths: JSON.stringify(arr)})
                 })
             })
