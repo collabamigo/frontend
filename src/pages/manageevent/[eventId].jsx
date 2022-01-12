@@ -277,7 +277,7 @@ function Event() {
         console.log(`originalFile size ${image.size / 1024 / 1024} MB`);
 
         var options = {
-            maxSizeMB: 1,
+            maxSizeMB: 0.3,
             maxWidthOrHeight: 1920,
             useWebWorker: true
         }
