@@ -252,7 +252,7 @@ class ClubAdminPage extends Component {
             return(
                 <Card.Link
                     className=""
-                    href="https://medium.com/"
+                    href={this.state.basicInformation.medium}
                     target="_blank"
                 >
                     <SvgIcon

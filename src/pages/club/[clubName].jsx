@@ -222,6 +222,24 @@ class ClubHomePage extends Component {
         }
     }
 
+    renderMedium() {
+        if (this.state.basicInformation.medium) {
+            return (
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.medium}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="medium.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
     renderMail(){
         // eslint-disable-next-line react/no-unstable-nested-components
         const Mailto = ({ email, subject = '', body = '', children }) => {
@@ -383,6 +401,8 @@ class ClubHomePage extends Component {
                                     {this.renderTelegram()}
 
                                     {this.renderGithub()}
+
+                                    {this.renderMedium()}
 
                                     {this.renderMail()}
 
