@@ -69,7 +69,12 @@ function isEmpty(obj) {
 }
 
 function Event() {
-    const router = useRouter()
+    const router = useRouter();
+
+    let eventId = undefined;
+
+    if (router.query.eventId !== undefined)
+        eventId = router.query.eventId.split("-")[0];
 
     const firebase = useContext(FirebaseContext);
     const storage = firebase?getStorage(firebase):getStorage();
@@ -153,7 +158,7 @@ function Event() {
         let start = (new Date(value[1].split('to')[1])).toISOString();
         console.log("edited maginc", start);
 
-        axios.patch("club/competition/"+ router.query.eventId +"/" ,{
+        axios.patch("club/competition/"+ eventId +"/" ,{
             name: value[0],
             event_start: (new Date(value[1].split('to')[0])).toISOString(),
             event_end: (new Date(value[1].split('to')[1])).toISOString(),
@@ -175,12 +180,12 @@ function Event() {
         console.log(value[4], "lll");
 
 
-        var lolstart = (new Date(value[3])).toISOString();
+        const lolstart = (new Date(value[3])).toISOString();
         console.log(lolstart, " hello");
-        var lolend = (new Date(value[4])).toISOString();
+        const lolend = (new Date(value[4])).toISOString();
         console.log(lolend, " hellsdsdsdo");
 
-        axios.patch("form/form/"+ router.query.eventId +"/" ,{
+        axios.patch("form/form/"+ eventId +"/" ,{
             opens_at: lolstart,
             closes_at: lolend,
         }).then((res) => {
@@ -199,7 +204,7 @@ function Event() {
 
 
     const setFaq = (faq) => {
-        axios.patch(`club/competition/${router.query.eventId}/`, {
+        axios.patch(`club/competition/${eventId}/`, {
             faq: JSON.stringify(faq)
         }).then(() => {
             setData((prevData) => {
@@ -219,7 +224,7 @@ function Event() {
         const payload = {
             image_links:JSON.stringify(temp)
         }
-        axios.patch(`/club/competition/${router.query.eventId}/`, payload).then(()=>
+        axios.patch(`/club/competition/${eventId}/`, payload).then(()=>
         {deleteObject(desertRef)
             showAlert(
                 "Picture Deleted",
@@ -269,7 +274,7 @@ function Event() {
             contentType: image.type,
             customMetadata: {
                 clubs: JSON.stringify(event.clubs),
-                misc: `event-${router.query.eventId}-banner`
+                misc: `event-${eventId}-banner`
             }
         }
 
@@ -293,7 +298,7 @@ function Event() {
                   const payload = {
                       image_links: JSON.stringify(arr)
                   }
-                  axios.patch("/club/competition/" + router.query.eventId + "/", payload).then(() => {
+                  axios.patch("/club/competition/" + eventId + "/", payload).then(() => {
                       showAlert(
                           "Picture Uploaded",
                           "success"
@@ -311,7 +316,7 @@ function Event() {
         const payload = {
             link: (args[0].startsWith("http://") || args[0].startsWith("https://"))?args[0]:`https://${args[0]}`,
         }
-        axios.patch('/club/competition/' + router.query.eventId + '/', payload).then(()=>{handleClose2
+        axios.patch('/club/competition/' + eventId + '/', payload).then(()=>{handleClose2
             showAlert(
             "Links Added",
                 "success"
@@ -320,10 +325,10 @@ function Event() {
     }
 
      useEffect(() => {
-        if (router.query.eventId!==undefined) {
+        if (eventId!==undefined) {
 
             if (!data.tableResponses[1])
-                axios.get(`form/response/${router.query.eventId}/`)
+                axios.get(`form/response/${eventId}/`)
                     .then(res => settableResponses(res.data))
                     .catch(err => {
                         if (err.response.status === 404)
@@ -333,11 +338,11 @@ function Event() {
                     })
 
             if (isEmpty(event))
-                axios.get(`club/competition/${router.query.eventId}/`)
+                axios.get(`club/competition/${eventId}/`)
                     .then(res => setEvent(res.data))
 
             if (!data.form[1])
-                axios.get(`form/form/${router.query.eventId}/`)
+                axios.get(`form/form/${eventId}/`)
                     .then(res => setForm(res.data))
                     .catch(err => {
                         if (err.response.status === 404)
@@ -381,13 +386,13 @@ function Event() {
 
                 <UModal
                     ModalShow={ModalShow2}
-                    eventID={router.query.eventId}
+                    eventID={eventId}
                     handleClose={() => setModalShow2(false)}
                 />
 
                 <DuplicateModal
                     description={event.description}
-                    eventId={router.query.eventId}
+                    eventId={eventId}
                     handleClose={() => setShowDescriptionModal(false)}
                     setDescription={(desc)=>{setData((data)=>{return {...data, event:{...data.event, description: desc}}})}}
                     show={showDescriptionModal}
@@ -435,7 +440,6 @@ function Event() {
                                         <div
                                             className={"my-auto mx-3 " + ((data.bannerLinks[0]) ? "" : "-primary")}
                                             onClick={() => data.image1Ref.current.click()}
-                                            type="button"
                                         >
 
                                             {bannerControl(data.bannerLinks, 0)}
@@ -481,7 +485,6 @@ function Event() {
                                         <div
                                             className={"my-auto mx-3 " + ((data.bannerLinks[2]) ? "" : "-primary")}
                                             onClick={() => data.image3Ref.current.click()}
-                                            type="button"
                                         >
                                             {bannerControl(data.bannerLinks, 2)}
                                         </div>

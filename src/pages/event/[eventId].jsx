@@ -34,7 +34,13 @@ import * as ga from "../../lib/ga";
 import {isBrowser} from "../../utilities/auth";
 
 export default function Event({eventData}) {
-    const router = useRouter()
+    const router = useRouter();
+
+    let eventId = undefined;
+
+    if (router.query.eventId !== undefined)
+        eventId = router.query.eventId.split("-")[0];
+
     const [ModalShow, setModalShow] = useState(false);
 
     const [data, setData] = useState({
@@ -105,9 +111,9 @@ export default function Event({eventData}) {
     }
 
     useEffect(() => {
-        if (router.query.eventId!==undefined) {
+        if (eventId!==undefined) {
             if (lodashIsEmpty(event))
-                axios.get(`club/competition/${router.query.eventId}/`)
+                axios.get(`club/competition/${eventId}/`)
                     .then(res => {
                         setEvent(res.data)
                         if ((res.data.winners !== undefined)){
@@ -116,7 +122,7 @@ export default function Event({eventData}) {
                     })
 
             if (!data.form[1])
-                axios.get(`form/form/${router.query.eventId}/`)
+                axios.get(`form/form/${eventId}/`)
                     .then(res => setForm(res.data))
                     .catch(err => {
                         if (err.response.status === 404)
@@ -154,7 +160,7 @@ export default function Event({eventData}) {
             }
 
             if (!data.pastResponse[1]) {
-                axios.get(`form/get-response/${router.query.eventId}/`)
+                axios.get(`form/get-response/${eventId}/`)
                     .then(res => setData((prevData) => {
                         if (lodashIsEmpty(res.data))
                             return {...prevData, pastResponse: [[], true]}
@@ -181,7 +187,7 @@ export default function Event({eventData}) {
     if (isBrowser())
         url=window.location.href
     else
-        url="https://collabamigo.com/event/"+router.query.eventId
+        url="https://collabamigo.com/event/"+eventId
 
     if (isLoading)
         return <Loading />
@@ -359,7 +365,7 @@ export default function Event({eventData}) {
                                 <div className="col-12 p-2">
                                     <GenerateEventForm
                                         end={form.closes_at}
-                                        eventId={router.query.eventId}
+                                        eventId={eventId}
                                         formData={JSON.parse(form.skeleton)}
                                         response={data.pastResponse[0]}
                                         start={form.opens_at}
@@ -473,8 +479,7 @@ export default function Event({eventData}) {
 }
 
 export async function getServerSideProps(context) {
-    // console.log(context)
-    const eventId = context.query.eventId;
+    const eventId = context.query.eventId.split("-")[0]
     const res = await axios.get(`club/competition/${eventId}/`)
 
     // const res = await fetch(`https://...`)

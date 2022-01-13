@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from "react"
-// import {useRouter} from 'next/router'
 import Card from 'react-bootstrap/Card'
 import PropTypes from "prop-types";
 import {SvgIcon} from "common/SvgIcon";
 import {getStorage, ref, getDownloadURL} from "firebase/storage";
 import {truncate} from "utilities";
-// import isEmpty from "lodash/isEmpty";
 import Link from "common/Link";
 import axios from "utilities/axios";
 import {isMobile} from "react-device-detect";
@@ -73,7 +71,7 @@ export default function EventTalkCard(props) {
         <div className={styles.cardCenter+" h-100"}>
             <Link
                 className="reset-a"
-                to={"/"+(props.manage?"manage":"")+"event/" + props.element.id}
+                to={"/"+(props.manage?"manage":"")+"event/" + props.element.id + "-" + props.element.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '-').toLowerCase()}
             >
                 <Card className="h-100">
                     <Card.Img
