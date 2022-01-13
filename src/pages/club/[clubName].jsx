@@ -442,12 +442,14 @@ class ClubHomePage extends Component {
                                         {this.state.basicInformation.admins.join(", ")}
                                     </div>
 
-                                    <div className={styles.memberSize}>
-                                        Member Size:
-                                        {' '}
+                                    {this.state.basicInformation.memberSize !== 0 &&
+                                        (
+                                            <div className={styles.memberSize}>
+                                                Member Size:
+                                                {" "}
 
-                                        {this.state.basicInformation.memberSize}
-                                    </div>
+                                                {this.state.basicInformation.memberSize}
+                                            </div>)}
                                 </div>
 
                                 <hr />
