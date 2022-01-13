@@ -247,6 +247,24 @@ class ClubAdminPage extends Component {
         }
     }
 
+    renderMedium(){
+        if(this.state.basicInformation.medium){
+            return(
+                <Card.Link
+                    className=""
+                    href="https://medium.com/"
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="medium.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
     renderMail(){
         if(this.state.basicInformation.mail){
             return(
@@ -626,6 +644,8 @@ class ClubAdminPage extends Component {
                                         {this.renderTelegram()}
 
                                         {this.renderGithub()}
+
+                                        {this.renderMedium()}
 
                                         {this.renderMail()}
 
