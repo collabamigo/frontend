@@ -555,7 +555,10 @@ class ClubHomePage extends Component {
 
                             <Card.Text className="card-text h5 col-12">
                                 <div>
-                                    <RCarousel responsive={responsive}>
+                                    <RCarousel
+                                        infinite
+                                        responsive={responsive}
+                                    >
                                         {this.state.competitions.map((option) => (
                                             <EventTalkCard
                                                 element={option}

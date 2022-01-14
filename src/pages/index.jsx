@@ -117,7 +117,10 @@ export default class AuthenticatedHome extends React.Component {
                         </div>
 
                         <div className={styles.secondsectionMiddle}>
-                            <Carousel responsive={responsive}>
+                            <Carousel
+                                infinite
+                                responsive={responsive}
+                            >
 
                                 {this.state.eventList.map((option) => (
                                     <EventTalkCard
@@ -148,7 +151,12 @@ export default class AuthenticatedHome extends React.Component {
                     <br />
 
                     <div className={styles.thirdsectionMiddle}>
-                        <Carousel responsive={responsive2}>
+                        <Carousel
+                            autoPlay
+                            autoPlaySpeed={2500}
+                            infinite
+                            responsive={responsive2}
+                        >
 
                             {this.state.clubList.map((option) => (
                                 <ClubCard
