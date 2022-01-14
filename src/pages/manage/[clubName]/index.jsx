@@ -363,8 +363,9 @@ class ClubAdminPage extends Component {
             github: values[4],
             mail: values[5],
             telegram: values[6],
-            other: values[7],
-            tagline: values[8],
+            medium: values[7],
+            other: values[8],
+            tagline: values[9],
         }
         axios.patch("club/club/"+ this.props.router.query.clubName +"/" ,payload)
             .then(() => {
@@ -381,8 +382,9 @@ class ClubAdminPage extends Component {
                                 github: values[4],
                                 mail: values[5],
                                 telegram: values[6],
-                                other: values[7],
-                                tagline: values[8],
+                                medium: values[7],
+                                other: values[8],
+                                tagline: values[9],
                             }
                         })
                 })
@@ -587,9 +589,10 @@ class ClubAdminPage extends Component {
                                         this.state.basicInformation.github,
                                         this.state.basicInformation.mail,
                                         this.state.basicInformation.telegram,
+                                        this.state.basicInformation.medium,
                                         this.state.basicInformation.other,
                                         this.state.basicInformation.tagline]}
-                                    labels={['Instagram','LinkedIn','Facebook','Discord','GitHub','Mail address','Telegram','Other website','Enter Your Clubs Tagline']}
+                                    labels={['Instagram','LinkedIn','Facebook','Discord','GitHub','Mail address','Telegram','Medium','Other website','Enter Your Clubs Tagline']}
                                     show={this.state.currentModal === 'panel'}
                                 />
 
