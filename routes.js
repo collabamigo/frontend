@@ -59,4 +59,5 @@ router.get('/service-worker.js', ({ serviceWorker }) => {
 // Default Next.js Routes
 router.use(nextRoutes)
 
+// eslint-disable-next-line no-undef
 module.exports = router
