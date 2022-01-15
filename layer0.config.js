@@ -2,5 +2,4 @@
 // You should commit this file to source control.
 module.exports = {
   connector: '@layer0/next',
-  "maximumFileSizeToCacheInBytes": 5000000,
 }
