@@ -512,27 +512,27 @@ class ClubHomePage extends Component {
                                                     key={item}
                                                 >
                                                     <ListGroup
-                                                            as="ol"
+                                                        as="ol"
+                                                    >
+                                                        <ListGroup.Item
+                                                            as="li"
+                                                            className="d-flex justify-content-between align-items-start my-2"
                                                         >
-                                                            <ListGroup.Item
-                                                                as="li"
-                                                                className="d-flex justify-content-between align-items-start my-2"
-                                                            >
-                                                                <div className={styles.notifications}>
-                                                                    <div className={styles.notificationHeading}>
-                                                                                {item["content"]}
-                                                                            </div>
-
-                                                                    <div>
-                                                                                {this.getDate(this.state.currentDateTime, item["timestamp"])}
-                                                                            </div>
-
+                                                            <div className={styles.notifications}>
+                                                                <div className={styles.notificationHeading}>
+                                                                    {item["content"]}
                                                                 </div>
 
-                                                                {this.getNotification(this.state.currentDateTime, item["timestamp"])}
+                                                                <div>
+                                                                    {this.getDate(this.state.currentDateTime, item["timestamp"])}
+                                                                </div>
 
-                                                            </ListGroup.Item>
-                                                        </ListGroup>
+                                                            </div>
+
+                                                            {this.getNotification(this.state.currentDateTime, item["timestamp"])}
+
+                                                        </ListGroup.Item>
+                                                    </ListGroup>
                                                 </ul>
                                                 ))}
 
