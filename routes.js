@@ -26,6 +26,7 @@ router.prerender([
   },
   {
     path: '/event/:id',
+  }
 ])
 
 // Serve service worker
@@ -64,4 +65,5 @@ router.match('/_next/data/:build/show/:name.json', NEXT_CACHE_HANDLER)
 // Default Next.js Routes
 router.use(nextRoutes)
 
+// eslint-disable-next-line no-undef
 module.exports = router
