@@ -135,7 +135,7 @@ function Event() {
 
     const convertToDatetimeString = iso_8601_string => {
         const date = new Date(iso_8601_string);
-        return date.toLocaleString();
+        return date.toString();
     }
 
     const handleShowEvent = () => setData({...data, showEvent: true});
@@ -153,10 +153,10 @@ function Event() {
     const handleSubmitEvent =(value)=>{
 
         handleCloseEvent();
-        console.log("edited maginc", value[0]);
+        console.log("edited maginc1", value[1].split('to')[1]);
 
         let start = (new Date(value[1].split('to')[1])).toISOString();
-        console.log("edited maginc", start);
+        console.log("edited maginc2", start);
 
         axios.patch("club/competition/"+ eventId +"/" ,{
             name: value[0],
@@ -745,11 +745,9 @@ function Event() {
                         {form && <EventAdminModal
                             handleClose={handleCloseEvent}
                             handleSubmit={handleSubmitEvent}
-                            initialValues={[event.name, convertToDatetimeString(event.event_start) +
-                                            (event.event_end?" to "+ convertToDatetimeString(event.event_end):""), event.location,
-                            convertToDatetimeString(form.opens_at),
-                            convertToDatetimeString(form.closes_at) ? (convertToDatetimeString(form.closes_at)) : ""]}
-                            labels={['Event Name','Date and Time','Location','Registration Starts', 'Registration ends']}
+                            initialValues={[event.name, event.event_start,event.event_end, event.location,
+                            form.opens_at,form.closes_at]}
+                            labels={['Event Name','Event Starts','Event Ends','Location','Registration Starts','Registration ends']}
                             show={data.showEvent}
                                  />}
 
