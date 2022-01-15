@@ -68,7 +68,7 @@ export default function EventTalkCard(props) {
     var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' +  datee.getFullYear());
 
     return (
-        <div className={styles.cardCenter+" h-100"}>
+        <div className={styles.cardCenter+" h-100 mx-3 mx-md-5"}>
             <Link
                 className="reset-a"
                 to={"/"+(props.manage?"manage":"")+"event/" + props.element.id + "-" + props.element.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '-').toLowerCase()}

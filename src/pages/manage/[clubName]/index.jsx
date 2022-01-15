@@ -353,7 +353,6 @@ class ClubAdminPage extends Component {
     }
 
     handleSubmitPanel(values){
-
         this.handleCloseModal()
         const payload = {
             instagram: values[0],
