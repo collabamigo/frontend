@@ -28,9 +28,8 @@ function generateCode(formData, setShowModal, eventId, response) {
 
         for (let itr in formData) {
             const field=formData[itr];
-            if (field.required && (!values[field.id] || lodashIsEmpty(values[field.id])))
+            if (field.required && (!values[field.id] || (typeof values[field.id] !== "number" && lodashIsEmpty(values[field.id]))))
                 errors[field.id] = 'This field is required';
-
         }
 
         // console.log("validate", errors, values);
