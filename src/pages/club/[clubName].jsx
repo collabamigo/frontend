@@ -365,9 +365,9 @@ class ClubHomePage extends Component {
         };
 
         return (
-            <div className="row m-md-3">
-                <div className="mx-3 col-md-2 col-lg-2 col-sm-12 d-flex justify-content-around">
-                    <div className={styles.clubcard}>
+            <div className="row m-md-3 mx-auto px-auto">
+                <div className="px-md-3 col-md-3 col-auto mx-auto">
+                    <div className={styles.clubcard + " m-0 ms-md-4"}>
                         <Card
                             className="pt-2"
                             style={{ width: '18rem' }}
@@ -415,31 +415,36 @@ class ClubHomePage extends Component {
                     </div>
                 </div>
 
-                <div className={styles.clubBox + " col-md-9 col-lg-9 col-sm-12 justify-content-around"}>
-                    <Card className={styles.leftCard1}>
-                        <Card.Body>
-                            <div className="">
-                                <BCarousel
-                                    nextIcon={
-                                        <span
-                                            aria-hidden="true"
-                                            className="carousel-control-next-icon"
-                                            style={{
+                <div className="ps-md-5 pe-md-0 col-md-9 col-sm-12 mx-auto row my-2 my-md-0">
+                    {/*<div className="row mw-100">*/}
+
+                    <div>
+                        <div className=" col-12">
+                            <h2 className="h2 fw-bold d-none d-md-block">
+                                {this.state.basicInformation.name}
+                            </h2>
+
+                            <BCarousel
+                                nextIcon={
+                                    <span
+                                        aria-hidden="true"
+                                        className="carousel-control-next-icon"
+                                        style={{
                                                 backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")`,
                                             }}
-                                        />
+                                    />
                                     }
-                                    prevIcon={
-                                        <span
-                                            aria-hidden="true"
-                                            className="carousel-control-prev-icon "
-                                            style={{
+                                prevIcon={
+                                    <span
+                                        aria-hidden="true"
+                                        className="carousel-control-prev-icon "
+                                        style={{
                                                 backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='blue'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e")`,
                                             }}
-                                        />
+                                    />
                                     }
-                                >
-                                    {lodashMap(this.state.bannerLinks, link =>
+                            >
+                                {lodashMap(this.state.bannerLinks, link =>
                                         (
                                             <BCarousel.Item key={link}>
                                                 <Image
@@ -450,19 +455,19 @@ class ClubHomePage extends Component {
                                                 />
                                             </BCarousel.Item>)
                                     )}
-                                </BCarousel>
+                            </BCarousel>
 
-                                <br />
+                            <br />
 
-                                <div>
-                                    <div className={styles.coordinators}>
-                                        Coordinators:
-                                        {' '}
+                            <div>
+                                <div className={styles.coordinators}>
+                                    Coordinators:
+                                    {' '}
 
-                                        {this.state.basicInformation.admins.join(", ")}
-                                    </div>
+                                    {this.state.basicInformation.admins.join(", ")}
+                                </div>
 
-                                    {this.state.basicInformation.memberSize !== 0 &&
+                                {this.state.basicInformation.memberSize !== 0 &&
                                         (
                                             <div className={styles.memberSize}>
                                                 Member Size:
@@ -470,43 +475,43 @@ class ClubHomePage extends Component {
 
                                                 {this.state.basicInformation.memberSize}
                                             </div>)}
-                                </div>
+                            </div>
 
-                                <hr />
+                            <hr />
 
 
-                                <div className={styles.mainBox + " row"}>
-                                    <div className={styles.descriptionBox + " col"}>
-                                        <div className={styles.descriptionHeading}>
-                                            Description
+                            <div className={styles.mainBox + " row"}>
+                                <div className={styles.descriptionBox + " col"}>
+                                    <div className=" fs-2 header-color">
+                                        Description
 
-                                            {" "}
-
-                                        </div>
-
-                                        <p className={styles.description}>
-                                            {this.state.basicInformation.description}
-                                        </p>
+                                        {" "}
 
                                     </div>
 
-                                    <div className={styles.announcementsBox + " col"}>
-                                        <div className={styles.announcementsHeading}>
-                                            Announcements
-                                            {" "}
-                                        </div>
+                                    <p className={styles.description}>
+                                        {this.state.basicInformation.description}
+                                    </p>
 
-                                        <div className="overflow-auto">
-                                            <ul
-                                                className="list p-0 m-0 pe-2"
-                                                style={{ height: '250px'}}
-                                            >
-                                                {this.state.announcements.map(item => (
-                                                    <ul
-                                                        className="pe-2"
-                                                        key={item}
-                                                    >
-                                                        <ListGroup
+                                </div>
+
+                                <div className={styles.announcementsBox + " col"}>
+                                    <div className=" fs-2 header-color">
+                                        Announcements
+                                        {" "}
+                                    </div>
+
+                                    <div className="overflow-auto rounded-top border">
+                                        <ul
+                                            className="list p-0 m-0 pe-2"
+                                            style={{ height: '250px'}}
+                                        >
+                                            {this.state.announcements.map(item => (
+                                                <ul
+                                                    className="pe-2"
+                                                    key={item}
+                                                >
+                                                    <ListGroup
                                                             as="ol"
                                                         >
                                                             <ListGroup.Item
@@ -515,12 +520,12 @@ class ClubHomePage extends Component {
                                                             >
                                                                 <div className={styles.notifications}>
                                                                     <div className={styles.notificationHeading}>
-                                                                        {item["content"]}
-                                                                    </div>
+                                                                                {item["content"]}
+                                                                            </div>
 
                                                                     <div>
-                                                                        {this.getDate(this.state.currentDateTime, item["timestamp"])}
-                                                                    </div>
+                                                                                {this.getDate(this.state.currentDateTime, item["timestamp"])}
+                                                                            </div>
 
                                                                 </div>
 
@@ -528,51 +533,52 @@ class ClubHomePage extends Component {
 
                                                             </ListGroup.Item>
                                                         </ListGroup>
-                                                    </ul>
+                                                </ul>
                                                 ))}
 
-                                            </ul>
+                                        </ul>
 
-                                        </div>
                                     </div>
                                 </div>
-
                             </div>
-
-                        </Card.Body>
-                    </Card>
+                        </div>
+                    </div>
 
                     <br />
 
-                    <Card className={styles.leftCard2}>
-                        <Card.Body className="mt-3">
-                            <Card.Title className="card-title fs-2 header-color text-left">
-                                Events
-                                {" "}
-                            </Card.Title>
+                    <div>
+                        <div className="mw-100">
+                            <div className="mt-3">
+                                <h2 className=" fs-2 header-color text-left">
+                                    Events
+                                    {" "}
+                                </h2>
 
-                            <br />
+                                <br />
 
-                            <Card.Text className="card-text h5 col-12">
-                                <div>
-                                    <RCarousel
-                                        infinite
-                                        responsive={responsive}
-                                    >
-                                        {this.state.competitions.map((option) => (
-                                            <EventTalkCard
-                                                element={option}
-                                                key={option.description}
-                                            />
+                                <div className=" h5 col-12">
+                                    <div>
+                                        <RCarousel
+                                            infinite={this.state.competitions.length > 1}
+                                            responsive={responsive}
+                                        >
+                                            {this.state.competitions.map((option) => (
+                                                <EventTalkCard
+                                                    element={option}
+                                                    key={option.description}
+                                                />
                                         ))}
 
-                                    </RCarousel>
+                                        </RCarousel>
+                                    </div>
                                 </div>
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
+                            </div>
+                        </div>
 
-                    <br />
+                        <br />
+                    </div>
+
+                    {/*</div>*/}
                 </div>
             </div>
 
