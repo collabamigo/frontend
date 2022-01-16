@@ -17,6 +17,7 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
 
     const [data, setData] = useState();
     const [googleState, setGoogleState] = useState("button");
+    const [expanded, setExpanded] = useState(!isAuthenticated);
 
     useEffect(() => {
 
@@ -25,12 +26,19 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
                 .then(res => setData(res.data[0])).catch(err => console.log(err))
     })
 
+    useEffect(() => {
+        if (isAuthenticated && expanded)
+            setExpanded(false);
+    }, [isAuthenticated])
+
     return (
         <Navbar
             bg="dark"
             className={styles.navbar + " sticky-top mb-4 "}
             collapseOnSelect
             expand="lg"
+            expanded={expanded}
+            onToggle={() => setExpanded(!expanded)}
             variant="dark"
         >
             <Container>
