@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 exports.foreverEdge = {
     browser: false,
     edge: {
@@ -5,7 +6,8 @@ exports.foreverEdge = {
       maxAgeSeconds: 60 * 60 * 60 * 365,
     },
   }
-  
+
+// eslint-disable-next-line no-undef
   exports.assetCache = {
     edge: {
       maxAgeSeconds: 60 * 60 * 60 * 365,
@@ -16,8 +18,8 @@ exports.foreverEdge = {
       serviceWorkerSeconds: 60 * 60 * 24,
     },
   }
-  
-  exports.SSR_CACHE_HANDLER = ({ removeUpstreamResponseHeader, cache }) => {
+
+  export const SSR_CACHE_HANDLER = ({ removeUpstreamResponseHeader, cache }) => {
     removeUpstreamResponseHeader('cache-control')
     cache({
       browser: false,
@@ -27,8 +29,8 @@ exports.foreverEdge = {
       },
     })
   }
-  
-  exports.NEXT_CACHE_HANDLER = ({ removeUpstreamResponseHeader, cache }) => {
+
+  export const NEXT_CACHE_HANDLER = ({ removeUpstreamResponseHeader, cache }) => {
     removeUpstreamResponseHeader('cache-control')
     cache({
       browser: {

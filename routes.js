@@ -1,6 +1,6 @@
-const { nextRoutes } = require('@layer0/next')
-const { Router } = require('@layer0/core/router')
-const { assetCache, NEXT_CACHE_HANDLER, SSR_CACHE_HANDLER } = require('./cache.js')
+import { nextRoutes } from '@layer0/next';
+import { Router } from '@layer0/core/router';
+import { NEXT_CACHE_HANDLER, SSR_CACHE_HANDLER } from './cache.js'
 
 // Create a new router
 const router = new Router()
@@ -10,23 +10,45 @@ router.prerender([
   NEXT_CACHE_HANDLER,
   SSR_CACHE_HANDLER,
   // Routes
-  ...nextRoutes,
+  // ...nextRoutes,
   // Default route
-  {
-    path: '*',
-  },
-  {
-    path: '/',
-  },
-  {
-    path: '/event/:id',
-  }
+  // {
+  //   path: '*',
+  // },
+  // {
+  //   path: '/',
+  // },
 ])
 
 // Serve service worker
 router.get('/service-worker.js', ({ serviceWorker }) => {
   return serviceWorker('.next/static/service-worker.js')
 })
+
+router.get('/event/:eventId', ({cache}) => {
+  cache({
+    browser: {
+      maxAgeSeconds: 0,
+    },
+    edge: {
+      maxAgeSeconds: 10,
+      staleWhileRevalidateSeconds: 60 * 60,
+    },
+  })
+})
+    // Products - getServerSideProps
+    .get('/_next/data/:__build__/event/:eventId.json', ({cache}) => {
+      cache({
+        browser: {
+          maxAgeSeconds: 0,
+          serviceWorkerSeconds: 10,
+        },
+        edge: {
+          maxAgeSeconds: 10,
+          staleWhileRevalidateSeconds: 60 * 60,
+        },
+      })
+    })
 
 // SSR Cache Handler
 // router.match('/', SSR_CACHE_HANDLER)
