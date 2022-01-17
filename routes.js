@@ -1,6 +1,6 @@
 import { nextRoutes } from '@layer0/next';
 import { Router } from '@layer0/core/router';
-import { NEXT_CACHE_HANDLER, SSR_CACHE_HANDLER } from './cache.js'
+// import { NEXT_CACHE_HANDLER, SSR_CACHE_HANDLER } from './cache.js'
 
 // Create a new router
 const router = new Router()
