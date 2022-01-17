@@ -28,9 +28,8 @@ function generateCode(formData, setShowModal, eventId, response) {
 
         for (let itr in formData) {
             const field=formData[itr];
-            if (field.required && (!values[field.id] || lodashIsEmpty(values[field.id])))
+            if (field.required && (!values[field.id] || (typeof values[field.id] !== "number" && lodashIsEmpty(values[field.id]))))
                 errors[field.id] = 'This field is required';
-
         }
 
         // console.log("validate", errors, values);
@@ -440,6 +439,36 @@ function generateCode(formData, setShowModal, eventId, response) {
                                 "Form Submitted. Reloading page...",
                                 "success"
                             );
+                            if (!response || lodashIsEmpty(response)) {
+                                console.log("New response");
+                                ga.event({
+                                    action: "event-registration",
+                                    params: {
+                                        event_id: eventId
+                                    }
+                                })
+                                ga.event({
+                                    action: `event-registration-${eventId}`,
+                                    params: {
+                                        event_id: eventId
+                                    }
+                                })
+                            } else {
+                                console.log("Existing response");
+                                ga.event({
+                                    action: "event-registration-edit",
+                                    params: {
+                                        event_id: eventId
+                                    }
+                                });
+                                ga.event({
+                                    action: `event-registration-edit-${eventId}`,
+                                    params: {
+                                        event_id: eventId
+                                    }
+                                })
+                            }
+
                             if (isBrowser()) {
                                 await sleep(1200);
                                 window.location.reload();
@@ -490,21 +519,6 @@ export default function GenerateEventForm({formData, eventId, start, end, respon
     const [show, setShow] = useState(false);
 
     const register = () => {
-        if (!response){
-                ga.event({
-                action: "event-registration",
-                params: {
-                    event_id: eventId
-                }
-            })
-        }
-        else
-            ga.event({
-                action: "event-registration-edit",
-                params: {
-                    event_id: eventId
-                }
-            })
         setShow(true);
 
     }

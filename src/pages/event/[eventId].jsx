@@ -378,18 +378,19 @@ export default function Event({eventData}) {
                                 </div>}
 
                                 <div className="p-2 col-6">
-                                    <Button
+                                    {event.link && (
+                                        <Button
                                         // className={"w-100 "+ (((new Date()) > (new Date(form.closes_at))) && ((new Date()) < (new Date(form.starts_at))) ?"disabled":"")}
-                                        className="w-100 "
+                                            className="w-100 "
                                         // disabled={((new Date()) > (new Date(form.closes_at))) ? true : false}
-                                        href={event.link}
-                                        rel="noopener noreferrer"
-                                        target="_blank"
-                                        variant="outline-primary"
-                                    >
-                                        {()=>alert(event.link)}
-                                        Join meet
-                                    </Button>
+                                            href={event.link}
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                            variant="outline-primary"
+                                        >
+                                            {() => alert(event.link)}
+                                            Join meet
+                                        </Button>)}
                                 </div>
                             </div>
 

@@ -1,6 +1,6 @@
-import React from "react"
+import React from "react";
 import styles from "./Footer.module.css";
-import {EmailShareButton} from "react-share";
+import { EmailShareButton } from "react-share";
 
 function Footer() {
   return (
@@ -8,28 +8,25 @@ function Footer() {
           <div className="container">
               <div className="row">
                   <div className="col-sm-12 col-md-6">
-
                       <br />
 
                       <h3>
                           CollabAmigo has helped
                       </h3>
 
-
                       <div className="text-justify ">
                           <ul className={styles.listt}>
-                              <li >
-                                  X students to register for events
+                              <li>
+                                  84 students to register for events
                               </li>
 
                               <li>
-                                  Y clubs and Organizations to host events
+                                  6 clubs and Organizations to host events
                               </li>
 
                               <li>
-                                  Z registrations to take place
+                                  with more to come ...
                               </li>
-
                           </ul>
                       </div>
                   </div>
@@ -95,16 +92,13 @@ function Footer() {
                   <div className="col-md-8 col-sm-6 col-xs-12">
                       <p className={styles.copyright_text}>
                           Copyright &copy; 2021 All Rights Reserved by
-                          {' '}
-
                           {" "}
 
                           <a href="https://github.com/watson-hex">
                               Watson-Hex
                           </a>
 
-                          {" "}
-
+                          {' '}
                           .
                       </p>
                   </div>
@@ -166,7 +160,7 @@ function Footer() {
                               <EmailShareButton
                                   onClick={() => {}}
                                   openShareDialogOnClick
-                                  to="watsonhex@gmail.com"  // please check this
+                                  to="watsonhex@gmail.com"
                               >
                                   <svg
                                       className={styles.colorwhite}
@@ -178,14 +172,13 @@ function Footer() {
                                       <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z" />
                                   </svg>
                               </EmailShareButton>
-
                           </li>
                       </ul>
                   </div>
               </div>
           </div>
       </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;
