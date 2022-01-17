@@ -5,20 +5,12 @@ import { NEXT_CACHE_HANDLER, SSR_CACHE_HANDLER } from './cache.js'
 // Create a new router
 const router = new Router()
 
-router.prerender([
-  // Cache handler
-  NEXT_CACHE_HANDLER,
-  SSR_CACHE_HANDLER,
-  // Routes
-  // ...nextRoutes,
-  // Default route
-  // {
-  //   path: '*',
-  // },
-  // {
-  //   path: '/',
-  // },
-])
+// router.prerender([
+//   // Cache handler
+//   NEXT_CACHE_HANDLER,
+//   SSR_CACHE_HANDLER,
+//
+// ])
 
 // Serve service worker
 router.get('/service-worker.js', ({ serviceWorker }) => {
