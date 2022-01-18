@@ -13,20 +13,22 @@ import axios from "utilities/axios";
 import Loading from "components/Loading";
 import lodashIsEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
-import EventAdminModal from "components/EventAdmin/modal";
 import Table from 'react-bootstrap/Table';
 import Carousel from 'react-bootstrap/Carousel';
 import {FirebaseContext} from "firebaseProvider";
 import ReactMarkdown from 'react-markdown'
 import SvgIcon from "common/SvgIcon";
-import ClubAdminModal from "../../components/ClubAdmin/modal";
+import ClubAdminModal from "components/ClubAdmin/modal";
 import UModal from "components/UModal";
 import FaqEditor from "components/FaqEditor";
-import {showAlert} from "../../common/Toast";
+import {showAlert} from "common/Toast";
 import imageCompression from 'browser-image-compression';
 
 import EditDescriptionModal from "components/EventAdmin/EditDescriptionModal";
-import {isValidUrl} from "../../utilities";
+import {isValidUrl} from "utilities";
+import EditNameDateModal from "components/EventAdmin/EditNameDateModal";
+
+
 function download_table_as_csv(table_id, separator = ',') {
     let rows = document.querySelectorAll('tr');
     let csv = [];
@@ -135,7 +137,7 @@ function Event() {
 
     const convertToDatetimeString = iso_8601_string => {
         const date = new Date(iso_8601_string);
-        return date.toString();
+        return date.toLocaleString();
     }
 
     const handleShowEvent = () => setData({...data, showEvent: true});
@@ -150,52 +152,69 @@ function Event() {
     const handleClose2 = () => setData({...data, showModal2:false});
     const handleShow2 = () => setData({...data, showModal2:true});
 
-    const handleSubmitEvent =(value)=>{
+    const handleSubmitEvent =(values)=>{
+        console.log("value", values)
+
+        const eventPayload = {};
+
+        eventPayload.name = values.name;
+
+        eventPayload.event_start = values.eventStartDate.toISOString();
+
+        if (values.eventEndDate)
+            eventPayload.event_end = values.eventEndDate.toISOString();
+
+        if (values.location || values.location === "")
+            eventPayload.location = values.location;
+
+        const formPayload = {};
+
+        formPayload.opens_at = values.registrationStartDate;
+
+        if (values.registrationEndDate)
+            formPayload.closes_at = values.registrationEndDate;
+
 
         handleCloseEvent();
-        console.log("edited maginc1", value[1].split('to')[1]);
-
-        let start = (new Date(value[1].split('to')[1])).toISOString();
-        console.log("edited maginc2", start);
-
-        axios.patch("club/competition/"+ eventId +"/" ,{
-            name: value[0],
-            event_start: (new Date(value[1].split('to')[0])).toISOString(),
-            event_end: (new Date(value[1].split('to')[1])).toISOString(),
-            location: value[2],
-        }).then(() => {
+        // console.log("edited maginc1", value[1].split('to')[1]);
+        //
+        // let start = (new Date(value[1].split('to')[1])).toISOString();
+        // console.log("edited maginc2", start);
+        //
+        axios.patch("club/competition/"+ eventId +"/" ,eventPayload)
+        .then(() => {
                 setData((prevData) => {
-                    return {...prevData, event: {...prevData.event, name: value[0],
-                        event_start: (new Date(value[1].split('to')[0])).toISOString(),
-                        event_end: (new Date(value[1].split('to')[1])).toISOString(),
-                        location: value[2],
-
+                    return {...prevData, event: {...prevData.event,
+                            name: values.name,
+                            event_start: values.eventStartDate.toISOString(),
+                            event_end: values.eventEndDate.toISOString(),
+                            location: values.location,
                     }}
                 })
-
-                console.log("ediawdawdawdawdawdwadted", value[0]);
+            showAlert("Event Updated Successfully", "success");
         })
-
-        console.log(value[3],"sjkdk");
-        console.log(value[4], "lll");
-
-
-        const lolstart = (new Date(value[3])).toISOString();
-        console.log(lolstart, " hello");
-        const lolend = (new Date(value[4])).toISOString();
-        console.log(lolend, " hellsdsdsdo");
-
-        axios.patch("form/form/"+ eventId +"/" ,{
-            opens_at: lolstart,
-            closes_at: lolend,
-        }).then((res) => {
-                console.log(res.data);
+        //
+        // console.log(value[3],"sjkdk");
+        // console.log(value[4], "lll");
+        //
+        //
+        // const lolstart = (new Date(value[3])).toISOString();
+        // console.log(lolstart, " hello");
+        // const lolend = (new Date(value[4])).toISOString();
+        // console.log(lolend, " hellsdsdsdo");
+        //
+        axios.patch("form/form/"+ eventId +"/" ,formPayload)
+        .then((res) => {
+                // console.log(res.data);
                 setData((prevData) => {
                     return {...prevData,
                          form: [res.data, true],
                     }
                 })
+                showAlert("Form Updated Successfully", "success");
         })
+
+
     }
 
 
@@ -742,12 +761,15 @@ function Event() {
                             </div>
                         </div>
 
-                        {form && <EventAdminModal
+                        {form && <EditNameDateModal
+                            eventEndDate={event.event_end ? new Date(event.event_end) : undefined}
+                            eventStartDate={new Date(event.event_start)}
                             handleClose={handleCloseEvent}
                             handleSubmit={handleSubmitEvent}
-                            initialValues={[event.name, event.event_start,event.event_end, event.location,
-                            form.opens_at,form.closes_at]}
-                            labels={['Event Name','Event Starts','Event Ends','Location','Registration Starts','Registration ends']}
+                            location={event.location}
+                            name={event.name}
+                            registrationEndDate={form.closes_at ? new Date(form.closes_at) : undefined}
+                            registrationStartDate={form.opens_at ? new Date(form.opens_at) : undefined}
                             show={data.showEvent}
                                  />}
 
