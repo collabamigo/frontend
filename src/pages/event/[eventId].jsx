@@ -326,15 +326,14 @@ export default function Event({eventData}) {
                                     </p>
 
 
+                                    {event.location?
+                                        <p className=" text-primary">
+                                            <FontAwesomeIcon icon={faMapMarkerAlt} />
 
+                                            {" "}
 
-                                    <p className=" text-primary">
-                                        <FontAwesomeIcon icon={faMapMarkerAlt} />
-
-                                        {' '}
-
-                                        {event.location}
-                                    </p>
+                                            {event.location}
+                                        </p>:null}
 
                                     {lodashIsEmpty(form)?null:
                                     <p className=" text-primary">
