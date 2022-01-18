@@ -23,7 +23,7 @@ router.get('/event/:eventId', ({cache}) => {
       maxAgeSeconds: 0,
     },
     edge: {
-      maxAgeSeconds: 0,
+      maxAgeSeconds: 10,
       staleWhileRevalidateSeconds: 7 * 24 * 60 * 60,
     },
   })
@@ -35,7 +35,7 @@ router.get('/event/:eventId', ({cache}) => {
       serviceWorkerSeconds: 10,
     },
     edge: {
-      maxAgeSeconds: 0,
+      maxAgeSeconds: 10,
       staleWhileRevalidateSeconds: 7 * 24 * 60 * 60,
     },
   })
