@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, {useEffect} from "react";
+import React from "react";
 import {useField, useFormikContext} from "formik";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,9 +11,6 @@ export function DatePickerField({...props}) {
     if (props.className.includes("is-invalid")) {
         externalClassName += "is-invalid ";
     }
-    useEffect(() =>{
-        setFieldTouched(field.name, false, false);
-    }, [1]);
 
     return (
         <span className={externalClassName}>

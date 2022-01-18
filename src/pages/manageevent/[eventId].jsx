@@ -188,6 +188,9 @@ function Event() {
                     }}
                 })
             showAlert("Event Updated Successfully", "success");
+
+            // Refreshing Layer0 cache
+            axios.get(`${window.location.origin}/event/${eventId}/`)
         })
 
         if (!lodashIsEmpty(formPayload))
@@ -200,6 +203,9 @@ function Event() {
                         };
                     });
                     showAlert("Form Updated Successfully", "success");
+
+                    // Refreshing Layer0 cache
+                    axios.get(`${window.location.origin}/event/${eventId}/`)
                 });
 
     }
@@ -216,6 +222,9 @@ function Event() {
             setData((prevData) => {
                 return {...prevData, event: {...prevData.event, faq: JSON.stringify(faq)}}
             })
+
+            // Refreshing Layer0 cache
+            axios.get(`${window.location.origin}/event/${eventId}/`)
         })
     }
 
@@ -231,11 +240,15 @@ function Event() {
             image_links:JSON.stringify(temp)
         }
         axios.patch(`/club/competition/${eventId}/`, payload).then(()=>
-        {deleteObject(desertRef)
+        {
+            deleteObject(desertRef)
             showAlert(
                 "Picture Deleted",
                 "success"
             )
+
+            // Refreshing Layer0 cache
+            axios.get(`${window.location.origin}/event/${eventId}/`)
         })
         setData({...data, bannerLinks:undefined,bannerPaths:JSON.stringify(temp)})
     }
@@ -310,6 +323,9 @@ function Event() {
                           "success"
                         )
                       setData({...data, bannerLinks: undefined, bannerPaths: JSON.stringify(arr)})
+
+                      // Refreshing Layer0 cache
+                      axios.get(`${window.location.origin}/event/${eventId}/`)
                   })
               })
         })
@@ -329,6 +345,9 @@ function Event() {
                 "success"
             )
             setEvent({...event, link: payload.link})
+
+            // Refreshing Layer0 cache
+            axios.get(`${window.location.origin}/event/${eventId}/`)
         })
     }
 

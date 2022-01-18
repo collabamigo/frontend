@@ -23,24 +23,23 @@ router.get('/event/:eventId', ({cache}) => {
       maxAgeSeconds: 0,
     },
     edge: {
-      maxAgeSeconds: 10,
-      staleWhileRevalidateSeconds: 60 * 60,
+      maxAgeSeconds: 0,
+      staleWhileRevalidateSeconds: 7 * 24 * 60 * 60,
     },
   })
 })
-    // Products - getServerSideProps
-    .get('/_next/data/:__build__/event/:eventId.json', ({cache}) => {
-      cache({
-        browser: {
-          maxAgeSeconds: 0,
-          serviceWorkerSeconds: 10,
-        },
-        edge: {
-          maxAgeSeconds: 10,
-          staleWhileRevalidateSeconds: 60 * 60,
-        },
-      })
-    })
+.get('/_next/data/:__build__/event/:eventId.json', ({cache}) => {
+  cache({
+    browser: {
+      maxAgeSeconds: 0,
+      serviceWorkerSeconds: 10,
+    },
+    edge: {
+      maxAgeSeconds: 0,
+      staleWhileRevalidateSeconds: 7 * 24 * 60 * 60,
+    },
+  })
+})
 
 // SSR Cache Handler
 // router.match('/', SSR_CACHE_HANDLER)
