@@ -169,18 +169,14 @@ function Event() {
 
         const formPayload = {};
 
-        formPayload.opens_at = values.registrationStartDate;
+        if (values.registrationStartDate)
+            formPayload.opens_at = values.registrationStartDate;
 
         if (values.registrationEndDate)
             formPayload.closes_at = values.registrationEndDate;
 
-
         handleCloseEvent();
-        // console.log("edited maginc1", value[1].split('to')[1]);
-        //
-        // let start = (new Date(value[1].split('to')[1])).toISOString();
-        // console.log("edited maginc2", start);
-        //
+
         axios.patch("club/competition/"+ eventId +"/" ,eventPayload)
         .then(() => {
                 setData((prevData) => {
@@ -193,27 +189,18 @@ function Event() {
                 })
             showAlert("Event Updated Successfully", "success");
         })
-        //
-        // console.log(value[3],"sjkdk");
-        // console.log(value[4], "lll");
-        //
-        //
-        // const lolstart = (new Date(value[3])).toISOString();
-        // console.log(lolstart, " hello");
-        // const lolend = (new Date(value[4])).toISOString();
-        // console.log(lolend, " hellsdsdsdo");
-        //
-        axios.patch("form/form/"+ eventId +"/" ,formPayload)
-        .then((res) => {
-                // console.log(res.data);
-                setData((prevData) => {
-                    return {...prevData,
-                         form: [res.data, true],
-                    }
-                })
-                showAlert("Form Updated Successfully", "success");
-        })
 
+        if (!lodashIsEmpty(formPayload))
+            axios.patch("form/form/" + eventId + "/", formPayload)
+                .then((res) => {
+                    setData((prevData) => {
+                        return {
+                            ...prevData,
+                            form: [res.data, true],
+                        };
+                    });
+                    showAlert("Form Updated Successfully", "success");
+                });
 
     }
 
@@ -335,11 +322,13 @@ function Event() {
         const payload = {
             link: (args[0].startsWith("http://") || args[0].startsWith("https://"))?args[0]:`https://${args[0]}`,
         }
-        axios.patch('/club/competition/' + eventId + '/', payload).then(()=>{handleClose2
+        axios.patch('/club/competition/' + eventId + '/', payload).then(()=>{
+            handleClose2()
             showAlert(
             "Links Added",
                 "success"
             )
+            setEvent({...event, link: payload.link})
         })
     }
 

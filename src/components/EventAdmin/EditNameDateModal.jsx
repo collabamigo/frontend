@@ -155,53 +155,55 @@ export default function EditNameDateModal({show, handleClose, name, location, ev
                                     type="text"
                                 />
 
-                                <div className="mb-3 align-middle">
-                                    <label
-                                        className="me-2 fs-5"
-                                        htmlFor="registrationStartDate"
-                                    >
-                                        Registration starts at
-                                    </label>
+                                {registrationStartDate!==undefined?
+                                    (
+                                        <>
+                                            <div className="mb-3 align-middle">
+                                                <label
+                                                    className="me-2 fs-5"
+                                                    htmlFor="registrationStartDate"
+                                                >
+                                                    Registration starts at
+                                                </label>
 
-                                    <DatePickerField
-                                        className={"form-control w-auto text-input bg-secondary " +
+                                                <DatePickerField
+                                                    className={"form-control w-auto text-input bg-secondary " +
                                             "text-white border-secondary" +
                                             ((touched.registrationStartDate && errors.registrationStartDate) ? " is-invalid" : "")}
                                         // id="eventStartDate"
-                                        name="registrationStartDate"
-                                        required
-                                        showTimeSelect
-                                    />
+                                                    name="registrationStartDate"
+                                                    required={registrationStartDate !== undefined}
+                                                    showTimeSelect
+                                                />
 
-                                    {touched.registrationStartDate && errors.registrationStartDate &&
-                                        <div className="invalid-feedback">
-                                            {errors.registrationStartDate}
-                                        </div>}
-                                </div>
+                                                {touched.registrationStartDate && errors.registrationStartDate &&
+                                                <div className="invalid-feedback">
+                                                    {errors.registrationStartDate}
+                                                </div>}
+                                            </div>
 
-                                <div className="mb-3 align-middle">
-                                    <label
-                                        className="me-2 fs-5"
-                                        htmlFor="registrationEndDate"
-                                    >
-                                        Registration closes at
-                                    </label>
+                                            <div className="mb-3 align-middle">
+                                                <label
+                                                    className="me-2 fs-5"
+                                                    htmlFor="registrationEndDate"
+                                                >
+                                                    Registration closes at
+                                                </label>
 
-                                    <DatePickerField
-                                        className={"form-control w-auto text-input bg-secondary " +
-                                            "text-white border-secondary" +
-                                            ((touched.registrationEndDate && errors.registrationEndDate) ? " is-invalid" : "")}
-                                        // id="eventStartDate"
-                                        name="registrationEndDate"
-                                        required
-                                        showTimeSelect
-                                    />
+                                                <DatePickerField
+                                                    className={"form-control w-auto text-input bg-secondary " +
+                                    "text-white border-secondary" +
+                                    ((touched.registrationEndDate && errors.registrationEndDate) ? " is-invalid" : "")}
+                                                    name="registrationEndDate"
+                                                    showTimeSelect
+                                                />
 
-                                    {touched.registrationEndDate && errors.registrationEndDate &&
-                                        <div className="invalid-feedback">
-                                            {errors.registrationEndDate}
-                                        </div>}
-                                </div>
+                                                {touched.registrationEndDate && errors.registrationEndDate &&
+                                                <div className="invalid-feedback">
+                                                    {errors.registrationEndDate}
+                                                </div>}
+                                            </div>
+                                        </>):null}
                             </Modal.Body>
 
                             <Modal.Footer className="border-0">
