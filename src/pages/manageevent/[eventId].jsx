@@ -25,7 +25,7 @@ import FaqEditor from "components/FaqEditor";
 import {showAlert} from "../../common/Toast";
 import imageCompression from 'browser-image-compression';
 
-import DuplicateModal from "components/EventAdmin/DuplicateModal";
+import EditDescriptionModal from "components/EventAdmin/EditDescriptionModal";
 import {isValidUrl} from "../../utilities";
 function download_table_as_csv(table_id, separator = ',') {
     let rows = document.querySelectorAll('tr');
@@ -390,7 +390,7 @@ function Event() {
                     handleClose={() => setModalShow2(false)}
                 />
 
-                <DuplicateModal
+                <EditDescriptionModal
                     description={event.description}
                     eventId={eventId}
                     handleClose={() => setShowDescriptionModal(false)}

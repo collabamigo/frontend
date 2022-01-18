@@ -7,7 +7,7 @@ import {showAlert} from "common/Toast";
 import axios from "utilities/axios";
 import TextEditor from "components/TextEditor";
 
-export default class CreateEventModal extends React.Component {
+export default class EditDescriptionModal extends React.Component {
 
     static propTypes = {
         description: PropTypes.string.isRequired,
