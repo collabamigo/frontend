@@ -23,7 +23,7 @@ jobs:
           remote-repository-name: "legal"
           path-to-document: 'https://github.com/watson-hex/frontend-collabamigo/wiki/Contributor-License-Agreement' # e.g. a CLA or a DCO document
           # branch should not be protected
-          allowlist: devmrfitz,heemankv,Khwaish-09,sc0rp10n-py,Shikharhacks007
+          allowlist: devmrfitz,heemankv,Khwaish-09,sc0rp10n-py,Shikharhacks007,bot*,*bot
           branch: main
 
           #below are the optional inputs - If the optional inputs are not given, then default values will be taken
