@@ -46,9 +46,4 @@
         position: absolute;
         bottom: 0;
     }
-
-    .image{
-        border-top-left-radius: 10px !important;
-        border-top-right-radius: 10px !important;
-    }
 }

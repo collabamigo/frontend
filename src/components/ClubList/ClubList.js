@@ -1,69 +1,44 @@
-import React  from 'react'
-import PropTypes from 'prop-types'
-import Button from 'react-bootstrap/Button';
-import Boxes from './Boxes';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import ClubCard from '../../common/HomePageCards/ClubCard.js';
 
-class Clublist extends React.Component {
-    static propTypes = {
-        ItemList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-        Type: PropTypes.string.isRequired,
-    }
-    constructor(props) {
-        super(props)
-        this.state = {
-            next:3,
-            arrayForHoldingboxes : [],
-            boxesPerPage: 3,
-            initial: true
-        }
-        this.loopWithSlice = this.loopWithSlice.bind(this);
-        this.handleShowMoreboxes = this.handleShowMoreboxes.bind(this);
-    }
+const ClubList = ({ ItemList, text }) => {
+  const responsive2 = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 5,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 3,
+    },
+  };
 
-    componentDidMount() {
-        this.loopWithSlice(0, this.state.boxesPerPage);
-    }
+  return (
+    <div className="my-4 mx-3 mx-lg-5">
+      <h2 className="text-primary mx-lg-3 my-3">{text}</h2>
+      <Carousel autoPlay autoPlaySpeed={2500} infinite responsive={responsive2}>
+        {ItemList?.map((option) => (
+          <ClubCard key={option.username} value={option} />
+        ))}
+      </Carousel>
+    </div>
+  );
+};
 
-    shouldComponentUpdate()
-    {return true;}
+ClubList.propTypes = {
+  ItemList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+};
 
-    componentDidUpdate() {
-        if (this.props.ItemList.length !== 0 && this.state.initial) {
-            this.loopWithSlice(0, this.state.boxesPerPage);
-        }
-    }
-
-    loopWithSlice(start, end){
-        this.setState((prevState) => ({
-            initial: false,
-            arrayForHoldingboxes: prevState.arrayForHoldingboxes.concat(this.props.ItemList.slice(start, end)) }))
-
-        // this.setState((prevState) => ({ boxesToShow: prevState.arrayForHoldingboxes }))
-        // this.setState({arrayForHoldingboxes:this.state.arrayForHoldingboxes.concat(this.props.ItemList.slice(start, end))})
-        // this.setState({boxesToShow:this.state.arrayForHoldingboxes})
-      }
-
-    handleShowMoreboxes(){
-        this.setState((prevState) => ({ next: prevState.next + prevState.boxesPerPage }))
-        this.loopWithSlice(this.state.next, this.state.next + this.state.boxesPerPage);
-        // this.setState({next:this.state.next + this.state.boxesPerPage});
-    }
-    render() {
-        return (
-            <div>
-                {this.props.ItemList.length>0 ?
-                    <Boxes
-                        Type={this.props.Type}
-                        boxesToRender={this.state.arrayForHoldingboxes}
-                    />
-                    : null}
-
-                <Button onClick={this.handleShowMoreboxes}>
-                    Load more
-                </Button>
-            </div>
-        )
-    }
-}
-
-export default Clublist
+export default ClubList;
