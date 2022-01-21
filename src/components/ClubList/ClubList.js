@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ClubCard from '../../common/HomePageCards/ClubCard.js';
-import styles from '../../styles/index.module.css';
 
 const ClubList = ({ ItemList, text }) => {
   const responsive2 = {
@@ -27,8 +26,8 @@ const ClubList = ({ ItemList, text }) => {
   };
 
   return (
-    <div className={styles.thirdsectionMiddle + ' my-5'}>
-      <h2 className="text-primary mx-3 my-3">{text}</h2>
+    <div className="my-4 mx-3 mx-lg-5">
+      <h2 className="text-primary mx-lg-3 my-3">{text}</h2>
       <Carousel autoPlay autoPlaySpeed={2500} infinite responsive={responsive2}>
         {ItemList?.map((option) => (
           <ClubCard key={option.username} value={option} />
