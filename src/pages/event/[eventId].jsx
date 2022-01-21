@@ -32,8 +32,10 @@ import {
   } from "react-share";
 import * as ga from "../../lib/ga";
 import {isBrowser} from "../../utilities/auth";
+import Clublist from 'components/ClubList/ClubList';
 
-export default function Event({eventData}) {
+export default function Event ({ eventData }) {
+    const [clubList, setClubList] = useState(null);
     const router = useRouter();
 
     let eventId = undefined;
@@ -67,7 +69,9 @@ export default function Event({eventData}) {
                     ...event,
                 }
             };
-    })};
+        });
+    };
+    
     const setForm = (form) => setData((prevData) => {
         return {...prevData, form: [form, true]}
     });
@@ -89,6 +93,13 @@ export default function Event({eventData}) {
             setAnalyticLogged(true);
         }
     })
+
+    useEffect(() => {
+     axios.get("/club/feed").then((res) => {
+         setClubList(res.data.clubs);
+     });
+    }, []);
+    
 
 
 
@@ -232,7 +243,7 @@ export default function Event({eventData}) {
             />
 
             <div className="row px-md-5 mx-md-5 px-2 mx-2">
-                <div className="col-md-4 col-12 me-4">
+                <div className="col-md-4 col-12 me-4 mt-lg-4">
                     <div className="pb-5">
                         {imageLinks ?
                             <Carousel>
@@ -277,6 +288,7 @@ export default function Event({eventData}) {
                         </div>
                     </div>
                 </div>
+
 
                 <div className="col">
                     <div className="row">
@@ -474,6 +486,7 @@ export default function Event({eventData}) {
                     </div>
                 </div>
             </div>
+            { clubList && <Clublist ItemList={clubList} text='Suggestions'/> }
         </>
     )
 }

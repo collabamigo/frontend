@@ -6,6 +6,7 @@ import axios from "utilities/axios";
 import styles from "../styles/index.module.css";
 import ClubCard from "../common/HomePageCards/ClubCard.js";
 import EventTalkCard from "../common/HomePageCards/EventTalkCard.js";
+import ClubList from 'components/ClubList/ClubList';
 
 // import LandingFooter from "components/LandingFooter";
 
@@ -140,40 +141,10 @@ export default class AuthenticatedHome extends React.Component {
 
                     </div>
                 </div>
-
-                <div className={styles.thirdsectionInner}>
-                    <div className={styles.thirdsectionHeading + " text-primary"}>
-                        {' '}
-                        Clubs & Organizations
-
-                    </div>
-
-                    <br />
-
-                    <div className={styles.thirdsectionMiddle}>
-                        <Carousel
-                            autoPlay
-                            autoPlaySpeed={2500}
-                            infinite
-                            responsive={responsive2}
-                        >
-
-                            {this.state.clubList.map((option) => (
-                                <ClubCard
-                                    key={option.username}
-                                    value={option}
-                                />
-                                        ))}
-                        </Carousel>
-                    </div>
-
-                    <div className={styles.thirdsectionfooter +" d-flex flex-row-reverse bd-highlight"}>
-                        <div className="p-2 bd-highlight" />
-
-                        <div className="p-2 bd-highlight" />
-                    </div>
-
-                </div>
+                        
+                        
+                { this.state.clubList.length > 0 && <ClubList ItemList={ this.state.clubList} text='Clubs & Organizations'/>}
+              
             </div>
 
         );
