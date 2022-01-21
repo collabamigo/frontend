@@ -304,11 +304,11 @@ export default function Event({eventData}) {
 
                                         {' '}
 
-                                        {data.event.club_names.map(item => (
+                                        {data.event.club_names.map((item, index) => (
                                             <span key={item}>
                                                 {item}
 
-                                                {data.event.club_names.length >1 ? ", " : null}
+                                                {(index + 1 !== data.event.club_names.length) ? ", " : null}
 
                                                 {' '}
                                             </span>
