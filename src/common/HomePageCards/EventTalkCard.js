@@ -84,7 +84,7 @@ export default function EventTalkCard(props) {
                         <Card.Img
                             className="w-100 h-100"
                             src={imageLink ? imageLink : "https://via.placeholder.com/350x200"}
-                            style={{ objectFit: 'contain' }}
+                            // style={{ objectFit: 'contain' }}
                             variant="top"
                         />
                     </div>
