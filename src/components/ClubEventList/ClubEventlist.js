@@ -35,22 +35,27 @@ function ClubEventList({ text }) {
   };
 
   return (
-    <div className="my-4 mx-3 mx-lg-5">
-      <h2 className="text-primary mx-lg-5 my-3">{text}</h2>
+      <div className="my-4 mx-3 mx-lg-3">
+          <h2 className="text-primary mx-lg-5 my-3">
+              {text}
+          </h2>
 
-      {clubEventList && (
-        <Carousel
-          // autoPlay
-          autoPlaySpeed={2500}
-          infinite
-          responsive={responsive}
-        >
-          {clubEventList?.map((option) => (
-            <EventTalkCard element={option} key={option} />
+          {clubEventList && (
+          <Carousel
+              autoPlay
+              autoPlaySpeed={2500}
+              infinite
+              responsive={responsive}
+          >
+              {clubEventList?.map((option) => (
+                  <EventTalkCard
+                      element={option}
+                      key={option}
+                  />
           ))}
-        </Carousel>
+          </Carousel>
       )}
-    </div>
+      </div>
   );
 }
 

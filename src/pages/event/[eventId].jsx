@@ -476,9 +476,11 @@ export default function Event ({ eventData }) {
                 </div>
             </div>
 
-            <ClubEventlist
-                text='Related Competitions'
-            /> 
+            <div className='my-5'>
+                <ClubEventlist
+                    text='Related Competitions'
+                /> 
+            </div>
         </>
     )
 }

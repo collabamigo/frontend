@@ -54,10 +54,12 @@ export default class AuthenticatedHome extends React.Component {
                 </div>
 
                 <ClubEventList text='Competitions' />
-                        
-                <ClubList
-                    text='Clubs & Organizations'
-                /> 
+
+                <div className='my-5 overflow-hidden'>
+                    <ClubList
+                        text='Clubs & Organizations'
+                    /> 
+                </div>  
               
             </div>
 
