@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ClubCard from '../../common/HomePageCards/ClubCard.js';
+import axios from 'utilities/axios';
 
-function ClubList({ ItemList, text }) {
+function ClubList({ text }) {
+  const [clubList, setClubList] = useState(null);
+
+  useEffect(() => {
+    axios.get('/club/feed').then((res) => {
+      setClubList(res.data.clubs);
+    });
+  }, []);
+
   const responsive2 = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -31,25 +40,26 @@ function ClubList({ ItemList, text }) {
               {text}
           </h2>
 
+          {clubList && (
           <Carousel
               autoPlay
               autoPlaySpeed={2500}
               infinite
               responsive={responsive2}
           >
-              {ItemList?.map((option) => (
+              {clubList?.map((option) => (
                   <ClubCard
                       key={option.username}
                       value={option}
                   />
-        ))}
+          ))}
           </Carousel>
+      )}
       </div>
   );
 }
 
 ClubList.propTypes = {
-  ItemList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
   text: PropTypes.string.isRequired,
 };
 
