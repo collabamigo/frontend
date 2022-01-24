@@ -32,10 +32,9 @@ import {
   } from "react-share";
 import * as ga from "../../lib/ga";
 import {isBrowser} from "../../utilities/auth";
-import Clublist from 'components/ClubList/ClubList';
+import ClubEventlist from 'components/ClubEventList/ClubEventlist';
 
 export default function Event ({ eventData }) {
-    const [clubList, setClubList] = useState(null);
     const router = useRouter();
 
     let eventId = undefined;
@@ -93,16 +92,6 @@ export default function Event ({ eventData }) {
             setAnalyticLogged(true);
         }
     })
-
-    useEffect(() => {
-     axios.get("/club/feed").then((res) => {
-         setClubList(res.data.clubs);
-     });
-    }, []);
-    
-
-
-
 
     const event = data.event;
     const form = data.form[0];
@@ -486,7 +475,12 @@ export default function Event ({ eventData }) {
                     </div>
                 </div>
             </div>
-            { clubList && <Clublist ItemList={clubList} text='Suggestions'/> }
+
+            <div className='my-5'>
+                <ClubEventlist
+                    text='Related Competitions'
+                /> 
+            </div>
         </>
     )
 }
