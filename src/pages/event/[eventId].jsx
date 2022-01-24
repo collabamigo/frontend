@@ -70,7 +70,7 @@ export default function Event ({ eventData }) {
             };
         });
     };
-    
+
     const setForm = (form) => setData((prevData) => {
         return {...prevData, form: [form, true]}
     });
@@ -478,8 +478,8 @@ export default function Event ({ eventData }) {
 
             <div className='my-5'>
                 <ClubEventlist
-                    text='Related Competitions'
-                /> 
+                    text='You may also like'
+                />
             </div>
         </>
     )
