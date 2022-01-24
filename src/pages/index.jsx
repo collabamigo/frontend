@@ -4,7 +4,6 @@ import "react-multi-carousel/lib/styles.css";
 import Image from "react-bootstrap/Image";
 import axios from "utilities/axios";
 import styles from "../styles/index.module.css";
-import ClubCard from "../common/HomePageCards/ClubCard.js";
 import EventTalkCard from "../common/HomePageCards/EventTalkCard.js";
 import ClubList from 'components/ClubList/ClubList';
 
@@ -53,26 +52,6 @@ export default class AuthenticatedHome extends React.Component {
                         mobile: {
                           breakpoint: { max: 464, min: 0 },
                           items: 2
-                        }
-                      };
-
-        const responsive2 = {
-                        superLargeDesktop: {
-                          // the naming can be any, depends on you.
-                          breakpoint: { max: 4000, min: 3000 },
-                          items: 5
-                        },
-                        desktop: {
-                          breakpoint: { max: 3000, min: 1024 },
-                          items: 5
-                        },
-                        tablet: {
-                          breakpoint: { max: 1024, min: 464 },
-                          items: 2
-                        },
-                        mobile: {
-                          breakpoint: { max: 464, min: 0 },
-                          items: 3
                         }
                       };
 
@@ -143,7 +122,10 @@ export default class AuthenticatedHome extends React.Component {
                 </div>
                         
                         
-                { this.state.clubList.length > 0 && <ClubList ItemList={ this.state.clubList} text='Clubs & Organizations'/>}
+                { this.state.clubList.length > 0 && <ClubList
+                    ItemList={this.state.clubList}
+                    text='Clubs & Organizations' 
+                                                    /> }
               
             </div>
 

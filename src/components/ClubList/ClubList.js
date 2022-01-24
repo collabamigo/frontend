@@ -4,7 +4,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ClubCard from '../../common/HomePageCards/ClubCard.js';
 
-const ClubList = ({ ItemList, text }) => {
+function ClubList({ ItemList, text }) {
   const responsive2 = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -26,19 +26,31 @@ const ClubList = ({ ItemList, text }) => {
   };
 
   return (
-    <div className="my-4 mx-3 mx-lg-5">
-      <h2 className="text-primary mx-lg-3 my-3">{text}</h2>
-      <Carousel autoPlay autoPlaySpeed={2500} infinite responsive={responsive2}>
-        {ItemList?.map((option) => (
-          <ClubCard key={option.username} value={option} />
+      <div className="my-4 mx-3 mx-lg-5">
+          <h2 className="text-primary mx-lg-3 my-3">
+              {text}
+          </h2>
+
+          <Carousel
+              autoPlay
+              autoPlaySpeed={2500}
+              infinite
+              responsive={responsive2}
+          >
+              {ItemList?.map((option) => (
+                  <ClubCard
+                      key={option.username}
+                      value={option}
+                  />
         ))}
-      </Carousel>
-    </div>
+          </Carousel>
+      </div>
   );
-};
+}
 
 ClubList.propTypes = {
   ItemList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default ClubList;

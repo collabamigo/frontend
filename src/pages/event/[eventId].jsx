@@ -486,7 +486,11 @@ export default function Event ({ eventData }) {
                     </div>
                 </div>
             </div>
-            { clubList && <Clublist ItemList={clubList} text='Suggestions'/> }
+
+            { clubList && <Clublist
+                ItemList={clubList}
+                text='Suggestions'
+                          /> }
         </>
     )
 }
