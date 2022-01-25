@@ -32,8 +32,9 @@ import {
   } from "react-share";
 import * as ga from "../../lib/ga";
 import {isBrowser} from "../../utilities/auth";
+import ClubEventlist from 'components/ClubEventList/ClubEventlist';
 
-export default function Event({eventData}) {
+export default function Event ({ eventData }) {
     const router = useRouter();
 
     let eventId = undefined;
@@ -67,7 +68,9 @@ export default function Event({eventData}) {
                     ...event,
                 }
             };
-    })};
+        });
+    };
+
     const setForm = (form) => setData((prevData) => {
         return {...prevData, form: [form, true]}
     });
@@ -89,9 +92,6 @@ export default function Event({eventData}) {
             setAnalyticLogged(true);
         }
     })
-
-
-
 
     const event = data.event;
     const form = data.form[0];
@@ -232,7 +232,7 @@ export default function Event({eventData}) {
             />
 
             <div className="row px-md-5 mx-md-5 px-2 mx-2">
-                <div className="col-md-4 col-12 me-4">
+                <div className="col-md-4 col-12 me-4 mt-lg-4">
                     <div className="pb-5">
                         {imageLinks ?
                             <Carousel>
@@ -277,6 +277,7 @@ export default function Event({eventData}) {
                         </div>
                     </div>
                 </div>
+
 
                 <div className="col">
                     <div className="row">
@@ -473,6 +474,12 @@ export default function Event({eventData}) {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className='my-5'>
+                <ClubEventlist
+                    text='You may also like'
+                />
             </div>
         </>
     )

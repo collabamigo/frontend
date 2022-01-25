@@ -5,7 +5,8 @@ import {isBrowser, setLoggedOut} from "./auth";
 import {showAlert} from "../common/Toast";
 
 const axios = axios_base.create({
-    baseURL: backend
+    baseURL: backend,
+    timeout: 15000,
 })
 
 if (isBrowser() && sessionStorage.getItem("token"))
