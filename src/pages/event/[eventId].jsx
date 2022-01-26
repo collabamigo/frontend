@@ -367,6 +367,7 @@ export default function Event ({ eventData }) {
                                         end={form.closes_at}
                                         eventId={eventId}
                                         formData={JSON.parse(form.skeleton)}
+                                        registerUrlQuery={router.query.register || false}
                                         response={data.pastResponse[0]}
                                         start={form.opens_at}
                                     />
