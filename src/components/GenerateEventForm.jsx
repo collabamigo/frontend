@@ -544,6 +544,20 @@ export default function GenerateEventForm({formData, eventId, start, end, regist
     }
     else
         registrationMessage = "Registration closed"
+
+    let modifiedResponse = response;
+    if (!lodashIsEmpty(response)) {
+        for (let itr in formData) {
+            const field = formData[itr];
+            if (field.type === "checkbox" && response[field.id]) {
+                try {
+                    modifiedResponse[field.id] = JSON.parse(response[field.id]);
+                } catch (e) {
+                    modifiedResponse[field.id] = response[field.id];
+                }
+            }
+        }
+    }
     return (
         <>
             <Button
@@ -564,7 +578,7 @@ export default function GenerateEventForm({formData, eventId, start, end, regist
                 onHide={() => setShow(false)}
                 show={show}
             >
-                {generateCode(formData, setShow, eventId, response)}
+                {generateCode(formData, setShow, eventId, modifiedResponse)}
             </Modal>
         </>
     )
