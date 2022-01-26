@@ -68,7 +68,6 @@ class EventHistory extends React.Component {
                         <EventTalkCard
                             element={option}
                             key={option.description}
-                            manage
                         />
                     ))}
                 </RCarousel>
