@@ -1,5 +1,5 @@
 import lodashIsEmpty from "lodash/isEmpty";
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Formik, Field, Form} from 'formik';
 import {Modal} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -510,18 +510,24 @@ function generateCode(formData, setShowModal, eventId, response) {
     )
 }
 
-export default function GenerateEventForm({formData, eventId, start, end, response}) {
+export default function GenerateEventForm({formData, eventId, start, end, registerUrlQuery, response}) {
     if (!formData)
         return null
 
     const loggedIn = useContext(LoginContext);
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(registerUrlQuery && loggedIn && !((new Date()) < (new Date(start))) &&
+        ((new Date()) < (new Date(end))));
 
     const register = () => {
         setShow(true);
 
     }
+
+    useEffect(() => {
+        if (registerUrlQuery && loggedIn && !((new Date()) < (new Date(start))) && ((new Date()) < (new Date(end))))
+            setShow(true);
+    }, [loggedIn])
 
     let registrationMessage;
     let registrationDisabled = true;
@@ -564,6 +570,7 @@ GenerateEventForm.propTypes = {
     end: PropTypes.string.isRequired,
     eventId: PropTypes.string.isRequired,
     formData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]))).isRequired,
+    registerUrlQuery: PropTypes.bool.isRequired,
     response:PropTypes.bool.isRequired,
     start: PropTypes.string.isRequired,
 }
