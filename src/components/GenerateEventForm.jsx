@@ -30,6 +30,9 @@ function generateCode(formData, setShowModal, eventId, response) {
             const field=formData[itr];
             if (field.required && (!values[field.id] || (typeof values[field.id] !== "number" && lodashIsEmpty(values[field.id]))))
                 errors[field.id] = 'This field is required';
+            if (field.type === "checkbox" && field.min !== undefined && field.max !== undefined)
+                if (values[field.id].length < field.min || values[field.id].length > field.max)
+                    errors[field.id] = `This field must have between ${field.min} and ${field.max} options`;
         }
 
         // console.log("validate", errors, values);
