@@ -83,7 +83,7 @@ export default function EventTalkCard(props) {
                         style={{ height: '40%', borderRadius: '10px' }}
                     >
                         <Image
-                            className="img-fluid mh-100"
+                            className="object-fit-contain img-fluid"
                             src={imageLink ? imageLink : "https://via.placeholder.com/350x200"}
                             // style={{ objectFit: 'contain' }}
                             variant="top"
