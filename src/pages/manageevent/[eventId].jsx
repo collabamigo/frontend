@@ -674,6 +674,11 @@ function Event() {
                                                                     Sr no.
                                                                 </td>
 
+                                                                <td>
+                                                                    {" "}
+                                                                    Email (verified)
+                                                                </td>
+
                                                                 {tableHeaders.map((option) => (
                                                                     <td key={option.name}>
                                                                         {option.name}
@@ -689,6 +694,10 @@ function Event() {
 
                                                                     <td>
                                                                         {index}
+                                                                    </td>
+
+                                                                    <td>
+                                                                        {response.responder_emails[0]}
                                                                     </td>
 
                                                                     {response.elements.map((values) => (
