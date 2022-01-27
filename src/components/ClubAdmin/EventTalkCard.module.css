@@ -1,0 +1,49 @@
+
+.title{
+        font-size:30px;
+    }
+
+.subtitle{
+        font-size:20px;
+    }
+
+    .bottom{
+        position: absolute;
+        bottom: 0;
+    }
+
+    .cardinner{
+        padding: 4px;
+        margin-top: 0px;
+    }
+
+@media (max-width: 800px) {
+
+    .cardCenter{
+        border-radius: 10px !important;
+        /*width: 10rem !important;*/
+        position: relative;
+    }
+
+    .cardinner{
+        padding: 4px;
+        margin: 0px;
+    }
+
+    .title{
+        font-size:15px;
+    }
+
+    .text{
+        font-size:13px !important;
+    }
+
+    .text2{
+        font-size:13px !important;
+    }
+
+    .bottom{
+        position: absolute;
+        bottom: 0;
+    }
+}

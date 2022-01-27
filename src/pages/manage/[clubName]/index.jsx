@@ -18,8 +18,8 @@ import styles from "pages/club/styles.module.scss";
 import Link from "common/Link";
 import lodashMap from "lodash/map";
 import Image from "react-bootstrap/Image";
-import EventTalkCard from "../../../common/HomePageCards/EventTalkCard";
-import {showAlert} from "../../../common/Toast";
+import EventTalkCard from "components/ClubAdmin/EventTalkCard";
+import {showAlert} from "common/Toast";
 import imageCompression from 'browser-image-compression';
 
 class ClubAdminPage extends Component {
