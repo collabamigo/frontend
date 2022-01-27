@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card'
 import PropTypes from "prop-types";
 import {SvgIcon} from "common/SvgIcon";
 import {getStorage, ref, getDownloadURL} from "firebase/storage";
+import Image from "react-bootstrap/Image";
 import {truncate} from "utilities";
 import Link from "common/Link";
 import axios from "utilities/axios";
@@ -78,11 +79,11 @@ export default function EventTalkCard(props) {
                     style={{ borderRadius: '10px' }}
                 >
                     <div
-                        className="overflow-hidden"
+                        className="overflow-hidden justify-content-center d-flex"
                         style={{ height: '40%', borderRadius: '10px' }}
                     >
-                        <Card.Img
-                            className="w-100 h-100"
+                        <Image
+                            className="img-fluid mh-100"
                             src={imageLink ? imageLink : "https://via.placeholder.com/350x200"}
                             // style={{ objectFit: 'contain' }}
                             variant="top"
