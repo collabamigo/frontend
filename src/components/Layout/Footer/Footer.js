@@ -11,17 +11,17 @@ function Footer() {
                       <br />
 
                       <h3>
-                          CollabAmigo has helped
+                          CollabAmigo has helped...
                       </h3>
 
                       <div className="text-justify ">
                           <ul className={styles.listt}>
                               <li>
-                                  84 students to register for events
+                                  443 students to register for events
                               </li>
 
                               <li>
-                                  6 clubs and Organizations to host events
+                                  11 clubs and Organizations to host events
                               </li>
 
                               <li>
