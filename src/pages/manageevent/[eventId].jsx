@@ -650,6 +650,9 @@ function Event() {
 
                                             <Modal
                                                 aria-labelledby="example-custom-modal-styling-title"
+                                                className="mw-100 rounded-5"
+                                                contentClassName="border-0 m-0 rounded-5"
+                                                dialogClassName="mw-75 w-75"
                                                 onHide={handleClose}
                                                 show={showModal}
                                                 size="lg"
