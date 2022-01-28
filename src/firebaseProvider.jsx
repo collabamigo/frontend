@@ -1,6 +1,5 @@
-/* eslint-disable */
 import {getAuth, signInWithCustomToken} from "firebase/auth";
-import React, {createContext} from 'react'
+import React, {createContext, useEffect} from "react";
 import {getApps, initializeApp} from 'firebase/app'
 import PropTypes from "prop-types";
 import axios from "./utilities/axios";
@@ -16,7 +15,7 @@ const firebaseConfig = {
 const FirebaseContext = createContext(null)
 export {FirebaseContext}
 
-export default function FirebaseProvider ({children}) {
+export default function FirebaseProvider ({children, loggedIn}) {
     let firebase;
 
     if (!getApps().length)
@@ -25,9 +24,12 @@ export default function FirebaseProvider ({children}) {
         firebase = getApps()[0];
 
     const auth = getAuth(firebase);
-    if (!auth.currentUser)
-        axios.get("/authenticate/get-firebase-token/").then((res) =>
-            signInWithCustomToken(auth, res.data.firebaseToken))
+    useEffect(() => {
+        if (!auth.currentUser)
+            axios.get("/authenticate/get-firebase-token/").then((res) =>
+                signInWithCustomToken(auth, res.data.firebaseToken))
+    }, [loggedIn])
+
     return (
         <FirebaseContext.Provider value={firebase}>
             {children}
@@ -36,5 +38,6 @@ export default function FirebaseProvider ({children}) {
 }
 
 FirebaseProvider.propTypes = {
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    loggedIn: PropTypes.bool.isRequired
 }
