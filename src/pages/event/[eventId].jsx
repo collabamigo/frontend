@@ -2,20 +2,20 @@
 import lodashIsEmpty from "lodash/isEmpty";
 import Head from "next/head";
 import PropTypes from "prop-types";
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react"
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import Carousel from "react-bootstrap/Carousel";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCalendar, faClock} from '@fortawesome/free-regular-svg-icons'
-import {faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendar, faClock } from '@fortawesome/free-regular-svg-icons'
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import FAQModal from "components/faq/FAQModal";
-import {getStorage, ref, getDownloadURL} from "firebase/storage";
-import {useRouter} from 'next/router'
-import {remark} from "remark";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { useRouter } from 'next/router'
+import { remark } from "remark";
 import strip from "strip-markdown";
 import axios from "utilities/axios";
-import {SvgIcon} from "common/SvgIcon";
+import { SvgIcon } from "common/SvgIcon";
 import WModal from 'components/WModal';
 import Loading from "components/Loading";
 import lodashMap from "lodash/map";
@@ -29,12 +29,12 @@ import {
     TwitterShareButton,
     LinkedinShareButton,
     TelegramShareButton,
-  } from "react-share";
+} from "react-share";
 import * as ga from "../../lib/ga";
-import {isBrowser} from "../../utilities/auth";
+import { isBrowser } from "../../utilities/auth";
 import Clublist from 'components/ClubList/ClubList';
 
-export default function Event ({ eventData }) {
+export default function Event({ eventData }) {
     const [clubList, setClubList] = useState(null);
     const router = useRouter();
 
@@ -46,7 +46,7 @@ export default function Event ({ eventData }) {
     const [ModalShow, setModalShow] = useState(false);
 
     const [data, setData] = useState({
-        imageLinks:[],
+        imageLinks: [],
         clubLogoLinks: {},
         event: {},
         form: [undefined, false],
@@ -71,14 +71,14 @@ export default function Event ({ eventData }) {
             };
         });
     };
-    
+
     const setForm = (form) => setData((prevData) => {
-        return {...prevData, form: [form, true]}
+        return { ...prevData, form: [form, true] }
     });
 
     const addClubLogoLinks = (club, link) => {
         setData((prevData) => {
-            return {...prevData, clubLogoLinks: {...(prevData.clubLogoLinks), [club]: link}}
+            return { ...prevData, clubLogoLinks: { ...(prevData.clubLogoLinks), [club]: link } }
         })
     };
 
@@ -95,11 +95,11 @@ export default function Event ({ eventData }) {
     })
 
     useEffect(() => {
-     axios.get("/club/feed").then((res) => {
-         setClubList(res.data.clubs);
-     });
+        axios.get("/club/feed").then((res) => {
+            setClubList(res.data.clubs);
+        });
     }, []);
-    
+
 
 
 
@@ -122,12 +122,12 @@ export default function Event ({ eventData }) {
     }
 
     useEffect(() => {
-        if (eventId!==undefined) {
+        if (eventId !== undefined) {
             if (lodashIsEmpty(event))
                 axios.get(`club/competition/${eventId}/`)
                     .then(res => {
                         setEvent(res.data)
-                        if ((res.data.winners !== undefined)){
+                        if ((res.data.winners !== undefined)) {
                             setModalShow(true);
                         }
                     })
@@ -153,18 +153,18 @@ export default function Event ({ eventData }) {
                 if (data.bannerPaths === '[]') {
                     // suppression needed
                     // eslint-disable-next-line react/no-did-update-set-state
-                    setData({...data, bannerLinks: []})
+                    setData({ ...data, bannerLinks: [] })
                 } else
                     JSON.parse(data.bannerPaths).map((link, index) => {
                         getDownloadURL(ref(storage, link)).then((url) => {
                             // alert("adding "+url+" at "+index)
                             setData((data) => ({
-                                    ...data,
-                                    bannerLinks: {
-                                        ...(data.bannerLinks),
-                                        [index]: url,
-                                    }
-                                })
+                                ...data,
+                                bannerLinks: {
+                                    ...(data.bannerLinks),
+                                    [index]: url,
+                                }
+                            })
                             )
                         })
                     })
@@ -174,31 +174,34 @@ export default function Event ({ eventData }) {
                 axios.get(`form/get-response/${eventId}/`)
                     .then(res => setData((prevData) => {
                         if (lodashIsEmpty(res.data))
-                            return {...prevData, pastResponse: [[], true]}
+                            return { ...prevData, pastResponse: [[], true] }
 
                         let response = res.data[0].elements;
                         let temp_holder = {};
                         response.forEach(element => {
                             temp_holder[element.question] = element.value;
                         });
-                        return {...prevData, pastResponse: [temp_holder, true]}
+                        return { ...prevData, pastResponse: [temp_holder, true] }
                     }))
-                    .catch(() => {setData((prevData) => {
-                        return {...prevData, pastResponse: [[], true]}
-                    })})
+                    .catch(() => {
+                        setData((prevData) => {
+                            return { ...prevData, pastResponse: [[], true] }
+                        })
+                    })
             }
 
-    }})
+        }
+    })
     const isLoading = lodashIsEmpty(event);
 
     // const ref = useRef()
     // const isParticipateButtonVisible = useOnScreen(ref)
-
+    
     let url;
     if (isBrowser())
-        url=window.location.href
+        url = window.location.href
     else
-        url="https://collabamigo.com/event/"+eventId
+        url = "https://collabamigo.com/event/" + eventId
 
     if (isLoading)
         return <Loading />
@@ -247,20 +250,20 @@ export default function Event ({ eventData }) {
                     <div className="pb-5">
                         {imageLinks ?
                             <Carousel>
-                                {lodashMap(imageLinks, (image,index) => {
-                                return (
-                                    <Carousel.Item key={index}>
-                                        <Image
-                                            alt={event.name}
-                                            fluid
-                                            rounded
-                                            src={image}
-                                        />
-                                    </Carousel.Item>
-                                )
-                            })}
+                                {lodashMap(imageLinks, (image, index) => {
+                                    return (
+                                        <Carousel.Item key={index}>
+                                            <Image
+                                                alt={event.name}
+                                                fluid
+                                                rounded
+                                                src={image}
+                                            />
+                                        </Carousel.Item>
+                                    )
+                                })}
                             </Carousel>
-                    : null}
+                            : null}
                     </div>
 
                     <div className="pt-4">
@@ -270,21 +273,21 @@ export default function Event ({ eventData }) {
 
                         <div className="row justify-content-around">
                             {lodashMap(clubLogoLinks, ((link, club) => {
-                            return (
-                                <div
-                                    className="col-5 me-1"
-                                    key={club+link}
-                                >
-                                    <Image
-                                        alt={club}
-                                        fluid
-                                        rounded
-                                        src={link}
-                                        thumbnail
-                                    />
-                                </div>
-                            )
-                        }))}
+                                return (
+                                    <div
+                                        className="col-5 me-1"
+                                        key={club + link}
+                                    >
+                                        <Image
+                                            alt={club}
+                                            fluid
+                                            rounded
+                                            src={link}
+                                            thumbnail
+                                        />
+                                    </div>
+                                )
+                            }))}
                         </div>
                     </div>
                 </div>
@@ -308,7 +311,7 @@ export default function Event ({ eventData }) {
 
                                     <p className=" text-primary">
                                         <SvgIcon
-                                            className={{Fill: 'blue'}}
+                                            className={{ Fill: 'blue' }}
                                             height="20px"
                                             src="organization.svg"
                                             width="20px"
@@ -324,7 +327,7 @@ export default function Event ({ eventData }) {
 
                                                 {' '}
                                             </span>
-                                    ))}
+                                        ))}
                                     </p>
 
                                     <p className=" text-primary">
@@ -334,32 +337,32 @@ export default function Event ({ eventData }) {
                                         {' '}
 
                                         {convertToDatetimeString(event.event_start) +
-                                    (event.event_end?" to "+ convertToDatetimeString(event.event_end):"")}
+                                            (event.event_end ? " to " + convertToDatetimeString(event.event_end) : "")}
                                     </p>
 
 
-                                    {event.location?
+                                    {event.location ?
                                         <p className=" text-primary">
                                             <FontAwesomeIcon icon={faMapMarkerAlt} />
 
                                             {" "}
 
                                             {event.location}
-                                        </p>:null}
+                                        </p> : null}
 
-                                    {lodashIsEmpty(form)?null:
-                                    <p className=" text-primary">
-                                        <FontAwesomeIcon icon={faClock} />
+                                    {lodashIsEmpty(form) ? null :
+                                        <p className=" text-primary">
+                                            <FontAwesomeIcon icon={faClock} />
 
-                                        {' '}
+                                            {' '}
 
-                                        Reg. starts
-                                        {' '}
+                                            Reg. starts
+                                            {' '}
 
-                                        {convertToDatetimeString(form.opens_at)}
+                                            {convertToDatetimeString(form.opens_at)}
 
-                                        {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
-                                    </p>}
+                                            {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
+                                        </p>}
 
                                     <div>
                                         <ReactMarkdown>
@@ -372,28 +375,28 @@ export default function Event ({ eventData }) {
 
                         <div className="col-md-3 col-12">
                             <div className="row">
-                                {lodashIsEmpty(form)?null:
-                                <div className="col-12 p-2">
-                                    <GenerateEventForm
-                                        end={form.closes_at}
-                                        eventId={eventId}
-                                        formData={JSON.parse(form.skeleton)}
-                                        response={data.pastResponse[0]}
-                                        start={form.opens_at}
-                                    />
-                                </div>}
+                                {lodashIsEmpty(form) ? null :
+                                    <div className="col-12 p-2">
+                                        <GenerateEventForm
+                                            end={form.closes_at}
+                                            eventId={eventId}
+                                            formData={JSON.parse(form.skeleton)}
+                                            response={data.pastResponse[0]}
+                                            start={form.opens_at}
+                                        />
+                                    </div>}
 
-                                {(!event.faq || lodashIsEmpty(JSON.parse(event.faq)))?null:
-                                <div className="p-2 col-6">
-                                    <FAQModal data={JSON.parse(event.faq)} />
-                                </div>}
+                                {(!event.faq || lodashIsEmpty(JSON.parse(event.faq))) ? null :
+                                    <div className="p-2 col-6">
+                                        <FAQModal data={JSON.parse(event.faq)} />
+                                    </div>}
 
                                 <div className="p-2 col-6">
                                     {event.link && (
                                         <Button
-                                        // className={"w-100 "+ (((new Date()) > (new Date(form.closes_at))) && ((new Date()) < (new Date(form.starts_at))) ?"disabled":"")}
+                                            // className={"w-100 "+ (((new Date()) > (new Date(form.closes_at))) && ((new Date()) < (new Date(form.starts_at))) ?"disabled":"")}
                                             className="w-100 "
-                                        // disabled={((new Date()) > (new Date(form.closes_at))) ? true : false}
+                                            // disabled={((new Date()) > (new Date(form.closes_at))) ? true : false}
                                             href={event.link}
                                             rel="noopener noreferrer"
                                             target="_blank"
@@ -486,7 +489,7 @@ export default function Event ({ eventData }) {
                     </div>
                 </div>
             </div>
-            { clubList && <Clublist ItemList={clubList} text='Suggestions'/> }
+            {clubList && <Clublist ItemList={clubList} text='Suggestions' />}
         </>
     )
 }
@@ -510,7 +513,7 @@ export async function getServerSideProps(context) {
 
     // console.log(res.data)
     return {
-        props: {eventData: {...(res.data), strippedDescription}}, // will be passed to the page component as props
+        props: { eventData: { ...(res.data), strippedDescription } }, // will be passed to the page component as props
     }
 }
 

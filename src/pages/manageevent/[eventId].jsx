@@ -1,13 +1,13 @@
 
-import {getAuth} from "firebase/auth";
-import React, {useContext, useEffect, useState} from "react";
+import { getAuth } from "firebase/auth";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCalendar, faClock} from '@fortawesome/free-regular-svg-icons'
-import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons'
-import {getStorage, ref, getDownloadURL, uploadBytes, deleteObject} from "firebase/storage";
-import {useRouter} from 'next/router'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendar, faClock } from '@fortawesome/free-regular-svg-icons'
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+import { getStorage, ref, getDownloadURL, uploadBytes, deleteObject } from "firebase/storage";
+import { useRouter } from 'next/router'
 import Modal from 'react-bootstrap/Modal'
 import axios from "utilities/axios";
 import Loading from "components/Loading";
@@ -15,19 +15,21 @@ import lodashIsEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
 import Table from 'react-bootstrap/Table';
 import Carousel from 'react-bootstrap/Carousel';
-import {FirebaseContext} from "firebaseProvider";
+import { FirebaseContext } from "firebaseProvider";
 import ReactMarkdown from 'react-markdown'
 import SvgIcon from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
 import UModal from "components/UModal";
 import FaqEditor from "components/FaqEditor";
-import {showAlert} from "common/Toast";
+import { showAlert } from "common/Toast";
 import imageCompression from 'browser-image-compression';
-
+import Tab from 'react-bootstrap/Tab'
+import Tabs from 'react-bootstrap/Tabs'
 import EditDescriptionModal from "components/EventAdmin/EditDescriptionModal";
-import {isValidUrl} from "utilities";
+import { isValidUrl } from "utilities";
 import EditNameDateModal from "components/EventAdmin/EditNameDateModal";
-
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
 
 function download_table_as_csv(table_id, separator = ',') {
     let rows = document.querySelectorAll('tr');
@@ -79,7 +81,7 @@ function Event() {
         eventId = router.query.eventId.split("-")[0];
 
     const firebase = useContext(FirebaseContext);
-    const storage = firebase?getStorage(firebase):getStorage();
+    const storage = firebase ? getStorage(firebase) : getStorage();
 
     const [data, setData] = useState({
         clubLogoLinks: {},
@@ -87,21 +89,21 @@ function Event() {
         },
         showEvent: false,
         showModal: false,
-        showModal2:false,
+        showModal2: false,
         tableResponses: [[], false],
         form: [undefined, false],
-        bannerLinks:undefined,
-        bannerPaths :undefined,
-        image1Ref : React.createRef(),
-        image2Ref : React.createRef(),
-        image3Ref : React.createRef(),
-        links:null,
-        currentModal:null,
+        bannerLinks: undefined,
+        bannerPaths: undefined,
+        image1Ref: React.createRef(),
+        image2Ref: React.createRef(),
+        image3Ref: React.createRef(),
+        links: null,
+        currentModal: null,
     });
 
 
     const settableResponses = (tableResponses) => setData((prevData) => {
-        return {...prevData, tableResponses: [tableResponses, true]}
+        return { ...prevData, tableResponses: [tableResponses, true] }
     });
 
     const setEvent = (event) => {
@@ -117,42 +119,42 @@ function Event() {
         });
     }
     const setForm = (form) => setData((prevData) => {
-        return {...prevData, form: [form, true]}
+        return { ...prevData, form: [form, true] }
     });
 
     const addClubLogoLinks = (club, link) => {
         console.log(clubLogoLinks)
         setData((prevData) => {
-            return {...prevData, clubLogoLinks: {...(prevData.clubLogoLinks), [club]: link}}
+            return { ...prevData, clubLogoLinks: { ...(prevData.clubLogoLinks), [club]: link } }
         })
     };
     const event = data.event;
     const form = data.form[0];
     const clubLogoLinks = data.clubLogoLinks;
-    const tableHeaders = isEmpty(form)?[]:JSON.parse(form.skeleton);
+    const tableHeaders = isEmpty(form) ? [] : JSON.parse(form.skeleton);
     const tableResponses = data.tableResponses[0];
     const showModal = data.showModal;
     const showModal2 = data.showModal2;
-
+    // console.log(data.form);
 
     const convertToDatetimeString = iso_8601_string => {
         const date = new Date(iso_8601_string);
         return date.toLocaleString();
     }
 
-    const handleShowEvent = () => setData({...data, showEvent: true});
+    const handleShowEvent = () => setData({ ...data, showEvent: true });
     // const handleSubmitEvent = () => setData({...data, showEvent: false});
-    const handleCloseEvent = () => setData({...data, showEvent: false});
+    const handleCloseEvent = () => setData({ ...data, showEvent: false });
 
 
 
-    const handleClose = () => setData({...data, showModal: false});
-    const handleShow = () => setData({...data, showModal: true});
+    const handleClose = () => setData({ ...data, showModal: false });
+    const handleShow = () => setData({ ...data, showModal: true });
 
-    const handleClose2 = () => setData({...data, showModal2:false});
-    const handleShow2 = () => setData({...data, showModal2:true});
+    const handleClose2 = () => setData({ ...data, showModal2: false });
+    const handleShow2 = () => setData({ ...data, showModal2: true });
 
-    const handleSubmitEvent =(values)=>{
+    const handleSubmitEvent = (values) => {
         console.log("value", values)
 
         const eventPayload = {};
@@ -177,21 +179,24 @@ function Event() {
 
         handleCloseEvent();
 
-        axios.patch("club/competition/"+ eventId +"/" ,eventPayload)
-        .then(() => {
+        axios.patch("club/competition/" + eventId + "/", eventPayload)
+            .then(() => {
                 setData((prevData) => {
-                    return {...prevData, event: {...prevData.event,
+                    return {
+                        ...prevData, event: {
+                            ...prevData.event,
                             name: values.name,
                             event_start: values.eventStartDate.toISOString(),
                             event_end: values.eventEndDate.toISOString(),
                             location: values.location,
-                    }}
+                        }
+                    }
                 })
-            showAlert("Event Updated Successfully", "success");
+                showAlert("Event Updated Successfully", "success");
 
-            // Refreshing Layer0 cache
-            axios.get(`${window.location.origin}/event/${eventId}/`)
-        })
+                // Refreshing Layer0 cache
+                axios.get(`${window.location.origin}/event/${eventId}/`)
+            })
 
         if (!lodashIsEmpty(formPayload))
             axios.patch("form/form/" + eventId + "/", formPayload)
@@ -213,14 +218,14 @@ function Event() {
 
     const [ModalShow2, setModalShow2] = useState(false);
     const [showDescriptionModal, setShowDescriptionModal] = useState(false);
-
+    const [key, setKey] = useState('home');
 
     const setFaq = (faq) => {
         axios.patch(`club/competition/${eventId}/`, {
             faq: JSON.stringify(faq)
         }).then(() => {
             setData((prevData) => {
-                return {...prevData, event: {...prevData.event, faq: JSON.stringify(faq)}}
+                return { ...prevData, event: { ...prevData.event, faq: JSON.stringify(faq) } }
             })
 
             // Refreshing Layer0 cache
@@ -233,14 +238,13 @@ function Event() {
         console.log(data.bannerPaths)
         const temp = JSON.parse(data.bannerPaths)
         const storage = getStorage(firebase);
-        const desertRef = ref(storage,temp[num]);
+        const desertRef = ref(storage, temp[num]);
 
         temp.splice(num, 1)
         const payload = {
-            image_links:JSON.stringify(temp)
+            image_links: JSON.stringify(temp)
         }
-        axios.patch(`/club/competition/${eventId}/`, payload).then(()=>
-        {
+        axios.patch(`/club/competition/${eventId}/`, payload).then(() => {
             deleteObject(desertRef)
             showAlert(
                 "Picture Deleted",
@@ -250,12 +254,12 @@ function Event() {
             // Refreshing Layer0 cache
             axios.get(`${window.location.origin}/event/${eventId}/`)
         })
-        setData({...data, bannerLinks:undefined,bannerPaths:JSON.stringify(temp)})
+        setData({ ...data, bannerLinks: undefined, bannerPaths: JSON.stringify(temp) })
     }
 
-    const bannerControl = (args,num) => {
-        if (args[num] !== undefined && args !== undefined){
-            return(
+    const bannerControl = (args, num) => {
+        if (args[num] !== undefined && args !== undefined) {
+            return (
                 <div>
                     <Image
                         alt="Carousel Image"
@@ -270,8 +274,8 @@ function Event() {
 
             )
         }
-        else{
-            return(
+        else {
+            return (
                 <svg
                     height="44"
                     viewBox="0 0 24 24"
@@ -287,7 +291,7 @@ function Event() {
     const handleUpload = (image, index) => {
         const storage = getStorage();
         const storageRef = ref(storage, `/files/${getAuth(firebase).lastNotifiedUid}/${new Date().getTime()}`);
-        if(image == null)
+        if (image == null)
             return;
         const metadata = {
             contentType: image.type,
@@ -301,58 +305,58 @@ function Event() {
         console.log(`originalFile size ${image.size / 1024 / 1024} MB`);
 
         const options = {
-            maxSizeMB: 250/1024,
+            maxSizeMB: 250 / 1024,
             maxWidthOrHeight: 1920,
             useWebWorker: true
         }
         imageCompression(image, options)
             .then(function (compressedFile) {
-              console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-              console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+                console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+                console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
 
-              uploadBytes(storageRef, compressedFile, metadata).then((args) => {
-                  const temp = args["metadata"]["fullPath"]
-                  const arr = JSON.parse(data.bannerPaths)
-                  arr.splice(index,0,temp)
-                  const payload = {
-                      image_links: JSON.stringify(arr)
-                  }
-                  axios.patch("/club/competition/" + eventId + "/", payload).then(() => {
-                      showAlert(
-                          "Picture Uploaded",
-                          "success"
+                uploadBytes(storageRef, compressedFile, metadata).then((args) => {
+                    const temp = args["metadata"]["fullPath"]
+                    const arr = JSON.parse(data.bannerPaths)
+                    arr.splice(index, 0, temp)
+                    const payload = {
+                        image_links: JSON.stringify(arr)
+                    }
+                    axios.patch("/club/competition/" + eventId + "/", payload).then(() => {
+                        showAlert(
+                            "Picture Uploaded",
+                            "success"
                         )
-                      setData({...data, bannerLinks: undefined, bannerPaths: JSON.stringify(arr)})
+                        setData({ ...data, bannerLinks: undefined, bannerPaths: JSON.stringify(arr) })
 
-                      // Refreshing Layer0 cache
-                      axios.get(`${window.location.origin}/event/${eventId}/`)
-                  })
-              })
-        })
-        .catch(function (error) {
-          console.log(error.message);
-        });
+                        // Refreshing Layer0 cache
+                        axios.get(`${window.location.origin}/event/${eventId}/`)
+                    })
+                })
+            })
+            .catch(function (error) {
+                console.log(error.message);
+            });
     }
 
     const handleSubmitLinks = (args) => {
         const payload = {
-            link: (args[0].startsWith("http://") || args[0].startsWith("https://"))?args[0]:`https://${args[0]}`,
+            link: (args[0].startsWith("http://") || args[0].startsWith("https://")) ? args[0] : `https://${args[0]}`,
         }
-        axios.patch('/club/competition/' + eventId + '/', payload).then(()=>{
+        axios.patch('/club/competition/' + eventId + '/', payload).then(() => {
             handleClose2()
             showAlert(
-            "Links Added",
+                "Links Added",
                 "success"
             )
-            setEvent({...event, link: payload.link})
+            setEvent({ ...event, link: payload.link })
 
             // Refreshing Layer0 cache
             axios.get(`${window.location.origin}/event/${eventId}/`)
         })
     }
 
-     useEffect(() => {
-        if (eventId!==undefined) {
+    useEffect(() => {
+        if (eventId !== undefined) {
 
             if (!data.tableResponses[1])
                 axios.get(`form/response/${eventId}/`)
@@ -376,10 +380,10 @@ function Event() {
                             setForm(-1);
                         else
                             throw err;
-                })
+                    })
 
             if (isEmpty(clubLogoLinks) && !isEmpty(event))
-                event.clubs.map(club => getDownloadURL(ref(storage, 'data/'+club+'/uneditable/logo.png'))
+                event.clubs.map(club => getDownloadURL(ref(storage, 'data/' + club + '/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
 
             if (data.bannerLinks === undefined && data.bannerPaths !== undefined) {
@@ -387,7 +391,7 @@ function Event() {
                 if (data.bannerPaths === '[]') {
                     // suppression needed
                     // eslint-disable-next-line react/no-did-update-set-state
-                    setData({...data, bannerLinks: []})
+                    setData({ ...data, bannerLinks: [] })
                 } else
                     JSON.parse(data.bannerPaths).map((link, index) => {
                         getDownloadURL(ref(storage, link)).then((url) => {
@@ -397,17 +401,75 @@ function Event() {
                                 bannerLinks: {
                                     ...(data.bannerLinks),
                                     [index]: url,
-                                }})
+                                }
+                            })
                             )
                         })
                     })
-            }}})
+            }
+        }
+    })
 
+    const formContent = JSON.parse(form.skeleton);
+    console.log("formcontent ", formContent);
+    console.log("formresponse", tableResponses);
+
+    
+    ChartJS.register(ArcElement, Tooltip, Legend);
+    let graphData = [];
+    const chartData = {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            data: graphData,
+            backgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56',
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56'
+            ]
+        }]
+    };
+
+    renderSummary = () => {
+        tableHeaders.map((option, index) => {
+            if (formContent[index].type === "radio" || formContent[index].type === "checkbox" || formContent[index].type === "select" || formcontent[index].type === "number") {
+                return (
+                    <>
+                        <h1 key={option.name}>
+                            {option.name}
+                        </h1>
+                        {tableResponses.map((response) => (
+                            graphData.push(response.elements[index].value)
+                        ))}
+                        <Pie data={chartData} />
+                    </>
+                )
+            } else {
+                return (
+                    <>
+                        <h1 key={option.name}>
+                            {option.name}
+                        </h1>
+                        {tableResponses.map((response) => (
+                            <p key={response}>
+                                {response.elements[index].value}
+                            </p>
+                        ))}
+                    </>
+                )
+            }
+        })
+    }
 
     const isLoading = isEmpty(event);
     if (isLoading)
         return <Loading />
     else
+        // console.log("table headers ", tableHeaders);
+        // console.log("table responses ", tableResponses[0].elements);
+        
         return (
             <>
 
@@ -421,7 +483,7 @@ function Event() {
                     description={event.description}
                     eventId={eventId}
                     handleClose={() => setShowDescriptionModal(false)}
-                    setDescription={(desc)=>{setData((data)=>{return {...data, event:{...data.event, description: desc}}})}}
+                    setDescription={(desc) => { setData((data) => { return { ...data, event: { ...data.event, description: desc } } }) }}
                     show={showDescriptionModal}
 
                 />
@@ -449,94 +511,94 @@ function Event() {
 
                         <div className="column">
                             <div className="d-flex">
-                                {data.bannerLinks === undefined ? null:
-                                <div className="mx-auto d-flex">
-                                    <div className="d-flex">
-                                        {data.bannerLinks[0]?
-                                            <div>
-                                                <span onClick={() => handleDeletePic(0)}>
-                                                    <SvgIcon
-                                                        className="align-content-end"
-                                                        height="20px"
-                                                        src="cross.svg"
-                                                        width="20px"
-                                                    />
-                                                </span>
-                                            </div>: null}
+                                {data.bannerLinks === undefined ? null :
+                                    <div className="mx-auto d-flex">
+                                        <div className="d-flex">
+                                            {data.bannerLinks[0] ?
+                                                <div>
+                                                    <span onClick={() => handleDeletePic(0)}>
+                                                        <SvgIcon
+                                                            className="align-content-end"
+                                                            height="20px"
+                                                            src="cross.svg"
+                                                            width="20px"
+                                                        />
+                                                    </span>
+                                                </div> : null}
 
-                                        <div
-                                            className={"my-auto mx-3 " + ((data.bannerLinks[0]) ? "" : "-primary")}
-                                            onClick={() => data.image1Ref.current.click()}
-                                        >
+                                            <div
+                                                className={"my-auto mx-3 " + ((data.bannerLinks[0]) ? "" : "-primary")}
+                                                onClick={() => data.image1Ref.current.click()}
+                                            >
 
-                                            {bannerControl(data.bannerLinks, 0)}
+                                                {bannerControl(data.bannerLinks, 0)}
 
 
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="d-flex">
-                                        {data.bannerLinks[1]?
-                                            <div>
-                                                <span onClick={() => handleDeletePic(1)}>
-                                                    <SvgIcon
-                                                        className="align-content-end"
-                                                        height="20px"
-                                                        src="cross.svg"
-                                                        width="20px"
-                                                    />
-                                                </span>
-                                            </div>: null}
+                                        <div className="d-flex">
+                                            {data.bannerLinks[1] ?
+                                                <div>
+                                                    <span onClick={() => handleDeletePic(1)}>
+                                                        <SvgIcon
+                                                            className="align-content-end"
+                                                            height="20px"
+                                                            src="cross.svg"
+                                                            width="20px"
+                                                        />
+                                                    </span>
+                                                </div> : null}
 
-                                        <div
-                                            className={"my-auto mx-3" + ((data.bannerLinks[1]) ? "" : "-primary")}
-                                            onClick={() => data.image2Ref.current.click()}
-                                        >
-                                            {bannerControl(data.bannerLinks, 1)}
+                                            <div
+                                                className={"my-auto mx-3" + ((data.bannerLinks[1]) ? "" : "-primary")}
+                                                onClick={() => data.image2Ref.current.click()}
+                                            >
+                                                {bannerControl(data.bannerLinks, 1)}
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="d-flex">
-                                        {data.bannerLinks[2]?
-                                            <div>
-                                                <span onClick={() => handleDeletePic(2)}>
-                                                    <SvgIcon
-                                                        className="align-content-end"
-                                                        height="20px"
-                                                        src="cross.svg"
-                                                        width="20px"
-                                                    />
-                                                </span>
-                                            </div>: null}
+                                        <div className="d-flex">
+                                            {data.bannerLinks[2] ?
+                                                <div>
+                                                    <span onClick={() => handleDeletePic(2)}>
+                                                        <SvgIcon
+                                                            className="align-content-end"
+                                                            height="20px"
+                                                            src="cross.svg"
+                                                            width="20px"
+                                                        />
+                                                    </span>
+                                                </div> : null}
 
-                                        <div
-                                            className={"my-auto mx-3 " + ((data.bannerLinks[2]) ? "" : "-primary")}
-                                            onClick={() => data.image3Ref.current.click()}
-                                        >
-                                            {bannerControl(data.bannerLinks, 2)}
+                                            <div
+                                                className={"my-auto mx-3 " + ((data.bannerLinks[2]) ? "" : "-primary")}
+                                                onClick={() => data.image3Ref.current.click()}
+                                            >
+                                                {bannerControl(data.bannerLinks, 2)}
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>}
+                                    </div>}
                             </div>
 
                             <div>
                                 <input
                                     className="d-none"
-                                    onChange={(e)=>handleUpload(e.target.files[0], 0)}
+                                    onChange={(e) => handleUpload(e.target.files[0], 0)}
                                     ref={data.image1Ref}
                                     type="file"
                                 />
 
                                 <input
                                     className="d-none"
-                                    onChange={(e)=>handleUpload(e.target.files[0], 1)}
+                                    onChange={(e) => handleUpload(e.target.files[0], 1)}
                                     ref={data.image2Ref}
                                     type="file"
                                 />
 
                                 <input
                                     className="d-none"
-                                    onChange={(e)=>handleUpload(e.target.files[0], 2)}
+                                    onChange={(e) => handleUpload(e.target.files[0], 2)}
                                     ref={data.image3Ref}
                                     type="file"
                                 />
@@ -552,21 +614,21 @@ function Event() {
 
                             <div className="row justify-content-around">
                                 {lodashMap(clubLogoLinks, ((link, club) => {
-                                return (
-                                    <div
-                                        className="col-5 me-1"
+                                    return (
+                                        <div
+                                            className="col-5 me-1"
                                         // key={club+link}
-                                    >
-                                        <Image
-                                            alt={club}
-                                            fluid
-                                            rounded
-                                            src={link}
-                                            thumbnail
-                                        />
-                                    </div>
-                                )
-                            }))}
+                                        >
+                                            <Image
+                                                alt={club}
+                                                fluid
+                                                rounded
+                                                src={link}
+                                                thumbnail
+                                            />
+                                        </div>
+                                    )
+                                }))}
                             </div>
                         </div>
                     </div>
@@ -598,7 +660,7 @@ function Event() {
                                             {' '}
 
                                             {convertToDatetimeString(event.event_start) +
-                                            (event.event_end?" to "+ convertToDatetimeString(event.event_end):"")}
+                                                (event.event_end ? " to " + convertToDatetimeString(event.event_end) : "")}
                                         </p>
 
                                         <p>
@@ -609,19 +671,19 @@ function Event() {
                                             {event.location}
                                         </p>
 
-                                        {isEmpty(form)?null:
-                                        <p>
-                                            <FontAwesomeIcon icon={faClock} />
+                                        {isEmpty(form) ? null :
+                                            <p>
+                                                <FontAwesomeIcon icon={faClock} />
 
-                                            {' '}
+                                                {' '}
 
-                                            Reg. starts
-                                            {' '}
+                                                Reg. starts
+                                                {' '}
 
-                                            {convertToDatetimeString(form.opens_at)}
+                                                {convertToDatetimeString(form.opens_at)}
 
-                                            {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
-                                        </p>}
+                                                {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
+                                            </p>}
                                     </div>
                                 </div>
                             </div>
@@ -630,120 +692,148 @@ function Event() {
                                 <div className="row">
 
                                     <div>
-                                        {isEmpty(form)?null:
-                                        <>
-                                            <Button
-                                                className="w-100"
-                                                onClick={handleShow}
-                                                size="lg"
-                                            >
-                                                View Responses
-                                            </Button>
+                                        {isEmpty(form) ? null :
+                                            <>
+                                                <Button
+                                                    className="w-100"
+                                                    onClick={handleShow}
+                                                    size="lg"
+                                                >
+                                                    View Responses
+                                                </Button>
 
-                                            <Button
-                                                className="my-2 w-100"
-                                                onClick={() => setModalShow2(true)}
-                                                size="lg"
-                                            >
-                                                Declare winners
-                                            </Button>
+                                                <Button
+                                                    className="my-2 w-100"
+                                                    onClick={() => setModalShow2(true)}
+                                                    size="lg"
+                                                >
+                                                    Declare winners
+                                                </Button>
 
-                                            <Modal
-                                                aria-labelledby="example-custom-modal-styling-title"
-                                                onHide={handleClose}
-                                                show={showModal}
-                                                size="lg"
-                                            >
-                                                <Modal.Header closeButton>
-                                                    <Modal.Title>
-                                                        Responses
+                                                <Modal
+                                                    aria-labelledby="example-custom-modal-styling-title"
+                                                    onHide={handleClose}
+                                                    show={showModal}
+                                                    size="lg"
+                                                >
+                                                    <Modal.Header closeButton>
+                                                        <Modal.Title>
+                                                            Responses
 
-                                                    </Modal.Title>
-                                                </Modal.Header>
+                                                        </Modal.Title>
+                                                    </Modal.Header>
 
-                                                <Modal.Body>
-                                                    <Table
-                                                        bordered
-                                                        hover
-                                                        striped
-                                                    >
-                                                        <thead>
-                                                            <tr>
-                                                                <td>
-                                                                    {" "}
-                                                                    Sr no.
-                                                                </td>
+                                                    <Modal.Body>
 
+                                                        <Tabs
+                                                            activeKey={key}
+                                                            defaultActiveKey="responses"
+                                                            onSelect={(k) => setKey(k)}
+                                                            id="controlled-tab-example"
+                                                        >
+                                                            <Tab eventKey="responses" title="Responses">
+                                                                <Table
+                                                                    bordered
+                                                                    hover
+                                                                    striped
+                                                                >
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>
+                                                                                {" "}
+                                                                                Sr no.
+                                                                            </td>
+
+                                                                            {tableHeaders.map((option) => (
+                                                                                <td key={option.name}>
+                                                                                    {option.name}
+                                                                                </td>
+                                                                            ))}
+
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                    <tbody>
+                                                                        {tableResponses.map((response, index) => (
+                                                                            <tr key={response}>
+
+                                                                                <td>
+                                                                                    {index}
+                                                                                </td>
+
+                                                                                {response.elements.map((values) => (
+                                                                                    <td
+                                                                                        key={values.value}
+                                                                                    >
+                                                                                        {isValidUrl(values.value) ? (
+                                                                                            <a
+                                                                                                href={values.value}
+                                                                                                rel="noopener noreferrer"
+                                                                                                target="_blank"
+                                                                                            >
+                                                                                                {values.value}
+                                                                                            </a>
+                                                                                        ) : (
+                                                                                            values.value
+                                                                                        )}
+                                                                                    </td>
+                                                                                ))}
+                                                                            </tr>
+                                                                        ))}
+
+                                                                    </tbody>
+                                                                </Table>
+                                                            </Tab>
+                                                            <Tab eventKey="summary" title="Summary">
                                                                 {tableHeaders.map((option) => (
-                                                                    <td key={option.name}>
-                                                                        {option.name}
-                                                                    </td>
+                                                                    renderSummary()
                                                                 ))}
+                                                            </Tab>
+                                                        </Tabs>
 
-                                                            </tr>
-                                                        </thead>
+                                                        {/* {tableHeaders.map((option) => {
+                                                        <>
+                                                            <td key={option.name}>
+                                                                {option.name}
+                                                            </td>
 
-                                                        <tbody>
-                                                            {tableResponses.map((response, index) => (
-                                                                <tr key={response}>
+                                                            {tableResponses.elements.map((response) => {
+                                                                <p key={response.value}>
+                                                                    {response.value}
+                                                                </p>
+                                                            })}
+                                                        </>
+                                                    })} */}
+                                                        <br />
 
-                                                                    <td>
-                                                                        {index}
-                                                                    </td>
+                                                    </Modal.Body>
 
-                                                                    {response.elements.map((values) => (
-                                                                        <td
-                                                                            key={values.value}
-                                                                        >
-                                                                            {isValidUrl(values.value) ? (
-                                                                                <a
-                                                                                    href={values.value}
-                                                                                    rel="noopener noreferrer"
-                                                                                    target="_blank"
-                                                                                >
-                                                                                    {values.value}
-                                                                                </a>
-                                                                            ) : (
-                                                                                    values.value
-                                                                                )}
-                                                                        </td>
-                                                                    ))}
-                                                                </tr>
-                                                            ))}
-
-                                                        </tbody>
-                                                    </Table>
 
                                                     <br />
 
-                                                </Modal.Body>
-
-
-                                                <br />
-
-                                                <Button
-                                                    className="w-50 align-self-center"
-                                                    onClick={() => {
+                                                    <Button
+                                                        className="w-50 align-self-center"
+                                                        onClick={() => {
                                                             download_table_as_csv(event.name + " responses");
                                                         }}
-                                                >
-                                                    Download as CSV
-                                                </Button>
+                                                    >
+                                                        Download as CSV
+                                                    </Button>
 
-                                                <br />
+                                                    <br />
 
 
-                                            </Modal>
-                                        </>}
+                                                </Modal>
+                                            </>}
                                     </div>
 
                                     <div className="p-2 col-6">
                                         <FaqEditor
-                                            disappear={()=>{setData({...data, currentModal: null})}}
+                                            disappear={() => { setData({ ...data, currentModal: null }) }}
                                             faq={JSON.parse(event.faq)}
                                             setFaq={setFaq}
-                                            setShow={()=>{setData({...data,currentModal:"faq"})}}
-                                            show={data.currentModal=== "faq"}
+                                            setShow={() => { setData({ ...data, currentModal: "faq" }) }}
+                                            show={data.currentModal === "faq"}
                                         />
                                     </div>
 
@@ -779,7 +869,7 @@ function Event() {
                             registrationEndDate={form.closes_at ? new Date(form.closes_at) : undefined}
                             registrationStartDate={form.opens_at ? new Date(form.opens_at) : undefined}
                             show={data.showEvent}
-                                 />}
+                        />}
 
                         <div>
                             <ReactMarkdown>
