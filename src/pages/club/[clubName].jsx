@@ -240,6 +240,24 @@ class ClubHomePage extends Component {
         }
     }
 
+    renderYouTube() {
+        if (this.state.basicInformation.youtube) {
+            return (
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.youtube}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="youtube.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
     renderMail(){
         // eslint-disable-next-line react/no-unstable-nested-components
         const Mailto = ({ email, subject = '', body = '', children }) => {
@@ -352,7 +370,7 @@ class ClubHomePage extends Component {
             },
             desktop: {
                 breakpoint: {max: 3000, min: 1024},
-                items: 3
+                items: 2
             },
             tablet: {
                 breakpoint: {max: 1024, min: 464},
@@ -403,6 +421,8 @@ class ClubHomePage extends Component {
                                     {this.renderGithub()}
 
                                     {this.renderMedium()}
+
+                                    {this.renderYouTube()}
 
                                     {this.renderMail()}
 
@@ -556,7 +576,7 @@ class ClubHomePage extends Component {
 
                                 <br />
 
-                                <div className=" h5 col-12">
+                                <div className="col-12">
                                     <div>
                                         <RCarousel
                                             infinite={this.state.competitions.length > 1}

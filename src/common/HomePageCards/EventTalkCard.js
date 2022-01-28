@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card'
 import PropTypes from "prop-types";
 import {SvgIcon} from "common/SvgIcon";
 import {getStorage, ref, getDownloadURL} from "firebase/storage";
+import Image from "react-bootstrap/Image";
 import {truncate} from "utilities";
 import Link from "common/Link";
 import axios from "utilities/axios";
@@ -73,18 +74,21 @@ export default function EventTalkCard(props) {
                 className="reset-a"
                 to={"/"+(props.manage?"manage":"")+"event/" + props.element.id + "-" + props.element.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '-').toLowerCase()}
             >
-                <Card className="h-100" style={{ borderRadius: '10px' }}>
-                  <div
-                    className="overflow-hidden"
-                    style={{ height: '40%', borderRadius: '10px' }}
-                  >
-                    <Card.Img
-                       className="w-100 h-100"
-                        style={{ objectFit: 'contain' }}
-                        src={imageLink ? imageLink : "https://via.placeholder.com/350x200"}
-                        variant="top"
+                <Card
+                    className="h-100"
+                    style={{ borderRadius: '10px' }}
+                >
+                    <div
+                        className="overflow-hidden justify-content-center d-flex"
+                        style={{ height: '40%', borderRadius: '10px' }}
+                    >
+                        <Image
+                            className="object-fit-contain img-fluid"
+                            src={imageLink ? imageLink : "https://via.placeholder.com/350x200"}
+                            // style={{ objectFit: 'contain' }}
+                            variant="top"
                         />
-                  </div>
+                    </div>
 
                     <Card.Body className={styles.cardinner + ' px-2'}>
                         <Card.Title className=" text-primary fw-bold mt-1">

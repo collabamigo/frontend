@@ -1,5 +1,5 @@
 import lodashIsEmpty from "lodash/isEmpty";
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Formik, Field, Form} from 'formik';
 import {Modal} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -30,6 +30,9 @@ function generateCode(formData, setShowModal, eventId, response) {
             const field=formData[itr];
             if (field.required && (!values[field.id] || (typeof values[field.id] !== "number" && lodashIsEmpty(values[field.id]))))
                 errors[field.id] = 'This field is required';
+            if (field.type === "checkbox" && field.min !== undefined && field.max !== undefined)
+                if (values[field.id].length < field.min || values[field.id].length > field.max)
+                    errors[field.id] = `This field must have between ${field.min} and ${field.max} options`;
         }
 
         // console.log("validate", errors, values);
@@ -510,18 +513,24 @@ function generateCode(formData, setShowModal, eventId, response) {
     )
 }
 
-export default function GenerateEventForm({formData, eventId, start, end, response}) {
+export default function GenerateEventForm({formData, eventId, start, end, registerUrlQuery, response}) {
     if (!formData)
         return null
 
     const loggedIn = useContext(LoginContext);
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(registerUrlQuery && loggedIn && !((new Date()) < (new Date(start))) &&
+        ((new Date()) < (new Date(end))));
 
     const register = () => {
         setShow(true);
 
     }
+
+    useEffect(() => {
+        if (registerUrlQuery && loggedIn && !((new Date()) < (new Date(start))) && ((new Date()) < (new Date(end))))
+            setShow(true);
+    }, [loggedIn])
 
     let registrationMessage;
     let registrationDisabled = true;
@@ -535,6 +544,20 @@ export default function GenerateEventForm({formData, eventId, start, end, respon
     }
     else
         registrationMessage = "Registration closed"
+
+    let modifiedResponse = response;
+    if (!lodashIsEmpty(response)) {
+        for (let itr in formData) {
+            const field = formData[itr];
+            if (field.type === "checkbox" && response[field.id]) {
+                try {
+                    modifiedResponse[field.id] = JSON.parse(response[field.id]);
+                } catch (e) {
+                    modifiedResponse[field.id] = response[field.id];
+                }
+            }
+        }
+    }
     return (
         <>
             <Button
@@ -555,7 +578,7 @@ export default function GenerateEventForm({formData, eventId, start, end, respon
                 onHide={() => setShow(false)}
                 show={show}
             >
-                {generateCode(formData, setShow, eventId, response)}
+                {generateCode(formData, setShow, eventId, modifiedResponse)}
             </Modal>
         </>
     )
@@ -564,6 +587,7 @@ GenerateEventForm.propTypes = {
     end: PropTypes.string.isRequired,
     eventId: PropTypes.string.isRequired,
     formData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]))).isRequired,
+    registerUrlQuery: PropTypes.bool.isRequired,
     response:PropTypes.bool.isRequired,
     start: PropTypes.string.isRequired,
 }

@@ -414,7 +414,7 @@ function Event() {
     console.log("formcontent ", formContent);
     console.log("formresponse", tableResponses);
 
-    
+
     ChartJS.register(ArcElement, Tooltip, Legend);
     let graphData = [];
     const chartData = {
@@ -469,7 +469,7 @@ function Event() {
     else
         // console.log("table headers ", tableHeaders);
         // console.log("table responses ", tableResponses[0].elements);
-        
+
         return (
             <>
 
@@ -712,7 +712,9 @@ function Event() {
 
                                                 <Modal
                                                     aria-labelledby="example-custom-modal-styling-title"
-                                                    onHide={handleClose}
+                                                    className="mw-100 rounded-5"
+                                                contentClassName="border-0 m-0 rounded-5"
+                                                dialogClassName="mw-75 w-75"onHide={handleClose}
                                                     show={showModal}
                                                     size="lg"
                                                 >
@@ -744,7 +746,10 @@ function Event() {
                                                                                 Sr no.
                                                                             </td>
 
-                                                                            {tableHeaders.map((option) => (
+                                                                            <td>
+                                                                    {" "}
+                                                                    Email (verified)
+                                                                </td>{tableHeaders.map((option) => (
                                                                                 <td key={option.name}>
                                                                                     {option.name}
                                                                                 </td>
@@ -760,6 +765,10 @@ function Event() {
                                                                                 <td>
                                                                                     {index}
                                                                                 </td>
+
+                                                                    <td>
+                                                                        {response.responder_emails[0]}
+                                                                    </td>
 
                                                                                 {response.elements.map((values) => (
                                                                                     <td

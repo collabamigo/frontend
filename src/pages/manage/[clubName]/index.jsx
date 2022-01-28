@@ -283,6 +283,24 @@ class ClubAdminPage extends Component {
         }
     }
 
+    renderYouTube() {
+        if (this.state.basicInformation.youtube) {
+            return (
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.youtube}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="youtube.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
     renderOther(){
         if(this.state.basicInformation.other){
             return(
@@ -363,8 +381,9 @@ class ClubAdminPage extends Component {
             mail: values[5],
             telegram: values[6],
             medium: values[7],
-            other: values[8],
-            tagline: values[9],
+            youtube: values[8],
+            other: values[9],
+            tagline: values[10],
         }
         axios.patch("club/club/"+ this.props.router.query.clubName +"/" ,payload)
             .then(() => {
@@ -382,8 +401,9 @@ class ClubAdminPage extends Component {
                                 mail: values[5],
                                 telegram: values[6],
                                 medium: values[7],
-                                other: values[8],
-                                tagline: values[9],
+                                youtube: values[8],
+                                other: values[9],
+                                tagline: values[10],
                             }
                         })
                 })
@@ -589,9 +609,10 @@ class ClubAdminPage extends Component {
                                         this.state.basicInformation.mail,
                                         this.state.basicInformation.telegram,
                                         this.state.basicInformation.medium,
+                                        this.state.basicInformation.youtube,
                                         this.state.basicInformation.other,
                                         this.state.basicInformation.tagline]}
-                                    labels={['Instagram','LinkedIn','Facebook','Discord','GitHub','Mail address','Telegram','Medium','Other website','Enter Your Clubs Tagline']}
+                                    labels={['Instagram','LinkedIn','Facebook','Discord','GitHub','Mail address','Telegram','Medium Link', 'YouTube Link', 'Other website','Enter Your Clubs Tagline']}
                                     show={this.state.currentModal === 'panel'}
                                 />
 
@@ -650,6 +671,8 @@ class ClubAdminPage extends Component {
                                         {this.renderMedium()}
 
                                         {this.renderMail()}
+
+                                        {this.renderYouTube()}
 
                                         {this.renderOther()}
                                     </div>

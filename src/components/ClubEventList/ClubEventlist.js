@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'utilities/axios.js';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import ClubCard from '../../common/HomePageCards/ClubCard.js';
-import axios from 'utilities/axios';
+import EventTalkCard from 'common/HomePageCards/EventTalkCard.js';
 
-function ClubList({ text }) {
-  const [clubList, setClubList] = useState(null);
+function ClubEventList({ text }) {
+  const [clubEventList, setClubEventList] = useState(null);
 
   useEffect(() => {
     axios.get('/club/feed').then((res) => {
-      setClubList(res.data.clubs);
+      setClubEventList(res.data.competitions);
     });
   }, []);
 
-  const responsive2 = {
+  const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
@@ -22,7 +22,7 @@ function ClubList({ text }) {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 5,
+      items: 3,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -30,27 +30,27 @@ function ClubList({ text }) {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 3,
+      items: 1.01,
     },
   };
 
   return (
-      <div className="my-4 mx-3 mx-lg-5">
-          <h2 className="text-primary mx-lg-3 my-3">
+      <div className="my-4 mx-3 mx-lg-3">
+          <h2 className="text-primary mx-lg-5 my-3">
               {text}
           </h2>
 
-          {clubList && (
+          {clubEventList && (
           <Carousel
               autoPlay
               autoPlaySpeed={2500}
               infinite
-              responsive={responsive2}
+              responsive={responsive}
           >
-              {clubList?.map((option) => (
-                  <ClubCard
-                      key={option.username}
-                      value={option}
+              {clubEventList?.map((option) => (
+                  <EventTalkCard
+                      element={option}
+                      key={option}
                   />
           ))}
           </Carousel>
@@ -59,8 +59,8 @@ function ClubList({ text }) {
   );
 }
 
-ClubList.propTypes = {
+ClubEventList.propTypes = {
   text: PropTypes.string.isRequired,
 };
 
-export default ClubList;
+export default ClubEventList;
