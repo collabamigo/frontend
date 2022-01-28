@@ -410,7 +410,9 @@ function Event() {
         }
     })
 
-    const formContent = JSON.parse(form.skeleton);
+    let formContent;
+    if (form)
+        formContent = JSON.parse(form.skeleton);
     console.log("formcontent ", formContent);
     console.log("formresponse", tableResponses);
 
@@ -432,7 +434,7 @@ function Event() {
         }]
     };
 
-    renderSummary = () => {
+    const renderSummary = () => {
         tableHeaders.map((option, index) => {
             if (formContent[index].type === "radio" || formContent[index].type === "checkbox" || formContent[index].type === "select" || formcontent[index].type === "number") {
                 return (
