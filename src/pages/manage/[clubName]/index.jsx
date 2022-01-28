@@ -283,6 +283,24 @@ class ClubAdminPage extends Component {
         }
     }
 
+    renderYouTube() {
+        if (this.state.basicInformation.youtube) {
+            return (
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.youtube}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="youtube.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
     renderOther(){
         if(this.state.basicInformation.other){
             return(
@@ -653,6 +671,8 @@ class ClubAdminPage extends Component {
                                         {this.renderMedium()}
 
                                         {this.renderMail()}
+
+                                        {this.renderYouTube()}
 
                                         {this.renderOther()}
                                     </div>
