@@ -30,6 +30,7 @@ import { isValidUrl } from "utilities";
 import EditNameDateModal from "components/EventAdmin/EditNameDateModal";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import { pie } from "./eventid.module.css";
 
 function download_table_as_csv(table_id, separator = ',') {
     let rows = document.querySelectorAll('tr');
@@ -432,7 +433,15 @@ function Event() {
                 '#36A2EB',
                 '#FFCE56'
             ]
-        }]
+        }],
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+        },
+        legend: {
+            display: true,
+            position: 'bottom'
+        }
     };
 
     const renderSummary = () => {
@@ -448,7 +457,9 @@ function Event() {
                         <h1 key={option.name}>
                             {option.name}
                         </h1>
-                        <Pie data={chartData} />
+                        <div className="chart-container">
+                            <Pie data={chartData} className={pie}/>
+                        </div>
                     </>
                 )
             } else {
