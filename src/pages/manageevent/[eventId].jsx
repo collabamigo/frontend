@@ -123,7 +123,7 @@ function Event() {
     });
 
     const addClubLogoLinks = (club, link) => {
-        console.log(clubLogoLinks)
+        // console.log(clubLogoLinks)
         setData((prevData) => {
             return { ...prevData, clubLogoLinks: { ...(prevData.clubLogoLinks), [club]: link } }
         })
@@ -413,8 +413,9 @@ function Event() {
     let formContent;
     if (form)
         formContent = JSON.parse(form.skeleton);
-    console.log("formcontent ", formContent);
-    console.log("formresponse", tableResponses);
+
+    // console.log("formcontent ", formContent);
+    // console.log("formresponse", tableResponses);
 
 
     ChartJS.register(ArcElement, Tooltip, Legend);
@@ -435,16 +436,18 @@ function Event() {
     };
 
     const renderSummary = () => {
+        console.log("renderSummary");
         tableHeaders.map((option, index) => {
-            if (formContent[index].type === "radio" || formContent[index].type === "checkbox" || formContent[index].type === "select" || formcontent[index].type === "number") {
+            console.log("option ", option);
+            if (formContent[index].type === "radio" || formContent[index].type === "checkbox" || formContent[index].type === "select" || formContent[index].type === "number") {
+                {tableResponses.map((response) => (
+                    graphData.push(response.elements[index].value)
+                ))}
                 return (
                     <>
                         <h1 key={option.name}>
                             {option.name}
                         </h1>
-                        {tableResponses.map((response) => (
-                            graphData.push(response.elements[index].value)
-                        ))}
                         <Pie data={chartData} />
                     </>
                 )
@@ -715,8 +718,8 @@ function Event() {
                                                 <Modal
                                                     aria-labelledby="example-custom-modal-styling-title"
                                                     className="mw-100 rounded-5"
-                                                contentClassName="border-0 m-0 rounded-5"
-                                                dialogClassName="mw-75 w-75"onHide={handleClose}
+                                                    contentClassName="border-0 m-0 rounded-5"
+                                                    dialogClassName="mw-75 w-75" onHide={handleClose}
                                                     show={showModal}
                                                     size="lg"
                                                 >
@@ -749,9 +752,9 @@ function Event() {
                                                                             </td>
 
                                                                             <td>
-                                                                    {" "}
-                                                                    Email (verified)
-                                                                </td>{tableHeaders.map((option) => (
+                                                                                {" "}
+                                                                                Email (verified)
+                                                                            </td>{tableHeaders.map((option) => (
                                                                                 <td key={option.name}>
                                                                                     {option.name}
                                                                                 </td>
@@ -768,9 +771,9 @@ function Event() {
                                                                                     {index}
                                                                                 </td>
 
-                                                                    <td>
-                                                                        {response.responder_emails[0]}
-                                                                    </td>
+                                                                                <td>
+                                                                                    {response.responder_emails[0]}
+                                                                                </td>
 
                                                                                 {response.elements.map((values) => (
                                                                                     <td
@@ -796,9 +799,7 @@ function Event() {
                                                                 </Table>
                                                             </Tab>
                                                             <Tab eventKey="summary" title="Summary">
-                                                                {tableHeaders.map((option) => (
-                                                                    renderSummary()
-                                                                ))}
+                                                                {renderSummary()}
                                                             </Tab>
                                                         </Tabs>
 
