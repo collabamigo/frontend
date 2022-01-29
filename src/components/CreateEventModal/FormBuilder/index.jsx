@@ -64,6 +64,7 @@ export default function FormBuilder({
         reset,
     } = useForm();
     const [editIndex, setEditIndex] = useState(-1);
+    const [isValidationEnabled, setIsValidationEnabled] = useState(false);
     const copyFormData = useRef([]);
     const closeButton = useRef(null);
     // const [showValidation, toggleValidation] = useState(false);
@@ -354,6 +355,48 @@ export default function FormBuilder({
                         />
                         Required
                     </label>
+
+                    {(type === "checkbox" ||
+                        editFormData.type === "checkbox") &&
+                        <label
+                            style={{
+                            marginTop: 0,
+                        }}
+                        >                            
+                            <input
+                                {...register('enable-validation')}
+                                onChange={() => setIsValidationEnabled(prev=>!prev)}
+                                type="checkbox"
+                            />
+                            Enable Validation
+                        </label> }
+                    
+                    { isValidationEnabled &&
+                        <> 
+                            <label>
+                                {builder.inputCreator["en"].min}
+                                :
+                            </label>
+
+                            <input
+                                defaultValue={0}
+                                {...register('min')}
+                                placeholder="Minimum"
+                                type="number"
+                            />
+
+                            <label>
+                                {builder.inputCreator["en"].max}
+                                :
+                            </label>
+
+                            <input
+                                defaultValue={0}
+                                {...register('max')}
+                                placeholder="Maximum"
+                                type="number"
+                            />
+                        </>}
 
                     {/*<Animate
                         end={{
