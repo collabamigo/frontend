@@ -218,7 +218,7 @@ function Event() {
 
     const [ModalShow2, setModalShow2] = useState(false);
     const [showDescriptionModal, setShowDescriptionModal] = useState(false);
-    const [key, setKey] = useState('home');
+    const [key, setKey] = useState('responses');
 
     const setFaq = (faq) => {
         axios.patch(`club/competition/${eventId}/`, {
@@ -437,7 +437,7 @@ function Event() {
 
     const renderSummary = () => {
         console.log("renderSummary");
-        tableHeaders.map((option, index) => {
+        return tableHeaders.map((option, index) => {
             console.log("option ", option);
             if (formContent[index].type === "radio" || formContent[index].type === "checkbox" || formContent[index].type === "select" || formContent[index].type === "number") {
                 {tableResponses.map((response) => (
