@@ -432,17 +432,20 @@ function Event() {
                         '#FFCE56',
                         '#FF6384',
                         '#36A2EB',
-                        '#FFCE56'
+                        '#FFCE56',
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
                     ]
                 }],
-                options: {
-                    maintainAspectRatio: false,
-                    responsive: true,
-                },
-                legend: {
-                    display: true,
-                    position: 'bottom'
-                }
+                // options: {
+                //     maintainAspectRatio: false,
+                //     responsive: true,
+                // },
+                // legend: {
+                //     display: true,
+                //     position: 'bottom'
+                // }
             };
             if (formContent[index].type === "radio" || formContent[index].type === "checkbox" || formContent[index].type === "select" || formContent[index].type === "number") {
                 const graphData = {};
@@ -461,10 +464,11 @@ function Event() {
                             {option.name}
                         </h1>
 
-                        <div className="chart-container">
+                        <div>
                             <Pie
-                                className={pie}
+                                // className={pie}
                                 data={chartData}
+                                options={{maintainAspectRatio: false,}}
                             />
                         </div>
                     </>
