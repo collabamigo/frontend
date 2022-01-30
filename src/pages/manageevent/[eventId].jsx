@@ -30,7 +30,7 @@ import { isValidUrl } from "utilities";
 import EditNameDateModal from "components/EventAdmin/EditNameDateModal";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { pie } from "./eventid.module.css";
+// import { pie } from "./eventid.module.css";
 
 function download_table_as_csv(table_id, separator = ',') {
     let rows = document.querySelectorAll('tr');
@@ -457,11 +457,11 @@ function Event() {
             if (formContent[index].type === "radio" || formContent[index].type === "checkbox" || formContent[index].type === "select" || formContent[index].type === "number") {
                 const graphData = {};
                 tableResponses.forEach((response) => {
-                    if(graphData[response.elements[index].value] === undefined)
+                    if (graphData[response.elements[index].value] === undefined)
                         graphData[response.elements[index].value] = 1;
                     else
                         graphData[response.elements[index].value] += 1;
-            })
+                })
                 chartData.datasets[0].data = Object.values(graphData);
                 chartData.labels = Object.keys(graphData);
                 console.log("chartData", chartData);
@@ -475,7 +475,7 @@ function Event() {
                             <Pie
                                 // className={pie}
                                 data={chartData}
-                                options={{maintainAspectRatio: false,}}
+                                options={{ maintainAspectRatio: false, }}
                             />
                         </div>
                     </>
@@ -794,7 +794,7 @@ function Event() {
                                                                             <td key={option.name}>
                                                                                 {option.name}
                                                                             </td>
-                                                                            ))}
+                                                                        ))}
 
                                                                     </tr>
                                                                 </thead>
@@ -823,13 +823,13 @@ function Event() {
                                                                                         >
                                                                                             {values.value}
                                                                                         </a>
-                                                                                        ) : (
-                                                                                            values.value
-                                                                                        )}
+                                                                                    ) : (
+                                                                                        values.value
+                                                                                    )}
                                                                                 </td>
-                                                                                ))}
+                                                                            ))}
                                                                         </tr>
-                                                                        ))}
+                                                                    ))}
 
                                                                 </tbody>
                                                             </Table>
@@ -844,18 +844,18 @@ function Event() {
                                                     </Tabs>
 
                                                     {/* {tableHeaders.map((option) => {
-                                                        <>
-                                                            <td key={option.name}>
-                                                                {option.name}
-                                                            </td>
+                                                    <>
+                                                        <td key={option.name}>
+                                                            {option.name}
+                                                        </td>
 
-                                                            {tableResponses.elements.map((response) => {
-                                                                <p key={response.value}>
-                                                                    {response.value}
-                                                                </p>
-                                                            })}
-                                                        </>
-                                                    })} */}
+                                                        {tableResponses.elements.map((response) => {
+                                                            <p key={response.value}>
+                                                                {response.value}
+                                                            </p>
+                                                        })}
+                                                    </>
+                                                })} */}
 
                                                     <br />
 
@@ -867,8 +867,8 @@ function Event() {
                                                 <Button
                                                     className="w-50 align-self-center"
                                                     onClick={() => {
-                                                            download_table_as_csv(event.name + " responses");
-                                                        }}
+                                                        download_table_as_csv(event.name + " responses");
+                                                    }}
                                                 >
                                                     Download as CSV
                                                 </Button>
