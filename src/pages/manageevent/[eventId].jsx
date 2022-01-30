@@ -420,36 +420,41 @@ function Event() {
 
 
     ChartJS.register(ArcElement, Tooltip, Legend);
-    let graphData = [];
-    const chartData = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            data: graphData,
-            backgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56',
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56'
-            ]
-        }],
-        options: {
-            maintainAspectRatio: false,
-            responsive: true,
-        },
-        legend: {
-            display: true,
-            position: 'bottom'
-        }
-    };
+
 
     const renderSummary = () => {
         return tableHeaders.map((option, index) => {
+            const chartData = {
+                datasets: [{
+                    backgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56'
+                    ]
+                }],
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                }
+            };
             if (formContent[index].type === "radio" || formContent[index].type === "checkbox" || formContent[index].type === "select" || formContent[index].type === "number") {
-                {tableResponses.map((response) => (
-                    graphData.push(response.elements[index].value)
-                ))}
+                const graphData = {};
+                tableResponses.forEach((response) => {
+                    if(graphData[response.elements[index].value] === undefined)
+                        graphData[response.elements[index].value] = 1;
+                    else
+                        graphData[response.elements[index].value] += 1;
+            })
+                chartData.datasets[0].data = Object.values(graphData);
+                chartData.labels = Object.keys(graphData);
+                console.log("chartData", chartData);
                 return (
                     <>
                         <h1 key={option.name}>
