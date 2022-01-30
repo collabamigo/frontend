@@ -427,15 +427,22 @@ function Event() {
             const chartData = {
                 datasets: [{
                     backgroundColor: [
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FFCE56',
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FFCE56',
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FFCE56',
+                        '#d10000',
+                        '#a8005f',
+                        '#d15b00',
+                        '#ffc000',
+                        '#d1a900',
+                        '#00d1b2',
+                        '#accb00',
+                        '#1eae00',
+                        '#008077',
+                        '#06358b',
+                        '#47058d',
+                        '#8d0d7b',
+                        '#67028b',
+                        '#1d0891',
+                        '#0d0d91',
+                        '#008769',
                     ]
                 }],
                 // options: {
