@@ -1,5 +1,5 @@
 .contents_heeman {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #8d97ad;
   font-weight: 300;
 }
@@ -10,7 +10,6 @@
 .contents_heeman h6 {
   color: #3e4555;
 }
-
 
 .contents_heeman p {
   font-size: 20px;
@@ -38,31 +37,9 @@
 .contents_heeman ul li a:hover {
   -webkit-transform: translate3d(0px, -5px, 0px);
   transform: translate3d(0px, -5px, 0px);
-
 }
 
 .contents_heeman .subtitle {
-
   line-height: 24px;
   margin: 0 0 20px 0;
-}
-
-.behance:hover {
-  color: #4c56dd;
-}
-
-.instagram:hover {
-  color: #fd0061;
-}
-
-.github:hover {
-  color: #000000;
-}
-
-.linkedin:hover {
-  color: #0442b6;
-}
-
-.subtitle {
-  color: #9c3ab4 !important;
 }
