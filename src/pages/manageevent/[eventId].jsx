@@ -156,7 +156,7 @@ function Event() {
     const handleShow2 = () => setData({ ...data, showModal2: true });
 
     const handleSubmitEvent = (values) => {
-        console.log("value", values)
+        // console.log("value", values)
 
         const eventPayload = {};
 
@@ -235,8 +235,8 @@ function Event() {
     }
 
     const handleDeletePic = (num) => {
-        console.log("Picture deleted")
-        console.log(data.bannerPaths)
+        // console.log("Picture deleted")
+        // console.log(data.bannerPaths)
         const temp = JSON.parse(data.bannerPaths)
         const storage = getStorage(firebase);
         const desertRef = ref(storage, temp[num]);
@@ -302,8 +302,8 @@ function Event() {
             }
         }
 
-        console.log('originalFile instanceof Blob', image instanceof Blob); // true
-        console.log(`originalFile size ${image.size / 1024 / 1024} MB`);
+        // console.log('originalFile instanceof Blob', image instanceof Blob); // true
+        // console.log(`originalFile size ${image.size / 1024 / 1024} MB`);
 
         const options = {
             maxSizeMB: 250 / 1024,
@@ -312,8 +312,8 @@ function Event() {
         }
         imageCompression(image, options)
             .then(function (compressedFile) {
-                console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-                console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+                // console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+                // console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
 
                 uploadBytes(storageRef, compressedFile, metadata).then((args) => {
                     const temp = args["metadata"]["fullPath"]
@@ -454,7 +454,7 @@ function Event() {
                 //     position: 'bottom'
                 // }
             };
-            if (formContent[index].type === "radio" || formContent[index].type === "checkbox" || formContent[index].type === "select" || formContent[index].type === "number") {
+            if (formContent[index].type === "radio" || formContent[index].type === "select" || formContent[index].type === "number") {
                 const graphData = {};
                 tableResponses.forEach((response) => {
                     if (graphData[response.elements[index].value] === undefined)
@@ -464,7 +464,41 @@ function Event() {
                 })
                 chartData.datasets[0].data = Object.values(graphData);
                 chartData.labels = Object.keys(graphData);
-                console.log("chartData", chartData);
+                // console.log("chartData", chartData);
+                return (
+                    <>
+                        <h1 key={option.name}>
+                            {option.name}
+                        </h1>
+
+                        <div>
+                            <Pie
+                                // className={pie}
+                                data={chartData}
+                                options={{ maintainAspectRatio: false, }}
+                            />
+                        </div>
+                    </>
+                )
+            } else if (formContent[index].type === "checkbox") {
+                const temp = [];
+                let tarr;
+                const graphData = {};
+                tableResponses.forEach((response) => {
+                    tarr = JSON.parse(response.elements[index].value);
+                    tarr.forEach((t) => {
+                        temp.push(t);
+                    })
+                    temp.forEach((t) => {
+                        if (graphData[t] === undefined)
+                            graphData[t] = 1;
+                        else
+                            graphData[t] += 1;
+                    })
+                })
+                chartData.datasets[0].data = Object.values(graphData);
+                chartData.labels = Object.keys(graphData);
+                // console.log("chartData", chartData);
                 return (
                     <>
                         <h1 key={option.name}>
