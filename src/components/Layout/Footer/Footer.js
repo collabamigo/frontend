@@ -38,7 +38,7 @@ function Footer() {
 
                       <ul className={styles.footer_links}>
                           <li>
-                              <a href="/contactUs/">
+                              <a href="mailto:hello@collabamigo.com">
                                   Contact Us
                               </a>
                           </li>
