@@ -340,18 +340,18 @@ export default function Event({ eventData }) {
                                         </p> : null}
 
                                     {lodashIsEmpty(form) ? null :
-                                        <p className=" text-primary">
-                                            <FontAwesomeIcon icon={faClock} />
+                                    <p className=" text-primary">
+                                        <FontAwesomeIcon icon={faClock} />
 
-                                            {' '}
+                                        {' '}
 
-                                            Reg. starts
-                                            {' '}
+                                        Reg. starts
+                                        {' '}
 
-                                            {convertToDatetimeString(form.opens_at)}
+                                        {convertToDatetimeString(form.opens_at)}
 
-                                            {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
-                                        </p>}
+                                        {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
+                                    </p>}
 
                                     <div>
                                         <ReactMarkdown>
@@ -365,20 +365,21 @@ export default function Event({ eventData }) {
                         <div className="col-md-3 col-12">
                             <div className="row">
                                 {lodashIsEmpty(form) ? null :
-                                    <div className="col-12 p-2">
-                                        <GenerateEventForm
-                                            end={form.closes_at}
-                                            eventId={eventId}
-                                            formData={JSON.parse(form.skeleton)}
-                                            registerUrlQuery={router.query.register || false}response={data.pastResponse[0]}
-                                            start={form.opens_at}
-                                        />
-                                    </div>}
+                                <div className="col-12 p-2">
+                                    <GenerateEventForm
+                                        end={form.closes_at}
+                                        eventId={eventId}
+                                        formData={JSON.parse(form.skeleton)}
+                                        registerUrlQuery={router.query.register || false}
+                                        response={data.pastResponse[0]}
+                                        start={form.opens_at}
+                                    />
+                                </div>}
 
                                 {(!event.faq || lodashIsEmpty(JSON.parse(event.faq))) ? null :
-                                    <div className="p-2 col-6">
-                                        <FAQModal data={JSON.parse(event.faq)} />
-                                    </div>}
+                                <div className="p-2 col-6">
+                                    <FAQModal data={JSON.parse(event.faq)} />
+                                </div>}
 
                                 <div className="p-2 col-6">
                                     {event.link && (
