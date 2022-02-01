@@ -7,12 +7,9 @@ import Button from "react-bootstrap/Button";
 
 export default class index extends Component {
     static propTypes = {
-        // eslint-disable-next-line react/no-unused-prop-types
-        handleClose: PropTypes.func.isRequired,
-        // eslint-disable-next-line react/sort-prop-types
         ModalShow: PropTypes.bool.isRequired,
-        values: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-
+        handleClose: PropTypes.func.isRequired,
+        values: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number]))).isRequired,
         // handleShow: PropTypes.func.isRequired,
     }
 
