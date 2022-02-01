@@ -485,7 +485,17 @@ function Event() {
                 let tarr;
                 const graphData = {};
                 tableResponses.forEach((response) => {
-                    tarr = JSON.parse(response.elements[index].value);
+                    try {
+                        if (response.elements[index].value === "" || typeof response.elements[index].value !== "string" || !response.elements[index].value.includes("["))
+                            tarr = [];
+                        else if (response.elements[index].value.includes("\""))
+                            tarr = JSON.parse(response.elements[index].value);
+                        else
+                            tarr = JSON.parse(response.elements[index].value.replace("'", "\""));
+                    }
+                    catch (e) {
+                        tarr = [];
+                    }
                     tarr.forEach((t) => {
                         temp.push(t);
                     })
