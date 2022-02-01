@@ -454,7 +454,7 @@ function Event() {
                 //     position: 'bottom'
                 // }
             };
-            if (formContent[index].type === "radio" || formContent[index].type === "select" || formContent[index].type === "number") {
+            if (formContent[index].type === "radio" || formContent[index].type === "select") {
                 const graphData = {};
                 tableResponses.forEach((response) => {
                     if (graphData[response.elements[index].value] === undefined)
