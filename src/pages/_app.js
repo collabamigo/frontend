@@ -4,7 +4,6 @@ import React, {useEffect} from "react";
 import BasicLayout from "../components/Layout";
 import "styles/App.scss"
 import {Metrics} from '@layer0/rum'
-import FirebaseProvider from "firebaseProvider"
 import * as ga from 'lib/ga'
 
 if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'production') {
@@ -41,9 +40,7 @@ export default function MyApp({Component, pageProps}) {
 
     return (
         <BasicLayout title={Component.title?Component.title:"CollabAmigo"}>
-            <FirebaseProvider>
-                <Component {...pageProps} />
-            </FirebaseProvider>
+            <Component {...pageProps} />
         </BasicLayout>
     )
 }
