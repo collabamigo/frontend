@@ -494,7 +494,7 @@ function Event() {
                             tarr = JSON.parse(response.elements[index].value.replace("'", "\""));
                     }
                     catch (e) {
-                        console.log(e);
+                        console.log("error in graphData", e);
                         tarr = [];
                     }
                     tarr.forEach((t) => {
@@ -530,6 +530,7 @@ function Event() {
                     </>
                 )
             } else {
+
                 return (
                     <>
                         <h1 key={option.name}>
