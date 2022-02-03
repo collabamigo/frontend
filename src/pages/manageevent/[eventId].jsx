@@ -481,9 +481,9 @@ function Event() {
                     </>
                 )
             } else if (formContent[index].type === "checkbox") {
-                const temp = [];
+                let temp = [];
                 let tarr;
-                const graphData = {};
+                let graphData = {};
                 tableResponses.forEach((response) => {
                     try {
                         if (response.elements[index].value === "" || typeof response.elements[index].value !== "string" || !response.elements[index].value.includes("["))
@@ -494,20 +494,25 @@ function Event() {
                             tarr = JSON.parse(response.elements[index].value.replace("'", "\""));
                     }
                     catch (e) {
+                        console.log(e);
                         tarr = [];
                     }
                     tarr.forEach((t) => {
                         temp.push(t);
                     })
-                    temp.forEach((t) => {
-                        if (graphData[t] === undefined)
-                            graphData[t] = 1;
-                        else
-                            graphData[t] += 1;
-                    })
+                });
+                temp.forEach((t) => {
+                    if (graphData[t] === undefined)
+                        graphData[t] = 1;
+                    else
+                        graphData[t] += 1;
                 })
+                console.log(temp);
+                console.log(graphData);
                 chartData.datasets[0].data = Object.values(graphData);
                 chartData.labels = Object.keys(graphData);
+                temp = [];
+                graphData = {};
                 // console.log("chartData", chartData);
                 return (
                     <>
