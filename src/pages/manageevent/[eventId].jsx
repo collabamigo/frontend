@@ -820,12 +820,14 @@ function Event() {
                                                         onSelect={(k) => setKey(k)}
                                                     >
                                                         <Tab
+                                                            className="overflow-scroll"
                                                             eventKey="responses"
                                                             title="Responses"
                                                         >
                                                             <Table
                                                                 bordered
                                                                 hover
+                                                                responsive
                                                                 striped
                                                             >
                                                                 <thead>
