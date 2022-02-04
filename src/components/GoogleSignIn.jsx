@@ -11,7 +11,7 @@ function GoogleSignIn ({isAuthenticated, setLoggedIn, setStage, stage, visibilit
     async function profileExists (googleUser) {
         if (stage==="button")
             return {
-                res:await axios.get("connect/profile/?format=json"),
+                res:await axios.get("connect/profile/"),
                 googleUser: googleUser
             }
     }
