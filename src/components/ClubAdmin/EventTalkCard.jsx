@@ -10,7 +10,7 @@ import axios from "utilities/axios";
 import {isMobile} from "react-device-detect";
 import {remark} from 'remark'
 import strip from 'strip-markdown'
-
+import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 import styles from "./EventTalkCard.module.css";
 
 export default function EventTalkCard(props) {
@@ -121,17 +121,29 @@ export default function EventTalkCard(props) {
                                 width="15px"
                             />
 
+                            <p>
+                                <span className={styles.text2}>
+                                    .
 
-                            <p className={styles.text2}>
-                                .
-
-                                Fill before
-                                {' '}
+                                    Fill before
+                                    {' '}
 
 
 
-                                {finale}
+                                    {finale}
+                                </span>
+
+                                <span className="m-md-3 m-1">
+                                    <BootstrapSwitchButton
+                                        checked={true}
+                                        onstyle="outline-success"
+                                        offstyle="outline-danger"
+                                        size="xs"
+                                        style="rounded-5"
+                                    />
+                                </span>
                             </p>
+
                         </Card.Subtitle>
 
                     </Card.Body>
