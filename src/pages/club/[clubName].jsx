@@ -240,6 +240,24 @@ class ClubHomePage extends Component {
         }
     }
 
+    renderYouTube() {
+        if (this.state.basicInformation.youtube) {
+            return (
+                <Card.Link
+                    className=""
+                    href={this.state.basicInformation.youtube}
+                    target="_blank"
+                >
+                    <SvgIcon
+                        height="20px"
+                        src="youtube.svg"
+                        width="20px"
+                    />
+                </Card.Link>
+            )
+        }
+    }
+
     renderMail(){
         // eslint-disable-next-line react/no-unstable-nested-components
         const Mailto = ({ email, subject = '', body = '', children }) => {
@@ -403,6 +421,8 @@ class ClubHomePage extends Component {
                                     {this.renderGithub()}
 
                                     {this.renderMedium()}
+
+                                    {this.renderYouTube()}
 
                                     {this.renderMail()}
 

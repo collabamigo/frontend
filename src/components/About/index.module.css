@@ -1,0 +1,19 @@
+.behance:hover {
+  color: #4c56dd;
+}
+
+.instagram:hover {
+  color: #fd0061;
+}
+
+.github:hover {
+  color: #000000;
+}
+
+.linkedin:hover {
+  color: #0442b6;
+}
+
+.subtitle {
+  color: #9c3ab4 !important;
+}

@@ -38,7 +38,7 @@ function Footer() {
 
                       <ul className={styles.footer_links}>
                           <li>
-                              <a href="/contactUs/">
+                              <a href="mailto:hello@collabamigo.com">
                                   Contact Us
                               </a>
                           </li>
@@ -49,11 +49,11 @@ function Footer() {
                               </a>
                           </li>
 
-                          <li>
+                          {/* <li>
                               <a href="/privacyPolicy/">
                                   Privacy Policy
                               </a>
-                          </li>
+                          </li> */}
                       </ul>
                   </div>
 
@@ -70,16 +70,16 @@ function Footer() {
                           </li>
 
                           <li>
-                              <a href="/sitemap/">
+                              <a href="/sitemap.xml">
                                   Sitemap
                               </a>
                           </li>
 
-                          <li>
+                          {/* <li>
                               <a href="/rateUs/">
                                   Rate us
                               </a>
-                          </li>
+                          </li> */}
                       </ul>
                   </div>
               </div>

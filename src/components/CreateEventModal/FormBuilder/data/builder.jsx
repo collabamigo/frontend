@@ -25,6 +25,8 @@ export default {
       options: "Options",
       validation: "Show validation",
       generate: "Save Event",
+      min: "Minimum fields to select",
+      max: "Maximum fields to select",
     },
   },
   code: {

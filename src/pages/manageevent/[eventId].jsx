@@ -1,13 +1,13 @@
 
-import {getAuth} from "firebase/auth";
-import React, {useContext, useEffect, useState} from "react";
+import { getAuth } from "firebase/auth";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCalendar, faClock} from '@fortawesome/free-regular-svg-icons'
-import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons'
-import {getStorage, ref, getDownloadURL, uploadBytes, deleteObject} from "firebase/storage";
-import {useRouter} from 'next/router'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendar, faClock } from '@fortawesome/free-regular-svg-icons'
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+import { getStorage, ref, getDownloadURL, uploadBytes, deleteObject } from "firebase/storage";
+import { useRouter } from 'next/router'
 import Modal from 'react-bootstrap/Modal'
 import axios from "utilities/axios";
 import Loading from "components/Loading";
@@ -15,19 +15,22 @@ import lodashIsEmpty from "lodash/isEmpty";
 import lodashMap from "lodash/map";
 import Table from 'react-bootstrap/Table';
 import Carousel from 'react-bootstrap/Carousel';
-import {FirebaseContext} from "firebaseProvider";
+import { FirebaseContext } from "firebaseProvider";
 import ReactMarkdown from 'react-markdown'
 import SvgIcon from "common/SvgIcon";
 import ClubAdminModal from "components/ClubAdmin/modal";
 import UModal from "components/UModal";
 import FaqEditor from "components/FaqEditor";
-import {showAlert} from "common/Toast";
+import { showAlert } from "common/Toast";
 import imageCompression from 'browser-image-compression';
-
+import Tab from 'react-bootstrap/Tab'
+import Tabs from 'react-bootstrap/Tabs'
 import EditDescriptionModal from "components/EventAdmin/EditDescriptionModal";
-import {isValidUrl} from "utilities";
+import { isValidUrl } from "utilities";
 import EditNameDateModal from "components/EventAdmin/EditNameDateModal";
-
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
+// import { pie } from "./eventid.module.css";
 
 function download_table_as_csv(table_id, separator = ',') {
     let rows = document.querySelectorAll('tr');
@@ -79,7 +82,7 @@ function Event() {
         eventId = router.query.eventId.split("-")[0];
 
     const firebase = useContext(FirebaseContext);
-    const storage = firebase?getStorage(firebase):getStorage();
+    const storage = firebase ? getStorage(firebase) : getStorage();
 
     const [data, setData] = useState({
         clubLogoLinks: {},
@@ -87,21 +90,21 @@ function Event() {
         },
         showEvent: false,
         showModal: false,
-        showModal2:false,
+        showModal2: false,
         tableResponses: [[], false],
         form: [undefined, false],
-        bannerLinks:undefined,
-        bannerPaths :undefined,
-        image1Ref : React.createRef(),
-        image2Ref : React.createRef(),
-        image3Ref : React.createRef(),
-        links:null,
-        currentModal:null,
+        bannerLinks: undefined,
+        bannerPaths: undefined,
+        image1Ref: React.createRef(),
+        image2Ref: React.createRef(),
+        image3Ref: React.createRef(),
+        links: null,
+        currentModal: null,
     });
 
 
     const settableResponses = (tableResponses) => setData((prevData) => {
-        return {...prevData, tableResponses: [tableResponses, true]}
+        return { ...prevData, tableResponses: [tableResponses, true] }
     });
 
     const setEvent = (event) => {
@@ -117,43 +120,43 @@ function Event() {
         });
     }
     const setForm = (form) => setData((prevData) => {
-        return {...prevData, form: [form, true]}
+        return { ...prevData, form: [form, true] }
     });
 
     const addClubLogoLinks = (club, link) => {
-        console.log(clubLogoLinks)
+        // console.log(clubLogoLinks)
         setData((prevData) => {
-            return {...prevData, clubLogoLinks: {...(prevData.clubLogoLinks), [club]: link}}
+            return { ...prevData, clubLogoLinks: { ...(prevData.clubLogoLinks), [club]: link } }
         })
     };
     const event = data.event;
     const form = data.form[0];
     const clubLogoLinks = data.clubLogoLinks;
-    const tableHeaders = isEmpty(form)?[]:JSON.parse(form.skeleton);
+    const tableHeaders = isEmpty(form) ? [] : JSON.parse(form.skeleton);
     const tableResponses = data.tableResponses[0];
     const showModal = data.showModal;
     const showModal2 = data.showModal2;
-
+    // console.log(data.form);
 
     const convertToDatetimeString = iso_8601_string => {
         const date = new Date(iso_8601_string);
         return date.toLocaleString();
     }
 
-    const handleShowEvent = () => setData({...data, showEvent: true});
+    const handleShowEvent = () => setData({ ...data, showEvent: true });
     // const handleSubmitEvent = () => setData({...data, showEvent: false});
-    const handleCloseEvent = () => setData({...data, showEvent: false});
+    const handleCloseEvent = () => setData({ ...data, showEvent: false });
 
 
 
-    const handleClose = () => setData({...data, showModal: false});
-    const handleShow = () => setData({...data, showModal: true});
+    const handleClose = () => setData({ ...data, showModal: false });
+    const handleShow = () => setData({ ...data, showModal: true });
 
-    const handleClose2 = () => setData({...data, showModal2:false});
-    const handleShow2 = () => setData({...data, showModal2:true});
+    const handleClose2 = () => setData({ ...data, showModal2: false });
+    const handleShow2 = () => setData({ ...data, showModal2: true });
 
-    const handleSubmitEvent =(values)=>{
-        console.log("value", values)
+    const handleSubmitEvent = (values) => {
+        // console.log("value", values)
 
         const eventPayload = {};
 
@@ -177,21 +180,24 @@ function Event() {
 
         handleCloseEvent();
 
-        axios.patch("club/competition/"+ eventId +"/" ,eventPayload)
-        .then(() => {
+        axios.patch("club/competition/" + eventId + "/", eventPayload)
+            .then(() => {
                 setData((prevData) => {
-                    return {...prevData, event: {...prevData.event,
+                    return {
+                        ...prevData, event: {
+                            ...prevData.event,
                             name: values.name,
                             event_start: values.eventStartDate.toISOString(),
                             event_end: values.eventEndDate.toISOString(),
                             location: values.location,
-                    }}
+                        }
+                    }
                 })
-            showAlert("Event Updated Successfully", "success");
+                showAlert("Event Updated Successfully", "success");
 
-            // Refreshing Layer0 cache
-            axios.get(`${window.location.origin}/event/${eventId}/`)
-        })
+                // Refreshing Layer0 cache
+                axios.get(`${window.location.origin}/event/${eventId}/`)
+            })
 
         if (!lodashIsEmpty(formPayload))
             axios.patch("form/form/" + eventId + "/", formPayload)
@@ -213,14 +219,14 @@ function Event() {
 
     const [ModalShow2, setModalShow2] = useState(false);
     const [showDescriptionModal, setShowDescriptionModal] = useState(false);
-
+    const [key, setKey] = useState('responses');
 
     const setFaq = (faq) => {
         axios.patch(`club/competition/${eventId}/`, {
             faq: JSON.stringify(faq)
         }).then(() => {
             setData((prevData) => {
-                return {...prevData, event: {...prevData.event, faq: JSON.stringify(faq)}}
+                return { ...prevData, event: { ...prevData.event, faq: JSON.stringify(faq) } }
             })
 
             // Refreshing Layer0 cache
@@ -229,18 +235,17 @@ function Event() {
     }
 
     const handleDeletePic = (num) => {
-        console.log("Picture deleted")
-        console.log(data.bannerPaths)
+        // console.log("Picture deleted")
+        // console.log(data.bannerPaths)
         const temp = JSON.parse(data.bannerPaths)
         const storage = getStorage(firebase);
-        const desertRef = ref(storage,temp[num]);
+        const desertRef = ref(storage, temp[num]);
 
         temp.splice(num, 1)
         const payload = {
-            image_links:JSON.stringify(temp)
+            image_links: JSON.stringify(temp)
         }
-        axios.patch(`/club/competition/${eventId}/`, payload).then(()=>
-        {
+        axios.patch(`/club/competition/${eventId}/`, payload).then(() => {
             deleteObject(desertRef)
             showAlert(
                 "Picture Deleted",
@@ -250,12 +255,12 @@ function Event() {
             // Refreshing Layer0 cache
             axios.get(`${window.location.origin}/event/${eventId}/`)
         })
-        setData({...data, bannerLinks:undefined,bannerPaths:JSON.stringify(temp)})
+        setData({ ...data, bannerLinks: undefined, bannerPaths: JSON.stringify(temp) })
     }
 
-    const bannerControl = (args,num) => {
-        if (args[num] !== undefined && args !== undefined){
-            return(
+    const bannerControl = (args, num) => {
+        if (args[num] !== undefined && args !== undefined) {
+            return (
                 <div>
                     <Image
                         alt="Carousel Image"
@@ -270,8 +275,8 @@ function Event() {
 
             )
         }
-        else{
-            return(
+        else {
+            return (
                 <svg
                     height="44"
                     viewBox="0 0 24 24"
@@ -287,7 +292,7 @@ function Event() {
     const handleUpload = (image, index) => {
         const storage = getStorage();
         const storageRef = ref(storage, `/files/${getAuth(firebase).lastNotifiedUid}/${new Date().getTime()}`);
-        if(image == null)
+        if (image == null)
             return;
         const metadata = {
             contentType: image.type,
@@ -297,62 +302,62 @@ function Event() {
             }
         }
 
-        console.log('originalFile instanceof Blob', image instanceof Blob); // true
-        console.log(`originalFile size ${image.size / 1024 / 1024} MB`);
+        // console.log('originalFile instanceof Blob', image instanceof Blob); // true
+        // console.log(`originalFile size ${image.size / 1024 / 1024} MB`);
 
         const options = {
-            maxSizeMB: 250/1024,
+            maxSizeMB: 250 / 1024,
             maxWidthOrHeight: 1920,
             useWebWorker: true
         }
         imageCompression(image, options)
             .then(function (compressedFile) {
-              console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-              console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+                // console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+                // console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
 
-              uploadBytes(storageRef, compressedFile, metadata).then((args) => {
-                  const temp = args["metadata"]["fullPath"]
-                  const arr = JSON.parse(data.bannerPaths)
-                  arr.splice(index,0,temp)
-                  const payload = {
-                      image_links: JSON.stringify(arr)
-                  }
-                  axios.patch("/club/competition/" + eventId + "/", payload).then(() => {
-                      showAlert(
-                          "Picture Uploaded",
-                          "success"
+                uploadBytes(storageRef, compressedFile, metadata).then((args) => {
+                    const temp = args["metadata"]["fullPath"]
+                    const arr = JSON.parse(data.bannerPaths)
+                    arr.splice(index, 0, temp)
+                    const payload = {
+                        image_links: JSON.stringify(arr)
+                    }
+                    axios.patch("/club/competition/" + eventId + "/", payload).then(() => {
+                        showAlert(
+                            "Picture Uploaded",
+                            "success"
                         )
-                      setData({...data, bannerLinks: undefined, bannerPaths: JSON.stringify(arr)})
+                        setData({ ...data, bannerLinks: undefined, bannerPaths: JSON.stringify(arr) })
 
-                      // Refreshing Layer0 cache
-                      axios.get(`${window.location.origin}/event/${eventId}/`)
-                  })
-              })
-        })
-        .catch(function (error) {
-          console.log(error.message);
-        });
+                        // Refreshing Layer0 cache
+                        axios.get(`${window.location.origin}/event/${eventId}/`)
+                    })
+                })
+            })
+            .catch(function (error) {
+                console.log(error.message);
+            });
     }
 
     const handleSubmitLinks = (args) => {
         const payload = {
-            link: (args[0].startsWith("http://") || args[0].startsWith("https://"))?args[0]:`https://${args[0]}`,
+            link: (args[0].startsWith("http://") || args[0].startsWith("https://")) ? args[0] : `https://${args[0]}`,
         }
-        axios.patch('/club/competition/' + eventId + '/', payload).then(()=>{
+        axios.patch('/club/competition/' + eventId + '/', payload).then(() => {
             handleClose2()
             showAlert(
-            "Links Added",
+                "Links Added",
                 "success"
             )
-            setEvent({...event, link: payload.link})
+            setEvent({ ...event, link: payload.link })
 
             // Refreshing Layer0 cache
             axios.get(`${window.location.origin}/event/${eventId}/`)
         })
     }
 
-     useEffect(() => {
-        if (eventId!==undefined) {
+    useEffect(() => {
+        if (eventId !== undefined) {
 
             if (!data.tableResponses[1])
                 axios.get(`form/response/${eventId}/`)
@@ -376,10 +381,10 @@ function Event() {
                             setForm(-1);
                         else
                             throw err;
-                })
+                    })
 
             if (isEmpty(clubLogoLinks) && !isEmpty(event))
-                event.clubs.map(club => getDownloadURL(ref(storage, 'data/'+club+'/uneditable/logo.png'))
+                event.clubs.map(club => getDownloadURL(ref(storage, 'data/' + club + '/uneditable/logo.png'))
                     .then(url => addClubLogoLinks(club, url)))
 
             if (data.bannerLinks === undefined && data.bannerPaths !== undefined) {
@@ -387,7 +392,7 @@ function Event() {
                 if (data.bannerPaths === '[]') {
                     // suppression needed
                     // eslint-disable-next-line react/no-did-update-set-state
-                    setData({...data, bannerLinks: []})
+                    setData({ ...data, bannerLinks: [] })
                 } else
                     JSON.parse(data.bannerPaths).map((link, index) => {
                         getDownloadURL(ref(storage, link)).then((url) => {
@@ -397,17 +402,159 @@ function Event() {
                                 bannerLinks: {
                                     ...(data.bannerLinks),
                                     [index]: url,
-                                }})
+                                }
+                            })
                             )
                         })
                     })
-            }}})
+            }
+        }
+    })
 
+    let formContent;
+    if (form)
+        formContent = JSON.parse(form.skeleton);
+
+    // console.log("formcontent ", formContent);
+    // console.log("formresponse", tableResponses);
+
+
+    ChartJS.register(ArcElement, Tooltip, Legend);
+
+
+    const renderSummary = () => {
+        return tableHeaders.map((option, index) => {
+            const chartData = {
+                datasets: [{
+                    backgroundColor: [
+                        '#d10000',
+                        '#a8005f',
+                        '#d15b00',
+                        '#ffc000',
+                        '#d1a900',
+                        '#00d1b2',
+                        '#accb00',
+                        '#1eae00',
+                        '#008077',
+                        '#06358b',
+                        '#47058d',
+                        '#8d0d7b',
+                        '#67028b',
+                        '#1d0891',
+                        '#0d0d91',
+                        '#008769',
+                    ]
+                }],
+                // options: {
+                //     maintainAspectRatio: false,
+                //     responsive: true,
+                // },
+                // legend: {
+                //     display: true,
+                //     position: 'bottom'
+                // }
+            };
+            if (formContent[index].type === "radio" || formContent[index].type === "select") {
+                const graphData = {};
+                tableResponses.forEach((response) => {
+                    if (graphData[response.elements[index].value] === undefined)
+                        graphData[response.elements[index].value] = 1;
+                    else
+                        graphData[response.elements[index].value] += 1;
+                })
+                chartData.datasets[0].data = Object.values(graphData);
+                chartData.labels = Object.keys(graphData);
+                // console.log("chartData", chartData);
+                return (
+                    <>
+                        <h1 key={option.name}>
+                            {option.name}
+                        </h1>
+
+                        <div>
+                            <Pie
+                                // className={pie}
+                                data={chartData}
+                                options={{ maintainAspectRatio: false, }}
+                            />
+                        </div>
+                    </>
+                )
+            } else if (formContent[index].type === "checkbox") {
+                let temp = [];
+                let tarr;
+                let graphData = {};
+                tableResponses.forEach((response) => {
+                    try {
+                        if (response.elements[index].value === "" || typeof response.elements[index].value !== "string" || !response.elements[index].value.includes("["))
+                            tarr = [];
+                        else if (response.elements[index].value.includes("\""))
+                            tarr = JSON.parse(response.elements[index].value);
+                        else
+                            tarr = JSON.parse(response.elements[index].value.replace("'", "\""));
+                    }
+                    catch (e) {
+                        console.log("error in graphData", e);
+                        tarr = [];
+                    }
+                    tarr.forEach((t) => {
+                        temp.push(t);
+                    })
+                });
+                temp.forEach((t) => {
+                    if (graphData[t] === undefined)
+                        graphData[t] = 1;
+                    else
+                        graphData[t] += 1;
+                })
+                console.log(temp);
+                console.log(graphData);
+                chartData.datasets[0].data = Object.values(graphData);
+                chartData.labels = Object.keys(graphData);
+                temp = [];
+                graphData = {};
+                // console.log("chartData", chartData);
+                return (
+                    <>
+                        <h1 key={option.name}>
+                            {option.name}
+                        </h1>
+
+                        <div>
+                            <Pie
+                                // className={pie}
+                                data={chartData}
+                                options={{ maintainAspectRatio: false, }}
+                            />
+                        </div>
+                    </>
+                )
+            } else {
+
+                return (
+                    <>
+                        <h1 key={option.name}>
+                            {option.name}
+                        </h1>
+
+                        {tableResponses.map((response) => (
+                            <p key={response}>
+                                {response.elements[index].value}
+                            </p>
+                        ))}
+                    </>
+                )
+            }
+        })
+    }
 
     const isLoading = isEmpty(event);
     if (isLoading)
         return <Loading />
     else
+        // console.log("table headers ", tableHeaders);
+        // console.log("table responses ", tableResponses[0].elements);
+
         return (
             <>
 
@@ -421,7 +568,7 @@ function Event() {
                     description={event.description}
                     eventId={eventId}
                     handleClose={() => setShowDescriptionModal(false)}
-                    setDescription={(desc)=>{setData((data)=>{return {...data, event:{...data.event, description: desc}}})}}
+                    setDescription={(desc) => { setData((data) => { return { ...data, event: { ...data.event, description: desc } } }) }}
                     show={showDescriptionModal}
 
                 />
@@ -449,10 +596,10 @@ function Event() {
 
                         <div className="column">
                             <div className="d-flex">
-                                {data.bannerLinks === undefined ? null:
+                                {data.bannerLinks === undefined ? null :
                                 <div className="mx-auto d-flex">
                                     <div className="d-flex">
-                                        {data.bannerLinks[0]?
+                                        {data.bannerLinks[0] ?
                                             <div>
                                                 <span onClick={() => handleDeletePic(0)}>
                                                     <SvgIcon
@@ -462,7 +609,7 @@ function Event() {
                                                         width="20px"
                                                     />
                                                 </span>
-                                            </div>: null}
+                                            </div> : null}
 
                                         <div
                                             className={"my-auto mx-3 " + ((data.bannerLinks[0]) ? "" : "-primary")}
@@ -476,7 +623,7 @@ function Event() {
                                     </div>
 
                                     <div className="d-flex">
-                                        {data.bannerLinks[1]?
+                                        {data.bannerLinks[1] ?
                                             <div>
                                                 <span onClick={() => handleDeletePic(1)}>
                                                     <SvgIcon
@@ -486,7 +633,7 @@ function Event() {
                                                         width="20px"
                                                     />
                                                 </span>
-                                            </div>: null}
+                                            </div> : null}
 
                                         <div
                                             className={"my-auto mx-3" + ((data.bannerLinks[1]) ? "" : "-primary")}
@@ -497,7 +644,7 @@ function Event() {
                                     </div>
 
                                     <div className="d-flex">
-                                        {data.bannerLinks[2]?
+                                        {data.bannerLinks[2] ?
                                             <div>
                                                 <span onClick={() => handleDeletePic(2)}>
                                                     <SvgIcon
@@ -507,7 +654,7 @@ function Event() {
                                                         width="20px"
                                                     />
                                                 </span>
-                                            </div>: null}
+                                            </div> : null}
 
                                         <div
                                             className={"my-auto mx-3 " + ((data.bannerLinks[2]) ? "" : "-primary")}
@@ -522,21 +669,21 @@ function Event() {
                             <div>
                                 <input
                                     className="d-none"
-                                    onChange={(e)=>handleUpload(e.target.files[0], 0)}
+                                    onChange={(e) => handleUpload(e.target.files[0], 0)}
                                     ref={data.image1Ref}
                                     type="file"
                                 />
 
                                 <input
                                     className="d-none"
-                                    onChange={(e)=>handleUpload(e.target.files[0], 1)}
+                                    onChange={(e) => handleUpload(e.target.files[0], 1)}
                                     ref={data.image2Ref}
                                     type="file"
                                 />
 
                                 <input
                                     className="d-none"
-                                    onChange={(e)=>handleUpload(e.target.files[0], 2)}
+                                    onChange={(e) => handleUpload(e.target.files[0], 2)}
                                     ref={data.image3Ref}
                                     type="file"
                                 />
@@ -552,21 +699,21 @@ function Event() {
 
                             <div className="row justify-content-around">
                                 {lodashMap(clubLogoLinks, ((link, club) => {
-                                return (
-                                    <div
-                                        className="col-5 me-1"
+                                    return (
+                                        <div
+                                            className="col-5 me-1"
                                         // key={club+link}
-                                    >
-                                        <Image
-                                            alt={club}
-                                            fluid
-                                            rounded
-                                            src={link}
-                                            thumbnail
-                                        />
-                                    </div>
-                                )
-                            }))}
+                                        >
+                                            <Image
+                                                alt={club}
+                                                fluid
+                                                rounded
+                                                src={link}
+                                                thumbnail
+                                            />
+                                        </div>
+                                    )
+                                }))}
                             </div>
                         </div>
                     </div>
@@ -598,7 +745,7 @@ function Event() {
                                             {' '}
 
                                             {convertToDatetimeString(event.event_start) +
-                                            (event.event_end?" to "+ convertToDatetimeString(event.event_end):"")}
+                                                (event.event_end ? " to " + convertToDatetimeString(event.event_end) : "")}
                                         </p>
 
                                         <p>
@@ -609,7 +756,7 @@ function Event() {
                                             {event.location}
                                         </p>
 
-                                        {isEmpty(form)?null:
+                                        {isEmpty(form) ? null :
                                         <p>
                                             <FontAwesomeIcon icon={faClock} />
 
@@ -630,7 +777,7 @@ function Event() {
                                 <div className="row">
 
                                     <div>
-                                        {isEmpty(form)?null:
+                                        {isEmpty(form) ? null :
                                         <>
                                             <Button
                                                 className="w-100"
@@ -665,66 +812,102 @@ function Event() {
                                                 </Modal.Header>
 
                                                 <Modal.Body>
-                                                    <Table
-                                                        bordered
-                                                        hover
-                                                        striped
+
+                                                    <Tabs
+                                                        activeKey={key}
+                                                        defaultActiveKey="responses"
+                                                        id="controlled-tab-example"
+                                                        onSelect={(k) => setKey(k)}
                                                     >
-                                                        <thead>
-                                                            <tr>
-                                                                <td>
-                                                                    {" "}
-                                                                    Sr no.
-                                                                </td>
-
-                                                                <td>
-                                                                    {" "}
-                                                                    Email (verified)
-                                                                </td>
-
-                                                                {tableHeaders.map((option) => (
-                                                                    <td key={option.name}>
-                                                                        {option.name}
-                                                                    </td>
-                                                                ))}
-
-                                                            </tr>
-                                                        </thead>
-
-                                                        <tbody>
-                                                            {tableResponses.map((response, index) => (
-                                                                <tr key={response}>
-
-                                                                    <td>
-                                                                        {index}
-                                                                    </td>
-
-                                                                    <td>
-                                                                        {response.responder_emails[0]}
-                                                                    </td>
-
-                                                                    {response.elements.map((values) => (
-                                                                        <td
-                                                                            key={values.value}
-                                                                        >
-                                                                            {isValidUrl(values.value) ? (
-                                                                                <a
-                                                                                    href={values.value}
-                                                                                    rel="noopener noreferrer"
-                                                                                    target="_blank"
-                                                                                >
-                                                                                    {values.value}
-                                                                                </a>
-                                                                            ) : (
-                                                                                    values.value
-                                                                                )}
+                                                        <Tab
+                                                            className="overflow-scroll"
+                                                            eventKey="responses"
+                                                            title="Responses"
+                                                        >
+                                                            <Table
+                                                                bordered
+                                                                hover
+                                                                responsive
+                                                                striped
+                                                            >
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>
+                                                                            {" "}
+                                                                            Sr no.
                                                                         </td>
-                                                                    ))}
-                                                                </tr>
-                                                            ))}
 
-                                                        </tbody>
-                                                    </Table>
+                                                                        <td>
+                                                                            {" "}
+                                                                            Email (verified)
+                                                                        </td>
+
+                                                                        {tableHeaders.map((option) => (
+                                                                            <td key={option.name}>
+                                                                                {option.name}
+                                                                            </td>
+                                                                        ))}
+
+                                                                    </tr>
+                                                                </thead>
+
+                                                                <tbody>
+                                                                    {tableResponses.map((response, index) => (
+                                                                        <tr key={response}>
+
+                                                                            <td>
+                                                                                {index}
+                                                                            </td>
+
+                                                                            <td>
+                                                                                {response.responder_emails[0]}
+                                                                            </td>
+
+                                                                            {response.elements.map((values) => (
+                                                                                <td
+                                                                                    key={values.value}
+                                                                                >
+                                                                                    {isValidUrl(values.value) ? (
+                                                                                        <a
+                                                                                            href={values.value}
+                                                                                            rel="noopener noreferrer"
+                                                                                            target="_blank"
+                                                                                        >
+                                                                                            {values.value}
+                                                                                        </a>
+                                                                                    ) : (
+                                                                                        values.value
+                                                                                    )}
+                                                                                </td>
+                                                                            ))}
+                                                                        </tr>
+                                                                    ))}
+
+                                                                </tbody>
+                                                            </Table>
+                                                        </Tab>
+
+                                                        <Tab
+                                                            eventKey="summary"
+                                                            title="Summary"
+                                                        >
+                                                            {renderSummary()}
+                                                        </Tab>
+                                                    </Tabs>
+
+                                                    {/* {tableHeaders.map((option) => {
+                                                    <>
+                                                        <td key={option.name}>
+                                                            {option.name}
+                                                        </td>
+
+                                                        {tableResponses.elements.map((response) => {
+                                                            <p key={response.value}>
+                                                                {response.value}
+                                                            </p>
+                                                        })}
+                                                    </>
+                                                })} */}
 
                                                     <br />
 
@@ -736,8 +919,8 @@ function Event() {
                                                 <Button
                                                     className="w-50 align-self-center"
                                                     onClick={() => {
-                                                            download_table_as_csv(event.name + " responses");
-                                                        }}
+                                                        download_table_as_csv(event.name + " responses");
+                                                    }}
                                                 >
                                                     Download as CSV
                                                 </Button>
@@ -751,11 +934,11 @@ function Event() {
 
                                     <div className="p-2 col-6">
                                         <FaqEditor
-                                            disappear={()=>{setData({...data, currentModal: null})}}
+                                            disappear={() => { setData({ ...data, currentModal: null }) }}
                                             faq={JSON.parse(event.faq)}
                                             setFaq={setFaq}
-                                            setShow={()=>{setData({...data,currentModal:"faq"})}}
-                                            show={data.currentModal=== "faq"}
+                                            setShow={() => { setData({ ...data, currentModal: "faq" }) }}
+                                            show={data.currentModal === "faq"}
                                         />
                                     </div>
 
