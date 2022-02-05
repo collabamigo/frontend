@@ -11,6 +11,8 @@ import Link from "common/Link";
 import isEmpty from "lodash/isEmpty";
 import GoogleSignIn from "../../GoogleSignIn";
 import styles from "./Header.module.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
@@ -20,7 +22,6 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
     const [expanded, setExpanded] = useState(!isAuthenticated);
 
     useEffect(() => {
-
         if (isEmpty(data) && isAuthenticated)
             axios.get(`connect/profile`)
                 .then(res => setData(res.data[0])).catch(err => console.log(err))
@@ -31,6 +32,31 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
             setExpanded(false);
     }, [isAuthenticated])
 
+     const clubPeopleList = {
+          admin: [
+            {
+              name: 'Byld',
+              username: 'byld',
+            },
+          ],
+          member: [
+            {
+              name: 'Rahul Bansal',
+              username: 'wit',
+            },
+          ],
+        };
+
+    const userName = data.First_Name + " " + data.Last_Name;
+
+    const isAdmin = data && clubPeopleList.admin.find(
+    (elem) => elem.name === userName
+    );
+
+    const isMember = data && clubPeopleList.member.find(
+    (elem) => elem.name === userName
+
+    );
     return (
         <Navbar
             bg="dark"
@@ -80,8 +106,21 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
                                             key={club.id}
                                             to={`/manage/${club.username}/`}
                                         >
-                                            <NavDropdown.Item as="span">
-                                                {club.name}
+                                            <NavDropdown.Item
+                                                as="span"
+                                                className='d-flex align-items-center justify-content-between'
+                                            >
+                                                { club.name }
+                                               
+                                                { isMember && <FontAwesomeIcon
+                                                    color='orange'
+                                                    icon={faUserEdit}
+                                                              /> }
+
+                                                { isAdmin && <FontAwesomeIcon
+                                                    color='orange'
+                                                    icon={faUserEdit}
+                                                             /> }
                                             </NavDropdown.Item>
                                         </Link>
                                         ))}
@@ -94,7 +133,7 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
 
                             <NavDropdown
                                 id="dropdown-button-drop-start"
-                                title={data?(data.First_Name + " " + data.Last_Name):""}
+                                title={data?userName:""}
 
                             >
                                 <NavDropdown.Item href="/profile">

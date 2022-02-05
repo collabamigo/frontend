@@ -21,6 +21,8 @@ import Image from "react-bootstrap/Image";
 import EventTalkCard from "../../../common/HomePageCards/EventTalkCard";
 import {showAlert} from "../../../common/Toast";
 import imageCompression from 'browser-image-compression';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCrown, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 class ClubAdminPage extends Component {
 
@@ -59,6 +61,7 @@ class ClubAdminPage extends Component {
             bannerPaths :undefined,
             logoUrl:null,
             clubName: undefined,
+            userName:''
         }
     }
 
@@ -115,7 +118,16 @@ class ClubAdminPage extends Component {
                     then((res) => {
                         this.setState({competitions: res.data})
                     });
-            });
+                });
+            if (this.state.userName === '')
+               axios
+                .get(`connect/profile`)
+                .then((res) =>
+                    this.setState({
+                    userName: `${res.data[0].First_Name} ${res.data[0].Last_Name}`,
+                    })
+                )
+                .catch((err) => console.log(err));
             if (this.state.bannerLinks === undefined && this.state.bannerPaths !== undefined) {
                 const firebase = this.context;
                 const storage = firebase ? getStorage(firebase) : getStorage();
@@ -588,6 +600,29 @@ class ClubAdminPage extends Component {
         if (this.state.isLoading || this.state.announcements === null || this.state.competitions === null){
             return <Loading />;
         }
+
+        const clubPeopleList = {
+          admin: [
+            {
+              name: 'Byld',
+              username: 'byld',
+            },
+          ],
+          member: [
+            {
+              name: 'Rahul Bansal',
+              username: 'wit',
+            },
+          ],
+        };
+
+        const isAdmin = clubPeopleList.admin.find(elem => elem.name === this.state.userName);
+        
+        const isMember = clubPeopleList.member.find(
+          (elem) => elem.name === this.state.userName
+        );
+
+        
         return (
             <div className="row m-md-3">
                 <div className="mx-3 col-md-2 col-lg-2 col-sm-12 d-flex justify-content-around">
@@ -653,6 +688,39 @@ class ClubAdminPage extends Component {
                                         {this.state.basicInformation.tagline}
                                     </Card.Subtitle>
 
+                                    { (isAdmin || isMember) &&
+                                        <Card.Text className='my-2'>
+                                            { isMember &&
+                                            <>
+                                                <FontAwesomeIcon
+                                                    color='orange'
+                                                    icon={faUserEdit}
+                                                />
+
+                                                <span
+                                                    className='mx-2'
+                                                    style={{ color: 'orange' }}
+                                                >
+                                                    Core Member
+                                                </span>
+                                            </>}
+
+                                            { isAdmin &&
+                                                <>
+                                                    <FontAwesomeIcon
+                                                        color='orange'
+                                                        icon={faCrown}
+                                                    />
+
+                                                    <span
+                                                        className='mx-2'
+                                                        style={{ color: 'orange' }}
+                                                    >
+                                                        Admin
+                                                    </span>
+                                                </>}
+                                        </Card.Text>}
+                                    
                                     <br />
 
                                     <div className="col text-center">
