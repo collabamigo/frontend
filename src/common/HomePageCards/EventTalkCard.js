@@ -12,12 +12,14 @@ import {remark} from 'remark'
 import strip from 'strip-markdown'
 
 import styles from "./EventTalkCard.module.css";
+import { isAdmin } from '@firebase/util';
 
 export default function EventTalkCard(props) {
 
     const [data, setData] = useState({
         imageLink: undefined,
         strippedText: undefined,
+        isActive:false
     });
 
     const imageLink = data.imageLink;
@@ -40,18 +42,19 @@ export default function EventTalkCard(props) {
         if (imageLink === undefined){
                 axios.get(`club/competition/${props.element.id}/`)
                 .then(res => {
-                                const storage = getStorage();
-                                if((JSON.parse(res.data.image_links))[0])
-                                {
-                                    getDownloadURL(ref(storage, (JSON.parse(res.data.image_links))[0])).then(
-                                        link =>   setImageLink(link)
-                                    )
-                                }
-                                else{
-                                    setImageLink("https://via.placeholder.com/350x200")
-                                }
-                            })
+                    const storage = getStorage();
+                    setData(prev => ({ ...prev, isActive: res.data.is_active }) );
+                        if((JSON.parse(res.data.image_links))[0])
+                        {
+                            getDownloadURL(ref(storage, (JSON.parse(res.data.image_links))[0])).then(
+                                link =>   setImageLink(link)
+                            )
                         }
+                        else{
+                            setImageLink("https://via.placeholder.com/350x200")
+                        }
+                        })
+                    }
 
         if (strippedText === undefined){
             remark()
@@ -66,7 +69,17 @@ export default function EventTalkCard(props) {
     // var dates = new Date(props.element.event_end);
     // var finals = ((dates.getMonth() + 1) + '/' + dates.getDate() + '/' +  dates.getFullYear());
     var datee = new Date(props.element.event_end);
-    var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' +  datee.getFullYear());
+    var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' + datee.getFullYear());
+    
+    const publishHandler = () => {
+        axios.patch(`club/competition/${props.element.id}/`, {
+            is_active: !data.isActive
+        })
+            .then(res => {
+                setData((prev) => ({ ...prev, isActive: !res.data.isActive }));
+            })
+    }
+
 
     return (
         <div className={styles.cardCenter+" h-100 mx-3 mx-md-5"}>
@@ -90,7 +103,18 @@ export default function EventTalkCard(props) {
                         />
                     </div>
 
+                    
                     <Card.Body className={styles.cardinner + ' px-2'}>
+                        { props.isDraftVisible && !data?.isActive && props.isAdmin &&
+                            <button
+                                className='btn btn-primary'
+                                onClick={publishHandler}
+                                style={{ float: 'right' }}
+                                type='button'
+                            >
+                                Publish
+                            </button>}
+
                         <Card.Title className=" text-primary fw-bold mt-1">
                             {props.element.name}
                         </Card.Title>
@@ -145,6 +169,8 @@ export default function EventTalkCard(props) {
 EventTalkCard.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     element: PropTypes.object,
+    isAdmin: PropTypes.bool,
+    isDraftVisible: PropTypes.bool,
     manage: PropTypes.bool,
 }
 
@@ -156,6 +182,8 @@ EventTalkCard.defaultProps = {
         description: "Event descriptiontext comes here",
         footer: "Event footer",
     },
+    isAdmin: false,
+    isDraftVisible: false,
     manage: false,
 
 }

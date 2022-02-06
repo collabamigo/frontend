@@ -24,12 +24,12 @@ axios.interceptors.response.use(function (response) {
         throw error;
     if (localStorage.getItem("err") !== JSON.stringify(error)) {
         localStorage.setItem("err", JSON.stringify(error))
-        if (error.response.status === 500)
+        if (error.response?.status === 500)
             showAlert(
                     "Unexpected error occurred. Please contact us if you see this message repeatedly.",
                     "error"
                 )
-        else if (error.response.status === 401) {
+        else if (error.response?.status === 401) {
             showAlert(
                 "Authentication error. Please try clicking/tapping on the CollabConnect logo to re-authenticate",
                 "error"

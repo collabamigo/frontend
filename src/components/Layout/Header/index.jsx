@@ -20,43 +20,47 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
     const [data, setData] = useState();
     const [googleState, setGoogleState] = useState("button");
     const [expanded, setExpanded] = useState(!isAuthenticated);
+    const [username, setUsername] = useState('');
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isMember, setIsMember] = useState(false);
+
+    const clubPeopleList = {
+      admin: [
+        {
+          name: 'Byld',
+          username: 'byld',
+        },
+      ],
+      member: [
+        {
+          name: 'Rahul Bansal',
+          username: 'wit',
+        },
+      ],
+    };
 
     useEffect(() => {
         if (isEmpty(data) && isAuthenticated)
             axios.get(`connect/profile`)
-                .then(res => setData(res.data[0])).catch(err => console.log(err))
-    })
+                .then(res => {
+                    setData(res.data[0]);
+                    setUsername(
+                      res.data[0].First_Name + ' ' + res.data[0].Last_Name
+                    );
+                    setIsAdmin(clubPeopleList.admin.find((elem) => elem.name === username));
+                    setIsMember(clubPeopleList.member.find((elem) => elem.name === username));
+                
+                }).catch(err => console.log(err))
+        
+    },[data, isAuthenticated]);
 
     useEffect(() => {
         if (isAuthenticated && expanded)
             setExpanded(false);
     }, [isAuthenticated])
 
-     const clubPeopleList = {
-          admin: [
-            {
-              name: 'Byld',
-              username: 'byld',
-            },
-          ],
-          member: [
-            {
-              name: 'Rahul Bansal',
-              username: 'wit',
-            },
-          ],
-        };
+     
 
-    const userName = data.First_Name + " " + data.Last_Name;
-
-    const isAdmin = data && clubPeopleList.admin.find(
-    (elem) => elem.name === userName
-    );
-
-    const isMember = data && clubPeopleList.member.find(
-    (elem) => elem.name === userName
-
-    );
     return (
         <Navbar
             bg="dark"
@@ -133,7 +137,7 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
 
                             <NavDropdown
                                 id="dropdown-button-drop-start"
-                                title={data?userName:""}
+                                title={username}
 
                             >
                                 <NavDropdown.Item href="/profile">

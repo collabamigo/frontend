@@ -604,13 +604,13 @@ class ClubAdminPage extends Component {
         const clubPeopleList = {
           admin: [
             {
-              name: 'Byld',
+              name: 'Rahul Bansal',
               username: 'byld',
             },
           ],
           member: [
             {
-              name: 'Rahul Bansal',
+              name: 'Rahul Bansals',
               username: 'wit',
             },
           ],
@@ -1082,6 +1082,8 @@ class ClubAdminPage extends Component {
                                         {this.state.competitions.map((option) => (
                                             <EventTalkCard
                                                 element={option}
+                                                isAdmin={isAdmin}
+                                                isDraftVisible
                                                 key={option.description}
                                                 manage
                                             />
