@@ -412,7 +412,7 @@ function Event() {
     })
 
     let formContent;
-    if (form)
+    if (!isEmpty(form))
         formContent = JSON.parse(form.skeleton);
 
     // console.log("formcontent ", formContent);
