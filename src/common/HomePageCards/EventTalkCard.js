@@ -12,14 +12,13 @@ import {remark} from 'remark'
 import strip from 'strip-markdown'
 
 import styles from "./EventTalkCard.module.css";
-import { isAdmin } from '@firebase/util';
 
-export default function EventTalkCard(props) {
+export default function EventTalkCard (props) {
+    const [isActive, setIsActive] = useState(false);
 
     const [data, setData] = useState({
         imageLink: undefined,
         strippedText: undefined,
-        isActive:false
     });
 
     const imageLink = data.imageLink;
@@ -43,7 +42,7 @@ export default function EventTalkCard(props) {
                 axios.get(`club/competition/${props.element.id}/`)
                 .then(res => {
                     const storage = getStorage();
-                    setData(prev => ({ ...prev, isActive: res.data.is_active }) );
+                    setIsActive(res.data.is_active);
                         if((JSON.parse(res.data.image_links))[0])
                         {
                             getDownloadURL(ref(storage, (JSON.parse(res.data.image_links))[0])).then(
@@ -73,27 +72,29 @@ export default function EventTalkCard(props) {
     
     const publishHandler = () => {
         axios.patch(`club/competition/${props.element.id}/`, {
-            is_active: !data.isActive
+            is_active: !isActive
         })
-            .then(res => {
-                setData((prev) => ({ ...prev, isActive: !res.data.isActive }));
+            .then(() => {
+                setIsActive((prev) => !prev);
             })
     }
 
 
     return (
         <div className={styles.cardCenter+" h-100 mx-3 mx-md-5"}>
-            <Link
-                className="reset-a"
-                to={"/"+(props.manage?"manage":"")+"event/" + props.element.id + "-" + props.element.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '-').toLowerCase()}
+           
+
+            <Card
+                className={`h-100 ${isActive?'':'text-muted'}`}
+                style={{ borderRadius: '10px' }}
             >
-                <Card
-                    className="h-100"
-                    style={{ borderRadius: '10px' }}
+                <div
+                    className="overflow-hidden justify-content-center d-flex"
+                    style={{ height: '40%', borderRadius: '10px' }}
                 >
-                    <div
-                        className="overflow-hidden justify-content-center d-flex"
-                        style={{ height: '40%', borderRadius: '10px' }}
+                    <Link
+                        className="reset-a d-flex align-items-center justify-content-center"
+                        to={"/"+(props.manage?"manage":"")+"event/" + props.element.id + "-" + props.element.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '-').toLowerCase()}
                     >
                         <Image
                             className="object-fit-contain img-fluid"
@@ -101,21 +102,17 @@ export default function EventTalkCard(props) {
                             // style={{ objectFit: 'contain' }}
                             variant="top"
                         />
-                    </div>
+                    </Link>
+                </div>
 
                     
-                    <Card.Body className={styles.cardinner + ' px-2'}>
-                        { props.isDraftVisible && !data?.isActive && props.isAdmin &&
-                            <button
-                                className='btn btn-primary'
-                                onClick={publishHandler}
-                                style={{ float: 'right' }}
-                                type='button'
-                            >
-                                Publish
-                            </button>}
+                <Card.Body className={styles.cardinner + ' px-2 d-flex flex-column'}>
+                    <Link
+                        className="reset-a flex-1"
+                        to={"/"+(props.manage?"manage":"")+"event/" + props.element.id + "-" + props.element.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '-').toLowerCase()}
+                    >
 
-                        <Card.Title className=" text-primary fw-bold mt-1">
+                        <Card.Title className={`${isActive?'text-primary':'text-muted'} fw-bold mt-1`}>
                             {props.element.name}
                         </Card.Title>
 
@@ -130,15 +127,24 @@ export default function EventTalkCard(props) {
                         </Card.Subtitle>
 
 
-                        <Card.Text className={styles.text}>
+                        <Card.Text
+                            className={styles.text}
+                            style={{flex:1}}
+                        >
                             <p>
                                 {isMobile ? truncate(strippedText, 100) : truncate(strippedText, 290) }
                             </p>
                         </Card.Text>
 
-                        <br />
+                    </Link>
 
-                        <Card.Subtitle className={styles.bottom + " d-flex text-muted "}>
+                    <br />
+
+                    <Card.Subtitle className="d-flex text-muted mt-3">
+                        <div
+                            className='d-flex'
+                            style={{flex:1}}
+                        >
                             <SvgIcon
                                 height="15px"
                                 src="calendar_datee.svg"
@@ -146,21 +152,29 @@ export default function EventTalkCard(props) {
                             />
 
 
-                            <p className={styles.text2}>
-                                .
-
+                            <p className={styles.text2+ ' mx-2'}>
                                 Fill before
                                 {' '}
 
-
-
                                 {finale}
                             </p>
-                        </Card.Subtitle>
+                        </div>
 
-                    </Card.Body>
-                </Card>
-            </Link>
+                        { props.isDraftVisible &&  props.isAdmin &&
+                            <label className={styles.switch}>
+                                <input
+                                    checked={isActive}
+                                    className={styles.switch_input}
+                                    onChange={publishHandler}
+                                    type="checkbox"
+                                />
+
+                                <span className={styles.slider +' '+ styles.round} />
+                            </label>}
+                    </Card.Subtitle>
+
+                </Card.Body>
+            </Card>
         </div>
     )
 }

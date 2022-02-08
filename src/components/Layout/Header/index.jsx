@@ -12,7 +12,7 @@ import isEmpty from "lodash/isEmpty";
 import GoogleSignIn from "../../GoogleSignIn";
 import styles from "./Header.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import { faCrown, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
@@ -46,13 +46,23 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
                     setData(res.data[0]);
                     setUsername(
                       res.data[0].First_Name + ' ' + res.data[0].Last_Name
-                    );
-                    setIsAdmin(clubPeopleList.admin.find((elem) => elem.name === username));
-                    setIsMember(clubPeopleList.member.find((elem) => elem.name === username));
-                
+                    );                
                 }).catch(err => console.log(err))
         
-    },[data, isAuthenticated]);
+    }, [data, isAuthenticated]);
+    
+    useEffect(() => {
+        const admin = clubPeopleList.admin.findIndex(i=>i.name.toLowerCase()===username.toLowerCase());
+
+        const member = clubPeopleList.member.findIndex(
+          (i) => i.name.toLowerCase() === username.toLowerCase()
+        );
+        
+        setIsAdmin(admin === -1 ? false : true);
+        setIsMember(member === -1 ? false : true);
+
+    }, [username]);
+    
 
     useEffect(() => {
         if (isAuthenticated && expanded)
@@ -123,7 +133,7 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
 
                                                 { isAdmin && <FontAwesomeIcon
                                                     color='orange'
-                                                    icon={faUserEdit}
+                                                    icon={faCrown}
                                                              /> }
                                             </NavDropdown.Item>
                                         </Link>

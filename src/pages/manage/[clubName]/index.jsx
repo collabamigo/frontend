@@ -616,11 +616,15 @@ class ClubAdminPage extends Component {
           ],
         };
 
-        const isAdmin = clubPeopleList.admin.find(elem => elem.name === this.state.userName);
+        const isAdmin = clubPeopleList.admin.findIndex(
+          (i) => i.name.toLowerCase() === this.state.userName?.toLowerCase()
+        ) === -1 ? false : true;
         
-        const isMember = clubPeopleList.member.find(
-          (elem) => elem.name === this.state.userName
-        );
+        const isMember = clubPeopleList.member.findIndex(
+          (i) => i.name.toLowerCase() === this.state.userName?.toLowerCase()
+        ) === -1 ? false : true;
+
+        console.log(isAdmin, isMember, this.state.userName);
 
         
         return (
