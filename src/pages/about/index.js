@@ -11,6 +11,15 @@ class AboutUs extends React.Component {
     return (
         <div className={contents_heeman}>
             <div className="container">
+                <button
+                    onClick={() => {
+                        throw new Error("Sentry Frontend Error");
+                    }}
+                    type="button"
+                >
+                    Throw error
+                </button>
+
                 <div className="row justify-content-center mb-4">
                     <div className="col-md-9 text-center">
                         <h1 className="mb-4">
