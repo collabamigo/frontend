@@ -107,12 +107,12 @@
     "maintained node versions"
   ],
   "devDependencies": {
-    "@layer0/cli": "^4.8.1",
-    "@layer0/core": "^4.8.1",
-    "@layer0/devtools": "^4.8.1",
+    "@layer0/cli": "^4.10.1",
+    "@layer0/core": "^4.10.1",
+    "@layer0/devtools": "^4.10.1",
     "@layer0/next": "^4.3.0",
-    "@layer0/prefetch": "^4.8.1",
-    "@layer0/react": "^4.8.1",
+    "@layer0/prefetch": "^4.10.1",
+    "@layer0/react": "^4.10.1",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
     "eslint": "^8.2.0",
