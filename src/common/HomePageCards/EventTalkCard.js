@@ -61,7 +61,7 @@ export default function EventTalkCard(props) {
                     setStrippedText(String(file))
                 })
         }
-            })
+            }, [])
 
     // var dates = new Date(props.element.event_end);
     // var finals = ((dates.getMonth() + 1) + '/' + dates.getDate() + '/' +  dates.getFullYear());
