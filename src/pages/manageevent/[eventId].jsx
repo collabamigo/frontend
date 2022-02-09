@@ -30,7 +30,7 @@ import { isValidUrl } from "utilities";
 import EditNameDateModal from "components/EventAdmin/EditNameDateModal";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-// import { pie } from "./eventid.module.css";
+import Accordion from 'react-bootstrap/Accordion';
 
 function download_table_as_csv(table_id, separator = ',') {
     let rows = document.querySelectorAll('tr');
@@ -467,17 +467,18 @@ function Event() {
                 // console.log("chartData", chartData);
                 return (
                     <>
-                        <h1 key={option.name}>
-                            {option.name}
-                        </h1>
-
-                        <div>
-                            <Pie
-                                // className={pie}
-                                data={chartData}
-                                options={{ maintainAspectRatio: false, }}
-                            />
-                        </div>
+                        <Accordion.Item eventKey={index}>
+                            <Accordion.Header>
+                                {option.name}
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <Pie
+                                    // className={pie}
+                                    data={chartData}
+                                    options={{ maintainAspectRatio: false, }}
+                                />
+                            </Accordion.Body>
+                        </Accordion.Item>
                     </>
                 )
             } else if (formContent[index].type === "checkbox") {
@@ -507,8 +508,8 @@ function Event() {
                     else
                         graphData[t] += 1;
                 })
-                console.log(temp);
-                console.log(graphData);
+                // console.log(temp);
+                // console.log(graphData);
                 chartData.datasets[0].data = Object.values(graphData);
                 chartData.labels = Object.keys(graphData);
                 temp = [];
@@ -516,32 +517,36 @@ function Event() {
                 // console.log("chartData", chartData);
                 return (
                     <>
-                        <h1 key={option.name}>
-                            {option.name}
-                        </h1>
-
-                        <div>
-                            <Pie
-                                // className={pie}
-                                data={chartData}
-                                options={{ maintainAspectRatio: false, }}
-                            />
-                        </div>
+                        <Accordion.Item eventKey={index}>
+                            <Accordion.Header>
+                                {option.name}
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <Pie
+                                    // className={pie}
+                                    data={chartData}
+                                    options={{ maintainAspectRatio: false, }}
+                                />
+                            </Accordion.Body>
+                        </Accordion.Item>
                     </>
                 )
             } else {
 
                 return (
                     <>
-                        <h1 key={option.name}>
-                            {option.name}
-                        </h1>
-
-                        {tableResponses.map((response) => (
-                            <p key={response}>
-                                {response.elements[index].value}
-                            </p>
-                        ))}
+                        <Accordion.Item eventKey={index}>
+                            <Accordion.Header>
+                                {option.name}
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                {tableResponses.map((response) => (
+                                    <p key={response}>
+                                        {response.elements[index].value}
+                                    </p>
+                                ))}
+                            </Accordion.Body>
+                        </Accordion.Item>
                     </>
                 )
             }
@@ -597,73 +602,73 @@ function Event() {
                         <div className="column">
                             <div className="d-flex">
                                 {data.bannerLinks === undefined ? null :
-                                <div className="mx-auto d-flex">
-                                    <div className="d-flex">
-                                        {data.bannerLinks[0] ?
-                                            <div>
-                                                <span onClick={() => handleDeletePic(0)}>
-                                                    <SvgIcon
-                                                        className="align-content-end"
-                                                        height="20px"
-                                                        src="cross.svg"
-                                                        width="20px"
-                                                    />
-                                                </span>
-                                            </div> : null}
+                                    <div className="mx-auto d-flex">
+                                        <div className="d-flex">
+                                            {data.bannerLinks[0] ?
+                                                <div>
+                                                    <span onClick={() => handleDeletePic(0)}>
+                                                        <SvgIcon
+                                                            className="align-content-end"
+                                                            height="20px"
+                                                            src="cross.svg"
+                                                            width="20px"
+                                                        />
+                                                    </span>
+                                                </div> : null}
 
-                                        <div
-                                            className={"my-auto mx-3 " + ((data.bannerLinks[0]) ? "" : "-primary")}
-                                            onClick={() => data.image1Ref.current.click()}
-                                        >
+                                            <div
+                                                className={"my-auto mx-3 " + ((data.bannerLinks[0]) ? "" : "-primary")}
+                                                onClick={() => data.image1Ref.current.click()}
+                                            >
 
-                                            {bannerControl(data.bannerLinks, 0)}
+                                                {bannerControl(data.bannerLinks, 0)}
 
 
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="d-flex">
-                                        {data.bannerLinks[1] ?
-                                            <div>
-                                                <span onClick={() => handleDeletePic(1)}>
-                                                    <SvgIcon
-                                                        className="align-content-end"
-                                                        height="20px"
-                                                        src="cross.svg"
-                                                        width="20px"
-                                                    />
-                                                </span>
-                                            </div> : null}
+                                        <div className="d-flex">
+                                            {data.bannerLinks[1] ?
+                                                <div>
+                                                    <span onClick={() => handleDeletePic(1)}>
+                                                        <SvgIcon
+                                                            className="align-content-end"
+                                                            height="20px"
+                                                            src="cross.svg"
+                                                            width="20px"
+                                                        />
+                                                    </span>
+                                                </div> : null}
 
-                                        <div
-                                            className={"my-auto mx-3" + ((data.bannerLinks[1]) ? "" : "-primary")}
-                                            onClick={() => data.image2Ref.current.click()}
-                                        >
-                                            {bannerControl(data.bannerLinks, 1)}
+                                            <div
+                                                className={"my-auto mx-3" + ((data.bannerLinks[1]) ? "" : "-primary")}
+                                                onClick={() => data.image2Ref.current.click()}
+                                            >
+                                                {bannerControl(data.bannerLinks, 1)}
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="d-flex">
-                                        {data.bannerLinks[2] ?
-                                            <div>
-                                                <span onClick={() => handleDeletePic(2)}>
-                                                    <SvgIcon
-                                                        className="align-content-end"
-                                                        height="20px"
-                                                        src="cross.svg"
-                                                        width="20px"
-                                                    />
-                                                </span>
-                                            </div> : null}
+                                        <div className="d-flex">
+                                            {data.bannerLinks[2] ?
+                                                <div>
+                                                    <span onClick={() => handleDeletePic(2)}>
+                                                        <SvgIcon
+                                                            className="align-content-end"
+                                                            height="20px"
+                                                            src="cross.svg"
+                                                            width="20px"
+                                                        />
+                                                    </span>
+                                                </div> : null}
 
-                                        <div
-                                            className={"my-auto mx-3 " + ((data.bannerLinks[2]) ? "" : "-primary")}
-                                            onClick={() => data.image3Ref.current.click()}
-                                        >
-                                            {bannerControl(data.bannerLinks, 2)}
+                                            <div
+                                                className={"my-auto mx-3 " + ((data.bannerLinks[2]) ? "" : "-primary")}
+                                                onClick={() => data.image3Ref.current.click()}
+                                            >
+                                                {bannerControl(data.bannerLinks, 2)}
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>}
+                                    </div>}
                             </div>
 
                             <div>
@@ -757,18 +762,18 @@ function Event() {
                                         </p>
 
                                         {isEmpty(form) ? null :
-                                        <p>
-                                            <FontAwesomeIcon icon={faClock} />
+                                            <p>
+                                                <FontAwesomeIcon icon={faClock} />
 
-                                            {' '}
+                                                {' '}
 
-                                            Reg. starts
-                                            {' '}
+                                                Reg. starts
+                                                {' '}
 
-                                            {convertToDatetimeString(form.opens_at)}
+                                                {convertToDatetimeString(form.opens_at)}
 
-                                            {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
-                                        </p>}
+                                                {convertToDatetimeString(form.closes_at) ? ", closes " + convertToDatetimeString(form.closes_at) : ""}
+                                            </p>}
                                     </div>
                                 </div>
                             </div>
@@ -778,124 +783,126 @@ function Event() {
 
                                     <div>
                                         {isEmpty(form) ? null :
-                                        <>
-                                            <Button
-                                                className="w-100"
-                                                onClick={handleShow}
-                                                size="lg"
-                                            >
-                                                View Responses
-                                            </Button>
+                                            <>
+                                                <Button
+                                                    className="w-100"
+                                                    onClick={handleShow}
+                                                    size="lg"
+                                                >
+                                                    View Responses
+                                                </Button>
 
-                                            <Button
-                                                className="my-2 w-100"
-                                                onClick={() => setModalShow2(true)}
-                                                size="lg"
-                                            >
-                                                Declare winners
-                                            </Button>
+                                                <Button
+                                                    className="my-2 w-100"
+                                                    onClick={() => setModalShow2(true)}
+                                                    size="lg"
+                                                >
+                                                    Declare winners
+                                                </Button>
 
-                                            <Modal
-                                                aria-labelledby="example-custom-modal-styling-title"
-                                                className="mw-100 rounded-5"
-                                                contentClassName="border-0 m-0 rounded-5"
-                                                dialogClassName="mw-75 w-75"
-                                                onHide={handleClose}
-                                                show={showModal}
-                                                size="lg"
-                                            >
-                                                <Modal.Header closeButton>
-                                                    <Modal.Title>
-                                                        Responses
+                                                <Modal
+                                                    aria-labelledby="example-custom-modal-styling-title"
+                                                    className="mw-100 rounded-5"
+                                                    contentClassName="border-0 m-0 rounded-5"
+                                                    dialogClassName="mw-75 w-75"
+                                                    onHide={handleClose}
+                                                    show={showModal}
+                                                    size="lg"
+                                                >
+                                                    <Modal.Header closeButton>
+                                                        <Modal.Title>
+                                                            Responses
 
-                                                    </Modal.Title>
-                                                </Modal.Header>
+                                                        </Modal.Title>
+                                                    </Modal.Header>
 
-                                                <Modal.Body>
+                                                    <Modal.Body>
 
-                                                    <Tabs
-                                                        activeKey={key}
-                                                        defaultActiveKey="responses"
-                                                        id="controlled-tab-example"
-                                                        onSelect={(k) => setKey(k)}
-                                                    >
-                                                        <Tab
-                                                            className="overflow-scroll"
-                                                            eventKey="responses"
-                                                            title="Responses"
+                                                        <Tabs
+                                                            activeKey={key}
+                                                            defaultActiveKey="responses"
+                                                            id="controlled-tab-example"
+                                                            onSelect={(k) => setKey(k)}
                                                         >
-                                                            <Table
-                                                                bordered
-                                                                hover
-                                                                responsive
-                                                                striped
+                                                            <Tab
+                                                                className="overflow-scroll"
+                                                                eventKey="responses"
+                                                                title="Responses"
                                                             >
-                                                                <thead>
-                                                                    <tr>
-                                                                        <td>
-                                                                            {" "}
-                                                                            Sr no.
-                                                                        </td>
-
-                                                                        <td>
-                                                                            {" "}
-                                                                            Email (verified)
-                                                                        </td>
-
-                                                                        {tableHeaders.map((option) => (
-                                                                            <td key={option.name}>
-                                                                                {option.name}
-                                                                            </td>
-                                                                        ))}
-
-                                                                    </tr>
-                                                                </thead>
-
-                                                                <tbody>
-                                                                    {tableResponses.map((response, index) => (
-                                                                        <tr key={response}>
-
+                                                                <Table
+                                                                    bordered
+                                                                    hover
+                                                                    responsive
+                                                                    striped
+                                                                >
+                                                                    <thead>
+                                                                        <tr>
                                                                             <td>
-                                                                                {index}
+                                                                                {" "}
+                                                                                Sr no.
                                                                             </td>
 
                                                                             <td>
-                                                                                {response.responder_emails[0]}
+                                                                                {" "}
+                                                                                Email (verified)
                                                                             </td>
 
-                                                                            {response.elements.map((values) => (
-                                                                                <td
-                                                                                    key={values.value}
-                                                                                >
-                                                                                    {isValidUrl(values.value) ? (
-                                                                                        <a
-                                                                                            href={values.value}
-                                                                                            rel="noopener noreferrer"
-                                                                                            target="_blank"
-                                                                                        >
-                                                                                            {values.value}
-                                                                                        </a>
-                                                                                    ) : (
-                                                                                        values.value
-                                                                                    )}
+                                                                            {tableHeaders.map((option) => (
+                                                                                <td key={option.name}>
+                                                                                    {option.name}
                                                                                 </td>
                                                                             ))}
+
                                                                         </tr>
-                                                                    ))}
+                                                                    </thead>
 
-                                                                </tbody>
-                                                            </Table>
-                                                        </Tab>
+                                                                    <tbody>
+                                                                        {tableResponses.map((response, index) => (
+                                                                            <tr key={response}>
 
-                                                        <Tab
-                                                            eventKey="summary"
-                                                            title="Summary"
-                                                        >
-                                                            {renderSummary()}
-                                                        </Tab>
-                                                    </Tabs>
+                                                                                <td>
+                                                                                    {index}
+                                                                                </td>
 
-                                                    {/* {tableHeaders.map((option) => {
+                                                                                <td>
+                                                                                    {response.responder_emails[0]}
+                                                                                </td>
+
+                                                                                {response.elements.map((values) => (
+                                                                                    <td
+                                                                                        key={values.value}
+                                                                                    >
+                                                                                        {isValidUrl(values.value) ? (
+                                                                                            <a
+                                                                                                href={values.value}
+                                                                                                rel="noopener noreferrer"
+                                                                                                target="_blank"
+                                                                                            >
+                                                                                                {values.value}
+                                                                                            </a>
+                                                                                        ) : (
+                                                                                            values.value
+                                                                                        )}
+                                                                                    </td>
+                                                                                ))}
+                                                                            </tr>
+                                                                        ))}
+
+                                                                    </tbody>
+                                                                </Table>
+                                                            </Tab>
+
+                                                            <Tab
+                                                                eventKey="summary"
+                                                                title="Summary"
+                                                            >
+                                                                <Accordion defaultActiveKey="0">
+                                                                    {renderSummary()}
+                                                                </Accordion>
+                                                            </Tab>
+                                                        </Tabs>
+
+                                                        {/* {tableHeaders.map((option) => {
                                                     <>
                                                         <td key={option.name}>
                                                             {option.name}
@@ -909,27 +916,27 @@ function Event() {
                                                     </>
                                                 })} */}
 
+                                                        <br />
+
+                                                    </Modal.Body>
+
+
                                                     <br />
 
-                                                </Modal.Body>
+                                                    <Button
+                                                        className="w-50 align-self-center"
+                                                        onClick={() => {
+                                                            download_table_as_csv(event.name + " responses");
+                                                        }}
+                                                    >
+                                                        Download as CSV
+                                                    </Button>
+
+                                                    <br />
 
 
-                                                <br />
-
-                                                <Button
-                                                    className="w-50 align-self-center"
-                                                    onClick={() => {
-                                                        download_table_as_csv(event.name + " responses");
-                                                    }}
-                                                >
-                                                    Download as CSV
-                                                </Button>
-
-                                                <br />
-
-
-                                            </Modal>
-                                        </>}
+                                                </Modal>
+                                            </>}
                                     </div>
 
                                     <div className="p-2 col-6">
@@ -974,7 +981,7 @@ function Event() {
                             registrationEndDate={form.closes_at ? new Date(form.closes_at) : undefined}
                             registrationStartDate={form.opens_at ? new Date(form.opens_at) : undefined}
                             show={data.showEvent}
-                                 />}
+                        />}
 
                         <div>
                             <ReactMarkdown>
