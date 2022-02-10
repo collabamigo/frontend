@@ -72,7 +72,8 @@ export default function EventTalkCard(props) {
         <div className={styles.cardCenter+" h-100 mx-3 mx-md-5"}>
             <Link
                 className="reset-a"
-                to={"/"+(props.manage?"manage":"")+"event/" + props.element.id + "-" + props.element.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '-').toLowerCase()}
+                openInNewTab={props.openInNewTab}
+                to={"/" + (props.manage ? "manage" : "") + "event/" + props.element.id + "-" + props.element.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '-').toLowerCase()}
             >
                 <Card
                     className="h-100"
@@ -146,6 +147,7 @@ EventTalkCard.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     element: PropTypes.object,
     manage: PropTypes.bool,
+    openInNewTab: PropTypes.bool,
 }
 
 EventTalkCard.defaultProps = {
@@ -157,5 +159,6 @@ EventTalkCard.defaultProps = {
         footer: "Event footer",
     },
     manage: false,
+    openInNewTab: false,
 
 }

@@ -5,7 +5,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import EventTalkCard from 'common/HomePageCards/EventTalkCard.js';
 
-function ClubEventList({ text }) {
+function ClubEventList({ text,openInNewTab }) {
   const [clubEventList, setClubEventList] = useState(null);
 
   useEffect(() => {
@@ -51,6 +51,7 @@ function ClubEventList({ text }) {
                   <EventTalkCard
                       element={option}
                       key={option}
+                      openInNewTab={openInNewTab}
                   />
           ))}
           </Carousel>
@@ -60,7 +61,11 @@ function ClubEventList({ text }) {
 }
 
 ClubEventList.propTypes = {
+  openInNewTab: PropTypes.bool,
   text: PropTypes.string.isRequired,
+};
+ClubEventList.defaultProps = {
+  openInNewTab: false,
 };
 
 export default ClubEventList;
