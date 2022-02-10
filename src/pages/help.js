@@ -40,7 +40,7 @@ class Help extends React.Component {
 
     componentDidMount() {
 
-        axios.get(backend + "connect/teacher?format=json")
+        axios.get(backend + "connect/teacher/")
             .then(res => {
                 if (res.data.length)
                     this.handlerSubmit(res)
