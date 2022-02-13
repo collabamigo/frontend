@@ -23,7 +23,7 @@ function GoogleSignIn ({isAuthenticated, setLoggedIn, setStage, stage, visibilit
         if (window.google && !isAuthenticated && initializing) {
             window.google.accounts.id.initialize({
                 auto_select: false,
-                client_id: "597159953447-snucndrn3auafnv7gutico5vqvj20j3s.apps.googleusercontent.com",
+                client_id: process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID,
                 callback: onSignIn,
                 context: "signin",
                 ux_mode: "popup",
