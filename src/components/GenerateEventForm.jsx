@@ -314,7 +314,7 @@ function generateCode(formData, setShowModal, eventId, response) {
                 </label>
 
                 <Field
-                    className="text-input w-100 bg-secondary text-white border-secondary pb-4 rounded-4"
+                    className="text-input w-100 text-white border-secondary pb-4 rounded-4"
                     name={field.id}
                     required={field.required}
                     type="file"
