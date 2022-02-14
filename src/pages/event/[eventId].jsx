@@ -482,6 +482,7 @@ export default function Event({ eventData }) {
 
             <div className='my-5'>
                 <ClubEventlist
+                    openInNewTab
                     text='You may also like'
                 />
             </div>

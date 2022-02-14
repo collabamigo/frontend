@@ -36,3 +36,6 @@ out
 
 # Layer0 generated build directory
 .layer0
+
+# Sentry
+.sentryclirc

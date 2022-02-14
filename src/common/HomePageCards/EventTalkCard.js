@@ -63,13 +63,13 @@ export default function EventTalkCard (props) {
                     setStrippedText(String(file))
                 })
         }
-            })
+            }, [])
 
     // var dates = new Date(props.element.event_end);
     // var finals = ((dates.getMonth() + 1) + '/' + dates.getDate() + '/' +  dates.getFullYear());
     var datee = new Date(props.element.event_end);
     var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' + datee.getFullYear());
-    
+
     const publishHandler = () => {
         axios.patch(`club/competition/${props.element.id}/`, {
             is_active: !isActive
@@ -82,7 +82,7 @@ export default function EventTalkCard (props) {
 
     return (
         <div className={styles.cardCenter+" h-100 mx-3 mx-md-5"}>
-           
+
 
             <Card
                 className={`h-100 ${isActive?'':'text-muted'}`}
@@ -94,6 +94,7 @@ export default function EventTalkCard (props) {
                 >
                     <Link
                         className="reset-a d-flex align-items-center justify-content-center"
+                        openInNewTab={props.openInNewTab}
                         to={"/"+(props.manage?"manage":"")+"event/" + props.element.id + "-" + props.element.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '-').toLowerCase()}
                     >
                         <Image
@@ -105,7 +106,7 @@ export default function EventTalkCard (props) {
                     </Link>
                 </div>
 
-                    
+
                 <Card.Body className={styles.cardinner + ' px-2 d-flex flex-column'}>
                     <Link
                         className="reset-a flex-1"
@@ -186,6 +187,7 @@ EventTalkCard.propTypes = {
     isAdmin: PropTypes.bool,
     isDraftVisible: PropTypes.bool,
     manage: PropTypes.bool,
+    openInNewTab: PropTypes.bool,
 }
 
 EventTalkCard.defaultProps = {
@@ -199,5 +201,6 @@ EventTalkCard.defaultProps = {
     isAdmin: false,
     isDraftVisible: false,
     manage: false,
+    openInNewTab: false,
 
 }

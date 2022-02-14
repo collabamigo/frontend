@@ -30,7 +30,7 @@ import { isValidUrl } from "utilities";
 import EditNameDateModal from "components/EventAdmin/EditNameDateModal";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-// import { pie } from "./eventid.module.css";
+import Accordion from 'react-bootstrap/Accordion';
 
 function download_table_as_csv(table_id, separator = ',') {
     let rows = document.querySelectorAll('tr');
@@ -466,19 +466,19 @@ function Event() {
                 chartData.labels = Object.keys(graphData);
                 // console.log("chartData", chartData);
                 return (
-                    <>
-                        <h1 key={option.name}>
+                    <Accordion.Item eventKey={index}>
+                        <Accordion.Header>
                             {option.name}
-                        </h1>
+                        </Accordion.Header>
 
-                        <div>
+                        <Accordion.Body>
                             <Pie
-                                // className={pie}
+                                    // className={pie}
                                 data={chartData}
                                 options={{ maintainAspectRatio: false, }}
                             />
-                        </div>
-                    </>
+                        </Accordion.Body>
+                    </Accordion.Item>
                 )
             } else if (formContent[index].type === "checkbox") {
                 let temp = [];
@@ -507,42 +507,44 @@ function Event() {
                     else
                         graphData[t] += 1;
                 })
-                console.log(temp);
-                console.log(graphData);
+                // console.log(temp);
+                // console.log(graphData);
                 chartData.datasets[0].data = Object.values(graphData);
                 chartData.labels = Object.keys(graphData);
                 temp = [];
                 graphData = {};
                 // console.log("chartData", chartData);
                 return (
-                    <>
-                        <h1 key={option.name}>
+                    <Accordion.Item eventKey={index}>
+                        <Accordion.Header>
                             {option.name}
-                        </h1>
+                        </Accordion.Header>
 
-                        <div>
+                        <Accordion.Body>
                             <Pie
-                                // className={pie}
+                                    // className={pie}
                                 data={chartData}
                                 options={{ maintainAspectRatio: false, }}
                             />
-                        </div>
-                    </>
+                        </Accordion.Body>
+                    </Accordion.Item>
                 )
             } else {
 
                 return (
-                    <>
-                        <h1 key={option.name}>
+                    <Accordion.Item eventKey={index}>
+                        <Accordion.Header>
                             {option.name}
-                        </h1>
+                        </Accordion.Header>
 
-                        {tableResponses.map((response) => (
-                            <p key={response}>
-                                {response.elements[index].value}
-                            </p>
-                        ))}
-                    </>
+                        <Accordion.Body>
+                            {tableResponses.map((response) => (
+                                <p key={response}>
+                                    {response.elements[index].value}
+                                </p>
+                                ))}
+                        </Accordion.Body>
+                    </Accordion.Item>
                 )
             }
         })
@@ -846,7 +848,7 @@ function Event() {
                                                                             <td key={option.name}>
                                                                                 {option.name}
                                                                             </td>
-                                                                        ))}
+                                                                            ))}
 
                                                                     </tr>
                                                                 </thead>
@@ -875,13 +877,13 @@ function Event() {
                                                                                         >
                                                                                             {values.value}
                                                                                         </a>
-                                                                                    ) : (
-                                                                                        values.value
-                                                                                    )}
+                                                                                        ) : (
+                                                                                            values.value
+                                                                                        )}
                                                                                 </td>
-                                                                            ))}
+                                                                                ))}
                                                                         </tr>
-                                                                    ))}
+                                                                        ))}
 
                                                                 </tbody>
                                                             </Table>
@@ -891,7 +893,9 @@ function Event() {
                                                             eventKey="summary"
                                                             title="Summary"
                                                         >
-                                                            {renderSummary()}
+                                                            <Accordion defaultActiveKey="0">
+                                                                {renderSummary()}
+                                                            </Accordion>
                                                         </Tab>
                                                     </Tabs>
 
@@ -919,8 +923,8 @@ function Event() {
                                                 <Button
                                                     className="w-50 align-self-center"
                                                     onClick={() => {
-                                                        download_table_as_csv(event.name + " responses");
-                                                    }}
+                                                            download_table_as_csv(event.name + " responses");
+                                                        }}
                                                 >
                                                     Download as CSV
                                                 </Button>
