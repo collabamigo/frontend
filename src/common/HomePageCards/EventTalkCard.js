@@ -24,16 +24,16 @@ export default function EventTalkCard(props) {
     const strippedText = data.strippedText;
 
     const setImageLink = (imageLink) => {
-        setData({
+        setData((data)=>({
             ...data,
             imageLink,
-        });
+        }));
     };
     const setStrippedText = (strippedText) => {
-        setData({
+        setData((data) => ({
             ...data,
             strippedText,
-        });
+        }));
     };
 
     useEffect(() => {
@@ -125,11 +125,8 @@ export default function EventTalkCard(props) {
 
                             <p className={styles.text2}>
                                 .
-
                                 Fill before
                                 {' '}
-
-
 
                                 {finale}
                             </p>
