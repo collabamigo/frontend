@@ -25,16 +25,16 @@ export default function EventTalkCard (props) {
     const strippedText = data.strippedText;
 
     const setImageLink = (imageLink) => {
-        setData({
+        setData((data)=>({
             ...data,
             imageLink,
-        });
+        }));
     };
     const setStrippedText = (strippedText) => {
-        setData({
+        setData((data) => ({
             ...data,
             strippedText,
-        });
+        }));
     };
 
     useEffect(() => {
