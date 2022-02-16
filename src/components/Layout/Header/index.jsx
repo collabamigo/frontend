@@ -21,23 +21,6 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
     const [googleState, setGoogleState] = useState("button");
     const [expanded, setExpanded] = useState(!isAuthenticated);
     const [username, setUsername] = useState('');
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [isMember, setIsMember] = useState(false);
-
-    const clubPeopleList = {
-      admin: [
-        {
-          name: 'Byld',
-          username: 'byld',
-        },
-      ],
-      member: [
-        {
-          name: 'Rahul Bansal',
-          username: 'wit',
-        },
-      ],
-    };
 
     useEffect(() => {
         if (isEmpty(data) && isAuthenticated)
@@ -46,30 +29,18 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
                     setData(res.data[0]);
                     setUsername(
                       res.data[0].First_Name + ' ' + res.data[0].Last_Name
-                    );                
+                    );
                 }).catch(err => console.log(err))
-        
+
     }, [data, isAuthenticated]);
-    
-    useEffect(() => {
-        const admin = clubPeopleList.admin.findIndex(i=>i.name.toLowerCase()===username.toLowerCase());
 
-        const member = clubPeopleList.member.findIndex(
-          (i) => i.name.toLowerCase() === username.toLowerCase()
-        );
-        
-        setIsAdmin(admin === -1 ? false : true);
-        setIsMember(member === -1 ? false : true);
-
-    }, [username]);
-    
 
     useEffect(() => {
         if (isAuthenticated && expanded)
             setExpanded(false);
     }, [isAuthenticated])
 
-     
+
 
     return (
         <Navbar
@@ -125,19 +96,34 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
                                                 className='d-flex align-items-center justify-content-between'
                                             >
                                                 { club.name }
-                                               
-                                                { isMember && <FontAwesomeIcon
-                                                    color='orange'
-                                                    icon={faUserEdit}
-                                                              /> }
 
-                                                { isAdmin && <FontAwesomeIcon
+                                                <FontAwesomeIcon
                                                     color='orange'
                                                     icon={faCrown}
-                                                             /> }
+                                                />
                                             </NavDropdown.Item>
                                         </Link>
                                         ))}
+
+                                    {data.member_of?.map((club) => (
+                                        <Link
+                                            className="reset-a cursor-pointer"
+                                            key={club.id}
+                                            to={`/manage/${club.username}/`}
+                                        >
+                                            <NavDropdown.Item
+                                                as="span"
+                                                className='d-flex align-items-center justify-content-between'
+                                            >
+                                                {club.name}
+
+                                                <FontAwesomeIcon
+                                                    color='orange'
+                                                    icon={faUserEdit}
+                                                />
+                                            </NavDropdown.Item>
+                                        </Link>
+                                    ))}
                                 </ul>
                             </NavDropdown>
 
