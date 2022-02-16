@@ -16,7 +16,6 @@ export default function ClubCard({value}) {
         }
     })
 
-    console.log(value)
     return (
         <div className={styles.cardCenter + " h-100"}>
             <Link
