@@ -607,21 +607,17 @@ class ClubAdminPage extends Component {
 
         const isAdmin =
           this.state.clubs.findIndex(
-            (i) =>
-              i.name.toLowerCase() ===
-              this.state.basicInformation.name.toLowerCase()
-          ) === -1
-            ? false
-            : true;
-        
+              (i) =>
+                  i.name.toLowerCase() ===
+                  this.state.basicInformation.name.toLowerCase()
+          ) !== -1;
+
         const isMember =
           this.state.member_of.findIndex(
-            (i) =>
-              i.name.toLowerCase() ===
-              this.state.basicInformation.name.toLowerCase()
-          ) === -1
-            ? false
-            : true;
+              (i) =>
+                  i.name.toLowerCase() ===
+                  this.state.basicInformation.name.toLowerCase()
+          ) !== -1;
 
         return (
             <div className="row m-md-3">
@@ -720,7 +716,7 @@ class ClubAdminPage extends Component {
                                                     </span>
                                                 </>}
                                         </Card.Text>}
-                                    
+
                                     <br />
 
                                     <div className="col text-center">
