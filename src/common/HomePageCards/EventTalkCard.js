@@ -71,12 +71,14 @@ export default function EventTalkCard (props) {
     var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' + datee.getFullYear());
 
     const publishHandler = () => {
-        axios.patch(`club/competition/${props.element.id}/`, {
-            is_active: !isActive
-        })
-            .then(() => {
-                setIsActive((prev) => !prev);
-            })
+        axios
+          .post(`club/toggle-competition/`, {
+            is_active: !isActive,
+            competitionID: props.element.id,
+          })
+          .then(() => {
+            setIsActive((prev) => !prev);
+          });
     }
 
 
