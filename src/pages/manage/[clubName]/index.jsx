@@ -61,7 +61,9 @@ class ClubAdminPage extends Component {
             bannerPaths :undefined,
             logoUrl:null,
             clubName: undefined,
-            userName:''
+            userName: '',
+            clubs: [],
+            member_of: [],
         }
     }
 
@@ -121,13 +123,15 @@ class ClubAdminPage extends Component {
                 });
             if (this.state.userName === '')
                axios
-                .get(`connect/profile`)
-                .then((res) =>
-                    this.setState({
-                    userName: `${res.data[0].First_Name} ${res.data[0].Last_Name}`,
-                    })
-                )
-                .catch((err) => console.log(err));
+                 .get(`connect/profile`)
+                 .then((res) =>
+                   this.setState({
+                     userName: `${res.data[0].First_Name} ${res.data[0].Last_Name}`,
+                     clubs: res.data[0].clubs,
+                     member_of: res.data[0].member_of,
+                   })
+                 )
+                 .catch((err) => console.log(err));
             if (this.state.bannerLinks === undefined && this.state.bannerPaths !== undefined) {
                 const firebase = this.context;
                 const storage = firebase ? getStorage(firebase) : getStorage();
@@ -601,32 +605,24 @@ class ClubAdminPage extends Component {
             return <Loading />;
         }
 
-        const clubPeopleList = {
-          admin: [
-            {
-              name: 'Rahul Bansal',
-              username: 'byld',
-            },
-          ],
-          member: [
-            {
-              name: 'Rahul Bansals',
-              username: 'wit',
-            },
-          ],
-        };
-
-        const isAdmin = clubPeopleList.admin.findIndex(
-          (i) => i.name.toLowerCase() === this.state.userName?.toLowerCase()
-        ) === -1 ? false : true;
+        const isAdmin =
+          this.state.clubs.findIndex(
+            (i) =>
+              i.name.toLowerCase() ===
+              this.state.basicInformation.name.toLowerCase()
+          ) === -1
+            ? false
+            : true;
         
-        const isMember = clubPeopleList.member.findIndex(
-          (i) => i.name.toLowerCase() === this.state.userName?.toLowerCase()
-        ) === -1 ? false : true;
+        const isMember =
+          this.state.member_of.findIndex(
+            (i) =>
+              i.name.toLowerCase() ===
+              this.state.basicInformation.name.toLowerCase()
+          ) === -1
+            ? false
+            : true;
 
-        console.log(isAdmin, isMember, this.state.userName);
-
-        
         return (
             <div className="row m-md-3">
                 <div className="mx-3 col-md-2 col-lg-2 col-sm-12 d-flex justify-content-around">
@@ -697,13 +693,13 @@ class ClubAdminPage extends Component {
                                             { isMember &&
                                             <>
                                                 <FontAwesomeIcon
-                                                    color='orange'
+                                                    color='#6495ED'
                                                     icon={faUserEdit}
                                                 />
 
                                                 <span
                                                     className='mx-2'
-                                                    style={{ color: 'orange' }}
+                                                    style={{ color: '#6495ED' }}
                                                 >
                                                     Core Member
                                                 </span>
@@ -712,13 +708,13 @@ class ClubAdminPage extends Component {
                                             { isAdmin &&
                                                 <>
                                                     <FontAwesomeIcon
-                                                        color='orange'
+                                                        color='#0047AB'
                                                         icon={faCrown}
                                                     />
 
                                                     <span
                                                         className='mx-2'
-                                                        style={{ color: 'orange' }}
+                                                        style={{ color: '#0047AB' }}
                                                     >
                                                         Admin
                                                     </span>

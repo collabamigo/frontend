@@ -98,7 +98,7 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
                                                 { club.name }
 
                                                 <FontAwesomeIcon
-                                                    color='orange'
+                                                    color='#0047AB'
                                                     icon={faCrown}
                                                 />
                                             </NavDropdown.Item>
@@ -118,7 +118,7 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
                                                 {club.name}
 
                                                 <FontAwesomeIcon
-                                                    color='orange'
+                                                    color='#6495ED'
                                                     icon={faUserEdit}
                                                 />
                                             </NavDropdown.Item>
