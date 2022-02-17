@@ -416,7 +416,7 @@ function Event() {
         formContent = JSON.parse(form.skeleton);
 
     // console.log("formcontent ", formContent);
-    // console.log("formresponse", tableResponses);
+    console.log("formresponse" , event);
 
 
     ChartJS.register(ArcElement, Tooltip, Legend);
@@ -551,6 +551,15 @@ function Event() {
     }
 
     const isLoading = isEmpty(event);
+
+    const activateEvent = () => {
+          axios
+            .post(`club/toggle-competition/`, {
+              is_active: true,
+              competitionID: event.id,
+            })
+    }
+
     if (isLoading)
         return <Loading />
     else
@@ -723,6 +732,14 @@ function Event() {
                     <div className="col">
                         <div className="row text-primary">
                             <div className="col-md-9 col-12">
+                                { !event.is_active &&
+                                    <div
+                                        className='w-100 p-2'
+                                        style={{background:'rgba(255,0,0,0.1)',color:'red'}}
+                                    >
+                                        This event is not active
+                                    </div> }
+
                                 <h1 className="fw-bold">
                                     {event.name}
 
@@ -936,15 +953,15 @@ function Event() {
                                         </>}
                                     </div>
 
-                                    <div className="p-2 col-6">
+                                    { event.faq && <div className="p-2 col-6">
                                         <FaqEditor
-                                            disappear={() => { setData({ ...data, currentModal: null }) }}
+                                            disappear={() => { setData({ ...data, currentModal: null }); }}
                                             faq={JSON.parse(event.faq)}
                                             setFaq={setFaq}
-                                            setShow={() => { setData({ ...data, currentModal: "faq" }) }}
+                                            setShow={() => { setData({ ...data, currentModal: "faq" }); }}
                                             show={data.currentModal === "faq"}
                                         />
-                                    </div>
+                                    </div> }
 
                                     <div className="p-2 col-6">
                                         <Button
@@ -992,6 +1009,15 @@ function Event() {
                             >
                                 Update description
                             </Button>
+
+                            { !event.is_active &&
+                                <Button
+                                    className="my-2 w-100"
+                                    onClick={activateEvent}
+                                    size="lg"
+                                >
+                                    Activate Event
+                                </Button> }
                         </div>
                     </div>
                 </div>

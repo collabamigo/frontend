@@ -608,8 +608,8 @@ class ClubAdminPage extends Component {
         const isAdmin =
           this.state.clubs.findIndex(
             (i) =>
-              i.name.toLowerCase() ===
-              this.state.basicInformation.name.toLowerCase()
+              i.mail ===
+              this.state.basicInformation.mail
           ) === -1
             ? false
             : true;
@@ -617,8 +617,8 @@ class ClubAdminPage extends Component {
         const isMember =
           this.state.member_of.findIndex(
             (i) =>
-              i.name.toLowerCase() ===
-              this.state.basicInformation.name.toLowerCase()
+              i.mail ===
+              this.state.basicInformation.mail
           ) === -1
             ? false
             : true;
@@ -662,25 +662,26 @@ class ClubAdminPage extends Component {
                                             {this.state.basicInformation.name}
                                         </Card.Title>
 
-                                        <div
-                                            className=" align-self-end "
-                                            onClick={() => {
-                                            this.setState({
-                                                currentModal: "panel",
-                                            });
-                                        }}
-                                            type="button"
-                                        >
-                                            <svg
-                                                className={styles.edit}
-                                                height="64"
-                                                viewBox="0 0 24 24"
-                                                width="24"
-                                                xmlns="http://www.w3.org/2000/svg"
+                                        { isAdmin &&
+                                            <div
+                                                className=" align-self-end "
+                                                onClick={() => {
+                                                this.setState({
+                                                    currentModal: "panel",
+                                                });
+                                            }}
+                                                type="button"
                                             >
-                                                <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
-                                            </svg>
-                                        </div>
+                                                <svg
+                                                    className={styles.edit}
+                                                    height="64"
+                                                    viewBox="0 0 24 24"
+                                                    width="24"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
+                                                </svg>
+                                            </div> }
                                     </div>
 
 
@@ -918,7 +919,7 @@ class ClubAdminPage extends Component {
                                     <div className={styles.descriptionBox + " col"}>
                                         <div className={styles.descriptionHeading + " row d-flex justify-content-around"}>
 
-                                            <span className="col-9 h3 align-self-start">
+                                            <span className={`${isAdmin?'col-9':'col-12'} h3 align-self-start`}>
                                                 Description
 
                                                 {" "}
@@ -926,25 +927,26 @@ class ClubAdminPage extends Component {
 
                                             {" "}
 
-                                            <div
-                                                className="col-3"
-                                                onClick={() => {
+                                            {isAdmin&&
+                                                <div
+                                                    className="col-3"
+                                                    onClick={() => {
                                                 this.setState({
                                                     currentModal: "description",
                                                 });
                                                 }}
-                                                type="button"
-                                            >
-                                                <svg
-                                                    className={styles.edit}
-                                                    height="34"
-                                                    viewBox="0 0 24 24"
-                                                    width="24"
-                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    type="button"
                                                 >
-                                                    <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
-                                                </svg>
-                                            </div>
+                                                    <svg
+                                                        className={styles.edit}
+                                                        height="34"
+                                                        viewBox="0 0 24 24"
+                                                        width="24"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                        <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
+                                                    </svg>
+                                                </div>}
 
                                         </div>
 
@@ -964,25 +966,26 @@ class ClubAdminPage extends Component {
                                                 {" "}
                                             </span>
 
-                                            <div
-                                                className="col-3"
-                                                onClick={() => {
-                                                    this.setState({
-                                                        currentModal: "Announcements",
-                                                    });
-                                                }}
-                                                type="button"
-                                            >
-                                                <svg
-                                                    className={styles.edit}
-                                                    height="34"
-                                                    viewBox="0 0 24 24"
-                                                    width="24"
-                                                    xmlns="http://www.w3.org/2000/svg"
+                                            { isAdmin &&
+                                                <div
+                                                    className="col-3"
+                                                    onClick={ () => {
+                                                        this.setState({
+                                                            currentModal: "Announcements",
+                                                        });
+                                                    } }
+                                                    type="button"
                                                 >
-                                                    <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
-                                                </svg>
-                                            </div>
+                                                    <svg
+                                                        className={ styles.edit }
+                                                        height="34"
+                                                        viewBox="0 0 24 24"
+                                                        width="24"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                        <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
+                                                    </svg>
+                                                </div> }
 
                                             <ClubAdminModal
                                                 handleClose={this.handleCloseModal.bind(this)}
