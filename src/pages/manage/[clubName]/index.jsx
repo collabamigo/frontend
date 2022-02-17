@@ -721,7 +721,7 @@ class ClubAdminPage extends Component {
                                                     </span>
                                                 </>}
                                         </Card.Text>}
-                                    
+
                                     <br />
 
                                     <div className="col text-center">
@@ -969,15 +969,15 @@ class ClubAdminPage extends Component {
                                             { isAdmin &&
                                                 <div
                                                     className="col-3"
-                                                    onClick={ () => {
+                                                    onClick={() => {
                                                         this.setState({
                                                             currentModal: "Announcements",
                                                         });
-                                                    } }
+                                                    }}
                                                     type="button"
                                                 >
                                                     <svg
-                                                        className={ styles.edit }
+                                                        className={styles.edit}
                                                         height="34"
                                                         viewBox="0 0 24 24"
                                                         width="24"
