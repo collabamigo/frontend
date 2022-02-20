@@ -12,17 +12,26 @@ function CMem() {
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
 
+    // const [show3, setShow3] = React.useState(false);
+    // const handleClose3 = () => setShow3(false);
+    // const handleShow3 = () => setShow3(true);
+
     const [val, setVal] = React.useState("");
     const [val2, setVal2] = React.useState("");
+    // const [val3, setVal3] = React.useState("");
 
     const handleChange = (e) => {
         setVal(e.target.value);
+    };
+
+    const handleChange2 = (e) => {
         setVal2(e.target.value);
     };
 
-    // const [show, setShow] = React.useState(false);
-    // const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
+    // const handleChange3 = (e) => {
+    //     setVal3(e.target.value);
+    // };
+
     // axios call to get all the members
     React.useEffect(() => {
         Axios.get("/club/club/byld")
@@ -34,6 +43,17 @@ function CMem() {
                 console.log(err);
             });
     }, []);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let data = {
+            name: val,
+            email: val2,
+        };
+        setMem([...mem, data]);
+        handleClose2();
+    }
+
     return (
         <div>
             {mem.map((member) => (
@@ -80,8 +100,6 @@ function CMem() {
                                 <th>
                                     Email
                                 </th>
-
-                                <th />
                             </tr>
                         </thead>
 
@@ -94,25 +112,6 @@ function CMem() {
 
                                     <td>
                                         {member.email}
-                                    </td>
-
-                                    <td>
-                                        <button
-                                            onClick={() => {
-                                                Axios.delete(
-                                                    `/club/club/byld/${member.id}`
-                                                )
-                                                    .then((res) => {
-                                                        console.log(res);
-                                                    })
-                                                    .catch((err) => {
-                                                        console.log(err);
-                                                    });
-                                            }}
-                                            type="button"
-                                        >
-                                            Delete
-                                        </button>
                                     </td>
                                 </tr>
                             ))}
@@ -156,6 +155,7 @@ function CMem() {
 
                             <input
                                 name="name"
+                                onChange={handleChange}
                                 placeholder="Name"
                                 type="text"
                                 value={val}
@@ -167,6 +167,7 @@ function CMem() {
 
                             <input
                                 name="email"
+                                onChange={handleChange2}
                                 placeholder="Email"
                                 type="email"
                                 value={val2}
@@ -174,7 +175,7 @@ function CMem() {
                         </div>
 
                         <button
-                            onChange={handleChange}
+                            onClick={handleSubmit}
                             type="submit"
                         >
                             Add
