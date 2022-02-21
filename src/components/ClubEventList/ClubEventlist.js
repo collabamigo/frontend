@@ -10,7 +10,8 @@ function ClubEventList({ text,openInNewTab }) {
 
   useEffect(() => {
     axios.get('/club/feed').then((res) => {
-      setClubEventList(res.data.competitions);
+      const temp = res.data.competitions?.filter((item) => item.is_active);
+      setClubEventList(temp);
     });
   }, []);
 

@@ -13,7 +13,8 @@ import strip from 'strip-markdown'
 
 import styles from "./EventTalkCard.module.css";
 
-export default function EventTalkCard(props) {
+export default function EventTalkCard (props) {
+    const [isActive, setIsActive] = useState(false);
 
     const [data, setData] = useState({
         imageLink: undefined,
@@ -40,18 +41,19 @@ export default function EventTalkCard(props) {
         if (imageLink === undefined){
                 axios.get(`club/competition/${props.element.id}/`)
                 .then(res => {
-                                const storage = getStorage();
-                                if((JSON.parse(res.data.image_links))[0])
-                                {
-                                    getDownloadURL(ref(storage, (JSON.parse(res.data.image_links))[0])).then(
-                                        link =>   setImageLink(link)
-                                    )
-                                }
-                                else{
-                                    setImageLink("https://via.placeholder.com/350x200")
-                                }
-                            })
+                    const storage = getStorage();
+                    setIsActive(res.data.is_active);
+                        if((JSON.parse(res.data.image_links))[0])
+                        {
+                            getDownloadURL(ref(storage, (JSON.parse(res.data.image_links))[0])).then(
+                                link =>   setImageLink(link)
+                            )
                         }
+                        else{
+                            setImageLink("https://via.placeholder.com/350x200")
+                        }
+                        })
+                    }
 
         if (strippedText === undefined){
             remark()
@@ -66,22 +68,36 @@ export default function EventTalkCard(props) {
     // var dates = new Date(props.element.event_end);
     // var finals = ((dates.getMonth() + 1) + '/' + dates.getDate() + '/' +  dates.getFullYear());
     var datee = new Date(props.element.event_end);
-    var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' +  datee.getFullYear());
+    var finale = ((datee.getMonth() + 1) + '/' + datee.getDate() + '/' + datee.getFullYear());
+
+    const publishHandler = () => {
+        axios
+          .post(`club/toggle-competition/`, {
+            is_active: !isActive,
+            competitionID: props.element.id,
+          })
+          .then(() => {
+            setIsActive((prev) => !prev);
+          });
+    }
+
 
     return (
         <div className={styles.cardCenter+" h-100 mx-3 mx-md-5"}>
-            <Link
-                className="reset-a"
-                openInNewTab={props.openInNewTab}
-                to={"/" + (props.manage ? "manage" : "") + "event/" + props.element.id + "-" + props.element.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '-').toLowerCase()}
+
+
+            <Card
+                className={`h-100 ${isActive?'':'text-muted'}`}
+                style={{ borderRadius: '10px' }}
             >
-                <Card
-                    className="h-100"
-                    style={{ borderRadius: '10px' }}
+                <div
+                    className="overflow-hidden justify-content-center d-flex"
+                    style={{ height: '40%', borderRadius: '10px' }}
                 >
-                    <div
-                        className="overflow-hidden justify-content-center d-flex"
-                        style={{ height: '40%', borderRadius: '10px' }}
+                    <Link
+                        className="reset-a d-flex align-items-center justify-content-center"
+                        openInNewTab={props.openInNewTab}
+                        to={"/"+(props.manage?"manage":"")+"event/" + props.element.id + "-" + props.element.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '-').toLowerCase()}
                     >
                         <Image
                             className="object-fit-contain img-fluid"
@@ -89,10 +105,17 @@ export default function EventTalkCard(props) {
                             // style={{ objectFit: 'contain' }}
                             variant="top"
                         />
-                    </div>
+                    </Link>
+                </div>
 
-                    <Card.Body className={styles.cardinner + ' px-2'}>
-                        <Card.Title className=" text-primary fw-bold mt-1">
+
+                <Card.Body className={styles.cardinner + ' px-2 d-flex flex-column'}>
+                    <Link
+                        className="reset-a flex-1"
+                        to={"/"+(props.manage?"manage":"")+"event/" + props.element.id + "-" + props.element.name.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, '-').toLowerCase()}
+                    >
+
+                        <Card.Title className={`${isActive?'text-primary':'text-muted'} fw-bold mt-1`}>
                             {props.element.name}
                         </Card.Title>
 
@@ -107,15 +130,24 @@ export default function EventTalkCard(props) {
                         </Card.Subtitle>
 
 
-                        <Card.Text className={styles.text}>
+                        <Card.Text
+                            className={styles.text}
+                            style={{flex:1}}
+                        >
                             <p>
                                 {isMobile ? truncate(strippedText, 100) : truncate(strippedText, 290) }
                             </p>
                         </Card.Text>
 
-                        <br />
+                    </Link>
 
-                        <Card.Subtitle className={styles.bottom + " d-flex text-muted "}>
+                    <br />
+
+                    <Card.Subtitle className="d-flex text-muted mt-3">
+                        <div
+                            className='d-flex'
+                            style={{flex:1}}
+                        >
                             <SvgIcon
                                 height="15px"
                                 src="calendar_datee.svg"
@@ -123,18 +155,29 @@ export default function EventTalkCard(props) {
                             />
 
 
-                            <p className={styles.text2}>
-                                .
+                            <p className={styles.text2+ ' mx-2'}>
                                 Fill before
                                 {' '}
 
                                 {finale}
                             </p>
-                        </Card.Subtitle>
+                        </div>
 
-                    </Card.Body>
-                </Card>
-            </Link>
+                        { props.isDraftVisible &&  props.isAdmin &&
+                            <label className={styles.switch}>
+                                <input
+                                    checked={isActive}
+                                    className={styles.switch_input}
+                                    onChange={publishHandler}
+                                    type="checkbox"
+                                />
+
+                                <span className={styles.slider +' '+ styles.round} />
+                            </label>}
+                    </Card.Subtitle>
+
+                </Card.Body>
+            </Card>
         </div>
     )
 }
@@ -143,6 +186,8 @@ export default function EventTalkCard(props) {
 EventTalkCard.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     element: PropTypes.object,
+    isAdmin: PropTypes.bool,
+    isDraftVisible: PropTypes.bool,
     manage: PropTypes.bool,
     openInNewTab: PropTypes.bool,
 }
@@ -155,6 +200,8 @@ EventTalkCard.defaultProps = {
         description: "Event descriptiontext comes here",
         footer: "Event footer",
     },
+    isAdmin: false,
+    isDraftVisible: false,
     manage: false,
     openInNewTab: false,
 
