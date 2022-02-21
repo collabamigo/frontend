@@ -734,10 +734,17 @@ function Event() {
                             <div className="col-md-9 col-12">
                                 { !event.is_active &&
                                     <div
-                                        className='w-100 p-2'
+                                        className='w-100 p-2 d-flex align-items-baseline justify-content-between'
                                         style={{background:'rgba(255,0,0,0.1)',color:'red'}}
                                     >
                                         This event is not active
+                                        <Button
+                                            className="float-right"
+                                            onClick={activateEvent}
+                                            size="md"
+                                        >
+                                            Activate Event
+                                        </Button> 
                                     </div> }
 
                                 <h1 className="fw-bold">
@@ -961,7 +968,7 @@ function Event() {
                                             setShow={() => { setData({ ...data, currentModal: "faq" }); }}
                                             show={data.currentModal === "faq"}
                                         />
-                                    </div> }
+                                                   </div> }
 
                                     <div className="p-2 col-6">
                                         <Button
@@ -1009,15 +1016,6 @@ function Event() {
                             >
                                 Update description
                             </Button>
-
-                            { !event.is_active &&
-                                <Button
-                                    className="my-2 w-100"
-                                    onClick={activateEvent}
-                                    size="lg"
-                                >
-                                    Activate Event
-                                </Button> }
                         </div>
                     </div>
                 </div>

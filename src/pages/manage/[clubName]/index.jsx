@@ -61,9 +61,7 @@ class ClubAdminPage extends Component {
             bannerPaths :undefined,
             logoUrl:null,
             clubName: undefined,
-            userName: '',
-            clubs: [],
-            member_of: [],
+            email: '',
         }
     }
 
@@ -121,14 +119,12 @@ class ClubAdminPage extends Component {
                         this.setState({competitions: res.data})
                     });
                 });
-            if (this.state.userName === '')
+            if (this.state.email === '')
                axios
                  .get(`connect/profile`)
                  .then((res) =>
                    this.setState({
-                     userName: `${res.data[0].First_Name} ${res.data[0].Last_Name}`,
-                     clubs: res.data[0].clubs,
-                     member_of: res.data[0].member_of,
+                     email: res.data[0].email,
                    })
                  )
                  .catch((err) => console.log(err));
@@ -606,19 +602,19 @@ class ClubAdminPage extends Component {
         }
 
         const isAdmin =
-          this.state.clubs.findIndex(
+          this.state.basicInformation?.admins_detail?.findIndex(
             (i) =>
-              i.mail ===
-              this.state.basicInformation.mail
+              i.email ===
+              this.state.email
           ) === -1
             ? false
             : true;
         
         const isMember =
-          this.state.member_of.findIndex(
+          this.state.basicInformation?.members_detail?.findIndex(
             (i) =>
-              i.mail ===
-              this.state.basicInformation.mail
+              i.email ===
+              this.state.email
           ) === -1
             ? false
             : true;
@@ -689,38 +685,36 @@ class ClubAdminPage extends Component {
                                         {this.state.basicInformation.tagline}
                                     </Card.Subtitle>
 
-                                    { (isAdmin || isMember) &&
-                                        <Card.Text className='my-2'>
-                                            { isMember &&
-                                            <>
-                                                <FontAwesomeIcon
-                                                    color='#6495ED'
-                                                    icon={faUserEdit}
-                                                />
+                                    { isMember &&
+                                    <Card.Text className='my-2'>
+                                        <FontAwesomeIcon
+                                            color='#6495ED'
+                                            icon={faUserEdit}
+                                        />
 
-                                                <span
-                                                    className='mx-2'
-                                                    style={{ color: '#6495ED' }}
-                                                >
-                                                    Core Member
-                                                </span>
-                                            </>}
+                                        <span
+                                            className='mx-2'
+                                            style={{ color: '#6495ED' }}
+                                        >
+                                            Core Member
+                                        </span>
+                                    </Card.Text>}
 
-                                            { isAdmin &&
-                                                <>
-                                                    <FontAwesomeIcon
-                                                        color='#0047AB'
-                                                        icon={faCrown}
-                                                    />
+                                    { isAdmin &&
+                                    <Card.Text className='my-2'>
+                                        <FontAwesomeIcon
+                                            color='#0047AB'
+                                            icon={faCrown}
+                                        />
 
-                                                    <span
-                                                        className='mx-2'
-                                                        style={{ color: '#0047AB' }}
-                                                    >
-                                                        Admin
-                                                    </span>
-                                                </>}
-                                        </Card.Text>}
+                                        <span
+                                            className='mx-2'
+                                            style={{ color: '#0047AB' }}
+                                        >
+                                            Admin
+                                        </span>
+                                    </Card.Text>}
+                                    
 
                                     <br />
 
