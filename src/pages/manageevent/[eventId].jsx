@@ -557,7 +557,15 @@ function Event() {
             .post(`club/toggle-competition/`, {
               is_active: true,
               competitionID: event.id,
-            })
+            }).then(() => {
+              setData((prev) => ({
+                ...prev,
+                  event:{
+                    ...prev.event,
+                    is_active: true
+                  }
+              }));
+            });
     }
 
     if (isLoading)
@@ -744,7 +752,7 @@ function Event() {
                                             size="md"
                                         >
                                             Activate Event
-                                        </Button> 
+                                        </Button>
                                     </div> }
 
                                 <h1 className="fw-bold">
@@ -960,15 +968,16 @@ function Event() {
                                         </>}
                                     </div>
 
-                                    { event.faq && <div className="p-2 col-6">
-                                        <FaqEditor
-                                            disappear={() => { setData({ ...data, currentModal: null }); }}
-                                            faq={JSON.parse(event.faq)}
-                                            setFaq={setFaq}
-                                            setShow={() => { setData({ ...data, currentModal: "faq" }); }}
-                                            show={data.currentModal === "faq"}
-                                        />
-                                                   </div> }
+                                    { event.faq &&
+                                        <div className="p-2 col-6">
+                                            <FaqEditor
+                                                disappear={() => { setData({ ...data, currentModal: null }); }}
+                                                faq={JSON.parse(event.faq)}
+                                                setFaq={setFaq}
+                                                setShow={() => { setData({ ...data, currentModal: "faq" }); }}
+                                                show={data.currentModal === "faq"}
+                                            />
+                                        </div> }
 
                                     <div className="p-2 col-6">
                                         <Button
