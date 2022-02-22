@@ -16,13 +16,13 @@ function CMem() {
     // const handleClose3 = () => setShow3(false);
     // const handleShow3 = () => setShow3(true);
 
-    const [val, setVal] = React.useState("");
+    // const [val, setVal] = React.useState("");
     const [val2, setVal2] = React.useState("");
     // const [val3, setVal3] = React.useState("");
 
-    const handleChange = (e) => {
-        setVal(e.target.value);
-    };
+    // const handleChange = (e) => {
+    //     setVal(e.target.value);
+    // };
 
     const handleChange2 = (e) => {
         setVal2(e.target.value);
@@ -44,28 +44,29 @@ function CMem() {
             });
     }, []);
 
+    //axios patch to update the member
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        console.log(val2);
+    };
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         let data = {
-            name: val,
             email: val2,
         };
         setMem([...mem, data]);
         handleClose2();
+        handleUpdate();
     }
 
     return (
         <div>
             {mem.map((member) => (
-                <>
-                    <p>
-                        {member.name}
-                    </p>
-
-                    <p>
-                        {member.email}
-                    </p>
-                </>
+                <p key={member.id}>
+                    {member.name}
+                </p>
             ))}
 
             <button
@@ -94,12 +95,10 @@ function CMem() {
                         <thead>
                             <tr>
                                 <th>
-                                    Name
-                                </th>
-
-                                <th>
                                     Email
                                 </th>
+
+                                <th />
                             </tr>
                         </thead>
 
@@ -107,11 +106,18 @@ function CMem() {
                             {mem.map((member) => (
                                 <tr key={member.id}>
                                     <td>
-                                        {member.name}
+                                        {member.email}
                                     </td>
 
                                     <td>
-                                        {member.email}
+                                        <button
+                                            onClick={() => {
+                                                setMem(mem => mem.filter( m => m !== member));
+                                            }}
+                                            type="button"
+                                        >
+                                            Delete
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
@@ -149,18 +155,6 @@ function CMem() {
                 <Modal.Body>
                     <form>
                         <div>
-                            <label>
-                                Name:
-                            </label>
-
-                            <input
-                                name="name"
-                                onChange={handleChange}
-                                placeholder="Name"
-                                type="text"
-                                value={val}
-                            />
-
                             <label>
                                 Email:
                             </label>
