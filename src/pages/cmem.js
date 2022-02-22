@@ -7,6 +7,7 @@ function CMem() {
     const [show, setShow] = React.useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const memmail = [];
 
     const [show2, setShow2] = React.useState(false);
     const handleClose2 = () => setShow2(false);
@@ -45,9 +46,22 @@ function CMem() {
     }, []);
 
     //axios patch to update the member
-    const handleUpdate = (e) => {
-        e.preventDefault();
+    const handleUpdate = () => {
         console.log(val2);
+        Axios.patch(
+            `/club/club/byld/`,
+            { "members": memmail },
+        )
+            .then((res) => {
+                console.log(res);
+                handleClose2();
+                handleClose();
+            }
+        )
+            .catch((err) => {
+                console.log(err);
+            }
+        );
     };
 
 
@@ -57,6 +71,10 @@ function CMem() {
             email: val2,
         };
         setMem([...mem, data]);
+        mem.forEach((element) => {
+            console.log(element.email);
+            memmail.push(element.email);
+        });
         handleClose2();
         handleUpdate();
     }
