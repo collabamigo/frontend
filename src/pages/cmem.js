@@ -75,6 +75,7 @@ function CMem() {
             console.log(element.email);
             memmail.push(element.email);
         });
+        memmail.push(val2);
         handleClose2();
         handleUpdate();
     }
