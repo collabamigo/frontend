@@ -21,6 +21,8 @@ import Image from "react-bootstrap/Image";
 import EventTalkCard from "../../../common/HomePageCards/EventTalkCard";
 import {showAlert} from "../../../common/Toast";
 import imageCompression from 'browser-image-compression';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCrown, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 class ClubAdminPage extends Component {
 
@@ -59,6 +61,7 @@ class ClubAdminPage extends Component {
             bannerPaths :undefined,
             logoUrl:null,
             clubName: undefined,
+            email: '',
         }
     }
 
@@ -115,7 +118,16 @@ class ClubAdminPage extends Component {
                     then((res) => {
                         this.setState({competitions: res.data})
                     });
-            });
+                });
+            if (this.state.email === '')
+               axios
+                 .get(`connect/profile`)
+                 .then((res) =>
+                   this.setState({
+                     email: res.data[0].email,
+                   })
+                 )
+                 .catch((err) => console.log(err));
             if (this.state.bannerLinks === undefined && this.state.bannerPaths !== undefined) {
                 const firebase = this.context;
                 const storage = firebase ? getStorage(firebase) : getStorage();
@@ -588,6 +600,25 @@ class ClubAdminPage extends Component {
         if (this.state.isLoading || this.state.announcements === null || this.state.competitions === null){
             return <Loading />;
         }
+
+        const isAdmin =
+          this.state.basicInformation?.admins_detail?.findIndex(
+            (i) =>
+              i.email ===
+              this.state.email
+          ) === -1
+            ? false
+            : true;
+        
+        const isMember =
+          this.state.basicInformation?.members_detail?.findIndex(
+            (i) =>
+              i.email ===
+              this.state.email
+          ) === -1
+            ? false
+            : true;
+
         return (
             <div className="row m-md-3">
                 <div className="mx-3 col-md-2 col-lg-2 col-sm-12 d-flex justify-content-around">
@@ -627,31 +658,63 @@ class ClubAdminPage extends Component {
                                             {this.state.basicInformation.name}
                                         </Card.Title>
 
-                                        <div
-                                            className=" align-self-end "
-                                            onClick={() => {
-                                            this.setState({
-                                                currentModal: "panel",
-                                            });
-                                        }}
-                                            type="button"
-                                        >
-                                            <svg
-                                                className={styles.edit}
-                                                height="64"
-                                                viewBox="0 0 24 24"
-                                                width="24"
-                                                xmlns="http://www.w3.org/2000/svg"
+                                        { isAdmin &&
+                                            <div
+                                                className=" align-self-end "
+                                                onClick={() => {
+                                                this.setState({
+                                                    currentModal: "panel",
+                                                });
+                                            }}
+                                                type="button"
                                             >
-                                                <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
-                                            </svg>
-                                        </div>
+                                                <svg
+                                                    className={styles.edit}
+                                                    height="64"
+                                                    viewBox="0 0 24 24"
+                                                    width="24"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
+                                                </svg>
+                                            </div> }
                                     </div>
 
 
                                     <Card.Subtitle className={styles.tagline}>
                                         {this.state.basicInformation.tagline}
                                     </Card.Subtitle>
+
+                                    { isMember &&
+                                    <Card.Text className='my-2'>
+                                        <FontAwesomeIcon
+                                            color='#6495ED'
+                                            icon={faUserEdit}
+                                        />
+
+                                        <span
+                                            className='mx-2'
+                                            style={{ color: '#6495ED' }}
+                                        >
+                                            Core Member
+                                        </span>
+                                    </Card.Text>}
+
+                                    { isAdmin &&
+                                    <Card.Text className='my-2'>
+                                        <FontAwesomeIcon
+                                            color='#0047AB'
+                                            icon={faCrown}
+                                        />
+
+                                        <span
+                                            className='mx-2'
+                                            style={{ color: '#0047AB' }}
+                                        >
+                                            Admin
+                                        </span>
+                                    </Card.Text>}
+                                    
 
                                     <br />
 
@@ -850,7 +913,7 @@ class ClubAdminPage extends Component {
                                     <div className={styles.descriptionBox + " col"}>
                                         <div className={styles.descriptionHeading + " row d-flex justify-content-around"}>
 
-                                            <span className="col-9 h3 align-self-start">
+                                            <span className={`${isAdmin?'col-9':'col-12'} h3 align-self-start`}>
                                                 Description
 
                                                 {" "}
@@ -858,25 +921,26 @@ class ClubAdminPage extends Component {
 
                                             {" "}
 
-                                            <div
-                                                className="col-3"
-                                                onClick={() => {
+                                            {isAdmin&&
+                                                <div
+                                                    className="col-3"
+                                                    onClick={() => {
                                                 this.setState({
                                                     currentModal: "description",
                                                 });
                                                 }}
-                                                type="button"
-                                            >
-                                                <svg
-                                                    className={styles.edit}
-                                                    height="34"
-                                                    viewBox="0 0 24 24"
-                                                    width="24"
-                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    type="button"
                                                 >
-                                                    <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
-                                                </svg>
-                                            </div>
+                                                    <svg
+                                                        className={styles.edit}
+                                                        height="34"
+                                                        viewBox="0 0 24 24"
+                                                        width="24"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                        <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
+                                                    </svg>
+                                                </div>}
 
                                         </div>
 
@@ -896,25 +960,26 @@ class ClubAdminPage extends Component {
                                                 {" "}
                                             </span>
 
-                                            <div
-                                                className="col-3"
-                                                onClick={() => {
-                                                    this.setState({
-                                                        currentModal: "Announcements",
-                                                    });
-                                                }}
-                                                type="button"
-                                            >
-                                                <svg
-                                                    className={styles.edit}
-                                                    height="34"
-                                                    viewBox="0 0 24 24"
-                                                    width="24"
-                                                    xmlns="http://www.w3.org/2000/svg"
+                                            { isAdmin &&
+                                                <div
+                                                    className="col-3"
+                                                    onClick={() => {
+                                                        this.setState({
+                                                            currentModal: "Announcements",
+                                                        });
+                                                    }}
+                                                    type="button"
                                                 >
-                                                    <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
-                                                </svg>
-                                            </div>
+                                                    <svg
+                                                        className={styles.edit}
+                                                        height="34"
+                                                        viewBox="0 0 24 24"
+                                                        width="24"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                        <path d="M18.308 0l-16.87 16.873-1.436 7.127 7.125-1.437 16.872-16.875-5.691-5.688zm-15.751 21.444l.723-3.585 12.239-12.241 2.861 2.862-12.239 12.241-3.584.723zm17.237-14.378l-2.861-2.862 1.377-1.377 2.861 2.861-1.377 1.378z" />
+                                                    </svg>
+                                                </div> }
 
                                             <ClubAdminModal
                                                 handleClose={this.handleCloseModal.bind(this)}
@@ -1014,6 +1079,8 @@ class ClubAdminPage extends Component {
                                         {this.state.competitions.map((option) => (
                                             <EventTalkCard
                                                 element={option}
+                                                isAdmin={isAdmin}
+                                                isDraftVisible
                                                 key={option.description}
                                                 manage
                                             />

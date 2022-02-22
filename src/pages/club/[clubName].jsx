@@ -43,6 +43,7 @@ class ClubHomePage extends Component {
             currentDateTime : date,
             logoUrl: null,
             clubName: undefined,
+            email: null,
         }
     }
 
@@ -78,6 +79,16 @@ class ClubHomePage extends Component {
                 getDownloadURL(ref(storage, "data/" + this.props.router.query.clubName + "/uneditable/logo.png"))
                     .then(url => this.setState({logoUrl: url}));
             }
+            if (!this.state.email) {
+                axios
+                .get(`connect/profile`)
+                .then((res) =>
+                this.setState({
+                    email: res.data[0].email,
+                })
+                )
+                .catch((err) => console.log(err));
+            }
             if (isEmpty(this.state.basicInformation))
                 axios.get("club/club/"+ this.props.router.query.clubName +"/").then((res) => {
                     this.setState({basicInformation: res.data});
@@ -86,11 +97,32 @@ class ClubHomePage extends Component {
                     then((res) => {
                         this.setState({announcements : res.data})
                     });
-            if (this.state.competitions === null)
+            if (this.state.competitions === null) {
                 axios.get("club/clubcompetitions/" + this.props.router.query.clubName + "/").
                     then((res) => {
+                    const isAdmin =
+                      this.state.basicInformation?.admins_detail?.findIndex(
+                        (i) => i.email === this.state.email
+                      ) === -1
+                        ? false
+                        : true;
+
+                    const isMember =
+                      this.state.basicInformation?.members_detail?.findIndex(
+                        (i) => i.email === this.state.email
+                      ) === -1
+                        ? false
+                        : true;
+                    if (!isAdmin && !isMember) {
+                        const temp = res.data.filter(i => i.is_active === true);    
+                        this.setState({competitions: temp})
+                    }
+                    else {
                         this.setState({competitions: res.data})
-                    });
+                    }
+                });
+                 
+            }
             });
             if (this.state.bannerLinks === null && this.state.basicInformation !== null) {
                 const storage = getStorage();
