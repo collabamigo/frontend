@@ -11,6 +11,8 @@ import Link from "common/Link";
 import isEmpty from "lodash/isEmpty";
 import GoogleSignIn from "../../GoogleSignIn";
 import styles from "./Header.module.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCrown, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
@@ -18,18 +20,27 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
     const [data, setData] = useState();
     const [googleState, setGoogleState] = useState("button");
     const [expanded, setExpanded] = useState(!isAuthenticated);
+    const [username, setUsername] = useState('');
 
     useEffect(() => {
-
         if (isEmpty(data) && isAuthenticated)
             axios.get(`connect/profile`)
-                .then(res => setData(res.data[0])).catch(err => console.log(err))
-    })
+                .then(res => {
+                    setData(res.data[0]);
+                    setUsername(
+                      res.data[0].First_Name + ' ' + res.data[0].Last_Name
+                    );
+                }).catch(err => console.log(err))
+
+    }, [data, isAuthenticated]);
+
 
     useEffect(() => {
         if (isAuthenticated && expanded)
             setExpanded(false);
     }, [isAuthenticated])
+
+
 
     return (
         <Navbar
@@ -80,11 +91,39 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
                                             key={club.id}
                                             to={`/manage/${club.username}/`}
                                         >
-                                            <NavDropdown.Item as="span">
-                                                {club.name}
+                                            <NavDropdown.Item
+                                                as="span"
+                                                className='d-flex align-items-center justify-content-between'
+                                            >
+                                                { club.name }
+
+                                                <FontAwesomeIcon
+                                                    color='#0047AB'
+                                                    icon={faCrown}
+                                                />
                                             </NavDropdown.Item>
                                         </Link>
                                         ))}
+
+                                    {data.member_of?.map((club) => (
+                                        <Link
+                                            className="reset-a cursor-pointer"
+                                            key={club.id}
+                                            to={`/manage/${club.username}/`}
+                                        >
+                                            <NavDropdown.Item
+                                                as="span"
+                                                className='d-flex align-items-center justify-content-between'
+                                            >
+                                                {club.name}
+
+                                                <FontAwesomeIcon
+                                                    color='#6495ED'
+                                                    icon={faUserEdit}
+                                                />
+                                            </NavDropdown.Item>
+                                        </Link>
+                                    ))}
                                 </ul>
                             </NavDropdown>
 
@@ -94,7 +133,7 @@ export default function Header({ isAuthenticated, setLoggedIn, setLoggedOut }) {
 
                             <NavDropdown
                                 id="dropdown-button-drop-start"
-                                title={data?(data.First_Name + " " + data.Last_Name):""}
+                                title={username}
 
                             >
                                 <NavDropdown.Item href="/profile">
