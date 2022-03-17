@@ -304,6 +304,10 @@ export default function FormBuilder({
                             Date
                         </option>
 
+                        <option value="file">
+                            File Upload
+                        </option>
+
                         {/*<option value="week">
                             week
                         </option>
@@ -369,7 +373,7 @@ export default function FormBuilder({
                                 type="checkbox"
                             />
                             Enable Validation
-                        </label> }
+                        </label>}
                     
                     { isValidationEnabled &&
                         <> 
